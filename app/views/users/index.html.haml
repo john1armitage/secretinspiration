@@ -1,0 +1,20 @@
+%h1 Listing users
+
+%table
+  %tr
+    %th Email
+    %th Username
+    %th
+    %th
+    %th
+    %th Roles
+    %th
+
+  = render @users
+
+%p
+  - if allow? :roles, :update
+    = link_to 'Roles', roles_path
+
+  - if allow? :users, :carts
+    = link_to 'New User', new_user_path

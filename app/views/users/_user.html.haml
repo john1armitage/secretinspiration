@@ -1,0 +1,14 @@
+- if allow? :users, :show, user
+  %tr
+    %td= user.email
+    %td= user.username
+    %td= link_to 'Show', user
+    %td
+      - if allow?(:users, :update, user)
+        = link_to 'Edit', edit_user_path(user)
+    %td
+      - if allow?(:users, :destroy, user)
+        = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %td
+      - if allow?(:roles, :show) && user.role
+        = user.role.name

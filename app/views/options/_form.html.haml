@@ -1,0 +1,26 @@
+= form_for @option do |f|
+  %fieldset
+    %legend= 'Option: ' + ( @option.name || "new" )
+
+    .row
+      .field.small-4.columns
+        = f.label :name
+        = f.text_field :name
+      .field.small-4.columns
+        = f.label :rank
+        = f.number_field :rank
+    .row
+      .field.small-4.columns
+        = f.label :kind
+        = f.collection_select :kind, Element.where(:kind => 'item_options'), 'name', 'name' #, {}, { multiple: true, size: 4 }
+    .row
+      .field.small-2.columns
+        = f.label :price
+        = f.text_field :price
+      .field.small-2.columns.left
+        = f.label :vat_rate
+        = collection_select(:option, :vat_rate,
+          Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
+    .row
+      .actions
+        = f.submit 'Save'

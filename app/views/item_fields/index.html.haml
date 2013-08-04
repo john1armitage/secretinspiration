@@ -1,0 +1,25 @@
+%h1 Listing item_fields
+
+%table
+  %tr
+    %th Name
+    %th Field type
+    %th Rank
+    %th Options
+    %th
+    %th
+    %th
+
+  - @item_fields.each do |item_field|
+    %tr
+      %td= item_field.name
+      %td= item_field.field_type
+      %td= item_field.rank
+      %td= item_field.options
+      %td= link_to 'Show', item_field
+      %td= link_to 'Edit', edit_item_field_path(item_field)
+      %td= link_to 'Destroy', item_field, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Item Field', new_item_field_path

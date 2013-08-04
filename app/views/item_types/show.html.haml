@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @item_type.name
+%p
+  %b Rank:
+  = @item_type.rank
+%p
+  %b Properties:
+  = @item_type.properties
+
+= link_to 'Edit', edit_item_type_path(@item_type)
+\|
+= link_to 'Back', item_types_path

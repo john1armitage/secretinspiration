@@ -1,0 +1,12 @@
+= f.fields_for :variants, :class => " no_ajaxify" do |builder|
+  %fieldset
+    .field
+      = builder.label :name
+      = builder.text_field :name
+
+    .field
+      = builder.label :desc
+      = builder.text_area :desc
+    .field
+    = builder.check_box :_destroy
+    = builder.label :_destroy, "Remove Variant"

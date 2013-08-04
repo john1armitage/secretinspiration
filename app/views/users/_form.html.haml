@@ -1,0 +1,51 @@
+= form_for @user, :validate => true do |f|
+
+  %fieldset
+    %legend= 'User: ' + ( @user.email || "new" )
+    -#- if @user.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@tester.errors.count, "error")} prohibited this user from being saved:"
+    -#    %ul
+    -#      - @user.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+  .row
+    .field.small-4.columns
+      = f.label :email
+      = f.text_field :email
+  .row
+    - if allow_param? :user, :username
+      .field.small-4.columns
+        = f.label :username
+        = f.text_field :username
+    - if allow_param? :user, :active
+      .field.small-1.columns
+        = f.label :active #, :class => 'right'
+      .field.small-1.columns.left
+        = f.check_box :active #, :class => 'left'
+    - if allow_param? :user, :workforce
+      .field.small-1.columns
+        = f.label :workforce #, :class => 'right'
+      .field.small-1.columns.left
+        = f.check_box :workforce #, :class => 'left'
+
+  .row
+    .field.small-4.columns
+      = f.label :password
+      = f.password_field :password
+    .field.small-4.columns
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+  .row
+    .field.small-2.columns
+      = f.label :title
+      = f.text_field :title
+    .field.small-4.columns
+      = f.label :first_name
+      = f.text_field :first_name
+    .field.small-4.columns
+      = f.label :last_name
+      = f.text_field :last_name
+  .row
+    .actions
+      = f.submit 'Save'

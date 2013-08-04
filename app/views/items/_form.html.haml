@@ -1,0 +1,43 @@
+-# @categories = set_categories(params[:root_category])
+
+= form_for @item, :validate => true, :class => "no_ajaxify"  do |f|
+  %fieldset
+    %legend= 'Item: ' + ( @item.name || "new" )
+    = hidden_field_tag :root_category, params[:root_category]
+    -#- if @item.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
+    -#    %ul
+    -#      - @item.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-4.columns
+        = f.label :name
+        = f.text_field :name
+
+      -#.field.small-2.columns.left
+      -#  = f.label :item_type
+      -#  = collection_select(:item, :item_type_id,
+      -#    ItemType.where("properties -> '#{current_tenant.domain}' = '1'").order(:rank, :name), :id, :name)
+      .field.small-2.columns.left
+        = f.label :vat_rate
+        = collection_select(:item, :vat_rate,
+          Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
+    .row
+      .field.small-4.columns
+        = f.label :category, 'Category'
+        = f.grouped_collection_select :category_id, @categories, :categories, :nice_name, :id, :nice_name,
+          :include_blank => true
+    .row
+      .field.small-2.columns
+        = f.label :price
+        = f.text_field :price
+    .row
+      .field.small-8.columns
+        = f.label :slug
+        = f.text_field :slug
+
+    .row
+      .actions
+        = f.submit 'Save'

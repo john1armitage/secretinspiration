@@ -1,0 +1,26 @@
+%p
+  = link_to 'New element', new_element_path
+
+%table
+  %tr
+    %th Name
+    %th Kind
+    %th Desc
+    %th Rank
+    %th Default
+    %th
+    %th
+    %th
+
+  - @elements.each do |element|
+    %tr
+      %td= element.name
+      %td= element.kind
+      %td= element.desc
+      %td= element.rank
+      %td= element.default_choice
+      %td= link_to 'Show', element
+      - unless element.name == 'kind' and element.kind == 'kind'
+        %td= link_to 'Edit', edit_element_path(element)
+        %td= link_to 'Destroy', element, method: :delete, data: { confirm: 'Are you sure?' }
+

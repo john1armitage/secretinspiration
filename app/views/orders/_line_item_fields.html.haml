@@ -1,0 +1,33 @@
+.nested-fields
+  .row.left
+    -#.field.small-4.columns.ad-hoc
+    -#  = f.label :desc
+    -#  = f.text_field :desc
+    .field.small-3.columns
+      = f.label :variant
+      = f.text_field :variant_name, data: {autocomplete_source: variants_path}, :class => 'variant_complete'
+    .field.small-2.columns
+      = f.label :net_item
+      = f.text_field :net_item
+    .field.small-2.columns
+      = f.label :tax_item
+      = f.text_field :tax_item
+    .field.small-2.columns
+      = f.label :quantity
+      = f.text_field :quantity
+    .field.small-2.columns
+      = link_to_remove_association "remove item", f, :class => 'no_ajaxify'
+  .row
+    .field.small-4.columns
+      = f.label :account, 'Account'
+      = f.grouped_collection_select :account_id, @accounts, :accounts, :name , :id, :name,
+        :include_blank => true
+    .field.small-8.columns
+      = f.label :notes
+      = f.text_field :notes
+
+:coffeescript
+  jQuery ->
+    $('.variant_complete').autocomplete
+      source: "/variants",
+      minLength: 2

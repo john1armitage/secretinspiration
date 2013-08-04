@@ -1,0 +1,51 @@
+%h1 Listing pics
+
+%table
+  %tr
+    %th Name
+    %th Image
+    %th Viewable type
+    %th Viewable
+    %th
+    %th
+    %th
+  - @pics.each do |pic|
+    %tr
+      %td= pic.name
+      %td= pic.image
+      %td= pic.viewable_type
+      %td= pic.viewable_id
+      %td= link_to 'Show', pic
+      %td= link_to 'Edit', edit_pic_path(pic)
+      %td= link_to 'Destroy', pic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+#pics
+  != render @pics
+
+#new_pic
+
+  = form_for @pic do |f|
+    - if @pic.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@pic.errors.count, "error")} prohibited this pic from being saved:"
+        %ul
+          - @pic.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :image, "Upload image:"
+      = f.file_field :image
+    .field
+      = f.label :viewable_type
+      = f.text_field :viewable_type
+    .field
+      = f.label :viewable_id
+      = f.number_field :viewable_id
+    .actions
+      = f.submit 'Save'
+
+-# = link_to 'New Pic', new_pic_path

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  name: MyString
+  description: MyText
+  price: 9.99
+  item_default: false
+  stock: 1
+  available_on: 2013-07-09
+
+two:
+  item_id: 1
+  name: MyString
+  description: MyText
+  price: 9.99
+  item_default: false
+  stock: 1
+  available_on: 2013-07-09

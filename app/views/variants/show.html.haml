@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%h1
+  Variant Gallery
+
+.images
+  != render @pics
+
+%p
+  %b Item:
+  = @variant.item_id
+%p
+  %b Name:
+  = @variant.name
+%p
+  %b Description:
+  = @variant.desc
+%p
+  %b Price:
+  = @variant.price
+%p
+  %b Item default:
+  = @variant.item_default
+%p
+  %b Stock:
+  = @variant.stock
+%p
+  %b Available on:
+  = @variant.available_on
+
+= link_to 'Edit', edit_variant_path(@variant)
+\|
+= link_to 'Back', variants_path( :item_id => @item.id )

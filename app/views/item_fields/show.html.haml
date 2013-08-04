@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @item_field.name
+%p
+  %b Field type:
+  = @item_field.field_type
+%p
+  %b Options:
+  = @item_field.options
+
+= link_to 'Edit', edit_item_field_path(@item_field)
+\|
+= link_to 'Back', item_fields_path

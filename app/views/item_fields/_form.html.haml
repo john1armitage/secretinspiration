@@ -1,0 +1,34 @@
+= form_for @item_field do |f|
+
+  %fieldset
+    %legend= 'Item Fields: ' + ( @item_field.name || 'new' )
+
+
+    -#- if @item_field.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@item_field.errors.count, "error")} prohibited this item_field from being saved:"
+    -#    %ul
+    -#      - @item_field.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-6.columns
+        = f.label :name
+        = f.text_field :name
+    .row
+      .field.small-4.columns
+        = f.label :field_type
+        = collection_select(:item_field, :field_type, Element.all.where(:kind => 'field_type').order(:rank, :name), :name, :name)
+      .field.small-2.columns
+        = f.label :rank
+        = f.text_field :rank
+    .row
+      .field.small-12.columns
+        = f.label :options
+        = f.check_box :options
+      -#.field
+      -#  = f.label :item_type
+      -#  = collection_select(:item_field, :item_type_id, ItemType.where("properties -> '#{current_tenant.domain}' = '1'").order(:rank, :name), :id, :name)
+    .row
+      .actions
+        = f.submit 'Save'

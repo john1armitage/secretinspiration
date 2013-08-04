@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @option.name
+
+= link_to 'Edit', edite_option_path(@option)
+\|
+= link_to 'Back', options_path

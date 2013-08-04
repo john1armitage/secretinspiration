@@ -1,0 +1,33 @@
+= form_for(@element) do |f|
+
+  %fieldset
+    %legend= 'Element: ' + ( @element.name || 'new' )
+    -#-if @element.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@element.errors.count, "error")} prohibited this element from being saved:"
+    -#    %ul
+    -#      - @element.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-6.columns
+        = f.label :name
+        = f.text_field :name
+      .field.small-1.columns.left
+        = f.label :default_choice
+        = f.check_box :default_choice #, :class => 'left'
+    .row
+      .field.small-4.columns
+        = f.label :element
+        = collection_select(:element, :kind, Element.where(:kind => 'kind').order(:rank, :name), :name, :name)
+      .field.small-2.columns
+        = f.label :rank
+        = f.number_field :rank
+    .row
+      .field.small-12.columns
+        = f.label :desc
+        = f.text_field :desc
+
+    .row
+      .actions
+        = f.submit

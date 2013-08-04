@@ -1,0 +1,27 @@
+= form_for @tabel, :validate => true do |f|
+
+  %fieldset
+    %legend= 'Table: ' + ( @tabel.name || 'new' )
+
+    -#- if @tabel.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@tabel.errors.count, "error")} prohibited this tabel from being saved:"
+    -#    %ul
+    -#      - @tabel.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+  .row
+    .small-4.columns
+      = f.label :name
+      = f.text_field :name
+  .row
+    .small-4.columns
+      = f.label :variant
+      = collection_select(:tabel, :variant, Element.where(:kind => 'tables').order(:rank, :name), :name, :name)
+  .row
+    .small-4.columns
+      = f.label :capacity
+      = f.number_field :capacity
+  .row
+    .actions
+      = f.submit 'Save'

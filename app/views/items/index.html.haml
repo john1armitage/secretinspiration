@@ -1,0 +1,24 @@
+%table
+  %tr
+    %th Name
+    %th Price
+    %th Type
+    %th Category
+    %th
+
+  - @items.each do |item|
+    %tr
+      %td= item.name
+      %td= item.variants.where(item_default: true).first.price.to_d > 0 ? item.variants.where(item_default: true).first.price : item.price
+      %td= make_title(item.item_type.name)
+      %td= make_title(item.category.name) if item.category
+      %td= link_to 'Show', item
+      %td= link_to 'Edit', edit_item_path(item)
+      %td= link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = link_to 'Variants', variants_path(:item_id => item.id)
+        = item.variants.where( :domain => current_tenant.domain).size
+
+%br
+
+=  render partial: 'new_item_link', collection: @root_categories

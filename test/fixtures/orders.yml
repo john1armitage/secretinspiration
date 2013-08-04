@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  net_total: MyString
+  decimal: MyString
+  tax_total: 9.99
+  adjustment_total: 9.99
+  effective_date: 2013-07-15
+  due_date: 2013-07-15
+  user_id: 1
+  customer_id: 1
+  supplier_id: 1
+  state: MyString
+  special_instructions: MyText
+  notes: MyText
+
+two:
+  net_total: MyString
+  decimal: MyString
+  tax_total: 9.99
+  adjustment_total: 9.99
+  effective_date: 2013-07-15
+  due_date: 2013-07-15
+  user_id: 1
+  customer_id: 1
+  supplier_id: 1
+  state: MyString
+  special_instructions: MyText
+  notes: MyText

@@ -1,0 +1,52 @@
+= form_for @item_type, :validate => true do |f|
+
+  %fieldset
+    %legend= 'Item Type: ' + ( @item_type.name || "new" )
+    -#- if @item_type.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@item_type.errors.count, "error")} prohibited this item_type from being saved:"
+    -#    %ul
+    -#      - @item_type.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-4.columns
+        = f.label :name
+        = f.text_field :name
+      .field.small-2.columns
+        = f.label :rank
+        = f.number_field :rank
+      .field.small-2.columns
+        = f.label :account, 'Account'
+        = f.grouped_collection_select :account_id, get_accounts, :accounts, :name , :id, :name,
+          :include_blank => true
+      .field.small-2.columns.left
+        = f.label :vat_rate
+        = collection_select(:item_type, :vat_rate,
+          Element.where("kind = 'vat_rate'").order(:rank), :name, :name )
+      .field.small-2.columns
+        = f.label :menu_depth
+        = f.number_field :menu_depth
+    .row
+      .field.small-3.columns
+        = f.label :required_field_tokens, "Required"
+        = f.collection_select :required_field_tokens, get_fields, 'name', 'name', {}, { multiple: true, size: 8 }
+      .field.small-3.columns
+        = f.label :optional_field_tokens, "Optional"
+        = f.collection_select :optional_field_tokens, get_fields, 'name', 'name', {}, { multiple: true, size: 8 }
+      .field.small-3.columns
+        = f.label :collection_tokens, "Collection"
+        = f.collection_select :collection_tokens, get_collections, 'name', 'name', {}, {:multiple => true}
+      .field.small-3.columns
+        = f.label :options_tokens, "Options"
+        = f.collection_select :options_tokens, get_collections, 'name', 'name', {}, {:multiple => true}
+      %table
+        %tr
+          %td
+            Domains
+          - get_domains.each do |domain|
+            = render("layouts/fields/check_box", field: domain, f: f)
+
+    .row
+      .actions
+        = f.submit 'Save'

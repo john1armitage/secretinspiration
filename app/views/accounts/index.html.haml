@@ -1,0 +1,29 @@
+%h1 Listing accounts
+
+%table
+  %tr
+    %th Name
+    %th Code
+    %th Ancestry
+    %th Opening balance
+    %th
+    %th
+    %th
+
+  - @accounts.each do |account|
+    %tr
+      %td
+        - 1.upto( account.depth ) do
+          = '..'
+        = account.name
+      %td= account.code
+      %td= account.ancestry
+      %td= account.opening_balance
+      %td= link_to 'Show', account
+      %td= link_to 'Child', new_account_path(:parent_id => account)
+      %td= link_to 'Edit', edit_account_path(account)
+      %td= link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Account', new_account_path

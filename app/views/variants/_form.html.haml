@@ -1,0 +1,65 @@
+= form_for @variant do |f|
+
+  %fieldset
+    %legend= 'Variant: ' + ( @variant.item.name || 'new' )
+
+    -#- if @variant.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@variant.errors.count, "error")} prohibited this variant from being saved:"
+    -#    %ul
+    -#      - @variant.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    = f.hidden_field :item_id
+    = @variant.item_id
+
+    .row
+      .field.small-6.columns
+        = f.label :name
+        = f.text_field :name
+      .field.small-2.columns.left
+        = f.label :item_default
+        = f.check_box :item_default #, :class => 'block'
+    .row
+      .field.small-2.columns
+        = f.label :price
+        = f.text_field :price
+      .field.small-2.columns
+        = f.label :stock
+        = f.number_field :stock
+      .field.small-3.columns.left
+        = f.label :available_on
+        = f.date_field :available_on                # date_select
+    %table
+      %tr
+        %td
+        - get_fields.each do |field|
+          -### if exists get k as field name and v as required indicator
+          - if @variant.item.item_type.properties.has_key?( "#{field.name}" ) && eval( "@variant.item.item_type.#{field.name}") != 'xXx'
+            %td
+              = render("layouts/fields/#{field.field_type}", field: field, f: f)
+
+    %table
+      %tr
+        %td
+        - get_collections.each do |field|
+          -### if exists get k as field name and v as required indicator
+          - if @variant.item.item_type.properties.has_key?( "#{field.name}" ) && eval( "@variant.item.item_type.#{field.name}") != 'xXx'
+            = render("layouts/fields/collection", field: field, f: f)
+
+    .row
+      .field
+        = f.label :tag_list, "Tags (separated by commas)"
+        %br
+        = f.text_field :tag_list
+    .row
+      .field
+        = f.label :desc
+        = f.text_area :desc
+    .row
+      .field.small-8.columns
+        = f.label :slug
+        = f.text_field :slug
+    .row
+      .actions
+        = f.submit 'Save'

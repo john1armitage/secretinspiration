@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_id: 
+  user_id: 
+  arrival: 2013-07-17 09:58:10
+  state: MyString
+  pax: 1
+  notes: MyText
+
+two:
+  customer_id: 
+  user_id: 
+  arrival: 2013-07-17 09:58:10
+  state: MyString
+  pax: 1
+  notes: MyText

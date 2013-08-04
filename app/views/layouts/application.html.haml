@@ -1,0 +1,27 @@
+!!!
+%html
+%head
+%meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+%title
+  = content_for?(:title) ? yield(:title) : "Commerce"
+= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+= javascript_include_tag "application", "vendor/custom.modernizr", "data-turbolinks-track" => true
+= csrf_meta_tag
+%body
+
+  %section.section
+    .row
+      .large-3.columns
+        = render 'layouts/mast'
+      .large-9.columns
+        = render 'layouts/menus/top'
+
+    %section.section
+      .row
+        .large-3.columns
+          = render 'layouts/menus/main'
+
+        .large-9.columns
+          %section.section
+            #ajax-main
+              = yield

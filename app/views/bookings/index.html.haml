@@ -1,0 +1,76 @@
+.small-12.columns
+  = "Bookings for #{@booking_date.strftime("%d %B %Y")}, #{pluralize(@bookings.sum(:pax), 'person')}"
+.small-12.columns.clear
+  = link_to 'New Booking', new_booking_path
+  |
+  = link_to 'New Walk-In', new_booking_path(:walk_in => true)
+
+%table
+  %tr
+    %th Arrival
+    %th Pax
+    %th Customer
+    %th Tables
+    %th
+    %th State
+    %th
+    %th by
+    %th
+    %th
+    %th
+
+  - @bookings.each do |booking|
+    %tr
+      %td= booking.arrival.to_s(:time)
+      %td= booking.pax
+      - if booking.customer_name.blank?
+        %td
+          walk-in
+      - else
+        %td.has-tip.tip-top{ 'title' => booking.contact }
+          = booking.customer_name
+      %td
+        - booking.seatings.joins(:tabel).order('tabels.name::INT').each do |seating|
+          = render 'tabel', seating:  seating
+      %td= 'window' if booking.window
+      %td= booking.state
+      - if booking.notes.empty?
+        %td
+      -else
+        %td.has-tip.tip-top{ 'title' => booking.notes }
+          notes
+      %td= booking.user.username
+      %td= link_to 'Show', booking
+      %td= link_to 'Edit', edit_booking_path(booking)
+      %td= link_to 'Destroy', booking, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+.row.small-12
+  .calendar
+    %p= @booking_date.strftime("%B %Y")
+    = calendar(@booking_date) do |date|
+      = date.day
+      - if @bookings_by_date[date]
+        &rArr;
+        = pluralize( @bookings_by_date[date].size, 'booking')
+        %ul
+          - @bookings_by_date[date].each do |booking|
+            %li
+              - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+              = link_to title, booking
+
+.row.small-12
+  .calendar
+    - @booking_date = @booking_date + 1.month
+    %p= @booking_date.strftime("%B %Y")
+    = calendar(@booking_date) do |date|
+      = date.day
+      - if @bookings_next_month[date]
+        &rArr;
+        = pluralize( @bookings_next_month[date].size, 'booking')
+        %ul
+          - @bookings_next_month[date].each do |booking|
+            %li
+              - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+              = link_to title, booking
+

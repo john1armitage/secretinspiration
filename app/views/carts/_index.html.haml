@@ -1,0 +1,5 @@
+%h1 Your Cart
+%ul#cart
+  - @cart.line_items.joins(:variant).order('variants.name').each do |line_item|
+    = render 'carts/line_item', line_item: line_item
+  = button_to 'Clear Cart', clear_carts_path(), method: :delete, remote: true, form_class: 'no_ajaxify'

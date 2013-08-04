@@ -1,0 +1,4 @@
+%td
+  = label_tag item_choices_tag.name, make_title(item_choices_tag.name) #, :class => 'right'
+%td
+  = radio_button_tag "choices[#{@choice}][]", item_choices_tag.name, item_choices_tag.default_choice

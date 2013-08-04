@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tabel.name
+%p
+  %b Variant:
+  = @tabel.variant
+%p
+  %b Capacity:
+  = @tabel.capacity
+
+= link_to 'Edit', edit_tabel_path(@tabel)
+\|
+= link_to 'Back', tabels_path

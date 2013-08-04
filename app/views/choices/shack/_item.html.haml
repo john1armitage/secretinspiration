@@ -1,0 +1,37 @@
+- variants = item.variants.where(domain: current_tenant.domain)
+- default = variants.where(item_default: true)
+%li
+  - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : params[:id].to_i
+  - if @meal_id > 0
+    = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
+      - if (default.first.name == 'default')
+        = submit_tag item.name
+      - else
+        = make_title( item.name )
+        = submit_tag default.first.name
+      - variants = variants - default
+      = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
+      %br
+      = hidden_field_tag :meal_id, @meal_id
+      = hidden_field_tag :variant_id, default.first.id
+
+      - choices = item.category.choices ? (item.category.choices - [""] ) : []
+      - choices.each do |c|
+        - @choice = c
+        = make_title(c)
+        = render :partial => 'layouts/fields/item_choices_tag', collection: Element.where(kind: c).order(:rank) #, field: o
+        %br
+      - options = item.category.options ? (item.category.options - [""] ) : []
+      - options.each do |o|
+        - @option = o
+        = make_title(o)
+        = render :partial => 'layouts/fields/item_options_tag', collection: Option.where(kind: o).order(:rank) #, field: o
+        %br
+    -# :form_class => "no_ajaxify", :remote => true, class: 'tiny button'
+  - else
+    = make_title(item.name)
+    = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
+
+:coffeescript
+  jQuery ->
+    $( "#tabs" ).tabs()

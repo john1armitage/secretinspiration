@@ -1,0 +1,20 @@
+- if @course != line_item.variant.item.grouping
+  - @course = line_item.variant.item.grouping
+  %li= make_title(@course.split(':')[1])
+
+%li
+  = line_item.quantity
+  = line_item.desc
+  - unless line_item.choices.blank?
+    - line_item.choices.each do |k,v|
+      = make_title(v)
+  %br
+  = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify'
+  = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify'
+  = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify'
+
+  @
+  = line_item.net_item + line_item.tax_item
+
+  = '='
+  = line_item.net_total_item + line_item.tax_total_item

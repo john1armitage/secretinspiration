@@ -1,0 +1,33 @@
+= form_for @category do |f|
+  %fieldset
+    %legend= 'Category: ' + ( @category.parent ? make_title(@category.parent.name) : "Root Category" )
+    -#- if @category.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
+    -#    %ul
+    -#      - @category.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-5.columns
+        = f.label :name
+        = f.text_field :name
+    .row
+      .field.small-5.columns
+        = f.label :rank
+        = f.text_field :rank
+    .row
+      .field.small-5.columns
+        = f.label :ancestry
+        = f.text_field :ancestry
+    .row
+      .field.small-4.columns
+        = f.label :choices
+        = f.collection_select :choices, Element.where(:kind => 'item_choices'), 'name', 'name', {}, { multiple: true, size: 4 }
+    .row
+      .field.small-4.columns
+        = f.label :options
+        = f.collection_select :options, Element.where(:kind => 'item_options'), 'name', 'name', {}, { multiple: true, size: 4 }
+    .row
+      .actions
+        = f.submit 'Save'

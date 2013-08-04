@@ -1,0 +1,23 @@
+#new_pic
+  = form_for @pic do |f|
+    - if @pic.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@pic.errors.count, "error")} prohibited this pic from being saved:"
+        %ul
+          - @pic.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :image, "Upload images:"
+      = f.file_field :image, multiple: true
+    .field
+      = f.label :viewable_type
+      = f.text_field :viewable_type
+    .field
+      = f.label :viewable_id
+      = f.number_field :viewable_id
+    .actions
+      = f.submit 'Save'

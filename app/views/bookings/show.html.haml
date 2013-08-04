@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Customer:
+  = @booking.customer_name
+%p
+  %b Last User:
+  = @booking.user.username
+%p
+  %b Booking Date:
+  = @booking.arrival
+%p
+  %b Arrival:
+  = @booking.arrival
+%p
+  %b State:
+  = @booking.state
+%p
+  %b Pax:
+  = @booking.pax
+%p
+  %b Notes:
+  = @booking.notes
+
+= link_to 'Edit', edit_booking_path(@booking)
+\|
+= link_to 'Back', bookings_path

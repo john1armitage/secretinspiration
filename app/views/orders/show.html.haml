@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b Net total:
+  = @order.net_total
+%p
+  %b Tax total:
+  = @order.tax_total
+%p
+  %b Adjustment total:
+  = @order.adjustment_total
+%p
+  %b Effective date:
+  = @order.effective_date
+%p
+  %b Due date:
+  = @order.due_date
+%p
+  %b User:
+  = @order.user_id
+%p
+  %b Customer:
+  = @order.customer_id
+%p
+  %b Supplier:
+  = @order.supplier_id
+%p
+  %b State:
+  = @order.state
+%p
+  %b Special instructions:
+  = @order.special_instructions
+%p
+  %b Notes:
+  = @order.notes
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

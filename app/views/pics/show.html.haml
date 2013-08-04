@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @pic.name
+%p
+  %b Image:
+  = @pic.image
+%p
+  %b Viewable type:
+  = @pic.viewable_type
+%p
+  %b Viewable:
+  = @pic.viewable_id
+
+= link_to 'Edit', edit_pic_path(@pic)
+\|
+= link_to 'Back', pics_path

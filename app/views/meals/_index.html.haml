@@ -1,0 +1,5 @@
+%h1 Current Sitting
+%ul#meal
+  - @meals.each do |meal|
+    = render 'meal', meal: meal
+#editor

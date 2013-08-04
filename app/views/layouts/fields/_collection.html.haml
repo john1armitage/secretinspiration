@@ -1,0 +1,7 @@
+%tr
+  %td
+    = field.name.titleize
+  - Element.where(:kind => field.name).each do |s|
+    %td
+      =f.label s.name, make_title(s.name), :class => 'right'
+      =check_box_tag "#{field.name}[#{s.name}]", 1 , eval("@#{field.name}.present? && @#{field.name}.include?( '#{s.name}' )") ? true : false

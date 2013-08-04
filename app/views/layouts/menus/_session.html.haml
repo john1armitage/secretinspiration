@@ -1,0 +1,6 @@
+- unless current_user.id.blank?
+  != link_to "Profile", edit_user_path(current_user.id), :class => "small button radius"
+  != link_to "Log Out", logout_path, :method => :delete, :class => "small button radius no_ajaxify"
+- else
+  != link_to "Sign Up", signup_path, :class => "small button radius"
+  != link_to "Log In", login_path, :class => "small button radius"

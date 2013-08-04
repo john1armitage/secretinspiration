@@ -1,0 +1,18 @@
+- @categories = set_categories(current_tenant.default_category)
+#tabs
+  %ul
+    - @categories.each do |category|
+      %li
+        = link_to category.nice_name, "##{category.name}", :remote => true, :class => 'no_ajaxify'
+  - @categories.each do |category|
+    %div{'id' => "#{category.name}"}
+      %ul
+        - category.children.each do |subcat|
+          %li
+            = subcat.nice_name
+            %ul.menu-item
+              = render :partial => "choices/#{current_tenant.domain}/item", collection: subcat.items
+
+:coffeescript
+  jQuery ->
+    $( "#tabs" ).tabs()

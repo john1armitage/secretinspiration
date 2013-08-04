@@ -1,0 +1,5 @@
+- if @meal_id > 0
+  -#= form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
+  = submit_tag variant.name
+- else
+  = variant.name unless variant.name == 'default'

@@ -1,0 +1,17 @@
+%ul.side-nav
+  %li
+    != link_to 'Items', items_path, :class => "button radius"
+  - if allow? :orders, :index
+    %li
+      != link_to 'Orders', orders_path, :class => "button radius"
+  - if allow? :options, :index
+    %li
+      != link_to 'Options', options_path, :class => "button radius"
+  - if allow? :suppliers, :index
+    %li
+      != link_to 'Suppliers', suppliers_path, :class => "button radius"
+  - if allow? :customers, :index
+    %li
+      != link_to 'Customers', customers_path, :class => "button radius"
+  %li
+    != link_to 'Pics', pics_path, :class => "button radius"

@@ -1,0 +1,4 @@
+%td
+  = label_tag field.name, field.name, :class => 'right'
+%td
+  = check_box_tag "selections[#{field.name}]", 1, @selections.include?( field.name) ? true : false

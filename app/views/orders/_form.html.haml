@@ -1,0 +1,89 @@
+= form_for @order, :validate => true do |f|
+
+  %fieldset
+    %legend= 'Order: ' + ( @order.state || "new" )
+    -#- if @order.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+    -#    %ul
+    -#      - @order.errors.full_messages.each do |msg|
+    -#        %li= msg
+    .row
+      .field.small-4.columns
+        = f.label :effective_date
+        = f.date_field :effective_date
+      .field.small-4.columns
+        = f.label :due_date
+        = f.date_field :due_date
+      - if @order.new_record?
+        .field.small-2.columns
+          = f.label :quick
+          = f.check_box :quick
+      .field.small-2.columns.left
+        = f.label :state
+        = f.text_field :state
+    .row
+      .field.small-4.columns
+        = f.label :net_total
+        = f.text_field :net_total
+      .field.small-4.columns
+        = f.label :tax_total
+        = f.text_field :tax_total
+      .field.small-4.columns.left
+        = f.label :adjustment_total, 'Adjustments'
+        = f.text_field :adjustment_total
+    .row
+      .field.small-4.columns
+        = f.label :account, 'Account'
+        = f.grouped_collection_select :account_id, @accounts, :accounts, :name , :id, :name,
+          :include_blank => true
+      .field.small-8.columns.quick
+        = f.label :desc
+        = f.text_field :desc
+    .row
+      .field.small-4.columns
+        = f.label :user_id
+        = f.number_field :user_id
+      .field.small-4.columns
+        = f.label :customer_name
+        = f.text_field :customer_name, data: {autocomplete_source: customers_path}
+      .field.small-4.columns.left
+        = f.label :supplier_name
+        = f.text_field :supplier_name, data: {autocomplete_source: suppliers_path}
+    .row
+      .field.small-12.columns
+        = f.label :special_instructions
+        = f.text_area :special_instructions
+    .row
+      .field.small-12.columns
+        = f.label :notes
+        = f.text_area :notes
+    #items
+      .row.line-items
+        .field.small-7.columns
+          Items
+          = link_to_add_association 'add item', f, :line_items, :class => 'no_ajaxify', :data => {"association-insertion-method" => "after"  }
+      = f.fields_for :line_items do |task|
+        = render 'line_item_fields', :f => task
+    .actions
+      = f.submit 'Save'
+:coffeescript
+  jQuery ->
+    Account =
+      checkQuick: (quick) ->
+        if quick
+          $('div.quick').show()
+          $('div#items').hide()
+        else
+          $('div.quick').hide()
+          $('div#items').show()
+    Account.checkQuick($('#order_quick').is(':checked'))
+    $('#order_supplier_name').autocomplete
+      source: $('#order_supplier_name').data('autocomplete-source'),
+      minLength: 2
+    $('#order_customer_name').autocomplete
+      source: $('#order_customer_name').data('autocomplete-source'),
+      minLength: 2
+    $('#order_quick').change ->
+      alert( $(this).is(':checked') )
+      Account.checkQuick($(this).is(':checked'))

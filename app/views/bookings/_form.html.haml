@@ -1,0 +1,56 @@
+= form_for @booking, :validate => true do |f|
+
+  %fieldset
+    %legend= 'Booking: ' + ( @booking.customer_name || 'new' )
+
+
+    -#- if @booking.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@booking.errors.count, "error")} prohibited this booking from being saved:"
+    -#    %ul
+    -#      - @booking.errors.full_messages.each do |msg|
+    -#        %li= msg
+    = f.hidden_field :walkin
+    .row
+      .field.small-4.columns
+        = f.label :booking_date
+        = f.date_field :booking_date
+      .field.timepicker.small-3.columns.left
+        = f.label :arrival
+        = f.text_field :arrival
+      .field.small-1.columns.left
+        = f.label :window
+        = f.check_box :window
+      .field.small-1.columns.left
+        - if @booking.walkin
+          Walkin
+    .row
+      .field.small-2.columns
+        = f.label :pax, "Party Size"
+        = f.number_field :pax
+    - unless @booking.walkin == true
+      .row
+        .field.small-6.columns
+          = f.label :customer_name
+          = f.text_field :customer_name
+        .field.small-5.columns.left
+          = f.label :contact
+          = f.text_field :contact
+    .row
+      = render @tabels
+    .row
+      .field.small-12.columns
+        = f.label :notes
+        = f.text_area :notes
+    .row
+      .actions
+        = f.submit 'Save'
+
+:coffeescript
+  $("div.timepicker input").each (i) ->
+    $("div.timepicker input").datetimepicker
+      timeOnly: true
+      timeFormat: "h:mm TT"
+      altFieldTimeOnly: false
+      altTimeFormat: "HH:mm"
+      altField: $(this).next()

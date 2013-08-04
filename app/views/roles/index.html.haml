@@ -1,0 +1,22 @@
+- roles = lookup_roles
+
+%table
+  %tr
+    %td
+      User
+    - roles.order(:rank).each do |rol|
+      %td
+        = rol.name.capitalize
+  - @users.order(:username).each do |user|                      # scope to workforce field
+    %tr
+      %td
+        = user.email
+      - roles.each do |rol|
+        - user_role = user.role ? user.role.name : nil
+        %td
+          - if user_role == rol.name
+            = link_to 'Disable', role_path( :id => user.role.id ),
+             :method => :delete
+          - else
+            = link_to 'Enable', roles_path( :user_id => user.id, :role => rol.name  ),
+             :method => :post

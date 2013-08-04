@@ -1,0 +1,31 @@
+%h1 Listing categories
+
+%table
+  %tr
+    %th Root
+    %th Name
+    %th Id
+    %th Ancestry
+    %th Rank
+    %th
+    %th
+    %th
+
+  - @categories.each do |category|
+    %tr
+      %td= category.root.name.gsub(/_/, " ").titleize
+      %td
+        - 1.upto( category.depth ) do
+          = '..'
+        = category.name
+      %td= category.id
+      %td= category.ancestry
+      %td= category.rank
+      %td= link_to 'Show', category
+      %td= link_to 'Child', new_category_path(:parent_id => category)
+      %td= link_to 'Edit', edit_category_path(category)
+      %td= link_to 'Destroy', category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Category', new_category_path

@@ -1,0 +1,32 @@
+= form_for @account do |f|
+  %fieldset
+    %legend= 'Account: '# + @account.parent.code + ' ' + @account.parent.name
+
+    -#- if @account.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
+    -#    %ul
+    -#      - @account.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+      = f.hidden_field :parent_id
+
+    .row
+      .field.small-6.columns
+        = f.label :name
+        = f.text_field :name
+    .row
+      .field.small-6.columns
+        = f.label :code
+        = f.text_field :code
+    .row
+      .field.small-6.columns
+        = f.label :ancestry
+        = f.text_field :ancestry
+    .row
+      .field.small-6.columns
+        = f.label :opening_balance
+        = f.text_field :opening_balance
+    .row
+      .actions
+        = f.submit 'Save'

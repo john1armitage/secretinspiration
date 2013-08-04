@@ -1,0 +1,23 @@
+%h1 Listing Tables
+
+%table
+  %tr
+    %th Name
+    %th Variant
+    %th Capacity
+    %th
+    %th
+    %th
+
+  - @tabels.each do |tabel|
+    %tr
+      %td= tabel.name
+      %td= tabel.variant
+      %td= tabel.capacity
+      %td= link_to 'Show', tabel
+      %td= link_to 'Edit', edit_tabel_path(tabel)
+      %td= link_to 'Destroy', tabel, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Table', new_tabel_path

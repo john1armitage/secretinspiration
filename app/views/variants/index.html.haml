@@ -1,0 +1,35 @@
+%h1= @item.name
+
+%table
+  %tr
+    %th Item
+    %th Name
+    %th Description
+    %th Price
+    %th Item default
+    %th Stock
+    %th Available on
+    %th Pics
+    %th
+    %th
+    %th
+    %th
+
+  - @variants.each do |variant|
+    %tr
+      %td= variant.item.name
+      %td= variant.name
+      %td= variant.desc
+      %td= variant.price
+      %td= variant.item_default
+      %td= variant.stock
+      %td= variant.available_on
+      %td= link_to 'Pics', pics_url(:variant_id => variant.id)
+      %td= variant.pics.size
+      %td= link_to 'Show', variant
+      %td= link_to 'Edit', edit_variant_path(variant)
+      %td= link_to 'Destroy', variant, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Variant', new_variant_path( :item_id => @item.id)

@@ -1,0 +1,5 @@
+- options = Element.where(:kind => field.name).map {|option| option.name }
+%td
+  = f.label field.name
+%td
+  = f.select field.name, options

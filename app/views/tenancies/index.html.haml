@@ -1,0 +1,23 @@
+%h1 Listing tenancies
+
+%table
+  %tr
+    %th Name
+    %th Domain
+    %th Hostname
+    %th
+    %th
+    %th
+
+  - @tenancies.each do |tenancy|
+    %tr
+      %td= tenancy.name
+      %td= tenancy.domain
+      %td= tenancy.hostname
+      %td= link_to 'Show', tenancy
+      %td= link_to 'Edit', edit_tenancy_path(tenancy)
+      %td= link_to 'Destroy', tenancy, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tenancy', new_tenancy_path
