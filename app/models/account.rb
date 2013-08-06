@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
 
   monetize :opening_balance_cents, :allow_nil => true
 
-  has_ancestry :cache_depth => true
+  has_ancestry :cache_depth => true, :orphan_strategy => :adopt
 
   has_many :accounts
 

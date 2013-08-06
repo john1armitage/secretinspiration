@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 
-  has_ancestry :cache_depth => true
+  has_ancestry :cache_depth => true, :orphan_strategy => :adopt
 
   has_many :categories
   has_many :items, :as => :grouping

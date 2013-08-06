@@ -12,8 +12,8 @@ class VariantsController < ApplicationController
       @variants = @item ? @item.variants : Variant.all
       @variants = @variants.order(:name).where( :domain => current_tenant.domain)
     else
-      @variants = Variant.order(:name).where("name ILIKE ?", "%#{params[:term]}%")
-      render :json => @variants.map{|c| c.name}, root: false
+      @variants = Variant.includes(:item).order(:name).where("(variants.name ILIKE ? or items.name ILIKE ?) and product_flow <> ?", "%#{params[:term]}%", "%#{params[:term]}%", 'outgoing').references(:items)
+      render :json => @variants.map{|c| (c.name == 'default' ? c.item.name : c.name )}, root: false
     end
   end
 

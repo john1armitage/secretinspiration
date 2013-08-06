@@ -10,7 +10,8 @@ class Order < ActiveRecord::Base
 
   has_many :line_items, as: :ownable, dependent: :destroy
 
-  accepts_nested_attributes_for :line_items, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :line_items, :reject_if =>  proc { |att| att['variant_name'].blank? and att['desc'].blank? },
+                                :allow_destroy => true
   validates_associated :line_items
 
   belongs_to :account
@@ -22,16 +23,21 @@ class Order < ActiveRecord::Base
   before_validation :check_account
   before_save :get_totals
 
+  validates_presence_of :supplier_name
   validates_presence_of :effective_date
-  # validates_presence_of :net_total
+  validates_numericality_of :net_total, :unless => :state_incomplete
   validates_numericality_of :tax_total, :allow_nil => true
   validates_numericality_of :adjustment_total, :allow_nil => true
 
   validates_presence_of :account, :net_total, :desc, :if => :quick?
 
+  def state_incomplete
+    state == 'incomplete' or state == 'ordered'
+  end
+
   def check_account
     line_items.each do |line_item|
-      line_item.account_id = account_id if line_item.account_id.blank?
+      line_item.account_id = account_id if ( line_item.account_id.blank? and !line_item.variant_name.blank? )
     end
   end
 
@@ -40,7 +46,10 @@ class Order < ActiveRecord::Base
   end
 
   def get_totals
-    self.net_total = line_items.map(&:net_item).sum
+    nt = line_items.map(&:net_total_item).sum
+    tt = line_items.map(&:tax_total_item).sum
+    self.net_total = nt unless nt.to_d == 0
+    self.tax_total = tt unless tt.to_d == 0
   end
 
   def supplier_name

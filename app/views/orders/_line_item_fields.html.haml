@@ -1,11 +1,12 @@
 .nested-fields
   .row.left
-    -#.field.small-4.columns.ad-hoc
-    -#  = f.label :desc
-    -#  = f.text_field :desc
-    .field.small-3.columns
+    .field.small-7.columns
+      = f.label :desc, 'Description'
+      = f.text_field :desc
+    .field.small-5.columns
       = f.label :variant
       = f.text_field :variant_name, data: {autocomplete_source: variants_path}, :class => 'variant_complete'
+  .row.left
     .field.small-2.columns
       = f.label :net_item
       = f.text_field :net_item

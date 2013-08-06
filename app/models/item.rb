@@ -20,6 +20,8 @@ class Item < ActiveRecord::Base
   before_create :create_default_variant
   before_save :set_grouping_plus
 
+
+
   def set_grouping_plus
     self.grouping = "#{category.parent.rank}:#{category.parent.name}"
     self.item_type = ItemType.find_by_name( category.parent.name )

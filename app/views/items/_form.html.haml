@@ -21,9 +21,9 @@
       -#  = collection_select(:item, :item_type_id,
       -#    ItemType.where("properties -> '#{current_tenant.domain}' = '1'").order(:rank, :name), :id, :name)
       .field.small-2.columns.left
-        = f.label :vat_rate
-        = collection_select(:item, :vat_rate,
-          Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
+        = f.label :product_flow
+        = collection_select(:item, :product_flow,
+          Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
     .row
       .field.small-4.columns
         = f.label :category, 'Category'
@@ -33,6 +33,10 @@
       .field.small-2.columns
         = f.label :price
         = f.text_field :price
+      .field.small-2.columns.left
+        = f.label :vat_rate
+        = collection_select(:item, :vat_rate,
+          Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
     .row
       .field.small-8.columns
         = f.label :slug

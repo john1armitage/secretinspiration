@@ -14,16 +14,12 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    p params[:root_category]
     @categories = get_categories( params[:root_category])
-    p @categories
   end
 
   # GET /items/1/edit
   def edit
-    p @item.category.root.name
     @categories = get_categories( @item.category.root.name )
-    p @categories
   end
 
   # POST /items

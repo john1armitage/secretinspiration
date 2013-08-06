@@ -83,8 +83,6 @@ class BookingsController < ApplicationController
     def get_bookings(booking_date)
       start = booking_date.beginning_of_month
       stop = booking_date.end_of_month
-      p start
-      p stop
       @bookings.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
       @bookings.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
 

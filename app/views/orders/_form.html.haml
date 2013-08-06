@@ -1,3 +1,5 @@
+- @accounts = get_accounts
+- p @accounts
 = form_for @order, :validate => true do |f|
 
   %fieldset
@@ -63,8 +65,10 @@
         .field.small-7.columns
           Items
           = link_to_add_association 'add item', f, :line_items, :class => 'no_ajaxify', :data => {"association-insertion-method" => "after"  }
-      = f.fields_for :line_items do |task|
-        = render 'line_item_fields', :f => task
+          = @order.line_items.size
+        -# unless @order.new_record?
+        = f.fields_for :line_items do |task|
+          = render 'line_item_fields', :f => task
     .actions
       = f.submit 'Save'
 :coffeescript

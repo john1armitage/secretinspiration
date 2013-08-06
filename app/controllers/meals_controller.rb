@@ -35,7 +35,9 @@ class MealsController < ApplicationController
   end
 
   def check_out
-
+    order = Order.create( user_id: current_user.id, supplier_id: Supplier.find_by_name( current_tenancy.home_supplier ).id)
+    @meat.line_items.update_all(ownable_type: 'Order', ownable_id: order.id)
+    redirect_to order
   end
 
   def destroy

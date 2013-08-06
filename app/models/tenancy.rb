@@ -2,6 +2,12 @@ class Tenancy < ActiveRecord::Base
 
   after_create :create_schema
 
+  before_save :check_home_supplier
+
+  def check_home_supplier
+    Supplier.find_or_create_by(:name => home_supplier) unless home_supplier.blank?
+  end
+
   def create_schema
     ActiveRecord::Base.connection.execute("carts schema #{domain}")
     scope_schema do
