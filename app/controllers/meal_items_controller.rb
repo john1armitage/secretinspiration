@@ -26,9 +26,9 @@ class MealItemsController < ApplicationController
   def update
     current_item = LineItem.find(params[:id])
     if params['act'] == 'add'
-      @line_item = @meal.add_variant( current_item )
+      @line_item = params[:option].present? ? @meal.add_option( current_item ) : @meal.add_variant( current_item )
     else
-      @line_item = @meal.subtract_variant( current_item )
+      @line_item = params[:option].present? ?  @meal.subtract_option( current_item ) : @meal.subtract_variant( current_item )
     end
     @line_item.save if @line_item.quantity > 0
     respond_to do |format|
@@ -41,7 +41,15 @@ class MealItemsController < ApplicationController
 
   # DELETE /line_items/1
   def destroy
-    @line_item.destroy
+    if params[:option].present?
+      if @line_item.is_only_child? && @line_item.parent.net_item_cents == 0
+        @line_item.parent.destroy
+      else
+        @line_item.destroy
+      end
+    else
+      @line_item.destroy
+    end
     respond_to do |format|
       format.js { render 'meal.js.erb',
                          notice: 'Line item was successfully created.' }
@@ -58,7 +66,6 @@ class MealItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])
-      @meal = @line_item.ownable
-
+      @meal = params[:option].present? ? @line_item.parent.ownable : @line_item.ownable
     end
 end

@@ -20,7 +20,7 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update(meal_params)
-      redirect_to meals_url, notice: 'Cart was successfully updated.'
+      redirect_to meals_url, notice: 'Meal was successfully updated.'
     else
       render action: 'edit'
     end

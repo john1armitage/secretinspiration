@@ -111,4 +111,25 @@ class Meal < ActiveRecord::Base
     current_item
   end
 
+  def add_option( current_item )
+    current_item.quantity += 1
+    calculate_totals(current_item)
+    current_item
+  end
+
+  def subtract_option(current_item)
+    current_item.quantity -= 1
+    if current_item.quantity == 0
+      if current_item.is_only_child?  && ( current_item.parent.net_item_cents == 0 )
+        current_item.parent.destroy
+      else
+        current_item.destroy
+      end
+    else
+      calculate_totals(current_item)
+    end
+    current_item
+  end
+
+
 end

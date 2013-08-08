@@ -32,8 +32,10 @@ class LineItem < ActiveRecord::Base
   end
 
   def process_local
-    self.net_item = local_net_item / exchange_rate
-    self.tax_item = local_tax_item / exchange_rate
+    if local_net_item > 0
+      self.net_item = local_net_item / exchange_rate
+      self.tax_item = local_tax_item / exchange_rate
+  end
   end
 
   def process_variant
