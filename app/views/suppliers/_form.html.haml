@@ -14,11 +14,10 @@
         = f.text_field :name
     .row
       .field.small-5.columns
-        = f.label :phone1
+        = f.label :phone1, 'Phone'
         = f.text_field :phone1
-    .row
-      .field.small-5.columns
-        = f.label :phone2
+      .field.small-5.columns.left
+        = f.label :phone2, 'Alternative'
         = f.text_field :phone2
     .row
       .field.small-5.columns
@@ -26,12 +25,16 @@
         = f.text_field :email
     .row
       .field.small-5.columns
-        = f.label :notes
-        = f.text_field :notes
-    .row
-      .field.small-5.columns
         = f.label :opening_balance
         = f.text_field :opening_balance
+      .field.small-3.columns.left
+        = f.label :opening_balance_currency, 'Currency'
+        = f.collection_select :opening_balance_currency, Element.where( :kind => 'currency').load,
+          'name', 'name', {:selected => 'GBP'}
+    .row
+      .field.small-5.columns
+        = f.label :notes
+        = f.text_field :notes
     .row
       .actions
         = f.submit 'Save'

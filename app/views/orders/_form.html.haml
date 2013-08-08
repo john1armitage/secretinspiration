@@ -1,15 +1,13 @@
 - @accounts = get_accounts
-- p @accounts
 = form_for @order, :validate => true do |f|
 
   %fieldset
     %legend= 'Order: ' + ( @order.state || "new" )
-    -#- if @order.errors.any?
-    -#  #error_explanation
-    -#    %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
-    -#    %ul
-    -#      - @order.errors.full_messages.each do |msg|
-    -#        %li= msg
+    -#
+    -#= text_field_tag :currency, @currency
+    -#- unless @currency == current_tenant.home_currency
+    -#  = text_field_tag :exchange_rate, get_conversion_rate(@currency,current_tenant.home_currency, 1)
+    =# get_conversion_rate(@currency,current_tenant.home_currency, 1) unless @currency == current_tenant.home_currency
     .row
       .field.small-4.columns
         = f.label :effective_date

@@ -1,1 +1,1 @@
-= link_to "[New #{make_title(new_item_link.name)} Item]", new_item_path( :root_category => new_item_link.name )
+= button_to "New #{make_title(new_item_link.name)} Item", new_item_path( :root_category => new_item_link.name ), method: :get

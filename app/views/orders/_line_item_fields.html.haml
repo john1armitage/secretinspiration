@@ -1,4 +1,5 @@
 .nested-fields
+  = f.hidden_field :domain, value: current_tenant.domain
   .row.left
     .field.small-7.columns
       = f.label :desc, 'Description'
@@ -7,12 +8,25 @@
       = f.label :variant
       = f.text_field :variant_name, data: {autocomplete_source: variants_path}, :class => 'variant_complete'
   .row.left
-    .field.small-2.columns
-      = f.label :net_item
-      = f.text_field :net_item
-    .field.small-2.columns
-      = f.label :tax_item
-      = f.text_field :tax_item
+    - unless @exchange_rate.present?
+      .field.small-2.columns
+        = f.label :net_item
+        = f.text_field :net_item
+      .field.small-2.columns
+        = f.label :tax_item
+        = f.text_field :tax_item
+    - else
+      .field.small-2.columns
+        = f.label :local_net_item
+        = f.text_field :local_net_item
+      .field.small-2.columns
+        = f.label :local_tax_item
+        = f.text_field :local_tax_item
+      .field.small-2.columns
+        = f.hidden_field :local_net_item_currency, value: @currency
+        = f.label :exchange_rate, @currency
+
+        = f.text_field :exchange_rate, value: @exchange_rate
     .field.small-2.columns
       = f.label :quantity
       = f.text_field :quantity

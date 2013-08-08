@@ -14,7 +14,7 @@
 
 %p
   - if allow? :roles, :update
-    = link_to 'Roles', roles_path
+    = button_to 'Roles', roles_path, method: :get
 
   - if allow? :users, :carts
-    = link_to 'New User', new_user_path
+    = button_to 'New User', new_user_path, method: :get

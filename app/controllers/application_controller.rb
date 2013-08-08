@@ -79,8 +79,6 @@ class ApplicationController < ActionController::Base
     dst_currency_value = dst_currency_value.to_f
     dst_currency_text = dst_currency_text.join(' ')
 
-    #puts "#{country_code_dst} -> #{dst_currency_value} (#{dst_currency_text} to 1 #{country_code_src})"
-
     (dst_currency_value * amount).round(2)
   end
   helper_method :get_conversion_rate

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Transfer date:
+  = @transfer.transfer_date
+%p
+  %b Bank:
+  = @transfer.bank
+%p
+  %b Recipient:
+  = @transfer.recipient
+%p
+  %b Exchange rate:
+  = @transfer.exchange_rate
+
+= link_to 'Edit', edit_transfer_path(@transfer)
+\|
+= link_to 'Back', transfers_path

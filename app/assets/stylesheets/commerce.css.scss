@@ -5,6 +5,12 @@ h1 {
 li {
   list-style-type: none;
 }
+td.number, th.number {
+  text-align: right;
+}
+td.center, th.center {
+  text-align: center;
+}
 
 ul#cart, ul#meal, ul.menu-item {
   font-size: 0.8em;
@@ -53,6 +59,12 @@ div.catalogue_variant {
   margin-bottom: 0.8em;
 
   form, div {
+    display: inline;
+  }
+}
+form[method=get] {
+  display: inline;
+  div {
     display: inline;
   }
 }

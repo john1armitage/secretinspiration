@@ -9,24 +9,21 @@
   - unless line_item.choices.blank?
     - line_item.choices.each do |k,v|
       = make_title(v)
-  = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify'
-  = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify'
-  = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify'
   - unless line_item.options.blank?
     %br
     = make_title(line_item.options)
   %br
-  @
-  = line_item.net_item + line_item.tax_item
+  = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify'
+  = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify'
+  = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify'
+  = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
+  = "~#{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}~"
 
-  = '='
-  = line_item.net_total_item + line_item.tax_total_item
   - line_item.children.each do |option|
     %br
     = option.quantity
     x
     = make_title(option.desc)
-    @
-    = option.net_item + option.tax_item
-    = '='
+    %br
     = option.net_total_item + option.tax_total_item
+    = "~#{humanized_money_with_symbol(option.net_item + option.tax_item)}~"

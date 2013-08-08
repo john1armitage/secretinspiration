@@ -14,11 +14,6 @@ class ChoicesController < ApplicationController
     get_items
   end
 
-  #def set_categories( default_choices )
-  #  choices = params[:choices].present? ? params[:choices] : default_choices
-  #  get_categories( ItemType.find_by_name(choices).id)
-  #end
-
   def get_items
       @items = Item.order('item_type_id').where( :variants => { :domain => current_tenant.domain } ).includes(:variants, :item_type)
   end

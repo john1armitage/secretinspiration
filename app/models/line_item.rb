@@ -17,6 +17,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :account
 
   before_validation :process_variant
+  before_validation :process_local
   before_validation :get_totals
   #
   validates_presence_of :desc, :unless => :linked_id?
@@ -28,6 +29,16 @@ class LineItem < ActiveRecord::Base
   fields =  Element.where( kind: 'item_choices')
   fields.each do |field|
     store_accessor :choices, field.name.downcase
+  end
+
+  def process_local
+    self.net_item = local_net_item / exchange_rate
+    self.tax_item = local_tax_item / exchange_rate
+  end
+
+  def process_variant
+    self.account_id = variant.item.item_type.account_id if variant_id.present?
+    self.quantity = 1 unless quantity.to_i > 0
   end
 
   def get_totals
@@ -43,11 +54,6 @@ class LineItem < ActiveRecord::Base
 
   def cart_or_blank?
     ownable_type == 'Cart' || variant_name.blank?
-  end
-
-  def process_variant
-    self.account_id = variant.item.item_type.account_id if variant_id.present?
-    self.quantity = 1 unless quantity.to_i > 0
   end
 
   def check_account

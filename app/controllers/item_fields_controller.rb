@@ -27,7 +27,7 @@ class ItemFieldsController < ApplicationController
 
   # POST /item_fields
   def create
-    @item_field = ItemField.new(item_field_params)
+    @item_field = ItemField.new(params[:item_field])
 
     if @item_field.save
       redirect_to item_fields_url(:item_type_id => params[:item_field][:item_type_id]), notice: 'Item field was successfully created.'
@@ -38,7 +38,7 @@ class ItemFieldsController < ApplicationController
 
   # PATCH/PUT /item_fields/1
   def update
-    if @item_field.update(item_field_params)
+    if @item_field.update(params[:item_field])
       redirect_to  item_fields_url(:item_type_id => params[:item_field][:item_type_id]), notice: 'Item field was successfully updated.'
     else
       render action: 'edit'
@@ -58,8 +58,7 @@ class ItemFieldsController < ApplicationController
       @item_field = ItemField.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def item_field_params
-      params.require(:item_field).permit(:name, :field_type, :options, :rank)
-    end
+  def current_resource
+    @current_resource ||= @item_field
+  end
 end

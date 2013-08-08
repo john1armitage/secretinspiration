@@ -2,6 +2,9 @@ Commerce::Application.routes.draw do
 
 
 
+
+  resources :transfers
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -49,6 +52,7 @@ Commerce::Application.routes.draw do
   resources :tabels
 
   resources :suppliers
+  resources :banks
   resources :customers
   resources :orders
 

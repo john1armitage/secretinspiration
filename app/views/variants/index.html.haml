@@ -20,7 +20,7 @@
       %td= variant.item.name
       %td= variant.name
       %td= variant.desc
-      %td= variant.price
+      %td= humanized_money_with_symbol variant.price
       %td= variant.item_default
       %td= variant.stock
       %td= variant.available_on
@@ -32,4 +32,5 @@
 
 %br
 
-= link_to 'New Variant', new_variant_path( :item_id => @item.id)
+= button_to 'New Variant', new_variant_path( :item_id => @item.id), method: :get
+

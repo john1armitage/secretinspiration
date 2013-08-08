@@ -1,38 +1,33 @@
+= button_to 'Quick Order', new_order_path(:quick => true ), method: :get
 
-%h1 Listing orders
-
--# Use this when local_currency changes javascript - if blank, then  blank exchange_rate
-- to_currency = 'KES'
-=# get_conversion_rate('KES','GBP', 1000)
+= render partial: 'order_button', collection: Element.where(kind: 'currency').order(:rank)
 
 %table
   %tr
-    %th Effective date
-    %th Total
-    %th Due date
+    %th.number Effective date
+    %th.number Total
+    -#%th Net
+    -#%th Tax
+    %th.number Due date
     %th Customer
     %th Supplier
-    %th State
-    %th Items
+    %th.center State
+    %th.center Items
     %th
     %th
     %th
 
   - @orders.each do |order|
     %tr
-      %td= order.effective_date
-      %td= "gross_total"
-      %td= order.due_date
+      %td.number= order.effective_date.strftime("%-d %b %y")
+      %td.number= humanized_money_with_symbol(order.net_total + order.tax_total)
+      -#%td= humanized_money_with_symbol(order.net_total)
+      -#%td= humanized_money_with_symbol(order.tax_total)
+      %td.number= order.due_date.strftime("%-d %b %y") if order.due_date
       %td= order.customer.name if order.customer
       %td= order.supplier.name if order.supplier
-      %td= order.state
-      %td= ( order.quick ? 'quick' : order.line_items.size )
+      %td.center= order.state
+      %td.center= ( order.quick ? 'quick' : order.line_items.size )
       %td= link_to 'Show', order
       %td= link_to 'Edit', edit_order_path(order)
       %td= link_to 'Destroy', order, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Order', new_order_path
-|
-= link_to 'Quick Order', new_order_path(:quick => true )

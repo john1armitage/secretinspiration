@@ -12,6 +12,9 @@
   - if allow? :suppliers, :index
     %li
       != link_to 'Suppliers', suppliers_path, :class => "small button radius"
+  - if allow? :banks, :index
+    %li
+      != link_to 'Banks', banks_path, :class => "small button radius"
   - if allow? :customers, :index
     %li
       != link_to 'Customers', customers_path, :class => "small button radius"

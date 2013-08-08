@@ -59,22 +59,7 @@ class ItemsController < ApplicationController
   def get_root_categories  #  "data -> 'foo' = :value", value: true)
     @root_categories = Category.where( :ancestry_depth => 0 )
   end
-    ## Only allow a trusted parameter "white list" through.
-    #def item_params
-    #  params.require(:item).permit(:name)
-    #end
 
-  #def get_categories( item_type_id )
-  #  item_type =  ItemType.find( item_type_id )
-  #  category = Category.find_by_name( item_type.name )
-  #  if category
-  #    root_id = category.id
-  #    @categories = Category.at_depth( item_type.menu_depth - 1 ).where(:root_id => root_id ).order(:rank).load
-  #  else
-  #    @categories = []
-  #  end
-  #end
-  #
   def current_resource
     @current_resource ||= @item
   end

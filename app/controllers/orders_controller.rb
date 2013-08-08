@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.order(:effective_date => :desc, :net_total_cents => :desc )
   end
 
   # GET /orders/1
@@ -15,6 +15,13 @@ class OrdersController < ApplicationController
     @order = Order.new
     @order.user = current_user
     @order.state = 'incomplete'
+    if params[:quick].present?
+      @order.quick = true
+      @currency = current_tenant.home_currency
+    else
+      @currency = params[:currency]
+      @exchange_rate = get_conversion_rate(@currency,current_tenant.home_currency, 1) unless @currency == current_tenant.home_currency
+    end
   end
 
   # GET /orders/1/edit

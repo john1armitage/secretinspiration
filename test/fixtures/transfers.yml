@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  transfer_date: 2013-08-08
+  bank_id: 
+  recipient_id: 
+  exchange_rate: 9.99
+
+two:
+  transfer_date: 2013-08-08
+  bank_id: 
+  recipient_id: 
+  exchange_rate: 9.99

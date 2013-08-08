@@ -1,0 +1,29 @@
+= form_for @bank do |f|
+  %fieldset
+    %legend= 'Supplier'
+
+    .row
+      .field.small-5.columns
+        = f.label :name
+        = f.text_field :name
+    .row
+      .field.small-5.columns
+        = f.label :sort_code
+        = f.text_field :sort_code
+      .field.small-5.columns
+        = f.label :account_no
+        = f.text_field :account_no
+    .row
+      .field.small-5.columns
+        = f.label :opening_balance
+        = f.text_field :opening_balance
+      .field.small-3.columns.left
+        = f.label :opening_balance_currency, 'Currency'
+        = f.collection_select :opening_balance_currency, Element.where( :kind => 'currency').load,
+          'name', 'name', {:selected => 'GBP'}
+    .row
+      .field.small-10.columns
+        = f.label :notes
+        = f.text_field :notes
+  .actions
+    = f.submit 'Save'

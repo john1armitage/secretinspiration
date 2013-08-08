@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  sort_code: MyString
+  account_no: MyString
+  opening_balance: MyString
+  notes: MyString
+
+two:
+  name: MyString
+  sort_code: MyString
+  account_no: MyString
+  opening_balance: MyString
+  notes: MyString

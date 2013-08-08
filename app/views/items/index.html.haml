@@ -1,3 +1,5 @@
+=  render partial: 'new_item_link', collection: @root_categories
+
 %table
   %tr
     %th Name
@@ -19,6 +21,4 @@
         = link_to 'Variants', variants_path(:item_id => item.id)
         = item.variants.where( :domain => current_tenant.domain).size
 
-%br
 
-=  render partial: 'new_item_link', collection: @root_categories

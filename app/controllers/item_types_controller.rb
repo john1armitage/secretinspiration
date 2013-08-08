@@ -57,20 +57,6 @@ class ItemTypesController < ApplicationController
 
   end
 
-  #def store_field
-  #  get_collections
-  #  @collections.each do |field|
-  #    selected = []
-  #    if params[ field.name ].present?
-  #      params[field.name].each do |k,v|
-  #        # params[:sizes].each do |k,v|
-  #        selected << k
-  #      end
-  #    end
-  #    eval( "params[:variant][:#{field.name}] = selected.join('-')" )
-  #  end
-  #end
-
     def current_resource
       @current_resource ||= ItemType.find(params[:id])  if params[:id]
     end

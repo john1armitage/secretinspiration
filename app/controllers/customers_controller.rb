@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
 
   # POST /customers
   def create
-    @customer = Customer.new(customer_params)
+    @customer = Customer.new(params[:customer])
 
     if @customer.save
       redirect_to @customer, notice: 'Customer was successfully created.'
@@ -37,7 +37,7 @@ class CustomersController < ApplicationController
 
   # PATCH/PUT /customers/1
   def update
-    if @customer.update(customer_params)
+    if @customer.update(params[:customer])
       redirect_to @customer, notice: 'Customer was successfully updated.'
     else
       render action: 'edit'
@@ -56,8 +56,7 @@ class CustomersController < ApplicationController
       @customer = Customer.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def customer_params
-      params.require(:customer).permit(:name, :phone1, :phone1, :email, :notes)
-    end
+  def current_resource
+    @current_resource ||= @customer
+  end
 end

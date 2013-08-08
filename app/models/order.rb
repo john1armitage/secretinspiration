@@ -9,10 +9,11 @@ class Order < ActiveRecord::Base
   monetize :discount_cents, :allow_nil => true
 
   has_many :line_items, as: :ownable, dependent: :destroy
+  has_many :allocations
+  has_many :payments, through: :allocations
+  has_many :depreciations
 
-  accepts_nested_attributes_for :line_items, :reject_if =>  proc { |att| att['variant_name'].blank? and att['desc'].blank? },
-                                :allow_destroy => true
-  validates_associated :line_items
+  has_many  :postings, as: :postable, dependent: :destroy
 
   belongs_to :account
   belongs_to :user
@@ -22,6 +23,11 @@ class Order < ActiveRecord::Base
 
   before_validation :check_account
   before_save :get_totals
+
+  accepts_nested_attributes_for :line_items, :reject_if =>  proc { |att| att['variant_name'].blank? and att['desc'].blank? },
+                                :allow_destroy => true
+  validates_associated :line_items
+
 
   validates_presence_of :supplier_name
   validates_presence_of :effective_date

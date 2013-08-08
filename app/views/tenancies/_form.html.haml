@@ -2,12 +2,6 @@
 
   %fieldset
     %legend= 'Tenancy: ' + ( @tenancy.name || "new" )
-    -#- if @item_type.errors.any?
-    -#  #error_explanation
-    -#    %h2= "#{pluralize(@item_type.errors.count, "error")} prohibited this item_type from being saved:"
-    -#    %ul
-    -#      - @item_type.errors.full_messages.each do |msg|
-    -#        %li= msg
 
     .row
       .field.small-6.columns
@@ -36,6 +30,10 @@
         = f.collection_select :default_category, Category.where( :ancestry_depth => 0).load,
           'name', 'name'
     .row
+      .field.small-3.columns
+        = f.label :home_currency
+        = f.collection_select :home_currency, Element.where( :kind => 'currency').load,
+          'name', 'name'
       .field.small-1.columns.left
         = f.label :vat_exempt
         = f.check_box :vat_exempt
