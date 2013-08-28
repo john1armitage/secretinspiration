@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+// require zepto
+//= foundation.clearing.js
 //= require jquery.ui.autocomplete
 //= require jquery.ui.datepicker
 //= require jquery-ui-timepicker-addon

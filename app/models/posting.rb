@@ -1,7 +1,9 @@
 class Posting < ActiveRecord::Base
 
-  monetize :home_amount, :debit_amount, :credit_amount
+  monetize :debit_amount_cents
+  monetize :credit_amount_cents
 
   belongs_to :postable, polymorphic: true
-
+  belongs_to :accountable, polymorphic: true
+  belongs_to :account
 end

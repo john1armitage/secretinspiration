@@ -22,7 +22,9 @@ CREATE TABLE allocations (
     id integer NOT NULL,
     amount_cents integer DEFAULT 0 NOT NULL,
     payment_id integer,
-    order_id integer
+    order_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -58,7 +60,8 @@ CREATE TABLE banks (
     opening_balance_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
     notes text,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    rank integer
 );
 
 
@@ -79,38 +82,6 @@ CREATE SEQUENCE banks_id_seq
 --
 
 ALTER SEQUENCE banks_id_seq OWNED BY banks.id;
-
-
---
--- Name: depreciations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE depreciations (
-    id integer NOT NULL,
-    service_date date,
-    order_id integer,
-    allowable_cost_cents integer DEFAULT 0 NOT NULL,
-    life_years integer DEFAULT 3
-);
-
-
---
--- Name: depreciations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE depreciations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: depreciations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE depreciations_id_seq OWNED BY depreciations.id;
 
 
 --
@@ -233,25 +204,25 @@ CREATE TABLE line_items (
     domain character varying(255),
     "desc" character varying(255),
     account_id integer,
-    net_item_cents integer DEFAULT 0 NOT NULL,
     tax_item_cents integer DEFAULT 0 NOT NULL,
-    local_net_item_cents integer DEFAULT 0 NOT NULL,
-    local_net_item_currency character varying(255) DEFAULT 'GBP'::character varying NOT NULL,
-    local_tax_item_cents integer DEFAULT 0 NOT NULL,
-    exchange_rate numeric(10,7),
+    exchange_rate numeric(10,7) DEFAULT 1,
     vat_rate numeric(5,2),
     net_total_item_cents integer DEFAULT 0 NOT NULL,
     tax_total_item_cents integer DEFAULT 0 NOT NULL,
     discount_per_cent numeric(8,2),
     discount_cents integer DEFAULT 0 NOT NULL,
-    discount_currency character varying(255) DEFAULT 'GBP'::character varying NOT NULL,
     ownable_id integer,
     ownable_type character varying(255),
     choices hstore,
     ancestry character varying(255),
     ancestry_depth integer DEFAULT 0,
     option_id integer,
-    options character varying(255)
+    options character varying(255),
+    net_item_cents integer DEFAULT 0 NOT NULL,
+    net_item_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
+    net_home_cents integer DEFAULT 0 NOT NULL,
+    tax_home_cents integer DEFAULT 0 NOT NULL,
+    contra boolean
 );
 
 
@@ -344,76 +315,6 @@ ALTER SEQUENCE options_id_seq OWNED BY options.id;
 
 
 --
--- Name: payments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE payments (
-    id integer NOT NULL,
-    payment_date date,
-    amount_cents integer DEFAULT 0 NOT NULL,
-    amount_currency character varying(255) DEFAULT 'GBP'::character varying NOT NULL,
-    bank_id integer,
-    exchange_rate numeric(10,6),
-    home_amount_cents integer DEFAULT 0 NOT NULL
-);
-
-
---
--- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE payments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
-
-
---
--- Name: postings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE postings (
-    id integer NOT NULL,
-    event_date date,
-    currency character varying(255) DEFAULT 'GBP'::character varying,
-    exchange_rate numeric(10,6),
-    home_amount_cents integer DEFAULT 0 NOT NULL,
-    debit_amount_cents integer DEFAULT 0 NOT NULL,
-    credit_amount_cents integer DEFAULT 0 NOT NULL,
-    postable_type character varying(255),
-    postable_id integer
-);
-
-
---
--- Name: postings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE postings_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: postings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE postings_id_seq OWNED BY postings.id;
-
-
---
 -- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -503,7 +404,11 @@ CREATE TABLE transfers (
     recipient_id integer,
     exchange_rate numeric,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    amount_cents integer DEFAULT 0 NOT NULL,
+    amount_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
+    "desc" character varying(255),
+    state character varying(255) DEFAULT 'incomplete'::character varying
 );
 
 
@@ -658,13 +563,6 @@ ALTER TABLE ONLY banks ALTER COLUMN id SET DEFAULT nextval('banks_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY depreciations ALTER COLUMN id SET DEFAULT nextval('depreciations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY elements ALTER COLUMN id SET DEFAULT nextval('elements_id_seq'::regclass);
 
 
@@ -701,20 +599,6 @@ ALTER TABLE ONLY meals ALTER COLUMN id SET DEFAULT nextval('meals_id_seq'::regcl
 --
 
 ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY postings ALTER COLUMN id SET DEFAULT nextval('postings_id_seq'::regclass);
 
 
 --
@@ -776,14 +660,6 @@ ALTER TABLE ONLY banks
 
 
 --
--- Name: depreciations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY depreciations
-    ADD CONSTRAINT depreciations_pkey PRIMARY KEY (id);
-
-
---
 -- Name: elements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -829,22 +705,6 @@ ALTER TABLE ONLY meals
 
 ALTER TABLE ONLY options
     ADD CONSTRAINT options_pkey PRIMARY KEY (id);
-
-
---
--- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY payments
-    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
-
-
---
--- Name: postings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY postings
-    ADD CONSTRAINT postings_pkey PRIMARY KEY (id);
 
 
 --
@@ -910,13 +770,6 @@ CREATE INDEX index_allocations_on_payment_id ON allocations USING btree (payment
 
 
 --
--- Name: index_depreciations_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_depreciations_on_order_id ON depreciations USING btree (order_id);
-
-
---
 -- Name: index_item_types_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -959,13 +812,6 @@ CREATE INDEX index_options_on_name ON options USING btree (name);
 
 
 --
--- Name: index_postings_on_postable_type_and_postable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_postings_on_postable_type_and_postable_id ON postings USING btree (postable_type, postable_id);
-
-
---
 -- Name: index_transfers_on_bank_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -997,45 +843,15 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public;
-
-INSERT INTO schema_migrations (version) VALUES ('20130701014230');
-
-INSERT INTO schema_migrations (version) VALUES ('20130701151124');
-
-INSERT INTO schema_migrations (version) VALUES ('20130701152140');
-
-INSERT INTO schema_migrations (version) VALUES ('20130701190841');
-
-INSERT INTO schema_migrations (version) VALUES ('20130702085711');
+SET search_path TO vernas;
 
 INSERT INTO schema_migrations (version) VALUES ('20130707204916');
 
-INSERT INTO schema_migrations (version) VALUES ('20130708170118');
+INSERT INTO schema_migrations (version) VALUES ('20130709161628');
 
-INSERT INTO schema_migrations (version) VALUES ('20130710122322');
-
-INSERT INTO schema_migrations (version) VALUES ('20130710125338');
-
-INSERT INTO schema_migrations (version) VALUES ('20130710130947');
-
-INSERT INTO schema_migrations (version) VALUES ('20130710135720');
-
-INSERT INTO schema_migrations (version) VALUES ('20130710152108');
-
-INSERT INTO schema_migrations (version) VALUES ('20130711145709');
-
-INSERT INTO schema_migrations (version) VALUES ('20130711151459');
-
-INSERT INTO schema_migrations (version) VALUES ('20130711161814');
-
-INSERT INTO schema_migrations (version) VALUES ('20130711181420');
-
-INSERT INTO schema_migrations (version) VALUES ('20130712162051');
+INSERT INTO schema_migrations (version) VALUES ('20130710163822');
 
 INSERT INTO schema_migrations (version) VALUES ('20130714144039');
-
-INSERT INTO schema_migrations (version) VALUES ('20130714155255');
 
 INSERT INTO schema_migrations (version) VALUES ('20130715092149');
 
@@ -1043,23 +859,21 @@ INSERT INTO schema_migrations (version) VALUES ('20130715154250');
 
 INSERT INTO schema_migrations (version) VALUES ('20130715173319');
 
-INSERT INTO schema_migrations (version) VALUES ('20130715174648');
-
-INSERT INTO schema_migrations (version) VALUES ('20130716115720');
-
 INSERT INTO schema_migrations (version) VALUES ('20130716130544');
 
-INSERT INTO schema_migrations (version) VALUES ('20130716131550');
+INSERT INTO schema_migrations (version) VALUES ('20130716131612');
 
 INSERT INTO schema_migrations (version) VALUES ('20130716163248');
-
-INSERT INTO schema_migrations (version) VALUES ('20130716163433');
 
 INSERT INTO schema_migrations (version) VALUES ('20130717084246');
 
 INSERT INTO schema_migrations (version) VALUES ('20130717085810');
 
 INSERT INTO schema_migrations (version) VALUES ('20130717090033');
+
+INSERT INTO schema_migrations (version) VALUES ('20130717145651');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718140002');
 
 INSERT INTO schema_migrations (version) VALUES ('20130718142147');
 
@@ -1069,19 +883,21 @@ INSERT INTO schema_migrations (version) VALUES ('20130719084441');
 
 INSERT INTO schema_migrations (version) VALUES ('20130719091722');
 
-INSERT INTO schema_migrations (version) VALUES ('20130720183230');
+INSERT INTO schema_migrations (version) VALUES ('20130719143415');
 
-INSERT INTO schema_migrations (version) VALUES ('20130721085503');
+INSERT INTO schema_migrations (version) VALUES ('20130719143429');
 
-INSERT INTO schema_migrations (version) VALUES ('20130722184306');
+INSERT INTO schema_migrations (version) VALUES ('20130719170855');
 
-INSERT INTO schema_migrations (version) VALUES ('20130723104915');
+INSERT INTO schema_migrations (version) VALUES ('20130720102928');
 
-INSERT INTO schema_migrations (version) VALUES ('20130723184451');
+INSERT INTO schema_migrations (version) VALUES ('20130720191140');
 
-INSERT INTO schema_migrations (version) VALUES ('20130724121531');
+INSERT INTO schema_migrations (version) VALUES ('20130721141635');
 
-INSERT INTO schema_migrations (version) VALUES ('20130724132429');
+INSERT INTO schema_migrations (version) VALUES ('20130722092506');
+
+INSERT INTO schema_migrations (version) VALUES ('20130723143352');
 
 INSERT INTO schema_migrations (version) VALUES ('20130724141531');
 
@@ -1089,17 +905,23 @@ INSERT INTO schema_migrations (version) VALUES ('20130725122611');
 
 INSERT INTO schema_migrations (version) VALUES ('20130725122612');
 
-INSERT INTO schema_migrations (version) VALUES ('20130725141742');
+INSERT INTO schema_migrations (version) VALUES ('20130726172722');
+
+INSERT INTO schema_migrations (version) VALUES ('20130726172723');
+
+INSERT INTO schema_migrations (version) VALUES ('20130726172724');
+
+INSERT INTO schema_migrations (version) VALUES ('20130727203148');
+
+INSERT INTO schema_migrations (version) VALUES ('20130727203150');
+
+INSERT INTO schema_migrations (version) VALUES ('20130727203151');
+
+INSERT INTO schema_migrations (version) VALUES ('20130728154637');
 
 INSERT INTO schema_migrations (version) VALUES ('20130728154638');
 
-INSERT INTO schema_migrations (version) VALUES ('20130728192503');
-
-INSERT INTO schema_migrations (version) VALUES ('20130729133633');
-
-INSERT INTO schema_migrations (version) VALUES ('20130804090532');
-
-INSERT INTO schema_migrations (version) VALUES ('20130804091558');
+INSERT INTO schema_migrations (version) VALUES ('20130804084256');
 
 INSERT INTO schema_migrations (version) VALUES ('20130804175215');
 
@@ -1109,13 +931,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130804184638');
 
 INSERT INTO schema_migrations (version) VALUES ('20130804185443');
 
-INSERT INTO schema_migrations (version) VALUES ('20130804193531');
+INSERT INTO schema_migrations (version) VALUES ('20130806153507');
 
-INSERT INTO schema_migrations (version) VALUES ('20130805080025');
-
-INSERT INTO schema_migrations (version) VALUES ('20130805191105');
-
-INSERT INTO schema_migrations (version) VALUES ('20130807082648');
+INSERT INTO schema_migrations (version) VALUES ('20130807084204');
 
 INSERT INTO schema_migrations (version) VALUES ('20130807100241');
 
@@ -1128,3 +946,49 @@ INSERT INTO schema_migrations (version) VALUES ('20130808183809');
 INSERT INTO schema_migrations (version) VALUES ('20130808184843');
 
 INSERT INTO schema_migrations (version) VALUES ('20130808190659');
+
+INSERT INTO schema_migrations (version) VALUES ('20130813183525');
+
+INSERT INTO schema_migrations (version) VALUES ('20130821195508');
+
+INSERT INTO schema_migrations (version) VALUES ('20130821202603');
+
+INSERT INTO schema_migrations (version) VALUES ('20130822083354');
+
+INSERT INTO schema_migrations (version) VALUES ('20130822083740');
+
+INSERT INTO schema_migrations (version) VALUES ('20130822103806');
+
+INSERT INTO schema_migrations (version) VALUES ('20130822215530');
+
+INSERT INTO schema_migrations (version) VALUES ('20130822221602');
+
+INSERT INTO schema_migrations (version) VALUES ('20130823090044');
+
+INSERT INTO schema_migrations (version) VALUES ('20130823091053');
+
+INSERT INTO schema_migrations (version) VALUES ('20130825100340');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826151251');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826151442');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826151503');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826151535');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826153100');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826182631');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826183311');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826191516');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826191615');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826203003');
+
+INSERT INTO schema_migrations (version) VALUES ('20130826203949');
+
+INSERT INTO schema_migrations (version) VALUES ('20130828184937');

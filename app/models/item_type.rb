@@ -55,7 +55,6 @@ class ItemType < ActiveRecord::Base
     ItemField.order(:rank, :name).each do |field|
       fields << field.name if eval("#{field.present?} && #{field.name} == 'options'")
     end
-    p fields
     fields
   end
 

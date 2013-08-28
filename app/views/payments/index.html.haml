@@ -1,17 +1,31 @@
-%h1 Listing payments
+= button_to 'New Payment', new_payment_path, method: :get
 
 %table
   %tr
+    %th Payment date
+    %th Bank
+    %th Recipient
+    %th
+    %th Exchange rate
+    %th
     %th
     %th
     %th
 
-  - @payments.each do |payment|
+  - @transfers.each do |transfer|
     %tr
-      %td= link_to 'Show', payment
-      %td= link_to 'Edit', edit_payment_path(payment)
-      %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= transfer.transfer_date
+      %td= transfer.bank.name
+      %td= transfer.recipient.name
+      %td= humanized_money_with_symbol(transfer.amount)
+      %td= transfer.exchange_rate
+      %td= transfer.desc
+      %td
+        - unless transfer.state == 'incomplete'
+          = transfer.state
+        - else
+          = link_to 'Commit', commit_transfer_path(transfer), method: :post, :data => { :confirm => 'Commit?' }
+      %td= link_to 'Show', transfer
+      %td= link_to 'Edit', edit_transfer_path(transfer)
+      %td= link_to 'Destroy', transfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
-
-= link_to 'New Payment', new_payment_path

@@ -8,8 +8,10 @@
     != link_to "Cart", carts_path(), :remote => true, :class => "small button radius no_ajaxify"
   - if current_tenant.sitting == '1'
     != link_to "Sitting", meals_path(), :remote => true, :class => "small button radius no_ajaxify"
-  - if allow? :orders, :index
+  - if allow? :items, :index
     != link_to "Menu", menu_path('base'), :remote => true, :class => "small button radius no_ajaxify"
+  - if allow? :postings, :index
+    != link_to "Accounts", menu_path('accounts'), :remote => true, :class => "small button radius no_ajaxify"
   - if allow? :elements, :index
     != link_to "System", menu_path('system'), :remote => true, :class => "small button radius no_ajaxify"
   = render 'layouts/menus/session'

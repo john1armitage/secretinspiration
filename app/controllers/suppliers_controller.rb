@@ -1,12 +1,13 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: [:show, :edit, :update, :destroy]
+  before_action :set_supplier, only: [:show, :edit, :update, :destroy, :pay]
 
   # GET /suppliers
   def index
     unless params[:term].present?
       @suppliers = Supplier.all
     else
-      @suppliers = Supplier.order(:name).where("name ILIKE ?", "%#{params[:term]}%")
+      @suppliers = Supplier.order(:name).where("name ILIKE ? and name <> ?", "%#{params[:term]}%", current_tenant.home_supplier )
+      @suppliers = @suppliers.where("opening_balance_currency = ?", params[:currency] ) if  params[:currency].present?
       render :json => @suppliers.map{|c| c.name}, root: false
     end
   end
@@ -26,9 +27,11 @@ class SuppliersController < ApplicationController
 
   # POST /suppliers
   def create
-    @supplier = Supplier.new(supplier_params)
-
+    cats = params[:supplier][:cats]
+    params[:supplier].delete :cats
+    @supplier = Supplier.new(params[:supplier])
     if @supplier.save
+      set_cats(cats)
       redirect_to suppliers_url, notice: 'Supplier was successfully created.'
     else
       render action: 'new'
@@ -37,7 +40,10 @@ class SuppliersController < ApplicationController
 
   # PATCH/PUT /suppliers/1
   def update
-    if @supplier.update(supplier_params)
+    cats = params[:supplier][:cats]
+    params[:supplier].delete :cats
+    set_cats(cats)
+    if @supplier.update(params[:supplier])
       redirect_to suppliers_url, notice: 'Supplier was successfully updated.'
     else
       render action: 'edit'
@@ -57,7 +63,19 @@ class SuppliersController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def supplier_params
-      params.require(:supplier).permit(:name, :phone1, :phone2, :email, :notes, :opening_balance)
+  def current_resource
+    @current_resource ||= @supplier
+  end
+
+  def set_cats(cats)
+    @supplier.offerings.each do |old|
+      old.destroy unless cats.include?( old.category_id )
     end
+
+    catset = @supplier.offerings.map {|o| o.category_id}
+    cats.each do |cat|
+      @supplier.offerings.create(category_id: cat) unless ( cat.blank? or catset.include?(cat))
+    end
+  end
+
 end

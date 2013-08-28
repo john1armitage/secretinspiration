@@ -1,0 +1,24 @@
+%ul.side-nav
+  %li
+  - if allow? :orders, :index
+    %li
+      != link_to 'Orders', orders_path, :class => "button radius"
+  - if allow? :payments, :index
+    %li
+      != link_to 'Payments', payments_path, :class => "button radius"
+  - if allow? :transfers, :index
+    %li
+      != link_to 'Transfers', transfers_path, :class => "button radius"
+  - if allow? :postings, :index
+    %li
+      != link_to 'Postings', postings_path, :class => "button radius"
+  - if allow? :suppliers, :index
+    %li
+      != link_to 'Suppliers', suppliers_path, :class => "button radius"
+  - if allow? :banks, :index
+    %li
+      != link_to 'Banks', banks_path, :class => "button radius"
+  - if allow? :accounts, :index
+    %li
+      != link_to 'Account List', accounts_path, :class => "button radius"
+

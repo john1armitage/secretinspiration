@@ -1,4 +1,4 @@
-.nested-fields
+.nested-fields.line_items
   = f.hidden_field :domain, value: current_tenant.domain
   .row.left
     .field.small-7.columns
@@ -6,30 +6,36 @@
       = f.text_field :desc
     .field.small-5.columns
       = f.label :variant
-      = f.text_field :variant_name, data: {autocomplete_source: variants_path}, :class => 'variant_complete'
+      - if @items.present?
+        = f.text_field :variant_name, data: {autocomplete_source: @items}, :class => 'variant_complete'
+      - else
+        = f.text_field :variant_name, data: {autocomplete_source: variants_path}, :class => 'variant_complete'
   .row.left
-    - unless @exchange_rate.present?
-      .field.small-2.columns
-        = f.label :net_item
-        = f.text_field :net_item
-      .field.small-2.columns
-        = f.label :tax_item
-        = f.text_field :tax_item
-    - else
-      .field.small-2.columns
-        = f.label :local_net_item
-        = f.text_field :local_net_item
-      .field.small-2.columns
-        = f.label :local_tax_item
-        = f.text_field :local_tax_item
-      .field.small-2.columns
-        = f.hidden_field :local_net_item_currency, value: @currency
-        = f.label :exchange_rate, @currency
-
-        = f.text_field :exchange_rate, value: @exchange_rate
+    = f.hidden_field :net_item_currency, value: @order.net_total_currency
+    -#= f.text_field :net_total_item, class: 'net_total_item'
+    -#= f.text_field :tax_total_item, class: 'tax_total_item'
+    .field.small-3.columns
+      = f.label :net_item
+      = f.text_field :net_item, class: 'item_value net_item'
     .field.small-2.columns
+      = f.label :tax_item
+      = f.text_field :tax_item, class: 'item_value tax_item'
+    .field.small-1.columns
+      = f.label :exchange_rate, @order.net_total_currency
+      = f.text_field :exchange_rate, value: @order.exchange_rate
+    .field.small-1.columns
       = f.label :quantity
-      = f.text_field :quantity
+      = f.text_field :quantity, class: 'item_value quantity'
+    .field.small-2.columns
+      %span.title Net
+      %br
+      %span#net_total
+        = f.text_field :net_total_item, class: 'net_total_item'
+    .field.small-2.columns
+      %span.title Tax
+      %br
+      %span#tax_total
+        = f.text_field :tax_total_item, class: 'tax_total_item'
     .field.small-2.columns
       = link_to_remove_association "remove item", f, :class => 'no_ajaxify'
   .row
@@ -40,9 +46,9 @@
     .field.small-8.columns
       = f.label :notes
       = f.text_field :notes
-
 :coffeescript
   jQuery ->
     $('.variant_complete').autocomplete
-      source: "/variants",
+      source: "/variants?supplier_id=#{@order.supplier_id}",
       minLength: 2
+

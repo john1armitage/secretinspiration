@@ -14,14 +14,14 @@ class ApplicationController < ActionController::Base
   delegate :allow_param?, to: :current_permission
   helper_method :allow_param?
 
-  def get_categories( root_category )
+  def get_categories( root_category, product_block = 'incoming' )
     #item_type =  ItemType.find( item_type_id )
     category = Category.find_by_name( root_category )
     if category
       root_id = category.id
-      Category.at_depth( 1 ).where(:root_id => root_id ).order(:rank).load
+      Category.at_depth( 1 ).where('root_id = ? and product_flow <> ?', root_id, product_block ).order(:rank)
     else
-      []
+      Category.at_depth( 1 ).where('product_flow <> ?', product_block ).order(:rank)
     end
   end
   helper_method :get_categories
@@ -58,10 +58,29 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_item_fields
 
-  def get_accounts
-    @accounts = Account.at_depth( 1 ).load
+  def get_accounts(type = nil)
+    case type
+      when 'expense'
+        @accounts = Account.find_by_name('Expenses').children.load
+      when 'fixed'
+        @accounts = Account.find_by_name('Fixed Assets').load
+      when 'sale'
+        @accounts = Account.find_by_name('Revenue').children.load
+      else
+        @accounts = Account.at_depth( 1 ).load
+    end
   end
   helper_method :get_accounts
+
+  def get_suppliers( category_id = nil)
+    unless category_id
+      @suppliers = Supplier.all
+    else
+      category = Category.find(category_id).parent
+      @suppliers = category.suppliers
+    end
+  end
+  helper_method :get_suppliers
 
   def page_title
     "Commerce"

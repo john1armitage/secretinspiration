@@ -13,6 +13,10 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   def new
     @payment = Payment.new
+    @payment.payment_date = cookies[:last_tx_date] || Time.now
+    get_supplier
+    get_orders
+    get_banks
   end
 
   # GET /payments/1/edit
@@ -51,8 +55,20 @@ class PaymentsController < ApplicationController
       @payment = Payment.find(params[:id])
     end
 
-  def current_resource
-    @current_resource ||= @payment
-  end
+    def get_supplier
+      @supplier = Supplier.find(params[:supplier_id])
+    end
+
+    def get_orders
+      @orders = @supplier.orders.where( "state = 'committed' or state = 'part_paid'" ).order(:effective_date)
+    end
+
+    def get_banks
+      @banks = Bank.where( opening_balance_currency: @supplier.opening_balance_currency ).order(:rank)
+    end
+
+    def current_resource
+      @current_resource ||= @payment
+    end
 
 end

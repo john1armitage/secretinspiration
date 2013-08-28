@@ -4,8 +4,8 @@ class Variant < ActiveRecord::Base
 
   belongs_to :item
 
-  has_many :pics, as: :viewable
-  has_many :events, class_name: "VariantEvents"
+  has_many :pics, as: :viewable, dependent: :destroy
+  has_many :events, class_name: "VariantEvents", dependent: :destroy
 
   has_many :line_items
 
@@ -40,7 +40,8 @@ class Variant < ActiveRecord::Base
 
   def generate_slug
     if  self.slug.blank?
-      slug = "#{item_name}-#{name}"
+      slug = item_name
+      slug += "-#{name}" unless name == 'default'
       self.slug = slug.parameterize
     end
   end

@@ -12,6 +12,22 @@
       .field.small-5.columns
         = f.label :name
         = f.text_field :name
+      .field.small-2.columns.left
+        = f.label :product_flow
+        = collection_select(:category, :product_flow,
+          Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
+      .field.small-2.columns.left
+        = f.label :vat_rate
+        = collection_select(:category, :vat_rate,
+          Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
+    .row
+      .field.small-8.columns
+        = f.label :description
+        = f.text_area :description
+    .row
+      .field.small-8.columns
+        = f.label :notes
+        = f.text_area :notes
     .row
       .field.small-5.columns
         = f.label :rank
@@ -24,8 +40,7 @@
       .field.small-4.columns
         = f.label :choices
         = f.collection_select :choices, Element.where(:kind => 'item_choices'), 'name', 'name', {}, { multiple: true, size: 4 }
-    .row
-      .field.small-4.columns
+      .field.small-4.columns.left
         = f.label :options
         = f.collection_select :options, Element.where(:kind => 'item_options'), 'name', 'name', {}, { multiple: true, size: 4 }
     .row

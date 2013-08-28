@@ -1,9 +1,6 @@
 Commerce::Application.routes.draw do
 
-
-
-
-  resources :transfers
+  root 'choices#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -51,14 +48,28 @@ Commerce::Application.routes.draw do
   resources :bookings
   resources :tabels
 
-  resources :suppliers
+  resources :suppliers do
+    member do
+      post 'pay'
+    end
+  end
   resources :banks
   resources :customers
-  resources :orders
+  resources :orders do
+    member do
+      post 'commit'
+    end
+  end
+  resources :transfers do
+    member do
+      post 'commit'
+    end
+  end
+  resources :payments
+  resources :postings, :only => [:index, :show]
 
   get 'choices', to: 'choices#index'
   get 'welcome', to: 'welcome#index'
-  root 'choices#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

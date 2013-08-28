@@ -12,8 +12,13 @@ class VariantsController < ApplicationController
       @variants = @item ? @item.variants : Variant.all
       @variants = @variants.order(:name).where( :domain => current_tenant.domain)
     else
-      @variants = Variant.includes(:item).order(:name).where("(variants.name ILIKE ? or items.name ILIKE ?) and product_flow <> ?", "%#{params[:term]}%", "%#{params[:term]}%", 'outgoing').references(:items)
-      render :json => @variants.map{|c| (c.name == 'default' ? c.item.name : c.name )}, root: false
+      if params[:supplier_id].present?
+        @variants = Variant.includes( :item => :supplies ).order(:name).where("(variants.name ILIKE ? or items.name ILIKE ?) and product_flow <> ? and supplies.supplier_id = ?", "%#{params[:term]}%", "%#{params[:term]}%", 'outgoing', params[:supplier_id]).references(:items)
+      else
+        @variants = Variant.includes(:item).order(:name).where("(variants.name ILIKE ? or items.name ILIKE ?) and product_flow <> ?", "%#{params[:term]}%", "%#{params[:term]}%", 'outgoing').references(:items)
+      end
+
+      render :json => @variants.map{|c| (c.name == 'default' ? c.item.name : c.name )}.uniq, root: false
     end
   end
 
@@ -73,8 +78,8 @@ class VariantsController < ApplicationController
   def set_default
     id = @variant.id.blank? ? -999 : @variant.id
     defaults = @item.variants.where( item_default: true, domain: current_tenant.domain )
-    p defaults.size
-    p defaults.first
+    #p defaults.size
+    #p defaults.first
     unless defaults.empty?
       if params[:variant][:item_default].to_i == 1
          defaults.each do |variant|
@@ -82,7 +87,7 @@ class VariantsController < ApplicationController
         end
       end
     else
-      params[:variant][:item_default] = "1"
+      params[:variant][:item_default] = true
     end
   end
 

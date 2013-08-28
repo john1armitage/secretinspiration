@@ -4,4 +4,6 @@ class Customer < ActiveRecord::Base
 
   has_many :orders
 
+  has_many  :payments, as: :payable, dependent: :destroy
+
 end

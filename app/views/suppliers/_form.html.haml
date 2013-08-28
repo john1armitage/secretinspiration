@@ -12,6 +12,9 @@
       .field.small-5.columns
         = f.label :name
         = f.text_field :name
+      .field.small-3.columns.left
+        = f.label :cats, 'Offerings'
+        = f.collection_select :cats, get_categories( nil, 'outgoing'), 'id', 'name', {}, {:multiple => true}
     .row
       .field.small-5.columns
         = f.label :phone1, 'Phone'
@@ -30,7 +33,7 @@
       .field.small-3.columns.left
         = f.label :opening_balance_currency, 'Currency'
         = f.collection_select :opening_balance_currency, Element.where( :kind => 'currency').load,
-          'name', 'name', {:selected => 'GBP'}
+          'name', 'name'
     .row
       .field.small-5.columns
         = f.label :notes

@@ -6,14 +6,14 @@
   - unless @meal.line_items.empty?
     %ul
       - @course = ''
-      = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping')
+      = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, line_items.desc')
     = button_to 'Clear', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
       data: { confirm: 'Clear Items?' }
-    = button_to 'Bill', check_out_meal_path(@meal), method: :post, remote: true,
-      form_class: 'no_ajaxify'
+    = button_to 'Bill', check_out_meal_path(@meal), method: :post  #, remote: true, form_class: 'no_ajaxify'
+
   -else
     %p
       Use Menu to add Choices
-  = button_to 'Delete?', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
+  = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
     data: { confirm: 'Delete Order?' }
 

@@ -5,6 +5,8 @@ class Category < ActiveRecord::Base
   has_many :categories
   has_many :items, :as => :grouping
   has_many :items
+  has_many :offerings
+  has_many :suppliers, through: :offerings
 
   belongs_to :root, :class_name => 'Category'
 
@@ -14,8 +16,7 @@ class Category < ActiveRecord::Base
 
   before_save :set_ancestors
 
-  default_scope :order => 'rank, name ASC'
-#  default_scope :order, -> { order('rank, name ASC') }
+  default_scope { order('rank ASC, name ASC') }
 
   def nice_name
   name.gsub(/_/," ").titleize

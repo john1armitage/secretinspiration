@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Index:
+  = @posting.index
+%p
+  %b Show:
+  = @posting.show
+
+= link_to 'Edit', edit_posting_path(@posting)
+\|
+= link_to 'Back', postings_path

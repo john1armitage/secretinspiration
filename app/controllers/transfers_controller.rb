@@ -1,5 +1,5 @@
 class TransfersController < ApplicationController
-  before_action :set_transfer, only: [:show, :edit, :update, :destroy]
+  before_action :set_transfer, only: [:show, :edit, :update, :destroy, :commit]
 
   # GET /transfers
   def index
@@ -13,6 +13,7 @@ class TransfersController < ApplicationController
   # GET /transfers/new
   def new
     @transfer = Transfer.new
+    @transfer.transfer_date = cookies[:last_tx_date] || Time.now
   end
 
   # GET /transfers/1/edit
@@ -21,19 +22,30 @@ class TransfersController < ApplicationController
 
   # POST /transfers
   def create
-    @transfer = Transfer.new(transfer_params)
+    @transfer = Transfer.new(params[:transfer])
+    bank_currency = @transfer.bank.opening_balance_currency
+    recipient_currency = @transfer.recipient.opening_balance_currency
+    @transfer.desc = bank_currency + ":" + recipient_currency
+    @transfer.exchange_rate =  bank_currency == recipient_currency ? 1 : get_conversion_rate(bank_currency, recipient_currency, 1)
+    cookies[:last_tx_date] = @transfer.transfer_date
 
     if @transfer.save
-      redirect_to @transfer, notice: 'Transfer was successfully created.'
+      redirect_to transfers_url, notice: 'Transfer was successfully created.'
     else
       render action: 'new'
     end
   end
 
+  def commit
+    @transfer.commit
+    @transfer.save
+    redirect_to transfers_url
+  end
+
   # PATCH/PUT /transfers/1
   def update
-    if @transfer.update(transfer_params)
-      redirect_to @transfer, notice: 'Transfer was successfully updated.'
+    if @transfer.update(params[:transfer])
+      redirect_to transfers_url, notice: 'Transfer was successfully updated.'
     else
       render action: 'edit'
     end
@@ -52,7 +64,7 @@ class TransfersController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def transfer_params
-      params.require(:transfer).permit(:transfer_date, :bank_id, :recipient_id, :exchange_rate)
-    end
+  def current_resource
+    @current_resource ||= @transfer
+  end
 end

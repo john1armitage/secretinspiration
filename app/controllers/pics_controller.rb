@@ -46,9 +46,9 @@ class PicsController < ApplicationController
 
   # DELETE /pics/1
   def destroy
-    @variant = @pic.variant
+    @variant = @pic.viewable
     @pic.destroy
-    redirect_to pics_url, notice: 'Pic was successfully destroyed.'
+    redirect_to pics_url(variant_id: @variant.id), notice: 'Pic was successfully destroyed.'
   end
 
   private

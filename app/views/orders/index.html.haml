@@ -1,6 +1,11 @@
-= button_to 'Quick Order', new_order_path(:quick => true ), method: :get
-
-= render partial: 'order_button', collection: Element.where(kind: 'currency').order(:rank)
+.field.small-6.columns
+  - unless params[:supplier_id].present?
+    = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense' ), method: :get, form_class: 'inline'
+    = render partial: 'order_button', collection: Element.where(kind: 'currency').order(:rank)
+  - else
+    = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense', supplier_id: @supplier.id ), method: :get, form_class: 'inline'
+    = button_to @supplier.opening_balance_currency, new_order_path( supplier_id: @supplier.id, currency: @supplier.opening_balance_currency, type: 'expense' ), method: :get
+    %span.title= @supplier.name
 
 %table
   %tr
@@ -26,8 +31,14 @@
       %td.number= order.due_date.strftime("%-d %b %y") if order.due_date
       %td= order.customer.name if order.customer
       %td= order.supplier.name if order.supplier
-      %td.center= order.state
-      %td.center= ( order.quick ? 'quick' : order.line_items.size )
+      %td.center
+        - if order.state == 'incomplete'
+          = link_to 'Commit', commit_order_path(order), method: :post, :data => { :confirm => 'Commit?' }
+        - elsif order.state == 'committed' and order.home_supplier
+          = link_to 'Pay', pay_order_path(order), method: :post, :data => { :confirm => 'Commit?' }
+        - else
+          = order.state
+      %td.center= ( order.quick ? ( order.contra ? 'contra' : 'quick' ) : order.line_items.size )
       %td= link_to 'Show', order
       %td= link_to 'Edit', edit_order_path(order)
       %td= link_to 'Destroy', order, :method => :delete, :data => { :confirm => 'Are you sure?' }

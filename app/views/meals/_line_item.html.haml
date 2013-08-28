@@ -1,13 +1,17 @@
 - if @course != line_item.variant.item.grouping
   - @course = line_item.variant.item.grouping
-  %li= make_title(@course.split(':')[1])
+  %li.category
+    %span
+      = make_title(@course.split(':')[1])
 
 %li
   - unless line_item.net_total_item == 0
 
     = line_item.quantity
     x
-    = line_item.desc
+
+    %span.title
+      = line_item.desc
     - unless line_item.choices.blank?
       - line_item.choices.each do |k,v|
         = make_title(v)
@@ -25,7 +29,8 @@
   - line_item.children.each do |option|
     = option.quantity
     x
-    = make_title(option.desc)
+    %span.title
+      = make_title(option.desc)
     %br
     = link_to '+', meal_item_path( option.id, act: 'add', option: true), method: :patch, remote: true, class: 'no_ajaxify'
     = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'

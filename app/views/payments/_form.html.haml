@@ -1,10 +1,24 @@
 = form_for @payment do |f|
-  - if @payment.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@payment.errors.count, "error")} prohibited this payment from being saved:"
-      %ul
-        - @payment.errors.full_messages.each do |msg|
-          %li= msg
 
+  %fieldset
+    %legend= 'Supplier Payment: ' + @supplier.name
+    = hidden_field_tag :supplier_id
+    .row
+      .field.small-3.columns
+        = f.label :payment_date
+        = f.date_field :payment_date
+
+      .field.small-3.columns.left
+        = f.label :bank_id, 'Bank'
+        = f.collection_select :bank_id, @banks, 'id', 'name'
+
+    #allocations
+      .row.line-items
+        .field.small-7.columns
+          - unless @orders.size == 0
+            Allocations
+            = render partial: 'order', collection: @orders
+          -else
+            No outstanding orders on system
   .actions
     = f.submit 'Save'

@@ -6,7 +6,7 @@ class Meal < ActiveRecord::Base
   has_many :line_items, as: :ownable, dependent: :destroy
 
   def get_vat_rate(type)
-    eval("CONFIG[:vat_rate_#{type}]")
+    eval("CONFIG[:vat_rate_#{type}]")  || 0
   end
 
   def update_variant(variant_id, options, choices)

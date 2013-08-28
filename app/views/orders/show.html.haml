@@ -1,5 +1,5 @@
-%p#notice= notice
-
+%p
+  = button_to 'Commit', commit_order_path(@order), method: :post, :data => { :confirm => 'Commit?' }
 %p
   %b Net total:
   = @order.net_total

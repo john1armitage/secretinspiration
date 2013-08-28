@@ -1,16 +1,19 @@
 = form_for @bank do |f|
   %fieldset
-    %legend= 'Supplier'
+    %legend= 'Bank'
 
     .row
       .field.small-5.columns
         = f.label :name
         = f.text_field :name
+      .field.small-2.columns.left
+        = f.label :rank
+        = f.number_field :rank
     .row
       .field.small-5.columns
         = f.label :sort_code
         = f.text_field :sort_code
-      .field.small-5.columns
+      .field.small-5.columns.left
         = f.label :account_no
         = f.text_field :account_no
     .row

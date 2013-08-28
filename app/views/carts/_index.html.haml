@@ -1,5 +1,16 @@
 %h1 Your Cart
 %ul#cart
-  - @cart.line_items.joins(:variant).order('variants.name').each do |line_item|
+  - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
     = render 'carts/line_item', line_item: line_item
-  = button_to 'Clear Cart', clear_carts_path(), method: :delete, remote: true, form_class: 'no_ajaxify'
+  =# button_to 'Clear Cart', clear_carts_path(), method: :delete, remote: true, form_class: 'no_ajaxify'
+  - unless @cart.line_items.empty?
+    %ul
+      - @category = ''
+    = button_to 'Clear', clear_meal_path( @cart), method: :delete, remote: true, form_class: 'no_ajaxify',
+      data: { confirm: 'Clear All?' }
+    = button_to 'CheckOut', check_out_meal_path(@cart), method: :post, remote: true,
+      form_class: 'no_ajaxify'
+  -else
+    %p
+      Use Catalogue to add Items
+

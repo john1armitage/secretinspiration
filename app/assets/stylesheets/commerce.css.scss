@@ -22,7 +22,9 @@ ul#cart, ul#meal, ul.menu-item {
     display: inline;
   }
 }
-
+ul.menu-item {
+ margin-left: 0;
+}
 .side-nav li a {
   display: block;
   color: white;
@@ -52,17 +54,66 @@ ul.ui-autocomplete {
 .hidden {
   display: none
 }
+div#tabs {
+  li.category-tab {
+    font-size: 0.8em;
+  }
+}
 
+div.store-category.ui-tabs-panel {
+  padding: 0.3em;
+  .test {
+    clear: both;
+  }
+}
+
+div#side_menu {
+  h1 {
+    font-size: 1.2em;
+    margin-bottom: 0em;
+  }
+}
+
+ul#cart, ul#meal {
+  li {
+    padding: .2em;
+    width: 100%;
+    span.title {
+      font-weight: bold;
+    }
+    //border: 1px solid #c0c0c0;
+  }
+  li:nth-child(even) {background: #e0eeee}
+  li.category {
+    span {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
+}
+
+div.store-variant {
+  margin-top: 0em;
+  margin-left: 0em;
+  margin-bottom: 0.8em;
+  display: block;
+  float: left;
+  form, div {
+    display: inline;
+  }
+  img {
+    display: inline;
+  }
+}
 div.catalogue_variant {
   margin-left: 100px;
   margin-top: 0.5em;
   margin-bottom: 0.8em;
-
   form, div {
     display: inline;
   }
 }
-form[method=get] {
+form[method=get], form.inline {
   display: inline;
   div {
     display: inline;

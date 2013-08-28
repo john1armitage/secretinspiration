@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.order( :ancestry, :rank, :name ).all
+    @categories = Category.all
     #render :json => @categories
   end
 

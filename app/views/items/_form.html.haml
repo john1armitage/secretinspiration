@@ -1,4 +1,4 @@
--# @categories = set_categories(params[:root_category])
+- @categories = get_categories( params[:root_category] || @item.category.root.name )        #  @categories = get_categories( )
 
 = form_for @item, :validate => true, :class => "no_ajaxify"  do |f|
   %fieldset
@@ -16,10 +16,6 @@
         = f.label :name
         = f.text_field :name
 
-      -#.field.small-2.columns.left
-      -#  = f.label :item_type
-      -#  = collection_select(:item, :item_type_id,
-      -#    ItemType.where("properties -> '#{current_tenant.domain}' = '1'").order(:rank, :name), :id, :name)
       .field.small-2.columns.left
         = f.label :product_flow
         = collection_select(:item, :product_flow,
@@ -37,6 +33,13 @@
         = f.label :vat_rate
         = collection_select(:item, :vat_rate,
           Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)
+      .field.small-3.columns.left
+        = f.label :sups, 'Suppliers'
+        = f.collection_select :sups, get_suppliers( @item.category_id), 'id', 'name', {}, {:multiple => true}
+    .row
+      .field.small-8.columns
+        = f.label :description
+        = f.text_area :description
     .row
       .field.small-8.columns
         = f.label :slug

@@ -1,22 +1,33 @@
-= form_for @transfer do |f|
-  - if @transfer.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@transfer.errors.count, "error")} prohibited this transfer from being saved:"
-      %ul
-        - @transfer.errors.full_messages.each do |msg|
-          %li= msg
+= form_for @transfer, :validate => true do |f|
 
-  .field
-    = f.label :transfer_date
-    = f.date_select :transfer_date
-  .field
-    = f.label :bank
-    = f.text_field :bank
-  .field
-    = f.label :recipient
-    = f.text_field :recipient
-  .field
-    = f.label :exchange_rate
-    = f.text_field :exchange_rate
-  .actions
-    = f.submit 'Save'
+  %fieldset
+    %legend= 'Transfer'
+
+    .row
+      .field.small-3.columns
+        = f.label :transfer_date
+        = f.date_field :transfer_date
+      .field.small-3.columns.left
+        = f.label :state
+        = f.text_field :state
+    .row
+      .field.small-4.columns
+        = f.label :bank_id, 'From'
+        = f.collection_select :bank_id, Bank.order(:name), 'id', 'name'
+      .field.small-4.columns.left
+        = f.label :recipient_id, 'To'
+        = f.collection_select :recipient_id, Bank.order(:name), 'id', 'name'
+    .row
+      .field.small-3.columns
+        = f.label :amount
+        = f.text_field :amount
+    .row
+      .field.small-2.columns
+        = f.label :exchange_rate
+        = f.text_field :exchange_rate
+      .field.small-4.columns.left
+        = f.label :desc, 'Type'
+        = f.text_field :desc
+    .row
+      .actions
+        = f.submit 'Save'

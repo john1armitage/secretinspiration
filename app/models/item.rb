@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
 
   belongs_to :item_type
   belongs_to :category
+  has_many :supplies
+  has_many :suppliers, through: :supplies
 
   acts_as_taggable
 
@@ -20,7 +22,9 @@ class Item < ActiveRecord::Base
   before_create :create_default_variant
   before_save :set_grouping_plus
 
-
+  def sups
+    supplies.map {|o| o.supplier_id}
+  end
 
   def set_grouping_plus
     self.grouping = "#{category.parent.rank}:#{category.parent.name}"
@@ -36,8 +40,8 @@ class Item < ActiveRecord::Base
     item_type.name
   end
 
-  def description
-    desc[0..20]
+  def desc
+    description[0..20]
   end
 
   def generate_slug

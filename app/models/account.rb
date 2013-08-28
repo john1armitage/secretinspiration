@@ -5,6 +5,8 @@ class Account < ActiveRecord::Base
   has_ancestry :cache_depth => true, :orphan_strategy => :adopt
 
   has_many :accounts
+  has_many :postings, dependent: :nullify
+  has_many :payments, dependent: :nullify
 
   belongs_to :root, :class_name => 'Account'
 
@@ -15,7 +17,7 @@ class Account < ActiveRecord::Base
 
   before_save :set_ancestors
 
-  default_scope :order => 'code ASC'
+  default_scope { order('code ASC') }
 
   def set_ancestors
     self.root_id = ( ancestry.blank? ?  id : ancestry.gsub(/\/.+/, '') )

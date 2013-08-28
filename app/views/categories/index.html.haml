@@ -1,5 +1,3 @@
-%h1 Listing categories
-
 %table
   %tr
     %th Root
@@ -21,7 +19,10 @@
       %td= category.id
       %td= category.ancestry
       %td= category.rank
-      %td= link_to 'Show', category
+      - if category.ancestry_depth == 2 and category.parent.product_flow != 'outgoing'
+        %td= link_to 'Item', new_item_path( category_id: category.id)
+      - else
+        %td
       %td= link_to 'Child', new_category_path(:parent_id => category)
       %td= link_to 'Edit', edit_category_path(category)
       %td= link_to 'Destroy', category, :method => :delete, :data => { :confirm => 'Are you sure?' }

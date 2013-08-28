@@ -1,0 +1,18 @@
+.allocations
+  .row
+    .field.small-1.columns
+      = hidden_field_tag :order_id, order.id
+      = order.id
+    .field.small-1.columns
+      = order.state
+    .field.small-2.columns
+      Total
+      = order.net_total + order.tax_total
+    .field.small-2.columns
+      Paid
+    .field.small-2.columns
+      Due
+    .field.small-2.columns
+      Allocation
+
+

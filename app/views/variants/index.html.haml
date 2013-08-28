@@ -1,15 +1,11 @@
-%h1= @item.name
-
 %table
   %tr
     %th Item
-    %th Name
-    %th Description
     %th Price
-    %th Item default
+    %th Default
     %th Stock
-    %th Available on
-    %th Pics
+    %th Due
+    %th
     %th
     %th
     %th
@@ -17,14 +13,16 @@
 
   - @variants.each do |variant|
     %tr
-      %td= variant.item.name
-      %td= variant.name
-      %td= variant.desc
+      - clas = variant.desc.blank? ? 'no-tip' : 'has-tip'
+      %td{class: clas, title: variant.desc }
+        = variant.item.name
+        = ": #{variant.name}" unless variant.name == 'default'
       %td= humanized_money_with_symbol variant.price
       %td= variant.item_default
       %td= variant.stock
       %td= variant.available_on
-      %td= link_to 'Pics', pics_url(:variant_id => variant.id)
+      - pic = variant.pics.empty? ? 'Pics' : image_tag( variant.pics.first.image_url(:thumb) )
+      %td= link_to pic, pics_url(:variant_id => variant.id)
       %td= variant.pics.size
       %td= link_to 'Show', variant
       %td= link_to 'Edit', edit_variant_path(variant)

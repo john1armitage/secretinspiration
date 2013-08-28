@@ -5,5 +5,19 @@ class Supplier < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
 
   has_many :orders
+  has_many :supplies
+  has_many :items, through: :supplies
+  has_many :offerings
+  has_many :categories, through: :offerings
+  has_many  :postings, as: :accountable, dependent: :nullify
+
+  has_many  :payments, as: :payable, dependent: :destroy
+
+  default_scope { order('name ASC') }
+
+  def cats
+    offerings.map {|o| o.category_id}
+  end
+
 
 end

@@ -1,12 +1,14 @@
-%h1 Listing banks
+= button_to 'New Bank', new_bank_path, method: :get
 
 %table
   %tr
     %th Name
     %th Sort code
     %th Account no
-    %th Opening balance
+    %th.number Opening balance
+    %th Currency
     %th Notes
+    %th Rank
     %th
     %th
     %th
@@ -16,12 +18,13 @@
       %td= bank.name
       %td= bank.sort_code
       %td= bank.account_no
-      %td= bank.opening_balance
+      %td.number= bank.opening_balance
+      %td= bank.opening_balance_currency
       %td= bank.notes
+      %td= bank.rank
       %td= link_to 'Show', bank
       %td= link_to 'Edit', edit_bank_path(bank)
       %td= link_to 'Destroy', bank, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= button_to 'New Bank', new_bank_path, method: :get
