@@ -15,12 +15,15 @@
   - if allow? :postings, :index
     %li
       != link_to 'Postings', postings_path, :class => "button radius"
-  - if allow? :suppliers, :index
-    %li
-      != link_to 'Suppliers', suppliers_path, :class => "button radius"
   - if allow? :banks, :index
     %li
       != link_to 'Banks', banks_path, :class => "button radius"
+  - if allow? :suppliers, :index
+    %li
+      != link_to 'Suppliers', suppliers_path, :class => "button radius"
+  - if allow? :employees, :index
+    %li
+      != link_to 'Employees', employees_path, :class => "button radius"
   - if allow? :accounts, :index
     %li
       != link_to 'Account List', accounts_path, :class => "button radius"

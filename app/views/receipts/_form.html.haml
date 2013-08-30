@@ -1,6 +1,6 @@
 = form_for @receipt do |f|
   %fieldset
-    %legend= 'Receipt'
+    %legend= 'Receipt ' + @account
     .row
       .field.small-3.columns
         = f.label :receipt_date
@@ -8,6 +8,7 @@
       .field.small-3.columns
         = f.label :amount
         = f.text_field :amount
+        = f.hidden_field :amount_currency
       .field.small-3.columns.left
         = f.label :bank_id, 'Bank'
         = f.collection_select :bank_id, @banks, 'id', 'name'
@@ -57,3 +58,7 @@
          $(this).val('0')
       $('input#receipt_amount').val(amount.toFixed(2))
       Account.calculateHomeTotal(amount)
+    $('div#ajax-main').on 'change', 'input#sales', ->
+      sales = $('input#sales').val()
+      VAT = (sales/5).toFixed(2)
+      $('input#VAT').val(VAT)

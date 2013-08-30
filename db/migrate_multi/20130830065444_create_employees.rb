@@ -4,7 +4,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :title
       t.string :first_name
       t.string :last_name
-      t.string :date_of_birth
+      t.date :date_of_birth
       t.string :ni_number
       t.money :hourly_rate
       t.string :address1

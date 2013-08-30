@@ -21,10 +21,10 @@ class EmployeesController < ApplicationController
 
   # POST /employees
   def create
-    @employee = Employee.new(employee_params)
+    @employee = Employee.new(params[:employee])
 
     if @employee.save
-      redirect_to @employee, notice: 'Employee was successfully created.'
+      redirect_to employees_url, notice: 'Employee was successfully created.'
     else
       render action: 'new'
     end
@@ -32,8 +32,8 @@ class EmployeesController < ApplicationController
 
   # PATCH/PUT /employees/1
   def update
-    if @employee.update(employee_params)
-      redirect_to @employee, notice: 'Employee was successfully updated.'
+    if @employee.update(params[:employee])
+      redirect_to employees_url, notice: 'Employee was successfully updated.'
     else
       render action: 'edit'
     end
@@ -52,7 +52,7 @@ class EmployeesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def employee_params
-      params.require(:employee).permit(:title, :first_name, :last_name, :date_of_birth, :ni_number, :address1, :address2, :town, :postcode, :mobile_phone, :home_phone, :start_date, :end_date)
-    end
+  def current_resource
+    @current_resource ||= @employee
+  end
 end

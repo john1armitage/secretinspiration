@@ -13,6 +13,7 @@ class ReceiptsController < ApplicationController
   # GET /receipts/new
   def new
     @receipt = Receipt.new
+    @receipt.state = 'incomplete'
     @receipt.receipt_date = cookies[:last_tx_date] || Time.now
     @receipt.amount_currency = params[:currency]
     @receipt.exchange_rate = @receipt.amount_currency == current_tenant.home_currency ? 1 : get_conversion_rate(@receipt.amount_currency, current_tenant.home_currency, 1)
@@ -36,8 +37,17 @@ class ReceiptsController < ApplicationController
   # POST /receipts
   def create
     @receipt = Receipt.new(params[:receipt])
-
     if @receipt.save
+      if params[:tips].present?
+        sales_apportions
+        @receipt.post_takings
+      else
+        account_id = Account.find_by_name(params[:account]).id
+        @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name(params[:account]).id, amount_cents: @receipt.amount_cents, amount_currency: @receipt.amount_currency)
+        @receipt.post
+      end
+      @receipt.update(state: 'complete')
+      cookies[:last_tx_date] = @receipt.receipt_date
       redirect_to receipts_url, notice: 'Receipt was successfully created.'
     else
       render action: 'new'
@@ -63,6 +73,12 @@ class ReceiptsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_receipt
       @receipt = Receipt.find(params[:id])
+    end
+
+    def sales_apportions
+      @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name('Retail Sales').id, amount_cents: params[:sales].to_d * 100, amount_currency: @receipt.amount_currency)
+      @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name('Tips Control').id, amount_cents: params[:tips].to_d * 100, amount_currency: @receipt.amount_currency)
+      @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name('VAT Control').id, amount_cents: params[:VAT].to_d * 100, amount_currency: @receipt.amount_currency)
     end
 
     def get_banks

@@ -5,28 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/receipts/_receipt_button.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/receipts/_takings.html.haml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/migrate/20130828184937_add_paid_to_orders.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20130828184937_add_paid_to_orders.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/payments/_hmrc.html.haml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/payments/_payroll.html.haml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/db/migrate_multi/20130829224328_add_desc_to_payments.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20130830224328_add_desc_to_payments.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate_multi/20130830065444_create_employees.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20130830065444_create_employees.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/menus/_accounts.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/menus/_accounts.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/items/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/orders/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/orders/_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/employees/_form.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/payments/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/suppliers/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/suppliers/_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/receipts/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/receipts/_form.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/_order.html.haml" afterPath="$PROJECT_DIR$/app/views/payments/_order.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/account.rb" afterPath="$PROJECT_DIR$/app/models/account.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/allocation.rb" afterPath="$PROJECT_DIR$/app/models/allocation.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/apportion.rb" afterPath="$PROJECT_DIR$/app/models/apportion.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/edit.html.haml" afterPath="$PROJECT_DIR$/app/views/employees/edit.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/edit.html.haml" afterPath="$PROJECT_DIR$/app/views/payments/edit.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/suppliers/edit.html.haml" afterPath="$PROJECT_DIR$/app/views/suppliers/edit.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/employee.rb" afterPath="$PROJECT_DIR$/app/models/employee.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/employees_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/employees_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/index.html.haml" afterPath="$PROJECT_DIR$/app/views/employees/index.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/index.html.haml" afterPath="$PROJECT_DIR$/app/views/payments/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/postings/index.html.haml" afterPath="$PROJECT_DIR$/app/views/postings/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/suppliers/index.html.haml" afterPath="$PROJECT_DIR$/app/views/suppliers/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item.rb" afterPath="$PROJECT_DIR$/app/models/item.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/items_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/items_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/order.rb" afterPath="$PROJECT_DIR$/app/models/order.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/receipts/index.html.haml" afterPath="$PROJECT_DIR$/app/views/receipts/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/line_items_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/line_items_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/employees/new.html.haml" afterPath="$PROJECT_DIR$/app/views/employees/new.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/payments/new.html.haml" afterPath="$PROJECT_DIR$/app/views/payments/new.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/suppliers/new.html.haml" afterPath="$PROJECT_DIR$/app/views/suppliers/new.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/payment.rb" afterPath="$PROJECT_DIR$/app/models/payment.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/payments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/posting.rb" afterPath="$PROJECT_DIR$/app/models/posting.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/receipt.rb" afterPath="$PROJECT_DIR$/app/models/receipt.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/receipts_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/receipts_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/structure.sql" afterPath="$PROJECT_DIR$/db/structure.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -38,7 +43,7 @@
     <file path="$PROJECT_DIR$/../secure/Gemfile" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373208236275" ignored="false" />
     <file path="$PROJECT_DIR$/../secure/lib/tasks/multitenant.rake" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373208403256" ignored="false" />
     <file path="/multitenant.rake" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1374245758711" ignored="false" />
-    <file path="/index.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377845862458" ignored="false" />
+    <file path="/index.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377893446781" ignored="false" />
     <file path="/seeds.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373223977447" ignored="false" />
     <file path="/20130701152140_create_items.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373224099567" ignored="false" />
     <file path="/application_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377792078969" ignored="false" />
@@ -58,7 +63,7 @@
     <file path="/items_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377791933005" ignored="false" />
     <file path="/temp.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1375640459243" ignored="false" />
     <file path="/user.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1374677829890" ignored="false" />
-    <file path="/Dummy.txt" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377845641774" ignored="false" />
+    <file path="/Dummy.txt" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377873195999" ignored="false" />
     <file path="/20130707204916_create_roles.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373303075679" ignored="false" />
     <file path="/manager_permissions.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373230517471" ignored="false" />
     <file path="/operator_permissions.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373230525023" ignored="false" />
@@ -69,7 +74,7 @@
     <file path="/user_permission.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373307752839" ignored="false" />
     <file path="/manager_permission.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373301923005" ignored="false" />
     <file path="/20130708170118_add_user_names_status.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373303428350" ignored="false" />
-    <file path="/_form.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377818250595" ignored="false" />
+    <file path="/_form.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377893892138" ignored="false" />
     <file path="/users_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373379087822" ignored="false" />
     <file path="/base_permission.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373307667725" ignored="false" />
     <file path="/index.js.erb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1373361045557" ignored="false" />
@@ -244,13 +249,13 @@
     <file path="/20130808183525_create_depreciations.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1375987511291" ignored="false" />
     <file path="/20130808183809_create_postings.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1375989133667" ignored="false" />
     <file path="/20130808184843_create_allocations.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1375987887826" ignored="false" />
-    <file path="/payments_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377809004556" ignored="false" />
-    <file path="/payment.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377809823273" ignored="false" />
-    <file path="/posting.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377251652113" ignored="false" />
+    <file path="/payments_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377895325204" ignored="false" />
+    <file path="/payment.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377896178477" ignored="false" />
+    <file path="/posting.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377890438955" ignored="false" />
     <file path="/depreciation.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1375988389459" ignored="false" />
     <file path="/transfer.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377547175960" ignored="false" />
     <file path="/inflections.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377161052849" ignored="false" />
-    <file path="/allocation.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377779666798" ignored="false" />
+    <file path="/allocation.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377848750652" ignored="false" />
     <file path="/supply.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1376419230890" ignored="false" />
     <file path="/20130821195508_offering.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377114990083" ignored="false" />
     <file path="/offering.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377162240905" ignored="false" />
@@ -258,7 +263,7 @@
     <file path="/commit.js.erb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377203555525" ignored="false" />
     <file path="/20130823090044_add_accountable_to_postings.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377248702663" ignored="false" />
     <file path="/20130823091053_add_home_currency_to_orders.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377250034933" ignored="false" />
-    <file path="/_accounts.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377812500188" ignored="false" />
+    <file path="/_accounts.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377846274154" ignored="false" />
     <file path="/transfers_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377546195600" ignored="false" />
     <file path="/postings_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377418577313" ignored="false" />
     <file path="/account_posting.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377546418105" ignored="false" />
@@ -275,12 +280,17 @@
     <file path="/20130828184937_add_paid_to_orders.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377715810192" ignored="false" />
     <file path="/_order.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377783359400" ignored="false" />
     <file path="/20130829211529_create_receipts.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377814142464" ignored="false" />
-    <file path="/receipts_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377817365587" ignored="false" />
+    <file path="/receipts_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377875039292" ignored="false" />
     <file path="/_receipt_button.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377813691262" ignored="false" />
     <file path="/20130829225211_create_apportions.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377816882907" ignored="false" />
-    <file path="/receipt.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377816828603" ignored="false" />
+    <file path="/receipt.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377890385021" ignored="false" />
     <file path="/_takings.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377817974565" ignored="false" />
-    <file path="/20130830065444_create_employees.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377845995353" ignored="false" />
+    <file path="/20130830065444_create_employees.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377846782069" ignored="false" />
+    <file path="/apportion.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377874979704" ignored="false" />
+    <file path="/_HMRC.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377888235891" ignored="false" />
+    <file path="/_payroll.html.haml" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377892470886" ignored="false" />
+    <file path="/employees_controller.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377893063383" ignored="false" />
+    <file path="/employee.rb" changelist="ce30f9df-f017-4bbd-b10b-be3c22a06a48" time="1377893184242" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,46 +310,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/receipts/index.html.haml">
+      <file leaf-file-name="payments_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="24" selection-start="496" selection-end="496" vertical-scroll-proportion="-5.0">
+            <state line="81" column="93" selection-start="2955" selection-end="2955" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receipts_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/receipts_controller.rb">
+      <file leaf-file-name="account_posting.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/concerns/account_posting.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="116" selection-start="863" selection-end="863" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apportion.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/apportion.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/postings/index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="73" selection-start="98" selection-end="98" vertical-scroll-proportion="-5.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/receipts/_form.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="53" selection-start="1801" selection-end="1801" vertical-scroll-proportion="-17.541666">
+            <state line="12" column="40" selection-start="525" selection-end="531" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -348,34 +331,61 @@
       <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/payments/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="48" selection-start="173" selection-end="173" vertical-scroll-proportion="-1.25">
+            <state line="0" column="58" selection-start="58" selection-end="58" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="employee.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/employee.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="employees_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/employees_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/payments/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="998" selection-end="1036" vertical-scroll-proportion="0.40246406">
+            <state line="62" column="128" selection-start="1720" selection-end="1720" vertical-scroll-proportion="-25.625">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payment.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="42" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="posting.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/posting.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="39" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="receipts_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/receipts_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="21" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="receipt.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/receipt.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="2" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0186915">
               <folding />
             </state>
           </provider>
@@ -403,22 +413,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/suppliers/_form.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/receipts/_receipt_button.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/receipts/edit.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/receipts/new.html.haml" />
-        <option value="$PROJECT_DIR$/db/migrate/20130829211529_create_receipts.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20130829224328_add_desc_to_payments.rb" />
-        <option value="$PROJECT_DIR$/app/views/postings/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/models/receipt.rb" />
-        <option value="$PROJECT_DIR$/app/models/account.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20130829225211_create_apportions.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/receipts_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/receipts/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/receipts/_takings.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/receipts/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/edit.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/new.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/_HMRC.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/_hmrc.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/_order.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/employees/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/employees_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/payments/index.html.haml" />
-        <option value="$PROJECT_DIR$/db/migrate/20130830065444_create_employees.rb" />
+        <option value="$PROJECT_DIR$/app/views/employees/index.html.haml" />
+        <option value="$PROJECT_DIR$/app/models/employee.rb" />
+        <option value="$PROJECT_DIR$/app/views/payments/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/payments/_payroll.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/payments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/payment.rb" />
+        <option value="$PROJECT_DIR$/app/models/posting.rb" />
+        <option value="$PROJECT_DIR$/app/models/receipt.rb" />
       </list>
     </option>
   </component>
@@ -432,7 +442,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="230" />
     <option name="y" value="48" />
-    <option name="width" value="1322" />
+    <option name="width" value="1648" />
     <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -980,6 +990,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="employees" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="elements" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1331,8 +1363,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/views/receipts" />
       <recent name="$PROJECT_DIR$/app/views/payments" />
+      <recent name="$PROJECT_DIR$/app/views/receipts" />
       <recent name="$PROJECT_DIR$/app/views/suppliers" />
       <recent name="$PROJECT_DIR$/app/views/layouts/menus" />
       <recent name="$PROJECT_DIR$/app/views/orders" />
@@ -1788,14 +1820,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="230" y="48" width="1322" height="1032" extended-state="0" />
-    <editor active="false" />
+    <frame x="230" y="48" width="1648" height="1032" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928178" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44739756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25354332" sideWeight="0.6511628" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19360903" sideWeight="0.6511628" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28037384" sideWeight="0.1562189" order="10" side_tool="true" content_ui="tabs" />
@@ -1804,7 +1837,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23093922" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3889503" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24915825" sideWeight="0.55957943" order="2" side_tool="false" content_ui="combo" />
@@ -1912,114 +1944,114 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20130829224355_add_desc_to_receipts.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/employees_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="124" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
+        <state line="35" column="31" selection-start="689" selection-end="689" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20130829211529_create_receipts.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/employees/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="56" selection-start="266" selection-end="296" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/receipt.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="22" selection-start="133" selection-end="133" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/account.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="2" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/apportion.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20130829225211_create_apportions.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="51" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/postings/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="73" selection-start="98" selection-end="98" vertical-scroll-proportion="-5.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/receipts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="116" selection-start="863" selection-end="863" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/receipts/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="24" selection-start="496" selection-end="496" vertical-scroll-proportion="-5.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/receipts/_takings.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="30" selection-start="286" selection-end="286" vertical-scroll-proportion="0.29157668">
+        <state line="12" column="63" selection-start="218" selection-end="218" vertical-scroll-proportion="-7.5">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/employee.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
+        <state line="2" column="6" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/employees_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/payments/_payroll.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="28" selection-start="255" selection-end="255" vertical-scroll-proportion="0.21560575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/payments/new.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/receipts/_form.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/payments/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="53" selection-start="1801" selection-end="1801" vertical-scroll-proportion="-17.541666">
+        <state line="62" column="128" selection-start="1720" selection-end="1720" vertical-scroll-proportion="-25.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/employees/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="20" selection-start="377" selection-end="377" vertical-scroll-proportion="0.41095892">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/elements_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="0" selection-start="1386" selection-end="1447" vertical-scroll-proportion="0.8121646">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/payments/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="48" selection-start="173" selection-end="173" vertical-scroll-proportion="-1.25">
+        <state line="0" column="58" selection-start="58" selection-end="58" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20130830065444_create_employees.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/payments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="27" selection-start="349" selection-end="349" vertical-scroll-proportion="0.3522505">
+        <state line="81" column="93" selection-start="2955" selection-end="2955" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/payments/_form.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/models/concerns/account_posting.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="998" selection-end="1036" vertical-scroll-proportion="0.40246406">
+        <state line="12" column="40" selection-start="525" selection-end="531" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/payment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="42" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/posting.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="39" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/receipts_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="21" selection-start="1380" selection-end="1380" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/receipt.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="2" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0186915">
           <folding />
         </state>
       </provider>

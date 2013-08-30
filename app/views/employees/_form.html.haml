@@ -1,49 +1,53 @@
 = form_for @employee do |f|
-  - if @employee.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@employee.errors.count, "error")} prohibited this employee from being saved:"
-      %ul
-        - @employee.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :date_of_birth
-    = f.text_field :date_of_birth
-  .field
-    = f.label :ni_number
-    = f.text_field :ni_number
-  .field
-    = f.label :address1
-    = f.text_field :address1
-  .field
-    = f.label :address2
-    = f.text_field :address2
-  .field
-    = f.label :town
-    = f.text_field :town
-  .field
-    = f.label :postcode
-    = f.text_field :postcode
-  .field
-    = f.label :mobile_phone
-    = f.text_field :mobile_phone
-  .field
-    = f.label :home_phone
-    = f.text_field :home_phone
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :end_date
-    = f.date_select :end_date
-  .actions
-    = f.submit 'Save'
+  %fieldset
+    %legend= 'Employee'
+    .row
+      .field.small-2.columns
+        = f.label :title
+        = f.text_field :title
+      .field.small-2.columns
+        = f.label :first_name
+        = f.text_field :first_name
+      .field.small-2.columns.left
+        = f.label :last_name
+        = f.text_field :last_name
+    .row
+      .field.small-3.columns
+        = f.label :date_of_birth
+        = f.date_field :date_of_birth
+      .field.small-2.columns.left
+        = f.label :ni_number
+        = f.text_field :ni_number
+    .row
+      .field.small-4.columns
+        = f.label :address1
+        = f.text_field :address1
+    .row
+      .field.small-4.columns
+        = f.label :address2
+        = f.text_field :address2
+    .row
+      .field.small-4.columns
+        = f.label :town
+        = f.text_field :town
+    .row
+      .field.small-2.columns
+        = f.label :postcode
+        = f.text_field :postcode
+    .row
+      .field.small-3.columns
+        = f.label :mobile_phone
+        = f.text_field :mobile_phone
+      .field.small-3.columns.left
+        = f.label :home_phone
+        = f.text_field :home_phone
+    .row
+      .field.small-3.columns
+        = f.label :start_date
+        = f.date_field :start_date
+      .field.small-3.columns.left
+        = f.label :end_date
+        = f.date_field :end_date
+    .row
+      .actions
+        = f.submit 'Save'

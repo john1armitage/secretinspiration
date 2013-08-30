@@ -4,13 +4,13 @@
     %span.small-1.columns
       = order.id
       = hidden_field_tag 'order_id[]', order.id
-    %span.small-1.columns
+    %span.small-2.columns
       Total
       = total = order.net_total + order.tax_total
-    %span.small-1.columns
+    %span.small-2.columns
       Paid
       = order.paid
-    %span.small-1.columns.due
+    %span.small-2.columns.due
       Due
       = total - order.paid
     .field.small-1.columns

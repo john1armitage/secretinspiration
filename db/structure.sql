@@ -58,7 +58,8 @@ CREATE TABLE apportions (
     amount_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
     account_id integer,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    "desc" character varying(255)
 );
 
 
@@ -162,7 +163,7 @@ CREATE TABLE employees (
     title character varying(255),
     first_name character varying(255),
     last_name character varying(255),
-    date_of_birth character varying(255),
+    date_of_birth date,
     ni_number character varying(255),
     hourly_rate_cents integer DEFAULT 0 NOT NULL,
     hourly_rate_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
@@ -1183,3 +1184,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130829224355');
 INSERT INTO schema_migrations (version) VALUES ('20130829225211');
 
 INSERT INTO schema_migrations (version) VALUES ('20130830065444');
+
+INSERT INTO schema_migrations (version) VALUES ('20130830143324');

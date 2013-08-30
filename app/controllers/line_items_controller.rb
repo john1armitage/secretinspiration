@@ -9,10 +9,8 @@ class LineItemsController < ApplicationController
   def create
     @line_item = @cart.update_variant(params[:variant_id])
     @line_item.domain = current_tenant.domain
-    p @line_item
     respond_to do |format|
       if @line_item.save
-        p "SAVED"
         format.js { render 'cart.js.erb',
                notice: 'Line item was successfully created.' }
         format.json { render action: 'show',

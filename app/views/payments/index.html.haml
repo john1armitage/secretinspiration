@@ -1,5 +1,4 @@
-= button_to 'New Payment', new_payment_path, method: :get
-= button_to 'Staff', new_payment_path(type: 'staff'), method: :get
+=# button_to 'New Payment', new_payment_path, method: :get
 = button_to 'HMRC', new_payment_path(type: 'HMRC'), method: :get
 = button_to 'VAT', new_payment_path(type: 'VAT'), method: :get
 
@@ -19,7 +18,7 @@
     %tr
       %td= payment.payment_date
       %td= payment.bank.name
-      %td= payment.payable.name
+      %td= payment.payable.name if payment.payable
       %td= humanized_money_with_symbol(payment.amount)
       %td= payment.amount_currency
       %td= payment.exchange_rate

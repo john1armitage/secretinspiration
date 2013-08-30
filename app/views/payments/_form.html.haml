@@ -1,14 +1,16 @@
 = form_for @payment do |f|
 
   %fieldset
-    %legend= 'Supplier Payment: ' + @supplier.name
+    %legend
+      = @label
+      = '-' + @supplier.name if @supplier
     = f.hidden_field :payable_type
     = f.hidden_field :payable_id
     = f.hidden_field :account_id
     = f.hidden_field :state
     = f.hidden_field :amount_currency
     = f.hidden_field :exchange_rate
-    = f.text_field :home_amount
+    = f.hidden_field :home_amount
     .row
       .field.small-3.columns
         = f.label :payment_date
@@ -22,15 +24,21 @@
         = f.label :bank_id, 'Bank'
         = f.collection_select :bank_id, @banks, 'id', 'name'
 
-    #allocations
-      .row.line-items
-        .field.small-10.columns
-          - unless @orders.size == 0
-            = render partial: 'order', collection: @orders
-          -else
-            No outstanding orders on system
+    - if @supplier
+      #allocations
+        .row.line-items
+          .field.small-10.columns
+            - unless @orders.size == 0
+              = render partial: 'order', collection: @orders
+            -else
+              No outstanding orders on system
+    - elsif params[:type] == 'HMRC'
+      = render partial: 'hmrc'
+    - elsif params[:type] == 'payroll'
+      = render partial: 'payroll'
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Commit'
 
 :coffeescript
   jQuery ->
@@ -43,6 +51,23 @@
             amount += allocation
           else
             $(this).val('0')
+        Account.setTotals(amount)
+      updatePayroll: ->
+        amount = 0
+        $('input.allocation_plus').each ->
+          allocation = parseFloat($(this).val())
+          if $.isNumeric(allocation)
+            amount += allocation
+          else
+            $(this).val('0')
+        $('input.allocation_less').each ->
+          allocation = parseFloat($(this).val())
+          if $.isNumeric(allocation)
+            amount -= allocation
+          else
+            $(this).val('0')
+        Account.setTotals(amount)
+      setTotals: (amount) ->
         $('input#payment_amount').val(amount.toFixed(2))
         exchange_rate = $('input#payment_exchange_rate').val()
         $('input#payment_home_amount').val((amount/exchange_rate).toFixed(2))
@@ -51,5 +76,7 @@
       due = order.find('span.due').html().replace(/[^0-9\.]+/g,"")
       order.find('input.allocation').val(due)
       Account.updateTotal()
-    $('div#allocations').on 'change', 'input.allocation', ->
+    $('div#ajax-main').on 'change', 'input.allocation', ->
       Account.updateTotal()
+    $('div#ajax-main').on 'change', 'input.allocation_plus, input.allocation_less', ->
+      Account.updatePayroll()

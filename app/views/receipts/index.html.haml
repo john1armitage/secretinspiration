@@ -7,6 +7,7 @@
   %tr
     %th Receipt date
     %th Amount
+    %th Apportions
     %th Bank
     %th Exchange rate
     %th Home amount
@@ -21,7 +22,8 @@
     %tr
       %td= receipt.receipt_date
       %td= receipt.amount
-      %td= receipt.bank
+      %td= receipt.apportions.size
+      %td= receipt.bank.name
       %td= receipt.exchange_rate
       %td= receipt.home_amount
       %td= receipt.state
