@@ -6,6 +6,9 @@
   - if allow? :payments, :index
     %li
       != link_to 'Payments', payments_path, :class => "button radius"
+  - if allow? :receipts, :index
+    %li
+      != link_to 'Receipts', receipts_path, :class => "button radius"
   - if allow? :transfers, :index
     %li
       != link_to 'Transfers', transfers_path, :class => "button radius"

@@ -14,12 +14,14 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    if params[:category_id]
+    if params[:category_id].present?
       category = Category.find(params[:category_id])
       params[:category_root] = category.root
       @item.category_id = category.id
       @item.product_flow = category.parent.product_flow
       @item.vat_rate = category.parent.vat_rate
+    elsif params[:category_root].present?
+      @product_flow = Category.find_by_name(params[:category_root]).product_flow
     end
   end
 

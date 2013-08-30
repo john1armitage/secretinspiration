@@ -14,15 +14,28 @@ class ApplicationController < ActionController::Base
   delegate :allow_param?, to: :current_permission
   helper_method :allow_param?
 
-  def get_categories( root_category, product_block = 'incoming' )
-    #item_type =  ItemType.find( item_type_id )
+  def get_categories( root_category, product_flow = nil )
     category = Category.find_by_name( root_category )
+    product_flow = category.product_flow unless product_flow
+    results = Category.at_depth( 1 )
     if category
-      root_id = category.id
-      Category.at_depth( 1 ).where('root_id = ? and product_flow <> ?', root_id, product_block ).order(:rank)
-    else
-      Category.at_depth( 1 ).where('product_flow <> ?', product_block ).order(:rank)
+      #root_id = category.id
+      results = results.where('root_id = ?', category.id)
     end
+    case product_flow
+    when 'incoming'
+      results = results.where('product_flow <> ?', 'outgoing' )
+    when 'outgoing'
+      results = results.where('product_flow <> ?', 'incoming' )
+    end
+    results.order(:rank)
+    #if category
+    #  root_id = category.id
+    #  results = Category.at_depth( 1 ).where('root_id = ? and product_flow <> ?', root_id, product_block ).order(:rank)
+    #else
+    #  results = Category.at_depth( 1 ).where('product_flow <> ?', product_block ).order(:rank)
+    #end
+
   end
   helper_method :get_categories
 

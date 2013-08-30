@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  receipt_date: 2013-08-29
+  amount: MyString
+  bank_id: 
+  exchange_rate: MyString
+  home_amount: MyString
+  state: MyString
+  receivable_type: MyString
+  receivable_id: 1
+
+two:
+  receipt_date: 2013-08-29
+  amount: MyString
+  bank_id: 
+  exchange_rate: MyString
+  home_amount: MyString
+  state: MyString
+  receivable_type: MyString
+  receivable_id: 1

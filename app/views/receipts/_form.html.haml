@@ -1,0 +1,59 @@
+= form_for @receipt do |f|
+  %fieldset
+    %legend= 'Receipt'
+    .row
+      .field.small-3.columns
+        = f.label :receipt_date
+        = f.date_field :receipt_date
+      .field.small-3.columns
+        = f.label :amount
+        = f.text_field :amount
+      .field.small-3.columns.left
+        = f.label :bank_id, 'Bank'
+        = f.collection_select :bank_id, @banks, 'id', 'name'
+    - if params[:type] == 'takings'
+      = render partial: 'takings'
+    - else
+      .row
+        .field.small-3.columns
+          = text_field_tag :account, @account
+    .row
+      .field.small-3.columns
+        = f.label :exchange_rate
+        = f.text_field :exchange_rate
+      .field.small-3.columns.left
+        = f.label :home_amount
+        = f.text_field :home_amount
+    .row
+      .field.small-3.columns
+        = f.label :state
+        = f.text_field :state
+      .field.small-3.columns
+        = f.label :receivable_type
+        = f.text_field :receivable_type
+      .field.small-3.columns.left
+        = f.label :receivable_id
+        = f.number_field :receivable_id
+    .row
+      .actions
+        = f.submit 'Save'
+
+:coffeescript
+  jQuery ->
+    Account=
+      calculateHomeTotal: ( amount ) ->
+        exchange_rate = $('input#receipt_exchange_rate').val()
+        $('input#receipt_home_amount').val((amount/exchange_rate).toFixed(2))
+    $('div#ajax-main').on 'change', 'input#receipt_amount', ->
+      amount = $('input#receipt_amount').val()
+      Account.calculateHomeTotal(amount)
+    $('div#ajax-main').on 'change', 'input.apportion', ->
+      amount = 0
+      $('input.apportion').each ->
+        apportion = parseFloat($(this).val())
+        if $.isNumeric(apportion)
+         amount += apportion
+        else
+         $(this).val('0')
+      $('input#receipt_amount').val(amount.toFixed(2))
+      Account.calculateHomeTotal(amount)

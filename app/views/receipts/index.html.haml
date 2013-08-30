@@ -1,0 +1,34 @@
+= button_to 'Banked Takings', new_receipt_path( currency: current_tenant.home_currency, type: 'takings' ), method: :get
+= button_to 'VAT Refund', new_receipt_path( currency: current_tenant.home_currency, type: 'VAT' ), method: :get
+= button_to 'Directors Loan', new_receipt_path( currency: current_tenant.home_currency, type: 'directors' ), method: :get
+= render partial: 'receipt_button', collection: Element.where(kind: 'currency').order(:rank)
+
+%table
+  %tr
+    %th Receipt date
+    %th Amount
+    %th Bank
+    %th Exchange rate
+    %th Home amount
+    %th State
+    %th Receivable type
+    %th Receivable
+    %th
+    %th
+    %th
+
+  - @receipts.each do |receipt|
+    %tr
+      %td= receipt.receipt_date
+      %td= receipt.amount
+      %td= receipt.bank
+      %td= receipt.exchange_rate
+      %td= receipt.home_amount
+      %td= receipt.state
+      %td= receipt.receivable_type
+      %td= receipt.receivable_id
+      %td= link_to 'Show', receipt
+      %td= link_to 'Edit', edit_receipt_path(receipt)
+      %td= link_to 'Destroy', receipt, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+

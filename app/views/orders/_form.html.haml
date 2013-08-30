@@ -3,11 +3,6 @@
 
   %fieldset
     %legend= 'Order: ' + ( @order.state || "new" )
-
-    -#= text_field_tag :currency, @currency
-    -#- unless @currency == current_tenant.home_currency
-    -#  = text_field_tag :exchange_rate, get_conversion_rate(@currency,current_tenant.home_currency, 1)
-    =# get_conversion_rate(@currency,current_tenant.home_currency, 1) unless @currency == current_tenant.home_currency
     .row
       .field.small-4.columns
         = f.label :effective_date
@@ -29,6 +24,8 @@
         %span.title
           = "#{@order.net_total_currency} #{@order.exchange_rate} Total"
           = f.hidden_field :exchange_rate
+          = f.text_field :net_home
+          = f.text_field :tax_home
         %br
         %span#order_total
           = @order.net_total + @order.tax_total
@@ -122,3 +119,6 @@
       $('input#order_net_total').val((net_total/100).toFixed(2))
       $('input#order_tax_total').val((tax_total/100).toFixed(2))
       $('span#order_total').html((net_total/100 + tax_total/100).toFixed(2))
+      exchange_rate = $('input#order_exchange_rate').val()
+      $('input#order_net_home').val((net_total/(100*exchange_rate)).toFixed(2))
+      $('input#order_tax_home').val((tax_total/(100*exchange_rate)).toFixed(2))

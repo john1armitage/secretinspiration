@@ -40,8 +40,6 @@ class OrdersController < ApplicationController
     else
       @currency =  @order.supplier ? @order.supplier.opening_balance_currency :  current_tenant.home_currency
     end
-    p @currency
-    p current_tenant.home_currency
     if @currency == current_tenant.home_currency
       @exchange_rate = 1
     else

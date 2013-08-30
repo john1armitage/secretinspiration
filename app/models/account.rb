@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
   has_many :accounts
   has_many :postings, dependent: :nullify
   has_many :payments, dependent: :nullify
+  has_many :apportions
 
   belongs_to :root, :class_name => 'Account'
 

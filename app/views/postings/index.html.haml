@@ -5,8 +5,8 @@ Search Functions
     %th Effective
     %th
     %th
-    %th
     %th Account
+    %th Reference
     %th.number Debit
     %th.number Credit
     %th
@@ -14,13 +14,12 @@ Search Functions
     %th
 
   - @postings.each do |posting|
-    - p posting.postable
     %tr
       %td= posting.event_date.strftime("%-d %b %y")
       %td= posting.postable_type
       %td= posting.postable_type.classify.constantize.find(posting.postable_id).desc
-      %td= posting.accountable.name if posting.accountable
       %td= posting.account.name if posting.account
+      %td= posting.accountable.name if posting.accountable
       %td.number= humanized_money_with_symbol( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= humanized_money_with_symbol( posting.credit_amount )  unless posting.credit_amount == 0
       %td=# link_to 'Show', posting

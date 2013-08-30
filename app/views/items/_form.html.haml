@@ -1,16 +1,9 @@
-- @categories = get_categories( params[:root_category] || @item.category.root.name )        #  @categories = get_categories( )
+- @categories = get_categories( params[:root_category] || @item.category.root.name )         #  @categories = get_categories( )
 
 = form_for @item, :validate => true, :class => "no_ajaxify"  do |f|
   %fieldset
     %legend= 'Item: ' + ( @item.name || "new" )
     = hidden_field_tag :root_category, params[:root_category]
-    -#- if @item.errors.any?
-    -#  #error_explanation
-    -#    %h2= "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
-    -#    %ul
-    -#      - @item.errors.full_messages.each do |msg|
-    -#        %li= msg
-
     .row
       .field.small-4.columns
         = f.label :name
@@ -36,6 +29,10 @@
       .field.small-3.columns.left
         = f.label :sups, 'Suppliers'
         = f.collection_select :sups, get_suppliers( @item.category_id), 'id', 'name', {}, {:multiple => true}
+        - p "CATS"
+        - p @item.category_id
+        - p "CATS 2"
+        - p get_suppliers( @item.category_id)
     .row
       .field.small-8.columns
         = f.label :description

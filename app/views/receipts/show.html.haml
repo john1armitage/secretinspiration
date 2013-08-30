@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Receipt date:
+  = @receipt.receipt_date
+%p
+  %b Amount:
+  = @receipt.amount
+%p
+  %b Bank:
+  = @receipt.bank
+%p
+  %b Exchange rate:
+  = @receipt.exchange_rate
+%p
+  %b Home amount:
+  = @receipt.home_amount
+%p
+  %b State:
+  = @receipt.state
+%p
+  %b Receivable type:
+  = @receipt.receivable_type
+%p
+  %b Receivable:
+  = @receipt.receivable_id
+
+= link_to 'Edit', edit_receipt_path(@receipt)
+\|
+= link_to 'Back', receipts_path

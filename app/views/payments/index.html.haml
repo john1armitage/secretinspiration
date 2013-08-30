@@ -1,4 +1,7 @@
 = button_to 'New Payment', new_payment_path, method: :get
+= button_to 'Staff', new_payment_path(type: 'staff'), method: :get
+= button_to 'HMRC', new_payment_path(type: 'HMRC'), method: :get
+= button_to 'VAT', new_payment_path(type: 'VAT'), method: :get
 
 %table
   %tr
@@ -12,20 +15,16 @@
     %th
     %th
 
-  - @transfers.each do |transfer|
+  - @payments.each do |payment|
     %tr
-      %td= transfer.transfer_date
-      %td= transfer.bank.name
-      %td= transfer.recipient.name
-      %td= humanized_money_with_symbol(transfer.amount)
-      %td= transfer.exchange_rate
-      %td= transfer.desc
-      %td
-        - unless transfer.state == 'incomplete'
-          = transfer.state
-        - else
-          = link_to 'Commit', commit_transfer_path(transfer), method: :post, :data => { :confirm => 'Commit?' }
-      %td= link_to 'Show', transfer
-      %td= link_to 'Edit', edit_transfer_path(transfer)
-      %td= link_to 'Destroy', transfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= payment.payment_date
+      %td= payment.bank.name
+      %td= payment.payable.name
+      %td= humanized_money_with_symbol(payment.amount)
+      %td= payment.amount_currency
+      %td= payment.exchange_rate
+      %td= payment.state
+      %td= link_to 'Show', payment
+      %td= link_to 'Edit', edit_payment_path(payment)
+      %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

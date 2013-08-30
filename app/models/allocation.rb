@@ -1,6 +1,6 @@
 class Allocation < ActiveRecord::Base
 
-  monetize :amount
+  monetize :amount_cents
   belongs_to :payments
   belongs_to :orders
 
