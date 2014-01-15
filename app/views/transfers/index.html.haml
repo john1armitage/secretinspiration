@@ -1,3 +1,16 @@
+= search_form_for @q do |f|
+  .row
+    .field.small-3.columns
+      = f.label :bank_id_eq, 'Bank'
+      = f.collection_select :bank_id_eq, @banks, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.label :transfer_date_gteq, 'From'
+      = f.date_field :transfer_date_gteq
+    .field.small-3.columns.left
+      = f.label :transfer_date_lteq, 'Until'
+      = f.date_field :transfer_date_lteq
+  .actions
+    = f.submit 'Search'
 = button_to 'New Transfer', new_transfer_path, method: :get
 
 %table
@@ -14,7 +27,7 @@
 
   - @transfers.each do |transfer|
     %tr
-      %td= transfer.transfer_date
+      %td= transfer.transfer_date.strftime("%d %b %y")
       %td= transfer.bank.name
       %td= transfer.recipient.name
       %td= humanized_money_with_symbol(transfer.amount)

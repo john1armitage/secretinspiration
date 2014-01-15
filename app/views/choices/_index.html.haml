@@ -1,20 +1,6 @@
-- @categories = set_categories(current_tenant.default_category)
-#tabs
-  %ul
-    - @categories.order(:rank, :name).each do |category|
-      %li.category-tab
-        = link_to category.nice_name.pluralize(2), "##{category.name}", :remote => true, :class => 'no_ajaxify'
-  - @categories.order(:rank, :name).each do |category|
-    %div.store-category{'id' => "#{category.name}"}
-      -#%ul.clearing-thumbs{'data-clearing' => ''}
-      %ul
-        - category.children.each do |subcat|
-          %li
-            = subcat.nice_name
-            %ul.menu-item
-              = render :partial => "choices/#{current_tenant.domain}/item", collection: subcat.items
-      .test
+- @category = Category.find_by_name( params[:choices]  )
+- @page = Page.find_by_code( @category.name )
+%ul
+  - if @page
+    != render 'pages/show_short'
 
-:coffeescript
-  jQuery ->
-    $( "#tabs" ).tabs()

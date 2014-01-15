@@ -12,19 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
-// require zepto
-//= foundation.clearing.js
-//= require jquery.ui.autocomplete
-//= require jquery.ui.datepicker
-//= require jquery-ui-timepicker-addon
-//= require jquery.ui.tabs
 //= require ajaxify_rails
-//= require rails.validations
-//= require cocoon
-//= require jquery.tokeninput
-
-
+//= require foundation
+// Note: Foundation 5 won't work with turbolinks
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function() {
+    $(document).foundation({
+        orbit: {
+            animation: 'slide'  // or fade
+        }
+    });
+    console.log("Foundation Loaded")
+});

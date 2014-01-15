@@ -1,7 +1,8 @@
 - variants = item.variants.where(domain: current_tenant.domain)
 - default = variants.where(item_default: true)
 %li
-  - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : params[:id].to_i
+  - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : 0
+  -#params[:id].to_i
   - if @meal_id > 0
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
       - if (default.first.name == 'default')
@@ -31,7 +32,3 @@
   - else
     = make_title(item.name)
     = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
-
-:coffeescript
-  jQuery ->
-    $( "#tabs" ).tabs()

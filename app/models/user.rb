@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_one :cart
+  has_many :pages
 
   validates_presence_of :password, :on => :create
   validates :email, uniqueness: true, presence: true

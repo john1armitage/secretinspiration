@@ -1,0 +1,121 @@
+//$shack-bg: red;
+//$secret-bg: blueviolet;
+//$gigiri-bg: darkturquoise;
+// import the CSS framework
+@import "foundation";
+
+//body.shack {
+//  .top-bar {
+//    background: $shack-bg;
+//  }
+//}
+//
+//body.secret {
+//  .top-bar {
+//    background: $secret-bg;
+//  }
+//}
+//body.gigiri {
+//  .top-bar {
+//    background: $gigiri-bg;
+//  }
+//}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+ul.inline-list {
+//  margin-top: rem-calc(6);
+  margin-bottom: rem-calc(8);
+  //margin-left: -0.8em;
+  margin-right: rem-calc(0);
+  a {
+    font-size: rem-calc(17);
+  }
+  li {
+    margin-left: rem-calc(10);
+  }
+}
+div#menu {
+  ul.inline-list {
+    margin-left: -0.8em;
+  }
+}
+
+div.columns ul#catalogue {
+  margin-left: 0.6em;
+}
+div#navigation .columns {
+  padding-left: 0.6em;
+}
+div#aside.columns {
+  padding: 0;
+}
+aside#sidebar {
+  ul {
+    margin-left: 0.25em;
+  }
+}
+.row .item section {
+  margin-left: 0;
+}
+
+.side-nav {
+  li a {
+    color: white;
+    margin-bottom: rem-calc(6);
+  }
+  .button.small {
+    padding-top: rem-calc(10);
+    padding-bottom: rem-calc(10);
+  }
+}
+
+
+// override for the 'Home' navigation link
+//.top-bar {
+// .name {
+//    font-size: rem-calc(13);
+//    line-height: 45px; }
+//  .name a {
+//    font-weight: normal;
+//    color: white;
+//    padding: 0 15px; }
+//}
+// THESE ARE EXAMPLES YOU CAN MODIFY
+// create mixins using Foundation classes
+@mixin twelve-columns {
+  @extend .small-12;
+  @extend .columns;
+  }
+@mixin six-columns-centered {
+  @extend .small-6;
+  @extend .columns;
+  @extend .text-center;
+  }
+// create your own classes
+// to make views framework-neutral
+.column {
+  @include six-columns-centered;
+  }
+.form {
+  @include grid-column(6);
+  }
+.form-centered {
+  @include six-columns-centered;
+  }
+.submit {
+  @extend .button;
+  @extend .radius;
+  }
+// apply styles to HTML elements
+// to make views framework-neutral
+main {
+  @include twelve-columns;
+  background-color: #eee;
+  }
+section {
+  @extend .row;
+  margin-top: 20px;
+  }

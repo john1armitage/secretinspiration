@@ -6,6 +6,7 @@ class Receipt < ActiveRecord::Base
   monetize :home_amount_cents
 
   belongs_to :bank
+  belongs_to :order
   has_many :apportions, dependent: :destroy
   has_many :postings, as: :postable, dependent: :destroy
 

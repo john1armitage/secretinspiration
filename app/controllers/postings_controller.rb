@@ -1,49 +1,36 @@
 class PostingsController < ApplicationController
   before_action :set_posting, only: [:show]
 
-  # GET /postings
   def index
-    @postings = Posting.all
+    @accounts = Account.joins(:postings).order("name").select('name', 'accounts.id').uniq
+    @accountables = Supplier.joins(:postings). where('suppliers.id = postings.accountable_id').order("name").select('name', 'suppliers.id', 'rank').uniq
+    #if params[:q]
+    #  params[:q][:debit_amount_cents_gteq] = 100 * params[:q][:debit_amount_cents_gteq].to_d
+    #  params[:q][:debit_amount_cents_lteq] = 100 * params[:q][:debit_amount_cents_lteq].to_d
+    #  params[:q][:credit_amount_cents_gteq] = 100 * params[:q][:credit_amount_cents_gteq].to_d
+    #  params[:q][:credit_amount_cents_lteq] = 100 * params[:q][:credit_amount_cents_lteq].to_d
+    #end
+    list_order = ''
+    unless params[:q].present?
+      limit = 25
+      list_order = 'DESC'
+    else
+      limit = params[:limit] || 100
+    end
+
+    @q = Posting.search(params[:q])
+    @postings = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at")
+    @debits = @postings.sum('debit_amount_cents').to_d / 100
+    @credits = @postings.sum('credit_amount_cents').to_d / 100
   end
 
-  # GET /postings/1
+  def search
+    index
+    render :index
+  end
+
   def show
   end
-
-  ## GET /postings/new
-  #def new
-  #  @posting = Posting.new
-  #end
-  #
-  ## GET /postings/1/edit
-  #def edit
-  #end
-  #
-  ## POST /postings
-  #def create
-  #  @posting = Posting.new(posting_params)
-  #
-  #  if @posting.save
-  #    redirect_to @posting, notice: 'Posting was successfully created.'
-  #  else
-  #    render action: 'new'
-  #  end
-  #end
-  #
-  ## PATCH/PUT /postings/1
-  #def update
-  #  if @posting.update(posting_params)
-  #    redirect_to @posting, notice: 'Posting was successfully updated.'
-  #  else
-  #    render action: 'edit'
-  #  end
-  #end
-  #
-  ## DELETE /postings/1
-  #def destroy
-  #  @posting.destroy
-  #  redirect_to postings_url, notice: 'Posting was successfully destroyed.'
-  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -29,6 +29,8 @@ Commerce::Application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
+  # Foundation 5
+  config.assets.precompile += %w( vendor/modernizr.js )
   # Generate digests for assets URLs.
   config.assets.digest = true
 
@@ -58,7 +60,7 @@ Commerce::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets.
-  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+  # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.

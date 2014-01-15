@@ -1,12 +1,12 @@
+- @accounts = get_accounts(@account_type)
 = form_for @payment do |f|
 
   %fieldset
     %legend
       = @label
-      = '-' + @supplier.name if @supplier
+      = ': ' + @supplier.name if @supplier
     = f.hidden_field :payable_type
     = f.hidden_field :payable_id
-    = f.hidden_field :account_id
     = f.hidden_field :state
     = f.hidden_field :amount_currency
     = f.hidden_field :exchange_rate
@@ -17,14 +17,37 @@
         = f.date_field :payment_date
 
       .field.small-3.columns.left
-        = f.label :amount
-        = f.text_field :amount
-
+        - if @payment.new_record?
+          = f.label :bank_id, 'Bank'
+          = f.collection_select :bank_id, @banks, 'id', 'name'
+        - else
+          %br
+          = @payment.bank.name
+          %br
+          = humanized_money_with_symbol(@payment.amount)
+    .row
       .field.small-3.columns.left
-        = f.label :bank_id, 'Bank'
-        = f.collection_select :bank_id, @banks, 'id', 'name'
+        - if @payment.new_record?
+          = f.label :amount
+          = f.text_field :amount
 
-    - if @supplier
+    .row
+      - unless @payment.new_record? or @payment.payable_type != 'Supplier'
+        .field.small-4.columns.left
+          = f.label :supplier_name
+          = f.text_field :supplier_name, data: {autocomplete_source: suppliers_path(currency: @payment.amount_currency)}
+
+    - if params[:quick].present?
+      .field.small-3.columns.left
+        = f.label :account_id, 'Account'
+        = f.grouped_collection_select :account_id, @accounts.order(:name), :accounts, :name , :id, :name,
+          :include_blank => true
+    -else
+      = f.hidden_field :account_id
+    .row
+      - if params[:quick].present?
+        = render partial: 'quick'
+    - if @supplier and !params[:quick].present?
       #allocations
         .row.line-items
           .field.small-10.columns
@@ -36,9 +59,18 @@
       = render partial: 'hmrc'
     - elsif params[:type] == 'payroll'
       = render partial: 'payroll'
+    .row
+      .field.small-9.columns
+        = f.label :desc
+        = f.text_field :desc
+    .row
+      .field.small-9.columns
+        = f.label :notes
+        = f.text_area :notes
 
   .actions
     = f.submit 'Commit'
+    =# f.submit 'Commit Suppliers'
 
 :coffeescript
   jQuery ->
@@ -80,3 +112,6 @@
       Account.updateTotal()
     $('div#ajax-main').on 'change', 'input.allocation_plus, input.allocation_less', ->
       Account.updatePayroll()
+    $('#payment_supplier_name').autocomplete
+      source: $('#payment_supplier_name').data('autocomplete-source'),
+      minLength: 2

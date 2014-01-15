@@ -21,15 +21,6 @@
         = f.text_field :state
     .row
       .field.small-3.columns
-        %span.title
-          = "#{@order.net_total_currency} #{@order.exchange_rate} Total"
-          = f.hidden_field :exchange_rate
-          = f.text_field :net_home
-          = f.text_field :tax_home
-        %br
-        %span#order_total
-          = @order.net_total + @order.tax_total
-      .field.small-3.columns
         = f.label :net_total
         = f.text_field :net_total, class: 'total_value'
       .field.small-3.columns
@@ -38,6 +29,16 @@
       .field.small-3.columns.left
         = f.label :adjustment_total, 'Adjustments'
         = f.text_field :adjustment_total
+      .field.small-3.columns
+        %span#order_total
+          = "#{@order.net_total_currency} @ #{@order.exchange_rate} "
+          %br
+          %br
+          = @order.net_total + @order.tax_total
+        -#%span.title
+        -#  = f.hidden_field :exchange_rate
+        -#  = f.text_field :net_home
+        -#  = f.text_field :tax_home
     .row
       .field.small-4.columns.quick
         = f.label :account, 'Account'
@@ -89,6 +90,13 @@
         else
           $('div.quick').hide()
           $('div#items').show()
+      updateHome: (netTotal, taxTotal) ->
+        exchange_rate = $('input#order_exchange_rate').val()
+        $('input#order_net_home').val(netTotal).toFixed(2)
+        alert('woof')
+        $('input#order_tax_home').val(taxTotal).toFixed(2)
+        alert('woof')
+
     Account.checkQuick($('#order_quick').is(':checked'))
     $('#order_supplier_name').autocomplete
       source: $('#order_supplier_name').data('autocomplete-source'),
@@ -99,6 +107,10 @@
     $('#order_quick').change ->
       alert( $(this).is(':checked') )
       Account.checkQuick($(this).is(':checked'))
+    $('div#ajax-main').on 'change', 'input#order_net_total, input#order_tax_total', ->
+      netTotal =  $('input#order_net_total').val()
+      taxTotal = $('input#order_tax_total').val()
+      Account.updateHome(netTotal, taxTotal)
     $('div#items').on 'change', 'input.item_value', ->
       net_total = 0
       tax_total = 0
@@ -116,9 +128,9 @@
           line_item.find('input.tax_total_item').val((tax / 100).toFixed(2))
           net_total += net
           tax_total += tax
-      $('input#order_net_total').val((net_total/100).toFixed(2))
-      $('input#order_tax_total').val((tax_total/100).toFixed(2))
-      $('span#order_total').html((net_total/100 + tax_total/100).toFixed(2))
-      exchange_rate = $('input#order_exchange_rate').val()
-      $('input#order_net_home').val((net_total/(100*exchange_rate)).toFixed(2))
-      $('input#order_tax_home').val((tax_total/(100*exchange_rate)).toFixed(2))
+      netTotal = net_total/100
+      taxTotal = tax_total/100
+      $('input#order_net_total').val(netTotal.toFixed(2))
+      $('input#order_tax_total').val(taxTotal.toFixed(2))
+      $('span#order_total').html((netTotal + taxTotal))
+      Account.updateHome(netTotal, taxTotal)

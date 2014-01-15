@@ -19,6 +19,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers/new
   def new
     @supplier = Supplier.new
+    @supplier.opening_balance_currency = current_tenant.home_currency
   end
 
   # GET /suppliers/1/edit

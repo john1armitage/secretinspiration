@@ -1,3 +1,19 @@
+= search_form_for @q do |f|
+  .row
+    .field.small-3.columns
+      = f.label :bank_id_eq, 'Bank'
+      = f.collection_select :bank_id_eq, @banks, 'id', 'name', include_blank: true
+    -#.field.small-3.columns
+    -#  = f.label :account_id_eq, 'Account'
+    -#  = f.collection_select :account_id_eq, @accounts, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.label :receipt_date_gteq, 'From'
+      = f.date_field :receipt_date_gteq
+    .field.small-3.columns.left
+      = f.label :receipt_date_lteq, 'Until'
+      = f.date_field :receipt_date_lteq
+  .actions
+    = f.submit 'Search'
 = button_to 'Banked Takings', new_receipt_path( currency: current_tenant.home_currency, type: 'takings' ), method: :get
 = button_to 'VAT Refund', new_receipt_path( currency: current_tenant.home_currency, type: 'VAT' ), method: :get
 = button_to 'Directors Loan', new_receipt_path( currency: current_tenant.home_currency, type: 'directors' ), method: :get
@@ -20,7 +36,7 @@
 
   - @receipts.each do |receipt|
     %tr
-      %td= receipt.receipt_date
+      %td= receipt.receipt_date.strftime("%d %b %y")
       %td= receipt.amount
       %td= receipt.apportions.size
       %td= receipt.bank.name

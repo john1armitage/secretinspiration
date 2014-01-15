@@ -8,12 +8,14 @@
       .field.small-4.columns
         = f.label :name
         = f.text_field :name
+      .field.small-1.columns
+        = f.label :rank
+        = f.text_field :rank
 
       .field.small-2.columns.left
         = f.label :product_flow
         = collection_select(:item, :product_flow,
           Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
-    .row
       .field.small-4.columns
         = f.label :category, 'Category'
         = f.grouped_collection_select :category_id, @categories, :categories, :nice_name, :id, :nice_name,

@@ -1,16 +1,2 @@
-%section.section.left
-  %p
-    != link_to 'Home', '/', :class => "button radius no_ajaxify"
-    - if current_user.id
-      != current_user.email
-    %br
-      != current_user.id
-      != current_user.role.name if current_user.role
-      != request.host
-      != current_tenant.domain
-      !=# cookies[:auth_token]
-    - flash.each do |name, msg|
-      = content_tag :div, msg, id: "flash_#{name}"
-    #notice{ style: "#{'display:none' unless flash[:notice]}" }
-      = flash[:notice]
+!= link_to image_tag("#{current_tenant.domain}_logo.gif"), '/', :class => "button radius no_ajaxify image"
 

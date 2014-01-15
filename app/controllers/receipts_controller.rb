@@ -3,7 +3,11 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts
   def index
-    @receipts = Receipt.all
+    #@receipts = Receipt.all
+    #@accounts = Account.joins(:receipts).order("name").select('name', 'accounts.id').uniq
+    @banks = Bank.joins(:receipts).order("name").select('name', 'banks.id', 'rank').uniq
+    @q = Receipt.search(params[:q])
+    @receipts = @q.result(distinct: true).limit(99).order('receipt_date, created_at')
   end
 
   # GET /receipts/1
@@ -24,6 +28,15 @@ class ReceiptsController < ApplicationController
           @account = 'Directors Account'
         when 'VAT'
           @account = 'VAT Control'
+        when 'contra'
+          @account = 'Accounts Payable'
+          @receipt.receivable_type = 'Supplier'
+          @receipt.receivable_id = params[:supplier_id]
+          orders = Supplier.find(params[:supplier_id]).orders.where("(state = 'committed' or state = 'part_paid') and contra = true")
+          amount = orders.sum('net_total_cents').to_d / 100
+          @receipt.amount = amount
+          @receipt.order_id = orders.first.id
+          @receipt.home_amount = amount / @receipt.exchange_rate
         else
           @account = 'Retail Sales'
       end
@@ -46,6 +59,7 @@ class ReceiptsController < ApplicationController
         @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name(params[:account]).id, amount_cents: @receipt.amount_cents, amount_currency: @receipt.amount_currency)
         @receipt.post
       end
+      Order.find(@receipt.order_id).update(state: 'paid') unless @receipt.order_id.blank?
       @receipt.update(state: 'complete')
       cookies[:last_tx_date] = @receipt.receipt_date
       redirect_to receipts_url, notice: 'Receipt was successfully created.'

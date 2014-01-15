@@ -40,7 +40,7 @@
       = link_to_remove_association "remove item", f, :class => 'no_ajaxify'
   .row
     .field.small-4.columns
-      = f.label :account, 'Account'
+      = f.label :account_id, 'Account'
       = f.grouped_collection_select :account_id, @accounts, :accounts, :name , :id, :name,
         :include_blank => true
     .field.small-8.columns

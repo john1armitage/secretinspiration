@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   has_many :postings, dependent: :nullify
   has_many :payments, dependent: :nullify
   has_many :apportions
+  belongs_to :accountable, class_name: 'Supplier'
 
   belongs_to :root, :class_name => 'Account'
 
@@ -18,7 +19,7 @@ class Account < ActiveRecord::Base
 
   before_save :set_ancestors
 
-  default_scope { order('code ASC') }
+  default_scope { order('name') }
 
   def set_ancestors
     self.root_id = ( ancestry.blank? ?  id : ancestry.gsub(/\/.+/, '') )

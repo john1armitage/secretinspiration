@@ -395,6 +395,52 @@ ALTER SEQUENCE options_id_seq OWNED BY options.id;
 
 
 --
+-- Name: pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE pages (
+    id integer NOT NULL,
+    code character varying(255),
+    title character varying(255),
+    sub character varying(255),
+    body text,
+    topic_id integer,
+    user_id integer,
+    credit character varying(255),
+    publish boolean,
+    release date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    body2 text,
+    body3 text,
+    link character varying(255),
+    link2 character varying(255),
+    link3 character varying(255),
+    color character varying(255),
+    image character varying(255)
+);
+
+
+--
+-- Name: pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
+
+
+--
 -- Name: receipts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -411,7 +457,8 @@ CREATE TABLE receipts (
     receivable_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    "desc" character varying(255)
+    "desc" character varying(255),
+    order_id integer
 );
 
 
@@ -490,7 +537,13 @@ CREATE TABLE tenancies (
     default_category character varying(255),
     vat_exempt boolean DEFAULT false,
     home_supplier character varying(255),
-    home_currency character varying(255)
+    home_currency character varying(255),
+    email character varying(255),
+    address character varying(255),
+    phone character varying(255),
+    company character varying(255),
+    coho character varying(255),
+    vat character varying(255)
 );
 
 
@@ -514,6 +567,38 @@ ALTER SEQUENCE tenancies_id_seq OWNED BY tenancies.id;
 
 
 --
+-- Name: topics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE topics (
+    id integer NOT NULL,
+    name character varying(255),
+    rank integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: topics_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE topics_id_seq OWNED BY topics.id;
+
+
+--
 -- Name: transfers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -528,7 +613,8 @@ CREATE TABLE transfers (
     amount_cents integer DEFAULT 0 NOT NULL,
     amount_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
     "desc" character varying(255),
-    state character varying(255) DEFAULT 'incomplete'::character varying
+    state character varying(255) DEFAULT 'incomplete'::character varying,
+    notes character varying(255)
 );
 
 
@@ -642,7 +728,8 @@ CREATE TABLE variants (
     updated_at timestamp without time zone,
     options hstore,
     slug character varying(255),
-    price_cents integer DEFAULT 0 NOT NULL
+    price_cents integer DEFAULT 0 NOT NULL,
+    rank integer
 );
 
 
@@ -739,6 +826,13 @@ ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY receipts ALTER COLUMN id SET DEFAULT nextval('receipts_id_seq'::regclass);
 
 
@@ -754,6 +848,13 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 --
 
 ALTER TABLE ONLY tenancies ALTER COLUMN id SET DEFAULT nextval('tenancies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY topics ALTER COLUMN id SET DEFAULT nextval('topics_id_seq'::regclass);
 
 
 --
@@ -865,6 +966,14 @@ ALTER TABLE ONLY options
 
 
 --
+-- Name: pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY pages
+    ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -886,6 +995,14 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY tenancies
     ADD CONSTRAINT tenancies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: topics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY topics
+    ADD CONSTRAINT topics_pkey PRIMARY KEY (id);
 
 
 --
@@ -991,10 +1108,24 @@ CREATE INDEX index_options_on_name ON options USING btree (name);
 
 
 --
+-- Name: index_pages_on_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_pages_on_topic_id ON pages USING btree (topic_id);
+
+
+--
 -- Name: index_receipts_on_bank_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_receipts_on_bank_id ON receipts USING btree (bank_id);
+
+
+--
+-- Name: index_receipts_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_receipts_on_order_id ON receipts USING btree (order_id);
 
 
 --
@@ -1186,3 +1317,25 @@ INSERT INTO schema_migrations (version) VALUES ('20130829225211');
 INSERT INTO schema_migrations (version) VALUES ('20130830065444');
 
 INSERT INTO schema_migrations (version) VALUES ('20130830143324');
+
+INSERT INTO schema_migrations (version) VALUES ('20130905205906');
+
+INSERT INTO schema_migrations (version) VALUES ('20130908170101');
+
+INSERT INTO schema_migrations (version) VALUES ('20140107163028');
+
+INSERT INTO schema_migrations (version) VALUES ('20140107171640');
+
+INSERT INTO schema_migrations (version) VALUES ('20140108155344');
+
+INSERT INTO schema_migrations (version) VALUES ('20140108155524');
+
+INSERT INTO schema_migrations (version) VALUES ('20140110155715');
+
+INSERT INTO schema_migrations (version) VALUES ('20140111130646');
+
+INSERT INTO schema_migrations (version) VALUES ('20140111134530');
+
+INSERT INTO schema_migrations (version) VALUES ('20140111143039');
+
+INSERT INTO schema_migrations (version) VALUES ('20140113154208');

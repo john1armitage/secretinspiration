@@ -6,6 +6,9 @@
       .field.small-5.columns
         = f.label :name
         = f.text_field :name
+      .field.small-2.columns
+        = f.label :rank
+        = f.number_field :rank
       .field.small-3.columns.left
         = f.label :cats, 'Offerings'
         = f.collection_select :cats, get_categories( nil, 'incoming'), 'id', 'name', {}, {:multiple => true}

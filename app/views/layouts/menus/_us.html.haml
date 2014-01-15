@@ -1,0 +1,12 @@
+%ul.inline-list.large-offset-2
+  - ['find_us', 'opening_hours'].each do |category|
+    %li
+      = link_to title(category), page_path(category, code:true)
+  - if allow? :news, :index
+    %li
+      = link_to 'News', page_path('news', code:true)
+:coffeescript
+  jQuery ->
+    $('div#menu li').on 'click', (event) ->
+      $('div#menu li').removeClass 'active'
+      $(this).addClass('active')

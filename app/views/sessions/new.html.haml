@@ -9,7 +9,7 @@
       = label_tag :password
       = password_field_tag :password
 
-    = link_to "forgotten password?", new_password_reset_path
+    = link_to "forgotten password?", password_resets_path, method: :POST
     .field
       = label_tag :remember_me
       = check_box_tag :remember_me, 1, params[:remember_me]

@@ -2,16 +2,29 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :commit, :pay]
 
   # GET /orders
+
   def index
+    @suppliers = Supplier.order(:name)
+    @q = Order.search(params[:q])
+
+    unless params[:limit].present?
+      limit = 25
+      list_order = 'DESC'
+    else
+      limit = params[:limit] || 100
+      list_order = 'ASC'
+    end
+    @orders = @q.result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
+
     unless params[:supplier_id].present?
       if params[:home].present?
-        @orders = Supplier.find_by_name( current_tenant.home_supplier ).orders.order(:effective_date => :desc, :net_total_cents => :desc )
+        @orders = @orders.where(supplier_id: Supplier.find_by_name( current_tenant.home_supplier ).id) #.    orders.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC" )
       else
-        @orders = Order.outgoings(Supplier.find_by_name( current_tenant.home_supplier )).order(:effective_date => :desc, :net_total_cents => :desc )
+        @orders = @orders.outgoings(Supplier.find_by_name( current_tenant.home_supplier )) #.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
       end
     else
       @supplier = Supplier.find(params[:supplier_id])
-      @orders = @supplier.orders.order(:effective_date => :desc, :net_total_cents => :desc )
+      @orders = @orders.where( supplier_id: params[:supplier_id] ) #@supplier.orders.search(params[:q]).result(distinct: true).order("effective_date #{list_order}, net_total_cents DESC").limit(limit)
     end
   end
 
@@ -24,6 +37,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     @order.user = current_user
     @order.state = 'incomplete'
+    @order.account_id = cookies[:last_tx_account]
     @order.effective_date = cookies[:last_tx_date] || Time.now
         if params[:supplier_id].present?
       @order.supplier = Supplier.find(params[:supplier_id])
@@ -58,6 +72,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order].merge(net_total_currency: current_tenant.home_currency))
     cookies[:last_tx_date] = @order.effective_date
+    cookies[:last_tx_account] = @order.account_id
 
     if @order.save
       redirect_to orders_url(supplier_id: @order.supplier_id), notice: 'Order was successfully created.'
@@ -86,8 +101,14 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    @order.pay
-    @order.save
+    unless @order.contra
+      @order.pay
+      @order.save
+    else
+      @order.contra
+      @order.save
+    end
+
     redirect_to orders_url(supplier_id: @order.supplier_id)
   end
 

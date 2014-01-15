@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def page_title
-    "Woof #{action_name}"
+    "#{current_tenant.name} Registration: #{action_name}"
   end
 
   def index

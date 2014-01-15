@@ -14,6 +14,13 @@ class ApplicationController < ActionController::Base
   delegate :allow_param?, to: :current_permission
   helper_method :allow_param?
 
+  include CurrentCart
+
+  def get_cart
+    set_cart
+  end
+  helper_method :get_cart
+
   def get_categories( root_category, product_flow = nil )
     category = Category.find_by_name( root_category )
     product_flow = category.product_flow unless product_flow
@@ -41,7 +48,7 @@ class ApplicationController < ActionController::Base
 
   def set_categories( default_choices )
     choices = params[:choices].present? ? params[:choices] : default_choices
-    @categories = get_categories(choices)
+    get_categories(choices)
   end
   helper_method :set_categories
 
@@ -76,7 +83,7 @@ class ApplicationController < ActionController::Base
       when 'expense'
         @accounts = Account.find_by_name('Expenses').children.load
       when 'fixed'
-        @accounts = Account.find_by_name('Fixed Assets').load
+        @accounts = Account.find_by_name('Asset').children.where(name: 'Fixed Assets').load
       when 'sale'
         @accounts = Account.find_by_name('Revenue').children.load
       else
@@ -96,7 +103,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_suppliers
 
   def page_title
-    "Commerce"
+    current_tenant.name
   end
   helper_method :page_title
 
@@ -121,6 +128,11 @@ class ApplicationController < ActionController::Base
     # @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
+
+  def admin_ok?
+    ['localhost', '127.0.0.1', '128.1.1.20', ].include? current_tenant.hostname || current_tenant.remote_host == '92.29.168.164'
+  end
+  helper_method :admin_ok?
 
   def current_tenant
     @current_tenant ||= Tenancy.find_by_hostname!(request.host)
@@ -147,4 +159,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def title(code)
+     code.gsub(/_/,' ').titleize
+  end
+  helper_method :title
 end

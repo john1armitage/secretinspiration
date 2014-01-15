@@ -12,7 +12,7 @@ class Variant < ActiveRecord::Base
   before_validation :generate_slug
 
   validates_presence_of :name
-  validates :slug, uniqueness: true, presence: true
+  #validates :slug, uniqueness: true, presence: true
   validates_numericality_of :price, :allow_nil => true
 
   before_destroy :ensure_not_referenced_by_any_line_item
@@ -31,7 +31,7 @@ class Variant < ActiveRecord::Base
   end
 
   def item_name
-    item.name
+     item.name
   end
 
   def description

@@ -3,7 +3,11 @@ class TransfersController < ApplicationController
 
   # GET /transfers
   def index
-    @transfers = Transfer.all
+    @accounts = Account.joins(:transfers).order("name").select('name', 'accounts.id').uniq
+    @banks = Bank.joins(:transfers).order("name").select('name', 'banks.id', 'rank').uniq
+    @recipients = Bank.joins(:transfers).order("name").select('name', 'banks.id', 'rank').uniq
+    @q = Transfer.search(params[:q])
+    @transfers = @q.result(distinct: true).limit(99).order('transfer_date, created_at')
   end
 
   # GET /transfers/1

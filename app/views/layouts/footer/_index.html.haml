@@ -1,0 +1,9 @@
+%p.contact
+  %span.email
+  %span.location
+    != current_tenant.address
+  %span.phone
+    != current_tenant.phone
+:coffeescript
+  jQuery ->
+    $( "span.email").html('<a href="mailto: #{current_tenant.email} %>?subject=Contact from #{current_tenant.hostname.capitalize}">Email Us</a>')

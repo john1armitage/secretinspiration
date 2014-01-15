@@ -9,6 +9,7 @@
         = f.label :amount
         = f.text_field :amount
         = f.hidden_field :amount_currency
+        = f.hidden_field :order_id
       .field.small-3.columns.left
         = f.label :bank_id, 'Bank'
         = f.collection_select :bank_id, @banks, 'id', 'name'

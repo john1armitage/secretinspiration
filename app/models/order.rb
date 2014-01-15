@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
   monetize :discount_cents, :allow_nil => true
 
   has_many :line_items, as: :ownable, dependent: :destroy
-  has_many :allocations
+  has_many :allocations, dependent: :destroy
   has_many :payments, through: :allocations
   has_many :depreciations
 
@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :customer
   belongs_to :supplier
-
+  has_many :receipts, dependent: :destroy
 
   before_validation :check_account
   #before_validation :get_totals
@@ -84,11 +84,11 @@ class Order < ActiveRecord::Base
   def home_posting
     contra = !contra
     Order.transaction do
-      create_posting( 'Order', id, false, net_total_cents, Account.find(account_id).parent.id, 'Account', account_id, contra)
-      create_posting( 'Order', id, true, (net_total_cents + tax_total_cents), Account.find_by_name('Accounts Receivable').id, 'Customer', customer_id, contra)
+      create_posting( 'Order', id, false, net_total_cents, Account.find(account_id).parent.id, 'Account', account_id, contra, effective_date)
+      create_posting( 'Order', id, true, (net_total_cents + tax_total_cents), Account.find_by_name('Accounts Receivable').id, 'Customer', customer_id, contra, effective_date)
       if tax_total_cents > 0
         vat_control = Account.find_by_name('VAT Control').id
-        create_posting( 'Order', id, false, tax_total_cents, vat_control, 'Account', vat_control, contra)
+        create_posting( 'Order', id, false, tax_total_cents, vat_control, 'Account', vat_control, contra, effective_date)
       end
       self.state = 'committed'
     end

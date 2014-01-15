@@ -1,19 +1,36 @@
-.field.small-6.columns
-  - unless params[:supplier_id].present?
-    = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense' ), method: :get, form_class: 'inline'
-    = render partial: 'order_button', collection: Element.where(kind: 'currency').order(:rank)
-  - else
-    = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense', supplier_id: @supplier.id ), method: :get, form_class: 'inline'
-    = button_to @supplier.opening_balance_currency, new_order_path( supplier_id: @supplier.id, currency: @supplier.opening_balance_currency, type: 'expense' ), method: :get
-    %span.title= @supplier.name
+= search_form_for @q do |f|
+  .row
+    .field.small-3.columns
+      = f.label :effective_date_gteq, 'From'
+      = f.date_field :effective_date_gteq
+    .field.small-3.columns.left
+      = f.label :effective_date_lteq, 'Until'
+      = f.date_field :effective_date_lteq
+  .row
+    .field.small-3.columns
+      = f.label :supplier_id_eq, 'Supplier'
+      = f.collection_select :supplier_id_eq, @suppliers, 'id', 'name', include_blank: true
+    .field.small-3.columns.left
+      = label_tag :limit
+      = select_tag :limit, options_for_select(%w[50 100 500 1000], params[:limit] || 100)
+  .row
+    .actions
+      = f.submit 'Search'
+    - unless params[:supplier_id].present?
+      = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense' ), method: :get, form_class: 'inline'
+      = render partial: 'order_button', collection: Element.where(kind: 'currency').order(:rank)
+    - else
+      = button_to 'Quick Order', new_order_path(:quick => true, type: 'expense', supplier_id: @supplier.id ), method: :get, form_class: 'inline'
+      = button_to @supplier.opening_balance_currency, new_order_path( supplier_id: @supplier.id, currency: @supplier.opening_balance_currency, type: 'expense' ), method: :get
+      %span.title= @supplier.name
 
 %table
   %tr
-    %th.number Effective date
+    %th.number Effective
     %th.number Total
     -#%th Net
     -#%th Tax
-    %th.number Due date
+    %th.number Due
     %th Customer
     %th Supplier
     %th.center State
@@ -24,11 +41,14 @@
 
   - @orders.each do |order|
     %tr
-      %td.number= order.effective_date.strftime("%-d %b %y")
-      %td.number= humanized_money_with_symbol(order.net_total + order.tax_total)
+      %td.number.has-tip.tip-right{'data-tooltip' => true, 'title' => order.id}
+        = order.effective_date.strftime("%-d %b %y")
+      %td.number.has-tip.tip-right{'data-tooltip' => true, 'title' => "Net: #{order.net_total}, Tax: #{order.tax_total}"}
+        = humanized_money_with_symbol(order.net_total + order.tax_total)
       -#%td= humanized_money_with_symbol(order.net_total)
       -#%td= humanized_money_with_symbol(order.tax_total)
-      %td.number= order.due_date.strftime("%-d %b %y") if order.due_date
+      %td.number
+        = order.due_date.strftime("%-d %b %y") if order.due_date
       %td= order.customer.name if order.customer
       %td= order.supplier.name if order.supplier
       %td.center

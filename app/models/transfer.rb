@@ -19,8 +19,8 @@ class Transfer < ActiveRecord::Base
       p "transaction"
       bank = Account.find_by_name( Bank.find(bank_id).name)
       recipient = Account.find_by_name( Bank.find(recipient_id).name)
-      create_posting( 'Transfer', id, true, amount_cents, bank.parent.id, 'Bank', bank_id, false, transfer_date)
-      create_posting( 'Transfer', id, false, amount_cents, recipient.parent.id, 'Bank', recipient_id, false, transfer_date)
+      create_posting( 'Transfer', id, true, amount_cents, bank.id, 'Bank', recipient_id, false, transfer_date)
+      create_posting( 'Transfer', id, false, amount_cents, recipient.id, 'Bank', bank_id, false, transfer_date)
       self.state = 'committed'
     end
     #end

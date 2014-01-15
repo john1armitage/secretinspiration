@@ -13,7 +13,7 @@ class Supplier < ActiveRecord::Base
 
   has_many  :payments, as: :payable, dependent: :destroy
 
-  default_scope { order('name ASC') }
+  default_scope { order('rank, name ASC') }
 
   def cats
     offerings.map {|o| o.category_id}

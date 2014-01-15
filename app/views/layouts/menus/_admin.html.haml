@@ -1,0 +1,27 @@
+%ul.inline-list
+  - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
+    %li
+      != link_to 'Bookings', bookings_path
+  - if current_tenant.sitting == '1'  && (allow? :meals, :index )
+    %li
+      != link_to "Sitting", meals_path(), remote: true, class: 'no_ajaxify'
+  - if allow? :items, :index
+    %li
+      != link_to 'Items', items_path
+  - if allow? :pages, :index
+    %li
+      != link_to 'Pages', pages_path
+  - if allow? :items, :index
+    %li
+      != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'
+  - if allow? :postings, :index
+    %li
+      != link_to "Accounts", menu_path('accounts'), remote: true, class: 'no_ajaxify'
+  - if allow? :elements, :index
+    %li
+      != link_to "System", menu_path('system'), remote: true, class: 'no_ajaxify'
+:coffeescript
+  jQuery ->
+    $('div#menu li').on 'click', (event) ->
+      $('div#menu li').removeClass 'active'
+      $(this).addClass('active')

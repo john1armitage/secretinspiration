@@ -7,7 +7,11 @@ jQuery ->
       else
         $('div.row.quick').hide()
         $('div.row.line-items').show()
-#  Meal =
-#    addItem: (variantId, mealId) ->
-#      alert( variantId + "Not Yet!")
-#      meal_items_path(variant_id: variant.id)
+  Utility =
+    menuSelect: ->
+      $('div#menu li').on 'click', (event) ->
+        $('div#menu li').removeClass 'active'
+        $(this).addClass('active')
+
+  Ajaxify.init
+    content_container: 'content'

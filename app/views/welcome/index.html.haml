@@ -1,3 +1,4 @@
-%h1
-  Welcome to
-  = current_tenant.name
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+- @page = Page.find_by_code('welcome')
+%article
+  != render 'pages/show'

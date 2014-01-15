@@ -1,0 +1,31 @@
+%h1 Listing pages
+
+%table
+  %tr
+    %th Code
+    %th Title
+    %th Link
+    %th Image
+    %th Color
+    %th Publish
+    %th Release
+    %th
+    %th
+    %th
+
+  - @pages.order(:code).each do |page|
+    %tr
+      %td= page.code
+      %td= page.title
+      %td= page.link
+      %td= page.image
+      %td= page.color
+      %td= page.publish
+      %td= page.release
+      %td= link_to 'Show', page
+      %td= link_to 'Edit', edit_page_path(page)
+      %td= link_to 'Destroy', page, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Page', new_page_path

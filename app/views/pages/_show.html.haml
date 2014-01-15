@@ -1,0 +1,35 @@
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+- unless @page.title == 'blank'
+  %h3
+    = @page.title
+.row
+  - if @page.image.blank?
+    .large-12.columns
+      %h6
+        = @page.sub
+      = markdown(@page.body)
+  -else
+    .large-6.columns
+      %h6
+        = @page.sub
+      = markdown(@page.body)
+    .large-6.columns
+      - if @page.image == 'image'
+        != link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
+      - else
+        - slide = @page.image.split(/-/)
+        %ul{"data-orbit" => ""}
+          - 1.upto(slide[1].to_i) do |image|
+            %li
+              %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@page.code}-#{image}.jpg"}
+
+.row
+  .large-12.columns
+    = markdown(@page.body2)
+.row
+  .large-12.columns
+    = markdown(@page.body3)
+
+:coffeescript
+  jQuery ->
+    $('div#menu li').removeClass 'active'

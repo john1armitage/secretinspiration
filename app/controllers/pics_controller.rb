@@ -58,8 +58,12 @@ class PicsController < ApplicationController
     end
 
     def get_pics
-      @variant = Variant.find( params[:variant_id])
-      @pics = @variant.pics.all
+      if params[:variant_id].present?
+        @variant = Variant.find( params[:variant_id])
+        @pics = @variant.pics.all
+      else
+        @pics = Pic.all
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

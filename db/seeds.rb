@@ -19,8 +19,8 @@
 #               domain: 'shack',
 #               hostname: 'peppershack.co.uk')
 #Tenancy.carts(name: 'Vernas',
-#               domain: 'vernas',
-#               hostname: 'vernas.co.uk')
+#               domain: 'gigiri',
+#               hostname: 'gigiri.co.uk')
 
 #User.carts(   username: 'John A',
 #               email: 'john.a@familya.co.uk',

@@ -4,7 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(:default, :assets, Rails.env)
 
 CONFIG = YAML.load(File.read(File.expand_path('../commerce.yml', __FILE__)))
 CONFIG.merge! CONFIG.fetch(Rails.env, {})
@@ -24,7 +24,7 @@ module Commerce
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| get_domain(request.host.reverse) }
+    #config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| get_domain(request.host.reverse) }
 
     config.active_record.schema_format = :sql
 
@@ -35,7 +35,7 @@ module Commerce
     #config.middleware.use 'Apartment::Elevators::HostHash', {'127.0.0.1' => 'shack'}
     #config.middleware.use 'Apartment::Elevators::HostHash', {'secretinspiration.co.uk' => 'secret'}
     #config.middleware.use 'Apartment::Elevators::HostHash', {'peppershack.co.uk' => 'shack'}
-    #config.middleware.use 'Apartment::Elevators::HostHash', {'vernas.co.uk' => 'vernas'}
+    #config.middleware.use 'Apartment::Elevators::HostHash', {'gigiri.co.uk' => 'gigiri'}
 
     def get_domain( hostname )
       case hostname
@@ -43,8 +43,8 @@ module Commerce
           'secret'
         when '127.0.0.1', 'peppershack.co.uk'
           'shack'
-        when 'vernas'
-          'vernas'
+        when 'gigiri'
+          'gigiri'            #gigiri
       end
     end
 

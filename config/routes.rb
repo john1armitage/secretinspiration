@@ -1,10 +1,14 @@
 Commerce::Application.routes.draw do
 
+  resources :topics
+
+  resources :pages
+
   resources :employees
 
   resources :receipts
 
-  root 'choices#index'
+  root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -13,8 +17,8 @@ Commerce::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
-  get 'choices', to: 'choices#index', as: 'choices'
-
+  #get 'choices', to: 'choices#index', as: 'choices'
+  resources :choices, :only => [ :index, :show ]
 
   resources :users
   resources :roles, :only => [ :index, :create, :destroy ]
@@ -25,12 +29,17 @@ Commerce::Application.routes.draw do
   resources :item_types
   resources :item_fields
   resources :tenancies
-  resources :menus, :only => :show
+  resources :menus, :only => [:show] do
+    member do
+      get 'sub'
+    end
+  end
   resources :categories
   resources :accounts
 
   resources :carts, :only => [:index, :update, :destroy] do
-    collection do
+    member do
+      post 'check_out'
       delete 'clear'
     end
   end
@@ -70,8 +79,11 @@ Commerce::Application.routes.draw do
     end
   end
   resources :payments
-  resources :postings, :only => [:index, :show]
-
+  resources :postings, :only => [:index, :show] do
+    collection do
+      match 'search' => 'collections#search', via: [:get, :post], as: :search
+    end
+  end
   get 'choices', to: 'choices#index'
   get 'welcome', to: 'welcome#index'
 

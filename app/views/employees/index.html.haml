@@ -6,7 +6,6 @@
     %th Date of birth
     %th Ni number
     %th Mobile phone
-    %th Home phone
     %th Start date
     %th End date
     %th
@@ -15,11 +14,10 @@
 
   - @employees.each do |employee|
     %tr
-      %td= employee.name
+      %td= employee.first_name
       %td= employee.date_of_birth
       %td= employee.ni_number
       %td= employee.mobile_phone
-      %td= employee.home_phone
       %td= employee.start_date
       %td= employee.end_date
       %td= link_to 'Pay', new_payment_path(type: 'payroll', employee_id: employee.id)

@@ -1,27 +1,48 @@
 !!!
 %html
 %head
-%meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0" }
-%title
-  = content_for?(:title) ? yield(:title) : "Commerce"
-= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-= javascript_include_tag "application", "vendor/custom.modernizr", "data-turbolinks-track" => true
-= csrf_meta_tag
-%body
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %title= content_for?(:title) ? yield(:title) : current_tenant.name
+  %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
+  = stylesheet_link_tag "application", "data-turbolinks-track" => true
 
-  %section.section
-    .row
-      .large-3.columns
-        = render 'layouts/mast'
-      .large-9.columns
-        = render 'layouts/menus/top'
+  -# Foundation 5 won't work with Rails Turbolinks
+  -# Modernizr is required for Zurb Foundation
+  = javascript_include_tag "modernizr", "data-turbolinks-track" => true
+  = csrf_meta_tags
+%body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
+  = javascript_include_tag "application"
+  .row#header
+    .large-12.columns.show-for-large-up
+      = render 'layouts/contact/index'
+  -#.row#header.hide-for-large-only
+  -#  .large-12.columns
+  -#    = render 'layouts/contact/index_small'
+  .row#navigation
+    .large-12.columns
+      = render 'layouts/navigation'
 
-    %section.section
+  .row
+    .large-12.columns#messages
+      = render 'layouts/messages'
+  .row
+    .large-10.push-2.columns
       .row
-        .large-2.columns
-          = render 'layouts/menus/main'
+        .large-10.columns#menu
+          = render 'choices/sub_menu'
+      .row
+        .large-10.columns#content{role: "content"}
+          = yield
+    -#.large-2.pull-10.columns.hide-for-small-only
+    .large-2.pull-10.columns#aside
+      %aside#sidebar
+        -# unless allow? :users, :index
+        = render "welcome/solus"
+        = render "welcome/current"
+        = render "welcome/footer"
+      #contact_small.hide-for-large-up
+        = render 'layouts/contact/index_small'
+      #utility
+      -#- if current_tenant.cart == '1' && !current_user.id.blank?
+      -#  = render :partial => 'carts/index'
 
-        .large-10.columns
-          %section.section
-            #ajax-main
-              = yield

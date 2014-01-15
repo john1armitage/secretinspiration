@@ -17,4 +17,11 @@ module ApplicationHelper
     pg_array.parse_pg_array
   end
 
+  def markdown(text)
+    #options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis]
+    #Redcarpet.new(text, *options).to_html.html_safe
+    #Redcarpet::Markdown.new(renderer, extensions = {})
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true).render(text).html_safe
+  end
+
 end

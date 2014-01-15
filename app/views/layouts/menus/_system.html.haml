@@ -9,12 +9,12 @@
     %li
       != link_to 'Tenancies', tenancies_path, :class => "small button radius"
   %li.divider
-  - if allow? :customers, :index
+  - if allow? :pages, :index
     %li
-      != link_to 'Customers', customers_path, :class => "small button radius"
-  - if allow? :tenancies, :index
+      != link_to 'Pages', pages_path, :class => "small button radius"
+  - if allow? :topics, :index
     %li
-      != link_to 'Tenancies', tenancies_path, :class => "small button radius"
+      != link_to 'Topics', topics_path, :class => "small button radius"
   %li.divider
   - if allow? :elements, :index
     %li

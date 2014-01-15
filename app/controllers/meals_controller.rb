@@ -40,9 +40,6 @@ class MealsController < ApplicationController
     order.supplier = Supplier.find_by_name( current_tenant.home_supplier )
     order.account = Account.find_by_name("Sales")
     order.home_supplier = true
-    p @meal
-    p @meal.line_items.map(&:net_total_item).sum
-    p @meal.line_items.map(&:tax_total_item).sum
     order.net_total_currency = order.supplier.opening_balance_currency
     order.exchange_rate = 1
     order.net_total_cents = order.net_home_cents = @meal.line_items.map(&:net_total_item_cents).sum

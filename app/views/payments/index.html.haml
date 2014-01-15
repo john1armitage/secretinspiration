@@ -1,29 +1,53 @@
 =# button_to 'New Payment', new_payment_path, method: :get
+= search_form_for @q do |f|
+  .row
+    .field.small-3.columns
+      = f.label :payment_date_gteq, 'From'
+      = f.date_field :payment_date_gteq
+    .field.small-3.columns.left
+      = f.label :payment_date_lteq, 'Until'
+      = f.date_field :payment_date_lteq
+  .row
+    .field.small-3.columns
+      = f.label :bank_id_eq, 'Bank'
+      = f.collection_select :bank_id_eq, @banks, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.label :account_id_eq, 'Account'
+      = f.collection_select :account_id_eq, @accounts, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.label :supplier_id_eq, 'Supplier'
+      = f.collection_select :payable_id_eq, @suppliers, 'id', 'name', include_blank: true
+    -#.field.small-3.columns
+    -#  = f.label :account_id_eq, 'Account'
+    -#  = f.collection_select :account_id_eq, @accounts, 'id', 'name', include_blank: true
+    .field.small-3.columns.left
+      = label_tag :limit
+      = select_tag :limit, options_for_select(%w[50 100 500 1000], params[:limit] || 100)
+  .actions
+    = f.submit 'Search'
+
 = button_to 'HMRC', new_payment_path(type: 'HMRC'), method: :get
 = button_to 'VAT', new_payment_path(type: 'VAT'), method: :get
 
 %table
   %tr
-    %th Payment date
+    %th.number Amount
     %th Bank
-    %th Recipient
-    %th
-    %th Exchange rate
-    %th
-    %th
+    %th Account
+    %th To
+    %th Rate
     %th
     %th
 
   - @payments.each do |payment|
     %tr
-      %td= payment.payment_date
+      %td.has-tip.tip-right{'data-tooltip' => true, 'title' => payment.id}
+        = payment.payment_date.strftime("%d %b %y")
       %td= payment.bank.name
+      %td= payment.account.name if payment.account
       %td= payment.payable.name if payment.payable
       %td= humanized_money_with_symbol(payment.amount)
       %td= payment.amount_currency
-      %td= payment.exchange_rate
-      %td= payment.state
-      %td= link_to 'Show', payment
       %td= link_to 'Edit', edit_payment_path(payment)
       %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

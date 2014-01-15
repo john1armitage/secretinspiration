@@ -1,0 +1,13 @@
+%ul#status
+  %li
+    != current_tenant.domain
+    != current_user.role.name
+    != current_user.id
+  - if current_user.id
+    %li
+      != current_user.email
+      !=# cookies[:auth_token]
+- flash.each do |name, msg|
+  = content_tag :div, msg, id: "flash_#{name}"
+-##notice{ style: "#{'display:none' unless flash[:notice]}" }
+-#  = flash[:notice]

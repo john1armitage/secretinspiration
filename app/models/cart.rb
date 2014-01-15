@@ -5,7 +5,7 @@ class Cart < ActiveRecord::Base
   belongs_to :user
 
   def update_variant(variant_id)
-    current_item = line_items.find_by(variant_id: variant_id)
+    current_item = line_items.where(variant_id: variant_id).first
     if current_item
       add_variant(current_item)
     else

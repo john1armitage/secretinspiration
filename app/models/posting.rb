@@ -7,6 +7,15 @@ class Posting < ActiveRecord::Base
   belongs_to :accountable, polymorphic: true
   belongs_to :account
 
-  default_scope { order('event_date DESC, postable_type, postable_id') }
+  def accountable_name
+    case accountable_name
+      when 'Supplier'
+        accountable.name
+      else
+        ''
+    end
+  end
+
+ # default_scope { order('event_date DESC, postable_type, postable_id') }
 
 end

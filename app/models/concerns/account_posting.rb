@@ -8,12 +8,9 @@ module AccountPosting
     post.event_date = posting_date
     post.postable_type = postable_type
     post.postable_id = postable_id
-    if credit && !contra || !credit && contra
-      p "credit"
+    unless credit && contra || !credit && !contra
       post.credit_amount_cents = amount
     else
-      p "debit"
-      p amount
       post.debit_amount_cents = amount
     end
     post.account_id = account_id
