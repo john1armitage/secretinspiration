@@ -11,6 +11,9 @@
   - if allow? :pages, :index
     %li
       != link_to 'Pages', pages_path
+  - if allow? :broadcasts, :index
+    %li
+      != link_to 'Broadcasts', broadcasts_path
   - if allow? :items, :index
     %li
       != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'

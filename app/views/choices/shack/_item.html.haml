@@ -2,6 +2,7 @@
 - default = variants.where(item_default: true)
 %li
   - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : 0
+  -# @meal_id = 1
   -#params[:id].to_i
   - if @meal_id > 0
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
@@ -32,3 +33,5 @@
   - else
     = make_title(item.name)
     = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
+  %p
+    != item.description

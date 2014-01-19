@@ -54,7 +54,9 @@ gem 'cocoon'
 gem 'redcarpet'
 
 gem 'jquery-tokeninput-rails'
+gem 'money', '6.0.1.beta4'
 gem 'money-rails'
+gem 'monetize'
 
 gem 'faraday'
 gem 'faraday_middleware'

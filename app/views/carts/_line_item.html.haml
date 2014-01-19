@@ -2,16 +2,16 @@
   - @category = line_item.variant.item.grouping
   %li.category
     %span
-      = make_title(@category.split(':')[1])
+      = make_title(@category.split(':')[1] ).pluralize
 
 %li
   = line_item.quantity
   x
   = line_item.desc
   %br
-  = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
-  = " ~ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
   = link_to '+', line_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify'
   = link_to '-', line_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify'
   = link_to 'x', line_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify'
+  = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
+  = " @ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
   %br

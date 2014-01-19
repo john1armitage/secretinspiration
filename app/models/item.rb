@@ -33,7 +33,7 @@ class Item < ActiveRecord::Base
   end
 
   def create_default_variant
-    variant = variants.create(name: 'default', domain: domain, item_default: true)
+    variant = variants.create(name: 'default', domain: domain, item_default: true, withdrawn: false)
   end
 
   def item_type_name

@@ -13,7 +13,7 @@
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
   .row#header
-    .large-12.columns.show-for-large-up
+    #contact.large-12.columns.show-for-small-up
       = render 'layouts/contact/index'
   -#.row#header.hide-for-large-only
   -#  .large-12.columns
@@ -28,10 +28,10 @@
   .row
     .large-10.push-2.columns
       .row
-        .large-10.columns#menu
-          = render 'choices/sub_menu'
+        .large-12.columns#menu
+          = render 'layouts/menus/us'
       .row
-        .large-10.columns#content{role: "content"}
+        .large-12.columns#content{role: "content"}
           = yield
     -#.large-2.pull-10.columns.hide-for-small-only
     .large-2.pull-10.columns#aside

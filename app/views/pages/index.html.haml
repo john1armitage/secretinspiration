@@ -13,11 +13,11 @@
     %th
     %th
 
-  - @pages.order(:code).each do |page|
+  - @pages.each do |page|
     %tr
       %td= page.code
-      %td= page.title
-      %td= page.link
+      %td= truncate(page.title, length: 15, omission: '...')
+      %td= truncate(page.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''), length: 10, omission: '...')
       %td= page.image
       %td= page.color
       %td= page.publish

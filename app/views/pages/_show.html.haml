@@ -8,12 +8,19 @@
       %h6
         = @page.sub
       = markdown(@page.body)
+    - unless @page.link.blank?
+      .row
+        .large-12.columns
+          != link_to 'More  information ...', @page.link
   -else
     .large-6.columns
       %h6
         = @page.sub
       = markdown(@page.body)
     .large-6.columns
+      - unless @page.link.blank?
+        %p
+          != link_to 'More information ...', @page.link
       - if @page.image == 'image'
         != link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
       - else
@@ -29,7 +36,11 @@
 .row
   .large-12.columns
     = markdown(@page.body3)
+- unless @page.link.blank?
+  .row
+    .large-12.columns
+      != link_to 'More information ...', @page.link
 
-:coffeescript
-  jQuery ->
-    $('div#menu li').removeClass 'active'
+-#:coffeescript
+-#  jQuery ->
+-#    $('div#menu li').removeClass 'active'

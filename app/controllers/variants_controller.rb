@@ -45,10 +45,8 @@ class VariantsController < ApplicationController
     @variant = Variant.new(params[:variant])
     @variant.domain = current_tenant.domain
     set_item
-    @variant.item_default = true unless find_defaults.size > 0
-    #set_default
     if @variant.save
-      set_default
+      remove_defaults(@variant.id) if @variant.item_default
       redirect_to variants_url(:item_id => @item.id), notice: 'Variant was successfully created.'
     else
       @item = @variant.item
@@ -60,7 +58,13 @@ class VariantsController < ApplicationController
   def update
     store_arrays
     if @variant.update(params[:variant])
-      set_default
+      if @variant.item_default
+        remove_defaults(@variant.id)
+      else
+        unless default_exists
+          @variant.update_column(item_default, true) unless force_default(@variant.id)
+        end
+      end
       redirect_to variants_url(:item_id => @item.id), notice: 'Variant was successfully updated.'
     else
       read_arrays
@@ -72,37 +76,60 @@ class VariantsController < ApplicationController
   def destroy
     set_item
     @variant.destroy
-    @item.variants.create(name: 'default', domain: current_tenant.domain, item_default: true) if @item.variants.size == 0
+    unless default_exists
+      @item.variants.create(name: 'default', domain: current_tenant.domain, item_default: true, withdrawn: false) unless force_default
+    end
+   # @item.variants.create(name: 'default', domain: current_tenant.domain, item_default: true) if @item.variants.size == 0
     redirect_to variants_url(:item_id => @item.id), notice: 'Variant was successfully destroyed.'
   end
 
   private
-  def force_default
-    if find_defaults.size == 0
-      if @item.variants.size > 0
-        @item.variants.first.update_column(item_default, true)
-      end
-    end
+  def default_exists
+    @item.variants.where(item_default: true).size > 0
   end
 
-  def find_defaults
-    @item.variants.where( item_default: true, domain: current_tenant.domain )
-  end
-
-  def set_default
-    id = @variant.id.blank? ? -999 : @variant.id
-    defaults =  find_defaults
-    unless defaults.empty?
-      if params[:variant][:item_default].to_i == 1
-         defaults.each do |variant|
-          variant.update_column( 'item_default', false ) unless variant.id == @variant.id.to_i
-        end
-      end
+  def force_default(id = -999)
+    candidates = get_candidates(id)
+    if candidates.size > 0
+       candidates.first.update_columns(item_default: true)
+      true
     else
-      @variant.update_column( 'item_default', true )
+      false
     end
   end
 
+  def remove_defaults(id)
+    if candidates = get_candidates(id)
+      candidates.each do |c|
+        c.update_columns( item_default: false)
+      end
+    end
+  end
+
+  def get_candidates(id)
+    @item.variants.where.not( id: id )
+  end
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+#  def find_defaults
+#    @item.variants.where( item_default: true, domain: current_tenant.domain )
+#  end
+#
+#  def set_default(id)
+#    id = @variant.id.blank? ? -999 : @variant.id
+#    defaults =  find_defaults
+#    unless defaults.empty? || @item.variants.size == 1
+#      if params[:variant][:item_default].to_i == 1
+#         defaults.each do |variant|
+#          variant.update_column( 'item_default', false ) unless variant.id == @variant.id.to_i
+#         end
+#      else
+#        @item.variants.where('id <> ?', @variant.id).first.update_column(item_default, true)
+#      end
+#    else
+#      @variant.update_column( 'item_default', true )
+#    end
+#  end
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   def get_item_type_properties
     @properties = @variant.item_type.properties
   end

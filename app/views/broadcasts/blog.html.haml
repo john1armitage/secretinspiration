@@ -1,0 +1,17 @@
+%table.blog
+  - @broadcasts.order('updated_at DESC').each do |broadcast|
+    %tr
+      %td
+        %h3= link_to broadcast.title, broadcast_path(broadcast)
+        %p
+          %span.date
+            - unless params[:name] == 'event'
+              = "#{broadcast.created_at.strftime("%e %b %Y")}"
+            - else
+              = broadcast.event_date.strftime("%e %b %Y") unless broadcast.event_date.blank?
+              = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
+          - if allow? :broadcasts, :edit
+            %span.date
+              = link_to 'Edit', edit_broadcast_path(broadcast)
+          %span
+            = truncate(broadcast.body, length: 200, separator: ' ', omission: '... ')

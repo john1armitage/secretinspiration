@@ -3,7 +3,8 @@ module Permissions
     def initialize
       allow :welcome, :index
       allow :choices, [:index,:show]
-      allow :pages, [:index,:show]
+      allow :pages, [:index, :blog,:show]
+      allow :broadcasts, [:index, :blog,:show]
       allow :menus, [:sub,:show]
       allow :carts, [:index, :update, :destroy, :clear]
       allow :line_items, [:create, :update, :destroy]

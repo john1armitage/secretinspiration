@@ -1,0 +1,61 @@
+= form_for @broadcast do |f|
+  - if @broadcast.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@broadcast.errors.count, "error")} prohibited this broadcast from being saved:"
+      %ul
+        - @broadcast.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .field.large-2.columns
+      = f.label :code
+      = f.text_field :code
+    .field.large-5.columns
+      = f.label :title
+      = f.text_field :title
+    .field.large-3.columns
+      = f.label :event_date
+      = f.date_field :event_date
+    .field.timepicker.large-2.columns.left
+      = f.label :event_time
+      = f.text_field :event_time
+  .field
+    = f.label :sub
+    = f.text_field :sub
+  .field
+    = f.label :body
+    = f.text_area :body
+  .field
+    = f.label :body2
+    = f.text_area :body2
+  .field
+    = f.label :body3
+    = f.text_area :body3
+  .row
+    .field.large-4.columns
+      = f.label :link
+      = f.text_field :link
+    .field.large-4.columns
+      = f.label :color
+      = f.text_field :color
+    .field.large-4.columns
+      = f.label :image
+      = f.text_field :image
+  .row
+    .field.large-2.columns
+      = f.label :topic_id
+      = f.text_field :topic_id
+    .field.large-1.columns
+      = f.label :user_id
+      = f.text_field :user_id
+    .field.large-5.columns
+      = f.label :credit
+      = f.text_field :credit
+    .field.large-1.columns
+      = f.label :publish
+      = f.check_box :publish
+    .field.large-3.columns
+      = f.label :release
+      = f.date_field :release
+  .row
+    .actions
+      = f.submit 'Save'

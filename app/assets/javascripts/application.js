@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require ajaxify_rails
 //= require foundation
+// require money/core_extensions
 // Note: Foundation 5 won't work with turbolinks
 //= require_tree .
 

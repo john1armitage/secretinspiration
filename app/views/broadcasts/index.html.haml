@@ -1,0 +1,33 @@
+%h1 Listing broadcasts
+
+%table
+  %tr
+    %th Event
+    %th Title
+    %th Link
+    %th Image
+    %th Color
+    %th Publish
+    %th Release
+    %th
+    %th
+    %th
+
+  - @broadcasts.each do |broadcast|
+    %tr
+      %td
+        = broadcast.event_date.strftime("%e %m %y") unless broadcast.event_date.blank?
+        = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
+      %td= truncate(broadcast.title, length: 15, omission: '...')
+      %td= truncate(broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''), length: 10, omission: '...')
+      %td= broadcast.image
+      %td= broadcast.color
+      %td= broadcast.publish
+      %td= broadcast.release
+      %td= link_to 'Show', broadcast
+      %td= link_to 'Edit', edit_broadcast_path(broadcast)
+      %td= link_to 'Destroy', broadcast, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Page', new_broadcast_path

@@ -3,7 +3,11 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.all
+    @pages = Page.order('updated_at DESC').all
+  end
+
+  def blog
+    @pages = Page.joins(:topic).where('topics.name = ?', params[:name]).order('updated_at DESC')
   end
 
   # GET /pages/1

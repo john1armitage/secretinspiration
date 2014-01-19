@@ -120,6 +120,54 @@ ALTER SEQUENCE banks_id_seq OWNED BY banks.id;
 
 
 --
+-- Name: broadcasts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE broadcasts (
+    id integer NOT NULL,
+    code character varying(255),
+    title character varying(255),
+    sub character varying(255),
+    body text,
+    topic_id integer,
+    user_id integer,
+    credit character varying(255),
+    publish boolean,
+    release date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    color character varying(255),
+    image character varying(255),
+    body2 text,
+    body3 text,
+    link character varying(255),
+    link2 character varying(255),
+    link3 character varying(255),
+    event_date date,
+    event_time time without time zone
+);
+
+
+--
+-- Name: broadcasts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE broadcasts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: broadcasts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE broadcasts_id_seq OWNED BY broadcasts.id;
+
+
+--
 -- Name: elements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -392,52 +440,6 @@ CREATE SEQUENCE options_id_seq
 --
 
 ALTER SEQUENCE options_id_seq OWNED BY options.id;
-
-
---
--- Name: pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE pages (
-    id integer NOT NULL,
-    code character varying(255),
-    title character varying(255),
-    sub character varying(255),
-    body text,
-    topic_id integer,
-    user_id integer,
-    credit character varying(255),
-    publish boolean,
-    release date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    body2 text,
-    body3 text,
-    link character varying(255),
-    link2 character varying(255),
-    link3 character varying(255),
-    color character varying(255),
-    image character varying(255)
-);
-
-
---
--- Name: pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE pages_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
 
 
 --
@@ -729,7 +731,8 @@ CREATE TABLE variants (
     options hstore,
     slug character varying(255),
     price_cents integer DEFAULT 0 NOT NULL,
-    rank integer
+    rank integer,
+    withdrawn boolean
 );
 
 
@@ -771,6 +774,13 @@ ALTER TABLE ONLY apportions ALTER COLUMN id SET DEFAULT nextval('apportions_id_s
 --
 
 ALTER TABLE ONLY banks ALTER COLUMN id SET DEFAULT nextval('banks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY broadcasts ALTER COLUMN id SET DEFAULT nextval('broadcasts_id_seq'::regclass);
 
 
 --
@@ -820,13 +830,6 @@ ALTER TABLE ONLY meals ALTER COLUMN id SET DEFAULT nextval('meals_id_seq'::regcl
 --
 
 ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regclass);
 
 
 --
@@ -910,6 +913,14 @@ ALTER TABLE ONLY banks
 
 
 --
+-- Name: broadcasts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY broadcasts
+    ADD CONSTRAINT broadcasts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: elements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -963,14 +974,6 @@ ALTER TABLE ONLY meals
 
 ALTER TABLE ONLY options
     ADD CONSTRAINT options_pkey PRIMARY KEY (id);
-
-
---
--- Name: pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY pages
-    ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
 
 
 --
@@ -1066,6 +1069,13 @@ CREATE INDEX index_apportions_on_receipt_id ON apportions USING btree (receipt_i
 
 
 --
+-- Name: index_broadcasts_on_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_broadcasts_on_topic_id ON broadcasts USING btree (topic_id);
+
+
+--
 -- Name: index_item_types_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1105,13 +1115,6 @@ CREATE INDEX index_meals_on_tabel_name ON meals USING btree (tabel_name);
 --
 
 CREATE INDEX index_options_on_name ON options USING btree (name);
-
-
---
--- Name: index_pages_on_topic_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_pages_on_topic_id ON pages USING btree (topic_id);
 
 
 --
@@ -1339,3 +1342,9 @@ INSERT INTO schema_migrations (version) VALUES ('20140111134530');
 INSERT INTO schema_migrations (version) VALUES ('20140111143039');
 
 INSERT INTO schema_migrations (version) VALUES ('20140113154208');
+
+INSERT INTO schema_migrations (version) VALUES ('20140117170920');
+
+INSERT INTO schema_migrations (version) VALUES ('20140118134215');
+
+INSERT INTO schema_migrations (version) VALUES ('20140119101002');

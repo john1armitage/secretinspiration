@@ -1,9 +1,9 @@
 %p#contact
+  %span.location.small-12.columns
+    != current_tenant.address
   %span.phone.small-6.columns
     != current_tenant.phone
   %span.email.small-6.columns
-  %span.location.small-12.columns
-    != current_tenant.address
 :coffeescript
   jQuery ->
     $( "li.email").html('<a href="mailto: #{current_tenant.email} %>?subject=Contact from #{current_tenant.hostname.capitalize}">Email Us</a>')

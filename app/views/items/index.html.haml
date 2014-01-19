@@ -4,14 +4,18 @@
   %tr
     %th Name
     %th Price
+    %th X
     %th Type
     %th Category
     %th
 
   - @items.each do |item|
+    - variants = item.variants.where(item_default: true, domain: current_tenant.domain)
+    - price = variants.first.price
     %tr
       %td= item.name
-      -#%td= item.variants.where(item_default: true).first.price.to_d > 0 ? item.variants.where(item_default: true).first.price : item.price
+      %td= price.to_d > 0 ? price : item.price
+      %td= item.withdrawn ? 'x' : ''
       %td= make_title(item.item_type.name)
       %td= make_title(item.category.name) if item.category
       %td= link_to 'Show', item

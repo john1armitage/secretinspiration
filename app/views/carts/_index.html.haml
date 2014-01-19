@@ -1,18 +1,19 @@
 - @cart ||= get_cart
 %ul#cart
-  %li
-    %h6 Wish List
-  - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
-    = render 'carts/line_item', line_item: line_item
-  =# button_to 'Clear Cart', clear_carts_path(), method: :delete, remote: true, form_class: 'no_ajaxify'
-  - unless @cart.line_items.empty?
-    %ul
-      - @category = ''
-    = button_to 'Clear', clear_cart_path( @cart), method: :delete, remote: true, form_class: 'no_ajaxify',
-      data: { confirm: 'Clear All?' }
-    = button_to 'CheckOut', check_out_cart_path(@cart), method: :post, remote: true,
-      form_class: 'no_ajaxify'
-  -else
-    %p
-      Use Catalogue to add Items
+  %li.title
+    %span
+      Wishes
+    - unless @cart.line_items.empty?
+      -#%ul
+      -#  - @category = ''
+      != humanized_money_with_symbol(( @cart.line_items.sum(:net_home_cents) + @cart.line_items.sum(:tax_home_cents))/100)
+      != button_to 'Clear', clear_cart_path( @cart), method: :delete, remote: true, form_class: 'no_ajaxify',
+        data: { confirm: 'Clear All?' }
+      - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
+        = render 'carts/line_item', line_item: line_item
+    -else
+      %li
+        %span
+        Use Catalogue to add Items
+      =# button_to 'CheckOut', check_out_cart_path(@cart), method: :post, remote: true, form_class: 'no_ajaxify'
 

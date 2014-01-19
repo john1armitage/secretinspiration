@@ -7,8 +7,6 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: [ :update, :destroy ]
 
   def create
-    p "VVVVVVVVVVVVbVVVVVVVVVVVVVV"
-    p params[:variant_id]
     @line_item = @cart.update_variant(params[:variant_id])
     @line_item.domain = current_tenant.domain
     respond_to do |format|

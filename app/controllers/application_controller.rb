@@ -130,7 +130,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def admin_ok?
-    ['localhost', '127.0.0.1', '128.1.1.20', ].include? current_tenant.hostname || current_tenant.remote_host == '92.29.168.164'
+    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.164' )
   end
   helper_method :admin_ok?
 

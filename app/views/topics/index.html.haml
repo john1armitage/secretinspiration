@@ -8,7 +8,7 @@
     %th
     %th
 
-  - @topics.each do |topic|
+  - @topics.order(:name).each do |topic|
     %tr
       %td= topic.name
       %td= topic.rank

@@ -11,12 +11,14 @@
       .field.small-1.columns
         = f.label :rank
         = f.text_field :rank
-
+      .field.small-2.columns.left
+        = f.label :withdrawn
+        = f.check_box :withdrawn #, :class => 'block'
       .field.small-2.columns.left
         = f.label :product_flow
         = collection_select(:item, :product_flow,
           Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
-      .field.small-4.columns
+      .field.small-3.columns
         = f.label :category, 'Category'
         = f.grouped_collection_select :category_id, @categories, :categories, :nice_name, :id, :nice_name,
           :include_blank => true
@@ -39,6 +41,10 @@
       .field.small-8.columns
         = f.label :description
         = f.text_area :description
+    .row
+      .field.small-8.columns
+        = f.label :notes
+        = f.text_area :notes
     .row
       .field.small-8.columns
         = f.label :slug

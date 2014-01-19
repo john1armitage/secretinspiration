@@ -42,6 +42,7 @@ class Variant < ActiveRecord::Base
     if  self.slug.blank?
       slug = item_name
       slug += "-#{name}" unless name == 'default'
+      slug += "-#{item.id}"
       self.slug = slug.parameterize
     end
   end

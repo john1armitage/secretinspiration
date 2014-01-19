@@ -2,9 +2,14 @@
   - ['find_us', 'opening_hours'].each do |category|
     %li
       = link_to title(category), page_path(category, code:true)
-  - if allow? :news, :index
+  - if allow? :pages, :index
     %li
-      = link_to 'News', page_path('news', code:true)
+      = link_to 'Our News', blog_pages_path(name: 'news')
+  - if allow? :broadcasts, :index
+    %li
+      = link_to 'Around Brixham', blog_broadcasts_path(name: 'news')
+    %li
+      = link_to 'Events', blog_broadcasts_path(name: 'event')
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->

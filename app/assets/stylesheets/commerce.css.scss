@@ -23,28 +23,43 @@ p#catalogue {
     }
   }
 }
+table.blog {
+  p  {
+    //font-size: 0.95em;
+    text-align: justify;
+  }
+}
+span.date {
+  font-size: 0.8em;
+  color: darkslategray;
+}
 div#solus, div#current {
   border: 1px solid grey;
+  background-color: #d3d3d3; // #e0eeee;
   padding: 0.25em;
   margin-bottom: 0.5em;
   h5 {
     font-weight: bold;
+    font-size: 0.9em;
+  }
+  p {
+    font-size: 0.8em;
   }
   &.red {
-    border-color: red;
-    h5 {
+   // border-color: red;
+    h5, span.highlight {
       color: red;
     }
   }
   &.purple {
-    border-color: purple;
-    h5 {
+   // border-color: purple;
+    h5, span.highlight {
       color: purple;
     }
   }
   &.green {
-    border-color: darkgreen;
-    h5 {
+    //border-color: darkgreen;
+    h5, span.highlight {
       color: darkgreen;
     }
   }
@@ -68,7 +83,8 @@ body#welcome_controller {
 }
 
 footer {
-  border: 1px solid darkslategrey;
+  border: 1px solid grey;
+  background-color: #d3d3d3;
   padding: 0.25em;
   margin-bottom: 0.5em;
   p {
@@ -83,6 +99,8 @@ div#menu {
       padding-left: 0.25em;
       padding-right: 0.25em;
       margin-right: -0.5em;
+      margin-bottom: 0.1em;
+      background-color: #d3d3d3;
     }
     &:hover {
       a {
@@ -115,11 +133,42 @@ ul#catalogue {
 ul#cart, ul#meal, ul.menu-item {
   font-size: 0.8em;
   clear: both;
+  background-color: #e0eeee;
+  li.title {
+    span {
+//      background-color: #d3d3d3;
+      font-weight: bold;
+      font-size: 1.1em;
+      color: darkslategray;
+      padding-left: 0.2em;
+    }
+  }
   h1{
     font-size: 2em;
   }
   form, div, li.inline {
     display: inline;
+  }
+}
+ul#cart, ul#meal {
+  border: 1px solid darkslategray;
+  li {
+    padding: .2em;
+    width: 100%;
+    span.title {
+      font-weight: bold;
+    }
+    //border: 1px solid #c0c0c0;
+  }
+  li:nth-child(even) {
+    background: #d3d3d3;
+  }
+  li.category {
+    background-color: lightgreen;
+    span {
+//      font-size: 1.1em;
+      font-weight: bold;
+    }
   }
 }
 ul.menu-item {
@@ -170,23 +219,6 @@ div#side_menu {
   }
 }
 
-ul#cart, ul#meal {
-  li {
-    padding: .2em;
-    width: 100%;
-    span.title {
-      font-weight: bold;
-    }
-    //border: 1px solid #c0c0c0;
-  }
-  li:nth-child(even) {background: #e0eeee}
-  li.category {
-    span {
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-  }
-}
 
 //.tabs.choices {
 //  margin-right: 0.5rem;
@@ -264,14 +296,6 @@ section#main {
 ul#status li {
   font-size: 0.8em;
 }
-div#solus, div#current {
-  h5 {
-    font-size: 0.9em;
-  }
-  p {
-    font-size: 0.8em;
-  };
-}
 ul#contact {
   margin-left: 0;
   li {
@@ -287,6 +311,13 @@ ul#contact {
     }
   }
 }
+div#contact {
+  border: 1px solid grey;
+  background-color: #d3d3d3; // #e0eeee;
+  padding: 0.1em;
+  margin-top: 0.1em;
+  margin-bottom: 0.2em;
+}
 p#contact {
   text-align: left;
   margin-bottom: 0;
@@ -297,12 +328,14 @@ p#contact {
     text-align: left;
     margin-bottom: 0;
     &.phone {
+      padding-left: 0.4em;
       font-weight: bold;
       font-size: 1.1em;
       color: darkred;
     }
     &.location {
       font-size: 0.9em;
+      padding-top: 0.2em;
     }
   }
 }

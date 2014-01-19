@@ -2,7 +2,17 @@ Commerce::Application.routes.draw do
 
   resources :topics
 
-  resources :pages
+  resources :pages do
+    collection do
+      get 'blog'
+    end
+  end
+
+  resources :broadcasts do
+    collection do
+      get 'blog'
+    end
+  end
 
   resources :employees
 

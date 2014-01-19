@@ -17,7 +17,7 @@
     %ul.inline-list.right
       - if allow? :items, :index
         %li
-          != link_to 'Admin', sub_menu_path('admin', code: true), class: 'button radius no_ajaxify', remote: 'true'
+          != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
       - %w(food drinks catalogue).each do |component|
         - if eval("current_tenant.#{component} == '1'")
           %li

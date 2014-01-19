@@ -2,6 +2,7 @@
   %tr
     %th Item
     %th Price
+    %th x
     %th Default
     %th Stock
     %th Due
@@ -15,9 +16,11 @@
     %tr
       - clas = variant.desc.blank? ? 'no-tip' : 'has-tip'
       %td{class: clas, title: variant.desc }
+        = variant.id
         = variant.item.name
         = ": #{variant.name}" unless variant.name == 'default'
       %td= humanized_money_with_symbol variant.price
+      %td= variant.withdrawn
       %td= variant.item_default
       %td= variant.stock
       %td= variant.available_on
