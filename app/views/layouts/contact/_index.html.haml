@@ -1,12 +1,13 @@
 %p#contact
-  %span.phone.large-2.small-6.columns
+  %span.phone
     != current_tenant.phone
-  %span.location.large-4.columns.show-for-medium-up
-    != current_tenant.address
-  %span.email.large-3.small-6.columns
+  %span.email
+  %br
+  %span.location
+    != link_to current_tenant.address, page_path('find_us', code:true)
   -#%span.large-3.columns.show-for-small-up
   -#  != request.remote_addr
   -#  != request.remote_addr == '92.29.168.164'
 :coffeescript
   jQuery ->
-    $( "span.email").html('<a href="mailto: #{current_tenant.email} %>?subject=Contact from #{current_tenant.hostname.capitalize}">Email Us</a>')
+    $( "span.email").html('<a href="mailto: #{current_tenant.email} %>?subject=Contact from #{current_tenant.hostname.capitalize}">Email Booking & Enquiry</a>')

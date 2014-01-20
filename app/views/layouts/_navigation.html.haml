@@ -13,18 +13,30 @@
 .row.show-for-large-up
   .large-3.columns
     != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', class: 'no_ajaxify image'
-  .large-9.columns
-    %ul.inline-list.right
-      - if allow? :items, :index
-        %li
-          != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
+  .large-4.columns
+    - if allow? :items, :index
+      %li
+        != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
+      -#- if current_tenant.cart == '1' # && !current_user.id.blank?
+      -#  %li
+      -#    != link_to 'Wish List', carts_path, class: 'no_ajaxify button radius', remote: true
+      -#%li
+      -#  != link_to 'Us', sub_menu_path('us', code: true), class: 'button radius no_ajaxify', remote: 'true'
+      -#- if admin_ok?
+      -#  %li
+      -#    = render 'layouts/menus/session'
+    - else
+      #contact
+        != render 'layouts/contact/index'
+  .large-5.columns
+    %ul#main-nav.inline-list.right
       - %w(food drinks catalogue).each do |component|
         - if eval("current_tenant.#{component} == '1'")
           %li
             != link_to make_title(component), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
       - if current_tenant.cart == '1' # && !current_user.id.blank?
         %li
-          != link_to 'Wish List', carts_path, class: 'no_ajaxify button radius', remote: true
+          != link_to 'Wishes', carts_path, class: 'no_ajaxify button radius', remote: true
       %li
         != link_to 'Us', sub_menu_path('us', code: true), class: 'button radius no_ajaxify', remote: 'true'
       - if admin_ok?

@@ -31,7 +31,11 @@
         %br
     -# :form_class => "no_ajaxify", :remote => true, class: 'tiny button'
   - else
-    = make_title(item.name)
+    %p.item-header
+      %span.price
+        = humanized_money_with_symbol( item.price )
+      %span.title
+        = make_title(item.name)
     = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
   %p
     != item.description

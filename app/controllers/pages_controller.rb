@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.order('updated_at DESC').all
+    @pages = Page.order('code').all
   end
 
   def blog

@@ -12,9 +12,10 @@
   = csrf_meta_tags
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
-  .row#header
-    #contact.large-12.columns.show-for-small-up
-      = render 'layouts/contact/index'
+  -# .row#header
+    -# unless allow? :items, :index
+      #contact.large-12.columns.show-for-small-up
+        = render 'layouts/contact/index'
   -#.row#header.hide-for-large-only
   -#  .large-12.columns
   -#    = render 'layouts/contact/index_small'

@@ -1,5 +1,5 @@
 - @categories ||= set_categories(current_tenant.default_category)
-%ul.inline-list.large-offset-2
+%ul.inline-list
   - @categories.order(:rank, :name).each do |category|
     %li
       = link_to category.nice_name.pluralize, choice_path(category.name)

@@ -43,11 +43,36 @@ div#menu {
   }
 }
 
-//div.columns ul#catalogue {
-//  margin-left: 0.6em;
-//}
-div#navigation .columns {
-  padding-left: 0.6em;
+div.columns ul#catalogue {
+  margin-left: 0.3em;
+  p {
+    font-size: 0.9em;
+  }
+  ul.menu-item {
+    li {
+      padding-bottom: 0.25em;
+      &.catalogue {
+//        border: 1px solid darkgray;
+      }
+    }
+    section {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+div#navigation {
+  .columns {
+    padding-left: 0.3em;
+  }
+  .button {
+    padding-right: 0.75em;
+    padding-left: 0.75em;
+  }
+  ul.inline-list li {
+    margin-left: 0.4em;
+  }
 }
 div#aside.columns {
   padding: 0;

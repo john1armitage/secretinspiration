@@ -4,14 +4,14 @@
   - if @page
     != render 'pages/show_short'
   - @choice.children.each do |subcat|
-    %li.header
-      %span.title
-        != subcat.nice_name
-        != @choice.name.titleize.pluralize
-      %span.notes
-        != subcat.description unless subcat.description.blank?
-      %ul.menu-item.small-block-grid-2.medium-block-grid-3.large-block-grid-4
-        = render :partial => "choices/#{current_tenant.domain}/item", collection: subcat.items
+    %li
+      %p.header
+        %span.title
+          != subcat.nice_name
+          != @choice.name.titleize.pluralize
+        %span.notes
+          != subcat.description unless subcat.description.blank?
+      = render :partial => "choices/#{current_tenant.domain}/show", locals: { subcat: subcat}
 
 :coffeescript
   jQuery ->

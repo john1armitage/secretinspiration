@@ -1,0 +1,12 @@
+%p#contact
+  %span.phone.large-2.small-6.columns
+    != current_tenant.phone
+  %span.location.large-4.columns.show-for-medium-up
+    != link_to current_tenant.address, page_path('find_us', code:true)
+  %span.email.large-3.small-2.columns.right
+  -#%span.large-3.columns.show-for-small-up
+  -#  != request.remote_addr
+  -#  != request.remote_addr == '92.29.168.164'
+:coffeescript
+  jQuery ->
+    $( "span.email").html('<a href="mailto: #{current_tenant.email} %>?subject=Contact from #{current_tenant.hostname.capitalize}">Bookings & Enquiries: Email Us</a>')

@@ -31,11 +31,23 @@
               %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@page.code}-#{image}.jpg"}
 
 .row
-  .large-12.columns
-    = markdown(@page.body2)
+  - if @page.feature2.blank?
+    .large-12.columns
+      = markdown(@page.body2)
+  - else
+    .large-6.columns
+      != render "pages/features/#{@page.feature2}"
+    .large-6.columns
+      = markdown(@page.body2)
 .row
-  .large-12.columns
-    = markdown(@page.body3)
+  - if @page.feature3.blank?
+    .large-12.columns
+      = markdown(@page.body3)
+  - else
+    .large-6.columns
+      = markdown(@page.body3)
+    .large-6.columns
+      != render "pages/features/#{@page.feature3}"
 - unless @page.link.blank?
   .row
     .large-12.columns

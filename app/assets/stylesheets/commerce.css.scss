@@ -33,9 +33,17 @@ span.date {
   font-size: 0.8em;
   color: darkslategray;
 }
+#test2, #test3 {
+  &.red {
+    background-color: red;
+  }
+  &.blue {
+    background-color: blue;
+  }
+}
 div#solus, div#current {
-  border: 1px solid grey;
-  background-color: #d3d3d3; // #e0eeee;
+  border: 1px solid darkgray;
+  background-color: #e0eeee; //#d3d3d3;
   padding: 0.25em;
   margin-bottom: 0.5em;
   h5 {
@@ -83,8 +91,8 @@ body#welcome_controller {
 }
 
 footer {
-  border: 1px solid grey;
-  background-color: #d3d3d3;
+  border: 1px solid darkgray;
+  background-color: #e0eeee; //d3d3d3;
   padding: 0.25em;
   margin-bottom: 0.5em;
   p {
@@ -98,9 +106,11 @@ div#menu {
     a {
       padding-left: 0.25em;
       padding-right: 0.25em;
-      margin-right: -0.5em;
+      margin-right: -0.25em;
       margin-bottom: 0.1em;
-      background-color: #d3d3d3;
+      background-color: #e0eeee; //#d3d3d3;
+      border-top: 1px solid darkgray;
+//      border-bottom: 1px solid darkgray;
     }
     &:hover {
       a {
@@ -119,7 +129,7 @@ ul#catalogue {
     margin-left: -0.5em;
     span.title {
       font-weight: bold;
-      margin-left: -0.75em;
+//      margin-left: -0.75em;
     }
     span.notes {
       color: darkslategray;
@@ -133,7 +143,6 @@ ul#catalogue {
 ul#cart, ul#meal, ul.menu-item {
   font-size: 0.8em;
   clear: both;
-  background-color: #e0eeee;
   li.title {
     span {
 //      background-color: #d3d3d3;
@@ -149,8 +158,12 @@ ul#cart, ul#meal, ul.menu-item {
   form, div, li.inline {
     display: inline;
   }
+  p {
+    font-size: 0.8em;
+  }
 }
 ul#cart, ul#meal {
+  background-color: #e0eeee;
   border: 1px solid darkslategray;
   li {
     padding: .2em;
@@ -171,9 +184,26 @@ ul#cart, ul#meal {
     }
   }
 }
-ul.menu-item {
- margin-left: 0;
+ul#catalogue {
+  li {
+    p {
+      padding: 0.2em;
+      &.header {
+        background-color: palegreen;
+      }
+      &.item-header {
+        background-color: paleturquoise;
+      }
+    }
+    input {
+      width: 100%;
+    }
+  }
+  ul.menu-item {
+    margin-left: 0;
+  }
 }
+
 ul.ui-autocomplete {
   position: absolute;
   list-style: none;
@@ -257,7 +287,7 @@ div#side_menu {
 div.store-variant {
   margin-top: 0em;
   margin-left: 0em;
-  margin-bottom: 0.8em;
+//  margin-bottom: 0.8em;
   display: block;
   float: left;
   form, div {
@@ -290,9 +320,9 @@ button.image, .button.image {
 section#main {
   padding-top: 0.5em;
 }
-//div#navigation {
-//  margin-top: 0.5em;
-//}
+div#navigation img {
+  margin-top: 0.2em;
+}
 ul#status li {
   font-size: 0.8em;
 }
@@ -312,14 +342,16 @@ ul#contact {
   }
 }
 div#contact {
-  border: 1px solid grey;
-  background-color: #d3d3d3; // #e0eeee;
+  border: 1px solid darkgray;
+  background-color: #e0eeee; // #d3d3d3;
   padding: 0.1em;
-  margin-top: 0.1em;
+  margin-top: 0.2em;
   margin-bottom: 0.2em;
+  margin-left: -2em;
+  margin-right: 2em;
 }
 p#contact {
-  text-align: left;
+  text-align: center;
   margin-bottom: 0;
   .columns {
     padding-left: 0;
@@ -328,14 +360,21 @@ p#contact {
     text-align: left;
     margin-bottom: 0;
     &.phone {
-      padding-left: 0.4em;
+      // padding-left: 0.4em;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1.2em;
       color: darkred;
     }
     &.location {
       font-size: 0.9em;
       padding-top: 0.2em;
     }
+//    &.email {
+//      font-size: 0.9em;
+//      padding-top: 0.2em;
+//    }
   }
+}
+ul#main-nav {
+  margin-top: 0.3em;
 }
