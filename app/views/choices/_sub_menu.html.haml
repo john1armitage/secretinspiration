@@ -2,7 +2,8 @@
 %ul.inline-list
   - @categories.order(:rank, :name).each do |category|
     %li
-      = link_to category.nice_name.pluralize, choice_path(category.name)
+      =# link_to category.nice_name.pluralize, choice_path(category.name)
+      = link_to category.nice_name.pluralize, choice_path(category.name, meal_id: 18)
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->

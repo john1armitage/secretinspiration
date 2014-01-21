@@ -5,13 +5,8 @@ class MenusController < ApplicationController
   before_action :set_cart, only: [:show]
 
 
-  #def show
-  #  p params[:id]
-  # #  render "layouts/menus/_#{params[:id]}",  layout: false
-  #  render :update do |page|
-  #    page.replace_html 'menu', :partial => "layouts/menus/#{params[:id]}"
-  #  end
-  #
-  #end
+  def sub
+    @page = Page.find_by_code(params[:id])
+  end
 
 end

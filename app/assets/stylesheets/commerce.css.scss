@@ -1,3 +1,7 @@
+nav.top-bar {
+  padding: 0;
+  margin-bottom: 0.2em;
+}
 h1 {
   font-size: 1.5em;
 }
@@ -100,7 +104,13 @@ footer {
     color: darkslategrey;
   }
 }
-
+div#content {
+  margin-bottom: 0.5em;
+}
+aside {
+  padding-left: 0.1em;
+  padding-right: 0.1em;
+}
 div#menu {
   li {
     a {
@@ -340,6 +350,9 @@ ul#contact {
       font-size: 0.9em;
     }
   }
+}
+div#admin {
+  margin-top: 0.4em;
 }
 div#contact {
   border: 1px solid darkgray;

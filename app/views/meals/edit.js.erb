@@ -1,2 +1,2 @@
 $('div#editor').html("<%= escape_javascript(render :partial => 'meals/form') %>")
-$('div#ajax-main').html("<%= escape_javascript(render :partial => 'choices/index', meal_id: @meal.id ) %>")
+$('div#menu').html("<%= escape_javascript(render :partial => 'choices/sub_menu', locals: {meal_id: @meal.id }) %>")

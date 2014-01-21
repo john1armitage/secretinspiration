@@ -1,5 +1,6 @@
 - variants = item.variants.where(domain: current_tenant.domain)
-- default = variants.where(item_default: true)
+-# default = variants.where(item_default: true)
+- default = variants
 %li
   - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : 0
   -# @meal_id = 1

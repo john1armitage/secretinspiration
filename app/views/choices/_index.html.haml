@@ -1,6 +1,6 @@
 - @category = Category.find_by_name( params[:choices]  )
 - @page = Page.find_by_code( @category.name )
 %ul{id: current_tenant.domain}
-  - if @page
+  - if @page.present?
     != render 'pages/show_short'
 

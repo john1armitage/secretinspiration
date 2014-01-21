@@ -3,7 +3,8 @@
 %ul#catalogue
   - if @page
     != render 'pages/show_short'
-  - @choice.children.each do |subcat|
+  - subcats = params[:filter].present? ? @choice.children.where( name: params[:filter]) : @choice.children
+  - subcats.each do |subcat|
     %li
       %p.header
         %span.title

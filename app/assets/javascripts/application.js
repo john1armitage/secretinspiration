@@ -22,7 +22,13 @@ $(function() {
     $(document).foundation({
         orbit: {
             animation: 'slide'  // or fade
+        },
+        topbar: {
+            custom_back_text: false,
+            is_hover: false,
+            scrolltop : true
         }
+
     });
     console.log("Foundation Loaded")
 });

@@ -1,1 +1,4 @@
 $('div#menu').html("<%= escape_javascript(render :partial => 'layouts/menus/' + params[:id]) %>")
+<% if @page %>
+$('div#content').html("<%= escape_javascript(render :partial => 'pages/show' ) %>")
+<% end %>

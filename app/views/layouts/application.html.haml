@@ -20,30 +20,45 @@
   -#  .large-12.columns
   -#    = render 'layouts/contact/index_small'
   .row#navigation
-    .large-12.columns
+    .large-12.columns.show-for-medium-up
       = render 'layouts/navigation'
-
+    .large-12.columns.hide-for-medium-up
+      = render 'layouts/navigation_small'
   .row
     .large-12.columns#messages
       = render 'layouts/messages'
   .row
-    .large-10.push-2.columns
-      .row
+    .large-2.columns#aside.show-for-large-up
+      %aside#sidebar
+        -# unless allow? :users, :index
+        = render "welcome/solus"
+        = render "welcome/current"
+        = render "welcome/footer"
+      #utility
+    .large-10.small-12.medium-12.columns
+      .row.show-for-medium-up
         .large-12.columns#menu
           = render 'layouts/menus/us'
       .row
         .large-12.columns#content{role: "content"}
           = yield
     -#.large-2.pull-10.columns.hide-for-small-only
-    .large-2.pull-10.columns#aside
-      %aside#sidebar
-        -# unless allow? :users, :index
-        = render "welcome/solus"
-        = render "welcome/current"
-        = render "welcome/footer"
-      #contact_small.hide-for-large-up
-        = render 'layouts/contact/index_small'
-      #utility
-      -#- if current_tenant.cart == '1' && !current_user.id.blank?
-      -#  = render :partial => 'carts/index'
+  -#.row.hide-for-large-up
+  -#  .large-12.columns#menu.show-for-medium-only
+  -#    = render 'layouts/menus/us'
+  -#  .large-12.columns#content{role: "content"}
+  -#    = yield
+  #aside.hide-for-large-up
+    %aside#sidebar
+      -# unless allow? :users, :index
+      = render "welcome/solus"
+      = render "welcome/current"
+      = render "welcome/footer"
+    #contact_small.hide-for-large-up
+      = render 'layouts/contact/index_small'
+    #utility
+:coffeescript
+  jQuery ->
+    $('ul.dropdown li:not(.title)').on 'click', (event) ->
+      $('li.menu-icon').click()
 

@@ -1,8 +1,10 @@
-%ul.side-nav
-  - %w(food drinks catalogue).each do |component|
-    - if eval("current_tenant.#{component} == '1'")
-      %li
-        != link_to make_title(component), choices_path(choices: component), :remote => true, :class => "button radius"
-  - if current_tenant.cart == '1' # && !current_user.id.blank?
-    %li
-      != link_to "Wish List", carts_path(), :remote => true, :class => "button radius no_ajaxify"
+- %w(food drinks catalogue).each do |component|
+  - if eval("current_tenant.#{component} == '1'")
+    %li.show-for-large-up
+      != link_to make_title(component), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
+    %li.hide-for-large-up
+      != link_to make_title(component), choices_path(choices: component), class: 'no_ajaxify', remote: 'true'
+%li.show-for-large-up
+  != link_to 'Us', sub_menu_path('us', code: true), class: 'button radius no_ajaxify', remote: 'true'
+%li.hide-for-large-up
+  != link_to 'Us', sub_menu_path('us', code: true), class: 'no_ajaxify', remote: 'true'
