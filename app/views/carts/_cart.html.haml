@@ -15,9 +15,3 @@
         %span
           Use Catalogue to add Items
       =# button_to 'CheckOut', check_out_cart_path(@cart), method: :post, remote: true, form_class: 'no_ajaxify'
--#- if allow? :index, :carts
--#  = render 'search'
--#- @cart ||= get_cart
--##editor
--#  = render 'cart'
--#

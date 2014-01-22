@@ -1,9 +1,9 @@
 - if @course != line_item.variant.item.grouping
   - @course = line_item.variant.item.grouping
+  - @component_title = make_title(@course.split(':')[1] ).pluralize
   %li.category
     %span
-      = make_title(@course.split(':')[1])
-
+      = link_to @component_title, choice_path(line_item.variant.item.category.parent.name), data: { tooltip:  true}, title: "View #{@component_title}"
 %li
   - unless line_item.net_total_item == 0
 
@@ -11,7 +11,7 @@
     x
 
     %span.title
-      = line_item.desc
+      = link_to line_item.desc, choice_path(line_item.variant.item.category.parent.name, meal_id: @meal.id, filter: line_item.variant.item.category.name), data: { tooltip:  true}, title: "View #{make_title(line_item.variant.item.category.name)} #{@component_title}"
     - unless line_item.choices.blank?
       - line_item.choices.each do |k,v|
         = make_title(v)
@@ -19,9 +19,9 @@
       %br
       = make_title(line_item.options)
     %br
-    = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify'
+    = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
+    = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
+    = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
     = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
     = " ~ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
     %br
@@ -38,4 +38,3 @@
     = option.net_total_item + option.tax_total_item
     = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
     %br
-l

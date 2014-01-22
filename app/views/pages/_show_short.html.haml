@@ -1,5 +1,11 @@
-%p#catalogue
-  %span.title
-    != @page.title
-  %span.body
-    != @page.body
+- unless @page
+  .row
+    .large-12.columns
+      %h6
+        Sorry, Page not Found
+- else
+  %p#catalogue
+    %span.title
+      != @page.title
+    %span.body
+      != @page.body

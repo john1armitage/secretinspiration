@@ -1,13 +1,19 @@
-- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-- @page = Page.find_by_code('solus')
-#solus
-  %h5
-    != @page.title
-  != markdown(@page.body)
-  - unless @page.link.blank?
-    %p
-      != link_to 'more ...', @page.link
-- unless @page.color.blank?
-  :coffeescript
-    jQuery ->
-      $('div#solus').addClass( "#{@page.color}" )
+- unless @page
+  .row
+    .large-12.columns
+      %h6
+        Sorry, Page not Found
+- else
+  - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+  - @page = Page.find_by_code('solus')
+  #solus
+    %h5
+      != @page.title
+    != markdown(@page.body)
+    - unless @page.link.blank?
+      %p
+        != link_to 'more ...', @page.link
+  - unless @page.color.blank?
+    :coffeescript
+      jQuery ->
+        $('div#solus').addClass( "#{@page.color}" )

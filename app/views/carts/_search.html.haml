@@ -1,0 +1,11 @@
+#search
+  = form_tag carts_path, method: 'get' do
+    .row
+      .large-12.columns
+        .row.collapse
+          .small-10.columns
+            %input{placeholder: "Cart ID", type: "text"}/
+          .small-2.columns
+            %a.button.postfix{href: "#"} Go
+          = text_field_tag :search
+          = submit_tag 'Search'

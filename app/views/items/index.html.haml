@@ -9,7 +9,7 @@
     %th Category
     %th
 
-  - @items.each do |item|
+  - @items.order('rank').each do |item|
     - variants = item.variants.where(item_default: true, domain: current_tenant.domain)
     - price = variants.first.price
     %tr

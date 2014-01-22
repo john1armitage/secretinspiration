@@ -1,12 +1,13 @@
-%ul#meal
-  != link_to "Food", choices_path(meal_id: @meal.id, choices: 'food'), :remote => true, :class => "tiny button radius"
-  Table
-  = @meal.tabel_name
-  != link_to "Drinks", choices_path(meal_id: @meal.id, choices: 'drinks'), :remote => true, :class => "tiny button radius"
+%ul#order
+  %li.title
+    != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+    %span
+      Table
+      = @meal.tabel_name
+    != link_to "Drinks",  edit_meal_path( @meal, choices: 'drinks'), remote: true, class: 'no_ajaxify'
   - unless @meal.line_items.empty?
-    %ul
-      - @course = ''
-      = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, line_items.desc')
+    - @course = ''
+    = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
     = button_to 'Clear', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
       data: { confirm: 'Clear Items?' }
     = button_to 'Bill', check_out_meal_path(@meal), method: :post  #, remote: true, form_class: 'no_ajaxify'

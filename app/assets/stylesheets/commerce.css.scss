@@ -139,7 +139,7 @@ ul#catalogue {
     margin-left: -0.5em;
     span.title {
       font-weight: bold;
-//      margin-left: -0.75em;
+      //      margin-left: -0.75em;
     }
     span.notes {
       color: darkslategray;
@@ -148,9 +148,26 @@ ul#catalogue {
     div.store-variant {
       border: 1px solid white;
     }
+    p {
+      padding: 0.2em;
+      &.header {
+        background-color: palegreen;
+      }
+      &.item-header {
+        background-color: paleturquoise;
+      }
+    }
+    input {
+      width: 100%;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+  ul.menu-item {
+    margin-left: 0;
   }
 }
-ul#cart, ul#meal, ul.menu-item {
+ul#cart, ul#meal, ul#order, ul.menu-item {
   font-size: 0.8em;
   clear: both;
   li.title {
@@ -172,7 +189,7 @@ ul#cart, ul#meal, ul.menu-item {
     font-size: 0.8em;
   }
 }
-ul#cart, ul#meal {
+ul#cart, ul#meal, ul#order {
   background-color: #e0eeee;
   border: 1px solid darkslategray;
   li {
@@ -192,25 +209,6 @@ ul#cart, ul#meal {
 //      font-size: 1.1em;
       font-weight: bold;
     }
-  }
-}
-ul#catalogue {
-  li {
-    p {
-      padding: 0.2em;
-      &.header {
-        background-color: palegreen;
-      }
-      &.item-header {
-        background-color: paleturquoise;
-      }
-    }
-    input {
-      width: 100%;
-    }
-  }
-  ul.menu-item {
-    margin-left: 0;
   }
 }
 

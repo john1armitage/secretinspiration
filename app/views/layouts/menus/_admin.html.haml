@@ -1,10 +1,4 @@
 %ul.inline-list
-  - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
-    %li
-      != link_to 'Bookings', bookings_path
-  - if current_tenant.sitting == '1'  && (allow? :meals, :index )
-    %li
-      != link_to "Sitting", meals_path(), remote: true, class: 'no_ajaxify'
   - if allow? :items, :index
     %li
       != link_to 'Items', items_path

@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   # GET /items
   def index
     get_root_categories
-    @items = Item.order(:item_type_id, :category_id, :name).all
+    @items = Item.order(:item_type_id, :category_id, :rank, :name)
   end
 
   # GET /items/1

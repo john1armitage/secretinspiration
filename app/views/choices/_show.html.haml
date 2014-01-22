@@ -1,4 +1,4 @@
-- @choice ||= Category.find_by_name( params[:id] )
+- @choice ||= ( @meal.present? || @cart.present?) ? Category.find_by_name( params[:choices] ).children.first : Category.find_by_name( params[:id] )
 - @page = Page.find_by_code( @choice.name )
 %ul#catalogue
   - if @page
@@ -8,8 +8,8 @@
     %li
       %p.header
         %span.title
-          != subcat.nice_name
-          != @choice.name.titleize.pluralize
+          != subcat.nice_name.pluralize
+          !=# @choice.name.titleize.pluralize
         %span.notes
           != subcat.description unless subcat.description.blank?
       = render :partial => "choices/#{current_tenant.domain}/show", locals: { subcat: subcat}

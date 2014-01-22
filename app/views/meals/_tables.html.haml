@@ -1,0 +1,6 @@
+- @meals = Meal.order('tabel_name')
+%li.title
+  %span
+    Live Tables
+- @meals.each do |meal|
+  = render 'meals/meal', meal: meal

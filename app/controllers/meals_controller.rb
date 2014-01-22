@@ -3,7 +3,6 @@ class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out]
 
   def index
-    @meals = Meal.order('tabel_name')
   end
 
   def edit
@@ -15,7 +14,7 @@ class MealsController < ApplicationController
     @meal.seating_id = params[:seating_id] if  params[:seating_id].present?
     @meal.tabel_name = params[:tabel_name]
     @meal.save
-    redirect_to meals_url
+    render 'meals'
   end
 
   def update
@@ -55,7 +54,7 @@ class MealsController < ApplicationController
 
   def destroy
     @meal.destroy
-    redirect_to meals_url
+    redirect_to bookings_url
   end
 
   private

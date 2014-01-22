@@ -68,7 +68,11 @@ Commerce::Application.routes.draw do
   resources :pics
   resources :options
 
-  resources :bookings
+  resources :bookings do
+    collection do
+      get 'dated'
+    end
+  end
   resources :tabels
 
   resources :suppliers do

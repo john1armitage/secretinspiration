@@ -1,0 +1,33 @@
+.row.large-12
+  .calendar
+    %p= @booking_date.strftime("%B %Y")
+    = calendar(@booking_date) do |date|
+      - unless date < Time.now.at_beginning_of_day
+        = date.day
+        = link_to 'new', new_booking_path(date: date.to_s)
+        - if @bookings_by_date[date]
+          -#&rArr;
+          = link_to "#{@bookings_by_date[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+          = @bookings_by_date[date].map(&:pax).sum
+          %ul
+            - @bookings_by_date[date].each do |booking|
+              %li
+                - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+                = link_to title, booking
+
+.row.large-12
+  .calendar
+    - next_month = @booking_date + 1.month
+    %p= next_month.strftime("%B %Y")
+    = calendar(next_month) do |date|
+      = date.day
+      = link_to 'new', new_booking_path(date: date.to_s)
+      - if @bookings_next_month[date]
+        = link_to "#{@bookings_next_month[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+        = @bookings_next_month[date].map(&:pax).sum
+        %ul
+          - @bookings_next_month[date].each do |booking|
+            %li
+              - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+              = link_to title, booking
+

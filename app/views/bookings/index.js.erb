@@ -1,0 +1,3 @@
+$('div#menu').html("<%= escape_javascript(render :partial => 'layouts/menus/bookings') %>")
+$('div#content').html("<%= escape_javascript(render :partial => 'index') %>")
+$('aside#sidebar').html("<%= escape_javascript(render :partial => 'meals/index') %>")

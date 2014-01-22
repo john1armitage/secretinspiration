@@ -1,0 +1,6 @@
+%ul.inline-list
+  - if allow? :bookings, :create
+    %li
+      = link_to 'New Booking', new_booking_path
+    %li
+      = link_to 'New Walk-In', new_booking_path(:walk_in => true)
