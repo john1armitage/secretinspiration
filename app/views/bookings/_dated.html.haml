@@ -1,19 +1,21 @@
 %ul#order
   %li.title
-    = "#{@booking_date.strftime("%a %e %b")}, #{pluralize(@bookings.sum(:pax), 'person')}"
+    - title = @booking_date.strftime("%a %e %b")
+    - title +=  ", #{pluralize(@bookings.sum(:pax), 'person')}" unless @bookings.empty?
+    = title
   - @bookings.each do |booking|
     %li
       = booking.arrival.to_s(:time)
       - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name
       %span.title
-        = link_to name, edit_booking_path(booking)
+        = link_to name, edit_booking_path(booking), remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Update Booking'
     %li
       = "#{booking.pax} pax"
       - booking.seatings.joins(:tabel).order('tabels.name::INT').each do |seating|
-        = render 'tabel', seating:  seating
+        = render partial: 'tabel', locals: {seating:  seating }
       = 'Window' if booking.window && booking.seatings.empty?
       = booking.state
-      = link_to 'X', booking, :method => :delete, :data => { :confirm => 'Cancel Booking?' }
+      = link_to 'X', booking, :method => :delete, remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true, :confirm => 'Cancel Booking?' }, title: 'Cancel Booking'
       - unless booking.notes.blank?
         %span{ class: 'has-tip', data: { tooltip:  true}, title: booking.notes }
           notes

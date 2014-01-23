@@ -1,6 +1,9 @@
 - unless flash[0]
   - flash.each do |name, msg|
     - if msg.is_a?(String)
-      %div{:class => "alert-box round #{name == :notice ? "success" : "alert"}", "data-alert" => ""}
+      %div#notice{:class => "alert-box round #{name == :notice ? "success" : "alert"}", "data-alert" => ""}
         = content_tag :div, msg
         %a.close{:href => "#"} &times;
+
+-##notice{ style: "#{'display:none' unless flash[:notice]}" }
+-#  = flash[:notice]

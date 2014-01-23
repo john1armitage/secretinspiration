@@ -1,0 +1,17 @@
+#thanks
+  .row
+    .large-12.columns
+      %p
+        Thanks, we give you a call to confirm:
+  .row
+    .large-12.columns
+      %p
+        != @booking.booking_date.strftime("%a %e %b")
+        at
+        != @booking.arrival.strftime("%H:%M")
+  .row
+    .large-12.columns
+      %p
+        for
+        != @booking.customer_name
+

@@ -107,9 +107,22 @@ footer {
 div#content {
   margin-bottom: 0.5em;
 }
-aside {
+aside#sidebar {
   padding-left: 0.1em;
   padding-right: 0.1em;
+  h3 {
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #d3d3d3;
+    padding: 0.2em;
+    border: 1px solid darkgray;
+  }
+  fieldset {
+    margin: 0;
+    padding: 0.2em;
+    background-color: #e0eeee;
+    border: 1px solid darkgray;
+  }
 }
 div#menu {
   li {
@@ -349,17 +362,20 @@ ul#contact {
     }
   }
 }
-div#admin {
-  margin-top: 0.4em;
+%ul#main-nav {
+  z-index: 10;
+  li#admin {
+    margin-top: 0.4em;
+  }
 }
 div#contact {
   border: 1px solid darkgray;
   background-color: #e0eeee; // #d3d3d3;
   padding: 0.1em;
-  margin-top: 0.2em;
+//  margin-top: 0.2em;
   margin-bottom: 0.2em;
-  margin-left: -2em;
-  margin-right: 2em;
+//  margin-left: -2em;
+//  margin-right: 2em;
 }
 p#contact {
   text-align: center;
@@ -373,11 +389,11 @@ p#contact {
     &.phone {
       // padding-left: 0.4em;
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.1em;
       color: darkred;
     }
     &.location {
-      font-size: 0.9em;
+      font-size: 0.8em;
       padding-top: 0.2em;
     }
 //    &.email {
@@ -388,4 +404,14 @@ p#contact {
 }
 ul#main-nav {
   margin-top: 0.3em;
+}
+div.calendar {
+  margin-left: 1em;
+  margin-right: 1.25em;
+}
+div#thanks {
+  margin: 0.1em;
+  padding: 0.5em;
+  background-color: palegoldenrod;
+  border: 1px solid darkgray;
 }

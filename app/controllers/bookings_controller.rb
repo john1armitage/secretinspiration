@@ -26,25 +26,37 @@ class BookingsController < ApplicationController
       @booking.customer_name = 'Walk-in'
       @booking.arrival = Time.now.to_s(:time)
     end
+    unless  @current_user.id.blank?
+      @booking.confirmed = true
+    end
+    render 'form'
   end
 
   # GET /bookings/1/edit
   def edit
     get_tables
     get_booked
+    render 'form'
   end
 
   # POST /bookings
   def create
     @booking = Booking.new(params[:booking])
-    @booking.user_id = @current_user.id
+    if  @current_user.id.blank?
+      @booking.user_id = User.find_by_username('system').id
+      @booking.confirmed = false
+      @request = true
+    else
+      @booking.user_id = @current_user.id
+    end
     if @booking.save
+      set_booked
       set_booking_dates
       render 'index'
     else
       update_booked
       get_tables
-      render action: 'new'
+      render 'form'
     end
   end
 
@@ -53,11 +65,12 @@ class BookingsController < ApplicationController
     set_booked
     params[:booking][:user_id] = current_user.id
     if @booking.update(params[:booking])
-      redirect_to bookings_url, notice: 'Booking was successfully updated.'
+      set_booking_dates
+      render 'index'
     else
       get_tables
       update_booked
-      render action: 'edit'
+      render 'form'
     end
   end
 
@@ -81,18 +94,18 @@ class BookingsController < ApplicationController
       @booked_tabels = @new_booked
     end
 
-   def set_booking_dates
-     @booking_date = params['booking_date'].present? ? params['booking_date'] : Date.today
-     @bookings = Booking.where( :booking_date => @booking_date )
-     @bookings_by_date = get_bookings(@booking_date)
-     @bookings_next_month = get_bookings(@booking_date + 1.month)
-   end
+   #def set_booking_dates
+   #  @booking_date = params['booking_date'].present? ? params['booking_date'] : Date.today
+   #  @bookings = Booking.where( :booking_date => @booking_date )
+   #  @bookings_by_date = get_bookings(@booking_date)
+   #  @bookings_next_month = get_bookings(@booking_date + 1.month)
+   #end
 
-  def get_bookings(booking_date)
-      start = (booking_date.to_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
-      stop = booking_date.end_of_month
-      Booking.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
-    end
+  #def get_bookings(booking_date)
+  #    start = (booking_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
+  #    stop = booking_date.end_of_month
+  #    Booking.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
+  #  end
 
     def get_tables
       @tabels = Tabel.order('name::INT')

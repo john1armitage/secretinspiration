@@ -1,0 +1,22 @@
+%p= month.strftime("%B %Y")
+= calendar(month) do |date|
+  = date.day
+  - if allow? :seating, :create
+    = render partial: 'month_admin', locals: {date: date, bookings: bookings}
+  - else
+    = render partial: 'month_public', locals: {date: date, bookings: bookings}
+
+  -#- if date >= Time.now.to_date
+  -#  = link_to 'new', new_booking_path(date: date.to_s)
+  -#  - if date == Time.now.to_date && (allow? :bookings, :create)
+  -#    = link_to 'New Walk-In', new_booking_path(:walk_in => true)
+  -#  - else
+  -#    REQUEST
+  -#- if bookings[date]
+  -#  = link_to "#{bookings[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+  -#  = bookings[date].map(&:pax).sum
+  -#  %ul
+  -#    - bookings[date].each do |booking|
+  -#      %li
+  -#        - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+  -#        = link_to title, booking

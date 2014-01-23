@@ -1,49 +1,58 @@
-= form_for @booking, class: 'no_ajaxify', :validate => true do |f|
+= form_for @booking, html: { class: 'no_ajaxify'}, remote: true, validate: true do |f|
 
   %fieldset
-    %legend= 'Booking: ' + ( @booking.customer_name || 'new' )
-
-
-    -#- if @booking.errors.any?
-    -#  #error_explanation
-    -#    %h2= "#{pluralize(@booking.errors.count, "error")} prohibited this booking from being saved:"
-    -#    %ul
-    -#      - @booking.errors.full_messages.each do |msg|
-    -#        %li= msg
     = f.hidden_field :walkin
     .row
-      .field.small-4.columns
-        = f.label :booking_date
-        = f.date_field :booking_date
-      .field.timepicker.small-3.columns.left
-        = f.label :arrival
+      .large-12.columns
+        %h3
+          = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
+    .row
+      .large-12.columns
+        - if @booking.booking_date.blank?
+          .field.small-4.columns
+            = f.label :booking_date
+            = f.date_field :booking_date
+        - else
+          = f.hidden_field :booking_date
+    .row
+      -#.large-12.columns
+      -#  .field.timepicker.small-3.columns.left
+      .large-6.columns.timepicker
+        = f.label :arrival, 'Time'
         = f.text_field :arrival
-      .field.small-1.columns.left
-        = f.label :window
-        = f.check_box :window
-      .field.small-1.columns.left
-        - if @booking.walkin
-          Walkin
-    .row
-      .field.small-2.columns
-        = f.label :pax, "Party Size"
+      .large-6.columns
+        = f.label :pax, 'Guests'
         = f.number_field :pax
-    - unless @booking.walkin == true
+    - unless @booking.walkin
       .row
-        .field.small-6.columns
-          = f.label :customer_name
+        .large-12.columns
+          = f.label :customer_name, 'Name'
           = f.text_field :customer_name
-        .field.small-5.columns.left
-          = f.label :contact
+      .row
+        .large-12.columns
+          = f.label :contact, 'Contact Phone'
           = f.text_field :contact
+    - else
+      = f.hidden_field :customer_name
+      = f.hidden_field :contact
     .row
-      = render @tabels
-    .row
-      .field.small-12.columns
-        = f.label :notes
+      .large-12.columns
+        = f.label :notes, "#{ (allow? :seating, :create) ? 'Notes' : 'Requests'}"
         = f.text_area :notes
+    - if allow? :seating, :create
+      .row
+        .large-12.columns
+          = render @tabels
+          - unless @booking.walkin
+            .large-4.columns.left
+              = f.label :window, 'Win'
+              = f.check_box :window
+          - if allow? :seating, :create
+            .large-4.columns.left
+              = f.label :confirmed, 'Conf'
+              = f.check_box :confirmed
     .row
-      .actions
+      .large-12.columns
         = f.submit 'Save'
 
 :coffeescript

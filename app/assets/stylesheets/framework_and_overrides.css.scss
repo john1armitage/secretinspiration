@@ -4,7 +4,10 @@
 // import the CSS framework
 @import "foundation";
 
-.has-tip { cursor: pointer; }
+.has-tip {
+  cursor: pointer;
+  color: #008cba;
+}
 
 //body.shack {
 //  .top-bar {

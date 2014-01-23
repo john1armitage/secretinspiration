@@ -163,4 +163,20 @@ class ApplicationController < ActionController::Base
      code.gsub(/_/,' ').titleize
   end
   helper_method :title
+
+  def set_booking_dates
+    @booking_date = @booking.booking_date if @booking
+    @booking_date ||= params['booking_date'].present? ? params['booking_date'] : Date.today
+    @bookings = Booking.where( :booking_date => @booking_date ).order(:arrival, :customer_name)
+    @bookings_by_date = get_bookings(@booking_date)
+    @bookings_next_month = get_bookings(@booking_date + 1.month)
+  end
+  helper_method :set_booking_dates
+
+  def get_bookings(booking_date)
+    start = (booking_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
+    stop = booking_date.end_of_month
+    Booking.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
+  end
+
 end
