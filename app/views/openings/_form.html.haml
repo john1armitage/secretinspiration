@@ -1,0 +1,32 @@
+= form_for @opening do |f|
+  - if @opening.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@opening.errors.count, "error")} prohibited this opening from being saved:"
+      %ul
+        - @opening.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .field.large-3.columns
+      = f.label :start_date
+      = f.date_field :start_date
+    .field.large-3.columns.left
+      = f.label :end_date
+      = f.date_field :end_date
+  .row
+    .field.large-2.columns
+      = f.label :repeat
+      = f.number_field :repeat
+    .field.large-2.columns
+      = f.label :frequency
+      = f.select :frequency,[ 'day', 'week', 'month' ]
+    .field.large-2.columns.left
+      = f.label :status
+      = f.select :status, [ 'closed', 'lunch', 'dinner', 'open' ]
+  .row
+    .field.large-8.columns.left
+      = f.label :message
+      = f.text_field :message
+  .row
+    .field.large-12.columns
+      = f.submit 'Save'

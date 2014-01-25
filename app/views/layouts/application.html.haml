@@ -59,4 +59,6 @@
   jQuery ->
     $('ul.dropdown li:not(.title)').on 'click', (event) ->
       $('li.menu-icon').click()
-
+    $(document).on "click", 'input[value="Cancel"]', (event) ->
+      event.preventDefault()
+      $(this).parents().find('div#editor').html('')

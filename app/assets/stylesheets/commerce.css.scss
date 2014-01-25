@@ -45,7 +45,7 @@ span.date {
     background-color: blue;
   }
 }
-div#solus, div#current {
+div#solus, div#current, div#sidecast {
   border: 1px solid darkgray;
   background-color: #e0eeee; //#d3d3d3;
   padding: 0.25em;
@@ -75,6 +75,9 @@ div#solus, div#current {
       color: darkgreen;
     }
   }
+}
+div#sidecast {
+  background-color: palegoldenrod;
 }
 body#welcome_controller {
   article {
@@ -408,10 +411,35 @@ ul#main-nav {
 div.calendar {
   margin-left: 1em;
   margin-right: 1.25em;
+  select {
+    width: 10em;
+    direction: rtl;
+//    option {
+//      font-size: 0.8em;
+//    }
+  }
+  li {
+    &.request {
+      border-top: 1px solid darkgray;
+      border-bottom: 1px solid darkgray;
+      background-color: #e0eeee;
+    }
+    &.event {
+      background-color: palegoldenrod;
+      border-bottom: 1px solid darkgray;
+    }
+  }
+}
+div#editor {
+  margin-bottom: 0.5em;
 }
 div#thanks {
+  font-size: 0.9em;
   margin: 0.1em;
   padding: 0.5em;
   background-color: palegoldenrod;
   border: 1px solid darkgray;
+  span.title {
+    font-weight: bold;
+  }
 }

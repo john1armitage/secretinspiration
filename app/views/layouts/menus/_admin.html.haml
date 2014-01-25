@@ -8,6 +8,9 @@
   - if allow? :broadcasts, :index
     %li
       != link_to 'Broadcasts', broadcasts_path
+  - if allow? :openings, :index
+    %li
+      != link_to 'Openings', openings_path
   - if allow? :items, :index
     %li
       != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'

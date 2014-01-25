@@ -6,12 +6,25 @@
   .row
     .large-12.columns
       %p
-        != @booking.booking_date.strftime("%a %e %b")
-        at
-        != @booking.arrival.strftime("%H:%M")
+      %p
+        Booking:
+        %br
+        %span.title
+          != @booking.arrival.strftime("%H:%M")
+        on
+        %span.title
+          != @booking.booking_date.strftime("%a %e %b")
+        %br
+        %span.title
+          != pluralize(@booking.pax, 'person')
   .row
     .large-12.columns
       %p
-        for
-        != @booking.customer_name
+        Contact:
+        %br
+        %span.title
+          != @booking.customer_name
+        %br
+        %span.title
+          != @booking.contact
 

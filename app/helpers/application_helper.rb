@@ -29,4 +29,12 @@ module ApplicationHelper
       count == 1 ? "#{noun}#{text}" : "#{noun.pluralize}#{text}"
     end
   end
+  def get_months(date, number)
+    months = []
+    0.upto(number) do |m|
+      months << [date.next_month(m).strftime("%B %Y"), date.next_month(m)]
+    end
+    months
+  end
+
 end

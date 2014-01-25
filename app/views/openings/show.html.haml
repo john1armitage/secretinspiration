@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Start date:
+  = @opening.start_date
+%p
+  %b Repeat:
+  = @opening.repeat
+%p
+  %b Frequency:
+  = @opening.frequency
+%p
+  %b String:
+  = @opening.string
+%p
+  %b Status:
+  = @opening.status
+%p
+  %b Message:
+  = @opening.message
+%p
+  %b String:
+  = @opening.string
+
+= link_to 'Edit', edit_opening_path(@opening)
+\|
+= link_to 'Back', openings_path

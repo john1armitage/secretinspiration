@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
 
   def dated
     @booking_date = params['booking_date'].present? ? params['booking_date'].to_date : Date.today
-    @bookings = Booking.where( :booking_date => @booking_date )
+    @bookings = Booking.where( booking_date: @booking_date )
   end
   # GET /bookings/1
   def show

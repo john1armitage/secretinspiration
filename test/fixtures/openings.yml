@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2014-01-24
+  repeat: 1
+  frequency: MyString
+  string: MyString
+  status: MyString
+  message: MyString
+  string: MyString
+
+two:
+  start_date: 2014-01-24
+  repeat: 1
+  frequency: MyString
+  string: MyString
+  status: MyString
+  message: MyString
+  string: MyString

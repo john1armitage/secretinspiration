@@ -166,10 +166,17 @@ class ApplicationController < ActionController::Base
 
   def set_booking_dates
     @booking_date = @booking.booking_date if @booking
-    @booking_date ||= params['booking_date'].present? ? params['booking_date'] : Date.today
+    @booking_date ||= params['booking_date'].present? ? params['booking_date'].to_date : Date.today
     @bookings = Booking.where( :booking_date => @booking_date ).order(:arrival, :customer_name)
     @bookings_by_date = get_bookings(@booking_date)
     @bookings_next_month = get_bookings(@booking_date + 1.month)
+    @events_by_date = get_events(@booking_date)
+    @events_next_month = get_events(@booking_date + 1.month)
+    @openings = get_openings( @booking_date.beginning_of_month, (@booking_date + 1.month).end_of_month )
+    p "HERE 2"
+    p @bookings_by_date
+    p @events_by_date
+    p @openings
   end
   helper_method :set_booking_dates
 
@@ -179,4 +186,50 @@ class ApplicationController < ActionController::Base
     Booking.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
   end
 
+  def get_events(event_date)
+    start = (event_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : event_date.beginning_of_month
+    stop = event_date.end_of_month
+    broadcasts = Broadcast.where('event_date >= ? AND event_date <= ?', start, stop )
+    broadcasts.group_by(&:event_date)
+  end
+
+  def get_openings(start, finish)
+    openings = []
+    Opening.where('start_date <= ?', finish).each do |opening|
+      if opening.finish_date >= start
+        date = opening.start_date
+        if opening.end_date.blank?
+          p "END NOT SET"
+          1.upto(opening.repeat ) do |actual|
+            if date >= start and date <= finish
+              p date
+              openings << Opening.new(opening.attributes.merge({start_date: date}))
+              p openings.size
+            end
+            date = opening.start_date + eval("#{actual}.#{opening.frequency}")
+          end
+        else
+          p "END SET"
+          #i = 0
+          while (date <= finish and date <= opening.end_date) do
+            #i += 1
+            opening.start_date = date
+            if date >= start and date <= finish
+              p date
+              openings << Opening.new(opening.attributes.merge({start_date: date}))
+            end
+            date = date + eval("1.#{opening.frequency}")
+          end
+        end
+
+      end
+    end
+    #p openings.size
+    #p "HERE 1"
+    #p openings
+    #openings.each do |o|
+    #  p o.start_date
+    #end
+    openings.group_by(&:start_date)
+  end
 end

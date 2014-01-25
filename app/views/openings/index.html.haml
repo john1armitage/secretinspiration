@@ -1,0 +1,27 @@
+%table
+  %tr
+    %th Start Date
+    %th Finish Date
+    %th Repeat
+    %th Frequency
+    %th Status
+    %th Message
+    %th
+    %th
+    %th
+
+  - @openings.each do |opening|
+    %tr
+      %td= opening.start_date.strftime('%e %b %y')
+      %td= opening.finish_date.strftime('%e %b %y')
+      %td= opening.repeat
+      %td= opening.frequency
+      %td= opening.status
+      %td= truncate( opening.message, length: 15 )
+      %td= link_to 'Show', opening
+      %td= link_to 'Edit', edit_opening_path(opening)
+      %td= link_to 'Destroy', opening, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Opening', new_opening_path

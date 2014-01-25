@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
 
   # POST /accounts
   def create
-    @account = Account.new(account_params)
+    @account = Account.new(params[:account])
 
     if @account.save
       redirect_to accounts_url, notice: 'Account was successfully created.'
@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1
   def update
-    if @account.update(account_params)
+    if @account.update(params[:account])
       redirect_to accounts_url, notice: 'Account was successfully updated.'
     else
       render action: 'edit'
@@ -56,8 +56,8 @@ class AccountsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def account_params
-      params.require(:account).permit(:name, :code, :ancestry, :opening_balance)
-    end
+  def current_resource
+    @current_resource ||= @account
+  end
 
 end

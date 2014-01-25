@@ -8,12 +8,11 @@
           = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
     .row
       .large-12.columns
-        - if @booking.booking_date.blank?
-          .field.small-4.columns
-            = f.label :booking_date
-            = f.date_field :booking_date
-        - else
-          = f.hidden_field :booking_date
+        - if @booking.booking_date.blank? || (allow? :seating, :create)
+          = f.label :booking_date
+          = f.date_field :booking_date
+        -#- else
+        -#  = f.hidden_field :booking_date
     .row
       -#.large-12.columns
       -#  .field.timepicker.small-3.columns.left
@@ -52,14 +51,8 @@
               = f.label :confirmed, 'Conf'
               = f.check_box :confirmed
     .row
-      .large-12.columns
+      .large-6.columns
         = f.submit 'Save'
+      .large-6.columns
+        = f.submit 'Cancel'
 
-:coffeescript
-  $("div.timepicker input").each (i) ->
-    $("div.timepicker input").datetimepicker
-      timeOnly: true
-      timeFormat: "h:mm TT"
-      altFieldTimeOnly: false
-      altTimeFormat: "HH:mm"
-      altField: $(this).next()

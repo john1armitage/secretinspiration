@@ -1,4 +1,2 @@
-%ul
-  - if date >= Time.now.to_date
-    %li
-      = link_to 'Request Booking', new_booking_path(date: date.to_s), class: 'no_ajaxify', remote: true
+%li.request
+  = link_to 'Request Booking', new_booking_path(date: date.to_s), class: 'no_ajaxify', remote: true

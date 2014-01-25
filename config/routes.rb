@@ -1,5 +1,7 @@
 Commerce::Application.routes.draw do
 
+  resources :openings
+
   resources :topics
 
   resources :pages do

@@ -13,6 +13,7 @@ class BroadcastsController < ApplicationController
 
   # GET /broadcasts/1
   def show
+    render 'aside' if params[:aside].present?
   end
 
   # GET /broadcasts/new
