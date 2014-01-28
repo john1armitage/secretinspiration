@@ -23,6 +23,11 @@ class ItemsController < ApplicationController
     elsif params[:category_root].present?
       @product_flow = Category.find_by_name(params[:category_root]).product_flow
     end
+    if current_tenant.vat_exempt
+      @item.vat_rate = 'zero'
+    else
+      @item.vat_rate = category.parent.vat_rate
+    end
   end
 
   # GET /items/1/edit

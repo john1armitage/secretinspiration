@@ -1,14 +1,13 @@
-%ul
+%li.request
+  = link_to 'Make Booking', new_booking_path(date: date.to_s, opening: opening), class: 'no_ajaxify', remote: true
+- if date == Time.now.to_date
+  %li.request
+  = link_to 'New Walk-In', new_booking_path(:walk_in => true, opening: opening), class: 'no_ajaxify', remote: true
+- if bookings[date]
   %li
-    = link_to 'Make Booking', new_booking_path(date: date.to_s), class: 'no_ajaxify', remote: true
-  - if date == Time.now.to_date
-    %li
-    = link_to 'New Walk-In', new_booking_path(:walk_in => true), class: 'no_ajaxify', remote: true
-  - if bookings[date]
-    %li
-      = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
-    %li
-      = pluralize bookings[date].map(&:pax).sum, 'person'
+    = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+  %li
+    = pluralize bookings[date].map(&:pax).sum, 'person'
     -#- bookings[date].each do |booking|
     -#  %li
     -#    - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"

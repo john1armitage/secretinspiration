@@ -2,7 +2,7 @@
   .row
     .large-12.columns
       %p
-        Thanks, we give you a call to confirm:
+        Thanks, we have noted your booking and will give you a call to confirm:
   .row
     .large-12.columns
       %p
@@ -27,4 +27,7 @@
         %br
         %span.title
           != @booking.contact
+        %br
+        %span.title
+          != @booking.email
 

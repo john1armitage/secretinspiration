@@ -1,29 +1,38 @@
 - months = get_months(Date.today, 12)
 %p= select_tag 'months', options_for_select(months, month)
 = calendar(month) do |date|
-  = date.day
-  - status = []
-  - if date >= Time.now.to_date
-    - if openings[date]
-      - openings[date].each do |opening|
-        - status << opening.status
-    - if status.size == 1 and status[0] == 'closed'
-      %span.closed
-        Closed
-    - else
-      %span
-        - unless status.size > 0 and status.include? 'lunch'
-          Dinner
-        - else
-          Lunch & Dinner
-      - if allow? :seating, :create
-        = render partial: 'month_admin', locals: {date: date, bookings: bookings, openings: openings}
+  %ul
+    %li
+    = date.day
+    - status = []
+    - if date >= Time.now.to_date
+      - if openings[date]
+        - openings[date].each do |opening|
+          - status << opening.status
+      - if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
+        %span.closed
+          Closed
       - else
-        = render partial: 'month_public', locals: {date: date, bookings: bookings, events: events, openings: openings}
-    - if events[date]
-      - events[date].each do |event|
-        %li.event
-          != link_to event.title, broadcast_path( event, aside: true ), class: 'no_ajaxify', remote: true
+        %span
+          - unless (status.size > 0 and ( status & ['lunch','open']))
+            - opening = 'dinner'
+          - else
+            - if status.include? 'open'
+              - opening = 'open'
+            - else
+              - opening = 'lunch'
+        - if allow? :seating, :create
+          = opening
+        -else
+          = render partial: 'month_request', locals: {date: date, bookings: bookings, events: events, opening: opening }
+        - if allow? :seating, :create
+          = render partial: 'month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
+        -#- else
+        -#  = render partial: 'month_public', locals: {date: date, bookings: bookings, events: events, opening: opening }
+      - if events[date]
+        - events[date].each do |event|
+          %li.event{class: event.category}
+            != link_to event.title, broadcast_path( event, aside: true ), class: 'no_ajaxify', remote: true
 
 
 

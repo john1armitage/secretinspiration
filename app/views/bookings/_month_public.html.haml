@@ -1,2 +1,7 @@
 %li.request
-  = link_to 'Request Booking', new_booking_path(date: date.to_s), class: 'no_ajaxify', remote: true
+  - case opening
+  - when 'open'
+    - open = 'lunch or dinner'
+  - else
+    - open = opening
+  = link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening}", remote: true

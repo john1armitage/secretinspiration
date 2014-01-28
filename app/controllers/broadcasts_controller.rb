@@ -7,7 +7,7 @@ class BroadcastsController < ApplicationController
   end
 
   def blog
-    @broadcasts = Broadcast.joins(:topic).where('publish = true and topics.name = ?', params[:name])
+    @broadcasts = Broadcast.joins(:topic).where('publish = true and blog = true and topics.name = ?', params[:name])
     @broadcasts = ( params[:name]) == 'event' ? @broadcasts.order('event_date, event_time ASC') : @broadcasts.order('updated_at DESC')
   end
 
@@ -19,6 +19,10 @@ class BroadcastsController < ApplicationController
   # GET /broadcasts/new
   def new
     @broadcast = Broadcast.new
+    @broadcast.blog = true
+    @broadcast.publish = true
+    @broadcast.category = 'blog'
+    @broadcast.repeat = 1
   end
 
   # GET /broadcasts/1/edit

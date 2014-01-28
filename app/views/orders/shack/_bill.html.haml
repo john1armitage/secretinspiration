@@ -1,0 +1,41 @@
+#invoice
+  %h3= "Bill #{@order.id}: #{@order.state}"
+
+  %ul
+    %li.header
+      %p
+        %span.title
+          = current_tenant.name
+    != render partial: "orders/#{current_tenant.domain}/line_item", collection: @order.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
+    %li
+      %p
+        %span
+          Total
+        %span
+          = humanized_money_with_symbol(@order.net_home + @order.tax_home)
+
+    - if @order.tax_home > 0
+      %li
+        %span
+          = @order.state
+        %span
+          = "(VAT: #{humanized_money_with_symbol(@order.tax_home)})"
+    %li.footer
+      %p
+        %span
+          = current_tenant.company
+          = "Co. No. #{current_tenant.coho}"
+        %span
+          = "[Order #{@order.id}]"
+          = @order.updated_at.strftime('%e-%b-%y')
+        %span
+          = "#{pluralize(@order.line_items.size, 'item')}"
+    %li.no-print
+      %span
+        = link_to "Print",'#', id: 'print'
+      %span
+        = link_to 'Amend Bill', check_in_meal_path(@order.id), method: :post, data: {confirm: 'Re-Create Order?'}, remote: true, class: 'no_ajaxify'
+      - if @order.state == 'incomplete'
+        %span
+          = link_to 'Complete', status_order_path(@order.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Complete Payment'}, remote: true, class: 'no_ajaxify'
+

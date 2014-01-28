@@ -1,0 +1,14 @@
+%ul#order
+  %li.title
+    %span
+      Table
+      = @meal.tabel_name
+      Bill
+  %li.total
+    %span.title
+      Total Order
+      != humanized_money_with_symbol(( @meal.line_items.sum(:net_home_cents) + @meal.line_items.sum(:tax_home_cents))/100)
+  - @course = ''
+  = render partial: 'meals/line_item_bill', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
+  = button_to 'Print', "Blah"
+

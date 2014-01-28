@@ -1,0 +1,12 @@
+%ul#order
+  %li.title
+    %span
+      Table
+      = @meal.tabel_name
+      Order
+  - @course = ''
+  = render partial: 'meals/line_item_order', collection: @meal.line_items.joins( {variant: { item: {category: :root } } } ).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
+  %li.no-print
+    %span
+      = link_to "Print",'#', id: 'print'
+

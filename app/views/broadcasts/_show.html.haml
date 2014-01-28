@@ -21,7 +21,7 @@
     .large-6.columns
       - unless @broadcast.link.blank?
         %p
-          != link_to 'More information ...', @broadcast.link
+          != link_to "More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link
       -#- if @broadcast.image == 'image'
       != link_to image_tag("/assets/images/#{@broadcast.image}.jpg")
       -#- else
@@ -40,7 +40,7 @@
 - unless @broadcast.link.blank?
   .row
     .large-12.columns
-      != link_to 'More information ...', @broadcast.link
+      != link_to "More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link
 
 -#:coffeescript
 -#  jQuery ->

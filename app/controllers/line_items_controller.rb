@@ -33,8 +33,14 @@ class LineItemsController < ApplicationController
     end
     @line_item.save if @line_item
     respond_to do |format|
-      format.js { render 'cart.js.erb',
-                         notice: 'Line item was successfully created.' }
+      if params[:bill].present?
+        @order = @line_item.ownable
+        format.js { render 'bill.js.erb',
+                           notice: 'Line item was successfully created.' }
+      else
+        format.js { render 'cart.js.erb',
+                           notice: 'Line item was successfully created.' }
+      end
       format.json { render action: 'show',
                            status: :created, location: @line_item }
     end

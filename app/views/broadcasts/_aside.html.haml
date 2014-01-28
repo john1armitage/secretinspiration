@@ -4,5 +4,6 @@
       != @broadcast.title
     %span.body
       != truncate(@broadcast.body, length: 200, separator: ' ', omission: '... ')
-  %p
-    = link_to 'more ...', broadcast_path(@broadcast)
+  - if @broadcast.blog
+    %p
+      = link_to 'more ...', broadcast_path(@broadcast)

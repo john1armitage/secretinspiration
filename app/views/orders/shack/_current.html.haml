@@ -1,0 +1,10 @@
+%ul#current.aside.no-print
+  %li.title
+    %span
+      Current Bills
+  = render :partial => "orders/#{current_tenant.domain}/current_order", collection: Order.where(state: 'incomplete').order('updated_at DESC')
+%ul#completed.aside.no-print
+  %li.title
+    %span
+      Paid Bills
+  = render :partial => "orders/#{current_tenant.domain}/current_order", collection: Order.where('state = ? and updated_at > ?', 'complete', (Time.now - 1.day)).order('updated_at DESC')

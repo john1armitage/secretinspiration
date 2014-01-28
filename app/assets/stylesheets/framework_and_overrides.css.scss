@@ -88,9 +88,14 @@ div#navigation {
 div#aside.columns {
   padding: 0;
 }
-aside#sidebar {
-  ul {
-    margin-left: 0.25em;
+aside {
+  a.button, input[type="text"] {
+    margin-bottom: 0;
+  }
+  &#sidebar {
+    ul {
+      margin-left: 0.25em;
+    }
   }
 }
 .row .item section {

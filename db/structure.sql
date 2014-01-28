@@ -144,7 +144,11 @@ CREATE TABLE broadcasts (
     link2 character varying(255),
     link3 character varying(255),
     event_date date,
-    event_time time without time zone
+    event_time time without time zone,
+    repeat integer,
+    frequency character varying(255),
+    category character varying(255),
+    blog boolean
 );
 
 
@@ -1401,3 +1405,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140118134215');
 INSERT INTO schema_migrations (version) VALUES ('20140119101002');
 
 INSERT INTO schema_migrations (version) VALUES ('20140124161344');
+
+INSERT INTO schema_migrations (version) VALUES ('20140125174409');
+
+INSERT INTO schema_migrations (version) VALUES ('20140126104520');

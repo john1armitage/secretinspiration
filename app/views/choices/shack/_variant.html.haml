@@ -1,7 +1,7 @@
 -# price = variant.price.to_d > 0 ? variant.price : variant.item.price
 - if @meal_id > 0
   -#= form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
-  = submit_tag variant.name
+  = submit_tag variant.name, class: 'wide'
 - else
   = variant.name unless variant.name == 'default'
   = "(#{humanized_money_with_symbol( variant.price )})" if variant.price.to_d > 0

@@ -14,7 +14,7 @@ class Cart < ActiveRecord::Base
     current_item
   end
 
-  def create_variant(variant_id, quantity = 1)
+  def create_variant(variant_id, quantity = 1, currency = 'GBP')
     variant = Variant.find(variant_id)
 
     current_item = line_items.build( variant: variant )
@@ -26,6 +26,7 @@ class Cart < ActiveRecord::Base
     current_item.vat_rate = get_vat_rate( variant.item.vat_rate )
     current_item.net_item = price / ( 1 + current_item.vat_rate )
     current_item.tax_item = price - current_item.net_item
+    current_item.net_item_currency = currency
     calculate_totals(current_item)
 
     current_item

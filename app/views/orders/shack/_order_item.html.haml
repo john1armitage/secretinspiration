@@ -1,0 +1,12 @@
+- if @category != order_item.variant.item.grouping
+  - @category = order_item.variant.item.grouping
+  - @component_title = make_title(@category.split(':')[1] ).pluralize
+  %li.category
+    %span
+      = @component_title
+
+%li.item
+  %span
+    = order_item.quantity
+    x
+    = order_item.desc

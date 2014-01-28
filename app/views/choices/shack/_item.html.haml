@@ -8,10 +8,10 @@
   - if @meal_id > 0
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
       - if (default.first.name == 'default')
-        = submit_tag item.name
+        = submit_tag item.name, class: 'wide'
       - else
         = make_title( item.name )
-        = submit_tag default.first.name
+        = submit_tag default.first.name, class: 'wide'
       - variants = variants - default
       = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
       %br
@@ -21,15 +21,15 @@
       - choices = item.category.choices ? (item.category.choices - [""] ) : []
       - choices.each do |c|
         - @choice = c
-        = make_title(c)
-        = render :partial => 'layouts/fields/item_choices_tag', collection: Element.where(kind: c).order(:rank) #, field: o
-        %br
+        =# make_title(c)
+        %ul.menu-item.small-block-grid-1.medium-block-grid-2.large-block-grid-2
+          = render :partial => 'layouts/fields/item_choices_tag', collection: Element.where(kind: c).order(:rank) #, field: o
       - options = item.category.options ? (item.category.options - [""] ) : []
       - options.each do |o|
         - @option = o
-        = make_title(o)
-        = render :partial => 'layouts/fields/item_options_tag', collection: Option.where(kind: o).order(:rank) #, field: o
-        %br
+        =# make_title(o)
+        %ul.menu-item.small-block-grid-1.medium-block-grid-2.large-block-grid-2
+          = render :partial => 'layouts/fields/item_options_tag', collection: Option.where(kind: o).order(:rank) #, field: o
     -# :form_class => "no_ajaxify", :remote => true, class: 'tiny button'
   - else
     %p.item-header

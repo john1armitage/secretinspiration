@@ -1,9 +1,10 @@
-#editor
-%ul#meal
+#editor.no-print
+%ul#meal.no-print
   = render 'meals/tables'
-#display
+#display.no-print
   = render 'bookings/dated'
-
+  - if allow? :orders, :index
+    != render "orders/#{current_tenant.domain}/current"
   -#%ul#order
   -#  %li.title
   -#    = "#{@booking_date.strftime("%a %e %b")}, #{pluralize(@bookings.sum(:pax), 'person')}"

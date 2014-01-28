@@ -3,12 +3,12 @@
   - @component_title = make_title(@category.split(':')[1] ).pluralize
   %li.category
     %span
-      = link_to @component_title, choice_path(line_item.variant.item.category.parent.name), data: { tooltip:  true}, title: "View #{@component_title}"
+      = link_to @component_title, choice_path(line_item.variant.item.category.parent.name), title: "View #{@component_title}"
 
 %li
   = line_item.quantity
   x
-  = link_to line_item.desc, choice_path(line_item.variant.item.category.parent.name, cart_id: @cart.id, filter: line_item.variant.item.category.name), data: { tooltip:  true}, title: "View #{make_title(line_item.variant.item.category.name)} #{@component_title}"
+  = link_to line_item.desc, choice_path(line_item.variant.item.category.parent.name, cart_id: @cart.id, filter: line_item.variant.item.category.name), title: "View #{make_title(line_item.variant.item.category.name)} #{@component_title}"
   %br
   = link_to '+', line_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
   = link_to '-', line_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"

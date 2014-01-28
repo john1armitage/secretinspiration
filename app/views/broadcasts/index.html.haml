@@ -7,7 +7,8 @@
     %th Link
     %th Image
     %th Color
-    %th Publish
+    %th Blog
+    %th Pub
     %th Release
     %th
     %th
@@ -16,12 +17,13 @@
   - @broadcasts.each do |broadcast|
     %tr
       %td
-        = broadcast.event_date.strftime("%e %m %y") unless broadcast.event_date.blank?
+        = broadcast.event_date.strftime("%e-%b-%y") unless broadcast.event_date.blank?
         = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
       %td= truncate(broadcast.title, length: 15, omission: '...')
       %td= truncate(broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''), length: 10, omission: '...')
       %td= broadcast.image
       %td= broadcast.color
+      %td= broadcast.blog
       %td= broadcast.publish
       %td= broadcast.release
       %td= link_to 'Show', broadcast

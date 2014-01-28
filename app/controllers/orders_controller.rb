@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :commit, :pay]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :commit, :pay, :status]
 
   # GET /orders
 
@@ -112,11 +112,16 @@ class OrdersController < ApplicationController
     redirect_to orders_url(supplier_id: @order.supplier_id)
   end
 
+  def status
+    @order.update_attribute(:state, params[:status])
+    render 'show'
+  end
 
   # DELETE /orders/1
   def destroy
+    supplier_id = @order.supplier_id
     @order.destroy
-    redirect_to orders_url(home: @order.home_supplier), notice: 'Order was successfully destroyed.'
+    redirect_to orders_url(supplier_id: supplier_id)
   end
 
   private

@@ -1,17 +1,34 @@
-%ul#cart
+%ul#cart.no-print
+  - if allow? :carts, :delete
+    != render 'carts/search'
   %li.title
     %span
       Wishes
+    - unless !current_user.cart || @cart.id == current_user.cart.id
+      != link_to 'X', cart_path( @cart, cart_id: @cart.id), method: :delete, remote: true, class: 'no_ajaxify',
+        data: { confirm: 'Delete?'}, title: "Delete Cart"
     - unless @cart.line_items.empty?
-      -#%ul
-      -#  - @category = ''
-      != humanized_money_with_symbol(( @cart.line_items.sum(:net_home_cents) + @cart.line_items.sum(:tax_home_cents))/100)
-      != button_to 'Clear', clear_cart_path( @cart), method: :delete, remote: true, form_class: 'no_ajaxify',
-        data: { confirm: 'Clear All?' }, data: { tooltip:  true}, title: "Remove All Items"
+      %span#bill_amount
+        != humanized_money_with_symbol(( @cart.line_items.sum(:net_home_cents) + @cart.line_items.sum(:tax_home_cents))/100)
+      != button_to 'Clear', clear_cart_path(@cart, cart_id: @cart.id), method: :delete, remote: true, form_class: 'has-tip no_ajaxify',
+        data: {  confirm: 'Clear All?'}, title: "Remove All Items"
       - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
         = render 'carts/line_item', line_item: line_item
     -else
       %li
         %span
-          Use Catalogue to add Items
-      =# button_to 'CheckOut', check_out_cart_path(@cart), method: :post, remote: true, form_class: 'no_ajaxify'
+          Use
+          != link_to 'Catalogue', choices_path(choices: 'catalogue', cart_id: @cart.id), class: 'no_ajaxify', remote: 'true'
+          to add Items
+    - if allow? :orders, :index
+      %li
+        = button_to 'Bill', check_out_cart_path(@cart, cart_id: @cart.id, bill: true), method: :post, data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'
+        = "Cart: SCW#{@cart.id}"
+:coffeescript
+  jQuery ->
+    $('input[value=Bill]').on "click", (event) ->
+      $total = $('span#bill_amount').html()
+      console.log $total
+      if !$total
+        alert('Nothing Ordered')
+        return false

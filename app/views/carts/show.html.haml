@@ -1,0 +1,13 @@
+%ul#cart
+  %li.title
+    %span
+      Wishes
+    - unless @cart.line_items.empty?
+      -#%ul
+      -#  - @category = ''
+      != humanized_money_with_symbol(( @cart.line_items.sum(:net_home_cents) + @cart.line_items.sum(:tax_home_cents))/100)
+      - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
+        = render 'carts/line_item', line_item: line_item
+    - if allow? :orders, :index
+      %li
+        = button_to 'Bill', cart_path(@cart), method: :get  #, remote: true, form_class: 'no_ajaxify'

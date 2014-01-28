@@ -49,9 +49,10 @@ Commerce::Application.routes.draw do
   resources :categories
   resources :accounts
 
-  resources :carts, :only => [:index, :update, :destroy] do
+  resources :carts, :only => [:index, :update, :show, :destroy] do
     member do
       post 'check_out'
+      post 'check_in'
       delete 'clear'
     end
   end
@@ -59,6 +60,7 @@ Commerce::Application.routes.draw do
   resources :meals, :only => [:index, :create, :show, :edit, :update, :destroy] do
     member do
       post 'check_out'
+      post 'check_in'
       delete 'clear'
     end
   end
@@ -87,6 +89,7 @@ Commerce::Application.routes.draw do
   resources :orders do
     member do
       post 'commit'
+      post 'status'
     end
   end
   resources :transfers do

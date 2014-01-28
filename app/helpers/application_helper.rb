@@ -37,4 +37,28 @@ module ApplicationHelper
     months
   end
 
+  def get_times(opening)
+    grouped_times = []
+    if ['lunch', 'open'].include?(opening)
+      times = []
+      time = '12:00'.to_time
+      0.upto(9) do |i|
+        times << time.strftime('%H:%M')
+        time = time + 15.minutes
+      end
+      grouped_times << times
+    end
+    if ['dinner', 'open'].include?(opening)
+      times = []
+      time = '18:00'.to_time
+      0.upto(14) do |i|
+        times << time.strftime('%H:%M')
+        time = time + 15.minutes
+      end
+      grouped_times << times
+    end
+    p grouped_times
+    grouped_times
+  end
+
 end

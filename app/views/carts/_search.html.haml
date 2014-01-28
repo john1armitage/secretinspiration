@@ -1,11 +1,16 @@
 #search
-  = form_tag carts_path, method: 'get' do
-    .row
-      .large-12.columns
-        .row.collapse
-          .small-10.columns
-            %input{placeholder: "Cart ID", type: "text"}/
-          .small-2.columns
-            %a.button.postfix{href: "#"} Go
-          = text_field_tag :search
-          = submit_tag 'Search'
+  .row.collapse
+    .small-10.columns
+      %input{placeholder: "Cart ID", type: "text"}/
+    .small-2.columns
+      %a.button.postfix{href: "#", title: 'Find Cart'} Go
+:coffeescript
+  jQuery ->
+    $('div#search a.button').on "click", (event) ->
+      $.get
+      $id = $(this).parent().siblings().find('input').val()
+      if $.isNumeric($id)
+        $.get( '/carts?cart_id=' + $id )
+      else
+        alert 'ID Required'
+      event.preventDefault()

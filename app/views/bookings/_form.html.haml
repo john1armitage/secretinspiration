@@ -11,33 +11,38 @@
         - if @booking.booking_date.blank? || (allow? :seating, :create)
           = f.label :booking_date
           = f.date_field :booking_date
-        -#- else
-        -#  = f.hidden_field :booking_date
+        - else
+          = f.hidden_field :booking_date
     .row
       -#.large-12.columns
       -#  .field.timepicker.small-3.columns.left
       .large-6.columns.timepicker
         = f.label :arrival, 'Time'
-        = f.text_field :arrival
+        = f.select :arrival, grouped_options_for_select(get_times(params[:opening]), nil, divider: 'Sitting')
+        =# f.text_field :arrival, placeholder: 'arrival'
       .large-6.columns
-        = f.label :pax, 'Guests'
-        = f.number_field :pax
+        = f.label :pax, 'Party'
+        = f.number_field :pax, placeholder: 'size'
     - unless @booking.walkin
       .row
         .large-12.columns
-          = f.label :customer_name, 'Name'
-          = f.text_field :customer_name
+          = f.label :customer_name, 'Contact'
+          = f.text_field :customer_name, placeholder: 'name'
       .row
         .large-12.columns
-          = f.label :contact, 'Contact Phone'
-          = f.text_field :contact
+          = f.label :contact, 'Phone', placeholder: 'phone'
+          = f.text_field :contact, placeholder: 'your number'
+      .row
+        .large-12.columns
+          = f.label :contact, 'Email'
+          = f.text_field :contact, placeholder: 'email'
     - else
       = f.hidden_field :customer_name
       = f.hidden_field :contact
     .row
       .large-12.columns
         = f.label :notes, "#{ (allow? :seating, :create) ? 'Notes' : 'Requests'}"
-        = f.text_area :notes
+        = f.text_area :notes, placeholder: 'notes'
     - if allow? :seating, :create
       .row
         .large-12.columns

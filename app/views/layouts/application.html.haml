@@ -4,8 +4,8 @@
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   %title= content_for?(:title) ? yield(:title) : current_tenant.name
   %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
-  = stylesheet_link_tag "application", "data-turbolinks-track" => true
-
+  = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
+  = stylesheet_link_tag 'print', :media => 'print'
   -# Foundation 5 won't work with Rails Turbolinks
   -# Modernizr is required for Zurb Foundation
   = javascript_include_tag "modernizr", "data-turbolinks-track" => true
@@ -19,21 +19,21 @@
   -#.row#header.hide-for-large-only
   -#  .large-12.columns
   -#    = render 'layouts/contact/index_small'
-  .row#navigation
+  .row#navigation.no-print
     .large-12.columns.show-for-medium-up
       = render 'layouts/navigation'
     .large-12.columns.hide-for-medium-up
       = render 'layouts/navigation_small'
-  .row
+  .row.no-print
     .large-12.columns#messages
       = render 'layouts/messages'
   .row
-    .large-2.columns#aside.show-for-large-up
+    .large-2.columns#aside.show-for-large-up.no-print
       %aside#sidebar
         = render "welcome/intro"
       #utility
     .large-10.small-12.medium-12.columns
-      .row.show-for-medium-up
+      .row.show-for-medium-up.no-print
         .large-12.columns#menu
           = render 'layouts/menus/us'
       .row
@@ -45,16 +45,16 @@
   -#    = render 'layouts/menus/us'
   -#  .large-12.columns#content{role: "content"}
   -#    = yield
-  #aside.hide-for-large-up
+  #aside.hide-for-large-up.no-print
     %aside#sidebar
       -# unless allow? :users, :index
       = render "welcome/intro"
       -#= render "welcome/solus"
       -#= render "welcome/current"
       -#= render "welcome/footer"
-    #contact_small.hide-for-large-up
+    #contact_small.hide-for-large-up.no-print
       = render 'layouts/contact/index_small'
-    #utility
+    #utility.no-print
 :coffeescript
   jQuery ->
     $('ul.dropdown li:not(.title)').on 'click', (event) ->
@@ -62,3 +62,6 @@
     $(document).on "click", 'input[value="Cancel"]', (event) ->
       event.preventDefault()
       $(this).parents().find('div#editor').html('')
+    $(document).on "click", 'a#print', (event) ->
+      window.print()
+      event.preventDefault()

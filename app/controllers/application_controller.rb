@@ -173,10 +173,6 @@ class ApplicationController < ActionController::Base
     @events_by_date = get_events(@booking_date)
     @events_next_month = get_events(@booking_date + 1.month)
     @openings = get_openings( @booking_date.beginning_of_month, (@booking_date + 1.month).end_of_month )
-    p "HERE 2"
-    p @bookings_by_date
-    p @events_by_date
-    p @openings
   end
   helper_method :set_booking_dates
 
@@ -189,7 +185,17 @@ class ApplicationController < ActionController::Base
   def get_events(event_date)
     start = (event_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : event_date.beginning_of_month
     stop = event_date.end_of_month
-    broadcasts = Broadcast.where('event_date >= ? AND event_date <= ?', start, stop )
+    #broadcasts = Broadcast.where('event_date >= ? AND event_date <= ?', start, stop )
+    broadcasts = []
+    Broadcast.where('event_date NOTNULL and event_date >= ? AND event_date <= ?', start, stop ).each do |event|
+      date = event.event_date
+      1.upto(event.repeat ) do |actual|
+        if date >= start and date <= stop
+          broadcasts << Broadcast.new(event.attributes.merge({event_date: date}))
+        end
+        date = event.event_date + eval("#{actual}.#{event.frequency}")
+      end
+    end
     broadcasts.group_by(&:event_date)
   end
 
@@ -199,23 +205,18 @@ class ApplicationController < ActionController::Base
       if opening.finish_date >= start
         date = opening.start_date
         if opening.end_date.blank?
-          p "END NOT SET"
           1.upto(opening.repeat ) do |actual|
             if date >= start and date <= finish
-              p date
               openings << Opening.new(opening.attributes.merge({start_date: date}))
-              p openings.size
             end
             date = opening.start_date + eval("#{actual}.#{opening.frequency}")
           end
         else
-          p "END SET"
           #i = 0
           while (date <= finish and date <= opening.end_date) do
             #i += 1
             opening.start_date = date
             if date >= start and date <= finish
-              p date
               openings << Opening.new(opening.attributes.merge({start_date: date}))
             end
             date = date + eval("1.#{opening.frequency}")
@@ -232,4 +233,12 @@ class ApplicationController < ActionController::Base
     #end
     openings.group_by(&:start_date)
   end
+
+  #def set_choices
+  #  choices = params[:choices].present? ? params[:choices] : default_choices
+  #  @categories = get_categories(choices)
+  #  @page = Page.find_by_code( choices )
+  #end
+  #helper_method :set_choices
+
 end
