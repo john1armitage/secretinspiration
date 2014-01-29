@@ -13,15 +13,16 @@
           = f.date_field :booking_date
         - else
           = f.hidden_field :booking_date
+    - unless @booking.walkin
+      .row
+        .large-12.columns.timepicker
+          = f.label :arrival, 'Arrival Time'
+          = f.select :arrival, grouped_options_for_select(get_times(params[:opening] || 'open'), @booking.arrival, divider: 'Sitting')
+    - else
+      = f.hidden_field :arrival
     .row
-      -#.large-12.columns
-      -#  .field.timepicker.small-3.columns.left
-      .large-6.columns.timepicker
-        = f.label :arrival, 'Time'
-        = f.select :arrival, grouped_options_for_select(get_times(params[:opening]), nil, divider: 'Sitting')
-        =# f.text_field :arrival, placeholder: 'arrival'
-      .large-6.columns
-        = f.label :pax, 'Party'
+      .large-12.columns
+        = f.label :pax, 'Number of People'
         = f.number_field :pax, placeholder: 'size'
     - unless @booking.walkin
       .row

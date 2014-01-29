@@ -50,6 +50,8 @@ class MealsController < ApplicationController
     @meal.update( state: 'checkout')
     @meal.line_items.update_all(ownable_type: 'Order', ownable_id: @order.id)
     Meal.find(@meal.id).destroy
+    set_booking_dates
+    render 'check'
   end
 
   def check_in
@@ -58,10 +60,7 @@ class MealsController < ApplicationController
     if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id)
       @order.destroy
     end
-    redirect_to meals_url(meal_id: @meal.id)
-    #respond_to do |format|
-    #   format.js  { render action: 'index', cart_id: @cart.id} # renders create.js.erb, which could be used to redirect via javascript
-    #end
+    redirect_to bookings_url()
   end
 
 

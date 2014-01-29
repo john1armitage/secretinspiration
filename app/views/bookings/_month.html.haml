@@ -21,12 +21,12 @@
               - opening = 'open'
             - else
               - opening = 'lunch'
+        -#- if allow? :seating, :create
+        -#  = opening
+        -#-else
+        = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening }
         - if allow? :seating, :create
-          = opening
-        -else
-          = render partial: 'month_request', locals: {date: date, bookings: bookings, events: events, opening: opening }
-        - if allow? :seating, :create
-          = render partial: 'month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
+          = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
         -#- else
         -#  = render partial: 'month_public', locals: {date: date, bookings: bookings, events: events, opening: opening }
       - if events[date]

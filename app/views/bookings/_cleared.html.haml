@@ -1,0 +1,11 @@
+%ul#order
+  %li.title
+    %span
+      Cleared
+  - @bookings.where("state = 'complete'").each do |booking|
+    %li
+      = booking.updated_at.strftime('%H:%M')
+      - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name
+      %span.title
+        = link_to name, status_booking_path(booking.id, status: 'incomplete', bill: true), method: :post, data: {confirm: 'Resume Service?'}, title: 'Table Cleared', remote: true, class: 'no_ajaxify'
+      = "#{booking.pax}"

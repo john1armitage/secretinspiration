@@ -114,7 +114,8 @@ class OrdersController < ApplicationController
 
   def status
     @order.update_attribute(:state, params[:status])
-    render 'show'
+    set_booking_dates
+    render 'bookings/index'
   end
 
   # DELETE /orders/1

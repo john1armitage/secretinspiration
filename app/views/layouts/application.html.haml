@@ -12,13 +12,6 @@
   = csrf_meta_tags
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
-  -# .row#header
-    -# unless allow? :items, :index
-      #contact.large-12.columns.show-for-small-up
-        = render 'layouts/contact/index'
-  -#.row#header.hide-for-large-only
-  -#  .large-12.columns
-  -#    = render 'layouts/contact/index_small'
   .row#navigation.no-print
     .large-12.columns.show-for-medium-up
       = render 'layouts/navigation'
@@ -39,20 +32,11 @@
       .row
         .large-12.columns#content{role: "content"}
           = yield
-    -#.large-2.pull-10.columns.hide-for-small-only
-  -#.row.hide-for-large-up
-  -#  .large-12.columns#menu.show-for-medium-only
-  -#    = render 'layouts/menus/us'
-  -#  .large-12.columns#content{role: "content"}
-  -#    = yield
-  #aside.hide-for-large-up.no-print
+  #aside.show-for-medium-down.no-print
     %aside#sidebar
       -# unless allow? :users, :index
       = render "welcome/intro"
-      -#= render "welcome/solus"
-      -#= render "welcome/current"
-      -#= render "welcome/footer"
-    #contact_small.hide-for-large-up.no-print
+    #contact_small.no-print
       = render 'layouts/contact/index_small'
     #utility.no-print
 :coffeescript

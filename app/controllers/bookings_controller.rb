@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :status]
 
   # GET /bookings
   def index
@@ -20,6 +20,7 @@ class BookingsController < ApplicationController
     get_tables
     @booked_tabels = []
     @booking = Booking.new
+    @booking.state = 'incomplete'
     @booking.booking_date = params[:date].present? ? params[:date] : Date.today.to_s
     if params[:walk_in].present?
       @booking.walkin = true
@@ -72,6 +73,12 @@ class BookingsController < ApplicationController
       update_booked
       render 'form'
     end
+  end
+
+  def status
+    @booking.update_attribute(:state, params[:status])
+    set_booking_dates
+    render 'index'
   end
 
   # DELETE /bookings/1

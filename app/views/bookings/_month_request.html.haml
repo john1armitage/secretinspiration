@@ -4,4 +4,7 @@
   - open = 'Lunch/Dinner'
 - else
   - open = opening.capitalize
-= link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening}", remote: true
+- if allow? :seating, :create
+  = link_to "Book #{opening.capitalize}", new_booking_path(date: date.to_s, opening: opening), class: 'no_ajaxify', remote: true
+- else
+  = link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening}", remote: true

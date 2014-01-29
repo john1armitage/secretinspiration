@@ -73,6 +73,9 @@ Commerce::Application.routes.draw do
   resources :options
 
   resources :bookings do
+    member do
+      post 'status'
+    end
     collection do
       get 'dated'
     end

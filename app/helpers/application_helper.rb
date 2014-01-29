@@ -37,7 +37,7 @@ module ApplicationHelper
     months
   end
 
-  def get_times(opening)
+  def get_times(opening = 'open')
     grouped_times = []
     if ['lunch', 'open'].include?(opening)
       times = []
@@ -57,7 +57,6 @@ module ApplicationHelper
       end
       grouped_times << times
     end
-    p grouped_times
     grouped_times
   end
 
