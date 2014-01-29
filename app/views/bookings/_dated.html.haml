@@ -17,7 +17,7 @@
       = link_to 'CXL', status_booking_path(booking.id, status: 'cancelled', bill: true), method: :post, data: {confirm: 'Cancel Booking?'}, title: 'Cancel Booking', remote: true, class: 'no_ajaxify'
       = "#{booking.pax} pax"
       - booking.seatings.joins(:tabel).order('tabels.name::INT').each do |seating|
-        = render partial: 'tabel', locals: {seating:  seating }
+        = render partial: 'bookings/tabel', locals: {seating:  seating }
       = 'W' if booking.window && booking.seatings.empty?
       = link_to 'Complete', status_booking_path(booking.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Service Complete?'}, title: 'Table Cleared', remote: true, class: 'no_ajaxify'
       - unless booking.notes.blank?

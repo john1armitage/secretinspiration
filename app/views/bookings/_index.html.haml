@@ -12,5 +12,5 @@
   jQuery ->
     $('select').on "change", (event) ->
       $.ajax
-        url: 'bookings?calendar=true&booking_date=' + event.target.value
+        url: "bookings?calendar=true#{ params[:no_content].present? ? '&no_content=true' : '' }&booking_date=" + event.target.value
         dataType: 'script'

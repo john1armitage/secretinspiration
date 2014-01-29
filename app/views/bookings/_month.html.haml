@@ -1,4 +1,5 @@
 - months = get_months(Date.today, 12)
+- no_content= params[:no_content].present? ? 'no_content' : ''
 %p= select_tag 'months', options_for_select(months, month)
 = calendar(month) do |date|
   %ul
@@ -24,7 +25,7 @@
         -#- if allow? :seating, :create
         -#  = opening
         -#-else
-        = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening }
+        = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
         - if allow? :seating, :create
           = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
         -#- else
@@ -32,7 +33,7 @@
       - if events[date]
         - events[date].each do |event|
           %li.event{class: event.category}
-            != link_to event.title, broadcast_path( event, aside: true ), class: 'no_ajaxify', remote: true
+            != link_to event.title, broadcast_path( event, aside: true ), class: "no_ajaxify  #{no_content}", remote: true
 
 
 

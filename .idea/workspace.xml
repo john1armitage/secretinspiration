@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/views/meals/_form.html.haml" line="8" />
+    <bookmark url="file://$PROJECT_DIR$/app/views/meals/_form.html.haml" line="10" />
     <bookmark url="file://$PROJECT_DIR$/app/controllers/postings_controller.rb" line="19" />
     <bookmark url="file://$PROJECT_DIR$/app/views/orders/secret/_bill.html.haml" description="    = @order.state&#10;" line="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/bookings/_cleared.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/meals/check.js.erb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/meals/check_out.js.erb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/migrate/20140125174409_add_repeat_to_event.rb" afterPath="$PROJECT_DIR$/db/migrate_public/20140125174409_add_repeat_to_event.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/migrate/20140126104520_add_category_to_broadcasts.rb" afterPath="$PROJECT_DIR$/db/migrate_public/20140126104520_add_category_to_broadcasts.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/assets/multitenant.rake" afterPath="$PROJECT_DIR$/lib/tasks/multitenant.rake" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_dated.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_dated.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_form.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_index.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_index.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/welcome/_intro.html.haml" afterPath="$PROJECT_DIR$/app/views/welcome/_intro.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_month.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_month.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_month_admin.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_month_admin.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_month_public.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_month_public.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/_month_request.html.haml" afterPath="$PROJECT_DIR$/app/views/bookings/_month_request.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navigation.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/bookings_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bookings_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/index.js.erb" afterPath="$PROJECT_DIR$/app/views/bookings/index.js.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/manifest-b2ff419ace069be5f4d2daf4666449ab.json" afterPath="$PROJECT_DIR$/public/assets/manifest-b2ff419ace069be5f4d2daf4666449ab.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bookings/form.js.erb" afterPath="$PROJECT_DIR$/app/views/bookings/form.js.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/meals_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/meals_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/order.rb" afterPath="$PROJECT_DIR$/app/models/order.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/structure.sql" afterPath="$PROJECT_DIR$/db/structure.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -41,9 +34,9 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/commerce@db_migrate__commerce.coverage" NAME="db:migrate: commerce Coverage Results" MODIFIED="1390989548870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
+    <SUITE FILE_PATH="coverage/commerce@db_migrate__commerce.coverage" NAME="db:migrate: commerce Coverage Results" MODIFIED="1391005999303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
     <SUITE FILE_PATH="coverage/commerce@db_rollback__commerce.coverage" NAME="db:rollback: commerce Coverage Results" MODIFIED="1390579136280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
-    <SUITE FILE_PATH="coverage/commerce@Development__commerce.coverage" NAME="Development: commerce Coverage Results" MODIFIED="1390838313342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
+    <SUITE FILE_PATH="coverage/commerce@Development__commerce.coverage" NAME="Development: commerce Coverage Results" MODIFIED="1390999136635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -57,64 +50,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="meals_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/meals_controller.rb">
+      <file leaf-file-name="_month_request.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_request.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="21" selection-start="1536" selection-end="1536" vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1320">
+            <state line="9" column="124" selection-start="382" selection-end="396" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="240">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_dated.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bookings/_dated.html.haml">
+      <file leaf-file-name="_month_public.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_public.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="14" selection-start="250" selection-end="250" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="450">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="68" selection-start="3672" selection-end="3672" vertical-scroll-proportion="0.0" vertical-offset="1452" max-vertical-offset="2205">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bookings/index.js.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="46" selection-start="283" selection-end="283" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="165">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="check.js.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/meals/check.js.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="57" selection-start="137" selection-end="137" vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="120">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/meals/_form.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="97" selection-start="1010" selection-end="1010" vertical-scroll-proportion="-10.333333" vertical-offset="7" max-vertical-offset="465">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bookings_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/bookings_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="21" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="2415">
+            <state line="7" column="57" selection-start="246" selection-end="246" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="195">
               <folding />
             </state>
           </provider>
@@ -123,7 +71,25 @@
       <file leaf-file-name="_month.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/bookings/_month.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="38" selection-start="986" selection-end="986" vertical-scroll-proportion="-13.75" vertical-offset="90" max-vertical-offset="915">
+            <state line="17" column="68" selection-start="589" selection-end="589" vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="930">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="60" selection-start="1648" selection-end="1648" vertical-scroll-proportion="-16.833334" vertical-offset="226" max-vertical-offset="930">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/bookings/index.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
               <folding />
             </state>
           </provider>
@@ -132,16 +98,43 @@
       <file leaf-file-name="_index.html.haml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/bookings/_index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="32" selection-start="289" selection-end="289" vertical-scroll-proportion="0.2764977" vertical-offset="0" max-vertical-offset="434">
+            <state line="14" column="72" selection-start="553" selection-end="553" vertical-scroll-proportion="0.4918033" vertical-offset="0" max-vertical-offset="427">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_cleared.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bookings/_cleared.html.haml">
+      <file leaf-file-name="_intro.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/welcome/_intro.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="118" selection-start="482" selection-end="482" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
+            <state line="0" column="5" selection-start="0" selection-end="28" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="150">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_navigation.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="0" selection-start="610" selection-end="822" vertical-scroll-proportion="10.541667" vertical-offset="478" max-vertical-offset="990">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_navigation_small.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="63" selection-start="974" selection-end="974" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form.js.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/bookings/form.js.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="92" selection-start="158" selection-end="158" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="135">
               <folding />
             </state>
           </provider>
@@ -169,12 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/line_items/bill.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/orders/show.html.haml" />
-        <option value="$PROJECT_DIR$/app/controllers/line_items_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/choices/_sub_menu.html.haml" />
-        <option value="$PROJECT_DIR$/app/controllers/choices_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/carts/_line_item.html.haml" />
         <option value="$PROJECT_DIR$/app/views/carts/_search.html.haml" />
         <option value="$PROJECT_DIR$/app/views/carts/check_out.js.erb" />
         <option value="$PROJECT_DIR$/app/views/orders/secret/_current_order.html.haml" />
@@ -198,27 +185,33 @@
         <option value="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_order.html.haml" />
         <option value="$PROJECT_DIR$/app/views/meals/_show_order.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/meals/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_line_item.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_current.html.haml" />
         <option value="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-        <option value="$PROJECT_DIR$/app/views/bookings/_month_request.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/views/bookings/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/meals/_index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/bookings/_cleared.html.haml" />
         <option value="$PROJECT_DIR$/app/views/bookings/_month_admin.html.haml" />
         <option value="$PROJECT_DIR$/app/views/meals/check.js.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/meals_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/bookings_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/bookings/_dated.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/bookings/index.js.erb" />
+        <option value="$PROJECT_DIR$/app/models/order.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/meals_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/meals/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/bookings/_dated.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_navigation.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/bookings/_form.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/bookings/form.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/welcome/_intro.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/bookings/_month_request.html.haml" />
         <option value="$PROJECT_DIR$/app/views/bookings/_month.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/bookings/_month_public.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
         <option value="$PROJECT_DIR$/app/views/bookings/_index.html.haml" />
       </list>
     </option>
@@ -231,8 +224,8 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="357" />
-    <option name="y" value="24" />
+    <option name="x" value="507" />
+    <option name="y" value="99" />
     <option name="width" value="1318" />
     <option name="height" value="979" />
   </component>
@@ -268,10 +261,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="commerce" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -438,7 +427,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrate_multi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -455,28 +448,6 @@
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="initializers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -496,7 +467,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
+              <option name="myItemId" value="welcome" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -515,84 +486,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="orders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="orders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shack" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="orders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="secret" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="options" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -636,77 +529,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="line_items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="layouts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="choices" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="choices" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shack" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -765,82 +588,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="validators" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="uploaders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="concerns" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1311,7 +1058,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="357" y="24" width="1318" height="979" extended-state="0" />
+    <frame x="507" y="99" width="1318" height="979" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1324,7 +1071,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2224622" sideWeight="0.41095892" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44671202" sideWeight="0.50035995" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37797958" sideWeight="0.8437725" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35868332" sideWeight="0.8437725" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1414,186 +1161,16 @@
           <line>20</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/views/layouts/application.html.haml</url>
+          <line>33</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="33" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/choices/_show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/choices/shack/_show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="2" selection-start="0" selection-end="71" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="120">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="28" selection-start="358" selection-end="358" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="465">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/commerce.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="89" selection-start="2353" selection-end="2353" vertical-scroll-proportion="-2.724138" vertical-offset="2047" max-vertical-offset="6795">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/fields/_item_choices_tag.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="86" selection-start="191" selection-end="191" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/category.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="804">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meals/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="150">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_order.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="142" selection-start="239" selection-end="275" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meals/_show_order.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="170" selection-start="268" selection-end="268" vertical-scroll-proportion="0.24647887" vertical-offset="0" max-vertical-offset="426">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/choices/shack/_item.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.91549295" vertical-offset="0" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/choices/shack/_variant.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="83" selection-start="364" selection-end="364" vertical-scroll-proportion="0.23917995" vertical-offset="0" max-vertical-offset="439">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/carts/_cart.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="1148" selection-end="1344" vertical-scroll-proportion="-8.375" vertical-offset="174" max-vertical-offset="600">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/carts/index.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="73" selection-start="73" selection-end="73" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/carts/_index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="41" selection-start="23" selection-end="104" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/order.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="23" selection-start="622" selection-end="633" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tabel.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/seating.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="538">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="106" selection-end="106" vertical-scroll-proportion="0.14285715" vertical-offset="0" max-vertical-offset="525">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_line_item.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="24" selection-start="260" selection-end="260" vertical-scroll-proportion="0.24590164" vertical-offset="0" max-vertical-offset="549">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/secret/_bill.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="33" selection-start="579" selection-end="579" vertical-scroll-proportion="0.28961748" vertical-offset="156" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/carts_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="5" selection-start="1811" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="1365">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/application_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="31" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.41329858" vertical-offset="268" max-vertical-offset="1035">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/accounts_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_public.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="0" selection-end="232" vertical-scroll-proportion="0.13274336" vertical-offset="0" max-vertical-offset="791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_request.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="104" selection-start="398" selection-end="398" vertical-scroll-proportion="0.18963337" vertical-offset="0" max-vertical-offset="791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate_multi/20140129095431_add_i_paddress_to_carts.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="12" selection-start="64" selection-end="64" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
@@ -1622,13 +1199,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="18" selection-start="1521" selection-end="1521" vertical-scroll-proportion="-16.25" vertical-offset="180" max-vertical-offset="855">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="76" column="121" selection-start="1579" selection-end="1579" vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="2490">
@@ -1636,37 +1206,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="37" selection-start="1846" selection-end="1848" vertical-scroll-proportion="-16.25" vertical-offset="390" max-vertical-offset="1050">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_sidebar.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meals/_index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="118" selection-start="596" selection-end="596" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="480">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="0" selection-start="27" selection-end="49" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="240">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_admin.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="4" selection-start="179" selection-end="179" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="300">
           <folding />
         </state>
       </provider>
@@ -1713,34 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/meals/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="97" selection-start="1010" selection-end="1010" vertical-scroll-proportion="-10.333333" vertical-offset="7" max-vertical-offset="465">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/meals_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="21" selection-start="1536" selection-end="1536" vertical-scroll-proportion="0.0" vertical-offset="454" max-vertical-offset="1320">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_cleared.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="118" selection-start="482" selection-end="482" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bookings/_dated.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="250" selection-end="250" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="450">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="114" column="68" selection-start="3672" selection-end="3672" vertical-scroll-proportion="0.0" vertical-offset="1452" max-vertical-offset="2205">
@@ -1755,23 +1269,261 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/seating.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/meal.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="14" selection-start="47" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2115">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20140129123525_add_seating_to_orders.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="63" selection-end="63" vertical-scroll-proportion="0.031847134" vertical-offset="0" max-vertical-offset="471">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/order.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="29" selection-start="870" selection-end="870" vertical-scroll-proportion="0.2964427" vertical-offset="270" max-vertical-offset="1950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/meals_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="97" selection-start="1929" selection-end="1929" vertical-scroll-proportion="0.6069364" vertical-offset="630" max-vertical-offset="1395">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/bookings_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="21" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="2415">
+        <state line="79" column="0" selection-start="1760" selection-end="1815" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="2415">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_thanks.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="653" selection-end="653" vertical-scroll-proportion="-15.625" vertical-offset="90" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate_multi/20140129143230_add_email_to_bookings.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="12" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/create.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="464">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_admin.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="4" selection-start="179" selection-end="179" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_info.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_meal.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="45" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.8606557" vertical-offset="0" max-vertical-offset="1065">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_dated.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="111" selection-start="250" selection-end="250" vertical-scroll-proportion="0.18036072" vertical-offset="0" max-vertical-offset="499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_cleared.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="118" selection-start="482" selection-end="482" vertical-scroll-proportion="0.33066133" vertical-offset="0" max-vertical-offset="499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_sidebar.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="534">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_line_item.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_line_item.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_line_item_bill.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="118" selection-start="596" selection-end="596" vertical-scroll-proportion="0.4918033" vertical-offset="0" max-vertical-offset="488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/meals/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="6" selection-start="282" selection-end="282" vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_search.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="512">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_line_item_bill.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/carts/_cart.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="610" selection-end="822" vertical-scroll-proportion="10.541667" vertical-offset="478" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/form.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="92" selection-start="158" selection-end="158" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="63" selection-start="974" selection-end="974" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/welcome/_intro.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="5" selection-start="0" selection-end="28" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_request.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="124" selection-start="382" selection-end="396" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/_month_public.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="57" selection-start="246" selection-end="246" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="60" selection-start="1648" selection-end="1648" vertical-scroll-proportion="-16.833334" vertical-offset="226" max-vertical-offset="930">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bookings/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="488">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bookings/_month.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="38" selection-start="986" selection-end="986" vertical-scroll-proportion="-13.75" vertical-offset="90" max-vertical-offset="915">
+        <state line="17" column="68" selection-start="589" selection-end="589" vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="930">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/bookings/_index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="32" selection-start="289" selection-end="289" vertical-scroll-proportion="0.2764977" vertical-offset="0" max-vertical-offset="434">
+        <state line="14" column="72" selection-start="553" selection-end="553" vertical-scroll-proportion="0.4918033" vertical-offset="0" max-vertical-offset="427">
           <folding />
         </state>
       </provider>

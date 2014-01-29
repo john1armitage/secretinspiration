@@ -5,6 +5,8 @@
       Table
       = @meal.tabel_name
     != link_to "Drinks",  edit_meal_path( @meal, choices: 'drinks'), remote: true, class: 'no_ajaxify'
+  %li
+    != @meal.seating.booking.customer_name
   - unless @meal.line_items.empty?
     %li.total
       %span.title

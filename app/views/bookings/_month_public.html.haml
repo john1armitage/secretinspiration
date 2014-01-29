@@ -4,4 +4,4 @@
     - open = 'lunch or dinner'
   - else
     - open = opening
-  = link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening}", remote: true
+  = link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening} #{no_content}", remote: true

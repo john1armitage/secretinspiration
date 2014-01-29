@@ -11,6 +11,9 @@
     %section.top-bar-section
       / Right Nav Section
       %ul.right
+        - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
+          %li.level-one
+            != link_to 'Book', bookings_path(no_content: true), remote: true, class: 'no_ajaxify'
         - %w(food drinks catalogue).each do |component|
           - if eval("current_tenant.#{component} == '1'")
             %li.has-dropdown
@@ -37,16 +40,3 @@
                 = link_to 'Events', blog_broadcasts_path(name: 'event')
               -#%li
               -#  = link_to category.nice_name.pluralize, choice_path(category.name)
-
-
--#.row.hide-for-large-up{data: { 'magellan-expedition' => 'fixed' } }
--#  .small-6.columns
--#    != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', :class => "no_ajaxify image mast"
--#  .small-6.columns
--#    %ul.inline-list.right
--#      - %w(food drinks catalogue).each do |component|
--#        - if eval("current_tenant.#{component} == '1'")
--#          %li
--#            != link_to make_title(component), choices_path(choices: component), class: 'no_ajaxify', remote: 'true'
--#      %li
--#        != link_to 'Us', sub_menu_path('us', code: true), class: 'no_ajaxify', remote: 'true'

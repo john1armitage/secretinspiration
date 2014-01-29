@@ -16,8 +16,9 @@
     - unless @booking.walkin
       .row
         .large-12.columns.timepicker
+          - arrival =  @booking.arrival ?  @booking.arrival.strftime('%H:%M') : nil
           = f.label :arrival, 'Arrival Time'
-          = f.select :arrival, grouped_options_for_select(get_times(params[:opening] || 'open'), @booking.arrival, divider: 'Sitting')
+          = f.select :arrival, grouped_options_for_select(get_times(params[:opening] || 'open'), arrival, divider: 'Sitting')
     - else
       = f.hidden_field :arrival
     .row
@@ -35,8 +36,8 @@
           = f.text_field :contact, placeholder: 'your number'
       .row
         .large-12.columns
-          = f.label :contact, 'Email'
-          = f.text_field :contact, placeholder: 'email'
+          = f.label :email, 'Email'
+          = f.text_field :email, placeholder: 'email'
     - else
       = f.hidden_field :customer_name
       = f.hidden_field :contact

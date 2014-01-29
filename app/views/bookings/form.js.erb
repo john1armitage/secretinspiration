@@ -1,1 +1,4 @@
+<% if params[:no_content].present? %>
+$('div#content').html("")
+<% end %>
 $('div#editor').html("<%= escape_javascript(render :partial => 'bookings/form') %>")

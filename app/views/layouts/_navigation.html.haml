@@ -1,14 +1,18 @@
-.row.hide-for-large-up{data: { 'magellan-expedition' => 'fixed' } }
-  .small-6.columns
-    != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', :class => "no_ajaxify image mast"
-  .small-6.columns
-    %ul.inline-list.right
-      - %w(food drinks catalogue).each do |component|
-        - if eval("current_tenant.#{component} == '1'")
-          %li
-            != link_to make_title(component), choices_path(choices: component), class: 'no_ajaxify', remote: 'true'
-      %li
-        != link_to 'Us', sub_menu_path('us', code: true), class: 'no_ajaxify', remote: 'true'
+-#.row.hide-for-large-up{data: { 'magellan-expedition' => 'fixed' } }
+-#  .small-6.columns
+-#    != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', :class => "no_ajaxify image mast"
+-#  .small-6.columns
+-#    %ul.inline-list.right
+-#      - %w(food drinks catalogue).each do |component|
+-#        - if eval("current_tenant.#{component} == '1'")
+-#          %li
+-#            != link_to make_title(component), choices_path(choices: component), class: 'no_ajaxify', remote: 'true'
+-#      %li
+-#        != link_to 'Ubs', sub_menu_path('us', code: true), class: 'no_ajaxify', remote: 'true'
+-#
+-#      - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
+-#        %li
+-#          != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'
 
 .row.show-for-large-up
   .large-3.columns

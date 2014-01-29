@@ -26,6 +26,7 @@ class Order < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
   belongs_to :customer
+  belongs_to :seating
   belongs_to :supplier
   has_many :receipts, dependent: :destroy
 

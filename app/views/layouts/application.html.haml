@@ -29,6 +29,9 @@
       .row.show-for-medium-up.no-print
         .large-12.columns#menu
           = render 'layouts/menus/us'
+      .row.hide-for-large-up
+        .large-12.columns
+          #editor
       .row
         .large-12.columns#content{role: "content"}
           = yield
@@ -41,11 +44,14 @@
     #utility.no-print
 :coffeescript
   jQuery ->
-    $('ul.dropdown li:not(.title)').on 'click', (event) ->
+    $('ul.dropdown li:not(.title),li.level-one').on 'click', (event) ->
       $('li.menu-icon').click()
+      $('div#editor').html('')
     $(document).on "click", 'input[value="Cancel"]', (event) ->
       event.preventDefault()
       $(this).parents().find('div#editor').html('')
     $(document).on "click", 'a#print', (event) ->
       window.print()
       event.preventDefault()
+    $(document).on "click", 'a.no_content', (event) ->
+      $('div#content').html('')
