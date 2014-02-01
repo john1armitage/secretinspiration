@@ -1,4 +1,4 @@
-- months = get_months(Date.today, 12)
+- months = get_months(Date.today.beginning_of_month, 12)
 - no_content= params[:no_content].present? ? 'no_content' : ''
 %p= select_tag 'months', options_for_select(months, month)
 = calendar(month) do |date|

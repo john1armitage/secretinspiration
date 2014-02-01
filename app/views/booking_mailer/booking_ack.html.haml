@@ -1,0 +1,37 @@
+%p
+  Hi
+
+%p
+  We have received your booking:
+
+%p
+  %i
+    Details
+  %br
+  = "#{@booking.arrival.strftime('%H:%M')} on #{@booking.booking_date.strftime('%a %e %B %y')}"
+  %br
+  = "Party of #{@booking.pax}"
+%p
+  %i
+    Contact
+  %br
+  = @booking.customer_name
+  %br
+  = @booking.contact
+
+- unless @booking.notes.blank?
+  %p
+    %span
+      We've noted your request:
+      %i
+        = "'#{@booking.notes}'"
+
+%p
+  We'll give you a call to confirm but looks fine!
+
+%p
+  Thanks, we look forward to seeing you.
+
+%p
+  %i
+    Pepper Shack

@@ -130,7 +130,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def admin_ok?
-    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.164' )
+    #( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.164' )
+    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || (  ENV[:allowed_hosts ].include? request.remote_addr )
   end
   helper_method :admin_ok?
 
@@ -167,7 +168,8 @@ class ApplicationController < ActionController::Base
   def set_booking_dates
     @booking_date = @booking.booking_date if @booking
     @booking_date ||= params['booking_date'].present? ? params['booking_date'].to_date : Date.today
-    @bookings = Booking.where( :booking_date => @booking_date ).order(:arrival, :customer_name)
+    @bookings = Booking.where( booking_date: @booking_date ).order(:arrival, :customer_name)
+    @requests = Booking.where( 'confirmed = ?', false ).order(:booking_date, :customer_name)
     @bookings_by_date = get_bookings(@booking_date)
     @bookings_next_month = get_bookings(@booking_date + 1.month)
     @events_by_date = get_events(@booking_date)

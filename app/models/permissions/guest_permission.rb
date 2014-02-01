@@ -13,7 +13,7 @@ module Permissions
       allow :users, [ :carts]
       #allow :users, [:new, :carts]
       allow :items_exists, [:index, :show]
-      allow_param :booking, [:walkin, :arrival, :pax, :customer_name, :contact, :notes, :booking_date]
+      allow_param :booking, [:walkin, :arrival, :pax, :customer_name, :contact, :notes, :booking_date, :state, :email]
     end
   end
 end

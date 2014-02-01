@@ -30,7 +30,7 @@
         = f.text_area :notes
     .row
       .field.small-5.columns
-        = f.label :rank
+        = f.label :rank, "Rank ... #{@category.parent.rank}"
         = f.text_field :rank
     .row
       .field.small-5.columns

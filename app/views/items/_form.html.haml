@@ -33,10 +33,6 @@
       .field.small-3.columns.left
         = f.label :sups, 'Suppliers'
         = f.collection_select :sups, get_suppliers( @item.category_id), 'id', 'name', {}, {:multiple => true}
-        - p "CATS"
-        - p @item.category_id
-        - p "CATS 2"
-        - p get_suppliers( @item.category_id)
     .row
       .field.small-8.columns
         = f.label :description

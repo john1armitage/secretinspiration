@@ -43,9 +43,13 @@ class BookingsController < ApplicationController
   # POST /bookings
   def create
     @booking = Booking.new(params[:booking])
+    p params[:booking]
+    p params[:booking][:email]
     if  @current_user.id.blank?
       @booking.user_id = User.find_by_username('system').id
       @booking.confirmed = false
+      @booking.state = 'incomplete'
+      @booking.IP = request.remote_addr
       @request = true
     else
       @booking.user_id = @current_user.id
@@ -53,6 +57,7 @@ class BookingsController < ApplicationController
     if @booking.save
       set_booked
       set_booking_dates
+      BookingMailer.booking_ack(@booking).deliver
       render 'index'
     else
       update_booked
@@ -143,7 +148,8 @@ class BookingsController < ApplicationController
     end
 
     def current_resource
-      @current_resource ||= Booking.find(params[:id])  if params[:id]
+      @current_resource ||= @booking
+  #    @current_resource ||= Booking.find(params[:id]) if params[:id]
     end
 
 

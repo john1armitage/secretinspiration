@@ -87,10 +87,7 @@ class ItemsController < ApplicationController
     @item.supplies.each do |old|
       old.destroy unless sups.include?( old.supplier_id )
     end
-
     supset = @item.supplies.map {|o| o.supplier_id}
-    p "SUPS"
-    p sups
     sups.each do |sup|
       @item.supplies.create(supplier_id: sup) unless ( sup.blank? or supset.include?(sup))
     end

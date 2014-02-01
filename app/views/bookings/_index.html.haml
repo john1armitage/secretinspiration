@@ -3,10 +3,11 @@
     - month = @booking_date
     = render partial: 'bookings/month', locals: {month: month, bookings: @bookings_by_date, events: @events_by_date, openings: @openings}
 
-.row.large-12
-  .calendar
-    - month = @booking_date + 1.month
-    = render partial: 'bookings/month', locals: {month: month, bookings: @bookings_next_month, events: @events_next_month, openings: @openings}
+- if @booking_date + 1.month <= Date.today.beginning_of_month + 12.month
+  .row.large-12
+    .calendar
+      - month = @booking_date + 1.month
+      = render partial: 'bookings/month', locals: {month: month, bookings: @bookings_next_month, events: @events_next_month, openings: @openings}
 
 :coffeescript
   jQuery ->

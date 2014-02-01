@@ -5,7 +5,7 @@
     - title +=  " [#{@bookings.sum(:pax)}]" unless @bookings.empty?
     %span
       = title
-  - @bookings.where("state <> 'complete'").each do |booking|
+  - @bookings.where("state <> 'complete' and state <> 'cancelled'").each do |booking|
     %li
       = booking.arrival.to_s(:time)
       - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name

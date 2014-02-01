@@ -2,21 +2,19 @@
   .row
     .large-12.columns
       %p
-        Thanks, we have noted your booking and will give you a call to confirm:
+        Thanks, your booking request has been noted. We'll give you a call to confirm:
   .row
     .large-12.columns
       %p
       %p
-        Booking:
+        %span.title
+          != @booking.booking_date.strftime("%a %e-%b-%y")
         %br
-        %span.title
-          != @booking.arrival.strftime("%H:%M")
-        on
-        %span.title
-          != @booking.booking_date.strftime("%a %e %b")
-        %br
-        %span.title
+        %span
           != pluralize(@booking.pax, 'person')
+        %span
+          at
+          != @booking.arrival.strftime("%H:%M")
   .row
     .large-12.columns
       %p
@@ -25,9 +23,9 @@
         %span.title
           != @booking.customer_name
         %br
-        %span.title
+        %span
           != @booking.contact
         %br
-        %span.title
+        %span
           != @booking.email
 

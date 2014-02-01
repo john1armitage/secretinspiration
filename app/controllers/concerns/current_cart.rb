@@ -22,7 +22,7 @@ module CurrentCart
       @cart = Cart.find(session[:cart_id])
     end
   rescue ActiveRecord::RecordNotFound
-    @cart = Cart.create
+    @cart = Cart.create(IP: request.remote_addr)
     session[:cart_id] = @cart.id
     @cart
   end
