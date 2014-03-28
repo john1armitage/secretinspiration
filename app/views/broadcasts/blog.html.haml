@@ -1,17 +1,23 @@
+- if allow? :broadcast, :create
+  = link_to 'New Broadcast', new_broadcast_path
+
 %table.blog
-  - @broadcasts.order('updated_at DESC').each do |broadcast|
+  - @broadcasts.order('event_date DESC').each do |broadcast|
     %tr
       %td
         %h3= link_to broadcast.title, broadcast_path(broadcast)
         %p
-          %span.date
-            - unless params[:name] == 'event'
+          - unless params[:name] == 'event'
+            %span.date
               = "#{broadcast.created_at.strftime("%e %b %Y")}"
-            - else
+          - else
+            %span.date
               = broadcast.event_date.strftime("%e %b %Y") unless broadcast.event_date.blank?
+            %span.time
               = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
           - if allow? :broadcasts, :edit
             %span.date
               = link_to 'Edit', edit_broadcast_path(broadcast)
           %span
             = truncate(broadcast.body, length: 200, separator: ' ', omission: '... ')
+          %span= link_to 'more', broadcast_path(broadcast)

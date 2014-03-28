@@ -5,7 +5,8 @@ class MealItemsController < ApplicationController
   before_action :set_line_item, only: [ :update, :destroy ]
 
   def create
-    variant = Variant.where( name: params[:commit]).first || Item.where( name: params[:commit]).first.variants.where( item_default: true).first
+    variant = Variant.find( params[:variant_id]) # || Item.where( name: params[:commit]).first.variants.where( item_default: true).first)
+#    variant = Variant.where( name: params[:commit]).first || Item.where( name: params[:commit]).first.variants.where( item_default: true).first
     @line_item = @meal.update_variant( variant.id, params[:options] || [], params[:choices] || [] )
     @line_item.domain = current_tenant.domain
     respond_to do |format|
@@ -61,11 +62,19 @@ class MealItemsController < ApplicationController
   private
 
     def set_meal
-      @meal = Meal.find(params[:meal_id])
+      if current_user.id.blank?
+        @meal = get_takeaway
+      else
+        @meal = Meal.find(params[:meal_id])
+      end
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])
-      @meal = params[:option].present? ? @line_item.parent.ownable : @line_item.ownable
+      if current_user.id.blank?
+        @meal = get_takeaway
+      else
+        @meal = params[:option].present? ? @line_item.parent.ownable : @line_item.ownable
+      end
     end
 end

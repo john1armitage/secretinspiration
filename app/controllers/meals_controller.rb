@@ -1,9 +1,22 @@
 class MealsController < ApplicationController
 
-  before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out, :patcher]
 
   def index
   end
+
+  def show
+    if params[:order] == 'takeaway'
+      @meal.update(state: 'requested')
+    elsif params[:order] == 'cancel'
+      @meal.update(state: 'takeaway')
+      #params[:choices] = 'food'
+      @meal.line_items.destroy_all
+      render 'meal_items/meal.js.erb'
+    end
+  end
+
+
 
   def edit
     @meal.id
@@ -11,17 +24,40 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new
-    @meal.seating_id = params[:seating_id] if  params[:seating_id].present?
-    @meal.tabel_name = params[:tabel_name]
-    @meal.state = 'active'
+    if params[:takeaway].present?
+      @meal.tabel_name = 'takeaway'
+      @meal.state = 'confirmed'
+    else
+      @meal.seating_id = params[:seating_id] if  params[:seating_id].present?
+      @meal.tabel_name = params[:tabel_name]
+      @meal.state = 'active'
+    end
     @meal.start_time = Time.now
     @meal.save
-    @meal.seating.booking.update_attribute(:state, 'active')
-    render 'meals'
+    if params[:takeaway].present?
+      render 'edit'
+    else
+      @meal.seating.booking.update_attribute(:state, 'active')
+      render 'meals'
+    end
+  end
+
+  def takeaway
+    @meal = Meal.find(get_takeaway)
+      render 'edit'
+  end
+
+  def patcher
+    if params[:state].present?
+      @meal.update_params(state: params[:state])
+    else
+      @meal.update(params[:meal])
+    end
+    render action: 'edit'
   end
 
   def update
-    if @meal.update(meal_params)
+    if @meal.update(params[:meal])
       redirect_to meals_url, notice: 'Meal was successfully updated.'
     else
       render action: 'edit'
@@ -75,13 +111,18 @@ class MealsController < ApplicationController
   end
 
   private
-
     def set_meal
-      @meal = Meal.find(params[:id])
+      if current_user.id.blank?
+        @meal = get_takeaway
+      else
+        @meal = Meal.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
-    def meal_params
-      params[:meals]
+    def current_resource
+      @current_resource ||= @meal
     end
+
+
 end

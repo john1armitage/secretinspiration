@@ -5,11 +5,12 @@
   %title= content_for?(:title) ? yield(:title) : current_tenant.name
   %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
   = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
-  = stylesheet_link_tag 'print', :media => 'print'
+  -#= stylesheet_link_tag 'print', :media => 'print'
   -# Foundation 5 won't work with Rails Turbolinks
   -# Modernizr is required for Zurb Foundation
   = javascript_include_tag "modernizr", "data-turbolinks-track" => true
   = csrf_meta_tags
+= favicon_link_tag 'favicon.ico'
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
   .row#navigation.no-print
@@ -22,7 +23,7 @@
       = render 'layouts/messages'
   .row
     .large-2.columns#aside.show-for-large-up.no-print
-      %aside#sidebar
+      %aside#sidebar.no-print
         = render "welcome/intro"
       #utility
     .large-10.small-12.medium-12.columns

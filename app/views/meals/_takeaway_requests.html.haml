@@ -1,0 +1,7 @@
+%ul.aside.no-print
+  - @meals = Meal.where("seating_id IS NULL AND state = 'requested'").order('updated_at')
+  %li.title
+    %span
+      Takeaway Requests
+  - @meals.each do |meal|
+    = render 'meals/meal', meal: meal

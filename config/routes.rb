@@ -59,8 +59,10 @@ Commerce::Application.routes.draw do
 
   resources :meals, :only => [:index, :create, :show, :edit, :update, :destroy] do
     member do
+      get 'takeaway'
       post 'check_out'
       post 'check_in'
+      patch 'patcher'
       delete 'clear'
     end
   end

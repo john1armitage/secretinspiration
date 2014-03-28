@@ -1,17 +1,17 @@
 .row.large-12
   .calendar
-    - month = @booking_date
+    - month = @booking_date.beginning_of_month
     = render partial: 'bookings/month', locals: {month: month, bookings: @bookings_by_date, events: @events_by_date, openings: @openings}
 
 - if @booking_date + 1.month <= Date.today.beginning_of_month + 12.month
   .row.large-12
     .calendar
-      - month = @booking_date + 1.month
+      - month = @booking_date.beginning_of_month + 1.month
       = render partial: 'bookings/month', locals: {month: month, bookings: @bookings_next_month, events: @events_next_month, openings: @openings}
 
 :coffeescript
   jQuery ->
     $('select').on "change", (event) ->
       $.ajax
-        url: "bookings?calendar=true#{ params[:no_content].present? ? '&no_content=true' : '' }&booking_date=" + event.target.value
+        url: "/bookings?calendar=true#{ params[:no_content].present? ? '&no_content=true' : '' }&booking_date=" + event.target.value
         dataType: 'script'

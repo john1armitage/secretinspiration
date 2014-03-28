@@ -3,6 +3,7 @@
     %th Item
     %th Price
     %th x
+    %th remote
     %th Default
     %th Stock
     %th Due
@@ -21,6 +22,7 @@
         = ": #{variant.name}" unless variant.name == 'default'
       %td= humanized_money_with_symbol variant.price
       %td= variant.withdrawn
+      %td= variant.remote_order
       %td= variant.item_default
       %td= variant.stock
       %td= variant.available_on

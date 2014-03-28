@@ -18,7 +18,7 @@
   .large-3.columns
     != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', class: 'no_ajaxify image'
   .large-4.columns
-    %ul#main-nav.inline-list
+    %ul#contact.inline-list
       - if allow? :items, :index
         %li#admin
           != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
@@ -40,11 +40,14 @@
       - else
         #contact
           != render 'layouts/contact/index'
-  .large-5.columns
-    %ul#main-nav.inline-list.right
       - if admin_ok?
         %li
           = render 'layouts/menus/session'
+  .large-5.columns
+    %ul#main-nav.inline-list.right
+      - if (current_tenant.takeaway && current_tenant.takeaway == '1') && ((allow? :meals, :takeaway) && admin_ok? ) && current_user.id.blank?
+        %li
+          != link_to 'Takeaway', takeaway_meal_path(id: 0,choices: 'food'), remote: true, class: 'button radius no_ajaxify'
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
         %li
           != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'

@@ -5,7 +5,8 @@
         %h3= link_to page.title, page_path(page)
         %p
           %span.date
-            = "#{page.created_at.strftime("%e %b %Y")}"
+            - dated = page.release.blank? ? page.updated_at : page.release
+            = "#{dated.strftime("%e %b %Y")}"
           - if allow? :pages, :edit
             %span.date
               = link_to 'Edit', edit_page_path(page)

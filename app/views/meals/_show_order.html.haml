@@ -1,12 +1,19 @@
 %ul#order
   %li.title
     %span
-      Table
-      = @meal.tabel_name
-      Order
+      - if current_user.id.blank?
+        Your takeaway order has been received
+        = @meal.tabel_name
+      - else
+        Table
+        = @meal.tabel_name
+      = "Order #{@meal.id}"
   - @course = ''
   = render partial: 'meals/line_item_order', collection: @meal.line_items.joins( {variant: { item: {category: :root } } } ).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
   %li.no-print
     %span
       = link_to "Print",'#', id: 'print'
+:coffeescript
+  jQuery ->
+    $('div#editor').html('')
 

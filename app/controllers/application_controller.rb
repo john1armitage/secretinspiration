@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_cart
 
+  def get_takeaway
+    set_takeaway
+  end
+  helper_method :get_takeaway
+
   def get_categories( root_category, product_flow = nil )
     category = Category.find_by_name( root_category )
     product_flow = category.product_flow unless product_flow
@@ -130,8 +135,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def admin_ok?
-    #( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.164' )
-    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || (  ENV[:allowed_hosts ].include? request.remote_addr )
+    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.77' )
+    #( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || (  ENV[:allowed_hosts ].include? request.remote_addr )
   end
   helper_method :admin_ok?
 
@@ -235,7 +240,7 @@ class ApplicationController < ActionController::Base
     #end
     openings.group_by(&:start_date)
   end
-
+  helper_method :get_openings
   #def set_choices
   #  choices = params[:choices].present? ? params[:choices] : default_choices
   #  @categories = get_categories(choices)

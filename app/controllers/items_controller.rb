@@ -42,7 +42,8 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item].merge(domain: current_tenant.domain, vat_exempt: current_tenant.vat_exempt))
     if @item.save
       set_sups(sups)
-      redirect_to items_url, notice: 'Item was successfully created.'
+      redirect_to choice_url( @item.item_type.name ), notice: 'Item was successfully created.'
+      #redirect_to choices_url, notice: 'Item was successfully created.'
     else
       get_categories(params[:item][:item_type_id])
       render action: 'new'
@@ -55,7 +56,7 @@ class ItemsController < ApplicationController
     params[:item].delete :sups
     set_sups(sups)
     if @item.update(params[:item].merge(:domain => current_tenant.domain))
-      redirect_to items_url, notice: 'Item was successfully updated.'
+      redirect_to choice_url( @item.item_type.name ), notice: 'Item was successfully updated.'
     else
       get_categories(@item.category.root.name)
       render action: 'edit'

@@ -2,4 +2,17 @@
   .no-print {
     display: none;
   }
+  table {
+    width: 90%;
+    font-size: 0.7em;
+    line-height: 8px;
+    border-collapse: collapse;
+    margin-left:2em;
+    margin-right: 2em;
+  }
+}
+@media screen {
+  .print-only {
+    display: none;
+  }
 }

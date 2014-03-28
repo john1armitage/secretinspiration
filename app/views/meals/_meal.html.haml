@@ -1,3 +1,4 @@
 %li.inline
-  = button_to meal.tabel_name, edit_meal_path(meal, choices: 'food'), method: :get, remote: true,
+  - title = meal.seating_id.blank? ? "TA#{meal.id}" : meal.tabel_name
+  = button_to title, edit_meal_path(meal, choices: 'food'), method: :get, remote: true,
     form_class: 'no_ajaxify'

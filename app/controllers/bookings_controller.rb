@@ -43,8 +43,6 @@ class BookingsController < ApplicationController
   # POST /bookings
   def create
     @booking = Booking.new(params[:booking])
-    p params[:booking]
-    p params[:booking][:email]
     if  @current_user.id.blank?
       @booking.user_id = User.find_by_username('system').id
       @booking.confirmed = false

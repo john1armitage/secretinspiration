@@ -27,6 +27,9 @@
         = f.label :price
         = f.text_field :price
       .field.small-2.columns.left
+        = f.label :remote_order
+        = f.check_box :remote_order
+      .field.small-2.columns.left
         = f.label :vat_rate
         = collection_select(:item, :vat_rate,
           Element.where("kind = 'vat_rate'").order(:rank), :name, :name, include_blank: true)

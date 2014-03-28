@@ -30,6 +30,9 @@
       .field.small-2.columns
         = f.label :price
         = f.text_field :price
+      .field.small-2.columns.left
+        = f.label :remote_order
+        = f.check_box :remote_order
       .field.small-2.columns
         = f.label :stock
         = f.number_field :stock

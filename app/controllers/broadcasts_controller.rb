@@ -3,7 +3,7 @@ class BroadcastsController < ApplicationController
 
   # GET /broadcasts
   def index
-    @broadcasts = Broadcast.order('updated_at DESC').all
+    @broadcasts = Broadcast.order('event_date DESC').all
   end
 
   def blog

@@ -1,27 +1,41 @@
 %ul#order
-  %li.title
-    != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
-    %span
-      Table
-      = @meal.tabel_name
-    != link_to "Drinks",  edit_meal_path( @meal, choices: 'drinks'), remote: true, class: 'no_ajaxify'
-  %li
-    != @meal.seating.booking.customer_name
-  - unless @meal.line_items.empty?
-    %li.total
-      %span.title
-        Total Order
-        != humanized_money_with_symbol(( @meal.line_items.sum(:net_home_cents) + @meal.line_items.sum(:tax_home_cents))/100)
-    - @course = ''
-    = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
-    = button_to 'Clear', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
-      data: { confirm: 'Clear Items?' }
-    = button_to 'Order', meal_path(@meal, order: true), method: :get  #, remote: true, form_class: 'no_ajaxify'
-    = button_to 'Bill', check_out_meal_path(@meal, meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
 
-  -else
+  %li.title
+    - if @meal.seating
+      %span
+        != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+        Table
+        = @meal.tabel_name
+        != link_to "Drinks",  edit_meal_path( @meal, choices: 'drinks'), remote: true, class: 'no_ajaxify'
+    -else
+      - if current_user.id.blank?
+        != link_to "Food Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+      - else
+        != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+      = @meal.state.capitalize
+  %li
+    - if @meal.seating
+      != @meal.seating.booking.customer_name
+    - elsif allow? :users, :index
+      != "TA: #{@meal.id}"
+  #line_items
+    = render 'meals/line_items'
+  - if allow? :meals, :edit
+    = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
+      data: { confirm: 'Delete Order?' }
+  - unless @meal.seating
     %li
-      Use Menu to add Choices
-  = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
-    data: { confirm: 'Delete Order?' }
+      = form_for @meal, :url => { controller: "meals", action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
+        %fieldset
+          .row
+            .large-12.columns
+              = f.label :contact, 'Contact'
+              = f.text_field :contact, placeholder: 'name'
+          .row
+            .large-12.columns
+              = f.label :phone, 'Phone', placeholder: 'phone'
+              = f.text_field :phone, placeholder: 'your number'
+          .row
+            .large-6.columns
+              = f.submit 'Save Contact'
 

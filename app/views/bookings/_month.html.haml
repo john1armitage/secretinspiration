@@ -14,14 +14,13 @@
         %span.closed
           Closed
       - else
-        %span
-          - unless (status.size > 0 and ( status & ['lunch','open']))
-            - opening = 'dinner'
+        - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
+          - opening = 'dinner'
+        - else
+          - if status.include? 'open'
+            - opening = 'open'
           - else
-            - if status.include? 'open'
-              - opening = 'open'
-            - else
-              - opening = 'lunch'
+            - opening = 'lunch'
         -#- if allow? :seating, :create
         -#  = opening
         -#-else

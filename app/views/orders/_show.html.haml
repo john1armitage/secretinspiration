@@ -2,6 +2,9 @@
   != render :partial => "orders/#{current_tenant.domain}/bill"
 - else
   != render :partial => "orders/#{current_tenant.domain}/show"
+:coffeescript
+  jQuery ->
+    $('div#editor').html('')
 
 -#%p
 -#  = button_to 'Commit', commit_order_path(@order), method: :post, :data => { :confirm => 'Commit?' }

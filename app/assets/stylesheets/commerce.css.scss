@@ -18,6 +18,17 @@ td.number, th.number {
 td.center, th.center {
   text-align: center;
 }
+div#flash {
+  margin: 0.5em;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  padding: 0.2em;
+  border: 1px solid gray;
+  p {
+    margin-left: 1em;
+    margin-bottom: 0;
+  }
+}
 p#catalogue {
   span {
     &.title {
@@ -29,15 +40,25 @@ p#catalogue {
   }
 }
 table.blog {
+  h3 {
+    font-size: 1.3em;
+  }
   p  {
-    //font-size: 0.95em;
+    font-size: 0.95em;
     text-align: justify;
   }
+  td {
+    border-top: 1px solid gray;
+  }
 }
-span.date {
-  font-size: 0.8em;
-  color: darkslategray;
-}
+  span.date {
+    font-size: 0.9em;
+    color: darkslategray;
+  }
+  span.time {
+    font-size: 0.8em;
+    color: darkslategray;
+  }
 #test2, #test3 {
   &.red {
     background-color: red;
@@ -53,11 +74,15 @@ div#solus, div#current, div#sidecast {
   margin-bottom: 0.5em;
   h5 {
     font-weight: bold;
-    font-size: 0.9em;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 0;
   }
   p {
-    font-weight: bold;
     font-size: 0.8em;
+    padding: 0.2em;
+    text-align: justify;
+    margin-bottom: 0;
   }
   &.red {
    // border-color: red;
@@ -185,7 +210,7 @@ ul#catalogue {
     margin-left: 0;
   }
 }
-ul#cart, ul#meal, ul#order, ul.menu-item, ul.aside {
+ul#cart, ul#meal, ul#order, ul.menu-item, ul.aside, ul.takeaway {
   font-size: 0.8em;
   clear: both;
   li.title {
@@ -207,7 +232,28 @@ ul#cart, ul#meal, ul#order, ul.menu-item, ul.aside {
     font-size: 0.8em;
   }
 }
-ul#cart, ul#meal, ul#order, ul.aside {
+ul#order {
+  form {
+    .columns {
+      padding: 0;
+    }
+    .row {
+      margin: 0;
+    }
+    label {
+      margin: 0;
+      //      padding:0;
+    }
+    input {
+      margin: 0;
+      margin-bottom: 0.3rem;
+
+      height: 1.5rem;
+      //      padding:0;
+    }
+  }
+}
+ul#cart, ul#meal, ul#order, ul.aside  {
   background-color: #e0eeee;
   border: 1px solid darkslategray;
   li {
@@ -444,6 +490,20 @@ div#thanks {
   border: 1px solid darkgray;
   span.title {
     font-weight: bold;
+  }
+}
+div#invoice {
+  #print-header {
+    text-align: center;
+  }
+  tr {
+    text-align: left;
+    &.category {
+      font-weight: bold;
+    }
+    &.total {
+      font-weight: bold;
+    }
   }
 }
 }

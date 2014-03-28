@@ -1,12 +1,14 @@
 - if @category != line_item.variant.item.grouping
   - @category = line_item.variant.item.grouping
   - @component_title = make_title(@category.split(':')[1] ).pluralize
-  %li.category
-    %span
+  %tr.category
+    %td
       = @component_title
+    %td
+      &nbsp;
 
-%li.item
-  %span
+%tr.item
+  %td
     = line_item.quantity
     x
     = line_item.desc
@@ -15,6 +17,6 @@
   -#= link_to '+', line_item_path( line_item.id, act: 'add', bill: true), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
   -#= link_to '-', line_item_path( line_item.id, act: 'subtract', bill: true), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
   -#= link_to 'x', line_item_path( line_item, bill: true), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
-  %span
+  %td.right
     = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
 

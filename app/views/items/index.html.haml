@@ -2,9 +2,11 @@
 
 %table
   %tr
+    %th
     %th Name
     %th Price
     %th X
+    %th remote
     %th Type
     %th Category
     %th
@@ -13,10 +15,12 @@
     - variants = item.variants.where(item_default: true, domain: current_tenant.domain)
     - price = variants.first.price
     %tr
+      %td= item.rank
       %td= item.name
       %td= price.to_d > 0 ? price : item.price
       %td= item.withdrawn ? 'x' : ''
-      %td= make_title(item.item_type.name)
+      %td= item.remote_order
+      %td= item.item_type.name if item.item_type
       %td= make_title(item.category.name) if item.category
       %td= link_to 'Show', item
       %td= link_to 'Edit', edit_item_path(item)
