@@ -5,9 +5,7 @@
   - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : @meal.present? ? @meal.id : 0
   -# @meal_id = 1
   -#params[:id].to_i
-  = allow?(:meals, :create) == true
-  = (default.first.item.remote_order == true)
-  - if @meal_id > 0 #&& ( (allow? :meals, :create) || (default.first.item.remote_order == true) )
+  - if @meal_id > 0  && ( (allow? :meals, :destroy) || (default.first.item.remote_order == true) )
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
       = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
       -#- if (default.first.name == 'default')

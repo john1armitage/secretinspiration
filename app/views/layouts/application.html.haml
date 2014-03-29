@@ -51,6 +51,18 @@
     $(document).on "click", 'input[value="Cancel"]', (event) ->
       event.preventDefault()
       $(this).parents().find('div#editor').html('')
+    $(document).on "click", 'form.request input', (event) ->
+      contact = $('input#meal_contact').val().trim()
+      phone = $('input#meal_phone').val().trim()
+      start_time = $('select#meal_start_time option:selected').val()
+      meal_id = $('input#meal_id').val()
+      if !contact
+        alert('Please check Contact Name')
+        event.preventDefault()
+      if phone.replace(/\D/g,'').length < 6
+        alert('Please check Phone Number: ' + phone)
+      event.preventDefault()
+      $.post( "/meals/" + meal_id + "/patcher", { order: 'request', contact: contact, phone: phone, start_time: start_time } )
     $(document).on "click", 'a#print', (event) ->
       window.print()
       event.preventDefault()

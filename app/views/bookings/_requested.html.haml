@@ -1,16 +1,17 @@
-%ul#order
-  %li.title
-    %span
-      Booking Requests
-  - @requests.each do |booking|
-    %li
-      = booking.booking_date.strftime('%e %b %y')
-      = "#{booking.pax} pax"
-      - unless booking.notes.blank?
-        %span{ title: booking.notes }
-          notes
-    %li
-      - if allow? :bookings, :delete
-        = link_to 'X', booking, :method => :delete, remote: true, class: 'no_ajaxify has-tip', data: { :confirm => 'Delete Booking?' }, title: 'Delete Booking'
-      %span.title
-        = link_to booking.customer_name, edit_booking_path(booking), remote: true, class: 'no_ajaxify', title: 'Update Booking'
+- unless @requests.empty?
+  %ul#order
+    %li.title
+      %span
+        Booking Requests
+    - @requests.each do |booking|
+      %li
+        = booking.booking_date.strftime('%e %b %y')
+        = "#{booking.pax} pax"
+        - unless booking.notes.blank?
+          %span{ title: booking.notes }
+            notes
+      %li
+        - if allow? :bookings, :delete
+          = link_to 'X', booking, :method => :delete, remote: true, class: 'no_ajaxify has-tip', data: { :confirm => 'Delete Booking?' }, title: 'Delete Booking'
+        %span.title
+          = link_to booking.customer_name, edit_booking_path(booking), remote: true, class: 'no_ajaxify', title: 'Update Booking'

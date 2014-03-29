@@ -62,7 +62,7 @@ Commerce::Application.routes.draw do
       get 'takeaway'
       post 'check_out'
       post 'check_in'
-      patch 'patcher'
+      post 'patcher'
       delete 'clear'
     end
   end

@@ -6,13 +6,16 @@ class MealsController < ApplicationController
   end
 
   def show
-    if params[:order] == 'takeaway'
-      @meal.update(state: 'requested')
-    elsif params[:order] == 'cancel'
-      @meal.update(state: 'takeaway')
-      #params[:choices] = 'food'
-      @meal.line_items.destroy_all
-      render 'meal_items/meal.js.erb'
+    if params[:order].present?
+      case params[:order]
+        when 'cancel'
+          @meal.update(state: 'takeaway')
+          #params[:choices] = 'food'
+          @meal.line_items.destroy_all
+        when 'confirm'
+          @meal.update(state: 'confirmed')
+      end
+      render  action: 'edit'
     end
   end
 
@@ -50,6 +53,13 @@ class MealsController < ApplicationController
   def patcher
     if params[:state].present?
       @meal.update_params(state: params[:state])
+    elsif params[:order].present?
+      case params[:order]
+        when 'request'
+          @meal.update(contact: params[:contact], phone: params[:phone], start_time: params[:start_time].to_time, state: 'requested')
+        when 'cancel'
+          @meal.update(contact: params[:contact], phone: params[:phone], start_time: nil, state: 'takeaway')
+      end
     else
       @meal.update(params[:meal])
     end

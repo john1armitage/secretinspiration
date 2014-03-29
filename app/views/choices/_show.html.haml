@@ -1,9 +1,13 @@
 - category = Category.find_by_name( params[:choices].present? ? params[:choices] : current_tenant.default_category)
 - @choice ||= ( @meal.present? || @cart.present?) ? category.children.first : Category.find_by_name( params[:id] )
-- @page = Page.find_by_code( @choice.name )
+- if @meal.present? && @meal.seating_id.blank?
+  - @page = Page.find_by_code( 'takeaway' )
+- else
+  - @page = Page.find_by_code( @choice.name )
 %ul#catalogue
   - if @page
-    != render 'pages/show_short'
+    - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+    != markdown(@page.body)
   - subcats = params[:filter].present? ? @choice.children.where( name: params[:filter]) : @choice.children
   - subcats.each do |subcat|
     - unless !(allow? :items, :create) && subcat.items.size == 0
@@ -17,6 +21,7 @@
             !=# @choice.name.titleize.pluralize
           %span.notes
             != subcat.description unless subcat.description.blank?
+
         = render :partial => "choices/#{current_tenant.domain}/show", locals: { subcat: subcat}
 
 :coffeescript

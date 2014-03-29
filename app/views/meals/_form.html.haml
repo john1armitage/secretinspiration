@@ -8,34 +8,46 @@
         = @meal.tabel_name
         != link_to "Drinks",  edit_meal_path( @meal, choices: 'drinks'), remote: true, class: 'no_ajaxify'
     -else
+      %span.title
+        = @meal.state.capitalize
       - if current_user.id.blank?
-        != link_to "Food Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+        - if @meal.state == 'takeaway'
+          != link_to "View Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+        - else
+          != "TA#{@meal.id}"
       - else
         != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
-      = @meal.state.capitalize
   %li
     - if @meal.seating
       != @meal.seating.booking.customer_name
     - elsif allow? :users, :index
       != "TA: #{@meal.id}"
-  #line_items
-    = render 'meals/line_items'
-  - if allow? :meals, :edit
+  - if allow?(:meals, :edit) && (!@meal.seating_id.blank? || @meal.tabel_name == 'takeaway')
     = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
       data: { confirm: 'Delete Order?' }
   - unless @meal.seating
     %li
       = form_for @meal, :url => { controller: "meals", action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
         %fieldset
+          = f.hidden_field :id
           .row
             .large-12.columns
               = f.label :contact, 'Contact'
               = f.text_field :contact, placeholder: 'name'
           .row
             .large-12.columns
-              = f.label :phone, 'Phone', placeholder: 'phone'
+              = f.label :phone, 'Phone'
               = f.text_field :phone, placeholder: 'your number'
           .row
-            .large-6.columns
-              = f.submit 'Save Contact'
+            .large-12.columns
+              - today = Time.now.strftime('%d-%m-%y').to_date
+              - opening = get_openings(today, today).first
+              = f.label :start_time, 'Time'
+              = f.select :start_time, grouped_options_for_select(get_times( opening || 'dinner', 'takeaway'), @meal.start_time.strftime('%H:%M'), divider: 'Collection')
+
+          -#.row
+          -#  .large-6.columns
+          -#    = f.submit 'Save Contact'
+  #line_items
+    = render 'meals/line_items'
 
