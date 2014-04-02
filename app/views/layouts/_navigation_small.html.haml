@@ -11,6 +11,9 @@
     %section.top-bar-section
       / Right Nav Section
       %ul.right
+        - if (current_tenant.takeaway && current_tenant.takeaway == '1') && allow?(:meals, :takeaway) && current_user.id.blank?
+          %li.level-one
+            != link_to 'Takeaway', takeaway_meal_path(id: 0,choices: 'food'), remote: true, class: 'no_ajaxify'
         - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
           %li.level-one
             != link_to 'Book', bookings_path(no_content: true), remote: true, class: 'no_ajaxify'

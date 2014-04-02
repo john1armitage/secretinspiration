@@ -185,7 +185,7 @@ class ApplicationController < ActionController::Base
   def get_bookings(booking_date)
     start = (booking_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
     stop = booking_date.end_of_month
-    Booking.where('booking_date >= ? AND booking_date <= ?', start, stop ).group_by(&:booking_date)
+    Booking.where('booking_date >= ? AND booking_date <= ? AND state <> ?', start, stop, 'cancelled' ).group_by(&:booking_date)
   end
 
   def get_events(event_date)

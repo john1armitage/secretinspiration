@@ -7,35 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/welcome/_advert.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/meals/_takeaway.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/meals/takeaway.js.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/mailers/takeaway_mailer.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/takeaway_mailer/takeaway_notify.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/images/shack_logo_small.gif" afterPath="$PROJECT_DIR$/app/assets/images/shack_logo_small.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/items/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/tenancies/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/tenancies/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_index.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/welcome/_intro.html.haml" afterPath="$PROJECT_DIR$/app/views/welcome/_intro.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" afterPath="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_line_item_bill.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_line_item_bill.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_line_items.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_line_items.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_meal.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_meal.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navigation.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_show_order.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_show_order.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/menus/_us.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/menus/_us.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/broadcasts/blog.html.haml" afterPath="$PROJECT_DIR$/app/views/broadcasts/blog.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/mailers/booking_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/booking_mailer.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/commerce.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/commerce.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/manifest-b2ff419ace069be5f4d2daf4666449ab.json" afterPath="$PROJECT_DIR$/public/assets/manifest-b2ff419ace069be5f4d2daf4666449ab.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/meals_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/meals_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/structure.sql" afterPath="$PROJECT_DIR$/db/structure.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,6 +37,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="bookings_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/bookings_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="57" column="47" selection-start="1457" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="885" max-vertical-offset="2475">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="186" column="82" selection-start="5758" selection-end="5758" vertical-scroll-proportion="0.75510204" vertical-offset="2420" max-vertical-offset="4395">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="_line_item_order.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,10 +73,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="framework_and_overrides.css.scss" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="framework_and_overrides.css.scss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="28" selection-start="467" selection-end="467" vertical-scroll-proportion="0.71570575" vertical-offset="0" max-vertical-offset="2940">
+            <state line="24" column="28" selection-start="467" selection-end="467" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="2940">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_navigation_small.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="5" selection-start="1349" selection-end="1349" vertical-scroll-proportion="-13.75" vertical-offset="45" max-vertical-offset="765">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_navigation.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="2073" selection-end="2335" vertical-scroll-proportion="-9.208333" vertical-offset="529" max-vertical-offset="1035">
               <folding />
             </state>
           </provider>
@@ -140,7 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/meal_items_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/meals/_tables.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/bookings_controller.rb" />
@@ -185,12 +193,13 @@
         <option value="$PROJECT_DIR$/app/models/meal.rb" />
         <option value="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" />
         <option value="$PROJECT_DIR$/config/commerce.yml" />
-        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/meals/_line_item_order.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/commerce.css.scss" />
         <option value="$PROJECT_DIR$/app/views/meals/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/meals/_line_item_bill.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss" />
+        <option value="$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
       </list>
     </option>
   </component>
@@ -835,6 +844,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1354,13 +1381,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/meals/index.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="79" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="105">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/meals/edit.js.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="622">
@@ -1431,13 +1451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="74" selection-start="2147" selection-end="2147" vertical-scroll-proportion="-9.208333" vertical-offset="484" max-vertical-offset="1035">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/menus/_us.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="19" selection-start="404" selection-end="404" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="360">
@@ -1462,13 +1475,6 @@
     <entry file="file://$PROJECT_DIR$/app/mailers/user_mailer.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/bookings_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="47" selection-start="1457" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="2475">
           <folding />
         </state>
       </provider>
@@ -1648,13 +1654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="0" selection-start="4133" selection-end="4133" vertical-scroll-proportion="0.5204461" vertical-offset="1790" max-vertical-offset="4395">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/mailers/booking_mailer.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="36" selection-start="57" selection-end="77" vertical-scroll-proportion="0.027223231" vertical-offset="0" max-vertical-offset="551">
@@ -1706,7 +1705,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/framework_and_overrides.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="28" selection-start="467" selection-end="467" vertical-scroll-proportion="0.71570575" vertical-offset="0" max-vertical-offset="2940">
+        <state line="24" column="28" selection-start="467" selection-end="467" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="2940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="0" selection-start="2073" selection-end="2335" vertical-scroll-proportion="-9.208333" vertical-offset="529" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation_small.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="5" selection-start="1349" selection-end="1349" vertical-scroll-proportion="-13.75" vertical-offset="45" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/bookings_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="47" selection-start="1457" selection-end="1500" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="2475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="186" column="82" selection-start="5758" selection-end="5758" vertical-scroll-proportion="0.75510204" vertical-offset="2420" max-vertical-offset="4395">
           <folding />
         </state>
       </provider>
