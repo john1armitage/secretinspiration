@@ -1,3 +1,7 @@
+%article
+  - if params[:name].present?
+    %h3
+      = params[:name].capitalize.pluralize
 - if allow? :broadcast, :create
   = link_to 'New Broadcast', new_broadcast_path
 

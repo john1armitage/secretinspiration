@@ -6,21 +6,21 @@
       = @component_title
 %li
   - unless line_item_order.net_total_item == 0
-
-    = line_item_order.quantity
-    x
-
+    %span
+      = "#{line_item_order.quantity} x"
     %span.title
       = line_item_order.desc
     - unless line_item_order.choices.blank?
-      - line_item_order.choices.each do |k,v|
-        = make_title(v)
+      %span
+        - line_item_order.choices.each do |k,v|
+          = make_title(v)
     - unless line_item_order.options.blank?
       %br
-      = make_title(line_item_order.options)
+      %span
+        = make_title(line_item_order.options)
 
   - line_item_order.children.each do |option|
-    = option.quantity
-    x
+    %span
+    = "#{option.quantity} x "
     %span.title
       = make_title(option.desc)

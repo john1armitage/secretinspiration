@@ -6,16 +6,15 @@ class MealsController < ApplicationController
   end
 
   def show
-    if params[:order].present?
-      case params[:order]
+    if params[:takeaway].present? && @meal && @meal.line_items.size > 0
+      case params[:takeaway]
         when 'cancel'
           @meal.update(state: 'takeaway')
-          #params[:choices] = 'food'
           @meal.line_items.destroy_all
         when 'confirm'
           @meal.update(state: 'confirmed')
       end
-      render  action: 'edit'
+      render  action: 'takeaway'
     end
   end
 
@@ -33,6 +32,8 @@ class MealsController < ApplicationController
     else
       @meal.seating_id = params[:seating_id] if  params[:seating_id].present?
       @meal.tabel_name = params[:tabel_name]
+      existing = Meal.where("state = 'active' and seating_id = ?", params[:seating_id] ).size
+      @meal.tabel_name += "-#{existing}" if existing > 0
       @meal.state = 'active'
     end
     @meal.start_time = Time.now
@@ -53,10 +54,11 @@ class MealsController < ApplicationController
   def patcher
     if params[:state].present?
       @meal.update_params(state: params[:state])
-    elsif params[:order].present?
-      case params[:order]
+    elsif params[:takeaway].present?
+      case params[:takeaway]
         when 'request'
           @meal.update(contact: params[:contact], phone: params[:phone], start_time: params[:start_time].to_time, state: 'requested')
+          TakeawayMailer.takeaway_notify(@meal).deliver
         when 'cancel'
           @meal.update(contact: params[:contact], phone: params[:phone], start_time: nil, state: 'takeaway')
       end

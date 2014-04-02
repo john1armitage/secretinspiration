@@ -135,8 +135,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def admin_ok?
-    ( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || ( request.remote_addr == '92.29.168.77' )
-    #( ['localhost', '127.0.0.1', '128.1.1.20' ].include? current_tenant.hostname ) || (  ENV[:allowed_hosts ].include? request.remote_addr )
+    ( CONFIG[:target_hosts].split(',').include? current_tenant.hostname ) || ( CONFIG[:allowed_hosts].split(',').include? request.remote_addr  )
   end
   helper_method :admin_ok?
 
@@ -205,6 +204,43 @@ class ApplicationController < ActionController::Base
     end
     broadcasts.group_by(&:event_date)
   end
+
+  def open?(day_to_check = Time.now)
+    openings = []
+    Opening.where('start_date <= ?', day_to_check).each do |opening|
+      if opening.finish_date >= day_to_check
+        date = opening.start_date
+        if opening.end_date.blank?
+          1.upto(opening.repeat ) do |actual|
+            if date == day_to_check
+              openings << Opening.new(opening.attributes.merge({start_date: date}))
+            end
+            date = opening.start_date + eval("#{actual}.#{opening.frequency}")
+          end
+        else
+          #i = 0
+          while (date <= day_to_check and date <= opening.end_date) do
+            #i += 1
+            opening.start_date = date
+            if date == start
+              openings << Opening.new(opening.attributes.merge({start_date: date}))
+            end
+            date = date + eval("1.#{opening.frequency}")
+          end
+        end
+
+      end
+    end
+    #p openings.size
+    #p "HERE 1"
+    #p openings
+    #openings.each do |o|
+    #  p o.start_date
+    #end
+    openings
+  end
+  helper_method :open?
+
 
   def get_openings(start, finish)
     openings = []

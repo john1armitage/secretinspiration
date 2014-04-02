@@ -12,8 +12,11 @@
         = f.label :rank
         = f.text_field :rank
       .field.small-2.columns.left
-        = f.label :withdrawn
+        = f.label :withdrawn, 'ex'
         = f.check_box :withdrawn #, :class => 'block'
+      .field.small-2.columns.left
+        = f.label :available, 'in'
+        = f.check_box :available
       .field.small-2.columns.left
         = f.label :product_flow
         = collection_select(:item, :product_flow,
@@ -36,6 +39,9 @@
       .field.small-3.columns.left
         = f.label :sups, 'Suppliers'
         = f.collection_select :sups, get_suppliers( @item.category_id), 'id', 'name', {}, {:multiple => true}
+      .field.small-3.columns
+        = f.label :choices
+        = f.collection_select :choices, Element.where(:kind => 'item_choices'), 'name', 'name', {}, { multiple: true, size: 4 }
     .row
       .field.small-8.columns
         = f.label :description

@@ -4,6 +4,28 @@
 // import the CSS framework
 @import "foundation";
 
+body {
+  font-family: 'OpenSans-Regular', Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+ul.menu-item {
+  input[type="radio"] {
+    margin:0;
+  }
+  input[type="radio"] + label {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    vertical-align: 0.1rem;
+  }
+  label.inline {
+    padding: 0;
+  }
+}
+
+table tbody tr td,  table tr td {
+  padding: 0;
+}
+
 .has-tip {
   cursor: pointer;
   color: #008cba;

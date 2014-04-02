@@ -3,11 +3,13 @@
     %span
       - if current_user.id.blank?
         Your takeaway order has been received
-        = @meal.tabel_name
+        = "TA#{@meal.id} for #{@meal.start_time.strftime('%H:%M')} [Pick-up: #{@meal.start_time.strftime('%H:%M')}]"
+      - elsif @meal.seating_id.blank?
+        = "Takeaway #{@meal.id} at #{Time.now.strftime('%H:%M')} [Pick-up: #{@meal.start_time.strftime('%H:%M')}, #{@meal.contact}]"
       - else
         Table
         = @meal.tabel_name
-      = "Order #{@meal.id}"
+        = "Order #{@meal.id} at #{Time.now.strftime('%H:%M')}"
   - @course = ''
   = render partial: 'meals/line_item_order', collection: @meal.line_items.joins( {variant: { item: {category: :root } } } ).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
   %li.no-print

@@ -2,8 +2,10 @@
 %html
 %head
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-  %title= content_for?(:title) ? yield(:title) : current_tenant.name
-  %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
+  %title= content_for?(:title) ? yield(:title) : current_tenant.title
+  -#%meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
+  %meta{:name => "description", :content => current_tenant.description}
+  %meta{:name => "keywords", :content => current_tenant.keywords}
   = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
   -#= stylesheet_link_tag 'print', :media => 'print'
   -# Foundation 5 won't work with Rails Turbolinks
@@ -51,18 +53,19 @@
     $(document).on "click", 'input[value="Cancel"]', (event) ->
       event.preventDefault()
       $(this).parents().find('div#editor').html('')
-    $(document).on "click", 'form.request input', (event) ->
+    $(document).on "click", 'form.contact input', (event) ->
       contact = $('input#meal_contact').val().trim()
       phone = $('input#meal_phone').val().trim()
       start_time = $('select#meal_start_time option:selected').val()
       meal_id = $('input#meal_id').val()
+      event.preventDefault()
       if !contact
         alert('Please check Contact Name')
-        event.preventDefault()
+        return
       if phone.replace(/\D/g,'').length < 6
         alert('Please check Phone Number: ' + phone)
-      event.preventDefault()
-      $.post( "/meals/" + meal_id + "/patcher", { order: 'request', contact: contact, phone: phone, start_time: start_time } )
+        return
+      $.post( "/meals/" + meal_id + "/patcher", { takeaway: 'request', contact: contact, phone: phone, start_time: start_time } )
     $(document).on "click", 'a#print', (event) ->
       window.print()
       event.preventDefault()

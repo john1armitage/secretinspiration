@@ -45,7 +45,7 @@
           = render 'layouts/menus/session'
   .large-5.columns
     %ul#main-nav.inline-list.right
-      - if (current_tenant.takeaway && current_tenant.takeaway == '1') && ((allow? :meals, :takeaway) && admin_ok? ) && current_user.id.blank?
+      - if (current_tenant.takeaway && current_tenant.takeaway == '1') && allow?(:meals, :takeaway) && current_user.id.blank?
         %li
           != link_to 'Takeaway', takeaway_meal_path(id: 0,choices: 'food'), remote: true, class: 'button radius no_ajaxify'
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )

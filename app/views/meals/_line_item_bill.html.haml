@@ -6,33 +6,38 @@
       = link_to @component_title, choice_path(line_item_bill.variant.item.category.parent.name), data: { tooltip:  true}, title: "View #{@component_title}"
 %li
   - unless line_item_bill.net_total_item == 0
-
-    = line_item_bill.quantity
-    x
+    %span
+      = line_item_bill.quantity
+      x
 
     %span.title
       = link_to line_item_bill.desc, choice_path(line_item_bill.variant.item.category.parent.name, meal_id: @meal.id, filter: line_item_bill.variant.item.category.name), data: { tooltip:  true}, title: "View #{make_title(line_item_bill.variant.item.category.name)} #{@component_title}"
     - unless line_item_bill.choices.blank?
       - line_item_bill.choices.each do |k,v|
-        = make_title(v)
+        %span
+          = make_title(v)
     - unless line_item_bill.options.blank?
       %br
-      = make_title(line_item_bill.options)
+        %span
+        = make_title(line_item_bill.options)
     %br
-    Bill
-    = humanized_money_with_symbol(line_item_bill.net_total_item + line_item_bill.tax_total_item)
-    = " ~ #{humanized_money_with_symbol(line_item_bill.net_item + line_item_bill.tax_item)}"
+    %span
+      Bill
+      = humanized_money_with_symbol(line_item_bill.net_total_item + line_item_bill.tax_total_item)
+      = " ~ #{humanized_money_with_symbol(line_item_bill.net_item + line_item_bill.tax_item)}"
     %br
 
   - line_item_bill.children.each do |option|
-    = option.quantity
+    %span
+      = option.quantity
     x
     %span.title
       = make_title(option.desc)
     %br
-    = link_to '+', meal_item_path( option.id, act: 'add', option: true), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to 'x', meal_item_path( option, option: true), method: :delete, remote: true, class: 'no_ajaxify'
-    = option.net_total_item + option.tax_total_item
-    = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
+    %span
+      = link_to '+', meal_item_path( option.id, act: 'add', option: true), method: :patch, remote: true, class: 'no_ajaxify'
+      = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'
+      = link_to 'x', meal_item_path( option, option: true), method: :delete, remote: true, class: 'no_ajaxify'
+      = option.net_total_item + option.tax_total_item
+      = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
     %br

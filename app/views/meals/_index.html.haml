@@ -3,8 +3,8 @@
   = render 'meals/tables'
 #display.no-print
   = render 'bookings/dated'
-  = render 'meals/takeaway_requests'
-  = render 'meals/takeaway_confirmed'
+  #takeaway
+    = render 'meals/takeaway'
   = render 'bookings/requested'
   - if allow? :orders, :index
     != render "orders/#{current_tenant.domain}/current"

@@ -1,3 +1,20 @@
+- today = (Date.today)
+- openings = get_openings(today, today)
+- status = []
+- if openings[today]
+  - openings[today].each do |opening|
+    - status << opening.status
+- if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
+  - opening = 'closed'
+- else
+  - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
+    - opening = 'dinner'
+  - else
+    - if status.include? 'open'
+      - opening = 'open'
+    - else
+      - opening = 'lunch'
+
 %ul#order
 
   %li.title
@@ -14,40 +31,46 @@
         - if @meal.state == 'takeaway'
           != link_to "View Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
         - else
-          != "TA#{@meal.id}"
+          %span.title
+            != "TA#{@meal.id}"
       - else
         != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
   %li
     - if @meal.seating
-      != @meal.seating.booking.customer_name
+      %span.title
+        != @meal.seating.booking.customer_name
     - elsif allow? :users, :index
-      != "TA: #{@meal.id}"
+      %span.title
+        != "TA #{@meal.id}"
   - if allow?(:meals, :edit) && (!@meal.seating_id.blank? || @meal.tabel_name == 'takeaway')
     = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
       data: { confirm: 'Delete Order?' }
   - unless @meal.seating
-    %li
-      = form_for @meal, :url => { controller: "meals", action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
-        %fieldset
-          = f.hidden_field :id
-          .row
-            .large-12.columns
-              = f.label :contact, 'Contact'
-              = f.text_field :contact, placeholder: 'name'
-          .row
-            .large-12.columns
-              = f.label :phone, 'Phone'
-              = f.text_field :phone, placeholder: 'your number'
-          .row
-            .large-12.columns
-              - today = Time.now.strftime('%d-%m-%y').to_date
-              - opening = get_openings(today, today).first
-              = f.label :start_time, 'Time'
-              = f.select :start_time, grouped_options_for_select(get_times( opening || 'dinner', 'takeaway'), @meal.start_time.strftime('%H:%M'), divider: 'Collection')
+    - if opening == 'closed'
+      %li
+        %span.title
+          Sorry, Closed today
+    - else
+      %li
+        = form_for @meal, :url => { controller: "meals", action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
+          %fieldset
+            = f.hidden_field :id
+            .row
+              .large-12.columns
+                = f.label :contact, 'Contact'
+                = f.text_field :contact, placeholder: 'name'
+            .row
+              .large-12.columns
+                = f.label :phone, 'Phone'
+                = f.text_field :phone, placeholder: 'your number'
+            .row
+              .large-12.columns
+                = f.label :start_time, 'Time'
+                = f.select :start_time, grouped_options_for_select(get_times( opening || 'dinner', 'takeaway'), @meal.start_time.strftime('%H:%M'), divider: 'Collection')
 
           -#.row
           -#  .large-6.columns
           -#    = f.submit 'Save Contact'
-  #line_items
-    = render 'meals/line_items'
-
+  - unless (opening == 'closed' && current_user.id.blank?)
+    #line_items
+      = render 'meals/line_items'

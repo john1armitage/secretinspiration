@@ -38,13 +38,15 @@
   - if (allow? :meals, :edit) && (!@meal.seating_id.blank? || @meal.state == 'confirmed')
     = button_to 'Order', meal_path(@meal, order: true), method: :get  #, remote: true, form_class: 'no_ajaxify'
     = button_to 'Bill', check_out_meal_path(@meal, meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
+    - if @meal.seating_id.blank?
+      = button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}
   - elsif @meal.state == 'takeaway'
-    = button_to 'Request', meal_path(@meal, order: 'request'), method: :get, form_class: 'request'
+    = button_to 'Request', meal_path(@meal, takeaway: 'request'), method: :get, form_class: 'contact no_ajaxify'
   - elsif @meal.state == 'requested'
-    - if current_user.id.blank?
-      = button_to 'Un-order', meal_path(@meal, order: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify'
-    -else
-      = button_to 'Confirm', meal_path(@meal, order: 'confirm'), method: :get, remote: true, form_class: 'no_ajaxify'
+    - unless current_user.id.blank?
+      = button_to 'Confirm', meal_path(@meal, takeaway: 'confirm'), method: :get, remote: true, form_class: 'no_ajaxify'
+      -#= button_to 'Request', meal_path(@meal, order: 'request'), method: :get, form_class: 'contact'
+    =# button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}
   - elsif @meal.state == 'confirmed'
     - unless current_user.id.blank?
       = button_to 'Order', meal_path(@meal, order: true), method: :get  #, remote: true, form_class: 'no_ajaxify'

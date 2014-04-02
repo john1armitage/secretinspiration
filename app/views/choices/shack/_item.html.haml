@@ -5,7 +5,7 @@
   - @meal_id = params[:meal_id].present? ? params[:meal_id].to_i : @meal.present? ? @meal.id : 0
   -# @meal_id = 1
   -#params[:id].to_i
-  - if @meal_id > 0  && ( (allow? :meals, :destroy) || (default.first.item.remote_order == true) )
+  - if @meal_id > 0  && ( (allow? :meals, :destroy) || (default.first.item.remote_order == true) ) && default.first.item.available
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
       = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
       -#- if (default.first.name == 'default')
@@ -20,12 +20,14 @@
       = hidden_field_tag :variant_id, default.first.id
 
       - choices = item.category.choices ? (item.category.choices - [""] ) : []
+      - choices = item.choices ? (item.choices - [""] ) : []  unless choices.size > 0
       - choices.each do |c|
         - @choice = c
         =# make_title(c)
         %ul.menu-item.small-block-grid-1.medium-block-grid-2.large-block-grid-2
           = render :partial => 'layouts/fields/item_choices_tag', collection: Element.where(kind: c).order(:rank) #, field: o
       - options = item.category.options ? (item.category.options - [""] ) : []
+
       - options.each do |o|
         - @option = o
         =# make_title(o)
@@ -37,7 +39,9 @@
       %span.price
         = humanized_money_with_symbol( item.price )
       %span.title
-        = make_title(item.name)
+        = item.name
+      %span
+        = 'Sorry, available soon' unless default.first.item.available
       - if allow? :items, :update
         %span= link_to 'Edit', edit_item_path(item)
       - if allow? :items, :destroy

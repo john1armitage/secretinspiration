@@ -1,0 +1,3 @@
+$('div#editor').html('')
+$('div#takeaway').html("<%= escape_javascript(render :partial => 'meals/takeaway') %>")
+$('div#content').html("<%= escape_javascript(render :partial => "choices/show") %>")
