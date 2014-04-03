@@ -1,4 +1,4 @@
 %td
-  = label_tag item_options_tag.name, make_title(item_options_tag.name) #, :class => 'right'
-%td
   = check_box_tag "options[#{@option}][]", item_options_tag.name #, @selections.include?( field.name) ? true : false
+%td
+  = label_tag item_options_tag.name #, make_title(item_options_tag.name) #, :class => 'right'

@@ -17,14 +17,15 @@
         = make_title(v)
     - unless line_item.options.blank?
       %br
-      = make_title(line_item.options)
+      = line_item.options
     %br
-    = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
-    = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
-    = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
-    = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
-    = " ~ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
-    %br
+    - unless current_user.id.blank? and @meal.state != 'takeaway'
+      = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
+      = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
+      = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
+      = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
+      = " ~ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
+      %br
 
   - line_item.children.each do |option|
     = option.quantity
@@ -32,9 +33,10 @@
     %span.title
       = make_title(option.desc)
     %br
-    = link_to '+', meal_item_path( option.id, act: 'add', option: true), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'
-    = link_to 'x', meal_item_path( option, option: true), method: :delete, remote: true, class: 'no_ajaxify'
-    = option.net_total_item + option.tax_total_item
-    = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
-    %br
+    - unless current_user.id.blank? and @meal.state != 'takeaway'
+      = link_to '+', meal_item_path( option.id, act: 'add', option: true), method: :patch, remote: true, class: 'no_ajaxify'
+      = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'
+      = link_to 'x', meal_item_path( option, option: true), method: :delete, remote: true, class: 'no_ajaxify'
+      = option.net_total_item + option.tax_total_item
+      = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
+      %br

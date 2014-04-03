@@ -22,9 +22,6 @@ ul.menu-item {
   }
 }
 
-table tbody tr td,  table tr td {
-  padding: 0;
-}
 
 .has-tip {
   cursor: pointer;
@@ -87,6 +84,10 @@ div.columns ul#catalogue {
       &.catalogue {
 //        border: 1px solid darkgray;
       }
+    }
+    label {
+      display: inline;
+      vertical-align: 0.2rem;
     }
     section {
       margin-left: 0;
@@ -188,3 +189,9 @@ section {
   @extend .row;
   margin-top: 20px;
   }
+
+@media print {
+  table tbody tr td,  table tr td {
+    padding: 0;
+  }
+}

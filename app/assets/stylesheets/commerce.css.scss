@@ -3,7 +3,9 @@ $link: darkslategray;
 //$theme: #008cba;
 
 @media screen, print {
-
+  .center {
+    text-align: center;
+  }
   nav.top-bar {
     padding: 0;
     margin-bottom: 0.2em;

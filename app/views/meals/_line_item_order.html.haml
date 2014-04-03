@@ -15,7 +15,6 @@
         - line_item_order.choices.each do |k,v|
           = make_title(v)
     - unless line_item_order.options.blank?
-      %br
       %span
         = make_title(line_item_order.options)
 

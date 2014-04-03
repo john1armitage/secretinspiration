@@ -1225,7 +1225,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO gigiri;
+SET search_path TO shack;
 
 INSERT INTO schema_migrations (version) VALUES ('20130707204916');
 
@@ -1436,3 +1436,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140328135627');
 INSERT INTO schema_migrations (version) VALUES ('20140331151202');
 
 INSERT INTO schema_migrations (version) VALUES ('20140402132901');
+
+INSERT INTO schema_migrations (version) VALUES ('20140403141536');

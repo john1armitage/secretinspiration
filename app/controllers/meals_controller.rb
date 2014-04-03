@@ -9,7 +9,7 @@ class MealsController < ApplicationController
     if params[:takeaway].present? && @meal && @meal.line_items.size > 0
       case params[:takeaway]
         when 'cancel'
-          @meal.update(state: 'takeaway')
+          @meal.update(state: 'takeaway', notes: '', start_time: nil)
           @meal.line_items.destroy_all
         when 'confirm'
           @meal.update(state: 'confirmed')
@@ -57,10 +57,11 @@ class MealsController < ApplicationController
     elsif params[:takeaway].present?
       case params[:takeaway]
         when 'request'
-          @meal.update(contact: params[:contact], phone: params[:phone], start_time: params[:start_time].to_time, state: 'requested')
-          TakeawayMailer.takeaway_notify(@meal).deliver
+          if @meal.update(contact: params[:contact], phone: params[:phone], start_time: params[:start_time].to_time, notes: params[:notes], state: 'requested') and 1 == 2
+            TakeawayMailer.takeaway_notify(@meal).deliver
+          end
         when 'cancel'
-          @meal.update(contact: params[:contact], phone: params[:phone], start_time: nil, state: 'takeaway')
+          @meal.update(notes: '', start_time: nil, state: 'takeaway')
       end
     else
       @meal.update(params[:meal])
@@ -70,9 +71,9 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update(params[:meal])
-      redirect_to meals_url, notice: 'Meal was successfully updated.'
+      render 'edit' #redirect_to meals_url, notice: 'Meal was successfully updated.'
     else
-      render action: 'edit'
+      render 'edit'
     end
   end
 

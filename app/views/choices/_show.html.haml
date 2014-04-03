@@ -1,4 +1,5 @@
 - category = Category.find_by_name( params[:choices].present? ? params[:choices] : current_tenant.default_category)
+- @choice = Category.find_by_name( params[:category] ) if params[:category].present?
 - @choice ||= ( @meal.present? || @cart.present?) ? category.children.first : Category.find_by_name( params[:id] )
 - if @meal.present? && @meal.seating_id.blank?
   - @page = Page.find_by_code( 'takeaway' )

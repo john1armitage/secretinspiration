@@ -10,7 +10,7 @@ class MealItemsController < ApplicationController
     @line_item = @meal.update_variant( variant.id, params[:options] || [], params[:choices] || [] )
     @line_item.domain = current_tenant.domain
     respond_to do |format|
-      if @line_item.save!
+      if (current_user.id.blank? && !['takeaway','requested'].include?(@meal.state)) || @line_item.save!
         format.js { render 'meal.js.erb',
                notice: 'Line item was successfully created.' }
         format.json { render action: 'show',

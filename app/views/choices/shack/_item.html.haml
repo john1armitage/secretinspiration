@@ -27,12 +27,12 @@
         %ul.menu-item.small-block-grid-1.medium-block-grid-2.large-block-grid-2
           = render :partial => 'layouts/fields/item_choices_tag', collection: Element.where(kind: c).order(:rank) #, field: o
       - options = item.category.options ? (item.category.options - [""] ) : []
-
+      - options = item.options ? (item.options - [""] ) : []  unless options.size > 0
       - options.each do |o|
         - @option = o
         =# make_title(o)
         %ul.menu-item.small-block-grid-1.medium-block-grid-2.large-block-grid-2
-          = render :partial => 'layouts/fields/item_options_tag', collection: Option.where(kind: o).order(:rank) #, field: o
+          = render :partial => 'layouts/fields/item_options_tag', collection: Element.where(kind: o).order(:rank) #, field: o
     -# :form_class => "no_ajaxify", :remote => true, class: 'tiny button'
   - else
     %p.item-header

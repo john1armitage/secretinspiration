@@ -10,6 +10,10 @@
         Table
         = @meal.tabel_name
         = "Order #{@meal.id} at #{Time.now.strftime('%H:%M')}"
+  - unless @meal.notes.blank?
+    %li
+      %span.title
+        = "*** #{@meal.notes} ***"
   - @course = ''
   = render partial: 'meals/line_item_order', collection: @meal.line_items.joins( {variant: { item: {category: :root } } } ).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
   %li.no-print

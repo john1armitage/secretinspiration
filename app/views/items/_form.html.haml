@@ -21,10 +21,17 @@
         = f.label :product_flow
         = collection_select(:item, :product_flow,
           Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
+    .row
       .field.small-3.columns
         = f.label :category, 'Category'
         = f.grouped_collection_select :category_id, @categories, :categories, :nice_name, :id, :nice_name,
           :include_blank => true
+      .field.small-3.columns
+        = f.label :choices
+        = f.collection_select :choices, Element.where(:kind => 'item_choices'), 'name', 'name', {}, { multiple: true, size: 4 }
+      .field.small-3.columns.left
+        = f.label :options
+        = f.collection_select :options, Element.where(:kind => 'item_options'), 'name', 'name', {}, { multiple: true, size: 4 }
     .row
       .field.small-2.columns
         = f.label :price
@@ -39,9 +46,6 @@
       .field.small-3.columns.left
         = f.label :sups, 'Suppliers'
         = f.collection_select :sups, get_suppliers( @item.category_id), 'id', 'name', {}, {:multiple => true}
-      .field.small-3.columns
-        = f.label :choices
-        = f.collection_select :choices, Element.where(:kind => 'item_choices'), 'name', 'name', {}, { multiple: true, size: 4 }
     .row
       .field.small-8.columns
         = f.label :description

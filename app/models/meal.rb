@@ -5,6 +5,12 @@ class Meal < ActiveRecord::Base
 
   has_many :line_items, as: :ownable, dependent: :destroy
 
+  validates_presence_of :contact, :phone, :start_time,  if: :takeaway_request?
+
+  def takeaway_request?
+    state != 'takeaway' and seating_id.blank?
+  end
+
   def get_vat_rate(type)
     eval("CONFIG[:vat_rate_#{type}]")  || 0
   end
@@ -27,12 +33,13 @@ class Meal < ActiveRecord::Base
     line_item_options = []
     options.each do |k, option_set|
       option_set.each do |o|
-        option = Option.find_by_name(o)
-        if option.price.to_d > 0
-          line_item_options << option
-        else
-          inline_options << option.name
-        end
+        inline_options << o
+        #option = Element.find_by_name(o)
+        #if option.price.to_d > 0
+        #  line_item_options << option
+        #else
+        #  inline_options << option.name
+        #end
       end
     end
     inline_options = inline_options.join(', ')
