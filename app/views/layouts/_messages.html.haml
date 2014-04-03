@@ -1,5 +1,4 @@
 - unless flash[0] == nil
-  Woof
   - flash.each do |name, msg|
     - if msg.is_a?(String)
       %div#notice{:class => "alert-box round #{name == :notice ? "success" : "alert"}", "data-alert" => ""}
@@ -9,7 +8,7 @@
   - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
   - page = Page.find_by_code('flash')
   - if page
-    #flash
+    #flash.no-print
       = markdown(page.body)
 
 -##notice{ style: "#{'display:none' unless flash[:notice]}" }

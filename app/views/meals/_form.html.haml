@@ -28,7 +28,6 @@
       %span.title
         = @meal.state.capitalize
       - if current_user.id.blank?
-        IN TEST
         - if @meal.state == 'takeaway'
           != link_to "View Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
         - else
@@ -69,30 +68,50 @@
         %span.title
           Sorry, Too Late today
     - else
-      %li
-        = form_for @meal, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
-          %fieldset
-            = f.hidden_field :id
-            .row
-              .large-12.columns
-                = f.label :contact, 'Contact Name'
-                = f.text_field :contact, placeholder: 'your name'
-            .row
-              .large-12.columns
-                = f.label :phone, 'Phone'
-                = f.text_field :phone, placeholder: 'your number'
-            .row
-              .large-12.columns
-                = f.label :start_time, 'Time'
-                = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
-            .row
-              .large-12.columns
-                = f.label :notes
-                = f.text_area :notes,  placeholder: 'special requests'
-            - unless current_user.id.blank?
+      - if ['takeaway','requested'].include? @meal.state
+        %li
+          = form_for @meal, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
+            %fieldset
+              = f.hidden_field :id
               .row
-                .large-6.columns
-                  = f.submit 'Update'
+                .large-12.columns
+                  = f.label :contact, 'Contact Name'
+                  = f.text_field :contact, placeholder: 'your name'
+              .row
+                .large-12.columns
+                  = f.label :phone, 'Phone'
+                  = f.text_field :phone, placeholder: 'your number'
+              .row
+                .large-12.columns
+                  = f.label :start_time, 'Time'
+                  = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
+              .row
+                .large-12.columns
+                  = f.label :notes
+                  = f.text_area :notes,  placeholder: 'special requests'
+              - unless current_user.id.blank?
+                .row
+                  .large-6.columns
+                    = f.submit 'Update'
+      - else
+        %li
+          %span
+            = "Pick-up: "
+          %span.title
+            = " #{@meal.start_time.strftime('%H:%M')}"
+          %br
+          %span
+            = "Contact:"
+          %span.title
+            = "#{@meal.contact}"
+          %br
+          %span
+            = "Phone:"
+          %span.title
+            = "#{@meal.phone}"
+          %br
+          %span
+            = "Any changes, please call"
   - unless ((opening == 'closed' or (times && times.empty?)) && current_user.id.blank?)
     #line_items
       = render 'meals/line_items'

@@ -16,12 +16,12 @@
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
   .row#navigation.no-print
-    .large-12.columns.show-for-medium-up
+    .large-12.columns.show-for-medium-up.no-print
       = render 'layouts/navigation'
-    .large-12.columns.hide-for-medium-up
+    .large-12.columns.hide-for-medium-up.no-print
       = render 'layouts/navigation_small'
   .row.no-print
-    .large-12.columns#messages
+    .large-12.columns#messages.no-print
       = render 'layouts/messages'
   .row
     .large-2.columns#aside.show-for-large-up.no-print
@@ -39,7 +39,7 @@
         .large-12.columns#content{role: "content"}
           = yield
   #aside.show-for-medium-down.no-print
-    %aside#sidebar
+    %aside#sidebar.no-print
       -# unless allow? :users, :index
       = render "welcome/intro"
     #contact_small.no-print
