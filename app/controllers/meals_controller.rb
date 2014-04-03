@@ -16,6 +16,9 @@ class MealsController < ApplicationController
       end
       render  action: 'takeaway'
     end
+    if params[:order].present? && params[:order] == 'true'
+      @meal.update(state: 'ordered')
+    end
   end
 
 
