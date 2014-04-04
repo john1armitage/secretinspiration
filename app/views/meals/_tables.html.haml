@@ -1,4 +1,4 @@
-- @meals = Meal.where('seating_id IS NOT NULL').order('tabel_name')
+- @meals = Meal.where("seating_id IS NOT NULL AND state <> 'billed'").order('tabel_name')
 %li.title
   %span
     Live Tables

@@ -1,8 +1,8 @@
-- @meals = Meal.where("seating_id IS NULL AND state IN ('confirmed')").order('updated_at')
+- @meals = Meal.where("seating_id IS NULL AND state IN ('checkout')").order('updated_at')
 - unless @meals.empty?
   %ul.aside.no-print
     %li.title
       %span
-        Takeaway Confirmed
+        Takeaway Checkout
     - @meals.each do |meal|
       = render 'meals/meal', meal: meal

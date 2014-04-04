@@ -1,3 +1,4 @@
+- @takeaway_editable = (!current_user.id.blank? or (['takeaway','requested'].include? @meal.state ))
 - today = (Date.today)
 - openings = get_openings(today, today)
 - status = []
@@ -68,9 +69,9 @@
         %span.title
           Sorry, Too Late today
     - else
-      - if ['takeaway','requested'].include? @meal.state
+      - if @takeaway_editable
         %li
-          = form_for @meal, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
+          = form_for @meal, url: {action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
             %fieldset
               = f.hidden_field :id
               .row
@@ -89,10 +90,9 @@
                 .large-12.columns
                   = f.label :notes
                   = f.text_area :notes,  placeholder: 'special requests'
-              - unless current_user.id.blank?
-                .row
-                  .large-6.columns
-                    = f.submit 'Update'
+              .row
+                .large-12.columns
+                  = f.submit 'Update'
       - else
         %li
           %span

@@ -16,7 +16,7 @@ class MealsController < ApplicationController
       end
       render  action: 'takeaway'
     end
-    if params[:order].present? && params[:order] == 'true'
+    if params[:order].present? && params[:order] == 'all'
       @meal.update(state: 'ordered')
     end
   end
@@ -100,20 +100,23 @@ class MealsController < ApplicationController
     @order.tax_total_cents = @order.tax_home_cents = @meal.line_items.map(&:tax_total_item_cents).sum
     @order.seating = @meal.seating
     @order.effective_date = Time.now
-    @order.desc = "Table #{@meal.tabel_name}"
+    @order.desc = @meal.seating_id.blank? ? "#{@meal.id}:#{@meal.contact}" : "#{@meal.id}:Table #{@meal.tabel_name}"
+    @order.seating_id = @meal.seating_id if @meal.seating
     @order.state = 'incomplete'
     @order.save
-    @meal.update( state: 'checkout')
     @meal.line_items.update_all(ownable_type: 'Order', ownable_id: @order.id)
-    @meal.seating.booking.update_attribute(:state, 'billing')
-    Meal.find(@meal.id).destroy
+    @meal.seating.booking.update_attribute(:state, 'billing')  if @meal.seating and @meal.seating.booking
+    state = @meal.seating_id.blank? ? 'takeaway' : 'billed'
+    @meal.update(state: state)
+#    @meal.destroy
     set_booking_dates
     render 'check'
   end
 
   def check_in
     @order = Order.find(params[:id])
-    @meal = Meal.create( tabel_name: @order.desc.gsub(/Table /,''), seating_id: @order.seating_id)
+    @meal = Meal.find( @order.desc.split(':')[0])
+    @meal.update(state: 'ordered')
     if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id)
       @order.destroy
     end

@@ -15,7 +15,10 @@
       %span.title
         = "*** #{@meal.notes} ***"
   - @course = ''
-  = render partial: 'meals/line_item_order', collection: @meal.line_items.joins( {variant: { item: {category: :root } } } ).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
+  -# if params[:order].present? && params[:order] == 'all'
+  - line_items = @meal.line_items.joins( {variant: { item: {category: :root } } }).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
+
+  = render partial: 'meals/line_item_order', collection: line_items
   %li.no-print
     %span
       = link_to "Print",'#', id: 'print'

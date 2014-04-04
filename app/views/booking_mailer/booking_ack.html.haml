@@ -27,10 +27,14 @@
         = "'#{@booking.notes}'"
 
 %p
-  We'll give you a call to confirm but looks fine!
-
-%p
-  Thanks, we look forward to seeing you.
+  = @total_booked
+  = @current_tenant.capacity
+  - if @total_booked <= @current_tenant.capacity
+    %span
+      Thanks, we'll get back to you to confirm but looks fine!
+  -else
+    %span
+      Thanks, we'll check the booking and get back to you.
 
 %p
   %i

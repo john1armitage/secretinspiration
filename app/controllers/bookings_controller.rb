@@ -55,7 +55,7 @@ class BookingsController < ApplicationController
     if @booking.save
       set_booked
       set_booking_dates
-      BookingMailer.booking_ack(@booking).deliver
+      BookingMailer.booking_ack(@booking, current_tenant).deliver
       render 'index'
     else
       update_booked

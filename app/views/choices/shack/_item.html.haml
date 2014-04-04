@@ -42,6 +42,9 @@
         = item.name
       %span
         = 'Sorry, available soon' unless default.first.item.available
+      - if (allow? :line_items, :create) && !item.notes.blank?
+        %span.has-tip{"data-tooltip" => "", title: item.notes}
+          notes
       - if allow? :items, :update
         %span= link_to 'Edit', edit_item_path(item)
       - if allow? :items, :destroy
@@ -50,6 +53,3 @@
     = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
   %p
     != item.description
-    - if (allow? :items, :create) && !item.notes.blank?
-      %span.has-tip{"data-tooltip" => "", title: item.notes}
-        notes

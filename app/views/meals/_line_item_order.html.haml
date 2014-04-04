@@ -1,25 +1,29 @@
 - if @course != line_item_order.variant.item.grouping
   - @course = line_item_order.variant.item.grouping
-  - @component_title = make_title(@course.split(':')[1] ).pluralize
-  %li.category
-    %span
-      = @component_title
-%li
-  - unless line_item_order.net_total_item == 0
-    %span
-      = "#{line_item_order.quantity} x"
-    %span.title
-      = line_item_order.desc
-    - unless line_item_order.choices.blank?
+  - course_name = @course.split(':')[1]
+  - @component_title = make_title(course_name).pluralize
+  - @required = params[:order].present?  && (params[:order] == 'all' || params[:order] == course_name)
+  - if @required
+    %li.category
       %span
-        - line_item_order.choices.each do |k,v|
-          = make_title(v)
-    - unless line_item_order.options.blank?
+        = @component_title
+- if @required
+  %li
+    - unless line_item_order.net_total_item == 0
       %span
-        = make_title(line_item_order.options)
+        = "#{line_item_order.quantity} x"
+      %span.title
+        = line_item_order.desc
+      - unless line_item_order.choices.blank?
+        %span
+          - line_item_order.choices.each do |k,v|
+            = make_title(v)
+      - unless line_item_order.options.blank?
+        %span
+          = make_title(line_item_order.options)
 
-  - line_item_order.children.each do |option|
-    %span
-    = "#{option.quantity} x "
-    %span.title
-      = make_title(option.desc)
+    - line_item_order.children.each do |option|
+      %span
+      = "#{option.quantity} x "
+      %span.title
+        = make_title(option.desc)

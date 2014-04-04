@@ -27,9 +27,12 @@
         = f.label :hostname
         = f.text_field :hostname
     .row
-      .field.small-6.columns.left
+      .field.small-4.columns.left
         = f.label :home_supplier
         = f.text_field :home_supplier
+      .field.small-1.columns.left
+        = f.label :capacity
+        = f.number_field :capacity
     .row
       .field.small-3.columns
         = f.label :component_tokens

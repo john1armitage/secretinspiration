@@ -122,7 +122,11 @@ class OrdersController < ApplicationController
   def destroy
     supplier_id = @order.supplier_id
     @order.destroy
-    redirect_to orders_url(supplier_id: supplier_id)
+    if supplier_id == Supplier.find_by_name(current_tenant.home_supplier ).id
+      render :nothing => true
+    else
+      redirect_to orders_url(supplier_id: supplier_id)
+    end
   end
 
   private
