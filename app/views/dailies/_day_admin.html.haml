@@ -1,0 +1,16 @@
+%li.request
+  = link_to 'New Daily', new_daily_path(date: date.to_s), class: 'no_ajaxify', remote: true
+%li.request
+  = link_to 'New Timesheet', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
+- if dailies[date]
+  %li
+    -#= link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+    Daily
+- if timesheets[date]
+  %li
+    Timesheet
+    -#= pluralize bookings[date].map(&:pax).sum, 'person'
+    -#- bookings[date].each do |booking|
+    -#  %li
+    -#    - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+    -#    = link_to title, booking

@@ -1,0 +1,28 @@
+= form_for @timesheet, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
+  %fieldset
+    .row
+      .field.small-12.columns
+        = f.label :employee_id
+        = f.collection_select :employee_id, Employee.where(live: true).order(:first_name), 'id', 'first_name', include_blank: true
+    .row
+      .field.small-12.columns
+        = f.label :start_time, 'Start'
+        = f.select :start_time, grouped_options_for_select(get_times('blank', 'timesheet'), @timesheet.start_time.strftime('%H:%M'), divider: 'Shift')
+    .row
+      .field.small-12.columns.left
+        = f.label :end_time, 'Finish'
+        = f.select :end_time, grouped_options_for_select(get_times('blank', 'timesheet'), @timesheet.end_time.strftime('%H:%M'), divider: 'Shift')
+    .row
+      .field.small-12.columns
+        = f.label :hours
+        = f.text_field :hours
+    .row
+      .field.small-12.columns
+        = f.label :work_date
+        = f.date_field :work_date
+      .field.small-12.columns.left
+        = f.label :session
+        = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @timesheet.session)
+    .row
+      .actions
+        = f.submit 'Save'

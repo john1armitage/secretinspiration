@@ -8,6 +8,9 @@
   - if allow? :broadcasts, :index
     %li
       != link_to 'Broadcasts', broadcasts_path
+  - if allow? :offers, :index
+    %li
+      != link_to 'Offers', offers_path
   - if allow? :openings, :index
     %li
       != link_to 'Openings', openings_path

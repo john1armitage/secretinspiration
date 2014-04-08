@@ -1,7 +1,7 @@
 - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 - @page = Page.find_by_code('current')
 #current
-  %h5
+  %h1
     != @page.title
   != markdown(@page.body)
   - if @page.image == 'image'

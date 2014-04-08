@@ -1,0 +1,21 @@
+%fieldset
+  = f.hidden_field :id
+  .row
+    .large-12.columns
+      = f.label :contact, 'Contact Name'
+      = f.text_field :contact, placeholder: 'your name'
+  .row
+    .large-12.columns
+      = f.label :phone, 'Phone'
+      = f.text_field :phone, placeholder: 'your number'
+  .row
+    .large-12.columns
+      = f.label :start_time, 'Time'
+      = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
+  .row
+    .large-12.columns
+      = f.label :notes
+      = f.text_area :notes,  placeholder: 'special requests'
+  .row
+    .large-12.columns
+      = f.submit 'Update'

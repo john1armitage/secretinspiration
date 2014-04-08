@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Employee:
+  = @timesheet.employee
+%p
+  %b Hours:
+  = @timesheet.hours
+
+= link_to 'Edit', edit_timesheet_path(@timesheet)
+\|
+= link_to 'Back', timesheets_path

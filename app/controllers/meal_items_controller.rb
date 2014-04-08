@@ -1,16 +1,25 @@
 class MealItemsController < ApplicationController
 
-  before_action :set_meal, only: [:create, :bill ]
+  before_action :set_meal, only: [:create, :bill, :new ]
 
   before_action :set_line_item, only: [ :update, :destroy ]
 
   def create
-    variant = Variant.find( params[:variant_id]) # || Item.where( name: params[:commit]).first.variants.where( item_default: true).first)
-#    variant = Variant.where( name: params[:commit]).first || Item.where( name: params[:commit]).first.variants.where( item_default: true).first
-    @line_item = @meal.update_variant( variant.id, params[:options] || [], params[:choices] || [] )
+    if params[:line_item][:special].present?
+      variant = Item.find_by_name( "ad_hoc_#{params[:line_item][:special]}").variants.first
+      @line_item = @meal.create_special(variant.id, params[:each], params[:line_item])
+      # @line_item.save
+    else
+      variant = Variant.find( params[:variant_id]) # || Item.where( name: params[:commit]).first.variants.where( item_default: true).first)
+      @line_item = @meal.update_variant( variant.id, params[:options] || [], params[:choices] || [] )
+    end
     @line_item.domain = current_tenant.domain
     respond_to do |format|
-      if (current_user.id.blank? && !['takeaway','requested'].include?(@meal.state)) || @line_item.save!
+      if !@line_item.special.blank? && @line_item.save!
+        format.js { render '/meals/edit.js.erb',
+                           notice: 'Line item was successfully created.' }
+
+      elsif (current_user.id.blank? && !['takeaway','requested'].include?(@meal.state)) || @line_item.save!
         format.js { render 'meal.js.erb',
                notice: 'Line item was successfully created.' }
         format.json { render action: 'show',
@@ -23,6 +32,10 @@ class MealItemsController < ApplicationController
     end
   end
 
+  def new
+    @line_item = LineItem.new(special: 'starter', quantity: 1, ownable_type: 'Meal', ownable_id: params[:meal_id], variant_id: Variant.find_by_name('dummy_special').id, domain: current_tenant.domain)
+
+  end
   # PATCH/PUT /line_items/1
   def update
     current_item = LineItem.find(params[:id])
@@ -65,6 +78,7 @@ class MealItemsController < ApplicationController
       if current_user.id.blank?
         @meal = get_takeaway
       else
+        id = params[:line_item].present? ? params[:line_item][:ownable_id] : params[:meal_id]
         @meal = Meal.find(params[:meal_id])
       end
     end
@@ -77,4 +91,5 @@ class MealItemsController < ApplicationController
         @meal = params[:option].present? ? @line_item.parent.ownable : @line_item.ownable
       end
     end
+
 end

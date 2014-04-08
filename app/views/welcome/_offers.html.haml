@@ -1,0 +1,16 @@
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+- @offers = Offer.where(live: true)
+- unless @offers.empty?
+  #offers
+    - @offers.each do |offer|
+      .offer
+        %h1
+          != offer.name
+        != markdown(offer.short)
+        - if allow? :offers, :edit
+          %p
+            != link_to 'more ...', offer_path(offer)
+-#- unless @page.color.blank?
+-#  :coffeescript
+-#    jQuery ->
+-#      $('div#current').addClass( "#{@page.color}" )

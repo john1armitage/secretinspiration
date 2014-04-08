@@ -5,10 +5,10 @@ class Meal < ActiveRecord::Base
 
   has_many :line_items, as: :ownable, dependent: :destroy
 
-  validates_presence_of :contact, :phone, :start_time,  if: :takeaway_request?
+ # validates_presence_of :contact, :phone, :start_time,  if: :remote_takeaway?
 
-  def takeaway_request?
-    state != 'takeaway' and seating_id.blank?
+  def remote_takeaway?
+    state == 'takeaway' and seating_id.blank?
   end
 
   def get_vat_rate(type)
@@ -74,6 +74,33 @@ class Meal < ActiveRecord::Base
     option_child.save
   end
 
+  # line_item[ownable_id]:186
+  # line_item[ownable_type]:Meal
+  # line_item[special]:main
+  # line_item[desc]:hhhh
+  # each:6
+  #
+  # line_item[quantity]:1
+
+
+  def create_special(variant_id, item_price, params_line_item)
+    variant = Variant.find(variant_id)
+    variant.price = item_price.to_d / params_line_item[:quantity].to_d
+    current_item = line_items.build(variant_id: variant_id)
+    price = variant.price
+    current_item.vat_rate = get_vat_rate( variant.item.vat_rate )
+    current_item.account_id = ItemType.find_by_name(variant.item.category.parent.name).account_id
+    current_item.net_item = price / ( 1 + current_item.vat_rate )
+    current_item.tax_item = price - current_item.net_item
+    current_item.quantity = params_line_item[:quantity]
+    calculate_totals(current_item)
+    current_item.ownable_id = params_line_item[:ownable_id]
+    current_item.ownable_type = 'Meal'
+    current_item.desc = params_line_item[:desc]
+    current_item.special = params_line_item[:special]
+    current_item
+  end
+
   def create_variant(variant_id,  inline_options, choices)
     variant = Variant.find(variant_id)
     current_item = line_items.build(variant_id: variant_id)
@@ -81,6 +108,7 @@ class Meal < ActiveRecord::Base
     current_item.desc += ": #{variant.name} " unless variant.name == 'default'
     current_item.quantity = 1
     price = ( variant.price.to_d > 0 ? variant.price : variant.item.price )
+    current_item.account_id = ItemType.find_by_name(variant.item.category.parent.name).account_id
     current_item.vat_rate = get_vat_rate( variant.item.vat_rate )
     current_item.net_item = price / ( 1 + current_item.vat_rate )
     current_item.tax_item = price - current_item.net_item

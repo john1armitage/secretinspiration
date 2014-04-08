@@ -1,3 +1,6 @@
+$theme: #009900;//darkslategray;//#008cba;
+$special: #3d5c2c; //#008cba;
+
 //$shack-bg: red;
 //$secret-bg: blueviolet;
 //$gigiri-bg: darkturquoise;
@@ -22,10 +25,20 @@ ul.menu-item {
   }
 }
 
+ul.inline-list a.button:hover {
+  background-color: $special; //#008cba;
+}
+a:hover {
+  color: $special; //#008cba;
+}
+ul.inline-list a.button:hover {
+  background-color: $special; //#008cba;
+  color: white;
+}
 
 .has-tip {
   cursor: pointer;
-  color: #008cba;
+  color: $special; //#008cba;
 }
 
 //body.shack {
@@ -108,6 +121,13 @@ div#navigation {
     margin-left: 0.4em;
   }
 }
+a {
+  color: $theme;
+  &.button {
+    font-weight: bold;
+  }
+}
+
 div#aside.columns {
   padding: 0;
 }

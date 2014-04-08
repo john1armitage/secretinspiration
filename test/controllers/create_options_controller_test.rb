@@ -30,7 +30,7 @@ class CreateOptionsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @create_option
+    get :form, id: @create_option
     assert_response :success
   end
 

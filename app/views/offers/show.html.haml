@@ -1,0 +1,14 @@
+%p#catalogue
+  %h1.title
+    != @offer.name
+  %span.body
+    != @offer.desc
+- @offers = Offer.where("live = ? AND id <> ?", true, @offer.id)
+
+- if  @offers.size > 0
+  - @offers.each do |offer|
+    .offer
+      %h1
+        != offer.name
+      != markdown(offer.desc)
+

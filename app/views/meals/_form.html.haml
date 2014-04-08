@@ -1,4 +1,3 @@
-- @takeaway_editable = (!current_user.id.blank? or (['takeaway','requested'].include? @meal.state ))
 - today = (Date.today)
 - openings = get_openings(today, today)
 - status = []
@@ -43,9 +42,10 @@
     - elsif allow? :users, :index
       %span.title
         != "TA #{@meal.id}"
-  - if allow?(:meals, :edit) && (!@meal.seating_id.blank? || @meal.tabel_name == 'takeaway')
-    = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify',
+  - if allow?(:meals, :form) && (!@meal.seating_id.blank? || @meal.tabel_name == 'takeaway')
+    = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify', class: 'semi',
       data: { confirm: 'Delete Order?' }
+    = button_to 'Special', new_meal_item_path(meal_id: @meal.id, special: true), method: :get, remote: true, form_class: 'no_ajaxify semi', class: 'semi'
   - if @meal.seating
     %li
       = form_for @meal, html: { class: 'no_ajaxify'}, method: 'patch', remote: true, validate: true do |f|
@@ -54,7 +54,7 @@
             .large-12.columns
               = f.text_area :notes,  placeholder: 'special requests'
           .row
-            .large-6.columns
+            .large-12.columns
               = f.submit 'Update'
 
   - else
@@ -71,28 +71,52 @@
     - else
       - if @takeaway_editable
         %li
-          = form_for @meal, url: {action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
-            %fieldset
-              = f.hidden_field :id
-              .row
-                .large-12.columns
-                  = f.label :contact, 'Contact Name'
-                  = f.text_field :contact, placeholder: 'your name'
-              .row
-                .large-12.columns
-                  = f.label :phone, 'Phone'
-                  = f.text_field :phone, placeholder: 'your number'
-              .row
-                .large-12.columns
-                  = f.label :start_time, 'Time'
-                  = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
-              .row
-                .large-12.columns
-                  = f.label :notes
-                  = f.text_area :notes,  placeholder: 'special requests'
-              .row
-                .large-12.columns
-                  = f.submit 'Update'
+          - if allow? :meals, :form
+            = form_for @meal, html: { class: 'no_ajaxify'},remote: true, validate: true do |f|
+              %fieldset
+                = f.hidden_field :id
+                .row
+                  .large-12.columns
+                    = f.label :contact, 'Contact Name'
+                    = f.text_field :contact, placeholder: 'your name'
+                .row
+                  .large-12.columns
+                    = f.label :phone, 'Phone'
+                    = f.text_field :phone, placeholder: 'your number'
+                .row
+                  .large-12.columns
+                    = f.label :start_time, 'Time'
+                    = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
+                .row
+                  .large-12.columns
+                    = f.label :notes
+                    = f.text_area :notes,  placeholder: 'special requests'
+                .row
+                  .large-12.columns
+                    = f.submit 'Update'
+          - else
+            = form_for @meal, url: {action: "patcher"}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
+              %fieldset
+                = f.hidden_field :id
+                .row
+                  .large-12.columns
+                    = f.label :contact, 'Contact Name'
+                    = f.text_field :contact, placeholder: 'your name'
+                .row
+                  .large-12.columns
+                    = f.label :phone, 'Phone'
+                    = f.text_field :phone, placeholder: 'your number'
+                .row
+                  .large-12.columns
+                    = f.label :start_time, 'Time'
+                    = f.select :start_time, grouped_options_for_select(times, (@meal.start_time ? @meal.start_time.strftime('%H:%M') : ''), divider: 'Collection')
+                .row
+                  .large-12.columns
+                    = f.label :notes
+                    = f.text_area :notes,  placeholder: 'special requests'
+                .row
+                  .large-12.columns
+                    = f.submit 'Update'
       - else
         %li
           %span

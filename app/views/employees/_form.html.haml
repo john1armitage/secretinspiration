@@ -11,13 +11,19 @@
       .field.small-2.columns.left
         = f.label :last_name
         = f.text_field :last_name
+      .field.small-2.columns.left
+        = f.label :live, 'Current'
+        = f.check_box :live
     .row
-      .field.small-3.columns
+      .field.small-3.columns.left
         = f.label :date_of_birth
         = f.date_field :date_of_birth
       .field.small-2.columns.left
         = f.label :ni_number
         = f.text_field :ni_number
+      .field.small-2.columns.left
+        = f.label :hourly_rate
+        = f.text_field :hourly_rate
     .row
       .field.small-4.columns
         = f.label :address1

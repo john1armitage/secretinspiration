@@ -30,7 +30,7 @@ class BookingsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @booking
+    get :form, id: @booking
     assert_response :success
   end
 

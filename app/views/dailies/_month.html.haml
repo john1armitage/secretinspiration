@@ -1,0 +1,56 @@
+- months = get_months((Date.today.beginning_of_month - 2.year), 24).reverse
+- no_content= params[:no_content].present? ? 'no_content' : ''
+%p
+  = select_tag 'months', options_for_select(months, month)
+  = select_tag 'employees', options_for_select(Employee.where(live:true).map(&:name),''), prompt: 'Timesheets'
+-#%p
+-#  hhh
+= calendar(month) do |date|
+  %ul
+    %li
+    = date.day
+    - if date <= Date.today
+      = link_to 'Daily', new_daily_path(date: date.to_s), class: 'no_ajaxify', remote: true
+      = link_to 'Timesheet', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
+
+    - if dailies[date]
+      - dailies[date].each do |daily|
+        %li
+          %span
+            = link_to daily.session[0].capitalize, edit_daily_path(daily), remote: true, class: 'no_ajaxify'
+          %span
+            = "#{humanized_money_with_symbol(daily.turnover)} + #{humanized_money_with_symbol(daily.tips)}"
+          = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Session", :data => { :confirm => 'Are you sure?' }
+    - if timesheets[date]
+      - timesheets[date].each do |timesheet|
+        %li
+          %span
+            = link_to timesheet.employee.first_name, edit_timesheet_path(timesheet), remote: true, class: 'no_ajaxify'
+          %span
+            = "#{timesheet.hours}"
+          = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Timesheet", :data => { :confirm => 'Are you sure?' }
+      =# render partial: 'dailies/daily', locals: {date: date, dailies: dailies, timesheets: timesheets, no_content: no_content }
+      -#- if timesheets[date]
+      -#  - timesheets[date].each do |timesheet|
+      -#    %li.timesheet
+      -#      != link_to timesheet.employee.name_first, timesheet_path( timesheet, aside: true ), class: "no_ajaxify  #{no_content}", remote: true
+
+
+
+
+
+
+  -#- if date >= Time.now.to_date
+  -#  = link_to 'new', new_booking_path(date: date.to_s)
+  -#  - if date == Time.now.to_date && (allow? :bookings, :create)
+  -#    = link_to 'New Walk-In', new_booking_path(:walk_in => true)
+  -#  - else
+  -#    REQUEST
+  -#- if bookings[date]
+  -#  = link_to "#{bookings[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+  -#  = bookings[date].map(&:pax).sum
+  -#  %ul
+  -#    - bookings[date].each do |booking|
+  -#      %li
+  -#        - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+  -#        = link_to title, booking

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  days: MyString
+  offer_type: MyString
+  amount: 9.99
+  name: MyString
+  desc: MyText
+  notes: MyText
+  live: false
+
+two:
+  days: MyString
+  offer_type: MyString
+  amount: 9.99
+  name: MyString
+  desc: MyText
+  notes: MyText
+  live: false

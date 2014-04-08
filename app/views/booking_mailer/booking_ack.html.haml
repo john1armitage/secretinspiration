@@ -27,8 +27,6 @@
         = "'#{@booking.notes}'"
 
 %p
-  = @total_booked
-  = @current_tenant.capacity
   - if @total_booked <= @current_tenant.capacity
     %span
       Thanks, we'll get back to you to confirm but looks fine!

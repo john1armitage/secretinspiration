@@ -18,19 +18,23 @@ class LineItem < ActiveRecord::Base
   belongs_to :option
   belongs_to :account
 
-  before_validation :process_variant
+  before_validation :process_variant unless :special?
   before_validation :process_home
   #
-  validates_presence_of :desc, :unless => :linked_id?
-  validates_presence_of :account #, :unless => :cart_or_blank?
-  validates_numericality_of :net_item, :greater_than => 0, :message => 'is required' #, :allow_nil => true
-  validates_numericality_of :tax_item, :allow_nil => true
-  validates_numericality_of :quantity
+  validates_presence_of :desc, unless: :special?
+  validates_presence_of :account, unless: :special? #, :unless => :cart_or_blank?
+  validates_numericality_of :net_item, :greater_than => 0, :message => 'is required', unless: :special? #, :allow_nil => true
+  validates_numericality_of :tax_item, :allow_nil => true, unless: :special?
+  validates_numericality_of :quantity, unless: :special?
 
   fields =  Element.where( kind: 'item_choices')
   fields.each do |field|
     store_accessor :choices, field.name.downcase
   end
+  def special?
+    !special.blank? ||  variant_id || option_id
+  end
+
 
   def process_home
     unless exchange_rate.blank?
@@ -44,9 +48,9 @@ class LineItem < ActiveRecord::Base
     self.quantity = 1 unless quantity.to_i > 0
   end
 
-  def linked_id?
-    variant_id || option_id
-  end
+  # def linked_id?
+  #   variant_id || option_id
+  # end
 
   def cart_or_blank?
     ownable_type == 'Cart' || variant_name.blank?

@@ -2,7 +2,7 @@
 - @page = Page.find_by_code('advert')
 - if @page
   #current
-    %h5
+    %h1
       != @page.title
     != markdown(@page.body)
     - if @page.image == 'image'

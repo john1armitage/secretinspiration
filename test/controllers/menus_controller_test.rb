@@ -30,7 +30,7 @@ class MenusControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @menu
+    get :form, id: @menu
     assert_response :success
   end
 

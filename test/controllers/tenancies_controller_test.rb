@@ -30,7 +30,7 @@ class TenanciesControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @tenancies_controller
+    get :form, id: @tenancies_controller
     assert_response :success
   end
 

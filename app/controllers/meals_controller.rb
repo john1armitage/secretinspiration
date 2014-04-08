@@ -134,7 +134,7 @@ class MealsController < ApplicationController
       if current_user.id.blank?
         @meal = get_takeaway
       else
-        @meal = Meal.find(params[:id])
+        @meal = Meal.find(params[:meal_id].present? ? params[:meal_id] : params[:id] )
       end
     end
 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_date: 
+  turnover: 
+  tips: 9.99
+  headcount: 1
+  session: MyString
+
+two:
+  account_date: 
+  turnover: 
+  tips: 9.99
+  headcount: 1
+  session: MyString

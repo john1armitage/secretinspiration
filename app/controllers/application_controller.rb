@@ -283,5 +283,33 @@ class ApplicationController < ActionController::Base
   #  @page = Page.find_by_code( choices )
   #end
   #helper_method :set_choices
+  def set_daily_dates
+    #@daily_date = @daily.account_date if @daily
+    @daily_date = params['daily_date'].present? ? params['daily_date'].to_date : Date.today
+    # @dailies = Daily.where( account_date: @daily_date ).order(:arrival, :customer_name)
+    #@requests = Booking.where( 'confirmed = ?', false ).order(:booking_date, :customer_name)
+    @dailies_by_date = get_dailies(@daily_date)
+    @dailies_last_month = get_dailies(@daily_date - 1.month)
+    @timesheets_by_date = get_timesheets(@daily_date)
+    @timesheets_last_month = get_timesheets(@daily_date - 1.month)
+  end
+  helper_method :set_daily_dates
+
+  def get_dailies(daily_date)
+    start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
+    stop = daily_date.end_of_month
+    Daily.where('account_date >= ? AND account_date <= ?', start, stop ).group_by(&:account_date)
+  end
+
+  def get_timesheets(daily_date)
+    start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
+    stop = daily_date.end_of_month
+    Timesheet.where('work_date >= ? AND work_date <= ?', start, stop ).group_by(&:work_date)
+  end
+
+
+  def get_headcount
+    Timesheet.where('work_date = ? AND session = ?', @daily.account_date, @daily.session).size
+  end
 
 end

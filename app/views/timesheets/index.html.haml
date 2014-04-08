@@ -1,0 +1,31 @@
+%h1 Listing timesheets
+
+%p
+  = link_to 'New Timesheet', new_timesheet_path
+
+%table
+  %tr
+    %th Date
+    %th
+    %th Employee
+    %th Start
+    %th End
+    %th Hours
+    %th
+    %th
+    %th
+
+  - @timesheets.order('work_date DESC, session').each do |timesheet|
+    %tr
+      %td= timesheet.work_date.strftime('%e %b %y')
+      %td= timesheet.session
+      %td= timesheet.employee.name
+      %td= timesheet.start_time.strftime('%H:%M')
+      %td= timesheet.end_time.strftime('%H:%M')
+      %td= timesheet.hours
+      %td= link_to 'Show', timesheet
+      %td= link_to 'Edit', edit_timesheet_path(timesheet)
+      %td= link_to 'Destroy', timesheet, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+

@@ -1,0 +1,26 @@
+= form_for @daily, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
+  %fieldset
+    .row
+      .field.small-12.columns
+        = f.label :account_date
+        = f.date_field :account_date
+    .row
+      .field.small-12.columns.left
+        %label
+          = "Headcount: #{@daily.headcount}"
+        = f.hidden_field :headcount
+    .row
+      .field.small-12.columns
+        = f.label :turnover
+        = f.text_field :turnover
+    .row
+      .field.small-12.columns
+        = f.label :tips
+        = f.text_field :tips
+    .row
+      .field.small-12.columns.left
+        = f.label :session
+        = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @daily.session)
+    .row
+      .actions.small-12
+        = f.submit 'Save'

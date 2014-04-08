@@ -30,7 +30,7 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @item
+    get :form, id: @item
     assert_response :success
   end
 

@@ -172,6 +172,41 @@ ALTER SEQUENCE broadcasts_id_seq OWNED BY broadcasts.id;
 
 
 --
+-- Name: dailies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE dailies (
+    id integer NOT NULL,
+    account_date date,
+    turnover numeric,
+    tips numeric,
+    headcount integer,
+    session character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: dailies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE dailies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dailies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE dailies_id_seq OWNED BY dailies.id;
+
+
+--
 -- Name: elements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -228,7 +263,8 @@ CREATE TABLE employees (
     start_date date,
     end_date date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    live boolean DEFAULT true
 );
 
 
@@ -354,7 +390,8 @@ CREATE TABLE line_items (
     net_item_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
     net_home_cents integer DEFAULT 0 NOT NULL,
     tax_home_cents integer DEFAULT 0 NOT NULL,
-    contra boolean
+    contra boolean,
+    special character varying(255)
 );
 
 
@@ -378,28 +415,31 @@ ALTER SEQUENCE line_items_id_seq OWNED BY line_items.id;
 
 
 --
--- Name: meals; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: offers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE meals (
+CREATE TABLE offers (
     id integer NOT NULL,
-    seating_id integer,
-    tabel_name character varying(255),
-    start_time time without time zone,
-    state character varying(255),
+    days character varying(255)[],
+    offer_type character varying(255),
+    category_id integer,
+    amount numeric,
+    name character varying(255),
+    short character varying(255),
+    "desc" text,
+    notes text,
+    live boolean DEFAULT true,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    contact character varying(255),
-    phone character varying(255),
-    notes text
+    rank integer
 );
 
 
 --
--- Name: meals_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: offers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE meals_id_seq
+CREATE SEQUENCE offers_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -408,10 +448,10 @@ CREATE SEQUENCE meals_id_seq
 
 
 --
--- Name: meals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: offers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE meals_id_seq OWNED BY meals.id;
+ALTER SEQUENCE offers_id_seq OWNED BY offers.id;
 
 
 --
@@ -613,6 +653,42 @@ CREATE SEQUENCE tenancies_id_seq
 --
 
 ALTER SEQUENCE tenancies_id_seq OWNED BY tenancies.id;
+
+
+--
+-- Name: timesheets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE timesheets (
+    id integer NOT NULL,
+    employee_id integer,
+    hours numeric,
+    work_date date,
+    start_time time without time zone,
+    end_time time without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    session character varying(255)
+);
+
+
+--
+-- Name: timesheets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE timesheets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: timesheets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE timesheets_id_seq OWNED BY timesheets.id;
 
 
 --
@@ -835,6 +911,13 @@ ALTER TABLE ONLY broadcasts ALTER COLUMN id SET DEFAULT nextval('broadcasts_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY dailies ALTER COLUMN id SET DEFAULT nextval('dailies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY elements ALTER COLUMN id SET DEFAULT nextval('elements_id_seq'::regclass);
 
 
@@ -870,7 +953,7 @@ ALTER TABLE ONLY line_items ALTER COLUMN id SET DEFAULT nextval('line_items_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY meals ALTER COLUMN id SET DEFAULT nextval('meals_id_seq'::regclass);
+ALTER TABLE ONLY offers ALTER COLUMN id SET DEFAULT nextval('offers_id_seq'::regclass);
 
 
 --
@@ -906,6 +989,13 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 --
 
 ALTER TABLE ONLY tenancies ALTER COLUMN id SET DEFAULT nextval('tenancies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY timesheets ALTER COLUMN id SET DEFAULT nextval('timesheets_id_seq'::regclass);
 
 
 --
@@ -976,6 +1066,14 @@ ALTER TABLE ONLY broadcasts
 
 
 --
+-- Name: dailies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY dailies
+    ADD CONSTRAINT dailies_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: elements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1016,11 +1114,11 @@ ALTER TABLE ONLY line_items
 
 
 --
--- Name: meals_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: offers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY meals
-    ADD CONSTRAINT meals_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY offers
+    ADD CONSTRAINT offers_pkey PRIMARY KEY (id);
 
 
 --
@@ -1061,6 +1159,14 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY tenancies
     ADD CONSTRAINT tenancies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: timesheets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY timesheets
+    ADD CONSTRAINT timesheets_pkey PRIMARY KEY (id);
 
 
 --
@@ -1143,34 +1249,6 @@ CREATE INDEX index_broadcasts_on_topic_id ON broadcasts USING btree (topic_id);
 --
 
 CREATE INDEX index_item_types_on_account_id ON item_types USING btree (account_id);
-
-
---
--- Name: index_meals_on_seating_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meals_on_seating_id ON meals USING btree (seating_id);
-
-
---
--- Name: index_meals_on_start_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meals_on_start_time ON meals USING btree (start_time);
-
-
---
--- Name: index_meals_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meals_on_state ON meals USING btree (state);
-
-
---
--- Name: index_meals_on_tabel_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meals_on_tabel_name ON meals USING btree (tabel_name);
 
 
 --
@@ -1425,3 +1503,17 @@ INSERT INTO schema_migrations (version) VALUES ('20140328135627');
 INSERT INTO schema_migrations (version) VALUES ('20140402124552');
 
 INSERT INTO schema_migrations (version) VALUES ('20140404081214');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404141219');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404143054');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404155951');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404160025');
+
+INSERT INTO schema_migrations (version) VALUES ('20140406111239');
+
+INSERT INTO schema_migrations (version) VALUES ('20140406113407');
+
+INSERT INTO schema_migrations (version) VALUES ('20140406133802');

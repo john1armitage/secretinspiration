@@ -3,10 +3,10 @@
   %fieldset
     = f.hidden_field :walkin
     = f.hidden_field :state
-    .row
-      .large-12.columns
-        %h3
-          = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
+    -#.row
+    -#  .large-12.columns
+    -#    %h5
+    -#      = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
     .row
       .large-12.columns
         - if @booking.booking_date.blank? || (allow? :seating, :create)
@@ -14,6 +14,8 @@
           = f.date_field :booking_date
         - else
           = f.hidden_field :booking_date
+          %h6
+            = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
     - unless @booking.walkin
       .row
         .large-12.columns.timepicker

@@ -1,0 +1,23 @@
+= form_for(@line_item, url: {controller: 'meal_items'},  html: { class: 'no_ajaxify'},remote: true, validate: true ) do |f|
+  = f.hidden_field :ownable_id
+  = f.hidden_field :ownable_type
+  = hidden_field_tag :meal_id, params[:meal_id]
+  %fieldset
+    .row
+      .large-12.columns
+        = f.label :special
+        = f.collection_select :special, Element.where(kind: 'special_item').order(:rank), 'name', 'name'
+    .row
+      .large-12.columns
+        = f.label :desc
+        = f.text_area :desc
+    .row
+      .large-6.columns
+        = label_tag :each
+        = text_field_tag :each
+      .large-6.columns
+        = f.label :quantity
+        = f.text_field :quantity
+    .row
+      .large-12.columns
+        = submit_tag "Add Special Item"

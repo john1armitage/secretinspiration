@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Account date:
+  = @daily.account_date
+%p
+  %b Turnover:
+  = @daily.turnover
+%p
+  %b Tips:
+  = @daily.tips
+%p
+  %b Headcount:
+  = @daily.headcount
+%p
+  %b Session:
+  = @daily.session
+
+= link_to 'Edit', edit_daily_path(@daily)
+\|
+= link_to 'Back', dailies_path

@@ -30,7 +30,7 @@ class TabelsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @tabel
+    get :form, id: @tabel
     assert_response :success
   end
 

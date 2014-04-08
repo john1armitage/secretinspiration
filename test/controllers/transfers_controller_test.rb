@@ -30,7 +30,7 @@ class TransfersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @transfer
+    get :form, id: @transfer
     assert_response :success
   end
 

@@ -1,5 +1,11 @@
 Commerce::Application.routes.draw do
 
+  resources :offers
+
+  resources :dailies
+
+  resources :timesheets
+
   resources :openings
 
   resources :topics
@@ -67,7 +73,11 @@ Commerce::Application.routes.draw do
     end
   end
 
-  resources :meal_items
+  resources :meal_items do
+    member do
+      get 'special'
+    end
+  end
   resources :line_items
   resources :items
   resources :variants

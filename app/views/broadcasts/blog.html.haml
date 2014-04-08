@@ -19,7 +19,7 @@
               = broadcast.event_date.strftime("%e %b %Y") unless broadcast.event_date.blank?
             %span.time
               = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
-          - if allow? :broadcasts, :edit
+          - if allow? :broadcasts, :form
             %span.date
               = link_to 'Edit', edit_broadcast_path(broadcast)
           %span

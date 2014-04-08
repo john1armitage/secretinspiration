@@ -1,6 +1,6 @@
 - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 - unless @broadcast.title == 'blank'
-  %h3
+  %h1
     - unless @broadcast.event_date.blank?
       %span.date
         = @broadcast.event_date.strftime("%e %b %Y") unless @broadcast.event_date.blank?
@@ -9,13 +9,13 @@
 - if @broadcast.image.blank?
   .row
     .large-12.columns
-      %h6
+      %h2
         = @broadcast.sub
       = markdown(@broadcast.body)
 -else
   .row
     .large-6.columns
-      %h6
+      %h2
         != @broadcast.sub
       != markdown(@broadcast.body)
     .large-6.columns

@@ -38,6 +38,7 @@ module ApplicationHelper
   end
 
   def get_times(opening = 'open', purpose = '')
+    dinner_open = '17:30'
     grouped_times = []
     now = Time.now.to_time
     if ['lunch', 'open'].include?(opening)
@@ -51,8 +52,17 @@ module ApplicationHelper
     end
     if ['dinner', 'open'].include?(opening)
       times = []
-      time = '18:00'.to_time
+      time = dinner_open.to_time
       0.upto(14) do |i|
+        times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
+        time = time + 15.minutes
+      end
+      grouped_times << times
+    end
+    if ['timesheet'].include?(purpose)
+      times = []
+      time = dinner_open.to_time
+      0.upto(26) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
       end

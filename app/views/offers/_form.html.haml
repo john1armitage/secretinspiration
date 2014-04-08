@@ -1,0 +1,41 @@
+= form_for @offer do |f|
+  - if @offer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@offer.errors.count, "error")} prohibited this offer from being saved:"
+      %ul
+        - @offer.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :rank
+    = f.text_field :rank
+  .field
+    = f.label :category_id
+    = f.collection_select :category_id, Category.where("product_flow <> 'incoming' AND ancestry_depth = 1").order(:rank), 'id', 'name', {}, { multiple: true, size: 4 }
+
+  .field
+    = f.label :days
+    = f.select :days, Date::DAYNAMES.zip((0..6).to_a), {}, { multiple: true, size: 4 }
+  .field
+    = f.label :offer_type
+    = f.collection_select :offer_type, Element.where(kind: 'offer').order(:name, :rank), 'name', 'name'
+  .field
+    = f.label :amount
+    = f.text_field :amount
+  .field
+    = f.label :short
+    = f.text_area :short
+  .field
+    = f.label :desc
+    = f.text_area :desc
+  .field
+    = f.label :notes
+    = f.text_area :notes
+  .field
+    = f.label :live
+    = f.check_box :live
+  .actions
+    = f.submit 'Save'

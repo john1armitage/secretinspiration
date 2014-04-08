@@ -30,7 +30,7 @@ class VariantsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @variant
+    get :form, id: @variant
     assert_response :success
   end
 

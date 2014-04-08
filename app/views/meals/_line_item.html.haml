@@ -1,9 +1,9 @@
 - if @course != line_item.variant.item.grouping
   - @course = line_item.variant.item.grouping
-  - @component_title = make_title(@course.split(':')[1] ).pluralize
+  - component_title = make_title(@course.split(':')[1] ).pluralize
   %li.category
     %span
-      = link_to @component_title, choice_path(line_item.variant.item.category.parent.name), data: { tooltip:  true}, title: "View #{@component_title}"
+      = link_to component_title, choice_path(line_item.variant.item.category.parent.name), data: { tooltip:  true}, title: "View #{@component_title}"
 %li
   - unless line_item.net_total_item == 0
 

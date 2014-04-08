@@ -1,0 +1,29 @@
+= link_to 'New Offer', new_offer_path
+%table
+  %tr
+    %th Days
+    %th Offer type
+    %th Amount
+    %th Name
+    %th Desc
+    %th Notes
+    %th Live
+    %th
+    %th
+    %th
+
+  - @offers.each do |offer|
+    %tr
+      %td= offer.days
+      %td= offer.offer_type
+      %td= offer.amount
+      %td= offer.name
+      %td= offer.desc
+      %td= offer.notes
+      %td= offer.live
+      %td= link_to 'Show', offer
+      %td= link_to 'Edit', edit_offer_path(offer)
+      %td= link_to 'Destroy', offer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
