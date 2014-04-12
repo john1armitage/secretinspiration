@@ -38,12 +38,12 @@ module ApplicationHelper
   end
 
   def get_times(opening = 'open', purpose = '')
-    dinner_open = '17:30'
+    dinner_open = CONFIG[:dinner_open]
     grouped_times = []
     now = Time.now.to_time
     if ['lunch', 'open'].include?(opening)
       times = []
-      time = '12:00'.to_time
+      time = CONFIG[:lunch_open].to_time
       0.upto(9) do |i|
         times << time.strftime('%H:%M') unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
@@ -71,4 +71,39 @@ module ApplicationHelper
     grouped_times
   end
 
+  def apply_offer(offer, meal)
+    line_items = meal.line_items.joins(variant: {item: {category: :category}})
+    applies = []
+    line_items.each do |line_item|
+      if (offer.categories.include? line_item.variant.item.category.id.to_s) || (offer.categories.include? line_item.variant.item.category.category.id.to_s)
+        applies << line_item
+      end
+    end
+    discount = 0.00
+    case offer.offer_type
+      when '2-for-1'
+        prices = []
+        applies.each do |li|
+          li.quantity.times do
+            prices << (li.net_item + li.tax_item)
+            # discount = every other
+          end
+          discount = prices.select.each_with_index { |str, i| i.odd? }.reduce(:+)
+        end
+      when 'fixed_price'
+        applies.each do |li|
+          li.quantity.times do
+            discount += ((li.net_item.to_d + li.tax_item.to_d) - offer.amount)
+          end
+        end
+      when 'percent_off'
+        applies.each do |li|
+          li.quantity.times do
+            discount += ((li.net_item.to_d + li.tax_item.to_d) * offer.amount / 100)
+            # discount = every other
+          end
+        end
+    end
+    discount
+  end
 end

@@ -5,7 +5,7 @@
     %th Offer type
     %th Amount
     %th Name
-    %th Desc
+    %th Cats
     %th Notes
     %th Live
     %th
@@ -18,7 +18,13 @@
       %td= offer.offer_type
       %td= offer.amount
       %td= offer.name
-      %td= offer.desc
+      %td
+        - if !offer.categories.blank?
+          - cats = offer.categories - [""]
+          - cats.each do |id|
+            = Category.find(id).name
+        - else
+          &nbsp;
       %td= offer.notes
       %td= offer.live
       %td= link_to 'Show', offer

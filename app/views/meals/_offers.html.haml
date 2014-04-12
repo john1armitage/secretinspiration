@@ -1,0 +1,25 @@
+-##offers
+-#  - offers = Offer.where("? = ANY (days)", Date.today.strftime("%w") )
+-#  - offers.each do |offer|
+-#    %li
+-#      - amount = apply_offer(offer, @meal)
+-#      = text_field_tag "#{offer.name}_amount", amount, class: 'semi offer'
+-#      %span
+-#        =# check_box_tag(offer.name, value = "1", checked = true)
+-#        = offer.name
+-#
+=# form_for @meal, url: {action: "checkout", }, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
+- offers = Offer.where("? = ANY (days)", Date.today.strftime("%w") )
+= form_tag("/meals/#{@meal.id}/check_out", method: 'post', class: 'no_ajaxify', remote: true, validate: true ) do
+  %fieldset
+    = hidden_field_tag :meal_id, @meal.id
+    = hidden_field_tag :bill, true
+    - offers.each do |offer|
+      - amount = apply_offer(offer, @meal)
+      .row
+        .large-12.columns
+          = text_field_tag "offer[#{offer.name}]", amount, class: 'third offer'
+          = label_tag "offer[#{offer.name}]", offer.name, class: 'third'
+    .row
+      .large-12.columns
+        = submit_tag 'Bill'

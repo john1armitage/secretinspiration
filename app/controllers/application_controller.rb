@@ -285,25 +285,32 @@ class ApplicationController < ActionController::Base
   #helper_method :set_choices
   def set_daily_dates
     #@daily_date = @daily.account_date if @daily
-    @daily_date = params['daily_date'].present? ? params['daily_date'].to_date : Date.today
-    # @dailies = Daily.where( account_date: @daily_date ).order(:arrival, :customer_name)
-    #@requests = Booking.where( 'confirmed = ?', false ).order(:booking_date, :customer_name)
-    @dailies_by_date = get_dailies(@daily_date)
-    @dailies_last_month = get_dailies(@daily_date - 1.month)
-    @timesheets_by_date = get_timesheets(@daily_date)
-    @timesheets_last_month = get_timesheets(@daily_date - 1.month)
+    @daily_date = params['daily_date'].present? ? params['daily_date'].to_date : Date.today.beginning_of_month
+    start = (@daily_date >= Time.now.at_beginning_of_day) ? Time.now.to_date : @daily_date.beginning_of_month
+    stop = @daily_date.end_of_month
+    start = start - start.strftime('%w').to_d.days
+    stop = stop + (6 - stop.strftime('%w').to_d).days
+    @dailies_by_date = get_dailies(start, stop)
+    @timesheets_by_date = get_timesheets(start, stop)
+    @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").group_by(&:work_date)
+    # start = start - 1.month
+    # stop = stop - 1.month
+    # @dailies_last_month = get_dailies(start, stop)
+    # @timesheets_last_month = get_timesheets(start, stop)
   end
   helper_method :set_daily_dates
 
-  def get_dailies(daily_date)
-    start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
-    stop = daily_date.end_of_month
-    Daily.where('account_date >= ? AND account_date <= ?', start, stop ).group_by(&:account_date)
+  def get_dailies(start, stop)
+    @dailies = Daily.where('account_date >= ? AND account_date <= ?', start, stop ).order(:account_date)
+    p start
+    p stop
+    p @dailies.size
+    @dailies.group_by(&:account_date)
   end
 
-  def get_timesheets(daily_date)
-    start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
-    stop = daily_date.end_of_month
+  def get_timesheets(start, stop)
+    # start = (daily_date >= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
+    # stop = daily_date.end_of_month
     Timesheet.where('work_date >= ? AND work_date <= ?', start, stop ).group_by(&:work_date)
   end
 

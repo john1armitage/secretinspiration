@@ -26,7 +26,30 @@
       %td
         Total
       %td.right
-        = humanized_money_with_symbol(@order.net_home + @order.tax_home)
+        = humanized_money_with_symbol(@order.net_home + @order.tax_home + @order.discount)
+
+    - if  @order.discount > 0 && params[:offer].present?
+      - params[:offer].each do |offer_name, amount|
+        %tr
+          %td
+            Less
+            = offer_name
+          %td.right
+            = humanized_money_with_symbol(amount)
+
+    - if @order.seating_id.blank? && @order.discount > 0
+      %tr
+        %td
+          = "Less #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% Takeaway"
+        %td.right
+          = humanized_money_with_symbol(@order.discount)
+
+    - if @order.discount > 0
+      %tr.total
+        %td
+          To Pay
+        %td.right
+          = humanized_money_with_symbol(@order.net_home + @order.tax_home)
 
     - if @order.tax_home > 0
       %tr
@@ -47,9 +70,28 @@
   %p.no-print
     %span
       = link_to "Print",'#', id: 'print'
+      |
     %span
       = link_to 'Amend Bill', check_in_meal_path(@order.id), method: :post, data: {confirm: 'Re-Create Order?'}, remote: true, class: 'no_ajaxify'
-    - if @order.state == 'incomplete'
-      %span
-        = link_to 'Complete', status_order_path(@order.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Complete Payment'}, remote: true, class: 'no_ajaxify'
+    -#- if @order.state == 'incomplete'
+    -#  |
+    -#  %span
+    -#    = link_to 'Complete', status_order_path(@order.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Complete Payment'}, remote: true, class: 'no_ajaxify'
 
+  - if allow? :orders, :edit
+    = form_for @order, url: {controller: 'orders', action: 'status', id: @order.id}, html: { class: 'no_ajaxify'}, method: :post, remote: true, validate: true do |f|
+      %fieldset
+        = hidden_field_tag :bill, true
+        = hidden_field_tag :due, (@order.net_home + @order.tax_home)
+        = f.hidden_field :state
+        = f.hidden_field :paid
+        .row
+          .large-4.columns
+            = f.label :tip
+            = f.text_field :tip
+          .large-4.columns
+            - total = (@order.paid > 0) ? @order.paid : (@order.net_home + @order.tax_home)
+            = label_tag :total
+            = text_field_tag :total, total
+          .large-4.columns
+            = f.submit 'Paid', id: 'bill_payment'

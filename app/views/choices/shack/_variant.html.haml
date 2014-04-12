@@ -1,7 +1,7 @@
 - price = variant.price.to_d > 0 ? variant.price : variant.item.price
 - if @meal_id > 0 && variant.name != 'default' && ( (allow? :meals, :destroy) || variant.remote_order == true)
   -#= form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify", :remote => true) do
-  = submit_tag "#{humanized_money_with_symbol( price )} #{variant.name}", class: 'half', data: { id: variant.id }
+  = submit_tag "#{humanized_money_with_symbol( price )} #{variant.name}", class: 'half item', data: { id: variant.id }
 - else
   - unless variant.name == 'default'
     = variant.name

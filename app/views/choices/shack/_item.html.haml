@@ -7,7 +7,7 @@
   -#params[:id].to_i
   - if @meal_id > 0  && ( (allow? :meals, :destroy) || (default.first.item.remote_order == true) ) && default.first.item.available
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify menu-item", :remote => true) do
-      = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
+      = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide item', data: { id: default.first.id }
       -#- if (default.first.name == 'default')
       -#  = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
       -#- else

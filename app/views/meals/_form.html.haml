@@ -1,3 +1,4 @@
+- @takeaway_editable = (!current_user.id.blank? or (['takeaway','requested'].include? @meal.state ))
 - today = (Date.today)
 - openings = get_openings(today, today)
 - status = []
@@ -71,7 +72,7 @@
     - else
       - if @takeaway_editable
         %li
-          - if allow? :meals, :form
+          - if allow? :meals, :edit
             = form_for @meal, html: { class: 'no_ajaxify'},remote: true, validate: true do |f|
               %fieldset
                 = f.hidden_field :id

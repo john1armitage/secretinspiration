@@ -3,7 +3,7 @@ class DailiesController < ApplicationController
 
   # GET /dailies
   def index
-    @dailies = Daily.all
+    #@dailies = Daily.all
     set_daily_dates
   end
 

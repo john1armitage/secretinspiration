@@ -29,11 +29,11 @@
     - month = @daily_date.beginning_of_month
     = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings}
 
-- if @daily_date - 1.month >= Date.today.beginning_of_month - 24.months
-  .row.large-12
-    .calendar
-      - month = @daily_date.beginning_of_month - 1.month
-      = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_last_month, timesheets: @timesheets_last_month, openings: @openings}
+-#- if @daily_date - 1.month >= Date.today.beginning_of_month - 24.months
+-#  .row.large-12
+-#    .calendar
+-#      - month = @daily_date.beginning_of_month - 1.month
+-#      = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_last_month, timesheets: @timesheets_last_month, openings: @openings}
 
 :coffeescript
   jQuery ->
@@ -42,7 +42,6 @@
         url: "/dailies?calendar=true#{ params[:no_content].present? ? '&no_content=true' : '' }&daily_date=" + event.target.value
         dataType: 'script'
     $('select#employees').on "change", (event) ->
-      alert(event.target.value)
       month = $('select#months option:selected').val()
       $.ajax
         url: "/timesheets?employee=" + event.target.value + "&month=" + month

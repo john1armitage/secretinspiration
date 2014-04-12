@@ -17,6 +17,9 @@
   - if allow? :items, :index
     %li
       != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'
+  - if allow? :dailes, :index
+    %li
+      != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
   - if allow? :postings, :index
     %li
       != link_to "Accounts", menu_path('accounts'), remote: true, class: 'no_ajaxify'

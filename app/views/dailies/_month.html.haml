@@ -2,7 +2,7 @@
 - no_content= params[:no_content].present? ? 'no_content' : ''
 %p
   = select_tag 'months', options_for_select(months, month)
-  = select_tag 'employees', options_for_select(Employee.where(live:true).map(&:name),''), prompt: 'Timesheets'
+  = select_tag 'employees', options_from_collection_for_select(Employee.where(live:true),'id', 'name',''), prompt: 'Timesheets'
 -#%p
 -#  hhh
 = calendar(month) do |date|
@@ -19,7 +19,7 @@
           %span
             = link_to daily.session[0].capitalize, edit_daily_path(daily), remote: true, class: 'no_ajaxify'
           %span
-            = "#{humanized_money_with_symbol(daily.turnover)} + #{humanized_money_with_symbol(daily.tips)}"
+            = "#{humanized_money_with_symbol(daily.take)} + #{humanized_money_with_symbol(daily.tips)}"
           = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Session", :data => { :confirm => 'Are you sure?' }
     - if timesheets[date]
       - timesheets[date].each do |timesheet|

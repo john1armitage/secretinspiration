@@ -260,6 +260,9 @@ $head-border: #009900;
       }
       label {
         margin: 0;
+        &.third {
+          display: inline;
+        }
         //      padding:0;
       }
       input {
@@ -268,7 +271,12 @@ $head-border: #009900;
         width: 100%;
         &.semi {
           width: 47%;
-          margin-left: 0.2em;
+          margin-left: 0.1em;
+        }
+        &.third {
+          width: 35%;
+          display: inline;
+          text-align: right;
         }
         height: 2rem;
         //      padding:0;
@@ -357,7 +365,7 @@ $head-border: #009900;
     background-color: #e0eeee;
     border: 1px solid darkslategray;
     li {
-      padding: .2em;
+      padding: .2em 0 .2em .2em;
       width: 100%;
       span.title {
         font-weight: bold;

@@ -13,8 +13,8 @@
     = f.label :rank
     = f.text_field :rank
   .field
-    = f.label :category_id
-    = f.collection_select :category_id, Category.where("product_flow <> 'incoming' AND ancestry_depth = 1").order(:rank), 'id', 'name', {}, { multiple: true, size: 4 }
+    = f.label :categories
+    = f.collection_select :categories, Category.where("product_flow <> 'incoming' AND ancestry_depth >0").order(:rank), 'id', 'name', {}, { multiple: true, size: 4 }
 
   .field
     = f.label :days

@@ -98,6 +98,28 @@ class MealsController < ApplicationController
     @order.exchange_rate = 1
     @order.net_total_cents = @order.net_home_cents = @meal.line_items.map(&:net_total_item_cents).sum
     @order.tax_total_cents = @order.tax_home_cents = @meal.line_items.map(&:tax_total_item_cents).sum
+    if params[:offer]
+      discount = 0.00
+      params[:offer].each do |k, v|
+        discount += v.to_d
+      end
+      @order.discount = discount
+      net_discount = current_tenant.vat ? @order.discount / (1 + CONFIG[:vat_rate_standard].to_d ) : 0
+      net_discount_tax = @order.discount - net_discount
+      @order.net_home -= net_discount
+      @order.tax_home -= net_discount_tax
+      @order.net_total = @order.net_home
+      @order.tax_total = @order.tax_home
+    end
+    if @meal.seating_id.blank? && (@order.net_home + @order.tax_home) > CONFIG[:takeaway_threshold].to_d
+      @order.discount = (@order.net_home + @order.tax_home) * CONFIG[:takeaway_discount]
+      net_discount = current_tenant.vat ? @order.discount / (1 + CONFIG[:vat_rate_standard].to_d ) : 0
+      net_discount_tax = @order.discount - net_discount
+      @order.net_home -= net_discount
+      @order.tax_home -= net_discount_tax
+      @order.net_total = @order.net_home
+      @order.tax_total = @order.tax_home
+    end
     @order.seating = @meal.seating
     @order.effective_date = Time.now
     @order.desc = @meal.seating_id.blank? ? "#{@meal.id}:#{@meal.contact}" : "#{@meal.id}:Table #{@meal.tabel_name}"

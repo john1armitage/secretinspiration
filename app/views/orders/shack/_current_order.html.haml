@@ -16,3 +16,10 @@
       %span.title
         != link_to 'X', order_path( current_order ), method: :delete, remote: true, class: 'no_ajaxify',
           data: {  confirm: 'Delete Order?'}, title: "Delete Order"
+  %p
+    %span.title
+      Paid
+    %span
+      = humanized_money_with_symbol(current_order.paid + current_order.tip)
+      %span
+        = "(#{humanized_money_with_symbol(current_order.paid)} + #{humanized_money_with_symbol(current_order.tip)})"

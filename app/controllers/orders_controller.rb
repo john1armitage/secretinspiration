@@ -30,6 +30,10 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
+    if params[:bill].present?
+      @order.state = 'complete'
+      @order.paid = @order.net_home + @order.tax_home unless @order.paid > 0
+    end
   end
 
   # GET /orders/new
@@ -113,7 +117,11 @@ class OrdersController < ApplicationController
   end
 
   def status
-    @order.update_attribute(:state, params[:status])
+    if params[:status].present?
+      @order.update_attribute(:state, params[:status])
+    elsif params[:order].present?
+      @order.update(params[:order])
+    end
     set_booking_dates
     render 'bookings/index'
   end

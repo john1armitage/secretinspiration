@@ -5,7 +5,7 @@ class MealItemsController < ApplicationController
   before_action :set_line_item, only: [ :update, :destroy ]
 
   def create
-    if params[:line_item][:special].present?
+    if params[:line_item].present? && params[:line_item][:special].present?
       variant = Item.find_by_name( "ad_hoc_#{params[:line_item][:special]}").variants.first
       @line_item = @meal.create_special(variant.id, params[:each], params[:line_item])
       # @line_item.save

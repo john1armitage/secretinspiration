@@ -3,7 +3,11 @@ class TimesheetsController < ApplicationController
 
   # GET /timesheets
   def index
-    @timesheets = Timesheet.all
+    month = params[:month].to_date
+    start = month.beginning_of_month
+    finish = month.end_of_month
+    @employee = Employee.find(params[:employee])
+    @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, finish, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
   end
 
   # GET /timesheets/1

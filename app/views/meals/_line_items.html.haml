@@ -14,8 +14,8 @@
         %td.right
           %span
             != humanized_money_with_symbol(total)
-        - if @meal.seating_id.blank? && total > 15
-          - discount = total / 15
+        - if @meal.seating_id.blank? && total > CONFIG[:takeaway_threshold].to_d
+          - discount = total * CONFIG[:takeaway_discount].to_d
           %tr
             %td
               %span
@@ -33,12 +33,15 @@
 
   - @course = ''
   = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
+  - if (allow? :orders, :create)  && !@meal.seating_id.blank?
+    = render partial: 'meals/offers'
   - order = ((@meal.state == 'ordered') ? 'Re-order' : 'Order')
   - if (allow? :meals, :form) && (!@meal.seating_id.blank? || (['confirmed','ordered'].include? @meal.state ))
     = button_to order, meal_path(@meal, order: 'all'), method: :get  #, remote: true, form_class: 'no_ajaxify'
     - unless @meal.seating_id.blank?
       = button_to 'Desserts', meal_path(@meal, order: 'dessert'), method: :get  #, remote: true, form_class: 'no_ajaxify'
-    = button_to 'Bill', check_out_meal_path(@meal, meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
+    - if @meal.seating_id.blank?
+      = button_to 'Bill', check_out_meal_path(@meal,meal_id: @meal.id, bill: true, takeaway: true), id: 'meal_bill', method: 'post', remote: true, form_class: 'no_ajaxify', title: 'Create Bill' #, data: {confirm: 'Create Bill?'}  #, remote: true, form_class: 'no_ajaxify'
     - if @meal.seating_id.blank?
       = button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}
   - elsif @meal.state == 'takeaway'
@@ -53,7 +56,8 @@
     - unless current_user.id.blank?
       = button_to order, meal_path(@meal, order: 'all'), method: :get  #, remote: true, form_class: 'no_ajaxify'
       = button_to 'Desserts', meal_path(@meal, order: 'dessert'), method: :get  #, remote: true, form_class: 'no_ajaxify'
-      = button_to 'Bill', check_out_meal_path(@meal, meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
+      -# params = "@meal, meal_id: @meal.id, bill: true, test: true"
+      = button_to 'Bill', check_out_meal_path(@meal,meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
   - unless @meal.seating_id.blank? && @meal.state != 'takeaway'
     = button_to 'Clear', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
     data: { confirm: 'Clear Items?' }

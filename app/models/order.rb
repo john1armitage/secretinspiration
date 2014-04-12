@@ -10,6 +10,7 @@ class Order < ActiveRecord::Base
            :numericality => {
                :greater_than => 0
            }
+  monetize :tip_cents, :allow_nil => true
   monetize :tax_total_cents, :allow_nil => true
   monetize :tax_home_cents, :allow_nil => true
   monetize :paid_cents, :allow_nil => true
@@ -31,6 +32,7 @@ class Order < ActiveRecord::Base
   has_many :receipts, dependent: :destroy
 
   before_validation :check_account
+  before_create :set_session
   #before_validation :get_totals
 
   #accepts_nested_attributes_for :line_items, :reject_if =>  proc { |att| att['variant_name'].blank? and att['desc'].blank? },
@@ -47,6 +49,12 @@ class Order < ActiveRecord::Base
   validates_presence_of :account, :net_total, :desc, :if => :quick?, :message => 'is required'
 
   scope :outgoings, ->(id) { where.not( supplier_id: id ) }
+
+  def set_session
+    unless seating_id.blank?
+      self.session = Time.now > '17:00'.to_time ? 'dinner' : 'lunch'
+    end
+  end
 
   def state_incomplete
     state == 'incomplete' or state == 'ordered'
