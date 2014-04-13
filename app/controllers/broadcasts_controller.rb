@@ -23,6 +23,7 @@ class BroadcastsController < ApplicationController
     @broadcast.publish = true
     @broadcast.category = 'blog'
     @broadcast.repeat = 1
+    @broadcast.topic_id = params[:topic] if params[:topic].present?
   end
 
   # GET /broadcasts/1/edit

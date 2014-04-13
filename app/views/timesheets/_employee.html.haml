@@ -1,43 +1,43 @@
 - hours = 0.00
 - wages = 0.00
 - tips = 0.00
-#employee
+#summary
   .row
-    .field.large-12.columns
+    .field.large-12.columns.title
       = params[:month].to_date.strftime('%B %Y')
-    .field.large-12.columns
+    .field.large-12.columns.id
       = @employee.name
   - @timesheets.each do |timesheet|
     - hours += timesheet.hours
     - wage = (hours * timesheet.employee.hourly_rate).to_d
-    - tip = (timesheet.tips / 100 / timesheet.headcount)
+    - tip = ((timesheet.tips || 0 )/ 100 / timesheet.headcount)
     - tips += tip
     - wages += wage
     .row
-      .field.large-12.columns
-        = "#{timesheet.work_date.strftime('%e').to_i.ordinalize} #{timesheet.work_date.strftime('%B')}"
+      .field.large-12.columns.id
+        = "#{timesheet.work_date.strftime('%a')}, #{timesheet.work_date.strftime('%e').to_i.ordinalize} #{timesheet.work_date.strftime('%B')}"
         = "#{timesheet.session}" unless timesheet.session == 'dinner'
-    .row
+    .row.title
       .field.large-4.columns
         Hours
-      .field.large-4.columns
+      .field.large-4.columns.number
         Pay
-      .field.large-4.columns
+      .field.large-4.columns.number
         Tips
     .row
       .field.large-4.columns
         = timesheet.hours
-      .field.large-4.columns
+      .field.large-4.columns.number
         = "#{humanized_money_with_symbol(wage)}"
-      .field.large-4.columns
+      .field.large-4.columns.number
         = "#{humanized_money_with_symbol(tip)}"
-  .row
-    .field.large-12.columns
-      Totals
+  .row.title
+    .field.large-12.columns.title
+      Month Totals
   .row
     .field.large-4.columns
       = hours
-    .field.large-4.columns
+    .field.large-4.columns.number
       = "#{humanized_money_with_symbol(wages)}"
-    .field.large-4.columns
+    .field.large-4.columns.number
       = "#{humanized_money_with_symbol(tips)}"

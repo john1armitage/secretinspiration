@@ -1,27 +1,27 @@
-%article
-  - if params[:name].present?
-    %h3
-      = params[:name].capitalize.pluralize
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+-#%article
+-#  - if params[:name].present?
+-#    %h3
+-#      = params[:name].capitalize.pluralize
 - if allow? :broadcast, :create
-  = link_to 'New Broadcast', new_broadcast_path
+  = link_to 'New Broadcast', new_broadcast_path(topic: Topic.find_by_name(params[:name]))
 
-%table.blog
-  - @broadcasts.order('event_date DESC').each do |broadcast|
-    %tr
-      %td
-        %h3= link_to broadcast.title, broadcast_path(broadcast)
+.two-column
+  %ul.blog
+    - @broadcasts.order('event_date DESC').each do |broadcast|
+      %li
+        %h1= link_to broadcast.title, broadcast_path(broadcast)
         %p
-          - unless params[:name] == 'event'
-            %span.date
-              = "#{broadcast.created_at.strftime("%e %b %Y")}"
+          - if params[:name] == 'event'
+            %span.date.event
+              = broadcast.event_date.strftime("%e %b %Y") unless broadcast.event_date.blank?
+            %span.date.event
+              = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
           - else
             %span.date
-              = broadcast.event_date.strftime("%e %b %Y") unless broadcast.event_date.blank?
-            %span.time
-              = broadcast.event_time.strftime("%H:%M") unless broadcast.event_time.blank?
+              = "#{broadcast.created_at.strftime("%e %b %Y")}"
           - if allow? :broadcasts, :form
             %span.date
               = link_to 'Edit', edit_broadcast_path(broadcast)
-          %span
-            = truncate(broadcast.body, length: 200, separator: ' ', omission: '... ')
-          %span= link_to 'more', broadcast_path(broadcast)
+          %span= link_to 'more...', broadcast_path(broadcast)
+          = markdown(truncate(broadcast.body.gsub(/[\r\n]/," "), length: 200, separator: ' ', omission: '... '))

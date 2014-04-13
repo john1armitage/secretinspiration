@@ -17,6 +17,7 @@ class PagesController < ApplicationController
   # GET /pages/new
   def new
     @page = Page.new
+    @page.topic_id = params[:topic] if params[:topic].present?
   end
 
   # GET /pages/1/edit

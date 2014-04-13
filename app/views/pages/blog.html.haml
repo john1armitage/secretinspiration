@@ -1,7 +1,11 @@
-%table.blog
-  - @pages.order('updated_at DESC').each do |page|
-    %tr
-      %td
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+- if allow? :pages, :create
+  %p
+    = link_to 'New Page', new_page_path(topic: Topic.find_by_name(params[:name]))
+.two-column
+  %ul.blog
+    - @pages.order('updated_at DESC').each do |page|
+      %li
         %h1= link_to page.title, page_path(page)
         %p
           %span.date
@@ -10,5 +14,5 @@
           - if allow? :pages, :form
             %span.date
               = link_to 'Edit', edit_page_path(page)
-          %span
-            = truncate(page.body, length: 200, separator: ' ', omission: '... ')
+          %span= link_to 'more...', page_path(page)
+          = markdown(truncate(page.body.gsub(/[\r\n]/," "), length: 200, separator: ' ', omission: '... '))

@@ -1,47 +1,56 @@
-- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-- unless @broadcast.title == 'blank'
-  %h1
-    - unless @broadcast.event_date.blank?
-      %span.date
-        = @broadcast.event_date.strftime("%e %b %Y") unless @broadcast.event_date.blank?
-        = @broadcast.event_time.strftime("%H:%M") unless @broadcast.event_time.blank?
-    = @broadcast.title
-- if @broadcast.image.blank?
+- unless @broadcast
   .row
     .large-12.columns
       %h2
-        = @broadcast.sub
-      = markdown(@broadcast.body)
--else
-  .row
-    .large-6.columns
-      %h2
-        != @broadcast.sub
-      != markdown(@broadcast.body)
-    .large-6.columns
-      - unless @broadcast.link.blank?
-        %p
-          != link_to("More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link, target: '_blank')
-      -#- if @broadcast.image == 'image'
-      != link_to image_tag("/assets/images/#{@broadcast.image}.jpg")
-      -#- else
-      -#  - slide = @broadcast.image.split(/-/)
-      -#  %ul{"data-orbit" => ""}
-      -#    - 1.upto(slide[1].to_i) do |image|
-      -#      %li
-      -#        %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@broadcast.code}-#{image}.jpg"}
+        Sorry, Page not Found
+- else
+  - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 
-.row
-  .large-12.columns
-    != markdown(@broadcast.body2)
-.row
-  .large-12.columns
-    != markdown(@broadcast.body3)
-- unless @broadcast.link.blank?
-  .row
-    .large-12.columns
-      != link_to "More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link
+  %article
+    - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+    - unless @broadcast.title == 'blank'
+      %h1
+        - unless @broadcast.event_date.blank?
+          %span.date
+            = @broadcast.event_date.strftime("%e %b %Y") unless @broadcast.event_date.blank?
+            = @broadcast.event_time.strftime("%H:%M") unless @broadcast.event_time.blank?
+        = @broadcast.title
+    - if @broadcast.image.blank?
+      .row
+        .large-12.columns
+          %h2
+            = @broadcast.sub
+          = markdown(@broadcast.body)
+    -else
+      .row
+        .large-6.columns
+          %h2
+            != @broadcast.sub
+          != markdown(@broadcast.body)
+        .large-6.columns
+          - unless @broadcast.link.blank?
+            %p
+              != link_to("More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link, target: '_blank')
+          -#- if @broadcast.image == 'image'
+          != link_to image_tag("/assets/images/#{@broadcast.image}.jpg")
+          -#- else
+          -#  - slide = @broadcast.image.split(/-/)
+          -#  %ul{"data-orbit" => ""}
+          -#    - 1.upto(slide[1].to_i) do |image|
+          -#      %li
+          -#        %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@broadcast.code}-#{image}.jpg"}
 
--#:coffeescript
--#  jQuery ->
--#    $('div#menu li').removeClass 'active'
+    .row
+      .large-12.columns
+        != markdown(@broadcast.body2)
+    .row
+      .large-12.columns
+        != markdown(@broadcast.body3)
+    - unless @broadcast.link.blank?
+      .row
+        .large-12.columns
+          != link_to "More information at #{truncate(@broadcast.link.gsub(/http:\/\//,'').gsub(/\/$/,'').gsub(/www\./,'').gsub(/\/$/,''))} ...", @broadcast.link
+
+    -#:coffeescript
+    -#  jQuery ->
+    -#    $('div#menu li').removeClass 'active'

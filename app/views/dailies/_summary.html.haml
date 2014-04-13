@@ -8,9 +8,9 @@
 - fy_start = fy_start - 1.year if fy_start > @daily_date#.strftime('%U')
 - week = ((@daily_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
 -#= week
-#employee
+#summary
   .row
-    .field.large-12.columns
+    .field.large-12.columns.title
       = @daily_date.to_date.strftime('%B %Y')
       =# week
   - @dailies.order(:account_date).each do |daily|
@@ -18,33 +18,34 @@
     - current = ((daily.account_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
     - if week != current
       .row
-        .large-12.columns
+        .large-12.columns.id
           = "Week #{week}"
       .row
-        .large-4.columns
+        .large-6.columns
           Take
-        .large-4.columns
+        .large-6.columns.number
           = "#{humanized_money_with_symbol(takes_week)}"
       .row
-        .large-4.columns
+        .large-6.columns
           CC
-        .large-4.columns
+        .large-6.columns.number
           = "#{humanized_money_with_symbol(credit_cards_week)}"
       .row
-        .large-4.columns
+        .large-6.columns
           Tips
-        .large-4.columns
+        .large-6.columns.number
           = "#{humanized_money_with_symbol(tips_week)}"
       .row
-        .large-4.columns
+        .large-6.columns
           cash
-        .large-4.columns
+        .large-6.columns.number
           = "#{humanized_money_with_symbol(takes_week - credit_cards_week)}"
       .row
-        .large-4.columns
+        .large-6.columns
           Turnover
-        .large-4.columns
+        .large-6.columns.number
           = "#{humanized_money_with_symbol(takes_week - tips_week)}"
+
       - takes_week = 0.00
       - credit_cards_week = 0.00
       - tips_week = 0.00
@@ -55,54 +56,30 @@
     - credit_cards_week += daily.credit_card.to_d
     - tips_week += daily.tips.to_d
   .row
-    .large-12.columns
+    .large-12.columns.id
       = "Week #{week}"
   .row
-    .large-4.columns
+    .large-6.columns
       Take
-    .large-4.columns
+    .large-6.columns.number
       = "#{humanized_money_with_symbol(takes_week)}"
   .row
-    .large-4.columns
+    .large-6.columns
       CC
-    .large-4.columns
+    .large-6.columns.number
       = "#{humanized_money_with_symbol(credit_cards_week)}"
   .row
-    .large-4.columns
+    .large-6.columns
       Tips
-    .large-4.columns
+    .large-6.columns.number
       = "#{humanized_money_with_symbol(tips_week)}"
   .row
-    .large-4.columns
+    .large-6.columns
       cash
-    .large-4.columns
+    .large-6.columns.number
       = "#{humanized_money_with_symbol(takes_week - credit_cards_week)}"
   .row
-    .large-4.columns
+    .large-6.columns
       Turnover
-    .large-4.columns
+    .large-6.columns.number
       = "#{humanized_money_with_symbol(takes_week - tips_week)}"
-
-
-    -# wage = (hours * timesheet.employee.hourly_rate).to_d
-    -#.row
-    -#  .field.large-12.columns
-    -#    = "#{timesheet.work_date.strftime('%e').to_i.ordinalize}"
-    -#    = "#{timesheet.session}" unless timesheet.session == 'dinner'
-    -#.row
-    -#  .field.large-4.columns
-    -#    Hours
-    -#  .field.large-4.columns
-    -#    Pay
-    -#  .field.large-4.columns
-    -#    Tips
-    -#.row
-    -#  .field.large-4.columns
-    -#    = timesheet.hours
-    -#  .field.large-4.columns
-    -#    = "#{humanized_money_with_symbol(wage)}"
-    -#  .field.large-4.columns
-    -#    = "#{humanized_money_with_symbol(tip)}"
-  -#.row
-  -#  .field.large-12.columns
-  -#    Totals

@@ -55,7 +55,9 @@ class BookingsController < ApplicationController
     if @booking.save
       set_booked
       set_booking_dates
-      BookingMailer.booking_ack(@booking, current_tenant).deliver
+      if @current_user.id.blank? && !@booking.email.blank?
+        BookingMailer.booking_ack(@booking, current_tenant).deliver
+      end
       render 'index'
     else
       update_booked
@@ -118,7 +120,17 @@ class BookingsController < ApplicationController
   #  end
 
     def get_tables
+      # @tabels = Tabel.order('name::INT')
       @tabels = Tabel.order('name::INT')
+      if @booking
+        booking_date = @booking.booking_date
+        id = @booking.id
+      else
+        booking_date = params[:date]
+        id = -1
+      end
+      booked = Tabel.joins(seatings: :booking ).where('bookings.booking_date = ? AND bookings.id <> ?', booking_date, id)
+      @tabels -= booked
     end
 
     def get_booked

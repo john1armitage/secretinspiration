@@ -11,6 +11,8 @@
         = link_to 'Around Brixham', blog_broadcasts_path(name: 'news')
       %li
         = link_to 'Events', blog_broadcasts_path(name: 'event')
+      %li
+        = link_to 'Rugby Stuff', blog_broadcasts_path(name: 'rugby')
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->

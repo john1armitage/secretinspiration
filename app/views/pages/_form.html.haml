@@ -43,7 +43,7 @@
   .row
     .field.large-2.columns
       = f.label :topic_id
-      = f.text_field :topic_id
+      = f.collection_select :topic_id, Topic.order(:rank, :name), 'id', 'name', include_blank: true
     .field.large-1.columns
       = f.label :user_id
       = f.text_field :user_id
