@@ -12,7 +12,7 @@
           - status << opening.status
       - if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
         %span.closed
-          Closed
+          Sorry, we're closed
       - else
         - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
           - opening = 'dinner'
@@ -24,7 +24,10 @@
         -#- if allow? :seating, :create
         -#  = opening
         -#-else
-        = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
+        - if bookings[date] && bookings[date].sum(&:pax) >= 30
+          Sorry, we're Full
+        - else
+          = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
         - if allow? :seating, :create
           = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
         -#- else

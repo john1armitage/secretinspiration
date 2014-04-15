@@ -61,8 +61,8 @@ module ApplicationHelper
     end
     if ['timesheet'].include?(purpose)
       times = []
-      time = dinner_open.to_time
-      0.upto(26) do |i|
+      time = dinner_open.to_time - 1.hour
+      0.upto(30) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
       end
@@ -93,7 +93,8 @@ module ApplicationHelper
       when 'fixed_price'
         applies.each do |li|
           li.quantity.times do
-            discount += ((li.net_item.to_d + li.tax_item.to_d) - offer.amount)
+            total = li.net_item.to_d + li.tax_item.to_d
+            discount += (total - offer.amount)  if total > offer.amount
           end
         end
       when 'percent_off'
@@ -105,5 +106,11 @@ module ApplicationHelper
         end
     end
     discount
+  end
+  def pounds(price)
+    number_to_currency(price, :unit => "£")
+  end
+  def pax(pax)
+    "#{pax} pax"
   end
 end

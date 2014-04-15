@@ -1,4 +1,5 @@
 - cleared = @bookings.where("state = 'complete'")
+- cleared = cleared.where('booking_date = ?', params[:booking_date]) if params[:booking_date].present?
 - unless cleared.empty?
   %ul#order
     %li.title
@@ -6,8 +7,9 @@
         Cleared
     - cleared.each do |booking|
       %li
-        = booking.updated_at.strftime('%H:%M')
-        - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name
-        %span.title
-          = link_to name, status_booking_path(booking.id, status: 'incomplete', bill: true), method: :post, data: {confirm: 'Resume Service?'}, title: 'Table Cleared', remote: true, class: 'no_ajaxify'
-        = "#{booking.pax}"
+        %p
+          = booking.updated_at.strftime('%H:%M')
+          - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name
+          %span.title
+            = link_to name, status_booking_path(booking.id, status: 'incomplete', bill: true), method: :post, data: {confirm: 'Resume Service?'}, title: 'Table Cleared', remote: true, class: 'no_ajaxify'
+          = "#{booking.pax}"

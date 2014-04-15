@@ -19,7 +19,7 @@
           %span
             = link_to daily.session[0].capitalize, edit_daily_path(daily), remote: true, class: 'no_ajaxify'
           %span
-            = "#{humanized_money_with_symbol(daily.take)} + #{humanized_money_with_symbol(daily.tips)}"
+            = link_to "#{humanized_money_with_symbol(daily.take)} + #{humanized_money_with_symbol(daily.tips)}", daily_path(daily), remote: true, class: 'no_ajaxify'
           = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Session", :data => { :confirm => 'Are you sure?' }
     - if timesheets[date]
       - timesheets[date].each do |timesheet|
@@ -29,6 +29,9 @@
           %span
             = "#{timesheet.hours}"
           = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Timesheet", :data => { :confirm => 'Are you sure?' }
+    - if bookings[date]
+      %li
+        = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
       =# render partial: 'dailies/daily', locals: {date: date, dailies: dailies, timesheets: timesheets, no_content: no_content }
       -#- if timesheets[date]
       -#  - timesheets[date].each do |timesheet|

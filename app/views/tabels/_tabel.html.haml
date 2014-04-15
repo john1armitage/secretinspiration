@@ -1,3 +1,3 @@
 .large-2.columns.left
-  = label_tag tabel.name, tabel.name #, :class => 'left'
+  = label_tag tabel.name, tabel.name, class: @status
   = check_box_tag "tabels[#{tabel.name}]", 1, @booked_tabels.include?( tabel.name) ? true : false

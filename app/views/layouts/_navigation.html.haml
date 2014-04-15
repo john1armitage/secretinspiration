@@ -22,9 +22,13 @@
       - if allow? :items, :index
         %li#admin
           != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
+      - if allow? :users, :new
         %li
           !=# link_to "Register", signup_path, :class => "button radius"
           != link_to "Register", signup_path
+      - if allow? :dailes, :index
+        %li
+          != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
         -#- if current_tenant.sitting == '1'  && (allow? :meals, :index )
         -#  %li
         -#    != link_to "Sitting", meals_path(), remote: true, class: 'no_ajaxify'

@@ -33,8 +33,9 @@ class DailiesController < ApplicationController
   # POST /dailies
   def create
     @daily = Daily.new(params[:daily])
+    set_net
     if @daily.save
-      redirect_to dailies_url, notice: 'Daily was successfully created.'
+      redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
     else
       render action: 'form'
     end
@@ -42,8 +43,9 @@ class DailiesController < ApplicationController
 
   # PATCH/PUT /dailies/1
   def update
+    set_net
     if @daily.update(params[:daily])
-      redirect_to dailies_url, notice: 'Daily was successfully updated.'
+      redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
     else
       render action: 'form'
     end
@@ -51,6 +53,7 @@ class DailiesController < ApplicationController
 
   # DELETE /dailies/1
   def destroy
+    params[:daily_date] = @daily.account_date.strftime('%d-%m-%Y')
     @daily.destroy
     set_daily_dates
     render 'index'
@@ -58,35 +61,25 @@ class DailiesController < ApplicationController
   end
 
   private
-  # def set_daily_dates
-  #   @daily_date = @daily.account_date if @daily
-  #   @daily_date ||= params['daily_date'].present? ? params['daily_date'].to_date : Date.today
-  #   # @dailies = Daily.where( account_date: @daily_date ).order(:arrival, :customer_name)
-  #   #@requests = Booking.where( 'confirmed = ?', false ).order(:booking_date, :customer_name)
-  #   @dailies_by_date = get_dailies(@daily_date)
-  #   @dailies_last_month = get_dailies(@daily_date - 1.month)
-  #   @timesheets_by_date = get_timesheets(@daily_date)
-  #   @timesheets_last_month = get_timesheets(@daily_date - 1.month)
-  # end
-  # #helper_method :set_daily_dates
-  #
-  # def get_dailies(daily_date)
-  #   start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
-  #   stop = daily_date.end_of_month
-  #   Daily.where('account_date >= ? AND account_date <= ?', start, stop ).group_by(&:account_date)
-  # end
-  #
-  # def get_timesheets(daily_date)
-  #   start = (daily_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
-  #   stop = daily_date.end_of_month
-  #   Timesheet.where('work_date >= ? AND work_date <= ?', start, stop ).group_by(&:work_date)
-  # end
-  #
-  #
-  # def get_headcount
-  #     Timesheet.where('work_date = ? AND session = ?', @daily.account_date, @daily.session).size
-  #   end
-    # Use callbacks to share common setup or constraints between actions.
+    def set_net
+      gross = params[:gross].present? ? params[:gross].to_d : 0.00
+      if gross > 0
+        vat_rate = current_tenant.vat_exempt ? 0.00 : CONFIG[:vat_rate_standard].to_d
+        p "YYYYYYYYYYYYYYYYYYYYYYYYYYY"
+        p gross
+        p vat_rate
+        tax = ((gross - ( gross / (1.00 + vat_rate) )) * 100 ).to_i
+        net = (gross * 100 - tax).to_i
+        tips =  (params[:daily][:tips].to_d * 100).to_i
+        p net
+        p tax
+        @daily.update( turnover_cents: net, tax_cents: tax, take_cents: (net + tax + tips))
+        p @daily.turnover_cents
+        # @daily.update( tax_cents: tax)
+        p @daily.tax_cents
+      end
+    end
+
     def set_daily
       @daily = Daily.find(params[:id])
     end

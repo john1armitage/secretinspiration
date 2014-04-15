@@ -52,6 +52,7 @@ class BookingsController < ApplicationController
     else
       @booking.user_id = @current_user.id
     end
+    set_session
     if @booking.save
       set_booked
       set_booking_dates
@@ -70,6 +71,7 @@ class BookingsController < ApplicationController
   def update
     set_booked
     params[:booking][:user_id] = current_user.id
+    set_session
     if @booking.update(params[:booking])
       set_booking_dates
       render 'index'
@@ -94,6 +96,10 @@ class BookingsController < ApplicationController
   end
 
   private
+    def set_session
+      @booking.session = (@booking.arrival.strftime('%H').to_i < 17) ? 'lunch' : 'dinner'
+    end
+
     def update_booked
       if @booking.new_record?
         @new_booked = []
@@ -129,8 +135,8 @@ class BookingsController < ApplicationController
         booking_date = params[:date]
         id = -1
       end
-      booked = Tabel.joins(seatings: :booking ).where('bookings.booking_date = ? AND bookings.id <> ?', booking_date, id)
-      @tabels -= booked
+      @booked = Tabel.joins(seatings: :booking ).where('bookings.booking_date = ? AND bookings.id <> ?', booking_date, id).order('name::INT')
+      @tabels  -= @booked
     end
 
     def get_booked

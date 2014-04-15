@@ -33,7 +33,7 @@ class TimesheetsController < ApplicationController
     @timesheet = Timesheet.new(params[:timesheet])
 
     if @timesheet.save
-      redirect_to dailies_url, notice: 'Daily was successfully created.'
+      redirect_to dailies_url(daily_date: @timesheet.work_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
     else
       render 'form'
     end
@@ -42,7 +42,7 @@ class TimesheetsController < ApplicationController
   # PATCH/PUT /timesheets/1
   def update
     if @timesheet.update(params[:timesheet])
-      redirect_to dailies_url, notice: 'Timesheet was successfully updated.'
+      redirect_to dailies_url(daily_date: @timesheet.work_date.strftime('%d-%m-%Y')), notice: 'Timesheet was successfully updated.'
     else
       render 'form'
     end
@@ -50,6 +50,8 @@ class TimesheetsController < ApplicationController
 
   # DELETE /timesheets/1
   def destroy
+    params[:daily_date] = @timesheet.work_date.strftime('%d-%m-%Y')
+
     @timesheet.destroy
     set_daily_dates
     render 'dailies/index'

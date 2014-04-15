@@ -2,10 +2,12 @@
   .row
     .large-12.columns
       %p
-        Thanks, your booking request has been noted. We'll give you a call to confirm:
+        %span.title
+          Thanks!
+        %span
+          We've got your booking request and will get back to you shortly to confirm
   .row
     .large-12.columns
-      %p
       %p
         %span.title
           != @booking.booking_date.strftime("%a %e-%b-%y")
@@ -15,11 +17,12 @@
         %span
           at
           != @booking.arrival.strftime("%H:%M")
+      - unless @booking.notes.blank?
+        %p
+          = "\"#{@booking.notes}\""
   .row
     .large-12.columns
       %p
-        Contact:
-        %br
         %span.title
           != @booking.customer_name
         %br

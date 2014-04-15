@@ -1,0 +1,80 @@
+#editor
+#display
+#summary
+  .row
+    .field.large-12.columns.title
+      = @daily.account_date.strftime('%a, %e %b %y')
+  .row
+    .field.large-12.columns.title
+      = @daily.session.capitalize
+  .row
+    .large-6.columns.id
+      Pax
+    .large-6.columns.number.id
+      = pax(@daily.pax)
+  .row
+    .large-6.columns
+      Booked
+    .large-6.columns.number
+      = pax(@daily.booked_pax)
+  .row
+    .large-6.columns
+      Walkin
+    .large-6.columns.number
+      = pax(@daily.walkin_pax)
+  .row
+    .large-6.columns.id
+      Take
+    .large-6.columns.number.id
+      = pounds(@daily.take)
+  .row
+    .large-6.columns
+      Cards
+    .large-6.columns.number
+      = pounds(@daily.credit_card)
+  .row
+    .large-6.columns
+      Cash
+    .large-6.columns.number
+      = pounds(@daily.take - @daily.credit_card)
+  .row
+    .large-6.columns.off
+      Discount
+    .large-6.columns.number.off
+      = pounds(@daily.discount)
+  .row
+    .large-6.columns.id
+      Turnover
+    .large-6.columns.number.id
+      = pounds(@daily.turnover)
+  .row
+    .large-6.columns
+      Seated
+    .large-6.columns.number
+      = pounds(@daily.seated)
+  .row
+    .large-6.columns
+      Takeaway
+    .large-6.columns.number
+      = pounds(@daily.takeaway)
+  .row
+    .large-6.columns.off
+      Tax
+    .large-6.columns.number.off
+      = pounds(@daily.tax)
+  .row
+    .large-6.columns.id
+      Tips
+    .large-6.columns.number.id
+      = pounds(@daily.tips)
+  .row
+    .large-6.columns
+      Staff
+    .large-6.columns.number
+      = pax(@daily.headcount)
+  .row
+    .large-6.columns
+      Share
+    .large-6.columns.number
+      - tips = @daily.tips / @daily.headcount
+      = tips

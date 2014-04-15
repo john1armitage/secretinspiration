@@ -43,7 +43,12 @@ $head-border: #009900;
     margin-bottom: 1em;
     margin-right: 1em;
     padding: 0.2em;
-    border: 1px solid gray;
+    color: orangered;
+    border: 1px dotted orangered; // solid gray;
+    a {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
     p {
       margin-left: 1em;
       margin-bottom: 0;
@@ -76,6 +81,10 @@ $head-border: #009900;
       .id {
         font-weight: bold;
         text-align: center;
+      }
+      .off {
+//        font-style: oblique;
+        color: gray;
       }
 
     }
@@ -285,6 +294,8 @@ $head-border: #009900;
         background-color: #e0eeee; //#d3d3d3;
         color: $link;
         border-top: 1px solid darkgray;
+        font-size: 0.9rem;
+        font-weight: bold;
         //      border-bottom: 1px solid darkgray;
       }
       &:hover {
@@ -298,6 +309,14 @@ $head-border: #009900;
           color: white;
         }
       }
+    }
+  }
+  label {
+    &.available {
+      color: green;
+    }
+    &.booked {
+      color: red;
     }
   }
   ul#order {
@@ -645,6 +664,9 @@ $head-border: #009900;
     padding: 0.5em;
     background-color: palegoldenrod;
     border: 1px solid darkgray;
+    p {
+      font-size: 0.9rem;
+    }
     span.title {
       font-weight: bold;
     }

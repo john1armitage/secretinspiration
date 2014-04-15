@@ -182,10 +182,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :set_booking_dates
 
-  def get_bookings(booking_date)
-    start = (booking_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
+  def get_bookings(booking_date, period = 'future')
+    start = (period == 'future' && booking_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : booking_date.beginning_of_month
     stop = booking_date.end_of_month
-    Booking.where('booking_date >= ? AND booking_date <= ? AND state <> ?', start, stop, 'cancelled' ).group_by(&:booking_date)
+    bookings = Booking.where('booking_date >= ? AND booking_date <= ?', start, stop)
+    bookings = bookings.where('state <> ?', 'cancelled' ) if period == 'future'
+    bookings.group_by(&:booking_date)
   end
 
   def get_events(event_date)
@@ -231,12 +233,6 @@ class ApplicationController < ActionController::Base
 
       end
     end
-    #p openings.size
-    #p "HERE 1"
-    #p openings
-    #openings.each do |o|
-    #  p o.start_date
-    #end
     openings
   end
   helper_method :open?
@@ -268,21 +264,10 @@ class ApplicationController < ActionController::Base
 
       end
     end
-    #p openings.size
-    #p "HERE 1"
-    #p openings
-    #openings.each do |o|
-    #  p o.start_date
-    #end
     openings.group_by(&:start_date)
   end
   helper_method :get_openings
-  #def set_choices
-  #  choices = params[:choices].present? ? params[:choices] : default_choices
-  #  @categories = get_categories(choices)
-  #  @page = Page.find_by_code( choices )
-  #end
-  #helper_method :set_choices
+
   def set_daily_dates
     #@daily_date = @daily.account_date if @daily
     @daily_date = params['daily_date'].present? ? params['daily_date'].to_date : Date.today.beginning_of_month
@@ -297,20 +282,16 @@ class ApplicationController < ActionController::Base
     # stop = stop - 1.month
     # @dailies_last_month = get_dailies(start, stop)
     # @timesheets_last_month = get_timesheets(start, stop)
+    @bookings = get_bookings(@daily_date, 'past')
   end
   helper_method :set_daily_dates
 
   def get_dailies(start, stop)
     @dailies = Daily.where('account_date >= ? AND account_date <= ?', start, stop ).order(:account_date)
-    p start
-    p stop
-    p @dailies.size
     @dailies.group_by(&:account_date)
   end
 
   def get_timesheets(start, stop)
-    # start = (daily_date >= Time.now.at_beginning_of_day) ? Time.now.to_date : daily_date.beginning_of_month
-    # stop = daily_date.end_of_month
     Timesheet.where('work_date >= ? AND work_date <= ?', start, stop ).group_by(&:work_date)
   end
 

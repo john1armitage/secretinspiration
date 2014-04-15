@@ -9,8 +9,12 @@
     -#      = @booking.walkin ? 'Walk In' : "Booking: #{@booking.booking_date.strftime('%e %b %y')}"
     .row
       .large-12.columns
+        %h1
+          Booking Request
+    .row
+      .large-12.columns
         - if @booking.booking_date.blank? || (allow? :seating, :create)
-          = f.label :booking_date
+          = f.label :booking_date, 'Date'
           = f.date_field :booking_date
         - else
           = f.hidden_field :booking_date
@@ -51,6 +55,10 @@
     - if allow? :seating, :create
       .row
         .large-12.columns
+          - @status = 'available'
+          = render @tabels
+          - @tabels = @booked
+          - @status = 'booked'
           = render @tabels
           - unless @booking.walkin
             .large-4.columns.left
@@ -62,7 +70,7 @@
               = f.check_box :confirmed
     .row
       .large-6.columns
-        = f.submit 'Save'
+        = f.submit 'Send'
       .large-6.columns
         = f.submit 'Cancel'
 
