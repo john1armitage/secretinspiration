@@ -4,10 +4,14 @@
 - takes_week = 0.00
 - credit_cards_week = 0.00
 - tips_week = 0.00
-- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
-- fy_start = fy_start - 1.year if fy_start > @daily_date#.strftime('%U')
-- week = ((@daily_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
--#= week
+- turnover_week = 0.00
+- tax_week = 0.00
+-#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
+-#- fy_start = fy_start - 1.year if fy_start > @daily_date#.strftime('%U')
+-# week = ((@daily_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
+- week = week_number(@daily_date) #.to_date.strftime('%U')
+- hmrc_pay_week = HMRC_week_number(@daily_date.beginning_of_week + 12.days)
+- week_start = week_start(@daily_date)
 #editor
 #display
 #summary
@@ -17,71 +21,76 @@
       =# week
   - @dailies.order(:account_date).each do |daily|
 
-    - current = ((daily.account_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
+    -# hmrc_current = ((daily.account_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
+    - current = week_number(daily.account_date)
     - if week != current
       .row
         .large-12.columns.id
-          = "Week #{week}"
+          = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
       .row
         .large-6.columns
           Take
         .large-6.columns.number
-          = "#{humanized_money_with_symbol(takes_week)}"
+          = "#{pounds(takes_week)}"
       .row
         .large-6.columns
           CC
         .large-6.columns.number
-          = "#{humanized_money_with_symbol(credit_cards_week)}"
-      .row
-        .large-6.columns
-          Tips
-        .large-6.columns.number
-          = "#{humanized_money_with_symbol(tips_week)}"
+          = "#{pounds(credit_cards_week)}"
       .row
         .large-6.columns
           cash
         .large-6.columns.number
-          = "#{humanized_money_with_symbol(takes_week - credit_cards_week)}"
+          = "#{pounds(takes_week - credit_cards_week)}"
       .row
         .large-6.columns
           Turnover
         .large-6.columns.number
-          = "#{humanized_money_with_symbol(takes_week - tips_week)}"
+          = "#{pounds(turnover_week)}"
+      .row
+        .large-6.columns
+          Tips
+        .large-6.columns.number
+          = "#{pounds(tips_week)}"
 
       - takes_week = 0.00
       - credit_cards_week = 0.00
       - tips_week = 0.00
-      - fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
-      - fy_start = fy_start - 1.year if fy_start > daily.account_date#.strftime('%U')
-      - week = ((daily.account_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
+      -#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
+      -#- fy_start = fy_start - 1.year if fy_start > daily.account_date#.strftime('%U')
+      - week = current
+      - hmrc_pay_week = HMRC_week_number(daily.account_date.beginning_of_week + 12.days)
+      - week_start = week_start(daily.account_date) #.account_date.beginning_of_week.strftime('%d-%m-%y')
     - takes_week += daily.take.to_d
     - credit_cards_week += daily.credit_card.to_d
     - tips_week += daily.tips.to_d
+    - turnover_week += daily.turnover.to_d
   .row
     .large-12.columns.id
-      = "Week #{week}"
+      = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
+      =# "W/b #{daily.account_date.beginning_of_week(:sunday).strftime('%d-%m-%y')}" #"Week #{week}"
   .row
     .large-6.columns
       Take
     .large-6.columns.number
-      = "#{humanized_money_with_symbol(takes_week)}"
+      = "#{pounds(takes_week)}"
   .row
     .large-6.columns
       CC
     .large-6.columns.number
-      = "#{humanized_money_with_symbol(credit_cards_week)}"
-  .row
-    .large-6.columns
-      Tips
-    .large-6.columns.number
-      = "#{humanized_money_with_symbol(tips_week)}"
+      = "#{pounds(credit_cards_week)}"
   .row
     .large-6.columns
       cash
     .large-6.columns.number
-      = "#{humanized_money_with_symbol(takes_week - credit_cards_week)}"
+      = "#{pounds(takes_week - credit_cards_week)}"
   .row
     .large-6.columns
       Turnover
     .large-6.columns.number
-      = "#{humanized_money_with_symbol(takes_week - tips_week)}"
+      = "#{pounds(turnover_week)}"
+  .row
+    .large-6.columns
+      Tips
+    .large-6.columns.number
+      = "#{pounds(tips_week)}"

@@ -269,7 +269,6 @@ class ApplicationController < ActionController::Base
   helper_method :get_openings
 
   def set_daily_dates
-    #@daily_date = @daily.account_date if @daily
     @daily_date = params['daily_date'].present? ? params['daily_date'].to_date : Date.today.beginning_of_month
     start = (@daily_date >= Time.now.at_beginning_of_day) ? Time.now.to_date : @daily_date.beginning_of_month
     stop = @daily_date.end_of_month

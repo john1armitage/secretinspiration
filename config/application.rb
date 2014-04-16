@@ -26,7 +26,7 @@ module Commerce
     #config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| get_domain(request.host.reverse) }
 
     config.active_record.schema_format = :sql
-
+    config.beginning_of_week = :sunday
     #config.middleware.use 'Apartment::Elevators::Generic', Proc.new { |request| request.host.reverse }
     #config.middleware.use 'Apartment::Elevators::Subdomain'
     #config.middleware.use 'Apartment::Elevators::Domain'

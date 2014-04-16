@@ -5,9 +5,11 @@ class TimesheetsController < ApplicationController
   def index
     month = params[:month].to_date
     start = month.beginning_of_month
-    finish = month.end_of_month
+    stop = month.end_of_month
+    start = start - start.strftime('%w').to_d.days
+    stop = stop + (6 - stop.strftime('%w').to_d).days
     @employee = Employee.find(params[:employee])
-    @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, finish, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+    @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
   end
 
   # GET /timesheets/1

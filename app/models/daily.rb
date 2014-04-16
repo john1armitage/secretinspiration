@@ -35,14 +35,14 @@ class Daily < ActiveRecord::Base
     orders = Order.where('effective_date = ? AND session = ?', account_date, session)
     if orders.size > 0
       takeaways = orders.where('effective_date = ? AND session = ? AND seating_id IS NULL', account_date, session)
-      self.takeaways = takeaways.size
-      self.turnover_cents = orders.to_a.sum(&:net_home_cents)
-      self.tips_cents = orders.to_a.sum(&:tip_cents)
-      self.tax_cents = orders.to_a.sum(&:tax_home_cents)
-      self.take_cents = self.turnover_cents + self.tax_cents + self.tips_cents
-      self.discount_cents = orders.to_a.sum(&:discount_cents)
-      self.takeaway_cents = takeaways.to_a.sum(&:net_home_cents)
-      self.seated_cents = self.turnover_cents - self.takeaway_cents
+      # self.takeaways = takeaways.size
+      # self.turnover_cents = orders.to_a.sum(&:net_home_cents)
+      # self.tips_cents = orders.to_a.sum(&:tip_cents)
+      # self.tax_cents = orders.to_a.sum(&:tax_home_cents)
+      # self.take_cents = self.turnover_cents + self.tax_cents + self.tips_cents
+      # self.discount_cents = orders.to_a.sum(&:discount_cents)
+      # self.takeaway_cents = takeaways.to_a.sum(&:net_home_cents)
+      # self.seated_cents = self.turnover_cents - self.takeaway_cents
     end
   end
 

@@ -3,7 +3,6 @@ class DailiesController < ApplicationController
 
   # GET /dailies
   def index
-    #@dailies = Daily.all
     set_daily_dates
   end
 
@@ -65,18 +64,10 @@ class DailiesController < ApplicationController
       gross = params[:gross].present? ? params[:gross].to_d : 0.00
       if gross > 0
         vat_rate = current_tenant.vat_exempt ? 0.00 : CONFIG[:vat_rate_standard].to_d
-        p "YYYYYYYYYYYYYYYYYYYYYYYYYYY"
-        p gross
-        p vat_rate
         tax = ((gross - ( gross / (1.00 + vat_rate) )) * 100 ).to_i
         net = (gross * 100 - tax).to_i
         tips =  (params[:daily][:tips].to_d * 100).to_i
-        p net
-        p tax
         @daily.update( turnover_cents: net, tax_cents: tax, take_cents: (net + tax + tips))
-        p @daily.turnover_cents
-        # @daily.update( tax_cents: tax)
-        p @daily.tax_cents
       end
     end
 
