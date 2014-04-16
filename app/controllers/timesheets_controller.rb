@@ -20,7 +20,8 @@ class TimesheetsController < ApplicationController
   def new
     @timesheet = Timesheet.new
     @timesheet.work_date = params[:date].present? ? params[:date] :  Date.today
-    @timesheet.start_time = @timesheet.end_time = Time.now
+    @timesheet.start_time = '18:00'
+    @timesheet.end_time = '22:00'
     @timesheet.session = 'dinner'
     render 'form'
   end

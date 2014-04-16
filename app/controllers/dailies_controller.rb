@@ -34,7 +34,8 @@ class DailiesController < ApplicationController
     @daily = Daily.new(params[:daily])
     set_net
     if @daily.save
-      redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
+      redirect_to dailies_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
+      # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
     else
       render action: 'form'
     end
@@ -44,7 +45,8 @@ class DailiesController < ApplicationController
   def update
     set_net
     if @daily.update(params[:daily])
-      redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
+      redirect_to dailies_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
+      # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
     else
       render action: 'form'
     end

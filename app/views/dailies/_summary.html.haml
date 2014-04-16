@@ -6,6 +6,11 @@
 - tips_week = 0.00
 - turnover_week = 0.00
 - tax_week = 0.00
+- takes_month = 0.00
+- credit_cards_month = 0.00
+- tips_month = 0.00
+- turnover_month = 0.00
+- tax_month = 0.00
 -#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
 -#- fy_start = fy_start - 1.year if fy_start > @daily_date#.strftime('%U')
 -# week = ((@daily_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
@@ -49,6 +54,11 @@
           = "#{pounds(turnover_week)}"
       .row
         .large-6.columns
+          Tax
+        .large-6.columns.number
+          = "#{pounds(tax_week)}"
+      .row
+        .large-6.columns
           Tips
         .large-6.columns.number
           = "#{pounds(tips_week)}"
@@ -65,6 +75,12 @@
     - credit_cards_week += daily.credit_card.to_d
     - tips_week += daily.tips.to_d
     - turnover_week += daily.turnover.to_d
+    - tax_week += daily.tax.to_d
+    - takes_month += daily.take.to_d
+    - credit_cards_month += daily.credit_card.to_d
+    - tips_month += daily.tips.to_d
+    - turnover_month += daily.turnover.to_d
+    - tax_month += daily.tax.to_d
   .row
     .large-12.columns.id
       = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
@@ -91,6 +107,46 @@
       = "#{pounds(turnover_week)}"
   .row
     .large-6.columns
+      Tac
+    .large-6.columns.number
+      = "#{pounds(tax_week)}"
+  .row
+    .large-6.columns
       Tips
     .large-6.columns.number
       = "#{pounds(tips_week)}"
+
+  .row
+    .large-12.columns.title
+      = "Month Totals"
+      =# "W/b #{daily.account_date.beginning_of_week(:sunday).strftime('%d-%m-%y')}" #"Week #{week}"
+  .row
+    .large-6.columns
+      Take
+    .large-6.columns.number
+      = "#{pounds(takes_month)}"
+  .row
+    .large-6.columns
+      CC
+    .large-6.columns.number
+      = "#{pounds(credit_cards_month)}"
+  .row
+    .large-6.columns
+      cash
+    .large-6.columns.number
+      = "#{pounds(takes_month - credit_cards_month)}"
+  .row
+    .large-6.columns
+      Turnover
+    .large-6.columns.number
+      = "#{pounds(turnover_month)}"
+  .row
+    .large-6.columns
+      Tax
+    .large-6.columns.number
+      = "#{pounds(tax_month)}"
+  .row
+    .large-6.columns
+      Tips
+    .large-6.columns.number
+      = "#{pounds(tips_month)}"
