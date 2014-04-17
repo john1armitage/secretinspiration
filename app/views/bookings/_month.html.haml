@@ -24,10 +24,17 @@
         -#- if allow? :seating, :create
         -#  = opening
         -#-else
-        - if bookings[date] && bookings[date].sum(&:pax) >= 30
-          Sorry, we're Full
-        - else
+        -#- if bookings[date].where(contact: 'early_ok').size > 0
+        -#  Early Only Please Call
+        - if bookings[date].blank? || (bookings[date] && bookings[date].sum(&:pax) < 30) ||  allow?(:seating, :create)
           = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
+        - elsif bookings[date] && bookings[date].any?{|a| ["early_ok","late_ok"].include? a.customer_name }
+          - if bookings[date].any?{|a| ["early_ok"].include? a.customer_name }
+            Phone, 6pm Only
+          - else
+            Phone, 9pm Only
+        - else
+          Sorry, we're Full
         - if allow? :seating, :create
           = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
         -#- else

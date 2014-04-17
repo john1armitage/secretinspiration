@@ -45,10 +45,13 @@ jQuery ->
     $('div#content').html('')
   $(document).on "click", 'input#bill_payment', (event) ->
     total = $('input#total').val()
+    tip = $('input#order_tip').val()
     paid = $('input#order_paid').val()
     due = $('input#due').val()
     if total != null and total > 0
-      if total > due
+      if tip > 0
+        $('input#order_paid').val(due)
+      else if total >= due
         $('input#order_paid').val(due)
         $('input#order_tip').val(total - due)
       else if total < due

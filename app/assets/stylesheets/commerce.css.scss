@@ -97,6 +97,15 @@ $head-border: #009900;
 
     }
   }
+  li {
+    .sub {
+      color: purple;
+    }
+    .head {
+      text-align: center;
+      font-weight: bold;
+    }
+  }
   ul.blog {
     margin-left: 0;
     h1 {

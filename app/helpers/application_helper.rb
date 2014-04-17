@@ -88,7 +88,7 @@ module ApplicationHelper
             prices << (li.net_item + li.tax_item)
             # discount = every other
           end
-          discount = prices.select.each_with_index { |str, i| i.odd? }.reduce(:+)
+          discount = prices.sort.reverse.select.each_with_index { |str, i| i.odd? }.reduce(:+)
         end
       when 'fixed_price'
         applies.each do |li|

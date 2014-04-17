@@ -58,8 +58,10 @@
     - if @order.tax_home > 0
       %tr
         %td
+          %span
+            = "Order #{@order.id}"
           %span.no-print
-            = @order.state
+            = "(#{@order.state})"
         %td.right
           = "(VAT: #{humanized_money_with_symbol(@order.tax_home)})"
     %tr.footer
@@ -67,10 +69,7 @@
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
       %td.right
-        = "[Order #{@order.id}]"
         = @order.updated_at.strftime('%e-%b-%y')
-      -#%span
-      -#  = "#{pluralize( @order.line_items.size, 'item')}"
   %p.no-print
     %span
       = link_to "Print",'#', id: 'print'
