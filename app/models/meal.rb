@@ -5,10 +5,12 @@ class Meal < ActiveRecord::Base
 
   has_many :line_items, as: :ownable, dependent: :destroy
 
- # validates_presence_of :contact, :phone, :start_time,  if: :remote_takeaway?
+  validates_presence_of :contact, :phone, :start_time,  if: :remote_takeaway?
+  validates  :contact,  length: { minimum: 2, too_short: 'too short' },   if: :remote_takeaway?
+  validates  :phone,  length: { minimum: 6, too_short: 'number too short' },  if: :remote_takeaway?
 
   def remote_takeaway?
-    state == 'takeaway' and seating_id.blank?
+    state == 'takeaway' and seating_id.blank? and line_items
   end
 
   def get_vat_rate(type)

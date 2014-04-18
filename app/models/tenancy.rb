@@ -1,5 +1,8 @@
 class Tenancy < ActiveRecord::Base
 
+
+belongs_to :supplier
+
   after_create :create_schema
 
   before_save :check_home_supplier

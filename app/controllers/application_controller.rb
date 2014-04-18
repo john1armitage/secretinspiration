@@ -190,6 +190,13 @@ class ApplicationController < ActionController::Base
     bookings.group_by(&:booking_date)
   end
 
+  def get_orders(date = Time.now.to_date )
+    start = date.beginning_of_month
+    stop = date.end_of_month
+    orders = Order.where('effective_date >= ? AND effective_date <= ? AND supplier_id = ?', start, stop, current_tenant.supplier_id)
+    orders.group_by(&:effective_date)
+  end
+
   def get_events(event_date)
     start = (event_date <= Time.now.at_beginning_of_day) ? Time.now.to_date : event_date.beginning_of_month
     stop = event_date.end_of_month
@@ -282,6 +289,7 @@ class ApplicationController < ActionController::Base
     # @dailies_last_month = get_dailies(start, stop)
     # @timesheets_last_month = get_timesheets(start, stop)
     @bookings = get_bookings(@daily_date, 'past')
+    @orders = get_orders(@daily_date)
   end
   helper_method :set_daily_dates
 

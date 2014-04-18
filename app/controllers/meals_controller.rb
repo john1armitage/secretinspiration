@@ -6,12 +6,13 @@ class MealsController < ApplicationController
   end
 
   def show
-    if params[:takeaway].present? && @meal && @meal.line_items.size > 0
+    if ( params[:takeaway].present? && @meal && @meal.line_items.size > 0 )
       case params[:takeaway]
         when 'cancel'
           @meal.update(state: 'takeaway', notes: '', start_time: nil)
           @meal.line_items.destroy_all
-        when 'confirm'
+        when 'request'
+          p 'JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ'
           @meal.update(state: 'confirmed')
       end
       render  action: 'takeaway'
@@ -60,8 +61,10 @@ class MealsController < ApplicationController
     elsif params[:takeaway].present?
       case params[:takeaway]
         when 'request'
-          if @meal.update(contact: params[:contact], phone: params[:phone], start_time: params[:start_time].to_time, notes: params[:notes], state: 'requested') and 1 == 2
+          if @meal.update(state: 'requested')
             TakeawayMailer.takeaway_notify(@meal).deliver
+          else
+            render 'takeaway'
           end
         when 'cancel'
           @meal.update(notes: '', start_time: nil, state: 'takeaway')

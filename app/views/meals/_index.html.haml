@@ -1,14 +1,15 @@
 #editor.no-print
 %ul#meal.no-print
   = render 'meals/tables'
-#display.no-print
-  = render 'bookings/dated'
-  #takeaway
-    = render 'meals/takeaway'
-  = render 'bookings/requested'
-  - if allow? :orders, :index
-    != render "orders/#{current_tenant.domain}/current"
-  = render 'bookings/cleared'
+- unless params[:short].present?
+  #display.no-print
+    = render 'bookings/dated'
+    #takeaway
+      = render 'meals/takeaway'
+    = render 'bookings/requested'
+    - if allow? :orders, :index
+      != render "orders/#{current_tenant.domain}/current"
+    = render 'bookings/cleared'
   -#%ul#order
   -#  %li.title
   -#    = "#{@booking_date.strftime("%a %e %b")}, #{pluralize(@bookings.sum(:pax), 'person')}"

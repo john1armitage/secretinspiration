@@ -1,0 +1,8 @@
+#editor
+#display
+- unless @orders.empty?
+  %ul#completed.aside.no-print
+    %li.title
+      %span
+        Orders
+    = render :partial => "orders/#{current_tenant.domain}/current_order", collection: @orders

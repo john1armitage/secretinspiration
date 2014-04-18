@@ -45,7 +45,19 @@
     - if @meal.seating_id.blank?
       = button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}
   - elsif @meal.state == 'takeaway'
-    = button_to 'Request', meal_path(@meal, takeaway: 'request'), method: :get, form_class: 'contact no_ajaxify'
+    - if !@meal.contact.blank? && (@meal.contact.size >= 2) && !@meal.phone.blank? && (@meal.phone.gsub(/[^\d]/, '').size >= 6)
+      = button_to 'Request', meal_path(@meal, takeaway: 'request'), method: :get, form_class: 'contact no_ajaxify'
+      = form_for @meal, url: {action: "patcher", takeaway: 'request'}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
+        .row
+          .large-12.columns
+            = f.submit 'Send Request'
+
+    - else
+      .row
+        .large-12.columns
+          %p
+            %span.title
+            Contact Details Required
   - elsif @meal.state == 'requested'
     - unless current_user.id.blank?
       = button_to 'Confirm', meal_path(@meal, takeaway: 'confirm'), method: :get, remote: true, form_class: 'no_ajaxify'
@@ -59,5 +71,5 @@
       -# params = "@meal, meal_id: @meal.id, bill: true, test: true"
       = button_to 'Bill', check_out_meal_path(@meal,meal_id: @meal.id, bill: true), method: 'post', data: {confirm: 'Create Bill?'}, remote: true, form_class: 'no_ajaxify', title: 'Create Bill'  #, remote: true, form_class: 'no_ajaxify'
   - unless @meal.seating_id.blank? && @meal.state != 'takeaway'
-    = button_to 'Clear', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
+    = button_to 'Clear Order', clear_meal_path( @meal), method: :delete, remote: true, form_class: 'no_ajaxify',
     data: { confirm: 'Clear Items?' }

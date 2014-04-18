@@ -645,7 +645,8 @@ CREATE TABLE tenancies (
     title character varying(255),
     description text,
     keywords text,
-    capacity integer
+    capacity integer,
+    supplier_id integer
 );
 
 
@@ -1286,6 +1287,13 @@ CREATE INDEX index_receipts_on_order_id ON receipts USING btree (order_id);
 
 
 --
+-- Name: index_tenancies_on_supplier_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_tenancies_on_supplier_id ON tenancies USING btree (supplier_id);
+
+
+--
 -- Name: index_transfers_on_bank_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1542,3 +1550,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140414132657');
 INSERT INTO schema_migrations (version) VALUES ('20140415132658');
 
 INSERT INTO schema_migrations (version) VALUES ('20140415143356');
+
+INSERT INTO schema_migrations (version) VALUES ('20140418115328');

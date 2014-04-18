@@ -27,7 +27,7 @@
 .row.large-12
   .calendar
     - month = @daily_date.beginning_of_month
-    = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings, bookings: @bookings}
+    = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings, bookings: @bookings, orders: @orders}
 
 -#- if @daily_date - 1.month >= Date.today.beginning_of_month - 24.months
 -#  .row.large-12
