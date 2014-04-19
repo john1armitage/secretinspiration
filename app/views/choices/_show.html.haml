@@ -11,7 +11,7 @@
     != markdown(@page.body)
   - subcats = params[:filter].present? ? @choice.children.where( name: params[:filter]) : @choice.children
   - subcats.each do |subcat|
-    - unless !(allow? :items, :create) && subcat.items.size == 0
+    - if (allow? :items, :create) || subcat.items.where(withdrawn: false).size > 0
       %li
         %p.header
           %span.title
