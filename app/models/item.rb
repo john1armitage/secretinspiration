@@ -27,7 +27,12 @@ class Item < ActiveRecord::Base
   end
 
   def set_grouping_plus
-    self.grouping = "#{category.parent.rank}:#{category.parent.name}"
+    if category.name == 'vegetarian_starter'
+      starter = Category.find_by_name('starter')
+      self.grouping = "#{starter.rank}:#{starter.name}"
+    else
+      self.grouping = "#{category.parent.rank}:#{category.parent.name}"
+    end
     self.item_type = ItemType.find_by_name( category.parent.name )
     self.vat_rate = item_type.vat_rate if vat_rate.blank? and !vat_exempt
   end

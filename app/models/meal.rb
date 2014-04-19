@@ -10,7 +10,7 @@ class Meal < ActiveRecord::Base
   validates  :phone,  length: { minimum: 6, too_short: 'number too short' },  if: :remote_takeaway?
 
   def remote_takeaway?
-    state == 'takeaway' and seating_id.blank? and line_items
+    state == 'takeaway' and seating_id.blank? and line_items.size > 0
   end
 
   def get_vat_rate(type)

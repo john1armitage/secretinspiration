@@ -21,7 +21,8 @@
         = current_tenant.name
       %td
         &nbsp;
-    != render partial: "orders/#{current_tenant.domain}/line_item", collection: @order.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')
+    - line_items = @order.line_items.joins( {:variant => :item } ) #.order('items.grouping, items.rank, line_items.desc')
+    != render partial: "orders/#{current_tenant.domain}/line_item", collection: line_items.order('items.grouping, items.rank, line_items.desc')
     %tr
       %td
         &nbsp;
