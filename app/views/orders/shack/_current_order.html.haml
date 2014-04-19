@@ -1,9 +1,9 @@
 %li
   %p
     %span
-      = current_order.updated_at.strftime('%e %b %y')
+      = current_order.updated_at.strftime('%e %b')
     %span.title
-      = link_to "#{current_order.desc}", order_path(current_order, bill: true), remote: true, class: 'no_ajaxify', title: 'View Order'
+      = link_to "#{current_order.desc.sub(/.*:/,"")}", order_path(current_order, bill: true), remote: true, class: 'no_ajaxify', title: 'View Order'
     %span
       = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
