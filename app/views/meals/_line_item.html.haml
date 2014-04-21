@@ -17,7 +17,7 @@
         = make_title(v)
     - unless line_item.options.blank?
       %br
-      = line_item.options
+      = make_title(line_item.options)
     %br
     - if @takeaway_editable
       = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
