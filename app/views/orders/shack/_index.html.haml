@@ -5,4 +5,5 @@
     %li.title
       %span
         Orders
+    - @orders = @orders.order('id ASC')
     = render :partial => "orders/#{current_tenant.domain}/current_order", collection: @orders

@@ -25,42 +25,13 @@
       - timesheets[date].each do |timesheet|
         %li
           %span
-            = link_to timesheet.employee.first_name, edit_timesheet_path(timesheet), remote: true, class: 'no_ajaxify'
+            = link_to "#{timesheet.session[0].upcase} #{timesheet.employee.first_name}", edit_timesheet_path(timesheet), remote: true, class: 'no_ajaxify'
           %span
             = "#{timesheet.hours}"
           = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Timesheet", :data => { :confirm => 'Are you sure?' }
-    -#- meals = Meal.where("seating_id IS NOT NULL AND state <> 'billed'").order('tabel_name')
-    -#- if meals
-    -#  %li
-    -#    = link_to (pluralize meals.size, 'meal'), meals_path(short: true), remote: true, class: 'no_ajaxify'
     - if bookings[date]
       %li
         = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
     - if orders[date]
       %li
         = link_to (pluralize orders[date].size, 'order'), orders_path(date: date.to_s, home: true), remote: true, class: 'no_ajaxify'
-      =# render partial: 'dailies/daily', locals: {date: date, dailies: dailies, timesheets: timesheets, no_content: no_content }
-      -#- if timesheets[date]
-      -#  - timesheets[date].each do |timesheet|
-      -#    %li.timesheet
-      -#      != link_to timesheet.employee.name_first, timesheet_path( timesheet, aside: true ), class: "no_ajaxify  #{no_content}", remote: true
-
-
-
-
-
-
-  -#- if date >= Time.now.to_date
-  -#  = link_to 'new', new_booking_path(date: date.to_s)
-  -#  - if date == Time.now.to_date && (allow? :bookings, :create)
-  -#    = link_to 'New Walk-In', new_booking_path(:walk_in => true)
-  -#  - else
-  -#    REQUEST
-  -#- if bookings[date]
-  -#  = link_to "#{bookings[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
-  -#  = bookings[date].map(&:pax).sum
-  -#  %ul
-  -#    - bookings[date].each do |booking|
-  -#      %li
-  -#        - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
-  -#        = link_to title, booking

@@ -11,7 +11,7 @@ class MealsController < ApplicationController
         when 'cancel'
           @meal.line_items.destroy_all
           @meal.update(state: 'takeaway', notes: '', start_time: nil)
-        when 'request'
+        when 'confirm'
           @meal.update(state: 'confirmed') if @meal.line_items
       end
       render  action: 'takeaway'
@@ -20,8 +20,6 @@ class MealsController < ApplicationController
       @meal.update(state: 'ordered')
     end
   end
-
-
 
   def edit
     @meal.id
@@ -51,7 +49,7 @@ class MealsController < ApplicationController
 
   def takeaway
     @meal = Meal.find(get_takeaway)
-      render 'edit'
+    render 'edit'
   end
 
   def patcher
@@ -128,6 +126,7 @@ class MealsController < ApplicationController
     @order.seating_id = @meal.seating_id if @meal.seating
     @order.state = 'incomplete'
     @order.save
+    @order.state = 'complete'
     @meal.line_items.update_all(ownable_type: 'Order', ownable_id: @order.id)
     @meal.seating.booking.update_attribute(:state, 'billing')  if @meal.seating and @meal.seating.booking
     state = @meal.seating_id.blank? ? 'takeaway' : 'billed'

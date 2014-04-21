@@ -7,7 +7,12 @@
     = link_to 'New Takeaway', meals_path(takeaway: true), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
 - if bookings[date]
   %li
-    = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+    - lunches = bookings[date].map{|a| a.session == "lunch"}
+    - dinners = bookings[date].map{|a| a.session == "dinner"}
+    - if lunches[0]
+      = link_to (pluralize lunches.size, 'lunch'), dated_bookings_path(booking_date: date.to_s, session: 'lunch'), remote: true, class: 'no_ajaxify'
+    - if dinners[0]
+      = link_to (pluralize dinners.size, 'dinner'), dated_bookings_path(booking_date: date.to_s, session: 'dinner'), remote: true, class: 'no_ajaxify'
   %li
     = pluralize bookings[date].map(&:pax).sum, 'person'
     -#- bookings[date].each do |booking|

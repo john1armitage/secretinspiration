@@ -1,21 +1,17 @@
 %li
   %p
     %span
-      = current_order.updated_at.strftime('%e %b')
+      = current_order.created_at.strftime('%H:%M %e %b')
     %span.title
       = link_to "#{current_order.desc.sub(/.*:/,"")}", order_path(current_order, bill: true), remote: true, class: 'no_ajaxify', title: 'View Order'
-    %span
-      = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
     %span
       = humanized_money_with_symbol(current_order.net_home + current_order.tax_home)
     - if current_order.tax_home > 0
       %span
         = "(#{humanized_money_with_symbol(current_order.net_home)} + #{humanized_money_with_symbol(current_order.tax_home)})"
-    - if allow? :orders, :delete
-      %span.title
-        != link_to 'X', order_path( current_order ), method: :delete, remote: true, class: 'no_ajaxify',
-          data: {  confirm: 'Delete Order?'}, title: "Delete Order"
+    %span
+      = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
     %span.title
       Paid
@@ -23,3 +19,7 @@
       = humanized_money_with_symbol(current_order.paid + current_order.tip)
       %span
         = "(#{humanized_money_with_symbol(current_order.paid)} + #{humanized_money_with_symbol(current_order.tip)})"
+    - if allow? :orders, :delete
+      %span.title
+        != link_to 'X', order_path( current_order ), method: :delete, remote: true, class: 'no_ajaxify',
+          data: {  confirm: 'Delete Order?'}, title: "Delete Order"

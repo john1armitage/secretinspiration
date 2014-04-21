@@ -41,6 +41,8 @@ class MealItemsController < ApplicationController
     current_item = LineItem.find(params[:id])
     if params['act'] == 'add'
       @line_item = params[:option].present? ? @meal.add_option( current_item ) : @meal.add_variant( current_item )
+    elsif params['act'] == 'main'
+        @line_item.variant_id = Item.find_by_name( "ad_hoc_main").variants.first.id
     else
       @line_item = params[:option].present? ?  @meal.subtract_option( current_item ) : @meal.subtract_variant( current_item )
     end

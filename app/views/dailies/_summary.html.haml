@@ -66,6 +66,8 @@
       - takes_week = 0.00
       - credit_cards_week = 0.00
       - tips_week = 0.00
+      - turnover_week = 0.00
+      - tax_week = 0.00
       -#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
       -#- fy_start = fy_start - 1.year if fy_start > daily.account_date#.strftime('%U')
       - week = current
@@ -107,7 +109,7 @@
       = "#{pounds(turnover_week)}"
   .row
     .large-6.columns
-      Tac
+      Tax
     .large-6.columns.number
       = "#{pounds(tax_week)}"
   .row

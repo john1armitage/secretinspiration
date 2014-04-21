@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     @order.state = 'incomplete'
     @order.account_id = cookies[:last_tx_account]
     @order.effective_date = cookies[:last_tx_date] || Time.now
-        if params[:supplier_id].present?
+    if params[:supplier_id].present?
       @order.supplier = Supplier.find(params[:supplier_id])
       @order.supplier_name = @order.supplier.name
       get_items

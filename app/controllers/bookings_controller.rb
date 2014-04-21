@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
   def dated
     @booking_date = params['booking_date'].present? ? params['booking_date'].to_date : Date.today
     @bookings = Booking.where( booking_date: @booking_date )
+    @bookings = @bookings.where( session: params['session'] ) if params['session'].present?
     @bookings = @bookings.where('state <> ?', params[:state]) if params[:not].present?
   end
   # GET /bookings/1
@@ -57,7 +58,7 @@ class BookingsController < ApplicationController
     if @booking.save
       set_booked
       set_booking_dates
-      if @current_user.id.blank? && !@booking.email.blank?
+      if @current_user.id.blank? # && !@booking.email.blank?
         BookingMailer.booking_ack(@booking, current_tenant).deliver
       end
       render 'index'

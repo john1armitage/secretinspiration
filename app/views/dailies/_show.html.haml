@@ -76,5 +76,5 @@
     .large-6.columns
       Share
     .large-6.columns.number
-      - tips = @daily.tips / @daily.headcount
-      = tips
+      - tips = @daily.tips / @daily.headcount if @daily.headcount.to_i > 0
+      = tips if tips

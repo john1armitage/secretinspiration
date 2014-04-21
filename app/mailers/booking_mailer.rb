@@ -5,7 +5,8 @@ class BookingMailer < ActionMailer::Base
     @booking = booking
     @total_booked = Booking.where("booking_date = ? and state <> 'cancelled'", booking.booking_date).sum(&:pax)
     @current_tenant = current_tenant
-    mail :to => booking.email, :subject => "Pepper Shack request: #{booking.booking_date.strftime('%e-%b-%y')}"
+    email = booking.email.blank? ? [CONFIG[:mail_sender]] : booking.email
+    mail to: email, :subject => "Pepper Shack request: #{booking.booking_date.strftime('%e-%b-%y')}"
   end
 
 end
