@@ -8,16 +8,16 @@
   - if allow? :broadcasts, :index
     %li
       != link_to 'Broadcasts', broadcasts_path
-  - if allow? :offers, :index
+  - if (allow? :offers, :index and current_tenant.offers == '1')
     %li
       != link_to 'Offers', offers_path
-  - if allow? :openings, :index
+  - if (allow? :openings, :index and current_tenant.openings == '1')
     %li
       != link_to 'Openings', openings_path
   - if allow? :items, :index
     %li
       != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'
-  - if allow? :dailes, :index
+  - if (allow? :dailies, :index and current_tenant.dailies == '1')
     %li
       != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
   - if allow? :postings, :index

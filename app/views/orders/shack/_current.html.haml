@@ -18,6 +18,18 @@
         Paid Bills
     = render :partial => "orders/#{current_tenant.domain}/current_order", collection: paid_orders
     %li.sub.head
-      %span
-        - take = paid_orders.to_a.map(&:paid).reduce(:+) + paid_orders.to_a.map(&:tip).reduce(:+)
-        = "#{pounds(take)} ( #{pounds(paid_orders.to_a.map(&:paid).reduce(:+))} + #{pounds(paid_orders.to_a.map(&:tip).reduce(:+))})"
+      - paid = paid_orders.to_a.map(&:paid).reduce(:+)
+      - tips = paid_orders.to_a.map(&:tip).reduce(:+)
+      - net = paid_orders.to_a.map(&:net_home).reduce(:+)
+      - tax = paid_orders.to_a.map(&:tax_home).reduce(:+)
+      - card = paid_orders.to_a.map(&:credit_card).reduce(:+)
+      - take = paid + tips
+      %p
+        %span.title
+          = "Take: #{pounds(take)}"
+      %p
+        %span
+          = " = #{pounds(net)} +  #{pounds(tax)} + #{pounds(tips)}"
+      %p
+        %span
+          = " = #{pounds(card)}cc + #{pounds(paid + tips - card)}"

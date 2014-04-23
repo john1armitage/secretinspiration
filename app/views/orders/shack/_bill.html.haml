@@ -89,13 +89,23 @@
           = hidden_field_tag :due, (@order.net_home + @order.tax_home)
           = f.hidden_field :state
           = f.hidden_field :paid
+          = f.hidden_field :credit_card
           .row
-            .large-4.columns
-              = f.label :tip
+            .large-2.columns
+              = f.label :tip, 'Cash Tip'
               = f.text_field :tip
-            .large-4.columns
+            .large-2.columns
+              = label_tag :cash, 'Part Cash'
+              = text_field_tag :cash, 0
+            .large-2.columns
               - total = (@order.paid > 0) ? @order.paid : (@order.net_home + @order.tax_home)
               = label_tag :total
               = text_field_tag :total, total
-            .large-4.columns
-              = f.submit 'Paid', id: 'bill_payment'
+            .large-2.columns.left
+              %br
+              %br
+              = f.submit 'All Cash', id: 'cash_payment'
+            .large-2.columns.left
+              %br
+              %br
+              = f.submit 'Credit Card', id: 'card_payment'

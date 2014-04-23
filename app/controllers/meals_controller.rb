@@ -22,7 +22,8 @@ class MealsController < ApplicationController
   end
 
   def edit
-    @meal.id
+    # @meal.id
+    render 'takeaway' if params[:choice].present?
   end
 
   def create
@@ -49,7 +50,7 @@ class MealsController < ApplicationController
 
   def takeaway
     @meal = Meal.find(get_takeaway)
-    render 'edit'
+    render 'edit'       # 'edit'
   end
 
   def patcher

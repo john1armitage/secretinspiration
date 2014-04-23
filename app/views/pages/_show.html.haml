@@ -1,65 +1,61 @@
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 - unless @page
-  .row
-    .large-12.columns
-      %h2
-        Sorry, Page not Found
-- else
-  - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+  - @page = Page.find_by_code('construction')
 
-  %article
-    - unless @page.title == 'blank'
-      %h1
-        = @page.title
-    .row
-      - if @page.image.blank?
-        .large-12.columns
-          %h2
-            = @page.sub
-          = markdown(@page.body)
-        - unless @page.link.blank?
-          .row
-            .large-12.columns
-              != link_to 'More  information ...', @page.link
-      -else
-        .large-6.columns.push-6
-          - unless @page.link.blank?
-            %p
-              != link_to 'More information ...', @page.link
-          - if @page.image == 'image'
-            != link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
-          - else
-            - slide = @page.image.split(/-/)
-            %ul{"data-orbit" => ""}
-              - 1.upto(slide[1].to_i) do |image|
-                %li
-                  %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@page.code}-#{image}.jpg"}
-        .large-6.columns.pull-6
-          %h2
-            = @page.sub
-          = markdown(@page.body)
-    .two-column.show-for-large-up
-      .row
-        - if @page.feature2.blank?
-          .large-12.columns
-            = markdown(@page.body2)
-        - else
-          .large-6.columns
-            != render "pages/features/#{@page.feature2}"
-          .large-6.columns
-            = markdown(@page.body2)
-      .row
-        - if @page.feature3.blank?
-          .large-12.columns
-            = markdown(@page.body3)
-        - else
-          .large-6.columns
-            = markdown(@page.body3)
-          .large-6.columns
-            != render "pages/features/#{@page.feature3}"
+%article
+  - unless @page.title == 'blank'
+    %h1
+      = @page.title
+  .row
+    - if @page.image.blank?
+      .large-12.columns
+        %h2
+          = @page.sub
+        = markdown(@page.body)
       - unless @page.link.blank?
         .row
           .large-12.columns
+            != link_to 'More  information ...', @page.link
+    -else
+      .large-6.columns.push-6
+        - unless @page.link.blank?
+          %p
             != link_to 'More information ...', @page.link
+        - if @page.image == 'image'
+          != link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
+        - else
+          - slide = @page.image.split(/-/)
+          %ul{"data-orbit" => ""}
+            - 1.upto(slide[1].to_i) do |image|
+              %li
+                %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@page.code}-#{image}.jpg"}
+      .large-6.columns.pull-6
+        %h2
+          = @page.sub
+        = markdown(@page.body)
+  .two-column.show-for-large-up
+    .row
+      - if @page.feature2.blank?
+        .large-12.columns
+          = markdown(@page.body2)
+      - else
+        .large-6.columns
+          != render "pages/features/#{@page.feature2}"
+        .large-6.columns
+          = markdown(@page.body2)
+    .row
+      - if @page.feature3.blank?
+        .large-12.columns
+          = markdown(@page.body3)
+      - else
+        .large-6.columns
+          = markdown(@page.body3)
+        .large-6.columns
+          != render "pages/features/#{@page.feature3}"
+    - unless @page.link.blank?
+      .row
+        .large-12.columns
+          != link_to 'More information ...', @page.link
 
   -#:coffeescript
   -#  jQuery ->

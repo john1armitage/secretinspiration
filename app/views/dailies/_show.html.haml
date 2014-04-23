@@ -77,4 +77,4 @@
       Share
     .large-6.columns.number
       - tips = @daily.tips / @daily.headcount if @daily.headcount.to_i > 0
-      = tips if tips
+      =  pounds(tips) if tips

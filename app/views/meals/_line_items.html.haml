@@ -46,7 +46,7 @@
       = button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}
   - elsif @meal.state == 'takeaway'
     - if !@meal.contact.blank? && (@meal.contact.size >= 2) && !@meal.phone.blank? && (@meal.phone.gsub(/[^\d]/, '').size >= 6)
-      = form_for @meal, url: {action: "patcher", takeaway: 'request'}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
+      = form_for @meal, url: {controller: 'meals', action: 'patcher', takeaway: 'request', id: 0}, html: { class: 'no_ajaxify'}, method: 'post', remote: true, validate: true do |f|
         .row
           .large-12.columns
             = f.submit 'Send Request'

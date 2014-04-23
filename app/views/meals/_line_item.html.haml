@@ -26,7 +26,7 @@
     = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
     = " @ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
     - unless @meal.seating_id.blank?
-      = link_to 'MAIN', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
+      = link_to 'main', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
     %br
 
   - line_item.children.each do |option|

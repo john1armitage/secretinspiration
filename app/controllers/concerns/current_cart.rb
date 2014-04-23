@@ -41,7 +41,7 @@ module CurrentCart
     if current_user.id.blank?
       @cart = Cart.find(session[:cart_id])
     else
-      @cart = current_user.cart || Cart.create( :user_id => current_user.id )
+#     @cart = current_user.cart || Cart.create( :user_id => current_user.id )
     end
   rescue ActiveRecord::RecordNotFound
     @cart = Cart.create(IP: request.remote_addr)

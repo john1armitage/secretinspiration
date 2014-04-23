@@ -26,9 +26,9 @@
         %li
           !=# link_to "Register", signup_path, :class => "button radius"
           != link_to "Register", signup_path
-      - if allow? :dailes, :index
-        %li
-          != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
+        - if allow? :dailes, :index and current_tenant.dailies == '1'
+          %li
+            != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
         -#- if current_tenant.sitting == '1'  && (allow? :meals, :index )
         -#  %li
         -#    != link_to "Sitting", meals_path(), remote: true, class: 'no_ajaxify'
@@ -55,11 +55,15 @@
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
         %li
           != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'
-      - %w(food drinks catalogue).each do |component|
+      - %w(food drinks).each do |component|                       #  accessory bag scented art
         - if eval("current_tenant.#{component} == '1'")
           %li
-            != link_to make_title(component), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
-      - if current_tenant.cart == '1' # && !current_user.id.blank?
+            != link_to make_title(component.pluralize), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
+      - %w(accessory bag art stuff).each do |component|                       #  accessory craft scented art
+        - if eval("current_tenant.#{component} == '1'") # && !current_user.id.blank?
+          %li
+            != link_to make_title(component.pluralize), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
+      - if current_tenant.cart == '1' && !current_user.id.blank?
         %li
           != link_to 'Wishes', carts_path(code: 'catalogue'), class: 'no_ajaxify button radius', remote: true
       %li

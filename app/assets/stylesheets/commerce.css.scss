@@ -52,6 +52,7 @@ $head-border: #009900;
     p {
       margin-left: 1em;
       margin-bottom: 0;
+      text-align: center;
     }
   }
   p#catalogue {
@@ -633,7 +634,7 @@ $head-border: #009900;
       &.phone {
         // padding-left: 0.4em;
         font-weight: bold;
-        font-size: 1.1em;
+        font-size: 1em;
         color: darkred;
       }
       &.location {

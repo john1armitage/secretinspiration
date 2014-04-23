@@ -8,29 +8,16 @@
         = f.date_field :account_date
     .row
       .field.small-12.columns
-        = f.label :credit_card
+        = f.label :credit_card, "Credit Card: #{pounds(@credit_card/100.00)}"
         = f.text_field :credit_card
     .row
       .field.small-12.columns.left
         = f.label :session
         = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @daily.session)
     .row
-      .field.small-12.columns
-        = label_tag :gross
-        = text_field_tag :gross
-        = label_tag :turnover
-        = @daily.turnover
-        = label_tag :tax
-        = @daily.tax
-    .row
-      .field.small-12.columns
-        = f.label :tips
-        = f.text_field :tips
-    .row
       .field.small-12.columns.left
         %label
           = "Headcount: #{@daily.headcount}"
-        -#= f.hidden_field :headcount
     .row
       .field.small-12.columns.left
         = f.submit 'Save'

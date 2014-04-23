@@ -43,18 +43,29 @@ jQuery ->
     event.preventDefault()
   $(document).on "click", 'a.no_content', (event) ->
     $('div#content').html('')
-  $(document).on "click", 'input#bill_payment', (event) ->
-    total = $('input#total').val()
-    tip = $('input#order_tip').val()
-    paid = $('input#order_paid').val()
-    due = $('input#due').val()
+  $(document).on "click", 'input#cash_payment', (event) ->
+    total = parseFloat($('input#total').val()) + parseFloat($('input#order_tip').val())
+    due = parseFloat($('input#due').val())
+    $('input#order_credit_card').val(0)
     if total != null and total > 0
-      if tip > 0
-        $('input#order_paid').val(due)
-      else if total >= due
+      if total >= due
         $('input#order_paid').val(due)
         $('input#order_tip').val(total - due)
-      else if total < due
+      else
+        $('input#order_paid').val(total)
+        $('input#order_tip').val(0)
+  $(document).on "click", 'input#card_payment', (event) ->
+    credit_card = parseFloat($('input#total').val())
+    $('input#order_credit_card').val(credit_card)
+    total = credit_card + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())
+    due = parseFloat($('input#due').val())
+    alert(total)
+    alert(due)
+    if total != null and total > 0
+      if total >= due
+        $('input#order_paid').val(due)
+        $('input#order_tip').val(total - due)
+      else
         $('input#order_paid').val(total)
         $('input#order_tip').val(0)
   $(document).on "click", 'input.variant', (event) ->

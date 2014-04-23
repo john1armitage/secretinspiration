@@ -30,7 +30,8 @@
         = @meal.state.capitalize
       - if current_user.id.blank?
         - if @meal.state == 'takeaway'
-          != link_to "View Menu", takeaway_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
+          - %w(starter main vegetarian dessert).each do |course|
+            != link_to course.capitalize, choice_path( id: course, meal_id: @meal.id) #, remote: true, class: 'no_ajaxify'
         - else
           %span.title
             != "TA #{@meal.id}"

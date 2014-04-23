@@ -3,7 +3,7 @@ class TenanciesController < ApplicationController
 
   # GET /tenancies
   def index
-    @tenancies = Tenancy.order(:name).all
+    @tenancies = Tenancy.order(:name)
   end
 
   # GET /tenancies/1

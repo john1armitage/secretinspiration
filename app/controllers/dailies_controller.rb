@@ -16,11 +16,13 @@ class DailiesController < ApplicationController
     @daily.account_date = params[:date].present? ? params[:date] : Date.today
     @daily.session = 'dinner'
     @daily.headcount = get_headcount
+    get_credit_card
     render 'form'
   end
 
   def edit
     @daily.headcount = get_headcount
+    get_credit_card
     render 'form'
   end
   # GET /dailies/1/edit
@@ -76,6 +78,10 @@ class DailiesController < ApplicationController
     def set_daily
       @daily = Daily.find(params[:id])
     end
+
+  def get_credit_card
+    @credit_card = Order.where('effective_date = ? AND session = ?', @daily.account_date, @daily.session).to_a.sum(&:credit_card_cents)
+  end
 
     # Only allow a trusted parameter "white list" through.
   def current_resource
