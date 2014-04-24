@@ -59,8 +59,6 @@ jQuery ->
     $('input#order_credit_card').val(credit_card)
     total = credit_card + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())
     due = parseFloat($('input#due').val())
-    alert(total)
-    alert(due)
     if total != null and total > 0
       if total >= due
         $('input#order_paid').val(due)
@@ -71,14 +69,3 @@ jQuery ->
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')
     $('input#variant_id').val(variant)
-#  $(document).on "change", 'input#gross', (event) ->
-#    console.log event.target
-#    alert('woof')
-#    gross = $('input#gross').val()
-#    alert(gross)
-#    if gross != null and gross != 0
-#      alert('woofle')
-#      net = gross / 1.2
-#      tax = gross - net
-#      $('input#daily_turnover').val(net)
-#      $('input#daily_tax').val(tax)

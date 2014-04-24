@@ -263,7 +263,8 @@ CREATE TABLE elements (
     rank integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    default_choice boolean
+    default_choice boolean,
+    properties hstore
 );
 
 
@@ -1601,3 +1602,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140415143356');
 INSERT INTO schema_migrations (version) VALUES ('20140418115328');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423093531');
+
+INSERT INTO schema_migrations (version) VALUES ('20140424143318');

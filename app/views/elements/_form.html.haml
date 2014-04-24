@@ -25,6 +25,15 @@
         = f.number_field :rank
     .row
       .field.small-12.columns
+        %table
+          %tr
+            %td
+              Domains
+            - get_domains.each do |domain|
+              = render("layouts/fields/check_box", field: domain, f: f)
+
+    .row
+      .field.small-12.columns
         = f.label :desc
         = f.text_field :desc
 

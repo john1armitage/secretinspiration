@@ -10,6 +10,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'Urban Country', 'Urban Country'
   inflect.irregular 'MiPac', 'MiPac'
   inflect.irregular 'Sweet Trolley', 'Sweet Trolley'
+  inflect.irregular 'headwear', 'headwear'
   inflect.irregular 'Food', 'Food'
   inflect.irregular 'Scented', 'Scented'
   inflect.irregular 'Art', 'Art'

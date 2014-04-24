@@ -3,6 +3,7 @@
 
 %table
   %tr
+    %th= current_tenant.domain
     %th Name
     %th Kind
     %th Desc
@@ -14,12 +15,13 @@
 
   - @elements.each do |element|
     %tr
+      %td
+        = eval("element.#{current_tenant.domain} == '1'") ? 'ok' : ''
       %td= element.name
       %td= element.kind
       %td= element.desc
       %td= element.rank
       %td= element.default_choice
-      %td= link_to 'Show', element
       - unless element.name == 'kind' and element.kind == 'kind'
         %td= link_to 'Edit', edit_element_path(element)
         %td= link_to 'Destroy', element, method: :delete, data: { confirm: 'Are you sure?' }

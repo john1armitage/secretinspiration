@@ -14,6 +14,7 @@ class ElementsController < ApplicationController
   # GET /elements/new
   def new
     @element = Element.new
+    eval("@element.#{current_tenant.domain} = true")
     @element.kind = params[:kind] if params[:kind].present?
   end
 
