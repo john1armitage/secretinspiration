@@ -36,6 +36,17 @@ module ApplicationHelper
     end
     months
   end
+  def get_weeks(month)
+    weeks = []
+    limits = get_work_month(month).split(':')
+    week_start = limits[0].to_date
+    stop = limits[1].to_date
+    while week_start <= stop and week_start < Date.today do
+      weeks << week_start.strftime('%d-%m-%Y')
+      week_start += 7.days
+    end
+    weeks.reverse
+  end
 
   def get_times(opening = 'open', purpose = '')
     dinner_open = CONFIG[:dinner_open]

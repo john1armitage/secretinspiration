@@ -8,7 +8,6 @@
   - unless line_item.net_total_item == 0
 
     = line_item.quantity
-    x
 
     %span.title
       = link_to line_item.desc, choice_path(line_item.variant.item.category.parent.name, meal_id: @meal.id, filter: line_item.variant.item.category.name), data: { tooltip:  true}, title: "View #{make_title(line_item.variant.item.category.name)} #{@component_title}"
@@ -24,14 +23,16 @@
       = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
       = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
     = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
-    = " @ #{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)}"
+    = "(#{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)})"
     - unless @meal.seating_id.blank?
-      = link_to 'main', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
+      - if line_item.variant.item.grouping.match(/.*starter/)
+        = link_to 'main', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
+      - elsif line_item.variant.item.grouping.match(/.*main/)
+        = link_to 'start', meal_item_path( line_item.id, act: 'starter'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
     %br
 
   - line_item.children.each do |option|
     = option.quantity
-    x
     %span.title
       = make_title(option.desc)
     %br

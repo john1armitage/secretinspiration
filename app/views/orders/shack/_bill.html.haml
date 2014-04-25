@@ -32,16 +32,22 @@
       %td.right
         = humanized_money_with_symbol(@order.net_home + @order.tax_home + @order.discount)
 
-    - if  @order.discount > 0 && params[:offer].present?
-      - params[:offer].each do |offer_name, amount|
-        - if amount.to_d > 0
-          %tr
-            %td
-              Less
-              = offer_name
-            %td.right
-              = humanized_money_with_symbol(amount)
-
+    - if  @order.discount > 0
+      - if params[:offer].present?
+        - params[:offer].each do |offer_name, amount|
+          - if amount.to_d > 0
+            %tr
+              %td
+                Less
+                = offer_name
+              %td.right
+                = humanized_money_with_symbol(amount)
+      - else
+        %tr
+          %td
+            Less Offer discount
+          %td.right
+            = humanized_money_with_symbol(@order.discount)
     - if @order.seating_id.blank? && @order.discount > 0
       %tr
         %td
@@ -64,7 +70,7 @@
           %span.no-print
             = "(#{@order.state})"
         %td.right
-          = "(VAT: #{humanized_money_with_symbol(@order.tax_home)})"
+          = "(VAT #{current_tenant.vat}: #{humanized_money_with_symbol(@order.tax_home)})"
     %tr.footer
       %td
         = current_tenant.company

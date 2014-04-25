@@ -65,8 +65,9 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   def destroy
+    item_type = @item.item_type.name
     @item.destroy
-    redirect_to items_url, notice: 'Item was successfully destroyed.'
+    redirect_to choice_url( item_type ), notice: 'Item was successfully updated.'
   end
 
   private

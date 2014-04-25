@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  effective_date: 2014-04-25
+  rate: 
+
+two:
+  employee_id: 
+  effective_date: 2014-04-25
+  rate: 

@@ -1,0 +1,21 @@
+= link_to 'New Pay rate', new_pay_rate_path
+
+%table
+  %tr
+    %th Employee
+    %th Effective date
+    %th Rate
+    %th
+    %th
+    %th
+
+  - @pay_rates.each do |pay_rate|
+    %tr
+      %td= pay_rate.employee.name
+      %td= pay_rate.effective_date
+      %td= pay_rate.rate
+      %td= link_to 'Show', pay_rate
+      %td= link_to 'Edit', edit_pay_rate_path(pay_rate)
+      %td= link_to 'Destroy', pay_rate, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+

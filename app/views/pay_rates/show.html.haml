@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Employee:
+  = @pay_rate.employee
+%p
+  %b Effective date:
+  = @pay_rate.effective_date
+%p
+  %b Rate:
+  = @pay_rate.rate
+
+= link_to 'Edit', edit_pay_rate_path(@pay_rate)
+\|
+= link_to 'Back', pay_rates_path

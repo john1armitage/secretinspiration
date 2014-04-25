@@ -572,6 +572,40 @@ ALTER SEQUENCE options_id_seq OWNED BY options.id;
 
 
 --
+-- Name: pay_rates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE pay_rates (
+    id integer NOT NULL,
+    employee_id integer,
+    effective_date date,
+    rate_cents integer DEFAULT 0 NOT NULL,
+    rate_currency character varying(255) DEFAULT 'USD'::character varying NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: pay_rates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE pay_rates_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pay_rates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE pay_rates_id_seq OWNED BY pay_rates.id;
+
+
+--
 -- Name: receipts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -715,7 +749,8 @@ CREATE TABLE timesheets (
     end_time time without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    session character varying(255)
+    session character varying(255),
+    pay_cents integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1028,6 +1063,13 @@ ALTER TABLE ONLY options ALTER COLUMN id SET DEFAULT nextval('options_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY pay_rates ALTER COLUMN id SET DEFAULT nextval('pay_rates_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY receipts ALTER COLUMN id SET DEFAULT nextval('receipts_id_seq'::regclass);
 
 
@@ -1200,6 +1242,14 @@ ALTER TABLE ONLY options
 
 
 --
+-- Name: pay_rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY pay_rates
+    ADD CONSTRAINT pay_rates_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1318,6 +1368,13 @@ CREATE INDEX index_item_types_on_account_id ON item_types USING btree (account_i
 --
 
 CREATE INDEX index_options_on_name ON options USING btree (name);
+
+
+--
+-- Name: index_pay_rates_on_employee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_pay_rates_on_employee_id ON pay_rates USING btree (employee_id);
 
 
 --
@@ -1604,3 +1661,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140418115328');
 INSERT INTO schema_migrations (version) VALUES ('20140423093531');
 
 INSERT INTO schema_migrations (version) VALUES ('20140424143318');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425142059');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425142943');

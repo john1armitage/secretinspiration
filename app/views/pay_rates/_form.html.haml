@@ -1,0 +1,19 @@
+= form_for @pay_rate do |f|
+  - if @pay_rate.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pay_rate.errors.count, "error")} prohibited this pay_rate from being saved:"
+      %ul
+        - @pay_rate.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :employee
+    = f.collection_select :employee_id, Employee.where(live: true).order(:first_name), 'id', 'first_name', include_blank: true
+  .field
+    = f.label :effective_date
+    = f.date_field :effective_date
+  .field
+    = f.label :rate
+    = f.text_field :rate
+  .actions
+    = f.submit 'Save'

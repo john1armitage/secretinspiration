@@ -30,6 +30,9 @@
   - if allow? :employees, :index
     %li
       != link_to 'Employees', employees_path, :class => "small button radius"
+  - if allow? :pay_rates, :index
+    %li
+      != link_to 'Pay Rates', pay_rates_path, :class => "small button radius"
   - if allow? :accounts, :index
     %li
       != link_to 'Account List', accounts_path, :class => "small button radius"

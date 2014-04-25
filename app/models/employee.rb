@@ -2,6 +2,7 @@ class Employee < ActiveRecord::Base
 
   monetize :hourly_rate_cents
   has_many :timesheets
+  has_many :pay_rates
 
   def name
     first_name + " " + last_name + " "

@@ -9,13 +9,15 @@
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
   - hmrc_pay_week = HMRC_week_number(timesheet_date.beginning_of_week + 12.days)
   - week_start = week_start(timesheet_date)
+  - employee = @timesheets.first.employee.name
 #summary
   .row
     .field.large-12.columns.title
-      = params[:month].to_date.strftime('%B %Y')
-    .field.large-12.columns.sub.head
-      = @employee.name
+      = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
   - if @timesheets.size > 0
+    .row
+      .large-12.columns.head
+        = employee
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.pay.to_d
@@ -23,11 +25,10 @@
       - tips += tip
       - wages += wage
 
-      - current = week_number(timesheet.work_date)
-      - if week != current
-        .row
-          .large-12.columns.sub.head
-            = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
+      - if employee != timesheet.employee.name
+        .row.title
+          .field.large-12.columns.sub.head
+            WEEK TOTAL
         .row.title
           .field.large-3.columns.sub
             Hours
@@ -42,13 +43,16 @@
             = pounds(week_wages)
           .field.large-4.columns.number.sub
             = pounds(week_tips)
-
+        .row
+          .large-12.columns.head
+            = timesheet.employee.name
         - week = week_number(timesheet.work_date) #.to_date.strftime('%U')
         - hmrc_pay_week = HMRC_week_number(timesheet.work_date.beginning_of_week + 12.days)
         - week_start = week_start(timesheet.work_date)
         - week_hours = 0.00
         - week_wages = 0.00
         - week_tips = 0.00
+        - employee = timesheet.employee.name
       - week_hours += timesheet.hours
       - week_wages += wage
       - week_tips += tip
@@ -72,7 +76,7 @@
           = "#{pounds(tip)}"
     .row
       .large-12.columns.sub.head
-        = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
+        Total
     .row.title
       .field.large-3.columns.sub
         Hours
@@ -87,13 +91,3 @@
         = pounds(week_wages)
       .field.large-4.columns.number.sub
         = pounds(week_tips)
-  .row.title
-    .field.large-12.columns.title
-      Month Totals
-  .row
-    .field.large-3.columns
-      = hours
-    .field.large-5.columns.number
-      = "#{pounds(wages)}"
-    .field.large-4.columns.number
-      = "#{pounds(tips)}"

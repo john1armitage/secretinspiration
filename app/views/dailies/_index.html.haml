@@ -1,39 +1,7 @@
--#%p
--#  = link_to 'New Daily', new_daily_path
--#
--#%table
--#  %tr
--#    %th Account date
--#    %th Turnover
--#    %th Tips
--#    %th Heads
--#    %th Session
--#    %th
--#    %th
--#    %th
--#
--#  - @dailies.order('account_date DESC, session').each do |daily|
--#    %tr
--#      %td= daily.account_date
--#      %td= daily.turnover
--#      %td= daily.tips
--#      %td= daily.headcount
--#      %td= daily.session
--#      %td= link_to 'Show', daily
--#      %td= link_to 'Edit', edit_daily_path(daily)
--#      %td= link_to 'Destroy', daily, :method => :delete, :data => { :confirm => 'Are you sure?' }
--#
--#%br
 .row.large-12
   .calendar
     - month = @daily_date.beginning_of_month
     = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings, bookings: @bookings, orders: @orders}
-
--#- if @daily_date - 1.month >= Date.today.beginning_of_month - 24.months
--#  .row.large-12
--#    .calendar
--#      - month = @daily_date.beginning_of_month - 1.month
--#      = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_last_month, timesheets: @timesheets_last_month, openings: @openings}
 
 :coffeescript
   jQuery ->
@@ -45,5 +13,10 @@
       month = $('select#months option:selected').val()
       $.ajax
         url: "/timesheets?employee=" + event.target.value + "&month=" + month
+        dataType: 'script'
+    $('select#weeks').on "change", (event) ->
+      week = $('select#weeks option:selected').val()
+      $.ajax
+        url: "/timesheets?week=" + event.target.value
         dataType: 'script'
 

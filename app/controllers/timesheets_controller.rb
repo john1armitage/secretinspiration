@@ -3,13 +3,22 @@ class TimesheetsController < ApplicationController
 
   # GET /timesheets
   def index
-    month = params[:month].to_date
-    start = month.beginning_of_month
-    stop = month.end_of_month
-    start = start - start.strftime('%w').to_d.days
-    stop = stop + (6 - stop.strftime('%w').to_d).days
-    @employee = Employee.find(params[:employee])
-    @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+    if params[:month].present?
+      month = params[:month].to_date
+      limits = get_work_month(month).split(':')
+      start = limits[0]
+      stop = limits[1]
+      @employee = Employee.find(params[:employee])
+      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @template = 'employee'
+    elsif params[:week].present?
+      start = params[:week].to_date
+      stop = start + 7.days
+      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @template = 'payroll'
+    else
+      @timesheets = Timesheet.order('work_date DESC, session DESC, employee_id')
+    end
   end
 
   # GET /timesheets/1

@@ -1,1 +1,5 @@
-$('aside#sidebar').html("<%= escape_javascript(render :partial => 'employee') %>")
+<% if @template.present? %>
+$('aside#sidebar').html("<%= escape_javascript(render :partial => @template) %>")
+<% else %>
+$('div#content').html("<%= escape_javascript(render :partial => 'index') %>")
+<% end %>

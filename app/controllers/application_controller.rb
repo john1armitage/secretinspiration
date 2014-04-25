@@ -298,9 +298,17 @@ class ApplicationController < ActionController::Base
     Timesheet.joins(:employee).where('work_date >= ? AND work_date <= ?', start, stop ).order('work_date, session DESC, first_name').group_by(&:work_date)
   end
 
-
   def get_headcount
     Timesheet.where('work_date = ? AND session = ?', @daily.account_date, @daily.session).size
   end
+
+  def get_work_month(month)
+    start = month.beginning_of_month
+    stop = month.end_of_month
+    start = start - start.strftime('%w').to_d.days
+    stop = stop + (6 - stop.strftime('%w').to_d).days
+    "#{start}:#{stop}"
+  end
+  helper_method :get_work_month
 
 end

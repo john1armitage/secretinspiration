@@ -1,9 +1,10 @@
+- markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 #sidecast
   %p#catalogue
     %span.title
       != @broadcast.title
     %span.body
-      != truncate(@broadcast.body, length: 200, separator: ' ', omission: '... ')
+      != markdown(truncate(@broadcast.body, length: 200, separator: ' ', omission: '... '))
   - if @broadcast.blog
     %p
       = link_to 'more ...', broadcast_path(@broadcast)
