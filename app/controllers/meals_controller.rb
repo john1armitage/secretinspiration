@@ -123,7 +123,7 @@ class MealsController < ApplicationController
     end
     @order.seating = @meal.seating
     @order.effective_date = Time.now
-    @order.desc = @meal.seating_id.blank? ? "TA#{@meal.id}:#{@meal.contact}" : "#{@meal.id}:Table #{@meal.tabel_name}/#{@meal.seating.booking.pax}"
+    @order.desc = @meal.seating_id.blank? ? "#{@meal.id}:TA#{@meal.id} #{@meal.contact}" : "#{@meal.id}:Table #{@meal.tabel_name}/#{@meal.seating.booking.pax}"
     @order.seating_id = @meal.seating_id if @meal.seating
     @order.state = 'incomplete'
     @order.save

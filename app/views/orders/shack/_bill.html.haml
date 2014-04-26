@@ -1,18 +1,19 @@
 #invoice
-  #print-header.print-only
-    %table
+  #print-header
+    %table.print-only
       %tr
         %td
           %span
             Brixham's Caribbean Restaurant & Bar
           %h1
             Pepper Shack
-        %td.right
-          book@peppershack.co.uk
-          %br
-          01803 882978
-          %br
-          = "Twitter: @ShackTalk"
+        %td
+          %p.right
+            01803 882978
+            %br
+            book@peppershack.co.uk
+            %br
+            = "Twitter: @ShackTalk"
 
   %h3.no-print= "Bill #{@order.id}: #{@order.state}"
 
@@ -43,18 +44,18 @@
                 = offer_name
               %td.right
                 = humanized_money_with_symbol(amount)
+      - elsif @order.seating_id.blank?
+        %tr
+          %td
+            = "Less #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% Takeaway"
+          %td.right
+            = humanized_money_with_symbol(@order.discount)
       - else
         %tr
           %td
             Less Offer discount
           %td.right
             = humanized_money_with_symbol(@order.discount)
-    - if @order.seating_id.blank? && @order.discount > 0
-      %tr
-        %td
-          = "Less #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% Takeaway"
-        %td.right
-          = humanized_money_with_symbol(@order.discount)
 
     - if @order.discount > 0
       %tr.total
