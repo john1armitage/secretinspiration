@@ -9,7 +9,9 @@
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
   - hmrc_pay_week = HMRC_week_number(timesheet_date.beginning_of_week + 12.days)
   - week_start = week_start(timesheet_date)
-  - employee = @timesheets.first.employee.name
+  - employee = @timesheets.first.employee
+  - work_cents = get_rate_cents(employee, timesheet_date)
+
 #summary
   .row
     .field.large-12.columns.title
@@ -17,15 +19,15 @@
   - if @timesheets.size > 0
     .row
       .large-12.columns.head
-        = employee
+        = employee.name
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
-      - wage = timesheet.pay.to_d
-      - tip = ((timesheet.tips || 0.00 )/ 100.00 / timesheet.headcount.to_d)
+      - wage = timesheet.pay_cents
+      - tip = ((timesheet.tips || 0 ) / timesheet.headcount.to_d)
       - tips += tip
       - wages += wage
 
-      - if employee != timesheet.employee.name
+      - if employee.name != timesheet.employee.name
         .row.title
           .field.large-12.columns.sub.head
             WEEK TOTAL
@@ -40,9 +42,9 @@
           .field.large-3.columns.sub
             = week_hours
           .field.large-5.columns.number.sub
-            = pounds(week_wages)
+            = pounds(week_hours * work_cents / 100 )
           .field.large-4.columns.number.sub
-            = pounds(week_tips)
+            = pounds(week_tips / 100.00)
         .row
           .large-12.columns.head
             = timesheet.employee.name
@@ -52,7 +54,8 @@
         - week_hours = 0.00
         - week_wages = 0.00
         - week_tips = 0.00
-        - employee = timesheet.employee.name
+        - employee = timesheet.employee
+        - work_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
       - week_hours += timesheet.hours
       - week_wages += wage
       - week_tips += tip
@@ -71,9 +74,9 @@
         .field.large-3.columns
           = timesheet.hours
         .field.large-5.columns.number
-          = "#{pounds(wage)}"
+          = "#{pounds(wage / 100)}"
         .field.large-4.columns.number
-          = "#{pounds(tip)}"
+          = "#{pounds(tip / 100)}"
     .row
       .large-12.columns.sub.head
         Total
@@ -88,6 +91,6 @@
       .field.large-3.columns.sub
         = week_hours
       .field.large-5.columns.number.sub
-        = pounds(week_wages)
+        = pounds(week_wages / 100)
       .field.large-4.columns.number.sub
-        = pounds(week_tips)
+        = pounds(week_tips/ 100)
