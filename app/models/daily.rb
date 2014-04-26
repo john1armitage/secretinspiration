@@ -32,7 +32,7 @@ class Daily < ActiveRecord::Base
       self.booked_pax = self.pax - self.walkin_pax
     end
 
-    orders = Order.where('effective_date = ? AND session = ?', account_date, session)
+    orders = Order.where('effective_date = ? AND session = ? AND state = ?', account_date, session, 'complete')
     if orders.size > 0
       takeaways = orders.where('effective_date = ? AND session = ? AND seating_id IS NULL', account_date, session)
       orders = orders.to_a
@@ -44,16 +44,11 @@ class Daily < ActiveRecord::Base
       self.discount_cents = orders.sum(&:discount_cents)
       self.takeaway_cents = takeaways.to_a.sum(&:net_home_cents)
       self.seated_cents = self.turnover_cents - self.takeaway_cents
+    else
+      self.turnover_cents = ((take_cents.to_d - tips_cents.to_d) / (1 + CONFIG[:vat_rate_standard]).to_d).ceil
+      self.tax_cents = take_cents - ( turnover_cents + tips_cents.to_d)
     end
   end
 
 end
 
-
-# add_column :dailies, :pax, :integer
-# add_column :dailies, :booked_pax, :integer
-# add_column :dailies, :walkin_pax, :integer
-# add_column :dailies, :takeaways, :integer
-# add_money :dailies, :booked, currency: { present: false }
-# add_money :dailies, :walkin, currency: { present: false }
-# add_money :dailies, :takeaway, currency: { present: false }

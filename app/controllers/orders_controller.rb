@@ -130,7 +130,11 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   def destroy
     supplier_id = @order.supplier_id
-    @order.destroy
+    if params[:test].present?
+      @order.update_attribute(:state, 'test')
+    else
+      @order.destroy
+    end
     if supplier_id == Supplier.find_by_name(current_tenant.home_supplier ).id
       render :nothing => true
     else

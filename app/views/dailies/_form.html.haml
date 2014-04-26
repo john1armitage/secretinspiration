@@ -10,6 +10,15 @@
       .field.small-12.columns
         = f.label :credit_card, "Credit Card: #{pounds(@credit_card/100.00)}"
         = f.text_field :credit_card
+    - unless @orders && @orders.size > 0
+      .row
+        .field.small-12.columns
+          = f.label :take
+          = f.text_field :take
+      .row
+        .field.small-12.columns
+          = f.label :tips
+          = f.text_field :tips
     .row
       .field.small-12.columns.left
         = f.label :session

@@ -67,14 +67,15 @@
       Tips
     .large-6.columns.number.id
       = pounds(@daily.tips)
-  .row
-    .large-6.columns
-      Staff
-    .large-6.columns.number
-      = pax(@daily.headcount)
-  .row
-    .large-6.columns
-      Share
-    .large-6.columns.number
-      - tips = @daily.tips / @daily.headcount if @daily.headcount.to_i > 0
-      =  pounds(tips) if tips
+  - tips = @daily.tips / @daily.headcount if @daily.headcount.to_i > 0
+  - if tips
+    .row
+      .large-6.columns
+        Staff
+      .large-6.columns.number
+        = pax(@daily.headcount)
+    .row
+      .large-6.columns
+        Share
+      .large-6.columns.number
+        =  pounds(tips)

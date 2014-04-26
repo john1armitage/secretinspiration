@@ -1,17 +1,18 @@
 #invoice
   #print-header.print-only
-    .row
-      .columns.large-6
-        %h1
-          Pepper Shack
-      .columns.large-6
-        %p.sub
-          Brixham's Caribbean Restaurant & Bar
-        %p.contact
+    %table
+      %tr
+        %td
           %span
-            01803 882978
-          %span
-            book@peppershack.co.uk
+            Brixham's Caribbean Restaurant & Bar
+          %h1
+            Pepper Shack
+        %td.right
+          book@peppershack.co.uk
+          %br
+          01803 882978
+          %br
+          = "Twitter: @ShackTalk"
 
   %h3.no-print= "Bill #{@order.id}: #{@order.state}"
 

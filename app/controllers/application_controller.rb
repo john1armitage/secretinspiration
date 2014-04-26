@@ -190,11 +190,13 @@ class ApplicationController < ActionController::Base
     bookings.group_by(&:booking_date)
   end
 
-  def get_orders(date = Time.now.to_date )
+  def get_orders(date = Time.now.to_date, state = '' )
     start = date.beginning_of_month
     stop = date.end_of_month
     orders = Order.where('effective_date >= ? AND effective_date <= ? AND supplier_id = ?', start, stop, current_tenant.supplier_id)
-    orders.order(:effective_date, :id).group_by(&:effective_date)
+    orders = orders.where(state: state) unless state.blank?
+    orders.order(:effective_date, :id)
+    orders.group_by(&:effective_date)
   end
 
   def get_events(event_date)
@@ -285,7 +287,7 @@ class ApplicationController < ActionController::Base
     @timesheets_by_date = get_timesheets(start, stop)
     @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").group_by(&:work_date)
     @bookings = get_bookings(@daily_date, 'past')
-    @orders = get_orders(@daily_date)
+    @orders = get_orders(@daily_date, 'complete')
   end
   helper_method :set_daily_dates
 

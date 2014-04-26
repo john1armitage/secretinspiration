@@ -310,7 +310,8 @@ CREATE TABLE employees (
     end_date date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    live boolean DEFAULT true
+    live boolean DEFAULT true,
+    monthly boolean
 );
 
 
@@ -1665,3 +1666,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140424143318');
 INSERT INTO schema_migrations (version) VALUES ('20140425142059');
 
 INSERT INTO schema_migrations (version) VALUES ('20140425142943');
+
+INSERT INTO schema_migrations (version) VALUES ('20140426155426');

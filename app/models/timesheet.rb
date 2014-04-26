@@ -18,7 +18,7 @@ class Timesheet < ActiveRecord::Base
     else
       self.hours = hours
       rate_cents = employee.pay_rates.where('effective_date <= ?', work_date).first.rate_cents #.order(:effective_date, DESC).first
-      self.pay_cents = rate_cents ? hours * rate_cents : 0
+      self.pay_cents = rate_cents ? (hours * rate_cents) : 0
     end
   end
 
