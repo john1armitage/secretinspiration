@@ -963,6 +963,47 @@ ALTER SEQUENCE variants_id_seq OWNED BY variants.id;
 
 
 --
+-- Name: wages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE wages (
+    id integer NOT NULL,
+    "FY" integer,
+    week_no integer,
+    employee_id integer,
+    hours numeric(4,2),
+    rate_cents integer DEFAULT 0 NOT NULL,
+    gross_cents integer DEFAULT 0 NOT NULL,
+    "NI_employer_cents" integer DEFAULT 0 NOT NULL,
+    "NI_employee_cents" integer DEFAULT 0 NOT NULL,
+    "PAYE_cents" integer DEFAULT 0 NOT NULL,
+    tips_cents integer DEFAULT 0 NOT NULL,
+    paid_date date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: wages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE wages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: wages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE wages_id_seq OWNED BY wages.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1128,6 +1169,13 @@ ALTER TABLE ONLY variant_stocks ALTER COLUMN id SET DEFAULT nextval('variant_sto
 --
 
 ALTER TABLE ONLY variants ALTER COLUMN id SET DEFAULT nextval('variants_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wages ALTER COLUMN id SET DEFAULT nextval('wages_id_seq'::regclass);
 
 
 --
@@ -1323,6 +1371,14 @@ ALTER TABLE ONLY variants
 
 
 --
+-- Name: wages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY wages
+    ADD CONSTRAINT wages_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_allocations_on_order_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1418,6 +1474,13 @@ CREATE INDEX index_transfers_on_recipient_id ON transfers USING btree (recipient
 --
 
 CREATE INDEX index_variants_on_slug ON variants USING btree (slug);
+
+
+--
+-- Name: index_wages_on_employee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_wages_on_employee_id ON wages USING btree (employee_id);
 
 
 --
@@ -1668,3 +1731,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140425142059');
 INSERT INTO schema_migrations (version) VALUES ('20140425142943');
 
 INSERT INTO schema_migrations (version) VALUES ('20140426155426');
+
+INSERT INTO schema_migrations (version) VALUES ('20140427102159');

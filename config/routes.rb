@@ -1,5 +1,7 @@
 Commerce::Application.routes.draw do
 
+  resources :wages
+
   resources :pay_rates
 
   resources :offers

@@ -1,3 +1,4 @@
+#editor
 - hours = 0.00
 - wages = 0.00
 - tips = 0.00
@@ -7,10 +8,12 @@
 - if @timesheets.size > 0
   - timesheet_date = @timesheets.first.work_date
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
-  - hmrc_pay_week = HMRC_week_number(timesheet_date.beginning_of_week + 12.days)
+  - pay_day = timesheet_date.beginning_of_week + 12.days
+  - hmrc_pay_week = HMRC_week_number(pay_day)
   - week_start = week_start(timesheet_date)
+  - fy = get_fy(pay_day)
   - employee = @timesheets.first.employee
-  - work_cents = get_rate_cents(employee, timesheet_date)
+  - rate_cents = get_rate_cents(employee, timesheet_date)
 
 #summary
   .row
@@ -30,7 +33,7 @@
       - if employee.name != timesheet.employee.name
         .row.title
           .field.large-12.columns.sub.head
-            WEEK TOTAL
+            = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
         .row.title
           .field.large-3.columns.sub
             Hours
@@ -42,7 +45,7 @@
           .field.large-3.columns.sub
             = week_hours
           .field.large-5.columns.number.sub
-            = pounds(week_hours * work_cents / 100 )
+            = pounds(week_hours * rate_cents / 100 )
           .field.large-4.columns.number.sub
             = pounds(week_tips / 100.00)
         .row
@@ -55,7 +58,7 @@
         - week_wages = 0.00
         - week_tips = 0.00
         - employee = timesheet.employee
-        - work_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
+        - rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
       - week_hours += timesheet.hours
       - week_wages += wage
       - week_tips += tip
@@ -79,7 +82,7 @@
           = "#{pounds(tip / 100)}"
     .row
       .large-12.columns.sub.head
-        Total
+        = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
     .row.title
       .field.large-3.columns.sub
         Hours

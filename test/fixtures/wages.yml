@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  FY: 1
+  week_no: 1
+  employee_id: 
+  hours: 9.99
+  rate: 
+  net: 
+  NI_employer: 
+  NI_employee: 
+  PAYE: 
+  tips: MyString
+  money: MyString
+  paid_date: 2014-04-27
+
+two:
+  FY: 1
+  week_no: 1
+  employee_id: 
+  hours: 9.99
+  rate: 
+  net: 
+  NI_employer: 
+  NI_employee: 
+  PAYE: 
+  tips: MyString
+  money: MyString
+  paid_date: 2014-04-27

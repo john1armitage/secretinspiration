@@ -318,4 +318,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_rate_cents
 
+  def get_fy(date)
+    year = date.year
+    date >= "06-04-#{}".to_date ? year : year - 1
+  end
+  helper_method :get_fy
+
+
 end

@@ -52,9 +52,7 @@ class Order < ActiveRecord::Base
   scope :outgoings, ->(id) { where.not( supplier_id: id ) }
 
   def set_session
-    unless seating_id.blank?
-      self.session = Time.now > '17:00'.to_time ? 'dinner' : 'lunch'
-    end
+   self.session = (Time.now > '17:00'.to_time && Time.now < '05:00') ? 'dinner' : 'lunch'
   end
 
   def state_incomplete

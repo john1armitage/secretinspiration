@@ -1,0 +1,43 @@
+#summary
+  .row
+    .field.large-12.columns.title
+      SUMMARY
+  - unless @wages.empty?
+    -# @wages.joins(:employee).where('employees.monthly = ?', false).each do |wage|
+    - @wages.each do |wage|
+      .row
+        .large-12.columns.head
+          = wage.employee.name
+      .row
+        .large-4.columns
+          Net
+        .large-4.columns
+          Tips
+        .large-4.columns
+          Total
+      .row
+        .large-4.columns
+          - net = wage.gross - (wage.NI_employee + wage.PAYE)
+          = pounds(net)
+        .large-4.columns
+          = pounds(wage.tips)
+        .large-4.columns
+          = pounds(wage.tips + net)
+      .row
+        .large-3.columns
+          Gross
+        .large-3.columns
+          e/ee
+        .large-3.columns
+          e/er
+        .large-3.columns
+          PAYE
+      .row
+        .large-3.columns
+          = pounds(wage.gross)
+        .large-3.columns
+          = pounds(wage.NI_employee)
+        .large-3.columns
+          = pounds(wage.NI_employer)
+        .large-3.columns
+          = pounds(wage.PAYE)

@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Fy:
+  = @wage.FY
+%p
+  %b Week no:
+  = @wage.week_no
+%p
+  %b Employee:
+  = @wage.employee
+%p
+  %b Hours:
+  = @wage.hours
+%p
+  %b Rate:
+  = @wage.rate
+%p
+  %b Net:
+  = @wage.net
+%p
+  %b Ni employer:
+  = @wage.NI_employer
+%p
+  %b Ni employee:
+  = @wage.NI_employee
+%p
+  %b Paye:
+  = @wage.PAYE
+%p
+  %b Tips:
+  = @wage.tips
+%p
+  %b Money:
+  = @wage.money
+%p
+  %b Paid date:
+  = @wage.paid_date
+
+= link_to 'Edit', edit_wage_path(@wage)
+\|
+= link_to 'Back', wages_path

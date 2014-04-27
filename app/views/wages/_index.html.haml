@@ -1,0 +1,36 @@
+= link_to 'New Wage', new_wage_path
+
+%table
+  %tr
+    %th Fy
+    %th Week no
+    %th Employee
+    %th Hours
+    %th Rate
+    %th Gross
+    %th Ni employer
+    %th Ni employee
+    %th Paye
+    %th Tips
+    %th Paid date
+    %th
+    %th
+    %th
+
+  - @wages.each do |wage|
+    %tr
+      %td= wage.FY
+      %td= wage.week_no
+      %td= wage.employee.name
+      %td= wage.hours
+      %td= wage.rate
+      %td= wage.gross
+      %td= wage.NI_employer
+      %td= wage.NI_employee
+      %td= wage.PAYE
+      %td= wage.tips
+      %td= wage.paid_date
+      %td= link_to 'Show', wage
+      %td= link_to 'Edit', edit_wage_path(wage)
+      %td= link_to 'Destroy', wage, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
