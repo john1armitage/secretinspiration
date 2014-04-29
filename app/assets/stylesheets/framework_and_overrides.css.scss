@@ -1,5 +1,10 @@
 $theme: #009900;//darkslategray;//#008cba;
-$special: #3d5c2c; //#008cba;
+$theme-secret: darken(mediumpurple, 20%);
+$theme-gigiri: darken(royalblue, 20%);
+
+$special: #3d5c2c;
+$special-secret: darken(mediumpurple, 40%);
+$special-gigiri: darken(royalblue, 40%);
 
 //$shack-bg: red;
 //$secret-bg: blueviolet;
@@ -39,23 +44,6 @@ ul.inline-list a.button:hover {
   cursor: pointer;
   color: $special; //#008cba;
 }
-
-//body.shack {
-//  .top-bar {
-//    background: $shack-bg;
-//  }
-//}
-//
-//body.secret {
-//  .top-bar {
-//    background: $secret-bg;
-//  }
-//}
-//body.gigiri {
-//  .top-bar {
-//    background: $gigiri-bg;
-//  }
-//}
 
 p {
   margin-bottom: 0.5em;
@@ -120,10 +108,40 @@ div#navigation {
     margin-left: 0.4em;
   }
 }
-a {
-  color: $theme;
-  &.button {
-    font-weight: bold;
+
+body {
+  a {
+    color: $theme;
+    &.button {
+      font-weight: bold;
+      &:hover {
+        color: $special; //#008cba;
+      }
+    }
+  }
+  &.secret {
+    a {
+      color: $theme-secret;
+      &.button {
+        color: white;
+        font-weight: bold;
+        &:hover {
+          background-color: $special-secret; //#008cba;
+        }
+      }
+    }
+  }
+  &.gigiri {
+    a {
+      color: $theme-gigiri;
+      &.button {
+        color: white;
+        font-weight: bold;
+        &:hover {
+          background-color: $special-gigiri; //#008cba;
+        }
+      }
+    }
   }
 }
 

@@ -1,16 +1,19 @@
 - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 - @page = Page.find_by_code('current')
-#current
-  %h1
-    != @page.title
-  != markdown(@page.body)
-  - if @page.image == 'image'
-    .aside-image
-      != link_to image_tag("/assets/images/#{current_tenant.domain}/current.jpg")
-  - unless @page.link.blank?
-    %p
-      != link_to 'more ...', @page.link
-- unless @page.color.blank?
-  :coffeescript
-    jQuery ->
-      $('div#current').addClass( "#{@page.color}" )
+- if @page
+  #current
+    %h1
+      != @page.title
+    != markdown(@page.body)
+    - if @page.image == 'image'
+      .aside-image
+        != link_to image_tag("/assets/images/#{current_tenant.domain}/current.jpg")
+    - unless @page.link.blank?
+      %p
+        != link_to 'more ...', @page.link
+  - unless @page.color.blank?
+    :coffeescript
+      jQuery ->
+        $('div#current').addClass( "#{@page.color}" )
+- else
+  Sorry, current missing

@@ -6,11 +6,12 @@
     - if allow? :pages, :index
       %li
         = link_to 'Our News', blog_pages_path(name: 'news')
-    - if allow? :broadcasts, :index
+    - if eval("current_tenant.brixham == '1'")
       %li
         = link_to 'Around Brixham', blog_broadcasts_path(name: 'news')
       %li
         = link_to 'Events', blog_broadcasts_path(name: 'event')
+    - if eval("current_tenant.rugby == '1'")
       %li
         = link_to 'Rugby Stuff', blog_broadcasts_path(name: 'rugby')
 :coffeescript

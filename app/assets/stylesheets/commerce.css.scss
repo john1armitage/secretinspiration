@@ -1,7 +1,12 @@
 $theme: #3d5c2c;
+$theme-secret: darken(mediumpurple, 20%);
+$theme-gigiri: darken(royalblue, 30%);
 //#006600;//darkslategray;//#008cba;
 $alt: #3d5c2c;
 $link: #009900;
+$link-secret: darken(mediumpurple, 5%);
+$link-gigiri: darken(royalblue, 5%);
+
 $head-border: #009900;
 //$theme: #008cba;
 
@@ -38,6 +43,25 @@ $head-border: #009900;
   a.button {
     background-color: $link;
   }
+  body {
+    &.secret {
+      a.button {
+        background-color: $link-secret;
+      }
+      h1 {
+        background-color: $theme-secret;
+      }
+    }
+    &.gigiri {
+      a.button {
+        background-color: $link-gigiri;
+      }
+      h1 {
+        background-color: $theme-gigiri;
+      }
+    }
+  }
+
   div#flash {
     margin: 0.5em;
     margin-bottom: 1em;
@@ -220,7 +244,7 @@ $head-border: #009900;
     &.purple {
       // border-color: purple;
       h1, span.highlight {
-        background-color: mediumpurple;
+        background-color: darken(mediumpurple, 5%);
         color: white;
       }
     }
@@ -332,6 +356,70 @@ $head-border: #009900;
         a {
           background-color: $link;
           color: white;
+        }
+      }
+    }
+  }
+  body {
+    &.secret {
+      ul.blog {
+        h1 {
+          background-color: darken($theme-secret, 0%);
+        }
+      }
+      ul#catalogue li p.header {
+        background-color: lighten($theme-secret, 40%);
+      }
+      div#menu {
+        li {
+          background-color: #e0eeee; //#d3d3d3;
+          color: $link-secret;
+          a {
+            color: $link-secret;
+            //          background-color: lighten($link-secret, 20%);
+          }
+          &:hover {
+            a {
+              background-color: lighten($link-secret, 30%);
+            }
+          }
+          &.active {
+            a {
+              color: white;
+              background-color: $link-secret;
+            }
+          }
+        }
+      }
+    }
+    &.gigiri {
+      ul#catalogue li p.header {
+        background-color: lighten($theme-gigiri, 40%);
+      }
+      ul.blog {
+        h1 {
+          background-color: darken($theme-gigiri, 0%);
+        }
+      }
+      div#menu {
+        li {
+          background-color: #e0eeee; //#d3d3d3;
+          color: $link-gigiri;
+          a {
+            color: $link-gigiri;
+            //          background-color: lighten($link-secret, 20%);
+          }
+          &:hover {
+            a {
+              background-color: lighten($link-gigiri, 30%);
+            }
+          }
+          &.active {
+            a {
+              color: white;
+              background-color: $link-gigiri;
+            }
+          }
         }
       }
     }
