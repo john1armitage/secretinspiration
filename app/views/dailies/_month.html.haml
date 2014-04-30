@@ -1,4 +1,4 @@
-- months = get_months((Date.today.beginning_of_month - 2.year), 24).reverse
+- months = get_months((Date.today.beginning_of_month - 2.year), 25).reverse
 - no_content= params[:no_content].present? ? 'no_content' : ''
 - weeks = get_weeks(month)
 %p
@@ -13,7 +13,7 @@
     = date.day
     - if date <= Date.today
       = link_to 'Daily', new_daily_path(date: date.to_s), class: 'no_ajaxify', remote: true
-      = link_to 'Timesheet', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
+    = link_to 'Timesheet', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
 
     - if dailies[date]
       - dailies[date].each do |daily|

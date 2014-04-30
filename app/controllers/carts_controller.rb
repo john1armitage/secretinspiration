@@ -6,7 +6,7 @@ class CartsController < ApplicationController
 
   def index
     if params[:cart_id].present?
-      @page = Page.find_by_code('catalogue')
+      @page = Page.find_by_code(current_tenant.default_category)
     elsif params[:code].present?
       @page = Page.find_by_code(params[:code])
     end

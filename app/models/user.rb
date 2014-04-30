@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_one :cart
+  has_many :carts
 
   has_many :pages
 

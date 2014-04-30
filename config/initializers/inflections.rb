@@ -13,9 +13,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'headwear', 'headwear'
   inflect.irregular 'Food', 'Food'
   inflect.irregular 'Scented', 'Scented'
-  inflect.irregular 'Art', 'Art'
-  inflect.irregular 'Stuff', 'Stuff'
+  #inflect.irregular 'Art', 'Art'      # messes up cart schema!!
   inflect.irregular 'Fibre', 'Fibre'
+  inflect.irregular 'catalogue', 'catalogue'
   inflect.uncountable %w(jewellery sundry art stuff)
 end
 

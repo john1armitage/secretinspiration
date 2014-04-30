@@ -6,7 +6,7 @@
   %article
     - unless @page.title == 'blank'
       %h1
-        = @page.title
+        = markdown(@page.title)
     .row
       - if @page.image.blank?
         .large-12.columns

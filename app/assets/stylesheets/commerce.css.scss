@@ -1,6 +1,6 @@
 $theme: #3d5c2c;
-$theme-secret: darken(mediumpurple, 20%);
-$theme-gigiri: darken(royalblue, 30%);
+$theme-secret: darken(mediumpurple, 15%);
+$theme-gigiri: darken(royalblue, 15%);
 //#006600;//darkslategray;//#008cba;
 $alt: #3d5c2c;
 $link: #009900;
@@ -188,7 +188,7 @@ $head-border: #009900;
   }
   #test2, #test3 {
     &.red {
-      background-color: red;
+      background-color: lighten(red, 20%);
     }
     &.blue {
       background-color: blue;
@@ -237,7 +237,7 @@ $head-border: #009900;
     &.red {
       // border-color: red;
       h1, span.highlight {
-        background-color: red;
+        background-color:  lighten(red, 5%);
         color: white;
       }
     }
@@ -483,13 +483,14 @@ $head-border: #009900;
     }
     font-weight: bold;
   }
-
+  span.bold {
+    font-weight:bold;
+  }
   ul#catalogue {
     li {
       margin-left: -0.5em;
       span.title {
         font-weight: bold;
-        //      margin-left: -0.75em;
       }
       span.notes {
         color: darkslategray;
