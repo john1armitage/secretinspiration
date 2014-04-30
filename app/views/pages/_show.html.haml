@@ -6,12 +6,11 @@
   %article
     - unless @page.title == 'blank'
       %h1
-        = markdown(@page.title)
+        = markdown(embolden(@page.title))
     .row
       - if @page.image.blank?
         .large-12.columns
-          %h2
-            = @page.sub
+          = markdown(embolden(@page.sub))
           = markdown(@page.body)
         - unless @page.link.blank?
           .row
@@ -31,8 +30,7 @@
                 %li
                   %img{alt: "slide 1", src: "/assets/images/#{current_tenant.domain}/#{@page.code}-#{image}.jpg"}
         .large-6.columns.pull-6
-          %h2
-            = @page.sub
+          = markdown(embolden(@page.sub))
           = markdown(@page.body)
     .two-column.show-for-large-up
       .row

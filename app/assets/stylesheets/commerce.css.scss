@@ -285,7 +285,7 @@ $head-border: #009900;
     article {
       h1 {
         font-size: 1.5rem;
-        padding: 0.1em 0em 0.2em 0.5em;
+        padding: 0.3em 0em 0.1em 0.5em;
         background-color: $theme; /* ##008cba */
         color: white;
         //        border-top: 3px solid $head-border;
@@ -304,6 +304,7 @@ $head-border: #009900;
         font-size: 0.85em;
         text-align: justify;
         line-height: 1.3rem;
+        margin-bottom: 0.3em;
       }
     }
   }
