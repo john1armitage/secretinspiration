@@ -477,12 +477,19 @@ $head-border: #009900;
   input {
     &.wide {
       width: 98%;
-      text-align: left;
+      text-align: center;
     }
     &.semi {
       width: 47%;
     }
     font-weight: bold;
+  }
+  div.store-variant {
+    input {
+      &.wide {
+        text-align: center;
+      }
+    }
   }
   span.bold {
     font-weight:bold;
@@ -497,8 +504,24 @@ $head-border: #009900;
         color: darkslategray;
         font-size: 0.9em;
       }
+
       div.store-variant {
+        margin-top: 0em;
+        margin-left: 0em;
+        display: block;
+        float: left;
+        form, div {
+          display: inline;
+        }
         border: 1px solid white;
+        width:100%;
+        img {
+          margin:0 auto;
+          display: block;
+        }
+        input.wide {
+          text-align: center;
+        }
       }
       p {
         padding: 0.2em;
@@ -647,19 +670,6 @@ $head-border: #009900;
   //  }
   //}
 
-  div.store-variant {
-    margin-top: 0em;
-    margin-left: 0em;
-    //  margin-bottom: 0.8em;
-    display: block;
-    float: left;
-    form, div {
-      display: inline;
-    }
-    img {
-      display: inline;
-    }
-  }
   div.catalogue_variant {
     margin-left: 100px;
     margin-top: 0.5em;
