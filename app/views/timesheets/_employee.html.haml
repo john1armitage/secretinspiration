@@ -4,6 +4,7 @@
 - week_hours = 0.00
 - week_wages = 0.00
 - week_tips = 0.00
+- month = params[:month].to_date.strftime('%B')
 - if @timesheets.size > 0
   - timesheet_date = @timesheets.first.work_date
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
@@ -19,9 +20,10 @@
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.pay.to_d
-      - tip = ((timesheet.tips || 0.00 )/ 100.00 / timesheet.headcount.to_d)
-      - tips += tip
-      - wages += wage
+      - tip = (timesheet.session == 'bonus' ? 0 : ((timesheet.tips || 0.00 )/ 100.00 / timesheet.headcount.to_d))
+      - if timesheet.work_date.to_date.strftime('%B')
+        - tips += tip
+        - wages += wage
 
       - current = week_number(timesheet.work_date)
       - if week != current
@@ -89,7 +91,7 @@
         = pounds(week_tips)
   .row.title
     .field.large-12.columns.title
-      Month Totals
+      = "#{month} Totals"
   .row
     .field.large-3.columns
       = hours

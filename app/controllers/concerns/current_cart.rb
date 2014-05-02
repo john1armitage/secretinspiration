@@ -25,9 +25,14 @@ module CurrentCart
 
   def set_cart
     if params[:cart_id].present?
+      cart_id = params[:cart_id]
+    elsif session[:cart_id].present?
+      cart_id = session[:cart_id]
+    end
+    if cart_id
       # @page = Page.find_by_code('catalogue')
       begin
-        @cart = Cart.find(params[:cart_id])
+        @cart = Cart.find(cart_id)
       rescue  ActiveRecord::RecordNotFound
         get_user_cart
       end

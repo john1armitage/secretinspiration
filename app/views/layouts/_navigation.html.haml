@@ -30,7 +30,7 @@
         - if eval("current_tenant.#{component} == '1'")
           %li
             != link_to make_title(component.pluralize), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'
-      - if current_tenant.cart == '1' && !current_user.id.blank?
+      - if current_tenant.cart == '1'
         %li
           != link_to 'Wishes', carts_path(code: 'jewellery'), class: 'no_ajaxify button radius', remote: true
       %li

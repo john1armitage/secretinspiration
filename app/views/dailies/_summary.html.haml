@@ -17,6 +17,7 @@
 - week = week_number(@daily_date) #.to_date.strftime('%U')
 - hmrc_pay_week = HMRC_week_number(@daily_date.beginning_of_week + 12.days)
 - week_start = week_start(@daily_date)
+- month = @daily_date.to_date.strftime('%B')
 #editor
 #display
 #summary
@@ -78,11 +79,12 @@
     - tips_week += daily.tips.to_d
     - turnover_week += daily.turnover.to_d
     - tax_week += daily.tax.to_d
-    - takes_month += daily.take.to_d
-    - credit_cards_month += daily.credit_card.to_d
-    - tips_month += daily.tips.to_d
-    - turnover_month += daily.turnover.to_d
-    - tax_month += daily.tax.to_d
+    - if daily.account_date.to_date.strftime('%B') == month
+      - takes_month += daily.take.to_d
+      - credit_cards_month += daily.credit_card.to_d
+      - tips_month += daily.tips.to_d
+      - turnover_month += daily.turnover.to_d
+      - tax_month += daily.tax.to_d
   .row
     .large-12.columns.id
       = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
@@ -120,7 +122,7 @@
 
   .row
     .large-12.columns.title
-      = "Month Totals"
+      = "#{month} Totals"
       =# "W/b #{daily.account_date.beginning_of_week(:sunday).strftime('%d-%m-%y')}" #"Week #{week}"
   .row
     .large-6.columns

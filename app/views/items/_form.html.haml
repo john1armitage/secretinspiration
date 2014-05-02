@@ -12,15 +12,19 @@
         = f.label :rank
         = f.text_field :rank
       .field.small-2.columns.left
-        = f.label :withdrawn, 'ex'
-        = f.check_box :withdrawn #, :class => 'block'
-      .field.small-2.columns.left
-        = f.label :available, 'in'
-        = f.check_box :available
-      .field.small-2.columns.left
         = f.label :product_flow
         = collection_select(:item, :product_flow,
           Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
+    .row
+      .field.small-2.columns.left
+        = f.label :withdrawn
+        = f.check_box :withdrawn #, :class => 'block'
+      .field.small-2.columns.left
+        = f.label :available, 'in stock'
+        = f.check_box :available
+      .field.small-2.columns.left
+        = f.label :unique
+        = f.check_box :unique
     .row
       .field.small-3.columns
         = f.label :category, 'Category'

@@ -4,8 +4,8 @@
   %li.title
     %span
       Wishes
-      = current_user.carts.first.id
-    - unless !current_user.carts || @cart.id == current_user.carts.first.id
+      = @cart.id
+    - if allow? :carts, :destroy
       != link_to 'X', cart_path( @cart, cart_id: @cart.id), method: :delete, remote: true, class: 'no_ajaxify',
         data: { confirm: 'Delete?'}, title: "Delete Cart"
     - unless @cart.line_items.empty?

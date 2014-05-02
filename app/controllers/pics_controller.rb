@@ -9,6 +9,7 @@ class PicsController < ApplicationController
     @pic = Pic.new
     @pic.viewable_type="Variant"
     @pic.viewable_id = params[:variant_id].to_i
+    @pic.name = params[:name].gsub(/_/, ' ') if params[:name]
   end
 
   # GET /pics/1

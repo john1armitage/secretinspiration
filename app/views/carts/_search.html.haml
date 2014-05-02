@@ -8,7 +8,7 @@
   jQuery ->
     $('div#search a.button').on "click", (event) ->
       $.get
-      $id = $(this).parent().siblings().find('input').val()
+      $id = $(this).parent().siblings().find('input').val().replace(/\D/g,'')
       if $.isNumeric($id)
         $.get( '/carts?cart_id=' + $id )
       else

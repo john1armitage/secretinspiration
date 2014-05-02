@@ -33,8 +33,10 @@ class Cart < ActiveRecord::Base
   end
 
   def add_variant( current_item )
-    current_item.quantity += 1
-    calculate_totals(current_item)
+    unless current_item.variant.item.unique
+      current_item.quantity += 1
+      calculate_totals(current_item)
+    end
     current_item
   end
 
