@@ -30,7 +30,8 @@ class PicsController < ApplicationController
     @pic = Pic.new(pic_params)
 
     if @pic.save
-      redirect_to pics_url(:variant_id => @pic.viewable.id), notice: 'Pic was successfully created.'
+#      redirect_to pics_url(:variant_id => @pic.viewable.id), notice: 'Pic was successfully created.'
+      redirect_to choice_url(id: @pic.viewable.item.category.parent.name), notice: 'Pic was successfully created.'
     else
       render action: 'new'
     end
