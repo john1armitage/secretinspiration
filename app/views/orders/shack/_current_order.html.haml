@@ -16,6 +16,8 @@
     %span.title
       Paid
     %span
+      - current_order.paid ||= 0
+      - current_order.tip ||= 0
       = pounds(current_order.paid + current_order.tip)
     - if allow? :orders, :delete
       %span.title

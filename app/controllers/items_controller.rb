@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     item_type = @item.item_type.name
-    @items.variants.where("item_id = ? AND domain = ?", @item_id, current_tenant.domain).destroy
+    @items.variants.where("item_id = ? AND domain = ?", @item_id, current_tenant.domain).destroy_all
     @item.destroy
     redirect_to choice_url( item_type ), notice: 'Item was successfully updated.'
   end

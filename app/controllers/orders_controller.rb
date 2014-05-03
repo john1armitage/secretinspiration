@@ -121,6 +121,7 @@ class OrdersController < ApplicationController
     if params[:status].present?
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
+      params[:order][:tip] ||= 0
       @order.update(params[:order])
     end
     set_booking_dates
