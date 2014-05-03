@@ -41,6 +41,8 @@
       %span.title
         = item.name
       %span
+        - p 'DDDDDDDDDDDDD'
+        - p item
         = 'Sorry, available soon' unless default.first.item.available
       - if (allow? :line_items, :create) && !item.notes.blank?
         %span.has-tip{"data-tooltip" => "", title: item.notes}

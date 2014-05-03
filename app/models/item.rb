@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   monetize :price_cents, :allow_nil => true
 
-  has_many :variants, :dependent => :destroy
+  has_many :variants #, :dependent => :destroy
 
   belongs_to :item_type
   belongs_to :category

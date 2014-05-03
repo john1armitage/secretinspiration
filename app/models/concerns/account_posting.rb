@@ -2,8 +2,6 @@ module AccountPosting
   extend ActiveSupport::Concern
   private
   def create_posting(postable_type, postable_id, credit, amount, account_id, accountable_type, accountable_id, contra, posting_date)
-    p "Account #{accountable_type} amount #{amount} credit #{credit}"
-    p "Account #{account_id}"
     post = Posting.new
     post.event_date = posting_date
     post.postable_type = postable_type
@@ -16,7 +14,6 @@ module AccountPosting
     post.account_id = account_id
     post.accountable_type = accountable_type
     post.accountable_id = accountable_id
-    p post
     post.save
   end
 end

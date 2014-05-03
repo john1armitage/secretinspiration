@@ -133,6 +133,8 @@ class OrdersController < ApplicationController
     if params[:test].present?
       @order.update_attribute(:state, 'test')
     else
+      # @items.variants.where("item_id = ? AND domain = ?", @item_id, current_tenant.domain).destroy
+      @order.line_items.where(ownable_type: 'Order', ownable_id: @order.id, domain: current_tenant.domain).destroy_all
       @order.destroy
     end
     if supplier_id == Supplier.find_by_name(current_tenant.home_supplier ).id

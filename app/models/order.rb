@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   monetize :discount_cents, :allow_nil => true
   monetize :credit_card_cents, :allow_nil => true
 
-  has_many :line_items, as: :ownable, dependent: :destroy
+  has_many :line_items, as: :ownable #, dependent: :destroy
   has_many :allocations, dependent: :destroy
   has_many :payments, through: :allocations
   has_many :depreciations
@@ -34,6 +34,7 @@ class Order < ActiveRecord::Base
 
   before_validation :check_account
   before_create :set_session
+
   #before_validation :get_totals
 
   #accepts_nested_attributes_for :line_items, :reject_if =>  proc { |att| att['variant_name'].blank? and att['desc'].blank? },
