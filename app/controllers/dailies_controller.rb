@@ -3,7 +3,11 @@ class DailiesController < ApplicationController
 
   # GET /dailies
   def index
-    set_daily_dates
+    if params[:balance].present?
+      render 'balance'
+    else
+      set_daily_dates
+    end
   end
 
   # GET /dailies/1

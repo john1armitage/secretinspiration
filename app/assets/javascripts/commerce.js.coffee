@@ -69,3 +69,8 @@ jQuery ->
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')
     $('input#variant_id').val(variant)
+
+  $(document).on "change", 'select#balance', (event) ->
+    $.ajax
+      url: "/dailies?calendar=false&balance=true&daily_date=" + event.target.value
+      dataType: 'script'

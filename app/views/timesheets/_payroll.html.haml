@@ -26,7 +26,7 @@
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.pay_cents
-      - tip = ((timesheet.tips || 0 ) / timesheet.headcount.to_d)
+      - tip = ((timesheet.tips || 0 ) / (timesheet.headcount || 1))
       - tips += tip
       - wages += wage
 

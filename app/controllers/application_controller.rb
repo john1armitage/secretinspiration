@@ -324,5 +324,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_fy
 
+  def get_balance(date)
+    limits = get_work_month(date).split(':')
+    start = limits[0]
+    stop = limits[1]
+    stop = Date.today.strftime('%Y-%m-%d') if stop.to_date > Date.today
+    Order.where("effective_date >= ? AND effective_date <= ? AND state = ?", start, stop, 'test' ).order(:effective_date)
+  end
+  helper_method :get_balance
 
 end

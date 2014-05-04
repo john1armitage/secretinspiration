@@ -31,3 +31,8 @@
   - if allow? :item_fields, :index
     %li
       != link_to 'Item Fields', item_fields_path, :class => "small button radius"
+  - if allow? :dailies, :delete
+    - months = get_months((Date.today.beginning_of_month - 2.year), 25).reverse
+    %li
+      =# select_tag 'balance', options_for_select(months, Date.today.beginning_of_month)
+      != link_to 'Test', dailies_path(daily_date: Date.today.beginning_of_month, calendar: false, balance: true), :class => "small button radius no_ajaxify", remote: true

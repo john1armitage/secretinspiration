@@ -1,0 +1,54 @@
+- @daily_date = params[:daily_date].to_date
+- months = get_months((Date.today.beginning_of_month - 2.year), 25).reverse
+- @orders = get_balance(@daily_date)
+#summary
+  .row
+    .field.large-12.columns.title
+      = select_tag 'balance', options_for_select(months, @daily_date)
+  - if @orders.size > 0
+    - first_day = @orders.first.effective_date
+    - week = HMRC_week_number(first_day)
+    - week_total = 0
+    - total = 0
+    .row
+      .field.large-12.columns.title
+        = HMRC_week_number(first_day)
+    - @orders.each do |order|
+      - current = HMRC_week_number(order.effective_date)
+      - if week != current
+        .row
+          .field.large-6.columns.number
+            Week
+          .field.large-6.columns.number
+            = pounds(week_total/100)
+        - week = current
+        - total += week_total
+        - week_total = 0
+        .row
+          .field.large-12.columns.title
+            = current
+      - week_total += order.paid_cents
+      .row
+        .field.large-6.columns.number
+          = order.effective_date.strftime('%a %e')
+        .field.large-6.columns.number
+          = pounds(order.paid)
+    - total += week_total
+    .row
+      .field.large-6.columns.number
+        Week
+      .field.large-6.columns.number
+        = pounds(week_total/100)
+    .row
+      .field.large-12.columns.title
+        = '+'
+    .row
+      .field.large-12.columns.number
+        = pounds(total/100)
+  - else
+    .row
+      .field.large-12.columns.title
+        = "nil"
+  .row
+    .field.large-12.columns.title
+      = link_to 'Summary', dailies_url(calendar: false, daily_date: @daily_date.to_date.strftime('%Y-%m-%d'), link: true), class: 'no_ajaxify', remote: 'true'

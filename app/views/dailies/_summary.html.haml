@@ -11,10 +11,7 @@
 - tips_month = 0.00
 - turnover_month = 0.00
 - tax_month = 0.00
--#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
--#- fy_start = fy_start - 1.year if fy_start > @daily_date#.strftime('%U')
--# week = ((@daily_date.to_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
-- week = week_number(@daily_date) #.to_date.strftime('%U')
+- week = week_number(@daily_date)
 - hmrc_pay_week = HMRC_week_number(@daily_date.beginning_of_week + 12.days)
 - week_start = week_start(@daily_date)
 - month = @daily_date.to_date.strftime('%B')
@@ -24,15 +21,13 @@
   .row
     .field.large-12.columns.title
       = @daily_date.to_date.strftime('%B %Y')
-      =# week
   - @dailies.order(:account_date).each do |daily|
 
-    -# hmrc_current = ((daily.account_date - fy_start)/7).to_i + 1 #.strftime('%U').to_i
     - current = week_number(daily.account_date)
     - if week != current
       .row
         .large-12.columns.id
-          = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
+          = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
       .row
         .large-6.columns
           Take
@@ -69,8 +64,6 @@
       - tips_week = 0.00
       - turnover_week = 0.00
       - tax_week = 0.00
-      -#- fy_start = "06-04-#{Date.today.year}".to_date #Date.today #.month(5) #.day(4)    '06-04'.to_date
-      -#- fy_start = fy_start - 1.year if fy_start > daily.account_date#.strftime('%U')
       - week = current
       - hmrc_pay_week = HMRC_week_number(daily.account_date.beginning_of_week + 12.days)
       - week_start = week_start(daily.account_date) #.account_date.beginning_of_week.strftime('%d-%m-%y')
@@ -88,7 +81,6 @@
   .row
     .large-12.columns.id
       = "W/b #{week_start} (HMRC #{hmrc_pay_week})"
-      =# "W/b #{daily.account_date.beginning_of_week(:sunday).strftime('%d-%m-%y')}" #"Week #{week}"
   .row
     .large-6.columns
       Take
@@ -122,8 +114,10 @@
 
   .row
     .large-12.columns.title
-      = "#{month} Totals"
-      =# "W/b #{daily.account_date.beginning_of_week(:sunday).strftime('%d-%m-%y')}" #"Week #{week}"
+      - if (allow? :dailies, :destroy) && params[:link].present?
+        = link_to "#{month} Totals", dailies_url(calendar: false, daily_date: @daily_date.to_date.strftime('%Y-%m-%d'), balance: true), class: 'no_ajaxify', remote: 'true'
+      - else
+        = "#{month} Totals"
   .row
     .large-6.columns
       Take
