@@ -68,6 +68,7 @@
       %tr
         %td
           %span
+            = "Table #{@order.seating.tabel.name}" if @order.seating
             = "Order #{@order.id}"
           %span.no-print
             = "(#{@order.state})"
