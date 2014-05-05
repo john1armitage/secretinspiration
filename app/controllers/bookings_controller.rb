@@ -76,6 +76,9 @@ class BookingsController < ApplicationController
     set_session
     if @booking.update(params[:booking])
       set_booking_dates
+      if !@booking.email.blank? && @booking.previous_changes[:confirmed].present? && @booking.confirmed
+        BookingMailer.booking_conf(@booking, current_tenant, params[:notes]).deliver
+      end
       render 'index'
     else
       get_tables

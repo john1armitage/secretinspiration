@@ -9,4 +9,11 @@ class BookingMailer < ActionMailer::Base
     mail to: email, :subject => "Pepper Shack request: #{booking.booking_date.strftime('%e-%b-%y')}"
   end
 
+  def booking_conf(booking, current_tenant, notes)
+    @booking = booking
+    @notes = notes
+    @current_tenant = current_tenant
+    email = booking.email.blank? ? [CONFIG[:mail_sender]] : booking.email
+    mail to: email, :subject => "Pepper Shack Booking Confirmed: #{booking.booking_date.strftime('%e-%b-%y')}"
+  end
 end

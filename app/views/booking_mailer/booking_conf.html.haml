@@ -1,8 +1,8 @@
 %p
-  Hi
+  Hi again
 
 %p
-  We have received your booking:
+  We're pleased to confirm your booking:
 
 %p
   %i
@@ -26,13 +26,14 @@
       %i
         = "'#{@booking.notes}'"
 
+- unless @notes.blank?
+  %p
+    %span
+      = @notes
+
 %p
-  - if @total_booked <= @current_tenant.capacity
-    %span
-      Thanks, we'll get back to you to confirm but looks fine!
-  -else
-    %span
-      Thanks, we'll check the booking and get back to you.
+  %span
+    Thanks, see you soon!
 
 %p
   %i
