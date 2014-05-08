@@ -8,6 +8,7 @@ gem 'pg'
 #gem 'apartment'
 gem 'pg_array_parser'
 #gem 'activerecord-postgres-hstore'
+gem 'node'
 
 gem 'haml'
 gem 'haml-rails'

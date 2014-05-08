@@ -5,7 +5,7 @@
         Your takeaway order has been received
         = "TA#{@meal.id} for #{@meal.start_time.strftime('%H:%M')}"
       - elsif @meal.seating_id.blank?
-        = "Takeaway #{@meal.id} at #{Time.now.strftime('%H:%M')} [Pick-up: #{@meal.arrival.strftime('%H:%M')}, #{@meal.contact}]"
+        = "Takeaway #{@meal.id} at #{Time.now.strftime('%H:%M')} [Pick-up: #{@meal.start_time.strftime('%H:%M')}, #{@meal.contact}]"
       - else
         Table
         = @meal.tabel_name
