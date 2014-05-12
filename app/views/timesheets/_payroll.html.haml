@@ -45,7 +45,7 @@
           .field.large-3.columns.sub
             = week_hours
           .field.large-5.columns.number.sub
-            = pounds(week_hours * rate_cents / 100 )
+            = pounds(week_hours * rate_cents / 100.00 )
           .field.large-4.columns.number.sub
             = pounds(week_tips / 100.00)
         .row
@@ -77,9 +77,9 @@
         .field.large-3.columns
           = timesheet.hours
         .field.large-5.columns.number
-          = "#{pounds(wage / 100)}"
+          = "#{pounds(wage / 100.00)}"
         .field.large-4.columns.number
-          = "#{pounds(tip / 100)}"
+          = "#{pounds(tip / 100.00)}"
     .row
       .large-12.columns.sub.head
         = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'

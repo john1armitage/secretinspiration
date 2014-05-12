@@ -14,7 +14,7 @@ class TimesheetsController < ApplicationController
       @template = 'employee'
     elsif params[:week].present?
       start = params[:week].to_date
-      stop = start + 7.days
+      stop = start + 6.days
       stop = Date.today if stop.to_date > Date.today
       @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
       @template = 'payroll'
