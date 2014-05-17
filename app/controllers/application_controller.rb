@@ -283,6 +283,7 @@ class ApplicationController < ActionController::Base
     stop = @daily_date.end_of_month
     start = start - start.strftime('%w').to_d.days
     stop = stop + (6 - stop.strftime('%w').to_d).days
+    #@daily_date = start
     @dailies_by_date = get_dailies(start, stop)
     @timesheets_by_date = get_timesheets(start, stop)
     @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").group_by(&:work_date)

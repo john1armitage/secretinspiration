@@ -1,0 +1,10 @@
+:coffeescript
+  jQuery ->
+    enchant()
+    game = new Core(320, 320)
+    game.onload = ->
+      sign = new Label()
+      sign.text = "Hello World!"
+      game.rootScene.addChild sign
+      return
+    game.start()

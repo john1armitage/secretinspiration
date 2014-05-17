@@ -124,6 +124,7 @@ Commerce::Application.routes.draw do
   end
   get 'choices', to: 'choices#index'
   get 'welcome', to: 'welcome#index'
+  get 'enchant', to: 'enchant#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

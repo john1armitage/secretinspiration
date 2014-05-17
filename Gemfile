@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.2'
+gem 'rails', '> 4.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -13,7 +13,7 @@ gem 'node'
 gem 'haml'
 gem 'haml-rails'
 
-gem 'sass-rails', '~> 4.0.1'
+gem 'sass-rails', '>= 4.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails' , '~> 4.0.1'
 gem 'foundation-rails'
@@ -23,7 +23,11 @@ gem 'jquery-rails'
 gem 'jquery-fileupload-rails'
 gem 'jquery-ui-rails'
 gem 'foundation-datetimepicker-rails'
-gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => '4-0-beta'
+
+# Broke with Rails 4.1
+#gem 'client_side_validations', :git => 'git://github.com/bcardarella/client_side_validations.git', :branch => '4-0-useable'
+gem "parsley-rails"
+
 gem "select2-rails"
 #gem 'jquery-turbolinks'
 
@@ -64,7 +68,12 @@ gem 'faraday_middleware'
 
 gem 'money-historical-bank'
 
-gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
+#gem "polyamorous", :github => "activerecord-hackery/polyamorous"
+
+# rails 4.1 upgrade fixes
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+gem 'sprockets', '2.11.0'
+#gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 
 #gem "google_currency"
 
