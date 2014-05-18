@@ -433,7 +433,7 @@ $head-border: #009900;
       color: red;
     }
   }
-  ul#order {
+  ul#order, ul#order-pad {
     form {
       .columns {
         padding: 0;
@@ -544,7 +544,7 @@ $head-border: #009900;
       background-color: paleturquoise;
     }
   }
-  ul#cart, ul#meal, ul#order, ul.menu-item, ul.aside, ul.takeaway {
+  ul#cart, ul#meal, ul#order, ul#order-pad, ul.menu-item, ul.aside, ul.takeaway {
     font-size: 0.8em;
     clear: both;
     li.title {
@@ -569,7 +569,7 @@ $head-border: #009900;
       font-size: 0.8em;
     }
   }
-  ul#cart, ul#meal, ul#order, ul.aside {
+  ul#cart, ul#meal, ul#order, ul#order-pad, ul.aside {
     background-color: #e0eeee;
     border: 1px solid darkslategray;
     li {
