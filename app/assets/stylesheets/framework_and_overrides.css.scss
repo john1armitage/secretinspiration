@@ -236,4 +236,9 @@ body {
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif; //'OpenSans-Regular', Arial, sans-serif;
   text-rendering: optimizeLegibility;
   color: #333;
+  &#monitor {
+    .row {
+      max-width: inherit;
+    }
+  }
 }

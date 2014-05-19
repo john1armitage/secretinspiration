@@ -21,12 +21,12 @@
   - if allow? :banks, :index
     %li
       != link_to 'Banks', banks_path, :class => "small button radius"
-  - if allow? :dailes, :index
-    %li
-      != link_to 'Dailies', dailies_path, :class => "small button radius", remote: true, class: 'no_ajaxify'
-  - if allow? :timesheets, :index
-    %li
-      != link_to 'Timesheets', timesheets_path, :class => "small button radius"
+  -#- if allow? :dailes, :index
+  -#  %li
+  -#    != link_to 'Dailies', dailies_path, :class => "small button radius", remote: true, class: 'no_ajaxify'
+  -#- if allow? :timesheets, :index
+  -#  %li
+  -#    != link_to 'Timesheets', timesheets_path, :class => "small button radius"
   - if allow? :wages, :index
     %li
       != link_to 'Wages', wages_path, :class => "small button radius"

@@ -6,6 +6,10 @@
       - if allow? :items, :index
         %li#admin
           != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
+      - if allow? :meals, :index
+        %li#admin
+          != link_to 'M', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
+
       - if allow? :users, :new
         %li
           != link_to "Register", signup_path

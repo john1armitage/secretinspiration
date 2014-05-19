@@ -569,6 +569,13 @@ $head-border: #009900;
       font-size: 0.8em;
     }
   }
+  ul.side-nav {
+    li {
+      a {
+        width: 100%;
+      }
+    }
+  }
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.aside {
     background-color: #e0eeee;
     border: 1px solid darkslategray;

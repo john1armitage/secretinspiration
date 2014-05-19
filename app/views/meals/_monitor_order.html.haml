@@ -1,0 +1,8 @@
+%ul#tabel
+  - unless @meal.notes.blank?
+    %li
+      %span.head
+        = "*** #{@meal.notes} ***"
+  - @course = ''
+  - line_items = @meal.line_items.joins( {variant: { item: {category: :root } } }).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
+  = render partial: 'meals/monitor_line_item', collection: line_items

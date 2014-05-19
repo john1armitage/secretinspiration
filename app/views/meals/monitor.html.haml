@@ -1,0 +1,5 @@
+%ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+  = render partial: 'meal_order', collection: @meals
+- if @takeaways.size > 0
+  %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+    = render partial: 'meal_order', collection: @takeaways

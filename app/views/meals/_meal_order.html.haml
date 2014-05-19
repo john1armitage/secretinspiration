@@ -1,0 +1,25 @@
+- line_items = meal_order.line_items.joins( {variant: { item: {category: :root } } }).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
+- if line_items.size > 0
+  %li.tabel
+    -if meal_order.seating_id.to_i == 0
+      %span.head
+        = "Takeaway "
+      %span
+        = "for #{meal_order.contact} (#{meal_order.id})"
+      %span.head
+        = "at #{meal_order.start_time.strftime('%H:%M')}"
+    - else
+      %span.head
+        Table
+        = meal_order.tabel_name
+      %span
+        = " (#{pluralize( meal_order.seating.booking.pax, 'person')})"
+    %ul#tabel
+      - unless meal_order.notes.blank?
+        %li
+          %span.head
+            = "*** #{meal_order.notes} ***"
+      - @course = ''
+      = render partial: 'meals/monitor_line_item', collection: line_items
+
+  -#= render 'monitor_order'

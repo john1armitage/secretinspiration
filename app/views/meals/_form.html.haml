@@ -39,11 +39,13 @@
         != link_to "Food", edit_meal_path( @meal, choices: 'food'), remote: true, class: 'no_ajaxify'
   %li
     - if @meal.seating
+      %span
+        State:
       %span.title
-        != @meal.seating.booking.customer_name
+        != @meal.state
     - elsif allow? :users, :index
       %span.title
-        != "TA #{@meal.id}"
+        != "TA #{@meal.id} #{@meal.state}"
   - if allow?(:meals, :form) && (!@meal.seating_id.blank? || @meal.tabel_name == 'takeaway')
     = button_to 'Bin', meal_path(@meal), method: :delete, remote: true, form_class: 'no_ajaxify', class: 'semi',
       data: { confirm: 'Delete Order?' }
