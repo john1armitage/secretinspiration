@@ -175,7 +175,8 @@ class MealsController < ApplicationController
   def check_in
     @order = Order.find(params[:id])
     @meal = Meal.find( @order.desc.split(':')[0])
-    @meal.update(state: 'ordered')
+    state = @meal.seating_id.blank? ? 'checkout' : 'ordered'
+    @meal.update(state: state)
     if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id)
       @order.destroy
     end

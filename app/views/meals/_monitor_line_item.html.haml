@@ -6,10 +6,10 @@
   - @active = get_active(meal, course_name)
   - @component_title = make_title(course_name).pluralize
   - @not_required = meal.state != 'confirmed' && ( course_name == 'starter' && !meal.state.include?('starter') || course_name == 'main' && !['starter','main'].include?(meal.state.gsub(/_ready/,'').gsub(/_served/,''))) && meal.state != 'ordered'
-  %li
-    = course_name
-    = meal.state
-    = @active
+  -#%li
+    -#= course_name
+    -#= meal.state
+    -#= @active
   - unless @not_required
     %li.category{class: @active}
       %span

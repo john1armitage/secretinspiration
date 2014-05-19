@@ -36,7 +36,7 @@
   - if (allow? :orders, :create)  && !@meal.seating_id.blank?
     = render partial: 'meals/offers'
   - order = ((@meal.state != 'active') ? 'Re-order' : 'Order')
-  - if (allow? :meals, :form) && (!@meal.seating_id.blank? || (['confirmed','ordered'].include? @meal.state ))
+  - if (allow? :meals, :form) && (!@meal.seating_id.blank? || (['confirmed','checkout'].include? @meal.state ))
     = button_to order, meal_path(@meal, order: 'all'), method: :get  #, remote: true, form_class: 'no_ajaxify'
     - unless @meal.seating_id.blank?
       = button_to 'Desserts', meal_path(@meal, order: 'dessert'), method: :get  #, remote: true, form_class: 'no_ajaxify'
