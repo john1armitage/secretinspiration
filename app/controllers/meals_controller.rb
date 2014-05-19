@@ -5,7 +5,7 @@ class MealsController < ApplicationController
   def index
     # if params[:monitor].present?
     @meals = Meal.includes(:line_items, seating: [:booking] ).where("state <> 'billed' AND state <> 'active' AND state <> 'complete' AND seating_id::INT > 0").order('updated_at')
-    @takeaways = Meal.includes(:line_items).where("state <> 'takeaway' AND seating_id IS NULL").order('start_time')
+    @takeaways = Meal.includes(:line_items).where("state NOT IN ('takeaway','checkout') AND seating_id IS NULL").order('start_time')
     # @tabels = Tabel.order('name::INT')
     render 'monitor', layout: 'monitor'
     # end

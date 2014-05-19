@@ -5,7 +5,7 @@
 
   - @active = get_active(meal, course_name)
   - @component_title = make_title(course_name).pluralize
-  - @not_required = ( course_name == 'starter' && !meal.state.include?('starter') || course_name == 'main' && !['starter','main'].include?(meal.state.gsub(/_ready/,'').gsub(/_served/,''))) && meal.state != 'ordered'
+  - @not_required = meal.state != 'confirmed' && ( course_name == 'starter' && !meal.state.include?('starter') || course_name == 'main' && !['starter','main'].include?(meal.state.gsub(/_ready/,'').gsub(/_served/,''))) && meal.state != 'ordered'
   %li
     = course_name
     = meal.state
@@ -14,19 +14,17 @@
     %li.category{class: @active}
       %span
         = @component_title
-      - if @active == 'active' && ['starter', 'main', 'dessert', 'ordered'].include?(meal.state)
-        %span.right
-          - state = course_name + "_ready"
-          = button_to 'Ready', patcher_meal_url(meal, state: state, monitor: true)
-      - if @active == 'ready'
+      - if @active == 'active' && ['starter', 'main', 'dessert', 'ordered', 'confirmed'].include?(meal.state)
         %span.right
           - if meal.seating_id.blank?
-            - action = 'complete'
-            - state = 'all_complete'
-          - else
-            - action = 'served'
-            - state = course_name + "_#{action}"
-          - end
+            - state = "checkout"
+          -else
+            - state = course_name + "_ready"
+          = button_to 'Ready', patcher_meal_url(meal, state: state, monitor: true)
+      - if @active == 'ready' && !meal.seating_id.blank?
+        %span.right
+          - action = 'served'
+          - state = course_name + "_#{action}"
           = button_to action.capitalize, patcher_meal_url(meal, state: state, monitor: true)
       - if @active == 'served'
         %span.right

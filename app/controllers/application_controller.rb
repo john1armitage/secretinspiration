@@ -335,7 +335,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_balance
 
   def get_active(meal, course_name)
-    if [course_name, 'ordered'].include?(meal.state)
+    if [course_name, 'ordered', 'confirmed'].include?(meal.state)
       active = 'active'
     else
       sub_state = meal.state.gsub(/_/,'').gsub(/starter/,'').gsub(/main/,'').gsub(/dessert/,'')
