@@ -1,5 +1,7 @@
 class MealsController < ApplicationController
 
+#  include ActionController::Live
+
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out, :patcher]
 
   def index

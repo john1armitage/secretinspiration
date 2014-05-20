@@ -75,6 +75,7 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem 'sprockets', '2.11.0'
 #gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 
+#gem 'puma'
 #gem "google_currency"
 
 # Use debugger

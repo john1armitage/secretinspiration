@@ -80,6 +80,7 @@
               - @mains.sort_by{|k,v| k}.each do |k, v|
                 %li
                   = "#{v} x #{k}"
+          - if @sides.size > 0
             %span.head
               = "#{package} Sides"
             %ul.tabel
