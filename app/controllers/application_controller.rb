@@ -338,6 +338,7 @@ class ApplicationController < ActionController::Base
     if [course_name, 'ordered', 'confirmed'].include?(meal.state)
       active = 'active'
     else
+      course_name = 'main' if course_name == 'side'
       sub_state = meal.state.gsub(/_/,'').gsub(/starter/,'').gsub(/main/,'').gsub(/dessert/,'')
       current_course = meal.state.gsub(/_/,'').gsub(/ready/,'').gsub(/served/,'')
       active = (current_course == course_name) ? sub_state : 'info'
