@@ -12,7 +12,7 @@
       - @starters = Hash.new { 0 }
       - @mains = Hash.new { 0 }
       - @sides = Hash.new { 0 }
-      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
         = render partial: 'meal_order', collection: @meals
         - package = 'Current'
         - if @starters.size > 0
@@ -44,7 +44,7 @@
 
     - if @afters.size > 0
       - @desserts = Hash.new { 0 }
-      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
         = render partial: 'meal_order', collection: @afters
         - if @desserts.size > 0
           %li.tabel
@@ -61,7 +61,7 @@
       - @mains = Hash.new { 0 }
       - @sides = Hash.new { 0 }
       - @desserts = Hash.new { 0 }
-      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+      %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
         = render partial: 'meal_order', collection: @takeaways
         - package = ''
         %li.tabel

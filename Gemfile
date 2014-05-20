@@ -49,7 +49,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
-gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
+#gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
+gem 'mini_magick'
 gem 'carrierwave'
 
 gem 'acts-as-taggable-on'
@@ -75,7 +76,7 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem 'sprockets', '2.11.0'
 #gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 
-#gem 'puma'
+gem 'sidekiq'
 #gem "google_currency"
 
 # Use debugger
