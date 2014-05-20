@@ -10,13 +10,15 @@ class TimesheetsController < ApplicationController
       stop = limits[1]
       stop = Date.today.strftime('%Y-%m-%d') if stop.to_date > Date.today
       @employee = Employee.find(params[:employee])
-      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @timesheets = Timesheet.includes(:employee).where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC') #.select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @dailies = Daily.where( "account_date >= ? AND account_date <= ?", start, stop ).order('account_date, session DESC').select("tips_cents, headcount") #.select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
       @template = 'employee'
     elsif params[:week].present?
       start = params[:week].to_date
       stop = start + 6.days
       stop = Date.today if stop.to_date > Date.today
-      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC') #.select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @dailies = Daily.where( "account_date >= ? AND account_date <= ?", start, stop ).order('account_date, session DESC').select("tips_cents, headcount")
       @template = 'payroll'
     else
       @timesheets = Timesheet.order('work_date DESC, session DESC, employee_id')

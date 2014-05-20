@@ -57,6 +57,7 @@
 
 
     - if @takeaways.size > 0
+      - @alpha = 'a'
       - @starters = Hash.new { 0 }
       - @mains = Hash.new { 0 }
       - @sides = Hash.new { 0 }
@@ -95,3 +96,17 @@
               - @desserts.sort_by{|k,v| k}.each do |k, v|
                 %li
                   = "#{v} x #{k}"
+
+:coffeescript
+  jQuery ->
+    $(document).keypress (e) ->
+      console.log(e)
+      key = e.charCode
+      alert(key)
+      key = String.fromCharCode(key)
+      alert(key)
+      input = $('input#' + key)
+      if input.val()
+        input.trigger("click")
+      alert(input.val())
+

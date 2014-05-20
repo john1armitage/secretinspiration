@@ -1,4 +1,3 @@
-- meal = monitor_line_item.ownable
 - if @course != monitor_line_item.variant.item.grouping
   - @course = monitor_line_item.variant.item.grouping
   - course_name = @course.split(':')[1]
@@ -7,31 +6,39 @@
   - @component_title = make_title(course_name).pluralize
   - @not_required = meal.state != 'confirmed' && ( course_name == 'starter' && !meal.state.include?('starter') || ['main','side'].include?(course_name) && !['starter','main'].include?(meal.state.gsub(/_ready/,'').gsub(/_served/,''))) && meal.state != 'ordered'
   -#%li
-    -#= course_name
-    -#= meal.state
-    -#= @active
-    -#= @not_required
+  -#  = course_name
+  -#  = meal.state
+  -#  = meal.state.split('_')
+  -#  = meal.state.split('_')[0]
+  -#  = @active
+  -#  = @not_required
   - unless @not_required
+    - if meal.seating_id.blank?
+      - id = @alpha
+      - @alpha = @alpha.next
+    - else
+      - id = meal.tabel_name
     %li.category{class: @active}
       %span
         = @component_title
-      - if @active == 'active' && (['starter', 'main', 'dessert', 'ordered', 'confirmed'].include?(meal.state))
+        = id
+      - if @active == 'active' && (['starter', 'main', 'dessert', 'ordered', 'confirmed'].include?(meal.state.split('_')[0]))
         %span.right
           - if meal.seating_id.blank?
             - state = "checkout"
           -else
             - state = course_name + "_ready"
-          = button_to 'Ready', patcher_meal_url(meal, state: state, monitor: true)
+          = button_to 'Ready', patcher_meal_url(meal, state: state, monitor: true), id: id, form_class: 'no_ajaxify'
       - if @active == 'ready' && !meal.seating_id.blank?
         - course_name = 'main' if course_name == 'side'
         %span.right
           - action = 'served'
           - state = course_name + "_#{action}"
-          = button_to action.capitalize, patcher_meal_url(meal, state: state, monitor: true)
+          = button_to action.capitalize, patcher_meal_url(meal, state: state, monitor: true), id: id, form_class: 'no_ajaxify'
       - if @active == 'served'
         %span.right
           - state = course_name + "_complete"
-          = button_to 'Complete', patcher_meal_url(meal, state: state, monitor: true)
+          = button_to 'Complete', patcher_meal_url(meal, state: state, monitor: true), id: id, form_class: 'no_ajaxify'
 - unless @not_required
   %li{class: @active}
     - unless monitor_line_item.net_total_item == 0

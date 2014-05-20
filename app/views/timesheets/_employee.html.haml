@@ -18,9 +18,11 @@
       = @employee.name
   - if @timesheets.size > 0
     - @timesheets.each do |timesheet|
+      - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
+      - tips_share = (daily.tips_cents / 100.00 || 0.00) / daily.headcount.to_d
       - hours += timesheet.hours
       - wage = timesheet.pay.to_d
-      - tip = (timesheet.session == 'bonus' ? 0 : ((timesheet.tips || 0.00 )/ 100.00 / timesheet.headcount.to_d))
+      - tip = (timesheet.session == 'bonus' ? 0 : tips_share )
       - if timesheet.work_date.to_date.strftime('%B')
         - tips += tip
         - wages += wage

@@ -26,8 +26,10 @@
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.pay_cents
-      - tip = ((timesheet.tips || 0 ) / (timesheet.headcount || 1))
-      - tips += tip
+      -#- tip = ((timesheet.tips || 0 ) / (timesheet.headcount || 1))
+      - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
+      - tips_share = (daily.tips_cents / 100.00 || 0.00) / daily.headcount.to_d
+      - tips += tips_share
       - wages += wage
 
       - if employee.name != timesheet.employee.name
@@ -47,7 +49,7 @@
           .field.large-5.columns.number.sub
             = pounds(week_hours * rate_cents / 100.00 )
           .field.large-4.columns.number.sub
-            = pounds(week_tips / 100.00)
+            = pounds(week_tips)
         .row
           .large-12.columns.head
             = timesheet.employee.name
@@ -61,7 +63,7 @@
         - rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
       - week_hours += timesheet.hours
       - week_wages += wage
-      - week_tips += tip
+      - week_tips += tips_share
       .row
         .field.large-12.columns.id
           = "#{timesheet.work_date.strftime('%a')}, #{timesheet.work_date.strftime('%e').to_i.ordinalize} #{timesheet.work_date.strftime('%B')}"
@@ -79,7 +81,7 @@
         .field.large-5.columns.number
           = "#{pounds(wage / 100.00)}"
         .field.large-4.columns.number
-          = "#{pounds(tip / 100.00)}"
+          = "#{pounds(tips_share)}"
     .row
       .large-12.columns.sub.head
         = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
@@ -96,4 +98,4 @@
       .field.large-5.columns.number.sub
         = pounds(week_wages / 100)
       .field.large-4.columns.number.sub
-        = pounds(week_tips/ 100)
+        = pounds(week_tips)
