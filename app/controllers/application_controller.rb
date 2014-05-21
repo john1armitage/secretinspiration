@@ -347,4 +347,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :get_active
 
+  def get_meals
+    @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
+    @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
+    @takeaways = Meal.includes(:line_items).where("state NOT IN ('takeaway','checkout') AND seating_id IS NULL").order('start_time')
+  end
+
 end

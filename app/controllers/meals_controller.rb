@@ -5,11 +5,18 @@ class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out, :patcher]
 
   def index
+#    Eventbus.clear
     # if params[:monitor].present?
-    @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
-    @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
-    #@meals = @meals - @afters
-    @takeaways = Meal.includes(:line_items).where("state NOT IN ('takeaway','checkout') AND seating_id IS NULL").order('start_time')
+    #EventBus.subscribe(:order_update, OrderMonitor.new, :send_update)
+    #unless request.xhr?
+    #  EventBus.subscribe(/order_update/) do |payload|
+    #    meal = payload[:meal]
+    #    get_meals
+    #    render 'monitor', layout: 'monitor'
+    #  end
+    #end
+
+    get_meals
     render 'monitor', layout: 'monitor'
   end
 
@@ -43,6 +50,7 @@ class MealsController < ApplicationController
         end
       end
       if state
+        #EventBus.announce( :order_update, meal: @meal)
         @meal.ordered_at = Time.now if @meal.ordered_at.blank? || params[:order] == 'dessert'
         @meal.update(state: state)
       end
@@ -96,6 +104,7 @@ class MealsController < ApplicationController
       else
         state = params[:state]
       end
+      EventBus.announce(:order_update, meal: @meal)
       @meal.update(state: state)
     elsif params[:takeaway].present?
       case params[:takeaway]
@@ -200,7 +209,17 @@ class MealsController < ApplicationController
   end
 
   private
-    def set_meal
+
+  #class OrderMonitor
+  #  def send_update(payload)
+  #    meal = payload[:meal]
+  #    p "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+  #    p meal
+  #  end
+  #
+  #end
+
+  def set_meal
       if current_user.id.blank?
         @meal = get_takeaway
       else

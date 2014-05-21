@@ -10,6 +10,8 @@ jQuery ->
         $('div.row.quick').hide()
         $('div.row.line-items').show()
   Utility =
+    dismissConfirm: ->
+      $('#cboxOverlay,#cboxOverlay,#confirmOverlay').remove()
     menuSelect: ->
       $('div#menu li').on 'click', (event) ->
         $('div#menu li').removeClass 'active'
