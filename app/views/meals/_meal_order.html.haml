@@ -14,7 +14,7 @@
         = meal_order.tabel_name
       %span
         = " (#{pluralize( meal_order.seating.booking.pax, 'person')})"
-    %ul.tabel
+    %ul{ class: "tabel"}
       - unless meal_order.notes.blank?
         %li
           %span.head

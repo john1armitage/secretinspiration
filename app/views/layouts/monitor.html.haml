@@ -11,4 +11,17 @@
   = javascript_include_tag "application"
   .row
     .large-12.columns
-      = yield
+      %ul
+        %li.wide
+          %p.center
+            %span.head
+              Live Orders
+  .row
+    .large-12.columns#content
+      %ul
+        = yield
+-#:coffeescript
+-#  jQuery ->
+-#    Ajaxify.init
+-#      content_container: 'content'
+-#    console.log("Ajafixy Loaded")

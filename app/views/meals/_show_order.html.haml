@@ -2,8 +2,11 @@
   %li.title
     %span
       - if current_user.id.blank?
-        Your takeaway order has been received
-        = "TA#{@meal.id} for #{@meal.start_time.strftime('%H:%M')}"
+        - unless @no_line_item.present?
+          Your takeaway order has been received
+          = "TA#{@meal.id} for #{@meal.start_time.strftime('%H:%M')}"
+        - else
+          Sorry, you forgot to order anything!
       - elsif @meal.seating_id.blank?
         = "Takeaway #{@meal.id} at #{Time.now.strftime('%H:%M')} [Pick-up: #{@meal.start_time.strftime('%H:%M')}, #{@meal.contact}]"
       - else
@@ -18,9 +21,10 @@
   - line_items = @meal.line_items.joins( {variant: { item: {category: :root } } }).where("roots_categories.name = 'food'").order('items.grouping, items.rank, line_items.desc')
 
   = render partial: 'meals/line_item_order', collection: line_items
-  %li.no-print
-    %span
-      = link_to "Print",'#', id: 'print'
+  - unless current_user.id.blank?
+    %li.no-print
+      %span
+        = link_to "Print",'#', id: 'print'
 :coffeescript
   jQuery ->
     $('div#editor').html('')

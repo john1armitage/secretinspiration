@@ -70,6 +70,9 @@ $head-border: #009900;
         margin: 0;
         background-color: #e0eeee;
         border: 1px solid darkslategray;
+        &.first {
+          border: 2px solid green;
+        }
         li {
           list-style-type: none;
           padding: .2em 0 .2em .2em;

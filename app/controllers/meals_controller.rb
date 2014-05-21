@@ -6,9 +6,9 @@ class MealsController < ApplicationController
 
   def index
     # if params[:monitor].present?
-    @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND seating_id::INT > 0").order('tabel_name')
-    @afters = @meals.where("state LIKE 'dessert%'")
-    @meals = @meals - @afters
+    @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
+    @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
+    #@meals = @meals - @afters
     @takeaways = Meal.includes(:line_items).where("state NOT IN ('takeaway','checkout') AND seating_id IS NULL").order('start_time')
     render 'monitor', layout: 'monitor'
   end
@@ -26,19 +26,26 @@ class MealsController < ApplicationController
     end
     if params[:order].present? # && params[:order] == 'all'
       if @meal.seating_id.blank?
-        state = 'ordered'
+        if @meal.line_items.size > 0
+          state = 'ordered'
+        else
+          @no_line_item = true
+        end
       else
         courses = get_courses
         if params[:order] == 'dessert' && courses.include?('dessert')
           state = 'dessert'
+          @meal.ordered_at = Time.now
         elsif courses.include?('starter')
           state = 'starter'
         elsif courses.include?('main')
           state = 'main'
         end
       end
-      HardWorker.perform_async('bob', 5)
-      @meal.update(state: state) if state
+      if state
+        @meal.ordered_at = Time.now if @meal.ordered_at.blank? || params[:order] == 'dessert'
+        @meal.update(state: state)
+      end
     end
   end
 
