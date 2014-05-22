@@ -1,0 +1,11 @@
+= form_for Message.new, html: { class: 'no_ajaxify'}, remote: true do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  .row
+    .field.large-9.columns
+      = f.text_field :message
+    .field.large-2.columns.left
+      = f.submit "Go"
+.row
+  %ul#chat.large-12.columns
+    %li
+      = ">> #{current_tenant.domain.capitalize} Chat"

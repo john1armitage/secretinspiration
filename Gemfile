@@ -76,7 +76,7 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem 'sprockets', '2.11.0'
 #gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 
-#gem 'sidekiq'
+gem 'sidekiq'
 #gem 'event_bg_bus'
 #gem "google_currency"
 

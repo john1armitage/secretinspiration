@@ -6,18 +6,14 @@ class MealsController < ApplicationController
 
   def index
 #    Eventbus.clear
-    # if params[:monitor].present?
-    #EventBus.subscribe(:order_update, OrderMonitor.new, :send_update)
-    #unless request.xhr?
-    #  EventBus.subscribe(/order_update/) do |payload|
-    #    meal = payload[:meal]
-    #    get_meals
-    #    render 'monitor', layout: 'monitor'
-    #  end
-    #end
+    if params[:monitor].present?
+      if request.xhr?
 
-    get_meals
-    render 'monitor', layout: 'monitor'
+        # Load up message listener
+      end
+      get_meals
+      render 'monitor', layout: 'monitor'
+    end
   end
 
   def show
@@ -50,7 +46,7 @@ class MealsController < ApplicationController
         end
       end
       if state
-        #EventBus.announce( :order_update, meal: @meal)
+        #EventBus.announce( :order_update, meal: @meal.id)
         @meal.ordered_at = Time.now if @meal.ordered_at.blank? || params[:order] == 'dessert'
         @meal.update(state: state)
       end
@@ -104,7 +100,7 @@ class MealsController < ApplicationController
       else
         state = params[:state]
       end
-      EventBus.announce(:order_update, meal: @meal)
+      #Publish events
       @meal.update(state: state)
     elsif params[:takeaway].present?
       case params[:takeaway]

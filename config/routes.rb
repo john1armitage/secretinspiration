@@ -42,6 +42,8 @@ Commerce::Application.routes.draw do
   #get 'choices', to: 'choices#index', as: 'choices'
   resources :choices, :only => [ :index, :show ]
 
+  resources :messages, :only => [ :index, :create, :destroy ]
+
   resources :users
   resources :roles, :only => [ :index, :create, :destroy ]
 

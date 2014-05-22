@@ -65,6 +65,20 @@ $head-border: #009900;
       .row {
         max-width: inherit;
       }
+      div#messages {
+        border: 1px solid gray;
+        input {
+          margin: 0.2em;
+          padding: 0.2em;
+          height: 1.5em;
+        }
+        ul#chat {
+          margin-top: 0.2em;
+          li {
+            font-size: 0.9em;
+          }
+        }
+      }
       ul.tabel {
         //        width: inherit;
         margin: 0;

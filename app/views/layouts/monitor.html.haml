@@ -4,24 +4,35 @@
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   %title= content_for?(:title) ? yield(:title) : current_tenant.title
   = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
-  = javascript_include_tag "modernizr", "data-turbolinks-track" => true
+  = javascript_include_tag "modernizr", "http://#{current_tenant.hostname}:9292/faye.js", "data-turbolinks-track" => true
   = csrf_meta_tags
 = favicon_link_tag 'favicon.ico'
 %body#monitor
   = javascript_include_tag "application"
   .row
-    .large-12.columns
+    .large-3.columns
+      #messages
+        = render 'layouts/chat'
+    .large-9.columns#content
       %ul
-        %li.wide
-          %p.center
-            %span.head
-              Live Orders
-  .row
-    .large-12.columns#content
-      %ul
+        %li.head
+          Live Orders
         = yield
+:coffeescript
+  jQuery ->
+    faye = new Faye.Client("http://#{current_tenant.hostname}:9292/faye")
+    faye.subscribe "/messages/new", (data) ->
+      eval(data)
+
+    return
 -#:coffeescript
 -#  jQuery ->
--#    Ajaxify.init
--#      content_container: 'content'
--#    console.log("Ajafixy Loaded")
+-#    faye = new Faye.Client("http://#{current_tenant.hostname}:9292/faye")
+-#    faye.subscribe "/messages/new", (data) ->
+-#      now = new Date().toString().match(/\d{2}:\d{2}/)[0]
+-#      chat = $('ul#chat')
+-#      chat.append('<li>' + now + " " + data + '</li>')
+-#      chat.find('li').first().remove()
+-#      return
+-#
+-#    return
