@@ -5,6 +5,7 @@
 - week_hours = 0.00
 - week_wages = 0.00
 - week_tips = 0.00
+- tips_share = 0.00
 - if @timesheets.size > 0
   - timesheet_date = @timesheets.first.work_date
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
@@ -26,9 +27,9 @@
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.pay_cents
-      -#- tip = ((timesheet.tips || 0 ) / (timesheet.headcount || 1))
-      - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
-      - tips_share = (daily.tips_cents / 100.00 || 0.00) / daily.headcount.to_d
+      - unless (timesheet.session == 'bonus')
+        - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
+        - tips_share = (daily.tips_cents / 100.00 || 0.00) / daily.headcount.to_d
       - tips += tips_share
       - wages += wage
 

@@ -7,9 +7,10 @@ class MealsController < ApplicationController
   def index
 #    Eventbus.clear
     if params[:monitor].present?
-      if request.xhr?
-
-        # Load up message listener
+      if params[:meal_id].present?
+        meal = Meal.find(params[:meal_id])
+        target = meal.seating_id.blank? ? "Takeaway #{meal.id}" : "Table #{meal.tabel_name}"
+        @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
       end
       get_meals
       render 'monitor', layout: 'monitor'
@@ -44,6 +45,8 @@ class MealsController < ApplicationController
         elsif courses.include?('main')
           state = 'main'
         end
+        target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "Table #{@meal.tabel_name}"
+        @message = Message.new(message: "#{target}: #{state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
       end
       if state
         #EventBus.announce( :order_update, meal: @meal.id)
@@ -117,7 +120,7 @@ class MealsController < ApplicationController
       @meal.update(params[:meal])
     end
     if params[:monitor].present?
-      redirect_to meals_url(monitor: true)
+      redirect_to meals_url(monitor: true, meal_id: @meal.id )
     else
       render action: 'edit'
     end

@@ -65,12 +65,17 @@ $head-border: #009900;
       .row {
         max-width: inherit;
       }
+      div.columns.no_padding {
+        padding: 0;
+      }
       div#messages {
         border: 1px solid gray;
+        margin: 0.2em;
+        padding: 0.2em;
         input {
           margin: 0.2em;
           padding: 0.2em;
-          height: 1.5em;
+          height: 1.8em;
         }
         ul#chat {
           margin-top: 0.2em;

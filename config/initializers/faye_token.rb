@@ -1,1 +1,1 @@
-FAYE_TOKEN = "Jonathan Jo"
+FAYE_TOKEN = "JonathanJo"

@@ -140,8 +140,11 @@ module ApplicationHelper
     (((date - fy_start)/7).to_i + 1)
   end
   def broadcast(channel, &block)
+    p "FFFFFFFFFFFFFFFFFFFFF"
+    p :FAYE_TOKEN
     message = {:channel => channel, :data => capture(&block), :ext => {:auth_token =>  :FAYE_TOKEN}}
-    uri = URI.parse("http://localhost:9292/faye")
-    Net::HTTP.post_form(uri, :message => message.to_json)
+    uri = URI.parse("http://128.1.1.20:9292/faye")
+    p message
+    p Net::HTTP.post_form(uri, :message => message.to_json)
   end
 end

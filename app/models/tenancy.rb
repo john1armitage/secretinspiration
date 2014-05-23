@@ -1,9 +1,9 @@
 class Tenancy < ActiveRecord::Base
 
 
-belongs_to :supplier
+  belongs_to :supplier
 
-  after_create :create_schema
+  #after_create :create_schema
 
   before_save :check_home_supplier
 
@@ -12,7 +12,7 @@ belongs_to :supplier
   end
 
   def create_schema
-    ActiveRecord::Base.connection.execute("carts schema #{domain}")
+    ActiveRecord::Base.connection.execute("create schema if not exists #{domain}")
     scope_schema do
       load Rails.root.join("db/schema.rb")
       ActiveRecord::Base.connection.execute("drop table #{self.class.table_name}")

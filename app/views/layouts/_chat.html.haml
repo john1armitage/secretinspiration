@@ -1,9 +1,9 @@
 = form_for Message.new, html: { class: 'no_ajaxify'}, remote: true do |f|
   = f.hidden_field :user_id, value: current_user.id
   .row
-    .field.large-9.columns
+    .field.large-9.columns.no_padding
       = f.text_field :message
-    .field.large-2.columns.left
+    .field.large-2.columns.left.no_padding
       = f.submit "Go"
 .row
   %ul#chat.large-12.columns

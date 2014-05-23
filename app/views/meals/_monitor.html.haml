@@ -1,7 +1,7 @@
 - if ((@meals.size + @afters.size + @takeaways.size) == 0)
-  %p.center
-    %span
-      Nothing currently due
+  %p
+    %span.head
+      No orders due
 - else
   - if @meals.size > 0
     - @starters = Hash.new { 0 }
@@ -95,35 +95,35 @@
               %li
                 = "#{v} x #{k}"
 
-:coffeescript
-  jQuery ->
-    $(document).keypress (e) ->
-      key = String.fromCharCode(e.charCode).toUpperCase()
-      input = $('input#' + key)
-      act = input.val()
-      if act
-        $.confirm
-          title: "Order " + key + " is " + act
-          message: 'Is that correct?'
-          buttons:
-            Yes:
-              class: "blue"
-              action: ->
-                input.trigger("click")
-                Utility.dismissConfirm
-                return
-            No:
-              class: "gray"
-              action: ->
-                Utility.dismissConfirm
-                return
-        $(document).keypress (e) ->
-          switch String.fromCharCode(e.charCode).toUpperCase()
-            when "Y"
-              input.trigger("click")
-              Utility.dismissConfirm
-              return
-            when "N"
-              Utility.dismissConfirm
-              return
-
+-#:coffeescript
+-#  jQuery ->
+-#    $(document).keypress (e) ->
+-#      key = String.fromCharCode(e.charCode).toUpperCase()
+-#      input = $('input#' + key)
+-#      act = input.val()
+-#      if act
+-#        $.confirm
+-#          title: "Order " + key + " is " + act
+-#          message: 'Is that correct?'
+-#          buttons:
+-#            Yes:
+-#              class: "blue"
+-#              action: ->
+-#                input.trigger("click")
+-#                Utility.dismissConfirm
+-#                return
+-#            No:
+-#              class: "gray"
+-#              action: ->
+-#                Utility.dismissConfirm
+-#                return
+-#        $(document).keypress (e) ->
+-#          switch String.fromCharCode(e.charCode).toUpperCase()
+-#            when "Y"
+-#              input.trigger("click")
+-#              Utility.dismissConfirm
+-#              return
+-#            when "N"
+-#              Utility.dismissConfirm
+-#              return
+-#
