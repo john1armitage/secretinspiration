@@ -72,15 +72,44 @@ $head-border: #009900;
         border: 1px solid gray;
         margin: 0.2em;
         padding: 0.2em;
+        form {
+          .row {
+            margin-left: 0;
+          }
+        }
         input {
-          margin: 0.2em;
+          margin: 0;
+          margin-bottom: 0.2em;
           padding: 0.2em;
           height: 1.8em;
         }
         ul#chat {
-          margin-top: 0.2em;
+          margin-left: 1em;
+          margin-bottom: 0;
+          padding-left: 0;
           li {
             font-size: 0.9em;
+            span {
+              &.starter, &.main, &.dessert {
+                font-weight: bold;
+              }
+            }
+            span.starter {
+              color: green;
+            }
+            span.main {
+              color: green;
+            }
+            span.dessert {
+              color: purple;
+            }
+            span.ready {
+              font-weight: bold;
+              color: red;
+            }
+            span.served {
+
+            }
           }
         }
       }

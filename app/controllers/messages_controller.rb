@@ -9,9 +9,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(params[:message])
     @message.created_at = Time.now
-    p "MMMMMMMMMMMMggggggggMMMMMMMMMMM"
-    p @message.message
-    p request.remote_addr
+    @message.message_type = 'adhoc'
   end
 
   def destroy

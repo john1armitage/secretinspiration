@@ -1,4 +1,6 @@
 - message ||= @message
 %li
-  = message.created_at.strftime('%H:%M')
-  = message.message
+  %span.time
+    = Time.now.strftime('%H:%M')
+  %span{class: message.message_type}
+    = message.message

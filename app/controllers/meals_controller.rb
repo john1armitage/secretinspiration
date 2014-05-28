@@ -9,8 +9,9 @@ class MealsController < ApplicationController
     if params[:monitor].present?
       if params[:meal_id].present?
         meal = Meal.find(params[:meal_id])
-        target = meal.seating_id.blank? ? "Takeaway #{meal.id}" : "Table #{meal.tabel_name}"
-        @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
+        target = meal.seating_id.blank? ? "Takeaway #{meal.id}" : "#{meal.tabel_name}"
+   #     @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
+        @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", message_type: meal.state.gsub(/\w*_/,''), user_id: current_user.id, created_at: Time.now)
       end
       get_meals
       render 'monitor', layout: 'monitor'
@@ -45,8 +46,8 @@ class MealsController < ApplicationController
         elsif courses.include?('main')
           state = 'main'
         end
-        target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "Table #{@meal.tabel_name}"
-        @message = Message.new(message: "#{target}: #{state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
+        target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "#{@meal.tabel_name}"
+        @message = Message.new(message: "#{target}: #{state.gsub(/_/,' ')}", message_type: state, user_id: current_user.id, created_at: Time.now)
       end
       if state
         #EventBus.announce( :order_update, meal: @meal.id)

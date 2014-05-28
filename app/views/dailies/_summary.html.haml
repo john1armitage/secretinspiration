@@ -67,6 +67,7 @@
       - week = current
       - hmrc_pay_week = HMRC_week_number(daily.account_date.beginning_of_week + 12.days)
       - week_start = week_start(daily.account_date) #.account_date.beginning_of_week.strftime('%d-%m-%y')
+
     - takes_week += daily.take.to_d
     - credit_cards_week += daily.credit_card.to_d
     - tips_week += daily.tips.to_d
