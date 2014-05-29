@@ -52,7 +52,7 @@
       .large-12.columns
         = f.label :notes, "#{ (allow? :seating, :create) ? 'Notes' : 'Requests'}"
         = f.text_area :notes, placeholder: 'notes'
-    - if allow? :seating, :create
+    - if allow? :seatings, :create
       .row
         .large-12.columns
           - @status = 'available'
@@ -64,7 +64,7 @@
             .large-4.columns.left
               = f.label :window, 'Win'
               = f.check_box :window
-          - if allow? :seating, :create
+          - if allow? :seatings, :create
             .large-4.columns.left
               = f.label :confirmed, 'Conf'
               = f.check_box :confirmed

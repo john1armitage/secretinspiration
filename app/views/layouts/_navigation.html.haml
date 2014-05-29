@@ -9,13 +9,17 @@
       - if allow? :users, :new
         %li
           != link_to "Register", signup_path
-        - if allow? :dailes, :index and current_tenant.dailies == '1'
-          %li
-            != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
       - else
         #contact
           != render 'layouts/contact/index'
       - if admin_ok?
+        - if allow? :meals, :index
+          %li#admin
+            != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
+
+        - if allow? :dailies, :index and current_tenant.dailies == '1'
+          %li
+            != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
         %li
           = render 'layouts/menus/session'
   .large-5.columns

@@ -1,10 +1,7 @@
 - unless current_user.id.blank?
-  - unless params[:monitor].present?
+  - if !params[:monitor].present? && allow?(:users, :index)
     %li
       != link_to "Profile", edit_user_path(current_user.id) #, :class => "button radius"
-  - if allow? :meals, :index
-    %li#admin
-      != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
 
   %li
     - monitor = params[:monitor].present? ?  true : false

@@ -30,6 +30,9 @@ class Item < ActiveRecord::Base
     if category.name == 'vegetarian_starter'
       starter = Category.find_by_name('starter')
       self.grouping = "#{starter.rank}:#{starter.name}"
+    elsif category.name == 'vegetarian_mains'
+      main = Category.find_by_name('main')
+      self.grouping = "#{main.rank}:#{main.name}"
     elsif category.name == 'child_dessert'
       dessert = Category.find_by_name('dessert')
       self.grouping = "#{dessert.rank}:#{dessert.name}"
