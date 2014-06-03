@@ -32,7 +32,7 @@
       %td
         Total
       %td.right
-        = humanized_money_with_symbol(@order.net_home + @order.tax_home + @order.discount)
+        = humanized_money_with_symbol(@order.net_total + @order.tax_total + @order.discount)
 
     - if  @order.discount > 0
       - if params[:offer].present?
@@ -62,7 +62,8 @@
         %td
           To Pay
         %td.right
-          = humanized_money_with_symbol(@order.net_home + @order.tax_home)
+          %span#order_total
+            = humanized_money_with_symbol(@order.net_total + @order.tax_total)
 
     - if @order.tax_home > 0
       %tr
@@ -95,11 +96,14 @@
       = form_for @order, url: {controller: 'orders', action: 'status', id: @order.id}, html: { class: 'no_ajaxify no-print'}, method: :post, remote: true, validate: true do |f|
         %fieldset
           = hidden_field_tag :bill, true
-          = hidden_field_tag :due, (@order.net_home + @order.tax_home)
+          = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
           = f.hidden_field :state
           = f.hidden_field :paid
           = f.hidden_field :credit_card
           .row
+            .large-2.columns
+              = f.label :voucher
+              = f.text_field :voucher
             .large-2.columns
               = f.label :tip, 'Cash Tip'
               = f.text_field :tip

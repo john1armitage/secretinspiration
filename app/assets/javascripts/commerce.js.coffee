@@ -30,28 +30,36 @@ jQuery ->
   $(document).on "click", 'a.no_content', (event) ->
     $('div#content').html('')
   $(document).on "click", 'input#cash_payment', (event) ->
-    total = parseFloat($('input#total').val()) + parseFloat($('input#order_tip').val())
-    due = parseFloat($('input#due').val())
-    $('input#order_credit_card').val(0)
-    if total != null and total > 0
-      if total >= due
-        $('input#order_paid').val(due)
-        $('input#order_tip').val(total - due)
+    voucher = parseFloat($('input#order_voucher').val())
+    alert('voucher ' + voucher)
+    total_paid = parseFloat($('input#total').val()) + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())  + voucher
+    alert('paid ' + total_paid)
+    order_total = parseFloat($('input#order_total').val())
+    alert('total ' + order_total)
+    $('input#order_credit_card').val(0.00)
+    if parseFloat(total_paid) > 0.00
+      if total_paid >= order_total
+        $('input#order_paid').val(order_total - voucher)
+        $('input#order_tip').val(total_paid - order_total)
+        alert("yes")
       else
-        $('input#order_paid').val(total)
-        $('input#order_tip').val(0)
+        $('input#order_paid').val(total_paid - voucher)
+        $('input#order_tip').val(0.00)
+        alert("no")
   $(document).on "click", 'input#card_payment', (event) ->
     credit_card = parseFloat($('input#total').val())
     $('input#order_credit_card').val(credit_card)
-    total = credit_card + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())
-    due = parseFloat($('input#due').val())
-    if total != null and total > 0
-      if total >= due
-        $('input#order_paid').val(due)
-        $('input#order_tip').val(total - due)
+    cash = parseFloat($('input#cash').val())
+    order_total = parseFloat($('input#order_total').val())
+    voucher = parseFloat($('input#order_voucher').val())
+    total_paid = credit_card + cash + parseFloat($('input#order_tip').val())  + voucher
+    if parseFloat(total_paid) > 0.00
+      if total_paid >= order_total
+        $('input#order_paid').val(order_total - voucher)
+        $('input#order_tip').val(total_paid - order_total)
       else
-        $('input#order_paid').val(total)
-        $('input#order_tip').val(0)
+        $('input#order_paid').val(total_paid - voucher)
+        $('input#order_tip').val(0.00)
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')
     $('input#variant_id').val(variant)

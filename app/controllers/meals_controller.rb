@@ -10,8 +10,9 @@ class MealsController < ApplicationController
       if params[:meal_id].present?
         meal = Meal.find(params[:meal_id])
         target = meal.seating_id.blank? ? "Takeaway #{meal.id}" : "#{meal.tabel_name}"
-   #     @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", user_id: current_user.id, created_at: Time.now)
         @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", message_type: meal.state.gsub(/\w*_/,''), user_id: current_user.id, created_at: Time.now)
+      #elsif params[:target].present?
+      #  @message = Message.new(message: "#{params[:target]}: cancelled", message_type: 'cancel', user_id: current_user.id, created_at: Time.now)
       end
       get_meals
       render 'monitor', layout: 'monitor'
@@ -199,25 +200,17 @@ class MealsController < ApplicationController
     if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id)
       @order.destroy
     end
-    redirect_to bookings_url()
+    redirect_to bookings_url
   end
 
 
   def destroy
+    target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "#{@meal.tabel_name}"
     @meal.destroy
-    redirect_to bookings_url
+    redirect_to bookings_url(monitor: true, target: target)
   end
 
   private
-
-  #class OrderMonitor
-  #  def send_update(payload)
-  #    meal = payload[:meal]
-  #    p "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
-  #    p meal
-  #  end
-  #
-  #end
 
   def set_meal
       if current_user.id.blank?

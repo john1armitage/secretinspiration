@@ -121,8 +121,13 @@ class OrdersController < ApplicationController
     if params[:status].present?
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
-      params[:order][:tip] ||= 0
       @order.update(params[:order])
+      if @order.voucher > 0
+        @order.net_home = (@order.paid / 1.2)
+        @order.tax_home = (@order.paid - @order.net_home)
+        @order.save
+      end
+      @order.update(tip_cents: 0) if @order.tip_cents.blank?
     end
     set_booking_dates
     render 'bookings/index'
