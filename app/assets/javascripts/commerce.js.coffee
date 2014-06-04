@@ -31,21 +31,16 @@ jQuery ->
     $('div#content').html('')
   $(document).on "click", 'input#cash_payment', (event) ->
     voucher = parseFloat($('input#order_voucher').val())
-    alert('voucher ' + voucher)
     total_paid = parseFloat($('input#total').val()) + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())  + voucher
-    alert('paid ' + total_paid)
     order_total = parseFloat($('input#order_total').val())
-    alert('total ' + order_total)
     $('input#order_credit_card').val(0.00)
     if parseFloat(total_paid) > 0.00
       if total_paid >= order_total
         $('input#order_paid').val(order_total - voucher)
         $('input#order_tip').val(total_paid - order_total)
-        alert("yes")
       else
         $('input#order_paid').val(total_paid - voucher)
         $('input#order_tip').val(0.00)
-        alert("no")
   $(document).on "click", 'input#card_payment', (event) ->
     credit_card = parseFloat($('input#total').val())
     $('input#order_credit_card').val(credit_card)
