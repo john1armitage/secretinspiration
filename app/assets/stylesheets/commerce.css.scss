@@ -44,6 +44,9 @@ $head-border: #009900;
     background-color: $link;
   }
   body {
+    fieldset.no-pad {
+      padding: 0;
+    }
     &.secret {
       a.button {
         background-color: $link-secret;

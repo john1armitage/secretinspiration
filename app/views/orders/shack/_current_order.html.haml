@@ -30,4 +30,4 @@
   %p
     %span
       - cash = current_order.paid + current_order.tip - current_order.credit_card
-      = "#{pounds(current_order.credit_card)}cc + #{pounds(cash)} (#{pounds(current_order.tip)})"
+      = "#{pounds(current_order.credit_card)}cc + #{pounds(cash)} #{pounds(current_order.tip)}T"

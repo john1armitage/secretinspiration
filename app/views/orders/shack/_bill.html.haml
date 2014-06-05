@@ -94,14 +94,18 @@
 
     - if allow? :orders, :edit
       = form_for @order, url: {controller: 'orders', action: 'status', id: @order.id}, html: { class: 'no_ajaxify no-print'}, method: :post, remote: true, validate: true do |f|
-        %fieldset
+        %fieldset.no-pad
           = hidden_field_tag :bill, true
           = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
           = f.hidden_field :state
           = f.hidden_field :paid
           = f.hidden_field :credit_card
           .row
-            .large-2.columns
+            - if allow? :orders, :edit
+              .large-3.columns
+                = f.label :effective_date
+                = f.date_field :effective_date
+            .large-1.columns
               = f.label :voucher
               = f.text_field :voucher
             .large-2.columns
@@ -109,16 +113,14 @@
               = f.text_field :tip
             .large-2.columns
               = label_tag :cash, 'Part Cash'
-              = text_field_tag :cash, 0
+              = text_field_tag :cash, 0.00
             .large-2.columns
               - total = (@order.paid > 0) ? @order.paid : (@order.net_home + @order.tax_home)
               = label_tag :total
               = text_field_tag :total, total
-            .large-2.columns.left
-              %br
-              %br
+            .large-1.columns.left
+              %p.center
+              = f.submit 'Card', id: 'card_payment'
+              %p.center
               = f.submit 'All Cash', id: 'cash_payment'
-            .large-2.columns.left
-              %br
-              %br
-              = f.submit 'Credit Card', id: 'card_payment'
+

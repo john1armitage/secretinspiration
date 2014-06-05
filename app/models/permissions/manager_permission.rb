@@ -16,7 +16,7 @@ module Permissions
       allow :seatings, [:new, :create, :destroy]
       allow :sessions, [:new, :create, :carts, :destroy]
       allow :users, [ :carts]
-      allow :dailies, [:index, :new, :create, :edit, :update, :destroy]
+      allow :dailies, [:index, :show, :new, :create, :edit, :update, :destroy]
       allow :timesheets, [:index, :new, :create, :edit, :update, :destroy]
       allow_param :booking, [:walkin, :arrival, :pax, :customer_name, :contact, :notes, :booking_date, :state, :email, :window, :confirmed]
       allow_param :meal, [:contact, :phone, :state, :start_time, :notes]
