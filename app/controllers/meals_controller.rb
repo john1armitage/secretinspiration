@@ -34,6 +34,8 @@ class MealsController < ApplicationController
       if @meal.seating_id.blank?
         if @meal.line_items.size > 0
           state = 'ordered'
+          target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+          @message = Message.new(message: "#{target}: #{state.gsub(/_/,' ')}", message_type: state, user_id: current_user.id, created_at: Time.now)
         else
           @no_line_item = true
         end
@@ -47,7 +49,7 @@ class MealsController < ApplicationController
         elsif courses.include?('main')
           state = 'main'
         end
-        target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "#{@meal.tabel_name}"
+        target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
         @message = Message.new(message: "#{target}: #{state.gsub(/_/,' ')}", message_type: state, user_id: current_user.id, created_at: Time.now)
       end
       if state
