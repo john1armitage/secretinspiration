@@ -9,7 +9,7 @@ class MealsController < ApplicationController
     if params[:monitor].present?
       if params[:meal_id].present?
         meal = Meal.find(params[:meal_id])
-        target = meal.seating_id.blank? ? "Takeaway #{meal.id}" : "#{meal.tabel_name}"
+        target = meal.seating_id.blank? ? "Take #{meal.id}" : "#{meal.tabel_name}"
         @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", message_type: meal.state.gsub(/\w*_/,''), user_id: current_user.id, created_at: Time.now)
       #elsif params[:target].present?
       #  @message = Message.new(message: "#{params[:target]}: cancelled", message_type: 'cancel', user_id: current_user.id, created_at: Time.now)
@@ -207,7 +207,7 @@ class MealsController < ApplicationController
 
 
   def destroy
-    target = @meal.seating_id.blank? ? "Takeaway #{@meal.id}" : "#{@meal.tabel_name}"
+    target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
     @meal.destroy
     redirect_to bookings_url(monitor: true, target: target)
   end
