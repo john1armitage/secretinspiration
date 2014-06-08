@@ -4,9 +4,10 @@
 - unless params[:short].present?
   #display.no-print
     = render 'bookings/dated'
-    #takeaway
-      = render 'meals/takeaway'
-    = render 'bookings/requested'
-    - if allow? :orders, :index
-      != render "orders/#{current_tenant.domain}/current"
-    = render 'bookings/cleared'
+    - unless @table_view == true
+      #takeaway
+        = render 'meals/takeaway'
+      = render 'bookings/requested'
+      - if allow? :orders, :index
+        != render "orders/#{current_tenant.domain}/current"
+      = render 'bookings/cleared'

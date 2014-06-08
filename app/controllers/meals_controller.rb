@@ -11,11 +11,14 @@ class MealsController < ApplicationController
         meal = Meal.find(params[:meal_id])
         target = meal.seating_id.blank? ? "Take #{meal.id}" : "#{meal.tabel_name}"
         @message = Message.new(message: "#{target}: #{meal.state.gsub(/_/,' ')}", message_type: meal.state.gsub(/\w*_/,''), user_id: current_user.id, created_at: Time.now)
-      #elsif params[:target].present?
-      #  @message = Message.new(message: "#{params[:target]}: cancelled", message_type: 'cancel', user_id: current_user.id, created_at: Time.now)
       end
       get_meals
       render 'monitor', layout: 'monitor'
+    elsif !request.xhr?
+      @booking_date = Date.today
+      @bookings = Booking.where( booking_date: @booking_date )
+      @table_view = true
+      render 'index', layout: 'table_view'
     end
   end
 
@@ -79,6 +82,8 @@ class MealsController < ApplicationController
     end
     @meal.start_time = Time.now
     @meal.save
+    target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+    @message = Message.new(message: "#{target}: #{@meal.state.gsub(/_/,' ')}", message_type: 'ordering', user_id: current_user.id, created_at: Time.now)
     if params[:takeaway].present?
       render 'edit'
     else
@@ -211,6 +216,9 @@ class MealsController < ApplicationController
 
   def destroy
     target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+    unless @meal.seating_id.blank?
+      @meal.seating.booking.update(state: 'incomplete')
+    end
     @meal.destroy
     redirect_to bookings_url(monitor: true, target: target)
   end

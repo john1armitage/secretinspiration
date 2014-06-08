@@ -1,0 +1,64 @@
+!!!
+%html
+%head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %title= content_for?(:title) ? yield(:title) : 'Shack Table View'
+  = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
+  = javascript_include_tag "modernizr", "data-turbolinks-track" => true
+  = csrf_meta_tags
+= favicon_link_tag 'favicon.ico'
+%body#monitor
+  = javascript_include_tag "application"
+  .row
+    .large-2.columns.no_padding
+      %ul#contact.inline-list
+        - if admin_ok?
+          %li
+            = render 'layouts/menus/session'
+      #aside
+        %aside#sidebar.no-print
+          = yield
+    .large-10.columns
+      .row.show-for-medium-up.no-print
+        .large-12.columns#menu
+      .row.show-for-medium-up.no-print
+        .large-12.columns#content
+          Yo
+-#:coffeescript
+-#  jQuery ->
+-#    faye = new Faye.Client("http://#{current_tenant.hostname}:9292/faye")
+-#    console.log(faye)
+-#    faye.subscribe "/messages/new", (data) ->
+-#      eval(data)
+-#      $.ajax
+-#        url: "/meals?monitor=true"
+-#        dataType: 'script'
+-#    $(document).keypress (e) ->
+-#      key = String.fromCharCode(e.charCode).toUpperCase()
+-#      input = $('input#' + key)
+-#      act = input.val()
+-#      if act
+-#        $.confirm
+-#          title: "Order " + key + " is " + act
+-#          message: 'Is that correct?'
+-#          buttons:
+-#            Yes:
+-#              class: "blue"
+-#              action: ->
+-#                input.trigger("click")
+-#                $('#cboxOverlay,#cboxOverlay,#confirmOverlay').remove()
+-#                return
+-#            No:
+-#              class: "gray"
+-#              action: ->
+-#                $('#cboxOverlay,#cboxOverlay,#confirmOverlay').remove()
+-#                return
+-#        $(document).keypress (e) ->
+-#          switch String.fromCharCode(e.charCode).toUpperCase()
+-#            when "Y"
+-#              input.trigger("click")
+-#              $('#cboxOverlay,#cboxOverlay,#confirmOverlay').remove()
+-#              return
+-#            when "N"
+-#              $('#cboxOverlay,#cboxOverlay,#confirmOverlay').remove()
+-#              return

@@ -3,7 +3,6 @@ class BookingsController < ApplicationController
 
   # GET /bookings
   def index
-    #@bookings = Booking.order('booking_date DESC, arrival')
     set_booking_dates
   end
 

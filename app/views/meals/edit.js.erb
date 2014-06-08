@@ -1,3 +1,8 @@
 $('div#editor').html("<%= escape_javascript(render :partial => 'meals/form') %>")
 $('div#menu').html("<%= escape_javascript(render :partial => 'choices/sub_menu') %>")
 $('div#content').html("<%= escape_javascript(render :partial => "choices/show") %>")
+<% unless params[:choices].present? %>
+<% broadcast "/messages/new" do %>
+$("#chat").prepend("<%= escape_javascript render(@message) %>");
+<% end %>
+<% end %>
