@@ -1,2 +1,5 @@
 $('aside#sidebar').html("<%= escape_javascript(render :partial => 'index') %>")
 $('div#content').html("<%= escape_javascript(render :partial => 'orders/show') %>")
+<% broadcast "/messages/new" do %>
+$("#chat").prepend("<%= escape_javascript render(@message) %>");
+<% end %>

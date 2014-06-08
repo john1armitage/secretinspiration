@@ -36,11 +36,11 @@
   - if (allow? :orders, :create)  && !@meal.seating_id.blank?
     = render partial: 'meals/offers'
   - order = ((['active','confirmed'].include? @meal.state ) ? 'Order' : 'Re-order')
-  - if (allow? :meals, :form) && (!@meal.seating_id.blank? || (['confirmed', 'ordered','checkout'].include? @meal.state ))
+  - if (allow? :meals, :form) && (!@meal.seating_id.blank? || (['ready', 'ordered','checkout'].include? @meal.state ))
     = button_to order, meal_path(@meal, order: 'all'), method: :get, remote: true, form_class: 'no_ajaxify'
     - unless @meal.seating_id.blank?
       = button_to 'Desserts', meal_path(@meal, order: 'dessert'), method: :get, remote: true, form_class: 'no_ajaxify'
-    - if @meal.seating_id.blank?
+    - if @meal.seating_id.blank? && (['ready','checkout'].include? @meal.state )
       = button_to 'Bill', check_out_meal_path(@meal,meal_id: @meal.id, bill: true, takeaway: true), id: 'meal_bill', method: 'post', remote: true, form_class: 'no_ajaxify', title: 'Create Bill' #, data: {confirm: 'Create Bill?'}  #, remote: true, form_class: 'no_ajaxify'
     - if @meal.seating_id.blank?
       = button_to 'Un-order', meal_path(@meal, takeaway: 'cancel'), method: :get, remote: true, form_class: 'no_ajaxify', data: {confirm: 'Cancel Order?'}

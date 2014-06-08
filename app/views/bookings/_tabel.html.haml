@@ -1,5 +1,5 @@
 - if @booking_date == Time.now.to_date
   = link_to seating.tabel.name, meals_path(seating_id: seating.id, tabel_name: seating.tabel.name), method: 'POST',
-    remote: true, class: "no_ajaxify has-tip", data: { tooltip:  true}, title: 'Create Order for Table'
+    remote: true, class: "no_ajaxify has-tip state #{seating.booking.state}", data: { tooltip:  true}, title: 'Create Order for Table'
 - else
   = seating.tabel.name

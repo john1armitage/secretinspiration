@@ -116,7 +116,6 @@ class OrdersController < ApplicationController
 
     redirect_to orders_url(supplier_id: @order.supplier_id)
   end
-
   def status
     if params[:status].present?
       @order.update_attribute(:state, params[:status])

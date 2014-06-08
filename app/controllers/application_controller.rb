@@ -335,8 +335,11 @@ class ApplicationController < ActionController::Base
   helper_method :get_balance
 
   def get_active(meal, course_name)
-    if [course_name, 'ordered', 'confirmed'].include?(meal.state)
+    #if [course_name, 'ordered', 'confirmed'].include?(meal.state)
+    if [course_name, 'ordered'].include?(meal.state)
       active = 'active'
+    elsif [course_name, 'ready'].include?(meal.state)
+        active = 'ready'
     else
       course_name = 'main' if course_name == 'side'
       sub_state = meal.state.gsub(/_/,'').gsub(/starter/,'').gsub(/main/,'').gsub(/dessert/,'')
@@ -350,7 +353,7 @@ class ApplicationController < ActionController::Base
   def get_meals
     @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
     @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
-    @takeaways = Meal.includes(:line_items).where("state NOT IN ('takeaway','checkout') AND seating_id IS NULL").order('start_time')
+    @takeaways = Meal.includes(:line_items).where("state IN ('ordered','ready') AND seating_id IS NULL").order(:start_time, :created_at)
   end
 
 end

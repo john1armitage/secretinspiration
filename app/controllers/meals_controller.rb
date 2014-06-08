@@ -191,6 +191,9 @@ class MealsController < ApplicationController
     @meal.update(state: state)
 #    @meal.destroy
     set_booking_dates
+    target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+    state = @meal.seating ? state.gsub(/_/,' ') : 'billed'
+    @message = Message.new(message: "#{target}: #{state}", message_type: state, user_id: current_user.id, created_at: Time.now)
     render 'check'
   end
 

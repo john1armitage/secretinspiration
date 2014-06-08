@@ -11,7 +11,7 @@
       = booking.arrival.to_s(:time)
       - name = booking.customer_name.blank? ? 'walk-in' : booking.customer_name
       %span.title
-        = link_to name, edit_booking_path(booking), remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Update Booking'
+        = link_to name, edit_booking_path(booking), remote: true, class: "no_ajaxify has-tip", data: { tooltip:  true}, title: 'Update Booking'
     %li
       - if allow? :bookings, :delete
         = link_to 'X', booking, :method => :delete, remote: true, class: 'no_ajaxify has-tip', data: { :confirm => 'Delete Booking?' }, title: 'Delete Booking'

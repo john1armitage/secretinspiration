@@ -232,6 +232,20 @@ section {
     padding: 0;
   }
 }
+ul#order {
+  a.has-tip.state {
+    &.incomplete {
+      color: green;
+    }
+    &.active {
+      color: darkorange;
+    }
+    &.billing {
+      color: red;
+    }
+  }
+
+}
 body {
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif; //'OpenSans-Regular', Arial, sans-serif;
   text-rendering: optimizeLegibility;
