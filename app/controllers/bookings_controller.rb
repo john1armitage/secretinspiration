@@ -4,6 +4,10 @@ class BookingsController < ApplicationController
   # GET /bookings
   def index
     set_booking_dates
+    if params[:message].present?
+      message = params[:message].split(':')
+      @message = Message.new(message: "#{message[0]}: #{message[1]}", message_type: message[1], user_id: current_user.id, created_at: Time.now)
+    end
   end
 
   def dated

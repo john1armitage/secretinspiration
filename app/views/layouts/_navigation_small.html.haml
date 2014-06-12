@@ -1,3 +1,8 @@
+- if admin_ok?
+  .row
+    .small-12.large-2.columns.no_padding
+      %ul#contact.inline-list
+        = render 'layouts/menus/session'
 .contain-to-grid.sticky
   -#%nav.top-bar{data: { 'topbar' => true, 'magellan-expedition' => 'fixed' } }
   %nav.top-bar{data: { topbar: true } }

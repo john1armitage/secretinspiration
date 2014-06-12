@@ -4,3 +4,8 @@ $('div#content').html("<%= escape_javascript(render :partial => 'bookings/index'
 <% elsif @request %>
 $('div#editor').html("<%= escape_javascript(render :partial => 'bookings/thanks') %>")
 <% end %>
+<% if @message %>
+<% broadcast "/messages/new" do %>
+$("#chat").prepend("<%= escape_javascript render(@message) %>");
+<% end %>
+<% end %>

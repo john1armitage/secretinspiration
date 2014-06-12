@@ -1,0 +1,34 @@
+- name = variant.item.name
+- name += ": #{variant.name}" unless variant.name == 'default'
+- price = variant.price.to_d > 0 ? variant.price : variant.item.price
+%li.catalogue
+  %section
+    .store-variant
+      - if pic = variant.pics.first
+        - title = variant.item.notes.blank? ? name : "#{name} [#{variant.item.notes}]"
+        %a.gallery.no_ajaxify.show-for-small-only{ href: pic.image_url(:detail), rel: @choice.name, title: name }
+          != render :partial => "choices/#{current_tenant.domain}/image", locals: {variant: variant, pic: pic, name: name}
+        %a.gallery.no_ajaxify.hide-for-small-only{ href: pic.image_url(:detail), rel: @choice.name, title: title }
+          != render :partial => "choices/#{current_tenant.domain}/image", locals: {variant: variant, pic: pic, name: title}
+      - else
+        %p
+          Sorry, no pic yet<br/><br/><br/>
+  %section.section.vertical-tabs{data: {section:  'vertical-tabs'}}
+    - cart_id = params[:cart_id].present? ? params[:cart_id] : nil
+    - param = "variant_id: #{variant.id}"
+    - param += ", cart_id: #{params[:cart_id]}" if params[:cart_id].present?
+    - param += ", order_id: #{params[:order_id]}, bill: true" if params[:order_id].present?
+    = button_to "#{humanized_money_with_symbol( price )} #{name}", eval("line_items_path(#{param})"),
+      form_class: 'no_ajaxify', :remote => true, title: 'Add to Wishes', class: 'wide'
+    - if allow? :items, :update
+      %span= link_to 'item', edit_item_path(variant.item)
+    - if allow? :items, :destroy
+      %span= link_to 'X', variant.item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      |
+    - if allow? :variants, :update
+      %span= link_to 'variant', edit_variant_path(variant)
+      %span
+        = link_to '+1', new_variant_path( item_id: variant.item.id)
+      |
+      - pic_name = "#{variant.item.name} #{variant.item.category.name}"
+      %span= link_to 'pic', pics_url(:variant_id => variant.id, name: pic_name.gsub(/ /, '_'))

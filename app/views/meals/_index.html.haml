@@ -1,7 +1,7 @@
 #editor.no-print
 %ul#meal.no-print
   = render 'meals/tables'
-- unless params[:short].present?
+- unless ( params[:short].present? or params[:table_view].present? )
   #display.no-print
     = render 'bookings/dated'
     - unless @table_view == true

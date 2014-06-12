@@ -1,1 +1,6 @@
 $('div#line_items').html("<%= escape_javascript(render :partial => 'meals/line_items' ) %>")
+<% if @message %>
+<% broadcast "/messages/new" do %>
+$("#chat").prepend("<%= escape_javascript render(@message) %>");
+<% end %>
+<% end %>

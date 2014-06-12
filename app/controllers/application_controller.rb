@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
   helper_method :admin_ok?
 
   def current_tenant
-    @current_tenant ||= Tenancy.find_by_hostname!(request.host)
+    @current_tenant ||= Tenancy.find_by_hostname!(request.host.gsub(/www./,''))
   end
   helper_method :current_tenant
 

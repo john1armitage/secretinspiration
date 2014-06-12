@@ -10,20 +10,24 @@
 %body#monitor
   = javascript_include_tag "application"
   .row
-    .large-2.columns.no_padding
+    .small-12.large-2.columns.no_padding
       %ul#contact.inline-list
         - if admin_ok?
-          %li
-            = render 'layouts/menus/session'
+          = render 'layouts/menus/session'
+        - else
+          admin_ok?
+          = request.remote_addr
+  .row
+    .small-12.large-10.columns
+      .row
+        .large-12.columns#menu
+      .row
+        .large-12.columns#content
+  .row
+    .small-12.large-2.columns.no_padding
       #aside
         %aside#sidebar.no-print
           = yield
-    .large-10.columns
-      .row.show-for-medium-up.no-print
-        .large-12.columns#menu
-      .row.show-for-medium-up.no-print
-        .large-12.columns#content
-          Yo
 -#:coffeescript
 -#  jQuery ->
 -#    faye = new Faye.Client("http://#{current_tenant.hostname}:9292/faye")

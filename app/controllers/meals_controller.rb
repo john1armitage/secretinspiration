@@ -5,7 +5,6 @@ class MealsController < ApplicationController
   before_action :set_meal, only: [:show, :edit, :update, :destroy, :clear, :check_out, :patcher]
 
   def index
-#    Eventbus.clear
     if params[:monitor].present?
       if params[:meal_id].present?
         meal = Meal.find(params[:meal_id])
@@ -14,7 +13,7 @@ class MealsController < ApplicationController
       end
       get_meals
       render 'monitor', layout: 'monitor'
-    elsif !request.xhr?
+    elsif params[:table_view].present?
       @booking_date = Date.today
       @bookings = Booking.where( booking_date: @booking_date )
       @table_view = true
@@ -83,7 +82,7 @@ class MealsController < ApplicationController
     @meal.start_time = Time.now
     @meal.save
     target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
-    @message = Message.new(message: "#{target}: #{@meal.state.gsub(/_/,' ')}", message_type: 'ordering', user_id: current_user.id, created_at: Time.now)
+    @message = Message.new(message: "#{target}: ordering", message_type: @meal.state, user_id: current_user.id, created_at: Time.now)
     if params[:takeaway].present?
       render 'edit'
     else
@@ -145,6 +144,9 @@ class MealsController < ApplicationController
 
   def clear
     if  @meal.line_items.destroy_all
+      target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+      @message = Message.new(message: "#{target}: re-ordering", message_type: @meal.state, user_id: current_user.id, created_at: Time.now)
+      @meal.update(state: 'active')
       render 'meal_items/meal.js.erb'
     else
       render 'meal_items/meal.js.erb'
@@ -219,8 +221,10 @@ class MealsController < ApplicationController
     unless @meal.seating_id.blank?
       @meal.seating.booking.update(state: 'incomplete')
     end
+    target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
+    message = "#{target}:cancel"
     @meal.destroy
-    redirect_to bookings_url(monitor: true, target: target)
+    redirect_to bookings_url(message: message, target: target)
   end
 
   private

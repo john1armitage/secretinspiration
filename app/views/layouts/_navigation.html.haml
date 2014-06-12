@@ -1,5 +1,5 @@
-.row.show-for-large-up
-  .large-3.columns
+.row.show-for-medium-up
+  .large-3.columns.show-for-large-up
     != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', class: 'no_ajaxify image'
   .large-4.columns
     %ul#contact.inline-list
@@ -13,10 +13,6 @@
         #contact
           != render 'layouts/contact/index'
       - if admin_ok?
-        - if allow? :meals, :index
-          %li#admin
-            != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
-
         - if allow? :dailies, :index and current_tenant.dailies == '1'
           %li
             != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
@@ -30,7 +26,7 @@
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
         %li
           != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'
-      - %w(food drinks accessory jewellery bag art stuff catalogue).each do |component|                       #  accessory bag scented art
+      - %w(food drinks accessory jewellery bag art stuff catalogue painting).each do |component|                       #  accessory bag scented art
         - if eval("current_tenant.#{component} == '1'")
           %li
             != link_to make_title(component.pluralize), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'

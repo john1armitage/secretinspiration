@@ -6,6 +6,7 @@ class MealItemsController < ApplicationController
 
   def create
     if params[:line_item].present? && params[:line_item][:special].present?
+      params[:choices] = 'food'
       variant = Item.find_by_name( "ad_hoc_#{params[:line_item][:special]}").variants.first
       @line_item = @meal.create_special(variant.id, params[:each], params[:line_item])
       # @line_item.save
