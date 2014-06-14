@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.order(:code).all
+    @accounts = Account.order(:code)
     respond_with @accounts
   end
 

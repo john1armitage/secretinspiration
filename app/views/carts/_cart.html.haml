@@ -2,9 +2,8 @@
   - if allow? :carts, :delete
     != render 'carts/search'
   %li.title
-    %span
+    %span.has-tip{data: { id: @cart.id, tooltip: true }, title: "Cart #{@cart.id}"}
       Wishes
-      = @cart.id
     - if allow? :carts, :destroy
       != link_to 'X', cart_path( @cart, cart_id: @cart.id), method: :delete, remote: true, class: 'no_ajaxify',
         data: { confirm: 'Delete?'}, title: "Delete Cart"

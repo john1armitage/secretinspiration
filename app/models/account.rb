@@ -19,7 +19,7 @@ class Account < ActiveRecord::Base
 
   before_save :set_ancestors
 
-  default_scope { order('name') }
+  #default_scope { order('name') }
 
   def set_ancestors
     self.root_id = ( ancestry.blank? ?  id : ancestry.gsub(/\/.+/, '') )

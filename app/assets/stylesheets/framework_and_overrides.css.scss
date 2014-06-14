@@ -112,6 +112,7 @@ body {
       font-weight: bold;
       &:hover {
         color: $special; //#008cba;
+
       }
     }
   }
@@ -255,4 +256,7 @@ body {
       max-width: inherit;
     }
   }
+}
+a.small.radius.button:hover {
+  color: white;
 }
