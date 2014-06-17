@@ -748,7 +748,8 @@ CREATE TABLE tenancies (
     description text,
     keywords text,
     capacity integer,
-    supplier_id integer
+    supplier_id integer,
+    menu character varying(255)
 );
 
 
@@ -1793,4 +1794,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140426155426');
 INSERT INTO schema_migrations (version) VALUES ('20140427102159');
 
 INSERT INTO schema_migrations (version) VALUES ('20140522102323');
+
+INSERT INTO schema_migrations (version) VALUES ('20140617145006');
 

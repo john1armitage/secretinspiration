@@ -38,7 +38,10 @@
     .large-10.small-12.medium-12.columns
       .row.show-for-medium-up.no-print
         .large-12.columns#menu
-          = render 'layouts/menus/us'
+          - if current_tenant.menu.blank?
+            = render 'choices/sub_menu'
+          - else
+            = render "layouts/menus/#{current_tenant.menu}"
       .row.hide-for-large-up
         .large-12.columns
           #editor
