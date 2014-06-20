@@ -25,11 +25,14 @@
         %span
           = current_tenant.company
           = "Co. No. #{current_tenant.coho}"
+      %p
         %span
           = "[Order #{@order.id}]"
           = @order.updated_at.strftime('%e-%b-%y')
-        %span
-          = "#{pluralize(@order.line_items.size, 'item')}"
+        -#%span
+        -#  - p "PPPPPPPPPPPPPPPPPPPPPPPPPP"
+        -#  - p @order.line_items
+        -#  = "#{pluralize(@order.line_items.size, 'item')}"
     %li.no-print
       %span
         = link_to "Print",'#', id: 'print'

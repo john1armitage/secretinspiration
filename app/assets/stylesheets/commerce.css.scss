@@ -457,6 +457,10 @@ $head-border: #009900;
     -moz-column-gap: 20px;
     -webkit-column-count: 2;
     -webkit-column-gap: 20px;
+    li {
+      orphans: 3;
+      widows: 3;
+    }
   }
   footer {
     border: 1px solid darkgray;
@@ -963,6 +967,13 @@ $head-border: #009900;
       &.total {
         font-weight: bold;
       }
+    }
+  }
+}
+body.artwork {
+  article.painting, article.welcome div.two-column {
+    p {
+      text-align: center;
     }
   }
 }

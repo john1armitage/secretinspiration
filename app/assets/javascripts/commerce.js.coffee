@@ -67,3 +67,9 @@ jQuery ->
     $.ajax
       url: "/dailies?calendar=false&balance=true&daily_date=" + event.target.value
       dataType: 'script'
+  $(document).foundation orbit:
+    animation: "fade" # Sets the type of animation used for transitioning between slides, can also be 'fade'
+    timer_speed: 10000 # Sets the amount of time in milliseconds before transitioning a slide
+    pause_on_hover: true # Pauses on the current slide while hovering
+    resume_on_mouseout: true # If pause on hover is set to true, this setting resumes playback after mousing out of slide
+    next_on_click: true # Advance to next slide on click

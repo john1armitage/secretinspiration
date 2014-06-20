@@ -50,6 +50,8 @@
         %span= link_to 'Edit', edit_item_path(item)
       - if allow? :items, :destroy
         %span= link_to 'X', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - if item.withdrawn
+        %span= 'WITHDRAWN'
 
     = render partial: "choices/#{current_tenant.domain}/variant", collection: variants.order(:rank)
   %p

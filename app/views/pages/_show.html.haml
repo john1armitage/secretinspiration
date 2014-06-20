@@ -3,7 +3,7 @@
   - @page = Page.find_by_code('construction')
 
 - if @page
-  %article
+  %article{class: @page.code}
     - unless @page.title == 'blank'
       %h1
         = markdown(embolden(@page.title))

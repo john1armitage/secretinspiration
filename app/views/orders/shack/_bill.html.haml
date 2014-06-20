@@ -101,10 +101,6 @@
           = f.hidden_field :paid
           = f.hidden_field :credit_card
           .row
-            - if allow? :orders, :edit
-              .large-3.columns
-                = f.label :effective_date
-                = f.date_field :effective_date
             .large-1.columns
               = f.label :voucher
               = f.text_field :voucher
@@ -116,10 +112,25 @@
               = text_field_tag :cash, 0.00
             .large-2.columns
               - total = (@order.paid > 0) ? @order.paid : (@order.net_home + @order.tax_home)
-              = label_tag :total
+              = label_tag :total #, "Total (cc #{@order.credit_card})"
               = text_field_tag :total, total
-            .large-1.columns.left
+            .large-2.columns
               %p.center
-              = f.submit 'Card', id: 'card_payment'
+                %span.small
+                  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
               %p.center
-              = f.submit 'All Cash', id: 'cash_payment'
+                = f.submit 'All Cash', id: 'cash_payment'
+            .large-2.columns.left
+              %p.center
+                %span.small
+                  = "[#{pounds(@order.credit_card )}]"
+              %p.center
+                = f.submit 'Card', id: 'card_payment'
+          .row
+            - if allow? :orders, :destroy
+              .large-3.columns
+                = f.label :effective_date
+                = f.date_field :effective_date
+              .large-3.columns.left
+                = f.label :session
+                = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
