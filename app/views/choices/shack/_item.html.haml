@@ -23,8 +23,8 @@
       = hidden_field_tag :meal_id, @meal_id
       = hidden_field_tag :variant_id, default.first.id
 
-      - choices = item.category.choices ? (item.category.choices - [""] ) : []
-      - choices = item.choices ? (item.choices - [""] ) : []  unless choices.size > 0
+      - choices = item.choices ? (item.choices - [""] ) : []
+      - choices = item.category.choices ? (item.category.choices - [""] ) : [] unless choices.size > 0
       - choices.each do |c|
         - @choice = c
         =# make_title(c)

@@ -2,7 +2,7 @@
 
 = form_for @item, :validate => true, :class => "no_ajaxify"  do |f|
   %fieldset
-    %legend= 'Item: ' + ( @item.name || "new" )
+    %legend= "Item#{@item.id}: " + ( @item.name || "new" )
     = hidden_field_tag :root_category, params[:root_category]
     .row
       .field.small-4.columns

@@ -76,7 +76,10 @@ div.columns ul#catalogue {
   }
   ul.menu-item {
     li {
-      padding-bottom: 0.25em;
+      padding-bottom: 0em;
+      input[type="checkbox"] {
+        margin: 0;
+      }
       &.catalogue {
 //        border: 1px solid darkgray;
       }
@@ -84,6 +87,7 @@ div.columns ul#catalogue {
     label {
       display: inline;
       vertical-align: 0.2rem;
+      font-size: 1.2em;
     }
     section {
       margin-left: 0;

@@ -688,6 +688,9 @@ $head-border: #009900;
     }
     ul.menu-item {
       margin-left: 0;
+      li.choice {
+        white-space:nowrap;
+      }
 
     }
   }
