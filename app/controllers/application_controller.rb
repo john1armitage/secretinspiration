@@ -108,7 +108,8 @@ class ApplicationController < ActionController::Base
   helper_method :get_suppliers
 
   def page_title
-    current_tenant.name
+    title = current_tenant.name
+    title += ": #{params[:id].gsub(/_/,' ').titleize}" if params[:id].present?
   end
   helper_method :page_title
 

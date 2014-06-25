@@ -3,7 +3,6 @@
 %head
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
   %title= content_for?(:title) ? yield(:title) : current_tenant.title
-  -#%meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Commerce'}"}
   %meta{:name => "description", :content => current_tenant.description}
   %meta{:name => "keywords", :content => current_tenant.keywords}
   = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'

@@ -24,13 +24,3 @@
             != subcat.description unless subcat.description.blank?
 
         = render :partial => "choices/#{current_tenant.domain}/show", locals: { subcat: subcat}
-
--#:coffeescript
--#  jQuery ->
--#    $('a.gallery').colorbox(
--#     {
--#       current: ""
--#       arrowkey: true
--#       rel: 'gal'
--#     }
--#    )

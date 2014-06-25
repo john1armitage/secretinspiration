@@ -33,9 +33,9 @@
           - if eval("current_tenant.#{component} == '1'")
             %li.has-dropdown
               != link_to make_title(component), "#", class: 'no_ajaxify'
-              - @categories = set_categories(component)
+              - categories = set_categories(component)
               %ul.dropdown
-                - @categories.order(:rank, :name).each do |category|
+                - categories.order(:rank, :name).each do |category|
                   %li
                     = link_to category.nice_name.pluralize, choice_path(category.name)
         %li.has-dropdown
