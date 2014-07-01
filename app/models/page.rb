@@ -6,4 +6,9 @@ class Page < ActiveRecord::Base
   validates_presence_of :code, :message => 'is required'
   validates_presence_of :body, :message => 'is required'
 
+ def to_param
+    code
+ end
+
+
 end

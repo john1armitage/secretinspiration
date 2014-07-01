@@ -59,7 +59,8 @@ class BroadcastsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_broadcast
-      @broadcast = params[:code].present? ? Broadcast.find_by_code(params[:id]) : Broadcast.find(params[:id])
+      @broadcast = Broadcast.find_by_code(params[:id])
+      # @broadcast = params[:code].present? ? Broadcast.find_by_code(params[:id]) : Broadcast.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

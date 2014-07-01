@@ -57,7 +57,7 @@ module ApplicationHelper
     grouped_times = []
     now = Time.now.to_time
     if ['lunch', 'open'].include?(opening)
-      times = []
+      times = ['']
       time = CONFIG[:lunch_open].to_time
       0.upto(9) do |i|
         times << time.strftime('%H:%M') unless purpose == 'takeaway' && now > time
@@ -66,7 +66,7 @@ module ApplicationHelper
       grouped_times << times
     end
     if ['dinner', 'open'].include?(opening)
-      times = []
+      times = ['']
       time = dinner_open.to_time
       0.upto(14) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
@@ -75,7 +75,7 @@ module ApplicationHelper
       grouped_times << times
     end
     if ['timesheet'].include?(purpose)
-      times = []
+      times = ['']
       time = dinner_open.to_time - 1.hour
       0.upto(30) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time

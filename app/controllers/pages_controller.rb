@@ -12,6 +12,9 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   def show
+    if params[:vanilla].present?
+      render layout: false
+    end
   end
 
   # GET /pages/new
@@ -53,7 +56,8 @@ class PagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = params[:code].present? ? Page.find_by_code(params[:id]) : Page.find(params[:id])
+      @page = Page.find_by_code(params[:id])
+      # @page = params[:code].present? ? Page.find_by_code(params[:id]) : Page.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

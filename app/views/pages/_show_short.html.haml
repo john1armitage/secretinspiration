@@ -4,8 +4,9 @@
       %h2
         Sorry, Page not Found
 - else
+  - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
   %p#catalogue
     %span.title
-      != @page.title
+      != markdown(@page.title)
     %span.body
-      != @page.body
+      != markdown(@page.body)

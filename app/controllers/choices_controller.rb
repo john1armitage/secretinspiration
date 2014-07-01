@@ -7,6 +7,16 @@ class ChoicesController < ApplicationController
     choices = params[:choices].present? ? params[:choices] : default_choices
     @categories = get_categories(choices)
     @page = Page.find_by_code( choices )
+    if params[:vanilla].present?
+      render layout: 'vanilla'
+    end
+
+  end
+
+  def show
+    if params[:vanilla].present?
+      render layout: 'vanilla'
+    end
   end
 
   private

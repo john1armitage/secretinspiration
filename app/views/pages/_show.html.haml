@@ -22,7 +22,8 @@
             %p
               != link_to 'More information ...', @page.link
           - if @page.image == 'image'
-            != link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
+            != image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
+            =# link_to image_tag("/assets/images/#{current_tenant.domain}/#{@page.code}.jpg")
           - else
             - slide = @page.image.split(/-/)
             %ul{"data-orbit" => ""}
@@ -32,7 +33,7 @@
         .large-6.columns.pull-6
           = markdown(embolden(@page.sub))
           = markdown(@page.body)
-    .two-column.show-for-large-up
+    .large-12.two-column.show-for-large-up
       .row
         - if @page.feature2.blank?
           .large-12.columns
@@ -42,15 +43,16 @@
             != render "pages/features/#{@page.feature2}"
           .large-6.columns
             = markdown(@page.body2)
+    .large-12.show-for-large-up
       .row
         - if @page.feature3.blank?
           .large-12.columns
             = markdown(@page.body3)
-        - else
-          .large-6.columns
-            = markdown(@page.body3)
-          .large-6.columns
-            != render "pages/features/#{@page.feature3}"
+        -#- else
+        -#  .large-6.columns
+        -#    = markdown(@page.body3)
+        -#  .large-6.columns
+        -#    != render "pages/features/#{@page.feature3}"
       - unless @page.link.blank?
         .row
           .large-12.columns

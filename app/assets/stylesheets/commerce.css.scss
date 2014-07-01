@@ -424,11 +424,20 @@ $head-border: #009900;
   }
   body {
     article {
+      p, li {
+        //        orphans: 2;
+        //        widows: 2;
+        font-size: 0.85em;
+        text-align: justify;
+        line-height: 1.3rem;
+        margin-bottom: 0.8em;
+      }
       h1 {
         font-size: 1.5rem;
         padding: 0.3em 0em 0.1em 0.5em;
         background-color: $theme; /* ##008cba */
         color: white;
+        margin-bottom: 0.3em;
         //        border-top: 3px solid $head-border;
       }
       h6, h2 {
@@ -438,14 +447,8 @@ $head-border: #009900;
       }
       img {
         margin-bottom: 0.5em;
-      }
-      p, li {
-        //        orphans: 2;
-        //        widows: 2;
-        font-size: 0.85em;
-        text-align: justify;
-        line-height: 1.3rem;
-        margin-bottom: 0.3em;
+        border: 1px solid darkgray;
+//        max-height:
       }
     }
   }
@@ -978,5 +981,12 @@ body.artwork {
     p {
       text-align: center;
     }
+  }
+}
+
+article.welcome ul.inline-list li {
+  &.title {
+    text-align: center;
+    font-weight: bold;
   }
 }

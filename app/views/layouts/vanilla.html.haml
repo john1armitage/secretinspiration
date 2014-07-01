@@ -1,0 +1,62 @@
+!!!
+%html
+%head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %title= content_for?(:title) ? yield(:title) : current_tenant.title
+  %meta{:name => "description", :content => current_tenant.description}
+  %meta{:name => "keywords", :content => current_tenant.keywords}
+  = stylesheet_link_tag "application", "data-turbolinks-track" => true, :media => 'print, screen'
+  -#= stylesheet_link_tag 'print', :media => 'print'
+  -# Foundation 5 won't work with Rails Turbolinks
+  -# Modernizr is required for Zurb Foundation
+  = javascript_include_tag "modernizr", "data-turbolinks-track" => true
+  = csrf_meta_tags
+= favicon_link_tag 'favicon.ico'
+%body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
+  = javascript_include_tag "application"
+  -#.row#navigation.no-print
+  -#  .large-12.columns.show-for-medium-up.no-print
+  -#    = render 'layouts/navigation'
+  -#  .large-12.columns.hide-for-medium-up.no-print
+  -#    = render 'layouts/navigation_small'
+  -#.row.no-print
+  -#  .large-12.columns#messages.no-print
+  -#    = render 'layouts/messages'
+  -#.row
+  -#  #aside.show-for-medium-down.no-print
+  -#    %aside#sidebar.no-print
+  -#      = render "welcome/offers"
+  -#      -#= render "layouts/media/#{current_tenant.domain}/index"
+  -#  .large-2.columns#aside.show-for-large-up.no-print
+  -#    %aside#sidebar.no-print
+  -#      #editor.hide-for-medium-down
+  -#      = render "welcome/offers"
+  -#      -#= render "layouts/media/#{current_tenant.domain}/index"
+  -#      = render "welcome/intro"
+  -#    #utility
+  .large-10.small-12.medium-12.columns
+    .row.show-for-medium-up.no-print
+      .large-12.columns#menu
+        - set_categories(params[:choices])
+        %ul.inline-list
+          - categories = @categories.order(:rank, :name)
+          - categories = categories.where("notes <> 'hide'") unless (allow? :categories, :edit)
+          - categories.each do |category|
+            %li
+              - params = category.name
+              - params += "?meal_id=#{@meal.id}" if @meal
+              - params += "?cart_id=#{@cart.id}" if @cart
+              = link_to category.nice_name.pluralize, choice_path(params)
+    .row.hide-for-large-up
+      .large-12.columns
+        #editor
+    .row
+      .large-12.columns#content{role: "content"}
+        = yield
+
+
+:coffeescript
+  jQuery ->
+    $('div#menu li').on 'click', (event) ->
+      $('div#menu li').removeClass 'active'
+      $(this).addClass('active')
