@@ -23,6 +23,8 @@
           %span
             = link_to "#{pounds(daily.take)} (#{pounds(daily.tips)})", daily_path(daily), remote: true, class: 'no_ajaxify'
           = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Session", :data => { :confirm => 'Are you sure?' }
+        %li
+          = "#{pluralize(daily.headcount, 'head')}"
     - if timesheets[date]
       - timesheets[date].each do |timesheet|
         %li
