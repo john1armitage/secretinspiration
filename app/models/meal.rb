@@ -22,12 +22,16 @@ class Meal < ActiveRecord::Base
     same_choices = true
     current_item = nil
     items.each do |item|
+      i = j = 0
       choices.each do |k, v|
-        same_choices = eval "item.#{k} == '#{v}'"
+        i += 1
+        j += 1 if eval "item.#{k} == '#{v}'"
+        # same_choices = eval "item.#{k} == '#{v}'"
         #p eval("item.#{k} == '#{v}'")
         #p eval("item.#{k}")
       end
-      if same_choices
+      # if same_choices
+     if i == j
         current_item = item
       end
     end

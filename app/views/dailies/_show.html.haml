@@ -19,7 +19,7 @@
       = pax(@daily.booked_pax)
   .row
     .large-6.columns
-      Walkin
+      Walk-in
     .large-6.columns.number
       = pax(@daily.walkin_pax)
   .row
@@ -79,3 +79,19 @@
         Share
       .large-6.columns.number
         =  pounds(tips)
+  - if allow? :dailies, :destroy
+    .row
+      .large-6.columns.id
+        Safe
+      .large-6.columns.number.id
+        = pounds(@daily.safe)
+    .row
+      .large-6.columns
+        Cash Out
+      .large-6.columns.number
+        = pounds(@daily.petty)
+    .row
+      .large-6.columns
+        Banked
+      .large-6.columns.number
+        = pounds(@daily.bank)

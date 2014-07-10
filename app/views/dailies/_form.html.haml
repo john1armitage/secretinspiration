@@ -10,6 +10,19 @@
       .field.small-12.columns
         = f.label :credit_card, "Credit Card: #{pounds(@credit_card/100.00)}"
         = f.text_field :credit_card
+    - if allow? :dailies, :destroy
+      .row
+        .field.small-12.columns
+          = f.label :safe, "In Safe"
+          = f.text_field :safe
+      .row
+        .field.small-12.columns
+          = f.label :petty, "Cash Used"
+          = f.text_field :petty
+      .row
+        .field.small-12.columns
+          = f.label :bank, "Banked"
+          = f.text_field :bank
     - unless @orders && @orders.size > 0
       .row
         .field.small-12.columns
