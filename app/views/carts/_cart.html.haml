@@ -12,13 +12,13 @@
         != humanized_money_with_symbol(( @cart.line_items.sum(:net_home_cents) + @cart.line_items.sum(:tax_home_cents))/100)
       != button_to 'Clear', clear_cart_path(@cart, cart_id: @cart.id), method: :delete, remote: true, form_class: 'has-tip no_ajaxify',
         data: {  confirm: 'Clear All?'}, title: "Remove All Items"
-      - @cart.line_items.joins({:variant => :item }).order('items.grouping, line_items.desc').each do |line_item|
+      - @cart.line_items.joins({:variant => {:item => :category} }).order('items.grouping, line_items.desc').each do |line_item|
         = render 'carts/line_item', line_item: line_item
     -else
       %li
         %span
-          Use
-          != link_to 'Catalogue', choices_path(choices: 'catalogue', cart_id: @cart.id), class: 'no_ajaxify', remote: 'true'
+          Use Catalogue
+          -#!= link_to 'Catalogue', choices_path(choices: 'catalogue', cart_id: @cart.id), class: 'no_ajaxify', remote: 'true'
           to add Items
     - if allow? :orders, :index
       %li

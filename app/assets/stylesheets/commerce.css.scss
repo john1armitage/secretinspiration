@@ -700,6 +700,9 @@ $head-border: #009900;
   ul.menu-item {
     input {
       background-color: paleturquoise;
+      &.store {
+        background-color: lightgray;
+      }
     }
   }
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.menu-item, ul.aside, ul.takeaway {

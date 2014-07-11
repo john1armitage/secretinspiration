@@ -1,11 +1,15 @@
 - if @category != line_item.variant.item.grouping
   - @category = line_item.variant.item.grouping
-  - @component_title = make_title(@category.split(':')[1] ).pluralize
+  - category_name = @category.split(':')[1]
+  - @component_title = make_title( category_name ).pluralize
   %li.category
     %span
       = link_to @component_title, choice_path(line_item.variant.item.category.parent.name), title: "View #{@component_title}"
 
 %li
+  %span.title
+    = line_item.variant.item.category.name.truncate(24, separator: /\s/, omission: '').titleize
+  %br
   = line_item.quantity
   x
   = link_to line_item.desc, choice_path(line_item.variant.item.category.parent.name, cart_id: @cart.id, filter: line_item.variant.item.category.name), title: "View #{make_title(line_item.variant.item.category.name)} #{@component_title}"

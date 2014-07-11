@@ -46,12 +46,13 @@ module CurrentCart
     if current_user.id.blank?
       @cart = Cart.find(session[:cart_id])
     else
-      @cart = current_user.carts.first || Cart.create( user_id: current_user.id, domain: current_tenant.domain )
+      @cart = current_user.carts.first || Cart.create( user_id: current_user.id )
       # @cart = Cart.create( user_id: current_user.id, domain: current_tenant.domain )
      session[:cart_id] = @cart.id
     end
   rescue ActiveRecord::RecordNotFound
-    @cart = Cart.create(IP: request.remote_addr, domain: current_tenant.domain)
+    # @cart = Cart.create(IP: request.remote_addr, domain: current_tenant.domain)
+    @cart = Cart.create(IP: request.remote_addr)
     session[:cart_id] = @cart.id
     @cart
   end
