@@ -107,29 +107,8 @@ class VariantsController < ApplicationController
   end
 
   def get_candidates(id)
-    @item.variants.where.not( id: id )
+    @item.variants.where(domain: current_tenant.domain).where.not( id: id )
   end
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
-#  def find_defaults
-#    @item.variants.where( item_default: true, domain: current_tenant.domain )
-#  end
-#
-#  def set_default(id)
-#    id = @variant.id.blank? ? -999 : @variant.id
-#    defaults =  find_defaults
-#    unless defaults.empty? || @item.variants.size == 1
-#      if params[:variant][:item_default].to_i == 1
-#         defaults.each do |variant|
-#          variant.update_column( 'item_default', false ) unless variant.id == @variant.id.to_i
-#         end
-#      else
-#        @item.variants.where('id <> ?', @variant.id).first.update_column(item_default, true)
-#      end
-#    else
-#      @variant.update_column( 'item_default', true )
-#    end
-#  end
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   def get_item_type_properties
     @properties = @variant.item_type.properties
   end
