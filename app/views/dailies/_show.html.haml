@@ -36,7 +36,8 @@
     .large-6.columns
       Cash
     .large-6.columns.number
-      = pounds(@daily.take - @daily.credit_card)
+      - cash = @daily.take - @daily.credit_card
+      = pounds(cash)
   .row
     .large-6.columns.off
       Discount
@@ -95,3 +96,18 @@
         Banked
       .large-6.columns.number
         = pounds(@daily.bank)
+    .row
+      .large-6.columns
+        Till
+      .large-6.columns.number
+        = pounds(@daily.till)
+    - dailies = Daily.order('account_date, session DESC')
+    - last_session = ( @daily.session == 'lunch' ) ? dailies.where('account_date < ?', @daily.account_date).last : dailies.where("account_date < ? OR (account_date = ? AND session = 'lunch')", @daily.account_date, @daily.account_date).last
+    - last_till = last_session ? last_session.till : 0.00
+    - last_safe = last_session ? last_session.safe : 0.00
+    - safe_amount = last_safe + cash - @daily.petty + ( last_till - @daily.till ) - @daily.bank
+    .row
+      .large-6.columns.id
+        Calculated
+      .large-6.columns.number.id
+        = pounds(safe_amount)

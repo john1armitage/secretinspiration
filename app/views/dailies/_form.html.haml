@@ -23,6 +23,10 @@
         .field.small-12.columns
           = f.label :bank, "Banked"
           = f.text_field :bank
+      .row
+        .field.small-12.columns
+          = f.label :till, "Pounds in Till"
+          = f.text_field :till
     - unless @orders && @orders.size > 0
       .row
         .field.small-12.columns
