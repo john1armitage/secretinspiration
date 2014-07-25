@@ -14,7 +14,11 @@
       .field.small-12.columns
         = f.label :till, "Pounds in Till"
         = f.text_field :till
-    - if allow? :dailies, :destroy
+    .row
+      .field.small-12.columns
+        = f.label :surplus
+        = f.text_field :surplus
+    - if allow? :orders, :destroy
       .row
         .field.small-12.columns
           = f.label :safe, "In Safe"
@@ -23,6 +27,18 @@
         .field.small-12.columns
           = f.label :petty, "Cash Used"
           = f.text_field :petty
+      .row
+        .field.small-12.columns
+          = f.label :petty_reason, "Reason"
+          = f.text_area :petty_reason
+      .row
+        .field.small-12.columns
+          = f.label :safe_cash, "Safe Used"
+          = f.text_field :safe_cash
+      .row
+        .field.small-12.columns
+          = f.label :safe_reason, "Reason"
+          = f.text_area :safe_reason
       .row
         .field.small-12.columns
           = f.label :bank, "Banked"

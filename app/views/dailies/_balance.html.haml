@@ -8,8 +8,8 @@
   - if @orders.size > 0
     - first_day = @orders.first.effective_date
     - week = HMRC_week_number(first_day)
-    - week_total = 0
-    - total = 0
+    - week_total = 0.00
+    - total = 0.00
     .row
       .field.large-12.columns.title
         = HMRC_week_number(first_day)
@@ -23,16 +23,16 @@
             = pounds(week_total/100)
         - week = current
         - total += week_total
-        - week_total = 0
+        - week_total = 0.00
         .row
           .field.large-12.columns.title
             = current
-      - week_total += order.paid_cents
+      - week_total += (order.paid_cents  + order.tip_cents)
       .row
         .field.large-6.columns.number
           = order.effective_date.strftime('%a %e')
         .field.large-6.columns.number
-          = pounds(order.paid)
+          = pounds(order.paid + order.tip)
     - total += week_total
     .row
       .field.large-6.columns.number

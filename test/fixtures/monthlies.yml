@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  takings: MyString
+  credit_card: MyString
+  cash: MyString
+  tax: MyString
+  turnover: MyString
+  cash_used: MyString
+
+two:
+  takings: MyString
+  credit_card: MyString
+  cash: MyString
+  tax: MyString
+  turnover: MyString
+  cash_used: MyString

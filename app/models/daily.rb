@@ -12,6 +12,8 @@ class Daily < ActiveRecord::Base
   monetize :petty_cents, :allow_nil => true
   monetize :bank_cents, :allow_nil => true
   monetize :till_cents, :allow_nil => true
+  monetize :safe_cash_cents, :allow_nil => true
+  monetize :surplus_cents, :allow_nil => true
 
   validates_presence_of :session, :account_date, :take, :credit_card, :tips
   validates_numericality_of :take, :credit_card, :tips

@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Takings:
+  = @monthly.takings
+%p
+  %b Credit card:
+  = @monthly.credit_card
+%p
+  %b Cash:
+  = @monthly.cash
+%p
+  %b Tax:
+  = @monthly.tax
+%p
+  %b Turnover:
+  = @monthly.turnover
+%p
+  %b Cash used:
+  = @monthly.cash_used
+
+= link_to 'Edit', edit_monthly_path(@monthly)
+\|
+= link_to 'Back', monthlies_path

@@ -22,7 +22,7 @@ module Permissions
       allow_param :meal, [:contact, :phone, :state, :start_time, :notes]
       allow_param :message, [:message, :message_type, :user_id, :create_time]
       allow_param :order, [:state, :paid, :credit_card, :tip]
-      allow_param :daily, [:headcount, :account_date, :credit_card, :session, :pax, :walkin_pax, :updated_at]
+      allow_param :daily, [:headcount, :account_date, :credit_card, :session, :pax, :till, :surplus, :walkin_pax, :updated_at]
       allow_param :timesheet, [:employee_id, :start_time, :end_time, :hours, :work_date, :session, :rate_cents, :headcount]
       #allow :choices, :index
       #allow :users, [:new, :carts, :form, :update]

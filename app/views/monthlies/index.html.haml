@@ -1,0 +1,34 @@
+%h1 Listing monthlies
+
+= link_to 'New Monthly', new_monthly_path
+
+%table
+  %tr
+    %th Month
+    %th Takings
+    %th Credit card
+    %th Banked
+    %th Cash used
+    %th Chk
+    %th Tax
+    %th Turnover
+    %th
+    %th
+    %th
+
+  - @monthlies.order(:year, :month).each do |monthly|
+    %tr
+      %td= "#{monthly.year} #{monthly.month}"
+      %td= monthly.takings
+      %td= monthly.credit_card
+      %td= monthly.cash
+      %td= monthly.cash_used
+      %td= monthly.credit_card + monthly.cash + monthly.cash_used
+      %td= monthly.tax
+      %td= monthly.turnover
+      %td= link_to 'Show', monthly
+      %td= link_to 'Edit', edit_monthly_path(monthly)
+      %td= link_to 'Destroy', monthly, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+

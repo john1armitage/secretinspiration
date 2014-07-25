@@ -18,6 +18,9 @@
   - if allow? :postings, :index
     %li
       != link_to 'Postings', postings_path, :class => "small button radius"
+  - if allow? :monthlies, :index
+    %li
+      != link_to 'Monthlies', monthlies_path, :class => "small button radius"
   - if allow? :banks, :index
     %li
       != link_to 'Banks', banks_path, :class => "small button radius"

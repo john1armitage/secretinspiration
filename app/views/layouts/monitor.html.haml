@@ -14,9 +14,10 @@
       %ul#contact.inline-list
         - if admin_ok?
           %li
+            - @home_flag = true
             = render 'layouts/menus/session'
-      #messages
-        = render 'layouts/chat'
+      -##messages
+      -#  = render 'layouts/chat'
     .large-10.columns#content
       %ul
         = yield

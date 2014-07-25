@@ -17,7 +17,7 @@
     %th
     %th
 
-  - @wages.each do |wage|
+  - @wages.order(:FY,:week_no).each do |wage|
     %tr
       %td= wage.FY
       %td= wage.week_no

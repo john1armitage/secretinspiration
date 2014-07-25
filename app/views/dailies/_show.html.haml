@@ -1,3 +1,11 @@
+- dailies = Daily.order('account_date, session DESC')
+- last_session = ( @daily.session == 'lunch' ) ? dailies.where('account_date < ?', @daily.account_date).last : dailies.where("account_date < ? OR (account_date = ? AND session = 'lunch')", @daily.account_date, @daily.account_date).last
+- last_till = last_session ? last_session.till : 0.00
+- last_safe = last_session ? last_session.safe : 0.00
+- cash = @daily.take - @daily.credit_card
+- surplus_amount = cash - @daily.petty + ( last_till - @daily.till )
+-# safe_amount = last_safe + cash - @daily.petty + ( last_till - @daily.till ) - @daily.bank
+- safe_amount = last_safe + surplus_amount - (@daily.bank + @daily.safe_cash)
 #editor
 #display
 #summary
@@ -36,8 +44,22 @@
     .large-6.columns
       Cash
     .large-6.columns.number
-      - cash = @daily.take - @daily.credit_card
       = pounds(cash)
+  .row
+    .large-6.columns
+      Till
+    .large-6.columns.number
+      = pounds(@daily.till)
+  .row
+    .large-6.columns
+      Surplus
+    .large-6.columns.number
+      = pounds(@daily.surplus)
+  .row
+    .large-6.columns.off
+      Calculated
+    .large-6.columns.number.off
+      = pounds(surplus_amount)
   .row
     .large-6.columns.off
       Discount
@@ -80,17 +102,15 @@
         Share
       .large-6.columns.number
         =  pounds(tips)
-  - if allow? :dailies, :destroy
+  - if allow? :orders, :destroy
     .row
       .large-6.columns.id
-        Safe
-      .large-6.columns.number.id
-        = pounds(@daily.safe)
-    .row
-      .large-6.columns
-        Cash Out
+        Till Used
       .large-6.columns.number
         = pounds(@daily.petty)
+    .row
+      .large-12.columns
+        = @daily.petty_reason
     .row
       .large-6.columns
         Banked
@@ -98,16 +118,19 @@
         = pounds(@daily.bank)
     .row
       .large-6.columns
-        Till
+        Safe Used
       .large-6.columns.number
-        = pounds(@daily.till)
-    - dailies = Daily.order('account_date, session DESC')
-    - last_session = ( @daily.session == 'lunch' ) ? dailies.where('account_date < ?', @daily.account_date).last : dailies.where("account_date < ? OR (account_date = ? AND session = 'lunch')", @daily.account_date, @daily.account_date).last
-    - last_till = last_session ? last_session.till : 0.00
-    - last_safe = last_session ? last_session.safe : 0.00
-    - safe_amount = last_safe + cash - @daily.petty + ( last_till - @daily.till ) - @daily.bank
+        = pounds(@daily.safe_cash)
+    .row
+      .large-12.columns.off
+        = @daily.safe_reason
     .row
       .large-6.columns.id
-        Calculated
+        Safe
       .large-6.columns.number.id
+        = pounds(@daily.safe)
+    .row
+      .large-6.columns.off
+        Calculated
+      .large-6.columns.number.off
         = pounds(safe_amount)
