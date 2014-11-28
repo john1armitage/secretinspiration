@@ -2,6 +2,7 @@ class PostingsController < ApplicationController
   before_action :set_posting, only: [:show]
 
   def index
+    @account_groups = Account.joins(:postings).where(ancestry_depth: 1).order("name").select('name', 'accounts.id').uniq
     @accounts = Account.joins(:postings).order("name").select('name', 'accounts.id').uniq
     @accountables = Supplier.joins(:postings). where('suppliers.id = postings.accountable_id').order("name").select('name', 'suppliers.id', 'rank').uniq
     #if params[:q]

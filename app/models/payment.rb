@@ -28,7 +28,8 @@ class Payment < ActiveRecord::Base
   end
 
   def postings
-    contra = order && order.contra ? true : false
+    # contra = order && order.contra ? true : false
+    contra = false
     bank_account = Account.find_by_name( bank.name ).id
     create_posting( 'Payment', id, false, amount_cents, account_id, payable_type, payable_id, contra, payment_date)
     create_posting( 'Payment', id, true, amount_cents, bank_account, payable_type, payable_id, contra, payment_date)

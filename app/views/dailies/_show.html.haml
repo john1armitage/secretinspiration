@@ -3,9 +3,9 @@
 - last_till = last_session ? last_session.till : 0.00
 - last_safe = last_session ? last_session.safe : 0.00
 - cash = @daily.take - @daily.credit_card
-- surplus_amount = cash - @daily.petty + ( last_till - @daily.till )
+- surplus_amount = cash + last_till - (@daily.petty + @daily.till)
 -# safe_amount = last_safe + cash - @daily.petty + ( last_till - @daily.till ) - @daily.bank
-- safe_amount = last_safe + surplus_amount - (@daily.bank + @daily.safe_cash)
+- safe_amount = last_safe + @daily.surplus - (@daily.bank + @daily.safe_cash)
 #editor
 #display
 #summary

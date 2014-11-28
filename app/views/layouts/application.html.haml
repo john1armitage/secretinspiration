@@ -26,11 +26,15 @@
     #aside.show-for-medium-down.no-print
       %aside#sidebar.no-print
         = render "welcome/offers"
+        =# request.remote_addr
         -#= render "layouts/media/#{current_tenant.domain}/index"
     .large-2.columns#aside.show-for-large-up.no-print
       %aside#sidebar.no-print
         #editor.hide-for-medium-down
         = render "welcome/offers"
+        =# request.remote_addr
+        -# p request
+
         -#= render "layouts/media/#{current_tenant.domain}/index"
         = render "welcome/intro"
       #utility
@@ -39,7 +43,7 @@
         .large-12.columns#menu
           - if current_tenant.menu.blank?
             = render 'choices/sub_menu'
-          - else
+          - elsif current_tenant.menu != 'off'
             = render "layouts/menus/#{current_tenant.menu}"
       .row.hide-for-large-up
         .large-12.columns

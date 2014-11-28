@@ -146,7 +146,8 @@ class MealsController < ApplicationController
     if  @meal.line_items.destroy_all
       target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
       @message = Message.new(message: "#{target}: re-ordering", message_type: @meal.state, user_id: current_user.id, created_at: Time.now)
-      @meal.update(state: 'active')
+      state = @meal.seating_id.blank? ? 'takeaway' : 'active'
+      @meal.update(state: state)
       render 'meal_items/meal.js.erb'
     else
       render 'meal_items/meal.js.erb'

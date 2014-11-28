@@ -1,4 +1,4 @@
-= link_to 'New Wage', new_wage_path
+-#= link_to 'New Wage', new_wage_path
 
 %table
   %tr
@@ -21,7 +21,7 @@
     %tr
       %td= wage.FY
       %td= wage.week_no
-      %td= wage.employee.name
+      %td= wage.employee.name if wage.employee
       %td= wage.hours
       %td= wage.rate
       %td= wage.gross

@@ -29,7 +29,7 @@
         - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
           %li.level-one
             != link_to 'Book', bookings_path(no_content: true), remote: true, class: 'no_ajaxify'
-        - %w(food drinks accessory jewellery bag art stuff catalogue painting).each do |component|
+        - %w(food drinks accessory jewellery bag art stuff catalogue painting clearance).each do |component|
           - if eval("current_tenant.#{component} == '1'")
             %li.has-dropdown
               != link_to make_title(component.pluralize), "#", class: 'no_ajaxify'

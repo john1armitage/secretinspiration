@@ -199,7 +199,16 @@ $head-border: #009900;
       }
     }
   }
+  table#financial {
 
+    td {
+      font-size: 0.8em;
+      line-height: 1em;
+      padding: 0;
+      padding-bottom: 0.6em;
+      padding-right: 0.5em;
+    }
+  }
   div#flash {
     margin: 0.5em;
     margin-bottom: 1em;

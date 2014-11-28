@@ -10,7 +10,7 @@
 %body#monitor
   = javascript_include_tag "application"
   .row
-    .large-2.columns.no_padding
+    .large-12.columns.no_padding
       %ul#contact.inline-list
         - if admin_ok?
           %li
@@ -18,7 +18,8 @@
             = render 'layouts/menus/session'
       -##messages
       -#  = render 'layouts/chat'
-    .large-10.columns#content
+  .row
+    .large-12.columns#content
       %ul
         = yield
 :coffeescript

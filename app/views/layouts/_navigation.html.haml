@@ -26,7 +26,7 @@
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
         %li
           != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'
-      - %w(food drinks accessory jewellery bag art stuff catalogue painting).each do |component|                       #  accessory bag scented art
+      - %w(food drinks accessory jewellery bag art stuff catalogue painting clearance).each do |component|                       #  accessory bag scented art
         - if eval("current_tenant.#{component} == '1'")
           %li
             != link_to make_title(component.pluralize), choices_path(choices: component), class: 'button radius no_ajaxify', remote: 'true'

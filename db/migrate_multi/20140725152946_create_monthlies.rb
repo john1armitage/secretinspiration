@@ -9,6 +9,7 @@ class CreateMonthlies < ActiveRecord::Migration
       t.money :tax, currency: { present: false }
       t.money :turnover, currency: { present: false }
       t.money :cash_used, currency: { present: false }
+      t.money :tips, currency: { present: false }
 
       t.timestamps
     end

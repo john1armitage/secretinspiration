@@ -22,6 +22,9 @@
       = f.date_field :event_date_lteq
   .row
     .field.small-3.columns
+      = f.label :grouping_eq, 'Group'
+      = f.collection_select :grouping_eq, @account_groups, 'id', 'name', include_blank: true
+    .field.small-3.columns
       = f.label :account_id_eq, 'Account'
       = f.collection_select :account_id_eq, @accounts, 'id', 'name', include_blank: true
     .field.small-3.columns.left
@@ -34,7 +37,7 @@
     .actions
       = f.submit 'Search'
 
-%table
+%table#financial
   %tr
     %th= sort_link(@q, :event_date, "Date")
     %th
@@ -49,8 +52,8 @@
       %br
       = humanized_money_with_symbol( @credits )
     %th
-    %th
-    %th
+    -#%th
+    -#%th
 
   - @postings.each do |posting|
     %tr
@@ -72,6 +75,8 @@
         = posting.accountable.name if posting.accountable
       %td.number= humanized_money_with_symbol( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= humanized_money_with_symbol( posting.credit_amount )  unless posting.credit_amount == 0
+      %td.number
+        = check_box_tag 'check'
       %td=# link_to 'Show', posting
       %td=# link_to 'Edit', edit_posting_path(posting)
       %td=# link_to 'Destroy', posting, :method => :delete, :data => { :confirm => 'Are you sure?' }

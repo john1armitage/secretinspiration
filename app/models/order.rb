@@ -10,11 +10,11 @@ class Order < ActiveRecord::Base
            :numericality => {
                :greater_than => 0
            }
-  monetize :voucher_cents, :allow_nil => true
-  monetize :tip_cents, :allow_nil => true
-  monetize :tax_total_cents, :allow_nil => true
+  monetize :voucher_cents, :allow_nil => false
+  monetize :tip_cents, :allow_nil => false
+  monetize :tax_total_cents, :allow_nil => false
   monetize :tax_home_cents, :allow_nil => true
-  monetize :paid_cents, :allow_nil => true
+  monetize :paid_cents, :allow_nil => false
   monetize :adjustment_total_cents, :allow_nil => true
   monetize :discount_cents, :allow_nil => true
   monetize :credit_card_cents, :allow_nil => true

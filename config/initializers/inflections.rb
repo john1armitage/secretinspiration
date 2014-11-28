@@ -16,7 +16,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   # #inflect.irregular 'Art', 'Art'      # messes up cart schema!!
   # inflect.irregular 'Fibre', 'Fibre'
   # inflect.irregular 'catalogue', 'catalogue'
-  inflect.uncountable %w(semi-precious jewellery sundry art stuff collection catalogue fibre scented food headwear trolley MiPac 'Urban Country' caribbean oggi soapstone)
+  inflect.uncountable %w(clearance semi-precious jewellery sundry art stuff collection catalogue fibre scented food headwear trolley MiPac 'Urban Country' caribbean oggi soapstone)
 end
 
 # These inflection rules are supported but not enabled by default:

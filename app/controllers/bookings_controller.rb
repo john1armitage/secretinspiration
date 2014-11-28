@@ -143,7 +143,7 @@ class BookingsController < ApplicationController
         booking_date = params[:date]
         id = -1
       end
-      @booked = Tabel.joins(seatings: :booking ).where('bookings.booking_date = ? AND bookings.id <> ?', booking_date, id).order('name::INT')
+      @booked = Tabel.joins(seatings: :booking ).where('bookings.booking_date = ? AND bookings.id <> ? AND bookings.state <> ?', booking_date, id, 'cancelled').order('name::INT')
       @tabels  -= @booked
     end
 

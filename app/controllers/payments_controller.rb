@@ -74,8 +74,8 @@ class PaymentsController < ApplicationController
   # POST /payments
   def create
     Payment.transaction do
-
-      if @payment = Payment.create(params[:payment])
+      @payment = Payment.create(params[:payment])
+      if @payment
         if params[:order_id].present?
           i = 0
           0.upto( params[:order_id].size - 1 ) do
@@ -115,7 +115,8 @@ class PaymentsController < ApplicationController
           redirect_to suppliers_url
           #redirect_to new_payment_url(supplier_id: @payment.payable_id, quick: true ), notice: 'Payment was successfully created.'
         elsif @payment.payable_type == 'Employee'
-          redirect_to new_payment_url(employee_id: @payment.payable_id, quick: true ), notice: 'Payment was successfully created.'
+          redirect_to employees_url
+          # redirect_to new_payment_url(employee_id: @payment.payable_id, quick: true ), notice: 'Payment was successfully created.'
         else
           redirect_to payments_url
         end

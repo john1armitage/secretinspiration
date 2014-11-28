@@ -9,25 +9,28 @@
   .row
     .field.small-4.columns.left
       = f.label :year, 'Month'
-      = f.select :year, options_for_select([2012, 2013], @monthly.year)
+      = f.select :year, options_for_select([2012, 2013, 2014, 2015, 2016], Time.now.year)
       = f.select :month, options_for_select([1,2,3,4,5,6,7,8,9,10,11,12], @monthly.month)
-  .field
-    = f.label :takings
-    = f.text_field :takings
   .field
     = f.label :credit_card
     = f.text_field :credit_card
   .field
-    = f.label :cash, "Banked"
+    = f.label :cash, "Surplus"
     = f.text_field :cash
   .field
     = f.label :cash_used
     = f.text_field :cash_used
   .field
+    = f.label :tips
+    = f.text_field :tips
+  .field
+    = f.label :takings, "Net Sales"
+    = f.text_field :takings
+  .field
     = f.label :tax
     = f.text_field :tax
-  .field
-    = f.label :turnover
-    = f.text_field :turnover
+  -#.field
+  -#  = f.label :turnover
+  -#  = f.text_field :turnover
   .actions
     = f.submit 'Save'

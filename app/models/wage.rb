@@ -27,4 +27,10 @@ class Wage < ActiveRecord::Base
 
   belongs_to :employee
 
+  after_create
+
+  validates_presence_of :employee_id, :message => 'is required'
+
+
+
 end

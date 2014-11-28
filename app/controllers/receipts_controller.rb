@@ -54,7 +54,7 @@ class ReceiptsController < ApplicationController
       if params[:tips].present?
         sales_apportions
         @receipt.post_takings
-      else
+      elsif params[:account].present?
         account_id = Account.find_by_name(params[:account]).id
         @receipt.apportions.create(receipt_id: @receipt.id, account_id: Account.find_by_name(params[:account]).id, amount_cents: @receipt.amount_cents, amount_currency: @receipt.amount_currency)
         @receipt.post
