@@ -384,6 +384,9 @@ $head-border: #009900;
       text-align: justify;
       margin-bottom: 0;
     }
+    img {
+      border: solid 2px darkslategray;
+    }
     &.red {
       // border-color: red;
       h1, span.highlight {
@@ -449,6 +452,9 @@ $head-border: #009900;
         margin-bottom: 0.3em;
         //        border-top: 3px solid $head-border;
       }
+      h2 {
+        border-top: solid 1px $theme;
+      }
       h6, h2 {
         font-size: 1.1em;
         color: $theme;
@@ -460,9 +466,23 @@ $head-border: #009900;
 //        max-height:
       }
     }
+    table {
+      border: none;
+      width:100%;
+      &.border {
+        border: solid 1px $theme;
+        background-color: #FFFCB2;
+        tr {
+          border: none;
+          td {
+            border: none;
+          }
+        }
+      }
+    }
   }
 
-  div.two-column {
+  .double div.two-column {
     column-count: 2;
     column-gap: 20px;
     -moz-column-count: 2;
