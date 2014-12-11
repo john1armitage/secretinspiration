@@ -1,23 +1,21 @@
 #invoice
   #print-header
-    %table.print-only
-      %tr
-        %td
-          %span
-            Brixham's Caribbean Restaurant & Bar
-          %h1
-            Pepper Shack
-        %td
-          %p.right
-            01803 882978
-            %br
-            book@peppershack.co.uk
-            %br
-            = "Twitter: @ShackTalk"
+    %h1.print-only
+      Pepper Shack
+    %p.print-only
+      %span
+        Brixham's Caribbean Restaurant
+      %span
+        01803 882978
+    -#%p.print-only
+    -#  %span
+    -#    book@peppershack.co.uk
+    -#  %span
+    -#    = "Twitter: @ShackTalk"
 
   %h3.no-print= "Bill #{@order.id}: #{@order.state}"
 
-  %table
+  %table#items
     %tr.header.no-print
       %td.title
         = current_tenant.name
@@ -65,21 +63,19 @@
           %span#order_total
             = humanized_money_with_symbol(@order.net_total + @order.tax_total)
 
-    - if @order.tax_home > 0
-      %tr
-        %td
-          %span
-            = "Table #{@order.seating.tabel.name}" if @order.seating
-            = "Order #{@order.id}"
-          %span.no-print
-            = "(#{@order.state})"
-        %td.right
-          = "(VAT #{current_tenant.vat}: #{humanized_money_with_symbol(@order.tax_home)})"
-    %tr.footer
+    %tr.print-onlyx
+      %td
+        &nbsp;
+      %td
+        &nbsp;
+    %tr.print-onlyx
       %td
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
+        %br
+        = "VAT #{current_tenant.vat}: #{humanized_money_with_symbol(@order.tax_home)}"
       %td.right
+        = "Table #{@order.seating.tabel.name}" if @order.seating
         = @order.updated_at.strftime('%e-%b-%y')
   %p.no-print
     %span
