@@ -137,6 +137,7 @@ class ApplicationController < ActionController::Base
 
   def admin_ok?
     ( CONFIG[:target_hosts].split(',').include? current_tenant.hostname ) || ( CONFIG[:allowed_hosts].split(',').include? request.remote_addr  )
+    #true
   end
   helper_method :admin_ok?
 
