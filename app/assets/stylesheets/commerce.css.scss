@@ -350,7 +350,7 @@ $head-border: #009900;
     h1 {
       font-size: 1.1em;
       font-weight: bold;
-      background-color: #d3d3d3;
+      //background-color: #d3d3d3;
       padding: 0.2em;
       //      border: 1px solid $head-border;
     }
@@ -367,15 +367,18 @@ $head-border: #009900;
 
   div#solus, div#current, div#offers, div#sidecast {
     border: 1px solid darkgray;
-    background-color: #e0eeee; //#d3d3d3;
+    background-color: palegreen;//#e0eeee; //#d3d3d3;
     padding: 0.15em 0.25em 0 0.25em;
     margin-bottom: 0.5em;
     h1 {
       font-weight: bold;
       font-size: 1.0em;
-      text-align: center;
+      text-align: left;
       margin-bottom: 0;
       margin-top: 0;
+    }
+    h3 {
+      font-size: 0.8em;
     }
     p {
       font-size: 0.75em;
@@ -383,51 +386,67 @@ $head-border: #009900;
       padding: 0.2em;
       text-align: justify;
       margin-bottom: 0;
+      em {
+        color: $theme;
+      }
     }
     img {
-      border: solid 2px darkslategray;
+      margin-bottom: 0.5em;
+      border: solid 1px #333;
     }
     &.red {
-      // border-color: red;
+      background-color: palegoldenrod;
+      border-color: lighten(red, 15%);
       h1, span.highlight {
-        background-color:  lighten(red, 5%);
-        color: white;
+        //background-color: white;
+        color: lighten(red, 5%);
+      }
+      em {
+        color: lighten(red, 5%);
       }
     }
     &.purple {
-      // border-color: purple;
+      background-color: #CCCCFF;
+      border-color: mediumpurple;
       h1, span.highlight {
-        background-color: darken(mediumpurple, 5%);
-        color: white;
+        color: darken(mediumpurple, 15%);
+      }
+      em {
+        color: darken(mediumpurple, 15%);
       }
     }
     &.green {
-      //border-color: darkgreen;
+      background-color: palegreen;
+      border-color: darkgreen;
       h1, span.highlight {
-        background-color: darkgreen;
-        color: white;
+        //background-color: white;
+        color: darkgreen;
+      }
+      em {
+        color: darken(darkgreen, 5%);
       }
     }
     &.darkslategray {
+      background-color: #d0d0d0;
       //border-color: darkgreen;
       h1, span.highlight {
-        background-color: darkslategray;
-        color: white;
+        //background-color: white;
+        color: darkslategray;
       }
     }
     &.theme {
       //border-color: darkgreen;
       h1, span.highlight {
-        background-color: $theme;
-        color: white;
+        //background-color: white;
+        color: $theme;
       }
     }
 
   }
   div#offers {
     h1, span.highlight {
-      background-color: $alt;
-      color: white;
+      background-color:white;
+      color:  $alt;
     }
   }
 
@@ -446,14 +465,16 @@ $head-border: #009900;
       }
       h1 {
         font-size: 1.5rem;
-        padding: 0.3em 0em 0.1em 0.5em;
-        background-color: $theme; /* ##008cba */
-        color: white;
-        margin-bottom: 0.3em;
+        padding: 0.3em 0em 0.1em 0em;
+        background-color: white; /* ##008cba */
+        border-top: solid 1px darkgray;
+        color: $theme;
+        margin-top:0.3em;
+        margin-bottom: 0;
         //        border-top: 3px solid $head-border;
       }
       h2 {
-        border-top: solid 1px $theme;
+        border-top: solid 1px darkgray;
       }
       h6, h2 {
         font-size: 1.1em;
@@ -478,6 +499,9 @@ $head-border: #009900;
             border: none;
           }
         }
+        &.highlight {
+          border-color: red;
+        }
       }
     }
   }
@@ -499,6 +523,7 @@ $head-border: #009900;
     background-color: #e0eeee; //d3d3d3;
     padding: 0.25em;
     margin-bottom: 0.5em;
+    text-align: center;
     p {
       font-size: 0.7em;
       color: darkslategrey;
@@ -518,7 +543,7 @@ $head-border: #009900;
         padding-right: 0.25em;
         margin-right: -0.25em;
         //        margin-bottom: 0.1em;
-        background-color: #e0eeee; //#d3d3d3;
+        // background-color: #e0eeee; //#d3d3d3;
         color: $link;
         border-top: 1px solid darkgray;
         font-size: 0.9rem;
@@ -527,7 +552,7 @@ $head-border: #009900;
       }
       &:hover {
         a {
-          background-color: palegreen;
+          background-color: #e0eeee; //palegreen;
         }
       }
       &.active {

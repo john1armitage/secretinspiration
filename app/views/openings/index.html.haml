@@ -10,7 +10,7 @@
     %th
     %th
 
-  - @openings.each do |opening|
+  - @openings.order(:start_date).each do |opening|
     %tr
       %td= opening.start_date.strftime('%e %b %y')
       %td= opening.finish_date.strftime('%e %b %y')

@@ -28,9 +28,9 @@
         = render "welcome/offers"
         =# request.remote_addr
         -#= render "layouts/media/#{current_tenant.domain}/index"
-    .large-2.columns#aside.show-for-large-up.no-print
+    .large-2.columns#aside.show-for-medium-up.no-print
       %aside#sidebar.no-print
-        #editor.hide-for-medium-down
+        #editor
         = render "welcome/offers"
         =# request.remote_addr
         -# p request
@@ -53,7 +53,7 @@
           = yield
         .large-12.columns.hide-for-medium-up.no-print#content{role: "content"}
           = yield
-  #aside.show-for-medium-down.no-print
+  #aside.show-for-small.no-print
     %aside#sidebar.no-print
       = render "welcome/intro"
     #contact_small.no-print

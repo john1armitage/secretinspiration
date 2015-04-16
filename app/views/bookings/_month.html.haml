@@ -6,13 +6,19 @@
     %li
     = date.day
     - status = []
+    - message = ''
     - if date >= Time.now.to_date
       - if openings[date]
         - openings[date].each do |opening|
           - status << opening.status
+          - if opening.message.blank?
+            - message = ''
+          -else
+            - message = "#{opening.message}"
       - if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
         %span.closed
-          Sorry, we're closed
+          = message unless message.blank?
+          We're Closed ... sorry
       - else
         - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
           - opening = 'dinner'

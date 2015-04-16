@@ -1,8 +1,8 @@
-- if admin_ok?
-  .row
-    .small-12.large-2.columns.no_padding
-      %ul#contact.inline-list
-        = render 'layouts/menus/session'
+-#- if admin_ok?
+-#  .row
+-#    .small-12.large-2.columns.no_padding
+-#      %ul#contact.inline-list
+-#        = render 'layouts/menus/session'
 .contain-to-grid.sticky
   -#%nav.top-bar{data: { 'topbar' => true, 'magellan-expedition' => 'fixed' } }
   %nav.top-bar{data: { topbar: true } }
@@ -52,5 +52,9 @@
                 = link_to 'Around Brixham', blog_broadcasts_path(name: 'news')
               %li
                 = link_to 'Events', blog_broadcasts_path(name: 'event')
+              -#%li
+              -#  != link_to "Remote", login_path() #, :class => "button radius"
+              = render 'layouts/menus/session'
+
               -#%li
               -#  = link_to category.nice_name.pluralize, choice_path(category.name)
