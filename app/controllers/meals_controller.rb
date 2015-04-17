@@ -113,6 +113,8 @@ class MealsController < ApplicationController
       end
       #Publish events
       @meal.update(state: state)
+    elsif params[:pholourie].present?
+      @meal.update(pholourie: true)
     elsif params[:takeaway].present?
       case params[:takeaway]
         when 'request'

@@ -15,8 +15,11 @@
       - if allow? :dailies, :index and current_tenant.dailies == '1'
         %li
           != link_to 'Dailies', dailies_path, remote: true, class: 'no_ajaxify'
-      -#%li.show-for-medium-up
-      -#  = render 'layouts/menus/session'
+      - if allow? :meals, :index
+        %li#admin
+          != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
+        %li
+          != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
   .large-5.columns
     %ul#main-nav.inline-list.right
       - if (current_tenant.takeaway && current_tenant.takeaway == '1') && allow?(:meals, :takeaway) && current_user.id.blank?

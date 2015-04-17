@@ -6,10 +6,10 @@
     - if @home_flag
       %li#admin
         != link_to 'Home', welcome_path, class: 'no_ajaxify' #, remote: 'true'
-    %li#admin
-      != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
-    %li
-      != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
+    -#%li#admin
+    -#  != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
+    -#%li
+    -#  != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
   %li
     - monitor = params[:monitor].present? ?  true : false
     != link_to "Log Out", logout_path(monitor: monitor), :method => :delete, :class => "no_ajaxify"

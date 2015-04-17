@@ -1,0 +1,4 @@
+%span.head
+  =# "[#{pluralize(  arrival.seating.booking.pax, 'person')}, Table #{arrival.tabel_name}] "
+  = "#{pluralize(  arrival.seating.booking.pax, 'person')} on #{arrival.tabel_name}"
+  = button_to 'Pholourie', patcher_meal_url(arrival, pholourie: true, monitor: true), id: arrival.id, form_class: 'no_ajaxify inline', remote: true

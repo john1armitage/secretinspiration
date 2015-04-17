@@ -120,6 +120,12 @@ $head-border: #009900;
           }
         }
       }
+      form.inline {
+        display: inline;
+        div {
+          display: inline;
+        }
+      }
       ul.tabel {
         //        width: inherit;
         margin: 0;
