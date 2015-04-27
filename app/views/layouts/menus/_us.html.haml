@@ -14,8 +14,8 @@
     - if eval("current_tenant.rugby == '1'")
       %li
         = link_to 'Rugby Stuff', blog_broadcasts_path(name: 'rugby')
-    %li
-      = render 'layouts/menus/session'
+  %li
+    = render 'layouts/menus/session'
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->

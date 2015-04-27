@@ -10,6 +10,9 @@ gem 'pg_array_parser'
 #gem 'activerecord-postgres-hstore'
 gem 'node'
 
+gem 'thin'
+gem 'faye'
+
 gem 'haml'
 gem 'haml-rails'
 

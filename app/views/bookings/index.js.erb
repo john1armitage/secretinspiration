@@ -1,6 +1,7 @@
 $('div#content').html("<%= escape_javascript(render :partial => 'bookings/index') %>")
 <% if allow? :seatings, :create %>
     $('aside#sidebar').html("<%= escape_javascript(render :partial => 'bookings/sidebar') %>")
+    $('div#editor').html('')
 <% elsif @request %>
 $('div#editor').html("<%= escape_javascript(render :partial => 'bookings/thanks') %>")
 <% end %>
