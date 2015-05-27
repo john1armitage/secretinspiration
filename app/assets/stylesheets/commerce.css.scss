@@ -1030,6 +1030,9 @@ $head-border: #009900;
   div#invoice {
     #print-header {
       text-align: center;
+      h1 {
+        font-size: 1.5em;
+      }
     }
     tr {
       text-align: left;

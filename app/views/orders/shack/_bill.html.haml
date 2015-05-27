@@ -63,20 +63,25 @@
           %span#order_total
             = humanized_money_with_symbol(@order.net_total + @order.tax_total)
 
-    %tr.print-onlyx
-      %td
-        &nbsp;
-      %td
-        &nbsp;
+  %table
+    %tr.print-only
+      %td.center
+        %b
+          Service not included: Tips shared equally - Cash or Card
+      -#%td
+      -#  &nbsp;
+  %table
     %tr.print-onlyx
       %td
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
         %br
-        = "VAT #{current_tenant.vat}: #{humanized_money_with_symbol(@order.tax_home)}"
+        = "VAT #{current_tenant.vat}: "
+        %b
+          = "#{humanized_money_with_symbol(@order.tax_home)}"
       %td.right
         = "Table #{@order.seating.tabel.name}" if @order.seating
-        = @order.updated_at.strftime('%e-%b-%y')
+        = @order.updated_at.strftime('%e/%m/%y')
   %p.no-print
     %span
       = link_to "Print",'#', id: 'print'
