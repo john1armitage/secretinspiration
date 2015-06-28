@@ -1028,25 +1028,33 @@ $head-border: #009900;
     }
   }
   div#invoice {
-    td {
-      font-size: 0.9em;
-    }
     #print-header {
       text-align: center;
       p {
-        font-size: 0.9em;
+        font-size: 0.85em;
       }
       h1 {
         font-size: 2em;
       }
     }
     tr {
+      td {
+        font-size: 0.95em;
+      }
       text-align: left;
       &.category {
         font-weight: bold;
       }
       &.total {
+        td {
+          font-size: 1.1em;
+        }
         font-weight: bold;
+      }
+      &.message {
+        td {
+          font-size: 1em;
+        }
       }
     }
   }

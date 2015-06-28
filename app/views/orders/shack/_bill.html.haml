@@ -1,14 +1,14 @@
 #invoice
   #print-header
-    %p.print-onlyx
+    %p.print-only
       %span
         Brixham's Caribbean Restaurant
       %span
         01803 882978
-    %h1.print-onlyx
+    %h1.print-only
       %b
         Pepper Shack
-    %p.print-onlyx
+    %p.print-only
       %span
         Hopefully, we got it right and you had a good time ... but do tell us if we can make things better. Otherwise, please help us spread the word ... nice reviews on <b>TripAdvisor</b> are most welcome, too.
   -#%p.print-only
@@ -67,14 +67,15 @@
           %span#order_total
             = humanized_money_with_symbol(@order.net_total + @order.tax_total)
 
+  -#%table
+  -#  %tr.print-only.message
+  -#    %td.center
+  #print-header
+    %p.print-only
+      %span
+        All <b>tips</b>, cash and card, are shared equally &amp; in full - Thanks again!
   %table
-    %tr.print-only
-      %td.center
-        Thanks again! All tips are shared equally and in full ... cash or card
-      -#%td
-      -#  &nbsp;
-  %table
-    %tr.print-only
+    %tr.print-onlyx
       %td
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
@@ -83,8 +84,9 @@
         %b
           = "#{humanized_money_with_symbol(@order.tax_home)}"
       %td.right
+        = @order.updated_at.strftime('%e-%m-%y')
+        %br
         = "Table #{@order.seating.tabel.name}" if @order.seating
-        = @order.updated_at.strftime('%e/%m/%y')
   %p.no-print
     %span
       = link_to "Print",'#', id: 'print'
