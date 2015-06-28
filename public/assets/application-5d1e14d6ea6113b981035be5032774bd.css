@@ -274,92 +274,114 @@
     color: purple;
   }
   /* line 123, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body#monitor form.inline {
+    display: inline;
+  }
+  /* line 125, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body#monitor form.inline div {
+    display: inline;
+  }
+  /* line 129, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel {
     margin: 0;
     background-color: #e0eeee;
     border: 1px solid darkslategray;
   }
-  /* line 128, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 134, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel.first {
     border: 2px solid green;
   }
-  /* line 131, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 137, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li {
     list-style-type: none;
     padding: .2em 0 .2em .2em;
     font-size: 0.8em;
   }
-  /* line 136, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 142, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li span.title {
     clear: both;
   }
-  /* line 140, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 146, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li:nth-child(even) {
     background: lightgrey;
   }
-  /* line 143, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 149, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.category {
     line-height: 1.9em;
     font-weight: bold;
   }
-  /* line 147, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 153, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.info {
     background-color: lightyellow;
     font-style: italic;
   }
-  /* line 152, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 158, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.ready.category {
     color: white;
     background-color: red;
   }
-  /* line 155, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 161, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.ready.category span {
     font-weight: bold;
   }
-  /* line 160, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 166, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.served {
     background-color: #d3d3d3;
     font-style: italic;
   }
-  /* line 166, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 172, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active span.title {
     font-weight: bold;
   }
-  /* line 170, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 176, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active:nth-child(even) {
     background: #d3d3d3;
   }
-  /* line 173, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 179, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active.category {
     color: white;
     background-color: green;
   }
-  /* line 176, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 182, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active.category span {
     font-weight: bold;
   }
-  /* line 182, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 188, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel h1 {
     font-size: 2em;
   }
-  /* line 185, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 191, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel h6 {
     font-size: 0.9rem;
   }
-  /* line 188, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 194, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel form, body#monitor ul.tabel div, body#monitor ul.tabel li.inline {
     display: inline;
   }
-  /* line 191, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 197, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel p {
     font-size: 0.8em;
   }
-  /* line 196, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 202, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor span.head {
     font-weight: bold;
   }
 
-  /* line 203, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 210, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  table#financial td {
+    font-size: 0.8em;
+    line-height: 1em;
+    padding: 0;
+    padding-bottom: 0.6em;
+    padding-right: 0.5em;
+  }
+
+  /* line 218, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  td.larger {
+    font-size: 0.95em;
+  }
+
+  /* line 221, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash {
     margin: 0.5em;
     margin-bottom: 1em;
@@ -368,81 +390,81 @@
     color: orangered;
     border: 1px dotted orangered;
   }
-  /* line 210, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 228, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash a {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: bold;
   }
-  /* line 214, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 232, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash p {
     margin-left: 1em;
     margin-bottom: 0;
     text-align: center;
   }
 
-  /* line 222, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 240, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#catalogue span.title {
     font-weight: bold;
   }
-  /* line 225, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 243, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#catalogue span.body {
     font-size: 0.9em;
   }
 
-  /* line 230, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 248, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary {
     border: 1px solid gray;
     padding: 0.2em;
   }
-  /* line 234, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 252, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row {
     font-size: 0.8em;
     padding: 0.2em 0 0.2em 0;
   }
-  /* line 237, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 255, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .number {
     text-align: right;
   }
-  /* line 240, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 258, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .title {
     font-weight: bold;
     text-align: center;
   }
-  /* line 244, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 262, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .id {
     font-weight: bold;
     text-align: center;
     color: darkslategray;
   }
-  /* line 249, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 267, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .sub {
     color: purple;
   }
-  /* line 252, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 270, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .head {
     text-align: center;
     font-weight: bold;
   }
-  /* line 256, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 274, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .off {
     color: gray;
   }
 
-  /* line 264, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 282, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   li .sub {
     color: purple;
   }
-  /* line 267, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 285, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   li .head {
     text-align: center;
     font-weight: bold;
   }
 
-  /* line 272, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 290, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog {
     margin-left: 0;
   }
-  /* line 274, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 292, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 {
     background-color: #3d5c2c;
     color: white;
@@ -450,30 +472,30 @@
     padding-left: 0.5em;
     margin-bottom: 0.2em;
   }
-  /* line 280, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 298, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 a {
     color: yellow;
   }
-  /* line 282, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 300, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 a:hover {
     color: orange;
   }
-  /* line 287, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 305, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog p {
     font-size: 0.85em;
     line-height: 1.5em;
     text-align: justify;
     margin-bottom: 0.2em;
   }
-  /* line 294, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 312, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog p.center {
     text-align: center;
   }
-  /* line 298, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 316, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog td {
     border-top: 1px solid gray;
   }
-  /* line 301, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 319, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog li {
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
@@ -482,58 +504,57 @@
     break-inside: avoid-column;
   }
 
-  /* line 309, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 327, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.date {
     font-size: 0.9em;
     color: darkslategray;
   }
-  /* line 312, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 330, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.date.event {
     font-weight: bold;
   }
 
-  /* line 316, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 334, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   h1 span.date {
     color: yellow;
   }
 
-  /* line 319, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 337, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p.right {
     text-align: right;
   }
 
-  /* line 323, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 341, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.time {
     font-size: 0.8em;
     color: darkslategray;
   }
-  /* line 326, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 344, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.time.event {
     font-weight: bold;
   }
 
-  /* line 331, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 349, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   #test2.red, #test3.red {
     background-color: #ff6666;
   }
-  /* line 334, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 352, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   #test2.blue, #test3.blue {
     background-color: blue;
   }
 
-  /* line 338, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 356, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar {
     padding-left: 0.1em;
     padding-right: 0.1em;
   }
-  /* line 341, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 359, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar h1 {
     font-size: 1.1em;
     font-weight: bold;
-    background-color: #d3d3d3;
     padding: 0.2em;
   }
-  /* line 351, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 369, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar fieldset {
     margin: 0;
     padding: 0.2em;
@@ -541,22 +562,26 @@
     border: 1px solid darkgray;
   }
 
-  /* line 359, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 377, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus, div#current, div#offers, div#sidecast {
     border: 1px solid darkgray;
-    background-color: #e0eeee;
+    background-color: palegreen;
     padding: 0.15em 0.25em 0 0.25em;
     margin-bottom: 0.5em;
   }
-  /* line 364, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 382, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus h1, div#current h1, div#offers h1, div#sidecast h1 {
     font-weight: bold;
     font-size: 1.0em;
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
     margin-top: 0;
   }
-  /* line 371, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 389, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus h3, div#current h3, div#offers h3, div#sidecast h3 {
+    font-size: 0.8em;
+  }
+  /* line 392, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus p, div#current p, div#offers p, div#sidecast p {
     font-size: 0.75em;
     line-height: 1.1rem;
@@ -564,71 +589,136 @@
     text-align: justify;
     margin-bottom: 0;
   }
-  /* line 380, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 398, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus p em, div#current p em, div#offers p em, div#sidecast p em {
+    color: #3d5c2c;
+  }
+  /* line 402, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus img, div#current img, div#offers img, div#sidecast img {
+    margin-bottom: 0.5em;
+    border: solid 1px #333;
+  }
+  /* line 406, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.red, div#current.red, div#offers.red, div#sidecast.red {
+    background-color: palegoldenrod;
+    border-color: #ff4d4d;
+  }
+  /* line 409, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.red h1, div#solus.red span.highlight, div#current.red h1, div#current.red span.highlight, div#offers.red h1, div#offers.red span.highlight, div#sidecast.red h1, div#sidecast.red span.highlight {
-    background-color: #ff1a1a;
-    color: white;
+    color: #ff1a1a;
   }
-  /* line 387, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 413, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.red em, div#current.red em, div#offers.red em, div#sidecast.red em {
+    color: #ff1a1a;
+  }
+  /* line 417, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.purple, div#current.purple, div#offers.purple, div#sidecast.purple {
+    background-color: #CCCCFF;
+    border-color: mediumpurple;
+  }
+  /* line 420, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.purple h1, div#solus.purple span.highlight, div#current.purple h1, div#current.purple span.highlight, div#offers.purple h1, div#offers.purple span.highlight, div#sidecast.purple h1, div#sidecast.purple span.highlight {
-    background-color: #845cd6;
-    color: white;
+    color: #6533cb;
   }
-  /* line 394, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 423, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.purple em, div#current.purple em, div#offers.purple em, div#sidecast.purple em {
+    color: #6533cb;
+  }
+  /* line 427, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.green, div#current.green, div#offers.green, div#sidecast.green {
+    background-color: palegreen;
+    border-color: darkgreen;
+  }
+  /* line 430, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.green h1, div#solus.green span.highlight, div#current.green h1, div#current.green span.highlight, div#offers.green h1, div#offers.green span.highlight, div#sidecast.green h1, div#sidecast.green span.highlight {
-    background-color: darkgreen;
-    color: white;
+    color: darkgreen;
   }
-  /* line 401, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 434, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.green em, div#current.green em, div#offers.green em, div#sidecast.green em {
+    color: #004b00;
+  }
+  /* line 438, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#solus.darkslategray, div#current.darkslategray, div#offers.darkslategray, div#sidecast.darkslategray {
+    background-color: #d0d0d0;
+  }
+  /* line 441, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.darkslategray h1, div#solus.darkslategray span.highlight, div#current.darkslategray h1, div#current.darkslategray span.highlight, div#offers.darkslategray h1, div#offers.darkslategray span.highlight, div#sidecast.darkslategray h1, div#sidecast.darkslategray span.highlight {
-    background-color: darkslategray;
-    color: white;
+    color: darkslategray;
   }
-  /* line 408, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 448, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.theme h1, div#solus.theme span.highlight, div#current.theme h1, div#current.theme span.highlight, div#offers.theme h1, div#offers.theme span.highlight, div#sidecast.theme h1, div#sidecast.theme span.highlight {
-    background-color: #3d5c2c;
-    color: white;
+    color: #3d5c2c;
   }
 
-  /* line 416, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 456, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#offers h1, div#offers span.highlight {
-    background-color: #3d5c2c;
-    color: white;
+    background-color: white;
+    color: #3d5c2c;
   }
 
-  /* line 422, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 462, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#sidecast {
     background-color: palegoldenrod;
   }
 
-  /* line 427, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 467, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body article p, body article li {
+    font-size: 0.85em;
+    text-align: justify;
+    line-height: 1.3rem;
+    margin-bottom: 0.8em;
+  }
+  /* line 475, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article h1 {
     font-size: 1.5rem;
-    padding: 0.3em 0em 0.1em 0.5em;
-    background-color: #3d5c2c;
+    padding: 0.3em 0em 0.1em 0em;
+    background-color: white;
     /* ##008cba */
-    color: white;
+    border-top: solid 1px darkgray;
+    color: #3d5c2c;
+    margin-top: 0.3em;
+    margin-bottom: 0;
   }
-  /* line 434, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 485, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body article h2 {
+    border-top: solid 1px darkgray;
+  }
+  /* line 488, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article h6, body article h2 {
     font-size: 1.1em;
     color: #3d5c2c;
     margin-bottom: 0.2em;
   }
-  /* line 439, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 493, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article img {
     margin-bottom: 0.5em;
+    border: 1px solid darkgray;
   }
-  /* line 442, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
-  body article p, body article li {
-    font-size: 0.85em;
-    text-align: justify;
-    line-height: 1.3rem;
-    margin-bottom: 0.3em;
+  /* line 499, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body table {
+    border: none;
+    width: 100%;
+  }
+  /* line 502, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body table.border {
+    border: solid 1px #3d5c2c;
+    background-color: #FFFCB2;
+  }
+  /* line 505, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body table.border tr {
+    border: none;
+  }
+  /* line 507, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body table.border tr td {
+    border: none;
+  }
+  /* line 511, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body table.border.highlight {
+    border-color: red;
   }
 
-  /* line 453, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
-  div.two-column {
+  /* line 518, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  .double div.two-column {
     column-count: 2;
     column-gap: 20px;
     -moz-column-count: 2;
@@ -636,201 +726,201 @@
     -webkit-column-count: 2;
     -webkit-column-gap: 20px;
   }
-  /* line 460, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
-  div.two-column li {
+  /* line 525, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  .double div.two-column li {
     orphans: 3;
     widows: 3;
   }
 
-  /* line 465, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 530, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   footer {
     border: 1px solid darkgray;
     background-color: #e0eeee;
     padding: 0.25em;
     margin-bottom: 0.5em;
+    text-align: center;
   }
-  /* line 470, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 536, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   footer p {
     font-size: 0.7em;
     color: darkslategrey;
   }
 
-  /* line 475, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 541, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#content {
     margin-bottom: 0.5em;
     margin-top: 0.2em;
   }
 
-  /* line 480, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 546, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu ul.inline-list {
     margin-bottom: 0;
   }
-  /* line 484, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 550, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li a {
     padding-left: 0.25em;
     padding-right: 0.25em;
     margin-right: -0.25em;
-    background-color: #e0eeee;
     color: #009900;
     border-top: 1px solid darkgray;
     font-size: 0.9rem;
     font-weight: bold;
   }
-  /* line 497, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 563, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li:hover a {
-    background-color: palegreen;
+    background-color: #e0eeee;
   }
-  /* line 502, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 568, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li.active a {
     background-color: #009900;
     color: white;
   }
 
-  /* line 512, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 578, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret ul.blog h1 {
     background-color: #6533cb;
   }
-  /* line 516, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 582, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret ul#catalogue li p.header {
     background-color: #e0d6f5;
   }
-  /* line 520, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 586, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li {
     background-color: #e0eeee;
     color: #845cd6;
   }
-  /* line 523, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 589, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li a {
     color: #845cd6;
   }
-  /* line 528, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 594, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li:hover a {
     background-color: #e0d6f5;
   }
-  /* line 533, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 599, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li.active a {
     color: white;
     background-color: #845cd6;
   }
-  /* line 542, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 608, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri ul#catalogue li p.header {
     background-color: #afc0f2;
   }
-  /* line 546, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 612, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri ul.blog h1 {
     background-color: #1d44b8;
   }
-  /* line 551, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 617, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li {
     background-color: #e0eeee;
     color: #2b58de;
   }
-  /* line 554, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 620, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li a {
     color: #2b58de;
   }
-  /* line 559, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 625, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li:hover a {
     background-color: #afc0f2;
   }
-  /* line 564, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 630, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li.active a {
     color: white;
     background-color: #2b58de;
   }
 
-  /* line 574, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 640, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   label.available {
     color: green;
   }
-  /* line 577, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 643, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   label.booked {
     color: red;
   }
 
-  /* line 583, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 649, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form .columns, ul#order-pad form .columns {
     padding: 0;
   }
-  /* line 586, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 652, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form .row, ul#order-pad form .row {
     margin: 0;
   }
-  /* line 589, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 655, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form label, ul#order-pad form label {
     margin: 0;
   }
-  /* line 591, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 657, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form label.third, ul#order-pad form label.third {
     display: inline;
   }
-  /* line 596, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 662, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input, ul#order-pad form input {
     margin: 0;
     margin-bottom: 0.3rem;
     width: 100%;
     height: 2rem;
   }
-  /* line 600, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 666, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input.semi, ul#order-pad form input.semi {
     width: 47%;
     margin-left: 0.1em;
   }
-  /* line 604, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 670, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input.third, ul#order-pad form input.third {
     width: 35%;
     display: inline;
     text-align: right;
   }
-  /* line 613, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 679, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order table, ul#order-pad table {
     margin-bottom: 0.2em;
     font-size: 0.9em;
     width: 95%;
   }
-  /* line 617, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 683, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order table td, ul#order-pad table td {
     padding: 0;
   }
 
-  /* line 622, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 688, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   input {
     font-weight: bold;
   }
-  /* line 623, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 689, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   input.wide {
     width: 98%;
     text-align: center;
   }
-  /* line 627, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 693, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   input.semi {
     width: 47%;
   }
 
-  /* line 634, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 700, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-variant input.wide {
     text-align: center;
   }
 
-  /* line 639, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 705, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.bold {
     font-weight: bold;
   }
 
-  /* line 643, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 709, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li {
     margin-left: -0.5em;
   }
-  /* line 645, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 711, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li span.title {
     font-weight: bold;
   }
-  /* line 648, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 714, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li span.notes {
     color: darkslategray;
     font-size: 0.9em;
   }
-  /* line 653, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 719, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant {
     margin-top: 0em;
     margin-left: 0em;
@@ -839,115 +929,119 @@
     border: 1px solid white;
     width: 100%;
   }
-  /* line 658, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 724, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant form, ul#catalogue li div.store-variant div {
     display: inline;
   }
-  /* line 663, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 729, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant img {
     margin: 0 auto;
     display: block;
     border: 1px solid #666;
     max-height: 19.5em;
   }
-  /* line 669, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 735, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant input.wide {
     text-align: center;
     width: 100%;
   }
-  /* line 674, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 740, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p {
     padding: 0.2em;
   }
-  /* line 676, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 742, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.header {
     background-color: palegreen;
   }
-  /* line 679, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 745, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.item-header {
     background-color: paleturquoise;
   }
-  /* line 683, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 749, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.center {
     margin: 0;
     padding-bottom: 0;
   }
-  /* line 689, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 755, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue ul.menu-item {
     margin-left: 0;
   }
-  /* line 691, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 757, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue ul.menu-item li.choice {
     white-space: nowrap;
   }
 
-  /* line 698, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 764, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.menu-item input {
     background-color: paleturquoise;
   }
+  /* line 766, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  ul.menu-item input.store {
+    background-color: lightgray;
+  }
 
-  /* line 702, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 771, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.menu-item, ul.aside, ul.takeaway {
     font-size: 0.8em;
     clear: both;
   }
-  /* line 706, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 775, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.title span, ul#meal li.title span, ul#order li.title span, ul#order-pad li.title span, ul.menu-item li.title span, ul.aside li.title span, ul.takeaway li.title span {
     font-weight: bold;
     font-size: 1.1em;
     color: darkslategray;
     padding-left: 0.2em;
   }
-  /* line 714, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 783, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart h1, ul#meal h1, ul#order h1, ul#order-pad h1, ul.menu-item h1, ul.aside h1, ul.takeaway h1 {
     font-size: 2em;
   }
-  /* line 717, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 786, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart h6, ul#meal h6, ul#order h6, ul#order-pad h6, ul.menu-item h6, ul.aside h6, ul.takeaway h6 {
     font-size: 0.9rem;
   }
-  /* line 720, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 789, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart form, ul#cart div, ul#cart li.inline, ul#meal form, ul#meal div, ul#meal li.inline, ul#order form, ul#order div, ul#order li.inline, ul#order-pad form, ul#order-pad div, ul#order-pad li.inline, ul.menu-item form, ul.menu-item div, ul.menu-item li.inline, ul.aside form, ul.aside div, ul.aside li.inline, ul.takeaway form, ul.takeaway div, ul.takeaway li.inline {
     display: inline;
   }
-  /* line 723, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 792, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart p, ul#meal p, ul#order p, ul#order-pad p, ul.menu-item p, ul.aside p, ul.takeaway p {
     font-size: 0.8em;
   }
 
-  /* line 729, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 798, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.side-nav li a {
     width: 100%;
   }
 
-  /* line 734, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 803, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.aside {
     background-color: #e0eeee;
     border: 1px solid darkslategray;
   }
-  /* line 737, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 806, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li, ul#meal li, ul#order li, ul#order-pad li, ul.aside li {
     padding: .2em 0 .2em .2em;
     width: 100%;
   }
-  /* line 740, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 809, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li span.title, ul#meal li span.title, ul#order li span.title, ul#order-pad li span.title, ul.aside li span.title {
     font-weight: bold;
   }
-  /* line 745, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 814, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li:nth-child(even), ul#meal li:nth-child(even), ul#order li:nth-child(even), ul#order-pad li:nth-child(even), ul.aside li:nth-child(even) {
     background: #d3d3d3;
   }
-  /* line 748, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 817, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.category, ul#meal li.category, ul#order li.category, ul#order-pad li.category, ul.aside li.category {
     background-color: lightgreen;
   }
-  /* line 750, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 819, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.category span, ul#meal li.category span, ul#order li.category span, ul#order-pad li.category span, ul.aside li.category span {
     font-weight: bold;
   }
 
-  /* line 756, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 825, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete {
     position: absolute;
     list-style: none;
@@ -956,107 +1050,107 @@
     border: solid 1px #999;
     cursor: default;
   }
-  /* line 763, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 832, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li {
     background-color: #FFF;
     border-top: solid 1px #DDD;
     margin: 0;
     padding: 0;
   }
-  /* line 768, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 837, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li a {
     color: #000;
     display: block;
     padding: 3px;
   }
-  /* line 773, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 842, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li a.ui-state-hover, ul.ui-autocomplete li a.ui-state-active {
     background-color: #FFFCB2;
   }
 
-  /* line 778, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 847, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   .hidden {
     display: none;
   }
 
-  /* line 787, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 856, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-category.ui-tabs-panel {
     padding: 0.3em;
   }
-  /* line 789, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 858, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-category.ui-tabs-panel .test {
     clear: both;
   }
 
-  /* line 795, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 864, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#side_menu h1 {
     font-size: 1.2em;
     margin-bottom: 0em;
   }
 
-  /* line 835, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 904, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.catalogue_variant {
     margin-left: 100px;
     margin-top: 0.5em;
     margin-bottom: 0.8em;
   }
-  /* line 839, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 908, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.catalogue_variant form, div.catalogue_variant div {
     display: inline;
   }
 
-  /* line 843, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 912, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   form[method=get], form.inline {
     display: inline;
   }
-  /* line 845, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 914, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   form[method=get] div, form.inline div {
     display: inline;
   }
 
-  /* line 850, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 919, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   button.image, .button.image {
     padding: 0;
     border: none;
     margin: 0;
   }
 
-  /* line 855, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 924, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   section#main {
     padding-top: 0.5em;
   }
 
-  /* line 858, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 927, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#navigation img {
     margin-top: 0.2em;
   }
 
-  /* line 861, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 930, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#status li {
     font-size: 0.8em;
   }
 
-  /* line 864, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 933, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact {
     margin-left: 0;
   }
-  /* line 866, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 935, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li {
     text-align: left;
     margin-bottom: 0;
   }
-  /* line 869, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 938, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li.phone {
     font-weight: bold;
     font-size: 1.1em;
     color: darkred;
   }
-  /* line 874, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 943, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li.location {
     font-size: 0.9em;
   }
 
-  /* line 885, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 954, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#contact {
     border: 1px solid darkgray;
     background-color: #e0eeee;
@@ -1064,66 +1158,66 @@
     margin-bottom: 0.2em;
   }
 
-  /* line 894, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 963, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact {
     text-align: center;
     margin-bottom: 0;
   }
-  /* line 897, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 966, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact .columns {
     padding-left: 0;
   }
-  /* line 900, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 969, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span {
     text-align: left;
     margin-bottom: 0;
   }
-  /* line 903, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 972, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span.phone {
     font-weight: bold;
     font-size: 1em;
     color: darkred;
   }
-  /* line 909, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 978, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span.location {
     font-size: 0.8em;
     padding-top: 0.2em;
   }
 
-  /* line 919, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 988, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#main-nav {
     margin-top: 0.3em;
   }
 
-  /* line 922, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 991, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar {
     margin-left: 1em;
     margin-right: 1.25em;
   }
-  /* line 925, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 994, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar select {
     width: 10em;
     direction: rtl;
   }
-  /* line 933, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1002, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar li.request {
     border-top: 1px solid darkgray;
     border-bottom: 1px solid darkgray;
     background-color: #e0eeee;
   }
-  /* line 938, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1007, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar li.event {
     border-top: 1px solid darkgray;
     border-bottom: 1px solid darkgray;
     background-color: palegoldenrod;
   }
 
-  /* line 945, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1014, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#editor {
     margin-bottom: 0.5em;
   }
 
-  /* line 948, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1017, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks {
     font-size: 0.9em;
     margin: 0.1em;
@@ -1131,38 +1225,50 @@
     background-color: palegoldenrod;
     border: 1px solid darkgray;
   }
-  /* line 954, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1023, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks p {
     font-size: 0.9rem;
   }
-  /* line 957, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1026, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks span.title {
     font-weight: bold;
   }
 
-  /* line 962, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1031, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#invoice td {
+    font-size: 0.9em;
+  }
+  /* line 1034, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice #print-header {
     text-align: center;
   }
-  /* line 965, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1036, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#invoice #print-header p {
+    font-size: 0.9em;
+  }
+  /* line 1039, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  div#invoice #print-header h1 {
+    font-size: 2em;
+  }
+  /* line 1043, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr {
     text-align: left;
   }
-  /* line 967, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1045, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.category {
     font-weight: bold;
   }
-  /* line 970, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1048, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.total {
     font-weight: bold;
   }
 }
-/* line 978, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1057, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
 body.artwork article.painting p, body.artwork article.welcome div.two-column p {
   text-align: center;
 }
 
-/* line 985, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1064, /home/john/RubymineProjects/commerce/app/assets/stylesheets/commerce.css.scss */
 article.welcome ul.inline-list li.title {
   text-align: center;
   font-weight: bold;
@@ -10098,10 +10204,9 @@ a.small.radius.button:hover, a.small.submit:hover {
     width: 90%;
     font-size: 0.7em;
     line-height: 8px;
-    border-collapse: collapse;
-    margin-left: 4em;
+    margin-left: 2em;
+    padding-right: 3em;
     margin-top: 1em;
-    margin-right: 4em;
   }
 
   /* line 14, /home/john/RubymineProjects/commerce/app/assets/stylesheets/print.css.scss */

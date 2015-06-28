@@ -18,6 +18,8 @@
       - if allow? :meals, :index
         %li#admin
           != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
+        %li#admin
+          != link_to 'Analysis', meals_path(analysis: true) #, remote: 'true'
         %li
           != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
   .large-5.columns

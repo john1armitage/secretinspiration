@@ -18,6 +18,8 @@ class MealsController < ApplicationController
       @bookings = Booking.where( booking_date: @booking_date )
       @table_view = true
       render 'index', layout: 'table_view'
+    elsif params[:analysis].present?
+      render 'analysis', layout: nil
     end
   end
 

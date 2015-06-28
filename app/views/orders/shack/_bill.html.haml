@@ -1,13 +1,17 @@
 #invoice
   #print-header
-    %h1.print-only
-      Pepper Shack
-    %p.print-only
+    %p.print-onlyx
       %span
         Brixham's Caribbean Restaurant
       %span
         01803 882978
-    -#%p.print-only
+    %h1.print-onlyx
+      %b
+        Pepper Shack
+    %p.print-onlyx
+      %span
+        Hopefully, we got it right and you had a good time ... but do tell us if we can make things better. Otherwise, please help us spread the word ... nice reviews on <b>TripAdvisor</b> are most welcome, too.
+  -#%p.print-only
     -#  %span
     -#    book@peppershack.co.uk
     -#  %span
@@ -66,12 +70,11 @@
   %table
     %tr.print-only
       %td.center
-        %b
-          Service not included: Tips shared equally - Cash or Card
+        Thanks again! All tips are shared equally and in full ... cash or card
       -#%td
       -#  &nbsp;
   %table
-    %tr.print-onlyx
+    %tr.print-only
       %td
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
