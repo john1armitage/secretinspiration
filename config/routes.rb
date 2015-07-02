@@ -114,6 +114,9 @@ Commerce::Application.routes.draw do
       post 'commit'
       post 'status'
     end
+    collection do
+      get 'analysis'
+    end
   end
   resources :transfers do
     member do

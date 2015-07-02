@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
       limit = 25
       list_order = 'DESC'
     else
-      limit = params[:limit] || 100
+      limit = params[:limit] || 500
       list_order = 'ASC'
     end
     @orders = @q.result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
@@ -27,6 +27,20 @@ class OrdersController < ApplicationController
       end
     end
     @orders = @orders.where(effective_date: params[:date]) if params[:date].present?
+  end
+
+  def analysis
+    set_analysis_dates
+    choices = params[:choices].present? ? params[:choices] : 'food'
+    @cats = collection_to_options(get_categories(choices))
+    @subs = collection_to_options(Category.find(params[:cat]).children) if params[:cat].present?
+    @items = collection_to_options(Item.where(category: params[:sub])) if params[:sub].present?
+    @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank") #.select("orders.effective_date, items.name")
+    @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start, @stop, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
+    if params[:sub].present?
+      @orders = @orders.where( 'categories.name = ?', params[:sub] )
+    end
+    render 'analysis', layout: nil
   end
 
   # GET /orders/1

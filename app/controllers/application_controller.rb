@@ -167,9 +167,19 @@ class ApplicationController < ActionController::Base
   end
 
   def title(code)
-     code.gsub(/_/,' ').titleize
+     code.gsub(/[\"\[\]]/,"").gsub(/_/,' ').titleize
   end
   helper_method :title
+
+  def terse(code)
+     code.gsub(/Verna\'s/,"")
+  end
+  helper_method :terse
+
+  def ungrouping(code)
+    code.gsub(/[^a-z ]/i,"")
+  end
+  helper_method :ungrouping
 
   def set_booking_dates
     @booking_date = @booking.booking_date if @booking
@@ -294,6 +304,30 @@ class ApplicationController < ActionController::Base
   end
   helper_method :set_daily_dates
 
+
+  def set_analysis_dates
+     @type = params['type'].present? ? params['type'] : 'food'
+     @cat = params['cat'].present? ? params['cat'] : ''
+     @sub = params['sub'].present? ? params['sub'] : ''
+     if params['start'].present? and not params['start'].blank?
+       @start = params['start'].to_date
+       @stop = (params['stop'].present? and not params['stop'].blank?) ? params['stop'].to_date : Date.today
+     elsif params['week'].present? and not params['week'].blank?
+       @start = params['week'].to_date
+       @stop = @start + 6
+     elsif params['month'].present? and not params['month'].blank?
+       @start = params['month'].to_date
+       @stop = @start.end_of_month
+     else
+       @start = Date.today.beginning_of_month
+       @stop = @start.end_of_month
+     end
+     @start = Date.today if @start > Date.today
+     @stop = Date.today if @stop > Date.today
+     @stop = @start if @stop < @start
+  end
+  helper_method :set_analysis_dates
+
   def get_dailies(start, stop)
     @dailies = Daily.where('account_date >= ? AND account_date <= ?', start, stop ).order('account_date, session DESC')
     @dailies.group_by(&:account_date)
@@ -356,6 +390,17 @@ class ApplicationController < ActionController::Base
     @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
     @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
     @takeaways = Meal.includes(:line_items).where("state IN ('ordered','ready') AND seating_id IS NULL").order(:start_time, :created_at)
+  end
+  def collection_to_options(categories, option = 'id')
+    cats = []
+    categories.each do |c|
+      if option == 'id'
+        cats << [c.name.gsub(/_/, ' ').titleize.pluralize, c.id]
+      else
+        cats << [c.name.gsub(/_/, ' ').titleize.pluralize, c.name]
+      end
+    end
+    cats
   end
 
 end
