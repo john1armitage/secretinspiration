@@ -67,6 +67,38 @@ jQuery ->
     $.ajax
       url: "/dailies?calendar=false&balance=true&daily_date=" + event.target.value
       dataType: 'script'
+
+  $(document).on "change", 'select#cat', (event) ->
+    start = $('input#start').val()
+    stop = $('input#stop').val()
+    choices = $("input[type='radio'][name='choices']:checked").val()
+    $.ajax
+      url: "/orders/analysis?start=" + start + "&stop=" + stop + "&choices=" + choices + "&cat=" + event.target.value
+      dataType: 'script'
+  $(document).on "change", 'select#sub', (event) ->
+    start = $('input#start').val()
+    stop = $('input#stop').val()
+    cat = $('select#cat').val()
+    choices = $("input[type='radio'][name='choices']:checked").val()
+    $.ajax
+      url: "/orders/analysis?start=" + start + "&stop=" + stop + "&choices=" + choices + "&cat=" + cat + "&sub=" + event.target.value
+      dataType: 'script'
+  $(document).on "change", 'select#item', (event) ->
+    start = $('input#start').val()
+    stop = $('input#stop').val()
+    cat = $('select#cat').val()
+    sub = $('select#sub').val()
+    choices = $("input[type='radio'][name='choices']:checked").val()
+    $.ajax
+      url: "/orders/analysis?start=" + start + "&stop=" + stop + "&choices=" + choices + "&cat=" + cat + "&sub=" + sub + "&item=" + event.target.value
+      dataType: 'script'
+  $(document).on "change", "input[type='radio'][name='choices']", (event) ->
+    start = $('input#start').val()
+    stop = $('input#stop').val()
+    choices = $("input[type='radio'][name='choices']:checked").val()
+    $.ajax
+      url: "/orders/analysis?start=" + start + "&stop=" + stop + "&choices=" + choices
+      dataType: 'script'
   $(document).foundation orbit:
     animation: "fade" # Sets the type of animation used for transitioning between slides, can also be 'fade'
     timer_speed: 10000 # Sets the amount of time in milliseconds before transitioning a slide

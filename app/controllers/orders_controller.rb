@@ -32,13 +32,21 @@ class OrdersController < ApplicationController
   def analysis
     set_analysis_dates
     choices = params[:choices].present? ? params[:choices] : 'food'
+    params[:cat] == Category.find_by_name( (params[:choices] == 'food') ? 'main' : 'wines') if ( params[:cat].blank? or !params[:cat].present?)
     @cats = collection_to_options(get_categories(choices))
     @subs = collection_to_options(Category.find(params[:cat]).children) if params[:cat].present?
     @items = collection_to_options(Item.where(category: params[:sub])) if params[:sub].present?
-    @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank") #.select("orders.effective_date, items.name")
-    @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start, @stop, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
-    if params[:sub].present?
-      @orders = @orders.where( 'categories.name = ?', params[:sub] )
+    # if params[:cat].blank? and params[:sub].blank? and params[:item].blank?
+      @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank")
+    # else
+      @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start, @stop, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
+    # end
+    if !params[:item].blank?
+      @line_items = @line_items.where( 'items.id = ?', params[:item] )
+    elsif !params[:sub].blank?
+      @line_items = @line_items.where( 'categories.id = ?', params[:sub] )
+    elsif !params[:cat].blank?
+      @line_items = @line_items.where( 'categories.category_id = ?', params[:cat] )
     end
     render 'analysis', layout: nil
   end

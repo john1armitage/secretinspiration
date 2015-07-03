@@ -395,9 +395,9 @@ class ApplicationController < ActionController::Base
     cats = []
     categories.each do |c|
       if option == 'id'
-        cats << [c.name.gsub(/_/, ' ').titleize.pluralize, c.id]
+        cats << [c.name.gsub(/_/, ' ').titleize, c.id]
       else
-        cats << [c.name.gsub(/_/, ' ').titleize.pluralize, c.name]
+        cats << [c.name.gsub(/_/, ' ').titleize, c.name]
       end
     end
     cats
