@@ -1,4 +1,4 @@
-Money.silence_core_extensions_deprecations = true
+#Money.silence_core_extensions_deprecations = true
 # raw config
 
 currencies = []
@@ -72,9 +72,9 @@ Money.default_currency = Money::Currency.new("GBP")
 
 #Money.default_bank = Money::Bank::HistoricalBank.new
 
-MoneyRails.configure do |config|
-
-  config.include_validations = true
-
-end
+# MoneyRails.configure do |config|
+#
+#   config.include_validations = true
+#
+# end
 
