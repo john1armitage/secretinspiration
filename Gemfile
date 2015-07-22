@@ -80,7 +80,7 @@ gem 'money-historical-bank'
 #gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 
 # rails 4.1 upgrade fixes
-gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+gem "ransack" , github: "activerecord-hackery/ransack", branch: "rails-4.2"
 gem 'sprockets', '2.11.0'
 #gem 'ransack', github: 'ernie/ransack', branch: 'rails-4'
 
