@@ -45,10 +45,10 @@ faye_server = Faye::RackAdapter.new(:mount => '/faye', :timeout => 25)
 thin = Rack::Handler.get('thin')
 thin.run(faye_server, :Port => 9292) do |server|
 #  You can set options on the server here, for example to set up SSL:
-#   server.ssl_options = {
-#       'ssl-key-file' => '/opt/nginx/ssl/nginx.key',
-#       'ssl-cert-file'  => '/opt/nginx/ssl/nginx.pem'
-#   }
-#   server.ssl = true
+  server.ssl_options = {
+      'ssl-key-file' => '/etc/nginx/ssl/nginx.key',
+      'ssl-cert-file'  => '/etc/nginx/ssl/nginx.pem'
+  }
+  server.ssl = true
 end
 

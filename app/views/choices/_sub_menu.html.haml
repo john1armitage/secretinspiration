@@ -4,11 +4,13 @@
   - categories = categories.where("notes <> 'hide'") unless (allow? :categories, :edit)
   - categories.each do |category|
     %li
-      - params = category.name
-      - params += "?meal_id=#{@meal.id}" if @meal
-      - params += "?cart_id=#{@cart.id}" if @cart
-      -# params += "?order_id=#{@order.id}" if @order
-      = link_to category.nice_name.pluralize, choice_path(params)
+      -# params = category.name
+      - if @meal
+        = link_to category.nice_name.pluralize, choice_path( category.name, meal_id: @meal.id )
+      - elsif @cart
+        = link_to category.nice_name.pluralize, choice_path( category.name, meal_id: @meal.id )
+      - else
+        = link_to category.nice_name.pluralize, choice_path( category.name )
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->
