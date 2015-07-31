@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_date: 2015-07-29
+  reference: MyString
+  credit_amount: 
+  debit_amount: 
+
+two:
+  event_date: 2015-07-29
+  reference: MyString
+  credit_amount: 
+  debit_amount: 

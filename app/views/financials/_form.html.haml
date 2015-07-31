@@ -1,0 +1,55 @@
+= form_for @financial do |f|
+  - if @financial.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@financial.errors.count, "error")} prohibited this transaction from being saved:"
+      %ul
+        - @financial.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %legend= 'Transaction'
+
+    .row
+      .field.small-3.columns
+        = f.label :event_date
+        = f.date_field :event_date
+      .field.small-2.columns.left
+        = f.label :credit
+        = f.check_box :credit
+      .field.small-2.columns.left
+        = f.label :resolved
+        = f.check_box :resolved
+      .field.small-2.columns.left
+        = f.label :processed
+        = f.check_box :processed
+    .row
+      .field.small-16.columns.left
+        = f.label :summary
+        = f.text_field :summary
+    .row
+      .field.small-12.columns.left
+        = f.label :desc, 'Reference'
+        = f.text_field :desc
+    .row
+      .field.small-3.columns.left
+        = f.label :classification
+        = f.text_field :classification
+      .field.small-3.columns.left
+        = f.label :credit_amount
+        = f.text_field :credit_amount
+      .field.small-3.columns.left
+        = f.label :debit_amount
+        = f.text_field :debit_amount
+    .row
+      .field.small-2.columns.left
+        = f.label :entity
+        = f.text_field :entity
+      .field.small-1.columns.left
+        = f.label :entity_id
+        = f.text_field :entity_id
+      .field.small-2.columns.left
+        = f.label :mandate
+        = f.text_field :mandate
+    .row
+      .actions
+        = f.submit 'Save'

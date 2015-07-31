@@ -1,0 +1,40 @@
+.row
+  .large-6.columns
+    %ul#contact.inline-list
+      - if allow? :financials, :index
+        %li#admin
+          != link_to 'New Transaction', new_financial_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+        %li#admin
+          != link_to 'Batch Input', batch_financials_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+
+
+
+%table
+  %thead
+    %tr
+      %th Date
+      -#%th Type
+      %th
+      %th Code
+      %th Credit
+      %th Debit
+      -#%th Res
+      -#%th Proc
+      %th
+      %th
+
+  %tbody
+    - @financials.each do |financial|
+      %tr
+        %td= financial.event_date
+        -#%td= financial.classification
+        %td.has-tip{"data-tooltip" => "", title: financial.desc}
+          = financial.summary
+        %td= financial.entity_ref
+        %td= ( financial.credit_amount > 0 ? financial.credit_amount : '' )
+        %td= ( financial.debit_amount > 0 ? financial.debit_amount : '' )
+        -#%td= ( financial.resolved ? 'OK' : '' )
+        -#%td= ( financial.processed ? 'OK' : '' )
+        %td= link_to 'E', edit_financial_path(financial)
+        %td= link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

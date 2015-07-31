@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th
     %th Name
     %th Date of birth
     %th Ni number
@@ -14,6 +15,7 @@
 
   - @employees.each do |employee|
     %tr
+      %td= employee.id
       %td= employee.first_name
       %td= employee.date_of_birth
       %td= employee.ni_number

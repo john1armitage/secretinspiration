@@ -97,7 +97,8 @@ CREATE TABLE banks (
     notes text,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    rank integer
+    rank integer,
+    reference character varying
 );
 
 
@@ -288,7 +289,8 @@ CREATE TABLE employees (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     live boolean DEFAULT true,
-    monthly boolean
+    monthly boolean,
+    reference character varying
 );
 
 
@@ -309,6 +311,51 @@ CREATE SEQUENCE employees_id_seq
 --
 
 ALTER SEQUENCE employees_id_seq OWNED BY employees.id;
+
+
+--
+-- Name: financials; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE financials (
+    id integer NOT NULL,
+    event_date date,
+    credit boolean DEFAULT false,
+    classification character varying,
+    entity character varying,
+    entity_id integer,
+    mandate integer,
+    "desc" character varying,
+    credit_amount_cents integer,
+    credit_amount_currency character varying DEFAULT 'GBP'::character varying,
+    debit_amount_cents integer,
+    debit_amount_currency character varying DEFAULT 'GBP'::character varying,
+    resolved boolean DEFAULT false,
+    processed boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    summary character varying,
+    entity_ref character varying
+);
+
+
+--
+-- Name: financials_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE financials_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: financials_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE financials_id_seq OWNED BY financials.id;
 
 
 --
@@ -1101,6 +1148,13 @@ ALTER TABLE ONLY employees ALTER COLUMN id SET DEFAULT nextval('employees_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY financials ALTER COLUMN id SET DEFAULT nextval('financials_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY item_fields ALTER COLUMN id SET DEFAULT nextval('item_fields_id_seq'::regclass);
 
 
@@ -1284,6 +1338,14 @@ ALTER TABLE ONLY elements
 
 ALTER TABLE ONLY employees
     ADD CONSTRAINT employees_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: financials_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY financials
+    ADD CONSTRAINT financials_pkey PRIMARY KEY (id);
 
 
 --
@@ -1822,4 +1884,10 @@ INSERT INTO schema_migrations (version) VALUES ('20140724143920');
 INSERT INTO schema_migrations (version) VALUES ('20140725145454');
 
 INSERT INTO schema_migrations (version) VALUES ('20140725145847');
+
+INSERT INTO schema_migrations (version) VALUES ('20150729112535');
+
+INSERT INTO schema_migrations (version) VALUES ('20150731133450');
+
+INSERT INTO schema_migrations (version) VALUES ('20150731144144');
 

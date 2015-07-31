@@ -1,5 +1,8 @@
 %ul.side-nav
   %li
+  - if allow? :financials, :index
+    %li
+      != link_to 'Financials', financials_path, :class => "small button radius"
   - if allow? :suppliers, :index
     %li
       != link_to 'Suppliers', suppliers_path, :class => "small button radius"

@@ -1,5 +1,12 @@
 Commerce::Application.routes.draw do
 
+  resources :financials do
+    collection do
+      get 'batch'
+      get 'processor'
+    end
+  end
+
   resources :monthlies
 
   resources :wages

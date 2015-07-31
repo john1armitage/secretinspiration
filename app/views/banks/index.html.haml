@@ -2,9 +2,11 @@
 
 %table
   %tr
+    %th
     %th Name
-    %th Sort code
-    %th Account no
+    %th Ref
+    -#%th Sort code
+    -#%th Account no
     %th.number Opening balance
     %th Currency
     %th Notes
@@ -15,9 +17,11 @@
 
   - @banks.each do |bank|
     %tr
+      %td= bank.id
       %td= bank.name
-      %td= bank.sort_code
-      %td= bank.account_no
+      %td= bank.reference
+      -#%td= bank.sort_code
+      -#%td= bank.account_no
       %td.number= bank.opening_balance
       %td= bank.opening_balance_currency
       %td= bank.notes
@@ -25,6 +29,3 @@
       %td= link_to 'Show', bank
       %td= link_to 'Edit', edit_bank_path(bank)
       %td= link_to 'Destroy', bank, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-

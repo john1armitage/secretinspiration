@@ -1,0 +1,110 @@
+- employee = nil
+- employee_id = nil
+- if 1 == 2
+  - @financials.each do |tx|
+    %p
+      -# event_date = Date.parse tx[0]
+      - event_date = tx[0]
+      -# reference = tx[1].upcase.gsub(/[^0-9a-z ,]/i, '')
+      - reference = tx[1].upcase.gsub(/[^0-9a-z &,]/i, '').sub('WWW','')
+      - type = ''
+      - if tx[2].blank?
+        - credit = true
+        - amount = tx[3].sub(',','').to_d
+        - mandate = reference.scan(/^*MANDATE NO [\d]+/)[0]
+        - unless mandate.blank?
+          - mandate = mandate.sub('MANDATE NO ', '').to_i
+        - if ( payee = reference.scan(/^*DIRECT DEBIT PAYMENT TO .+ REF/)[0] )
+          - payee = payee.sub('DIRECT DEBIT PAYMENT TO ', '').sub(' REF','')
+          - type = 'direct'
+        - elsif ( payee = reference.scan(/^*CARD PAYMENT TO [^,]+/)[0] )
+          - payee = payee.sub('CARD PAYMENT TO ', '').sub(',','')
+          - type = 'card'
+        - elsif ( payee = reference.scan(/^*CARD PAYMENT TO [a-zA-Z\s]+/)[0] )
+          - payee = payee.sub('CARD PAYMENT TO ', '')
+          - type = 'card'
+        - elsif ( payee = reference.scan(/^*BILL PAYMENT VIA FASTER PAYMENT TO [a-zA-Z\s]+ REFERENCE/)[0] )
+          - payee = payee.sub('BILL PAYMENT VIA FASTER PAYMENT TO ', '').sub(' REFERENCE','')
+          - type = 'BACS'
+        - elsif ( payee = reference.scan(/^*BILL PAYMENT TO [a-zA-Z\s]+ REFERENCE/)[0] )
+          - payee = payee.sub('BILL PAYMENT TO ', '').sub(' REFERENCE','')
+          - type = 'BACS'
+        - elsif ( payee = reference.scan(/^*BILL PAYMENT TO [a-zA-Z\s]+,/)[0] )
+          - payee = payee.sub('BILL PAYMENT TO ', '').sub(',','')
+          - type = 'BACS'
+        - elsif ( payee = reference.scan(/^*BILL PAYMENT TO [a-zA-Z0-9\s]+/)[0] )
+          - payee = payee.sub('BILL PAYMENT TO ', '')
+          - type = 'BACS'
+        - elsif ( payee = reference.scan(/^*TRANSFER TO [a-zA-Z\s]+/)[0] )
+          - payee = payee.sub('TRANSFER TO ', '')
+          - type = 'transfer'
+          - entity = 'Bank'
+        - elsif ( reference.scan(/^*CHARGES FROM/)[0] || reference.scan(/ANNUAL FEE/)[0] )
+          - payee = 'bank'
+          - type = 'charges'
+        - staff =[['SOPHIE BENJAFIELD','Sophie'],['JJ ARMITAGE','Joel'],['DEMI HELYER','Demi'],['DANIELLE PARSONS','Danielle'],['YAWEN LAI','Emmy'],['ABBIE MONTGOMERY','Abigail'],['MELIA CAMPBELL','Melia'],['ROB STOREY','Rob'],['HOLLY ELLARD','Holly'],['TIFFANY RICHARDS','Tiffany'],['TYLER HOWELL','Tyler']]
+        - staff.each do |s|
+          - if reference[s[0]]
+            - type = 'payroll'
+            - employee = s[1]
+            - emp = Employee.find_by_first_name(s[1])
+            - employee_id = !emp.blank? ? emp.id : 'unknown'
+            - entity = 'Employee'
+        - if ( reference.scan(/PAYROLL/)[0] || tx[5] == 'payroll' )
+          - type = 'payroll'
+        - if ['direct','card','BACS'].include?(type)
+          - supplier = Supplier.find_by_reference(payee.split(' ')[0]) || Supplier.find_by_reference('SUNDRY')
+          - supplier_id = !supplier.blank? ? supplier.id : 'unknown'
+          - entity = 'Supplier'
+        - else
+          - supplier = false
+      - else
+        - credit = false
+        - amount = tx[2].sub(',','').to_d
+        - if ( payer = reference.scan(/^*BANK GIRO CREDIT REF [a-zA-Z0-9\s]+,/)[0] )
+          - payer = payer.sub('BANK GIRO CREDIT REF ', '').sub(',','').gsub(/[0-9]/,'')
+          - type = 'merchant'
+        - elsif ( location = reference.scan(/^*CASH DEPOSIT AT [a-zA-Z\s]+/)[0] )
+          - location = location.sub('CASH DEPOSIT AT ', '')
+          - type = 'cash'
+        - elsif ( location = reference.scan(/^*CASH PAID IN AT [a-zA-Z\s]+/)[0] )
+          - location = location.sub('CASH PAID IN AT ', '')
+          - type = 'cash'
+        - elsif reference.scan(/^*FASTER PAYMENTS RECEIPT/)[0]
+          - payer = reference.scan(/^*FROM [a-zA-Z\s]+/)[0].sub('FROM ', '')
+          - type = 'bacs'
+        - elsif ( location = reference.scan(/^*CHEQUE PAID IN AT [a-zA-Z\s]+/)[0] )
+          - location = location.sub('CHEQUE PAID IN AT ', '')
+          - type = 'cheque'
+        - elsif reference.scan(/POST OFFICE CASH DEPOSIT/)[0]
+          - location = 'post office'
+          - type = 'cash'
+        - elsif ( payee = reference.scan(/^*CREDIT FROM .+ ON/)[0] )
+          - payee = payee.sub('CREDIT FROM ', '').sub(' ON','')
+          - type = 'refund'
+        - elsif ( payee = reference.scan(/^REJECTED .+ TO [a-zA-Z\s]+/)[0] )
+          - payee = payee.gsub(/REJECTED .+ TO /, '')
+          - type = 'reverse'
+        - elsif ( payee = reference.scan(/^*TRANSFER FROM [a-zA-Z\s]+/)[0] )
+          - payee = payee.sub('TRANSFER FROM ', '')
+          - type = 'transfer'
+          - entity = 'Bank'
+        - elsif reference.scan(/INTEREST PAID/)[0]
+          - payer = 'bank'
+          - type = 'interest'
+      - if ( payee && ['HMRC','JMVMARMITAGE','JONATHANARMITAGE','JARMITAGE'].include?(payee.split(' ')[0])) || (payer && ['EMS','AX','JMVMARMITAGE','JONATHANARMITAGE','JARMITAGE'].include?(payer.split(' ')[0]))
+        - type = 'transfer'
+        - entity = 'Bank'
+      = event_date
+      = "#{credit ? 'Out' : 'In'}: "
+      = type
+      = "Amount: #{amount}"
+      = "Employee: #{employee}" if type['payroll']
+      = "ID: #{employee_id}"  if type['payroll']
+      = "Supplier: #{supplier_id}" if supplier
+      = "Mandate: #{mandate}" if mandate
+      = "Payee: #{payee}" if payee
+      = "Payer: #{payer}" if payer
+      = "Location: #{location}" if location
+- else
+  HI
