@@ -31,6 +31,7 @@ class SuppliersController < ApplicationController
     cats = params[:supplier][:cats]
     params[:supplier].delete :cats
     @supplier = Supplier.new(params[:supplier])
+    split_reference
     if @supplier.save
       set_cats(cats)
       redirect_to suppliers_url, notice: 'Supplier was successfully created.'
@@ -44,6 +45,7 @@ class SuppliersController < ApplicationController
     cats = params[:supplier][:cats]
     params[:supplier].delete :cats
     set_cats(cats)
+    split_reference
     if @supplier.update(params[:supplier])
       redirect_to suppliers_url, notice: 'Supplier was successfully updated.'
     else
@@ -58,7 +60,12 @@ class SuppliersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  def split_reference
+    params[:supplier][:reference] = params[:supplier][:reference].upcase.split(' ')
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
     def set_supplier
       @supplier = Supplier.find(params[:id])
     end

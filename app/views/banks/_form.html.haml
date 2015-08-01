@@ -21,6 +21,9 @@
         = f.text_field :account_no
     .row
       .field.small-5.columns
+        = f.label :statement
+        = f.check_box :statement
+      .field.small-5.columns
         = f.label :opening_balance
         = f.text_field :opening_balance
       .field.small-3.columns.left

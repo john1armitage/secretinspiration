@@ -1,13 +1,14 @@
+- banks = Bank.where(statement: true)
 .row
-  .large-6.columns
+  .large-12.columns
     %ul#contact.inline-list
       - if allow? :financials, :index
         %li#admin
           != link_to 'New Transaction', new_financial_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
-        %li#admin
-          != link_to 'Batch Input', batch_financials_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
-
+        - banks.each do |bank|
+          %li#admin
+            != link_to "Batch #{bank.reference}", batch_financials_path(bank: bank.reference), class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
 %table
   %thead
@@ -15,7 +16,8 @@
       %th Date
       -#%th Type
       %th
-      %th Code
+      %th
+      %th
       %th Credit
       %th Debit
       -#%th Res
@@ -30,6 +32,7 @@
         -#%td= financial.classification
         %td.has-tip{"data-tooltip" => "", title: financial.desc}
           = financial.summary
+        %td= financial.entity_id
         %td= financial.entity_ref
         %td= ( financial.credit_amount > 0 ? financial.credit_amount : '' )
         %td= ( financial.debit_amount > 0 ? financial.debit_amount : '' )
