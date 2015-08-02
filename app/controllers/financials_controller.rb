@@ -17,7 +17,7 @@ class FinancialsController < ApplicationController
     ref_bank = params[:bank].present? ? params[:bank] : CONFIG[:default_bank]
 
     require "csv"
-    data_file = "~/commerce/#{ref_bank.downcase}.csv"
+    data_file = "~/dropbox/commerce/#{ref_bank.downcase}.csv"
     @financials = []
     CSV.foreach(File.expand_path(data_file)) do |tx|
       @financials << tx
@@ -75,14 +75,18 @@ class FinancialsController < ApplicationController
           payee = 'BANK'
           type = 'charges'
           summary = 'Bank Charges'
+          entity_ref = ref_bank
+          entity_id = Bank.find_by_reference(entity_ref)
+          summary = 'Bank Interest'
         end
-        if (entity_id = reference.scan(/SHACKPAYROLL\d+/)[0])
+        if (entity_id = reference.scan(/SHACKPAYROLL .+/)[0])
           type = 'payroll'
-          entity_id = entity_id.sub('SHACKPAYROLL','')
           entity = 'Employee'
-          summary = "Payroll ID: #{entity_id}"
+          entity_ref = entity_id.sub('SHACKPAYROLL ','')
+          emp = Employee.find_by_first_name(entity_ref)
+          summary = "Payroll #{entity_id}: #{entity_ref}"
         else
-          staff =[['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
+          staff =[['TOM AKERY', 'Tom'], ['VICTORIA CAMPBEL', 'Victoria'], ['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
           staff.each do |s|
             if reference[s[0]]
               type = 'payroll'
@@ -160,7 +164,9 @@ class FinancialsController < ApplicationController
         elsif reference.scan(/INTEREST PAID/)[0]
           payer = 'bank'
           type = 'interest'
-          entity = 'Debtor'
+          entity = 'Bank'
+          entity_ref = ref_bank
+          entity_id = Bank.find_by_reference(entity_ref)
           summary = 'Bank Interest'
         end
       end
