@@ -1,0 +1,8 @@
+%h1= "Entity check"
+
+- if @missing
+  %ul
+    - @missing.each do |ref|
+      = render 'entity_ref', ref: ref
+- else
+  %p= 'No unknown References'

@@ -3,6 +3,7 @@ Commerce::Application.routes.draw do
   resources :financials do
     collection do
       get 'batch'
+      get 'entity'
       get 'processor'
     end
   end

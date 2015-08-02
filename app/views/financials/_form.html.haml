@@ -13,6 +13,9 @@
       .field.small-3.columns
         = f.label :event_date
         = f.date_field :event_date
+      .field.small-3.columns.left
+        = f.label :bank
+        = f.collection_select :bank, Bank.where( statement: true ).order(:rank).load, 'reference', 'reference'
       .field.small-2.columns.left
         = f.label :credit
         = f.check_box :credit
@@ -23,7 +26,10 @@
         = f.label :processed
         = f.check_box :processed
     .row
-      .field.small-16.columns.left
+      .field.small-8.columns.left
+        = f.label :entity_ref
+        = f.text_field :entity_ref
+      .field.small-8.columns.left
         = f.label :summary
         = f.text_field :summary
     .row
@@ -45,7 +51,7 @@
         = f.label :entity
         = f.text_field :entity
       .field.small-1.columns.left
-        = f.label :entity_id
+        = f.label :entity_id, 'id'
         = f.text_field :entity_id
       .field.small-2.columns.left
         = f.label :mandate

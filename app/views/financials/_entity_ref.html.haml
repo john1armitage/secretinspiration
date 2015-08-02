@@ -1,0 +1,12 @@
+= form_for @supplier do |f|
+  = hidden_field_tag :entity, true
+  .row
+    .field.small-3.columns
+      = ref
+      = f.hidden_field :reference, :value => ref
+    .field.small-3.columns
+      = f.collection_select :id, Supplier.order(:name).load, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.text_field :name
+    .field.small-2.columns
+      = f.submit 'Save'

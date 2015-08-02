@@ -28,16 +28,34 @@ class SuppliersController < ApplicationController
 
   # POST /suppliers
   def create
-    cats = params[:supplier][:cats]
-    params[:supplier].delete :cats
-    @supplier = Supplier.new(params[:supplier])
-    split_reference
-    if @supplier.save
-      set_cats(cats)
-      redirect_to suppliers_url, notice: 'Supplier was successfully created.'
+    if params[:entity].present?
+      entity
     else
-      render action: 'new'
+      cats = params[:supplier][:cats]
+      params[:supplier].delete :cats
+      @supplier = Supplier.new(params[:supplier])
+      split_reference
+      if @supplier.save
+        set_cats(cats)
+        redirect_to suppliers_url, notice: 'Supplier was successfully created.'
+      else
+        render action: 'new'
+      end
     end
+  end
+
+  def entity
+    if params[:supplier][:id].blank?
+      @supplier = Supplier.new
+      @supplier.name = params[:supplier][:name]
+      @supplier.reference << params[:supplier][:reference]
+      @supplier.save
+    else
+      @supplier = Supplier.find(params[:supplier][:id])
+      @supplier.reference << params[:supplier][:reference]
+      @supplier.save
+    end
+    redirect_to entity_financials_url
   end
 
   # PATCH/PUT /suppliers/1

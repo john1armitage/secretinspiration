@@ -28,8 +28,7 @@
         = f.text_field :opening_balance
       .field.small-3.columns.left
         = f.label :opening_balance_currency, 'Currency'
-        = f.collection_select :opening_balance_currency, Element.where( :kind => 'currency').load,
-          'name', 'name'
+        = f.collection_select :opening_balance_currency, Element.where( :kind => 'currency').load, 'name', 'name'
     .row
       .field.small-10.columns
         = f.label :notes

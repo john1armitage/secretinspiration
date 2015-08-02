@@ -13,6 +13,7 @@ class BanksController < ApplicationController
   # GET /banks/new
   def new
     @bank = Bank.new
+    @bank.opening_balance_currency = 'GBP'
   end
 
   # GET /banks/1/edit
