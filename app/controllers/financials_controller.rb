@@ -45,7 +45,7 @@ class FinancialsController < ApplicationController
     ref_bank = params[:bank].present? ? params[:bank] : CONFIG[:default_bank]
 
     require "csv"
-    data_file = "~/Dropbox/commerce/#{ref_bank.downcase}.csv"
+    data_file = "~/commerce/#{ref_bank.downcase}.csv"
     input_file = File.expand_path(data_file)
     if File.exist?(input_file)
 
@@ -264,7 +264,7 @@ class FinancialsController < ApplicationController
 
       end
       time = Time.now.strftime("%Y%m%d")
-      done = "~/Dropbox/commerce/#{ref_bank.downcase}.#{time}"
+      done = "~/commerce/#{ref_bank.downcase}.#{time}"
       system("mv #{data_file} #{done}")
     else
       done = "#{params[:bank]} Batch not found"
