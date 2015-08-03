@@ -42,6 +42,7 @@ class DailiesController < ApplicationController
     @daily = Daily.new(params[:daily])
     set_net
     if @daily.save
+      create_financials
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
     else
@@ -52,6 +53,8 @@ class DailiesController < ApplicationController
   # PATCH/PUT /dailies/1
   def update
     set_net
+    remove_financials
+    create_financials
     if @daily.update(params[:daily])
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
@@ -70,6 +73,95 @@ class DailiesController < ApplicationController
   end
 
   private
+    def remove_financials
+      @daily.financials.destroy
+    end
+    def create_financials
+      # card control
+      credit_card_financial
+      # cash control
+      cash_financial
+      # VAT control
+      # income control
+      # tips control
+    end
+    def credit_card_financial
+      ref_bank = 'MERCHANT'
+      credit = true
+      credit_amount = @daily.credit_card
+      debit_amount = 0
+      entity = 'Account'
+      type = 'sales'
+      account = Account.find_by_name('Accounts Receivable')
+      if account
+        entity_id = account.id
+        entity_ref = account.code
+      end
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'} into #{ref_bank}"
+      @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+    end
+    def cash_financial
+      ref_bank = 'CASH'
+      credit = true
+      credit_amount = @daily.credit_card
+      debit_amount = 0
+      entity = 'Account'
+      type = 'takings'
+      account = Account.find_by_name('Accounts Receivable')
+      if account
+        entity_id = account.id
+        entity_ref = account.code
+      end
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+      @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+    end
+    def sales_financial
+      ref_bank = 'RECEIVABLE'
+      credit = false
+      credit_amount = 0
+      debit_amount = @daily.turnover
+      entity = 'Account'
+      type = 'sales'
+      account = Account.find_by_name('Sales')
+      if account
+        entity_id = account.id
+        entity_ref = account.code
+      end
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+      @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+    end
+    def tax_financial
+      ref_bank = 'RECEIVABLE'
+      credit = false
+      credit_amount = 0
+      debit_amount = @daily.turnover
+      entity = 'Account'
+      type = 'sales'
+      account = Account.find_by_name('VAT Control')
+      if account
+        entity_id = account.id
+        entity_ref = account.code
+      end
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+      @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+    end
+    def tips_financial
+      ref_bank = 'RECEIVABLE'
+      credit = false
+      credit_amount = 0
+      debit_amount = @daily.turnover
+      entity = 'Account'
+      type = 'sales'
+      account = Account.find_by_name('Tips Control')
+      if account
+        entity_id = account.id
+        entity_ref = account.code
+      end
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+      @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+    end
+
+
     def set_net
       gross = params[:gross].present? ? params[:gross].to_d : 0.00
       if gross > 0

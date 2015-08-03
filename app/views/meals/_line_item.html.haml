@@ -27,7 +27,7 @@
     - unless @meal.seating_id.blank?
       - if line_item.variant.item.grouping.match(/.*starter/)
         = link_to 'main', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
-      - elsif line_item.variant.item.grouping.match(/.*main/)
+      - elsif line_item.variant.item.grouping.match(/.*main/) || line_item.variant.item.grouping.match(/.*side/)
         = link_to 'start', meal_item_path( line_item.id, act: 'starter'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
     %br
 

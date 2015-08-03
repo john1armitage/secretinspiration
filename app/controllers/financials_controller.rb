@@ -9,7 +9,7 @@ class FinancialsController < ApplicationController
     @refs = get_entity_refs
     @suppliers = get_entity_suppliers
     @employees = get_entity_employees
-    @banks = Bank.where( statement: true ).order(:rank)
+    @banks = get_banks
 
 
     #HACK TO ALLOW Employee & Supplier Search
@@ -338,6 +338,9 @@ class FinancialsController < ApplicationController
   end
 
   private
+  def get_banks
+    Bank.where( 'reference IS NOT NULL' ).order(:rank)
+  end
   def get_entity_suppliers
     supplier_ids = Financial.where('entity_id IS NOT NULL').where(entity: 'Supplier').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)
     Supplier.where( id: supplier_ids ) #.order(:id)

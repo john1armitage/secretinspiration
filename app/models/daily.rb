@@ -15,6 +15,8 @@ class Daily < ActiveRecord::Base
   monetize :safe_cash_cents, :allow_nil => true
   monetize :surplus_cents, :allow_nil => true
 
+  has_many :financials, dependent: :destroy
+
   validates_presence_of :session, :account_date, :take, :credit_card, :tips
   validates_numericality_of :take, :credit_card, :tips
   before_validation :get_totals

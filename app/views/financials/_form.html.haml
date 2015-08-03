@@ -15,7 +15,7 @@
         = f.date_field :event_date
       .field.small-3.columns.left
         = f.label :bank
-        = f.collection_select :bank, Bank.where( statement: true ).order(:rank).load, 'reference', 'reference'
+        = f.collection_select :bank, Bank.where('reference IS NOT NULL').order(:rank).load, 'reference', 'reference'
       .field.small-2.columns.left
         = f.label :credit
         = f.check_box :credit

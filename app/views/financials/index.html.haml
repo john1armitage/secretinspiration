@@ -5,7 +5,7 @@
         %li#admin
           != link_to 'New', new_financial_path, title: 'Create Transaction', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
-        - @banks.each do |bank|
+        - @banks.where(statement: true).each do |bank|
           %li#admin
             != link_to "#{bank.reference}", batch_financials_path(bank: bank.reference), title: 'Batch Input', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 

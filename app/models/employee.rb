@@ -1,9 +1,9 @@
 class Employee < ActiveRecord::Base
 
   monetize :hourly_rate_cents
-  has_many :timesheets
-  has_many :pay_rates
-  has_many :wages
+  has_many :timesheets, dependent: :destroy
+  has_many :pay_rates, dependent: :destroy
+  has_many :wages, dependent: :destroy
 
   def name
     first_name + " " + last_name + " "
