@@ -42,7 +42,7 @@ class FinancialsController < ApplicationController
   end
 
   def entity
-    entity_suppliers = get_entity_suppliers
+    entity_suppliers = get_entity_refs
     references = Supplier.where("reference <> '{}'").select(:reference).map(&:reference).flatten(1).uniq.sort { |w1, w2| w1.casecmp(w2) }
     @missing = entity_suppliers - references
     @supplier = Supplier.new
