@@ -2,7 +2,7 @@
   = hidden_field_tag :entity, true
   .row
     .field.small-3.columns
-      = ref
+      = link_to ref, "/financials/?q[entity_ref_eq]=#{ref.gsub(/&/,'%26')}"
       = f.hidden_field :reference, :value => ref
     .field.small-3.columns
       = f.collection_select :id, Supplier.order(:name).load, 'id', 'name', include_blank: true
