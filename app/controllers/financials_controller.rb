@@ -227,7 +227,12 @@ class FinancialsController < ApplicationController
           summary = "Receipt from #{pr}"
         end
 
-
+        if entity_ref && entity_ref.scan(/PAYPAL[[a-zA-Z0-9]]*/)[0]
+          entity_ref = 'PAYPAL'
+        end
+        if entity_ref && entity_ref.scan(/AMAZON[[a-zA-Z0-9]]*/)[0]
+          entity_ref = 'AMAZON'
+        end
         if reference.scan(/DIRECTORS AC/)[0]
           entity = 'Bank'
           entity_ref = 'DIRECTORS'
