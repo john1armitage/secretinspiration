@@ -3,14 +3,14 @@
     %ul#contact.inline-list
       - if allow? :financials, :index
         %li#admin
-          != link_to 'New Transaction', new_financial_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+          != link_to 'New', new_financial_path, title: 'Create Transaction', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
         - @banks.each do |bank|
           %li#admin
-            != link_to "-> #{bank.reference}", batch_financials_path(bank: bank.reference), class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+            != link_to "#{bank.reference}", batch_financials_path(bank: bank.reference), title: 'Batch Input', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
         %li#admin
-          != link_to 'Entities', entity_financials_path, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+          != link_to 'Refs', entity_financials_path, title: 'Supplier References', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
 = search_form_for @q do |f|
 
@@ -25,19 +25,22 @@
       .field.small-6.columns.left
         %p
           = params[:result]
-  .row
-    .field.small-3.columns
-      = f.label :entity_ref_eq, 'Supplier'
-      = f.select :entity_ref_eq, options_for_select(@suppliers), include_blank: true
-    .field.small-3.columns
-      = f.label :summary_eq, 'Employee'
-      = f.select :summary_eq, options_for_select(@employees), include_blank: true
-    .field.small-3.columns
-      = f.label :bank_eq, 'Bank'
-      = f.collection_select :bank_eq, @banks, 'reference', 'name', include_blank: true
     .field.small-3.columns.left
       = label_tag :limit
       = select_tag :limit, options_for_select(%w[50 100 500 1000 1500 2000], params[:limit] || 100)
+  .row
+    .field.small-3.columns
+      = f.label :entity_id_eq, 'Supplier'
+      = f.collection_select :entity_id_eq, @suppliers, 'id', 'name', include_blank: true
+    .field.small-3.columns
+      = f.label :entity_ref_eq, 'Ref'
+      = f.select :entity_ref_eq, options_for_select(@refs, @ref), include_blank: true
+    .field.small-3.columns
+      = f.label :summary_eq, 'Employee'
+      = f.select :summary_eq, options_for_select(@employees, @employee), include_blank: true
+    .field.small-3.columns
+      = f.label :bank_eq, 'Bank'
+      = f.collection_select :bank_eq, @banks, 'reference', 'name', selected: @bank, include_blank: true
   .row
     .actions
       = f.submit 'Search'

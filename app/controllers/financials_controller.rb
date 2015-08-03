@@ -6,6 +6,7 @@ class FinancialsController < ApplicationController
   def index
     @financials = Financial.all
 
+    @refs = get_entity_refs
     @suppliers = get_entity_suppliers
     @employees = get_entity_employees
     @banks = Bank.where( statement: true ).order(:rank)
@@ -13,10 +14,17 @@ class FinancialsController < ApplicationController
 
     #HACK TO ALLOW Employee & Supplier Search
     if params[:q].present?
+      @employee = params[:q][:summary_eq]
+      @bank = params[:q][:bank_eq]
+      @ref = params[:q][:entity_ref_eq]
       unless params[:q][:summary_eq].blank?
         params[:q][:entity_ref_eq] = params[:q][:summary_eq]
       end
       params[:q].delete :summary_eq
+      unless params[:q][:entity_id_eq].blank?
+        params[:q][:entity_id_eq] = params[:q][:entity_id_eq].to_i
+        params[:q][:entity_eq] = 'Supplier'
+      end
     end
     # p params[:q]
 
@@ -115,11 +123,11 @@ class FinancialsController < ApplicationController
           if (emp = reference.scan(/SHACKPAYROLL .+/)[0])
             type = 'payroll'
             entity = 'Employee'
-            entity_ref = emp.sub('SHACKPAYROLL ', '').downcase.capitalize
+            entity_ref = emp.sub('SHACKPAY ', '').downcase.capitalize
             entity_id = Employee.find_by_first_name(entity_ref).id
             summary = "PAYROLL #{entity_id}: #{entity_ref}"
           else
-            staff =[['TOM AKERY', 'Tom'], ['VICTORIA CAMPBEL', 'Victoria'], ['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
+            staff =[['JUANITA ARMITAGE', 'Juanita'], ['TYLER HOWELL', 'Tyler'], ['PAISLEY JARRA', 'Paisley'], ['VERNA ARMITAGE', 'Verna'], ['LEAH CAMPBELL', 'Leah'], ['TOM AKERY', 'Tom'], ['VICTORIA CAMPBEL', 'Victoria'], ['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
             staff.each do |s|
               if reference[s[0]]
                 type = 'payroll'
@@ -211,10 +219,6 @@ class FinancialsController < ApplicationController
           summary = "Cash deposit"
           summary += " #{location.upcase}" unless location.blank?
         end
-        # if (payee && ['HMRC', 'JMVMARMITAGE', 'JONATHANARMITAGE', 'JARMITAGE'].include?(payee.split(' ')[0])) || (payer && ['EMS', 'AX', 'JMVMARMITAGE', 'JONATHANARMITAGE', 'JARMITAGE'].include?(payer.split(' ')[0]))
-        #   type = 'transfer'
-        #   entity = 'Bank'
-        # end
         if payer
           pr = payer.split(' ')[0]
           supplier = Supplier.where("'#{pr}' = ANY (reference)")
@@ -224,10 +228,10 @@ class FinancialsController < ApplicationController
         end
 
 
-        if reference.scan(/LOAN REPAYMENT/)[0] || reference.scan(/DIRECTORS LOAN/)[0]
+        if reference.scan(/DIRECTORS AC/)[0]
           entity = 'Bank'
           entity_ref = 'DIRECTORS'
-          summary = 'DIRECTORS LOAN'
+          summary = 'DIRECTORS ACCOUNT'
         end
         if reference.scan(/HMRC PAYE/)[0]
           entity = 'Bank'
@@ -329,11 +333,17 @@ class FinancialsController < ApplicationController
   end
 
   private
-    def get_entity_suppliers
-      Financial.where('entity_ref IS NOT NULL').where(entity: 'Supplier').select(:entity_ref).map(&:entity_ref).uniq.sort { |w1, w2| w1.casecmp(w2) }
-    end
+  def get_entity_suppliers
+    supplier_ids = Financial.where('entity_id IS NOT NULL').where(entity: 'Supplier').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)
+    Supplier.where( id: supplier_ids ) #.order(:id)
 
-    def get_entity_employees
+  end
+
+  def get_entity_refs
+    Financial.where('entity_ref IS NOT NULL').where(entity: 'Supplier').select(:entity_ref).map(&:entity_ref).uniq.sort { |w1, w2| w1.casecmp(w2) }
+  end
+
+  def get_entity_employees
       Financial.where('entity_ref IS NOT NULL').where(entity: 'Employee').select(:entity_ref).map(&:entity_ref).uniq.sort { |w1, w2| w1.casecmp(w2) }
     end
 
