@@ -14,16 +14,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/views/dailies/_show.html.haml" line="118" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/financials/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/financials/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/meals/_line_item.html.haml" afterPath="$PROJECT_DIR$/app/views/meals/_line_item.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/dailies_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/dailies_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/daily.rb" afterPath="$PROJECT_DIR$/app/models/daily.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/employee.rb" afterPath="$PROJECT_DIR$/app/models/employee.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/financial.rb" afterPath="$PROJECT_DIR$/app/models/financial.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/financials_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/financials_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/financials/index.html.haml" afterPath="$PROJECT_DIR$/app/views/financials/index.html.haml" />
-    </list>
+    <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;" />
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/tmp/" />
