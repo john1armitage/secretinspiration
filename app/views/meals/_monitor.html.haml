@@ -1,6 +1,7 @@
-- @arrivals = Meal.where("seating_id IS NOT NULL AND pholourie = 'false'").order('created_at')
+- if @active_tables.size > 0
+  = render partial: 'active_table', collection: @active_tables
+  %br
 - if @arrivals.size > 0
-  =# "#{pluralize(  @arrivals.size, 'arrival')}: "
   = render partial: 'arrival', collection: @arrivals
   %br
   %br

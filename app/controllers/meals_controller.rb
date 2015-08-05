@@ -33,6 +33,7 @@ class MealsController < ApplicationController
       render  action: 'takeaway'
     end
     if params[:order].present? # && params[:order] == 'all'
+      @meal.update(ordered_at: Time.now)
       if @meal.seating_id.blank?
         if @meal.line_items.size > 0
           state = 'ordered'
@@ -45,7 +46,6 @@ class MealsController < ApplicationController
         courses = get_courses
         if params[:order] == 'dessert' && courses.include?('dessert')
           state = 'dessert'
-          @meal.ordered_at = Time.now
         elsif courses.include?('starter')
           state = 'starter'
         elsif courses.include?('main')
@@ -103,6 +103,7 @@ class MealsController < ApplicationController
         case get_current_course(params[:state])
           when 'starter'
             state = courses.include?('main') ? 'main' : courses.include?('dessert') ? 'dessert' : 'complete'
+            @meal.update(ordered: Time.now)
           when 'main'
             state = courses.include?('dessert') ? 'dessert' : 'complete'
           when 'dessert'
