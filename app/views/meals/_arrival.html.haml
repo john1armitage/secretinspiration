@@ -1,4 +1,4 @@
-%span.head.box
+%span.head
   = "#{arrival.seating.booking.pax} for "
   = button_to 'Pholourie', patcher_meal_url(arrival, pholourie: true, monitor: true), id: arrival.id, form_class: 'no_ajaxify inline', remote: true
   = "(T#{arrival.tabel_name})"
