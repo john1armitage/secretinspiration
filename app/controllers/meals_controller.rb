@@ -103,7 +103,7 @@ class MealsController < ApplicationController
         case get_current_course(params[:state])
           when 'starter'
             state = courses.include?('main') ? 'main' : courses.include?('dessert') ? 'dessert' : 'complete'
-            @meal.update(ordered: Time.now)
+            @meal.update(ordered_at: Time.now)
           when 'main'
             state = courses.include?('dessert') ? 'dessert' : 'complete'
           when 'dessert'
