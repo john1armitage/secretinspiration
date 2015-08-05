@@ -390,7 +390,7 @@ class ApplicationController < ActionController::Base
     @active_tables = Meal.where("state NOT IN ('billed', 'complete')").includes(seating: [:booking] ).where("seating_id::INT > 0").order('created_at DESC')
     @arrivals = @active_tables.where("pholourie = 'false'").order('created_at')
     @meals = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete','main_served') AND state NOT LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
-    @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('billed', 'active', 'complete') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
+    @afters = Meal.includes(:line_items, seating: [:booking] ).where("state NOT IN ('complete','served') AND state LIKE 'dessert%' AND seating_id::INT > 0").order('ordered_at')
     @takeaways = Meal.includes(:line_items).where("state IN ('ordered','ready') AND seating_id IS NULL").order(:start_time, :created_at)
   end
   def collection_to_options(categories, option = 'id')
