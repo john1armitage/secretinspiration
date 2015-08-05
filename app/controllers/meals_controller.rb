@@ -98,12 +98,12 @@ class MealsController < ApplicationController
 
   def patcher
     if params[:state].present?
+      @meal.update(ordered_at: Time.now) unless params[:state].include? 'ready'
       if params[:state].include? 'complete'
         courses = get_courses
         case get_current_course(params[:state])
           when 'starter'
             state = courses.include?('main') ? 'main' : courses.include?('dessert') ? 'dessert' : 'complete'
-            @meal.update(ordered_at: Time.now)
           when 'main'
             state = courses.include?('dessert') ? 'dessert' : 'complete'
           when 'dessert'
