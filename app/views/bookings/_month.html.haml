@@ -17,7 +17,6 @@
             - message = "#{opening.message}"
       - if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
         %span.closed
-          = message unless message.blank?
           = "We're Closed"
           = " ... #{message}" unless message.blank?
           = " ... sorry"
