@@ -98,23 +98,30 @@
         .field.large-5.columns.number
           = "#{pounds(tips_share)}"
         .field.large-4.columns.number
-    .row
-      .large-12.columns.sub.head
+    .row.title
+      .field.large-12.columns.sub.head
         = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
     .row.title
       .field.large-3.columns.sub
         Hours
       .field.large-5.columns.number.sub
-        Pay
+        = pounds(week_hours * rate_cents / 100.00 )
       .field.large-4.columns.number.sub
-        Tips
+        = week_hours
     .row
       .field.large-3.columns.sub
-        = week_hours
+        Tips
       .field.large-5.columns.number.sub
-        = pounds(week_wages / 100)
-      .field.large-4.columns.number.sub
         = pounds(week_tips)
+      .field.large-4.columns.number.sub
+
+    .row
+      .field.large-3.columns.sub
+        Total
+      .field.large-5.columns.number.sub
+        = pounds(week_tips + ( week_hours * rate_cents / 100.00 ) )
+      .field.large-4.columns.number.sub
+        = rate_cents
   .row
     .field.large-12.columns.head
       = "Tips Out: #{pounds(total_tips_out)}"
