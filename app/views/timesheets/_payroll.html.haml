@@ -38,7 +38,7 @@
         - tips_share = 0.00
       - wages += wage
 
-      - if employee.name != timesheet.employee.name
+      - if employee.id != timesheet.employee.id
         .row.title
           .field.large-12.columns.sub.head
             = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
@@ -46,16 +46,23 @@
           .field.large-3.columns.sub
             Hours
           .field.large-5.columns.number.sub
-            Pay
-          .field.large-4.columns.number.sub
-            Tips
-        .row
-          .field.large-3.columns.sub
-            = week_hours
-          .field.large-5.columns.number.sub
             = pounds(week_hours * rate_cents / 100.00 )
           .field.large-4.columns.number.sub
+            = week_hours
+        .row
+          .field.large-3.columns.sub
+            Tips
+          .field.large-5.columns.number.sub
             = pounds(week_tips)
+          .field.large-4.columns.number.sub
+
+        .row
+          .field.large-3.columns.sub
+            Total
+          .field.large-5.columns.number.sub
+            = pounds(week_tips + ( week_hours * rate_cents / 100.00 ) )
+          .field.large-4.columns.number.sub
+            = rate_cents
         .row
           .large-12.columns.head
             = timesheet.employee.name
@@ -80,18 +87,17 @@
           = "#{timesheet.session}" unless timesheet.session == 'dinner'
       .row.title
         .field.large-3.columns
-          Hours
-        .field.large-5.columns.number
           Pay
-        .field.large-4.columns.number
-          Tips
-      .row
-        .field.large-3.columns
-          = timesheet.hours
         .field.large-5.columns.number
           = "#{pounds(wage / 100.00)}"
         .field.large-4.columns.number
+          = timesheet.hours
+      .row
+        .field.large-3.columns
+          Tips
+        .field.large-5.columns.number
           = "#{pounds(tips_share)}"
+        .field.large-4.columns.number
     .row
       .large-12.columns.sub.head
         = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'

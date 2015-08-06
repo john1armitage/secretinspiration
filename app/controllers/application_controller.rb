@@ -351,7 +351,9 @@ class ApplicationController < ActionController::Base
   helper_method :get_work_month
 
   def get_rate_cents(employee, work_date)
-    employee.pay_rates.where('effective_date <= ?', work_date).first.rate_cents
+    # p employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC')
+    # p employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents
+    employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents
   end
   helper_method :get_rate_cents
 
