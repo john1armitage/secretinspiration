@@ -71,6 +71,19 @@ $head-border: #009900;
         background-color: $theme-gigiri;
       }
     }
+    &#daily_editor {
+      font-size: 0.8rem;
+      fieldset {
+        padding: 0;
+        border: none;
+        input {
+          margin: 0;
+        }
+        .headings {
+          padding-right: 0;
+        }
+      }
+    }
     &#monitor {
       //      padding: 2em;
       .row {
@@ -1080,5 +1093,30 @@ article.welcome ul.inline-list li {
   &.title {
     text-align: center;
     font-weight: bold;
+  }
+}
+#daily_editor {
+  font-size: 0.8rem;
+  fieldset {
+    padding: 0;
+    border: none;
+    input {
+      margin: 0;
+    }
+  }
+  .headings {
+    padding-right: 0;
+    font-weight: bold;
+    text-align: right;
+    div {
+      padding-right: 0;
+      &.lefty {
+        text-align: left;
+      }
+    }
+  }
+  .field {
+    padding-right: 0;
+    text-align: right;
   }
 }

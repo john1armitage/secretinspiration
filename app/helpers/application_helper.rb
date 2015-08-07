@@ -128,17 +128,17 @@ module ApplicationHelper
   def pax(pax)
     "#{pax} pax"
   end
-  def week_number(date)
-    date.to_date.beginning_of_week.strftime('%U')
-  end
-  def week_start(date)
-    date.beginning_of_week.strftime('%d-%m-%y')
-  end
-  def HMRC_week_number(date)
-    fy_start = "06-04-#{Date.today.year}".to_date
-    fy_start = fy_start - 1.year if fy_start > date
-    (((date - fy_start)/7).to_i + 1)
-  end
+  # def week_number(date)
+  #   date.to_date.beginning_of_week.strftime('%U')
+  # end
+  # def week_start(date)
+  #   date.beginning_of_week.strftime('%d-%m-%y')
+  # end
+  # def HMRC_week_number(date)
+  #   fy_start = "06-04-#{Date.today.year}".to_date
+  #   fy_start = fy_start - 1.year if fy_start > date
+  #   (((date - fy_start)/7).to_i + 1)
+  # end
   def broadcast(channel, &block)
     message = {:channel => channel, :data => capture(&block), :ext => {:auth_token =>  :FAYE_TOKEN}}
 #    uri = URI.parse("http://#{current_tenant.hostname}:9292/faye")

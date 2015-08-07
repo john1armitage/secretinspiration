@@ -34,19 +34,25 @@
             = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
         .row.title
           .field.large-3.columns.sub
-            Hours
-          .field.large-5.columns.number.sub
             Pay
-          .field.large-4.columns.number.sub
-            Tips
-        .row
-          .field.large-3.columns.sub
-            = week_hours
           .field.large-5.columns.number.sub
             = pounds(week_wages)
           .field.large-4.columns.number.sub
+            = week_hours
+        .row
+          .field.large-3.columns.sub
+            Tips
+          .field.large-5.columns.number.sub
             = pounds(week_tips)
-
+          .field.large-4.columns.number.sub
+            &nbsp;
+        .row
+          .field.large-4.columns.number.sub.head
+            &nbsp;
+          .field.large-3.columns.sub.head
+            Total
+          .field.large-5.columns.number.sub.head
+            = pounds(week_tips + week_wages)
         - week = week_number(timesheet.work_date) #.to_date.strftime('%U')
         - hmrc_pay_week = HMRC_week_number(timesheet.work_date.beginning_of_week + 12.days)
         - week_start = week_start(timesheet.work_date)
@@ -62,35 +68,41 @@
           = "#{timesheet.session}" unless timesheet.session == 'dinner'
       .row.title
         .field.large-3.columns
-          Hours
-        .field.large-5.columns.number
           Pay
-        .field.large-4.columns.number
-          Tips
-      .row
-        .field.large-3.columns
-          = timesheet.hours
         .field.large-5.columns.number
           = "#{pounds(wage)}"
         .field.large-4.columns.number
+          = timesheet.hours
+      .row
+        .field.large-3.columns
+          Tips
+        .field.large-5.columns.number
           = "#{pounds(tip)}"
+        .field.large-4.columns.number
     .row
       .large-12.columns.sub.head
         = "W/b #{week_start} (HMRC #{hmrc_pay_week})" #"Week #{week}"
     .row.title
       .field.large-3.columns.sub
-        Hours
-      .field.large-5.columns.number.sub
         Pay
-      .field.large-4.columns.number.sub
-        Tips
-    .row
-      .field.large-3.columns.sub
-        = week_hours
       .field.large-5.columns.number.sub
         = pounds(week_wages)
       .field.large-4.columns.number.sub
+        = week_hours
+    .row
+      .field.large-3.columns.sub
+        Tips
+      .field.large-5.columns.number.sub
         = pounds(week_tips)
+      .field.large-4.columns.number.sub
+        &nbsp;
+    .row.head
+      .field.large-4.columns.number.sub.head
+        &nbsp;
+      .field.large-3.columns.sub.head
+        Total
+      .field.large-5.columns.number.sub.head
+        = pounds(week_tips + week_wages)
   .row.title
     .field.large-12.columns.title
       = "#{month} Totals"

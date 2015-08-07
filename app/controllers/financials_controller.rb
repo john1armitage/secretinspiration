@@ -10,21 +10,27 @@ class FinancialsController < ApplicationController
     @suppliers = get_entity_suppliers
     @employees = get_entity_employees
     @banks = get_banks
+    @target_banks = get_target_banks
 
-
-    #HACK TO ALLOW Employee & Supplier Search
+    #Note: HACK TO ALLOW Employee & Supplier & Bank Search - misuses classification & summary
     if params[:q].present?
-      @employee = params[:q][:summary_eq]
-      @bank = params[:q][:bank_eq]
-      @ref = params[:q][:entity_ref_eq]
-      unless params[:q][:summary_eq].blank?
+      @ref_bank = params[:q][:bank_eq]
+
+      if !params[:q][:classification_eq].blank?
+        @target_bank = params[:q][:entity_id_eq] = params[:q][:classification_eq]
+        params[:q][:entity_eq] = 'Bank'
+      elsif !params[:q][:summary_eq].blank?
         params[:q][:entity_ref_eq] = params[:q][:summary_eq]
-      end
-      params[:q].delete :summary_eq
-      unless params[:q][:entity_id_eq].blank?
-        params[:q][:entity_id_eq] = params[:q][:entity_id_eq].to_i
+        @employee = params[:q][:summary_eq]
+        params[:q].delete :entity_id_eq
+      elsif !params[:q][:entity_id_eq].blank?
+        @supplier_id = params[:q][:entity_id_eq].to_i #= params[:q][:entity_id_eq].to_i
         params[:q][:entity_eq] = 'Supplier'
+        @ref = params[:q][:entity_ref_eq]
       end
+      # remove hack params for search
+      params[:q].delete :summary_eq
+      params[:q].delete :classification_eq
     end
     # p params[:q]
 
@@ -340,6 +346,10 @@ class FinancialsController < ApplicationController
   private
   def get_banks
     Bank.where( 'reference IS NOT NULL' ).order(:rank)
+  end
+  def get_target_banks
+    target_bank_ids = Financial.where(entity: 'Bank').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)
+    @banks.where( id: target_bank_ids )
   end
   def get_entity_suppliers
     supplier_ids = Financial.where('entity_id IS NOT NULL').where(entity: 'Supplier').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)

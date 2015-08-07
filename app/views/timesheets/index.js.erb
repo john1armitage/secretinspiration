@@ -1,5 +1,6 @@
 <% if @template.present? %>
 $('aside#sidebar').html("<%= escape_javascript(render :partial => @template) %>")
+$('div#daily_editor').html("<%= escape_javascript(render :partial => 'wage_editor') %>")
 <% else %>
 $('div#content').html("<%= escape_javascript(render :partial => 'index') %>")
 <% end %>

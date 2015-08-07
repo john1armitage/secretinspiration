@@ -1,12 +1,17 @@
 - months = get_months((Date.today.beginning_of_month - 3.year), 37).reverse
 - no_content= params[:no_content].present? ? 'no_content' : ''
 - weeks = get_weeks(month)
-%p
-  = select_tag 'months', options_for_select(months, month)
-  = select_tag 'employees', options_from_collection_for_select(Employee.order(:first_name).where(live:true),'id', 'name',''), {prompt: 'Timesheets', width: 40}
-  = select_tag 'weeks', options_for_select(weeks), {prompt: 'Week'}
+.row.large-12
+  .small-3.columns
+    = select_tag 'months', options_for_select(months, month)
+  .small-3.columns
+    = select_tag 'employees', options_from_collection_for_select(Employee.order(:first_name).where(live:true),'id', 'name',''), {prompt: 'Timesheets', width: 40}
+  .small-3.columns.left
+    = select_tag 'weeks', options_for_select(weeks), {prompt: 'Week'}
 -#%p
--#  hhh
+
+#daily_editor
+
 = calendar(month) do |date|
   %ul
     %li

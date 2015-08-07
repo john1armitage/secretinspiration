@@ -28,10 +28,13 @@
     .field.small-3.columns.left
       = label_tag :limit
       = select_tag :limit, options_for_select(%w[50 100 500 1000 1500 2000], params[:limit] || 100)
+    .field.small-3.columns
+      = f.label :bank_eq, 'Ref Bank'
+      = f.collection_select :bank_eq, @banks, 'reference', 'name', selected: @ref_bank, include_blank: true
   .row
     .field.small-3.columns
       = f.label :entity_id_eq, 'Supplier'
-      = f.collection_select :entity_id_eq, @suppliers, 'id', 'name', include_blank: true
+      = f.collection_select :entity_id_eq, @suppliers, 'id', 'name', selected: @supplier_id, include_blank: true
     .field.small-3.columns
       = f.label :entity_ref_eq, 'Ref'
       = f.select :entity_ref_eq, options_for_select(@refs, @ref), include_blank: true
@@ -39,8 +42,9 @@
       = f.label :summary_eq, 'Employee'
       = f.select :summary_eq, options_for_select(@employees, @employee), include_blank: true
     .field.small-3.columns
-      = f.label :bank_eq, 'Bank'
-      = f.collection_select :bank_eq, @banks, 'reference', 'name', selected: @bank, include_blank: true
+      = f.label :classification_eq, 'Target Bank'
+      = f.collection_select :classification_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
+      -#= f.select :classification_eq, options_for_select(@banks, @target_bank), include_blank: true
   .row
     .actions
       = f.submit 'Search'

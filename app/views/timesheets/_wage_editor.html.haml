@@ -1,0 +1,30 @@
+- if !@wages.empty?
+  - wage = @wages.first
+  .row
+    %h4.small-6.columns.left
+      = "#{wage.FY}: Week #{wage.week_no}"
+  .row.headings
+    .small-1.columns
+      Name
+    .small-1.columns
+      Time
+    .small-1.columns
+      Hourly
+    .small-1.columns
+      Tips
+    .small-1.columns
+      Total
+    .small-2.columns.lefty
+      PAYE
+    .small-2.columns.lefty
+      NI Employee
+    .small-2.columns.left.lefty
+      NI Employee
+  - @wages.each do |wage|
+    - @wage = wage
+    = render 'wage'
+-else
+  No timesheets for Period
+
+:coffeescript
+  Ajaxify.set_content_container('daily_editor')

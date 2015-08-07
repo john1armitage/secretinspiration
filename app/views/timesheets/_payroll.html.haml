@@ -11,7 +11,7 @@
 - if @timesheets.size > 0
   - timesheet_date = @timesheets.first.work_date
   - week = week_number(timesheet_date) #.to_date.strftime('%U')
-  - pay_day = timesheet_date.beginning_of_week + 12.days
+  - pay_day = timesheet_date.beginning_of_week + 10.days
   - hmrc_pay_week = HMRC_week_number(pay_day)
   - week_start = week_start(timesheet_date)
   - fy = get_fy(pay_day)
@@ -28,7 +28,7 @@
         = employee.name
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
-      - wage = timesheet.pay_cents
+      - wage = timesheet.hours * rate_cents
       - if (timesheet.session != 'bonus')
         - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
         - daily_tips = (daily.tips_cents / 100.00 || 0.00 )
@@ -41,10 +41,10 @@
       - if employee.id != timesheet.employee.id
         .row.title
           .field.large-12.columns.sub.head
-            = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
+            = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: (week_tips * 100.00), pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
         .row.title
           .field.large-3.columns.sub
-            Hours
+            Hourly
           .field.large-5.columns.number.sub
             = pounds(week_hours * rate_cents / 100.00 )
           .field.large-4.columns.number.sub
@@ -55,7 +55,7 @@
           .field.large-5.columns.number.sub
             = pounds(week_tips)
           .field.large-4.columns.number.sub
-
+            &nbsp;
         .row
           .field.large-3.columns.sub
             Total
@@ -67,7 +67,7 @@
           .large-12.columns.head
             = timesheet.employee.name
         - week = week_number(timesheet.work_date) #.to_date.strftime('%U')
-        - hmrc_pay_week = HMRC_week_number(timesheet.work_date.beginning_of_week + 12.days)
+        - hmrc_pay_week = HMRC_week_number(timesheet.work_date.beginning_of_week + 10.days)
         - week_start = week_start(timesheet.work_date)
         - week_hours = 0.00
         - week_wages = 0.00
@@ -87,7 +87,7 @@
           = "#{timesheet.session}" unless timesheet.session == 'dinner'
       .row.title
         .field.large-3.columns
-          Pay
+          Hourly
         .field.large-5.columns.number
           = "#{pounds(wage / 100.00)}"
         .field.large-4.columns.number
@@ -98,12 +98,13 @@
         .field.large-5.columns.number
           = "#{pounds(tips_share)}"
         .field.large-4.columns.number
+          &nbsp;
     .row.title
       .field.large-12.columns.sub.head
-        = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: week_tips.ceil, pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
+        = button_to 'Weekly Wages', new_wage_path(fy: fy, week_no: hmrc_pay_week, employee_id: employee.id, hours: week_hours, rate: rate_cents, tips: (week_tips * 100.00), pay_day: pay_day), method: :get, remote: true, form_class: 'no_ajaxify semi' #, class: 'wide'
     .row.title
       .field.large-3.columns.sub
-        Hours
+        Hourly
       .field.large-5.columns.number.sub
         = pounds(week_hours * rate_cents / 100.00 )
       .field.large-4.columns.number.sub
@@ -114,7 +115,7 @@
       .field.large-5.columns.number.sub
         = pounds(week_tips)
       .field.large-4.columns.number.sub
-
+        &nbsp;
     .row
       .field.large-3.columns.sub
         Total

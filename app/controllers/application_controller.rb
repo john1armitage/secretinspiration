@@ -351,15 +351,13 @@ class ApplicationController < ActionController::Base
   helper_method :get_work_month
 
   def get_rate_cents(employee, work_date)
-    # p employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC')
-    # p employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents
     employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents
   end
   helper_method :get_rate_cents
 
   def get_fy(date)
     year = date.year
-    date >= "06-04-#{}".to_date ? year : year - 1
+    date >= "06-04-#{year}".to_date ? year : year - 1
   end
   helper_method :get_fy
 
@@ -407,4 +405,83 @@ class ApplicationController < ActionController::Base
     cats
   end
 
+  def week_number(date)
+    date.to_date.beginning_of_week.strftime('%U')
+  end
+  helper_method :week_number
+
+  def week_start(date)
+    date.beginning_of_week.strftime('%d-%m-%y')
+  end
+  helper_method :week_start
+
+  def HMRC_week_number(date)
+    fy_start = "06-04-#{Date.today.year}".to_date
+    fy_start = fy_start - 1.year if fy_start > date
+    (((date - fy_start)/7).to_i + 1)
+  end
+  helper_method :HMRC_week_number
+
+  def process_timesheets(timesheets)
+    hours = 0.00
+    wages = 0.00
+    tips = 0.00
+    week_hours = 0.00
+    week_wages = 0.00
+    week_tips = 0.00
+    tips_share = 0.00
+    total_tips_in = 0.00
+    total_tips_out = 0.00
+    wages = []
+    if timesheets.size > 0
+      work_date = params[:week].to_date
+      pay_date = params[:week].to_date + 10.days
+      week = week_number(pay_date) #.to_date.strftime('%U')
+      hmrc_pay_week = HMRC_week_number(pay_date)
+      fy = get_fy(pay_date)
+      employee = timesheets.first.employee
+      rate_cents = get_rate_cents(employee, timesheets.first.work_date)
+      timesheets.each do |timesheet|
+        if (timesheet.session != 'bonus')
+          daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
+          daily_tips = (daily.tips_cents / 100.00 || 0.00)
+          tips_share = daily_tips / daily.headcount.to_d
+          tips += tips_share
+        else
+          tips_share = 0.00
+          wages += daily_wage
+        end
+        if employee.id != timesheet.employee.id
+          wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
+          unless wage
+            wage = Wage.new
+            wage.employee = employee
+            wage.FY = fy
+            wage.week_no = hmrc_pay_week
+            wage.rate_cents = rate_cents
+          end
+          wage.hours = week_hours
+          wage.gross_cents = week_wages
+          wage.tips_cents = week_tips * 100.00
+          wage.save!
+          wages << wage
+          pay_date = params[:week].to_date + 10.days
+          week = week_number(pay_date) #.to_date.strftime('%U')
+          hmrc_pay_week = HMRC_week_number(pay_date)
+          fy = get_fy(pay_date)
+          week_hours = 0
+          week_wages = 0
+          week_tips = 0.00
+          employee = timesheet.employee
+          rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
+        end
+        hours += timesheet.hours
+        daily_wage = timesheet.hours * rate_cents
+        week_hours += timesheet.hours
+        week_wages += daily_wage
+        week_tips += tips_share
+      end
+    end
+    wages
+  end
 end

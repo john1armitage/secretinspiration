@@ -14,7 +14,7 @@ class WagesController < ApplicationController
   # GET /wages/new
   def new
     @wage = Wage.where(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]).first
-    @wage = Wage.create(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]) unless @wage
+    @wage = Wage.new(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]) unless @wage
     @wage.hours = params[:hours]
     @wage.rate_cents = params[:rate]
     @wage.gross_cents = @wage.hours.to_d * @wage.rate_cents.to_d
@@ -41,7 +41,11 @@ class WagesController < ApplicationController
   # PATCH/PUT /wages/1
   def update
     if @wage.update(params[:wage])
-      redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully updated.'
+      # if params[:editor].present?
+        redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
+      # else
+      #   redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully updated.'
+      # end
     else
       render action: 'edit'
     end

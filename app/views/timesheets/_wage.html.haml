@@ -1,0 +1,23 @@
+= form_for @wage  do |f|
+  %fieldset
+    .row
+      = hidden_field_tag :editor, true
+      = hidden_field_tag :week, params[:week]
+      .field.small-1.columns.headings
+        = @wage.employee.first_name
+      .field.small-1.columns
+        = "#{@wage.hours} #{pounds(@wage.rate)}"
+      .field.small-1.columns
+        = pounds(@wage.gross)
+      .field.small-1.columns
+        = pounds(@wage.tips)
+      .field.small-1.columns
+        = pounds(@wage.gross + @wage.tips)
+      .field.small-2.columns
+        = f.text_field :PAYE
+      .field.small-2.columns
+        = f.text_field :NI_employee
+      .field.small-2.columns
+        = f.text_field :NI_employer
+      .field.small-1.columns
+        = f.submit 'Save'

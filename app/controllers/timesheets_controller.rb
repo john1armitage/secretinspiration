@@ -17,8 +17,9 @@ class TimesheetsController < ApplicationController
       start = params[:week].to_date
       stop = start + 6.days
       stop = Date.today if stop.to_date > Date.today
-      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC') #.select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount")
+      @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ?", start, stop).order('employee_id, work_date, session DESC')
       @dailies = Daily.where( "account_date >= ? AND account_date <= ?", start, stop ).order('account_date, session DESC').select("tips_cents, headcount")
+      @wages = process_timesheets(@timesheets)
       @template = 'payroll'
     else
       @timesheets = Timesheet.order('work_date DESC, session DESC, employee_id')
