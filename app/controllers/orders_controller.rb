@@ -37,9 +37,11 @@ class OrdersController < ApplicationController
     @subs = collection_to_options(Category.find(params[:cat]).children) if params[:cat].present?
     @items = collection_to_options(Item.where(category: params[:sub])) if params[:sub].present?
     # if params[:cat].blank? and params[:sub].blank? and params[:item].blank?
-      @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank")
+    # @orders = Order.where('effective_date = ? ', @start).includes( line_items: [ variant: [item: :category]]).order("categories.rank")
+    # param = (@start = @stop ) ? "'effective_date = ? ', @start" : "'effective_date >= ? and effective_date <= ?', @start, @stop"
+    @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank")
     # else
-      @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start, @stop, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
+    @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start.beginning_of_day, @stop.end_of_day, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
     # end
     if !params[:item].blank?
       @line_items = @line_items.where( 'items.id = ?', params[:item] )

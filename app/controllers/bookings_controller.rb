@@ -47,7 +47,7 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
-    @booking = Booking.new(params[:booking])
+    @booking = Booking.new(params[:booking].merge(management: params[:management]))
     if  @current_user.id.blank?
       @booking.user_id = User.find_by_username('system').id
       @booking.confirmed = false

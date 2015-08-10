@@ -1,8 +1,10 @@
+- management = ((allow? :bookings, :update) ? true: false )
 = form_for @booking, html: { class: 'no_ajaxify'}, remote: true, validate: true do |f|
 
   %fieldset
     = f.hidden_field :walkin
     = f.hidden_field :state
+    = hidden_field_tag :management, management
     -#.row
     -#  .large-12.columns
     -#    %h5

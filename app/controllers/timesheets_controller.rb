@@ -47,6 +47,7 @@ class TimesheetsController < ApplicationController
 
   # POST /timesheets
   def create
+    calculate_hours(params[:timesheet][:start_time], params[:timesheet][:end_time])
     @timesheet = Timesheet.new(params[:timesheet])
 
     if @timesheet.save
@@ -58,6 +59,7 @@ class TimesheetsController < ApplicationController
 
   # PATCH/PUT /timesheets/1
   def update
+    calculate_hours(params[:timesheet][:start_time], params[:timesheet][:end_time])
     if @timesheet.update(params[:timesheet])
       redirect_to dailies_url(daily_date: @timesheet.work_date.strftime('%d-%m-%Y')), notice: 'Timesheet was successfully updated.'
     else
@@ -75,6 +77,12 @@ class TimesheetsController < ApplicationController
   end
 
   private
+    def calculate_hours(starting, ending)
+      start_time = starting.to_time
+      end_time = ending.to_time
+      end_time += 1.day if ((end_time.to_time - '00:00'.to_time) < 7200)
+      params[:timesheet][:hours] = ( end_time - start_time) / 3600
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_timesheet
       @timesheet = Timesheet.find(params[:id])

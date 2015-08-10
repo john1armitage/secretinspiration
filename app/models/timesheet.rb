@@ -12,12 +12,11 @@ class Timesheet < ActiveRecord::Base
   monetize :pay_cents
 
   def calculate_hours
-    hours = (end_time - start_time) / 3600
-    if hours <= 0
+    if hours <= 0 #&& 1 == 2
       self.hours = self.pay = 0
     else
       self.hours = hours
-      rate_cents = employee.pay_rates.where('effective_date <= ?', work_date).order(:effective_date, DESC).first.rate_cents
+      rate_cents = employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents
       self.pay_cents = rate_cents ? (hours * rate_cents) : 0
     end
   end

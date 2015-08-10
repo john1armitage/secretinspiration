@@ -77,7 +77,7 @@ module ApplicationHelper
     if ['timesheet'].include?(purpose)
       times = []
       time = dinner_open.to_time - 1.hour
-      0.upto(30) do |i|
+      0.upto(32) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
       end
