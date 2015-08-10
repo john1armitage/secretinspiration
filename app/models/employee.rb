@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   has_many :timesheets, dependent: :destroy
   has_many :pay_rates, dependent: :destroy
   has_many :wages, dependent: :destroy
+  before_update :make_reference
 
   def name
     first_name + " " + last_name + " "
@@ -17,4 +18,9 @@ class Employee < ActiveRecord::Base
     names = val.split(" ")
     title == names[0] && first_name == names[1] && last_name = name[2]
   end
+
+  def make_reference
+    self.reference = first_name if reference.blank?
+  end
+
 end

@@ -301,6 +301,7 @@ class FinancialsController < ApplicationController
 
   def new
     @financial = Financial.new
+    @financial.entity = params[:entity] if params[:entity].present?
     @financial.event_date = cookies[:last_fx_date]
     @financial.bank = cookies[:last_fx_bank]
   end
@@ -312,6 +313,19 @@ class FinancialsController < ApplicationController
     @financial = Financial.new(params[:financial])
     cookies[:last_fx_date] = @financial.event_date
     cookies[:last_fx_bank] = @financial.bank
+    if @financial.entity_ref.blank?
+      ref = ''
+      case @financial.entity
+        when 'Supplier'
+          supplier_ref = Supplier.find(@financial.entity_id).reference
+          ref = supplier_ref.first if supplier_ref
+        when 'Bank'
+          ref = Bank.find(@financial.entity_id).reference
+        when 'Employee'
+          ref = Employee.find(@financial.entity_id).reference
+      end
+      @financial.entity_ref = ref
+    end
     respond_to do |format|
       if @financial.save
         format.html { redirect_to financials_url }

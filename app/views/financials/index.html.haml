@@ -2,15 +2,19 @@
   .large-12.columns
     %ul#contact.inline-list
       - if allow? :financials, :index
-        %li#admin
-          != link_to 'New', new_financial_path, title: 'Create Transaction', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
-
         - @banks.where(statement: true).each do |bank|
           %li#admin
             != link_to "#{bank.reference}", batch_financials_path(bank: bank.reference), title: 'Batch Input', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
         %li#admin
           != link_to 'Refs', entity_financials_path, title: 'Supplier References', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+.row
+  .large-12.columns
+    %ul#contact.inline-list
+      - if allow? :financials, :index
+        - Element.where(kind: 'entity').map(&:name).each do |name|
+          %li#admin
+            != link_to "<New #{name}>", new_financial_path(entity: name), title: 'Create Transaction' #, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
 = search_form_for @q do |f|
 
@@ -71,7 +75,7 @@
         %td.has-tip{"data-tooltip" => "", title: financial.desc}
           = financial.summary
         %td.has-tip{"data-tooltip" => "", title: financial.entity_id}
-          = financial.entity_ref
+          = financial.entity_ref.truncate(15, omission: '...')
         %td= ( financial.credit_amount > 0 ? financial.credit_amount : '' )
         %td= ( financial.debit_amount > 0 ? financial.debit_amount : '' )
         -#%td= ( financial.resolved ? 'OK' : '' )

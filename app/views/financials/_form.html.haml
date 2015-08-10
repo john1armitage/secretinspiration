@@ -49,10 +49,19 @@
     .row
       .field.small-2.columns.left
         = f.label :entity
-        = f.text_field :entity
-      .field.small-1.columns.left
-        = f.label :entity_id, 'id'
-        = f.text_field :entity_id
+        = f.collection_select :entity, Element.where(kind: 'entity').order(:name).load,'name','name'
+      -#.field.small-1.columns.left
+      -#  = f.label :entity_id, 'id'
+      -#  = f.text_field :entity_id
+      .field.small-3.columns.left
+        = f.label :entity_id, 'ID'
+        - case @financial.entity
+          - when 'Bank'
+            = f.collection_select :entity_id, Bank.order(:name).load,'id','name', include_blank: true
+          - when 'Employee'
+            = f.collection_select :entity_id, Employee.order(:first_name).load,'id','first_name', include_blank: true
+          - when 'Supplier'
+            = f.collection_select :entity_id, Supplier.order(:name).load,'id','name', include_blank: true
       .field.small-2.columns.left
         = f.label :mandate
         = f.text_field :mandate
