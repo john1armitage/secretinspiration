@@ -75,9 +75,9 @@
         %td.has-tip{"data-tooltip" => "", title: financial.desc}
           = financial.summary
         %td.has-tip{"data-tooltip" => "", title: financial.entity_id}
-          = financial.entity_ref.truncate(15, omission: '...')
-        %td= ( financial.credit_amount > 0 ? financial.credit_amount : '' )
-        %td= ( financial.debit_amount > 0 ? financial.debit_amount : '' )
+          = financial.entity_ref.truncate(15, omission: '...') unless financial.entity_ref.blank?
+        %td= (financial.credit_amount && financial.credit_amount > 0 ? financial.credit_amount : '')
+        %td= (financial.debit_amount && financial.debit_amount > 0 ? financial.debit_amount : '')
         -#%td= ( financial.resolved ? 'OK' : '' )
         -#%td= ( financial.processed ? 'OK' : '' )
         %td= link_to 'E', edit_financial_path(financial)

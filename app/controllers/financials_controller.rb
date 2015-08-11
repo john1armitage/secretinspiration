@@ -304,6 +304,7 @@ class FinancialsController < ApplicationController
     @financial.entity = params[:entity] if params[:entity].present?
     @financial.event_date = cookies[:last_fx_date]
     @financial.bank = cookies[:last_fx_bank]
+    # @financial.debit_amount = @financial.credit_amount = 0.00
   end
 
   def edit
@@ -313,19 +314,7 @@ class FinancialsController < ApplicationController
     @financial = Financial.new(params[:financial])
     cookies[:last_fx_date] = @financial.event_date
     cookies[:last_fx_bank] = @financial.bank
-    if @financial.entity_ref.blank?
-      ref = ''
-      case @financial.entity
-        when 'Supplier'
-          supplier_ref = Supplier.find(@financial.entity_id).reference
-          ref = supplier_ref.first if supplier_ref
-        when 'Bank'
-          ref = Bank.find(@financial.entity_id).reference
-        when 'Employee'
-          ref = Employee.find(@financial.entity_id).reference
-      end
-      @financial.entity_ref = ref
-    end
+
     respond_to do |format|
       if @financial.save
         format.html { redirect_to financials_url }
@@ -338,6 +327,9 @@ class FinancialsController < ApplicationController
   end
 
   def update
+    if @financial.entity_ref.blank?
+      params[:financial][:entity_ref] = get_entity_ref
+    end
     respond_to do |format|
       if @financial.update(params[:financial])
         format.html { redirect_to financials_url }
@@ -358,6 +350,21 @@ class FinancialsController < ApplicationController
   end
 
   private
+
+  def get_entity_ref
+    ref = ''
+    case @financial.entity
+      when 'Supplier'
+        supplier_ref = Supplier.find(@financial.entity_id).reference
+        ref = supplier_ref.first if supplier_ref
+      when 'Bank'
+        ref = Bank.find(@financial.entity_id).reference
+      when 'Employee'
+        ref = Employee.find(@financial.entity_id).reference
+    end
+    ref
+  end
+
   def get_banks
     Bank.where( 'reference IS NOT NULL' ).order(:rank)
   end
