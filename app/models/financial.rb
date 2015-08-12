@@ -12,7 +12,7 @@ class Financial < ActiveRecord::Base
   # validates :debit_amount_cent, presence: true, unless: :check_credit_amount
   # validates :credit_amount_cent, presence: true, unless: :check_debit_amount
 
-  before_save :ensure_reference
+  before_save :ensure_reference, :set_credit
 
   belongs_to :daily
 
@@ -28,6 +28,16 @@ class Financial < ActiveRecord::Base
 
   def ensure_reference
    self.desc = summary if desc.blank?
+  end
+
+  def set_credit
+    if credit_amount && credit_amount > 0.00
+      self.credit = true
+      self.debit_amount = nil
+    else
+      self.credit = false
+      self.credit_amount = nil
+    end
   end
 
 end
