@@ -6,7 +6,9 @@
       .field.small-1.columns.headings
         = @wage.employee.first_name
       .field.small-1.columns
-        = "#{@wage.hours} #{pounds(@wage.rate)}"
+        = "#{@wage.hours} hr"
+        %br
+        = "#{pounds(@wage.rate)}"
       .field.small-1.columns
         = pounds(@wage.gross)
       .field.small-1.columns
