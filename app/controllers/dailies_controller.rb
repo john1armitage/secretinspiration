@@ -74,7 +74,9 @@ class DailiesController < ApplicationController
 
   private
     def remove_financials
-      @daily.financials.destroy
+      @daily.financials.each do |financial|
+        financial.destroy
+      end
     end
     def create_financials
       # card control
@@ -82,32 +84,35 @@ class DailiesController < ApplicationController
       # cash control
       cash_financial
       # VAT control
-      # income control
+      tax_financial
+      # sales control
+      sales_financial
       # tips control
+      tips_financial
     end
     def credit_card_financial
       ref_bank = 'MERCHANT'
-      credit = true
-      credit_amount = @daily.credit_card
-      debit_amount = 0
+      credit = false
+      credit_amount = 0
+      debit_amount = @daily.credit_card
       entity = 'Account'
       type = 'sales'
-      account = Account.find_by_name('Accounts Receivable')
+      account = Account.find_by_name('Merchant Control')
       if account
         entity_id = account.id
         entity_ref = account.code
       end
-      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'} into #{ref_bank}"
+      summary = desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
       @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
     def cash_financial
       ref_bank = 'CASH'
-      credit = true
-      credit_amount = @daily.credit_card
-      debit_amount = 0
+      credit = false
+      credit_amount = 0
+      debit_amount = @daily.take - @daily.credit_card
       entity = 'Account'
-      type = 'takings'
-      account = Account.find_by_name('Accounts Receivable')
+      type = 'sales'
+      account = Account.find_by_name('Cash in Hand')
       if account
         entity_id = account.id
         entity_ref = account.code
@@ -117,9 +122,9 @@ class DailiesController < ApplicationController
     end
     def sales_financial
       ref_bank = 'RECEIVABLE'
-      credit = false
-      credit_amount = 0
-      debit_amount = @daily.turnover
+      credit = true
+      credit_amount = @daily.turnover # - (@daily.tax + @daily.tips)
+      debit_amount = 0
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('Sales')
@@ -131,10 +136,10 @@ class DailiesController < ApplicationController
       @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
     def tax_financial
-      ref_bank = 'RECEIVABLE'
-      credit = false
-      credit_amount = 0
-      debit_amount = @daily.turnover
+      ref_bank = 'VAT'
+      credit = true
+      credit_amount = @daily.tax
+      debit_amount = 0
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('VAT Control')
@@ -146,10 +151,10 @@ class DailiesController < ApplicationController
       @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
     def tips_financial
-      ref_bank = 'RECEIVABLE'
-      credit = false
-      credit_amount = 0
-      debit_amount = @daily.turnover
+      ref_bank = 'TIPS'
+      credit = true
+      credit_amount = @daily.tips
+      debit_amount = 0.00
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('Tips Control')

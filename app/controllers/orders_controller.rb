@@ -32,6 +32,7 @@ class OrdersController < ApplicationController
   def analysis
     set_analysis_dates
     choices = params[:choices].present? ? params[:choices] : 'food'
+    root_id = Category.find_by_name(choices)
     params[:cat] == Category.find_by_name( (params[:choices] == 'food') ? 'main' : 'wines') if ( params[:cat].blank? or !params[:cat].present?)
     @cats = collection_to_options(get_categories(choices))
     @subs = collection_to_options(Category.find(params[:cat]).children) if params[:cat].present?
@@ -41,8 +42,7 @@ class OrdersController < ApplicationController
     # param = (@start = @stop ) ? "'effective_date = ? ', @start" : "'effective_date >= ? and effective_date <= ?', @start, @stop"
     @orders = Order.where('effective_date >= ? and effective_date <= ?', @start, @stop).includes( line_items: [ variant: [item: :category]]).order("categories.rank")
     # else
-    @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ?', @start.beginning_of_day, @stop.end_of_day, current_tenant.domain).includes( variant: [item: :category]).order("categories.rank, items.rank")
-    # end
+    @line_items = LineItem.where('line_items.created_at >= ? and line_items.created_at <= ? and line_items.domain = ? and root_id = ?', @start.beginning_of_day, @stop.end_of_day, current_tenant.domain, root_id).includes( variant: [item: :category]).order("categories.rank, items.rank")
     if !params[:item].blank?
       @line_items = @line_items.where( 'items.id = ?', params[:item] )
     elsif !params[:sub].blank?

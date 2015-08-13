@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
 
   has_ancestry :cache_depth => true, :orphan_strategy => :adopt
 
-  has_many :categories #, as: :courses
+  has_many :categories
   has_many :items, as: :grouping
   has_many :items
   has_many :offerings
