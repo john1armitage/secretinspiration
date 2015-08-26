@@ -1,7 +1,7 @@
 module Permissions
   class GuestPermission < BasePermission
     def initialize
-      allow :welcome, :index
+      allow :welcome, [:index, :edit, :update]
       allow :bookings, [:index,:new, :create]
       allow :choices, [:index,:show]
       allow :pages, [:index, :blog,:show]

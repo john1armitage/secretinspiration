@@ -139,6 +139,8 @@ Commerce::Application.routes.draw do
   end
   get 'choices', to: 'choices#index'
   get 'welcome', to: 'welcome#index'
+  get 'remote', to: 'welcome#edit'
+  post 'remote', to: 'welcome#update'
   get 'enchant', to: 'enchant#index'
 
   # Example of regular route:

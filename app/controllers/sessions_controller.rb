@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
 
   def new
+    p "DDDDDDDDDDDDDDDDDDDD"
+    p request.remote_addr
+    unless request.remote_addr.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1' || (flash[:remote][0].present? && flash[:remote][0] == CONFIG[:remote])
+      redirect_to root_url
+    end
+
   end
 
   def create

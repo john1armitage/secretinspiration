@@ -1,0 +1,23 @@
+%h3
+  Authorisation Required
+%p
+  This is an administrative section for authorised users only. Unless you know you have been authorised, please desist. There is no personal financial information helf on this site.
+
+= form_tag do
+
+  %fieldset
+    %legend= 'Remote'
+    -#- if @user.errors.any?
+    -#  #error_explanation
+    -#    %h2= "#{pluralize(@tester.errors.count, "error")} prohibited this user from being saved:"
+    -#    %ul
+    -#      - @user.errors.full_messages.each do |msg|
+    -#        %li= msg
+
+    .row
+      .field.small-4.columns
+        -#= label_tag :remote
+        = password_field_tag :remote
+    .row
+      .actions
+        = submit_tag 'Request'
