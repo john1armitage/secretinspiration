@@ -42,7 +42,7 @@ class DailiesController < ApplicationController
     @daily = Daily.new(params[:daily])
     set_net
     if @daily.save
-      create_financials
+      create_posts
       daily_processed
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
@@ -55,8 +55,8 @@ class DailiesController < ApplicationController
   def update
     set_net
     if @daily.update(params[:daily])
-      remove_financials
-      create_financials
+      remove_posts
+      create_posts
       daily_processed
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
@@ -78,25 +78,25 @@ class DailiesController < ApplicationController
     def daily_processed
       @daily.update(processed: true)
     end
-    def remove_financials
+    def remove_posts
       @daily.posts.destroy_all
       # @daily.posts.each do |financial|
       #   financial.destroy
       # end
     end
-    def create_financials
+    def create_posts
       # card control
-      credit_card_financial
+      credit_card_post
       # cash control
-      cash_financial
+      cash_post
       # VAT control
-      tax_financial
+      tax_post
       # sales control
-      sales_financial
+      sales_post
       # tips control
-      tips_financial
+      tips_post
     end
-    def credit_card_financial
+    def credit_card_post
       ref_bank = 'MERCHANT'
       bank = Bank.find_by_reference(ref_bank)
       credit = false
@@ -115,7 +115,8 @@ class DailiesController < ApplicationController
                            accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
-    def cash_financial
+
+    def cash_post
       ref_bank = 'CASH'
       bank = Bank.find_by_reference(ref_bank)
       credit = false
@@ -134,7 +135,8 @@ class DailiesController < ApplicationController
                            accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
-    def sales_financial
+
+    def sales_post
       ref_bank = 'RECEIVABLE'
       bank = Bank.find_by_reference(ref_bank)
       credit = true
@@ -153,7 +155,8 @@ class DailiesController < ApplicationController
                            accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
-    def tax_financial
+
+    def tax_post
       ref_bank = 'VAT'
       bank = Bank.find_by_reference(ref_bank)
       credit = true
@@ -172,7 +175,8 @@ class DailiesController < ApplicationController
                            accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
-    def tips_financial
+
+    def tips_post
       ref_bank = 'TIPS'
       bank = Bank.find_by_reference(ref_bank)
       credit = true
@@ -191,7 +195,6 @@ class DailiesController < ApplicationController
                            accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
-
 
     def set_net
       gross = params[:gross].present? ? params[:gross].to_d : 0.00

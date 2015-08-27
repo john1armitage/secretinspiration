@@ -293,7 +293,8 @@ CREATE TABLE employees (
     updated_at timestamp without time zone,
     live boolean DEFAULT true,
     monthly boolean,
-    reference character varying
+    reference character varying,
+    holiday boolean
 );
 
 
@@ -1989,4 +1990,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150826135718');
 INSERT INTO schema_migrations (version) VALUES ('20150827105711');
 
 INSERT INTO schema_migrations (version) VALUES ('20150827115527');
+
+INSERT INTO schema_migrations (version) VALUES ('20150827210844');
 

@@ -42,7 +42,9 @@ class WagesController < ApplicationController
   def update
     if @wage.update(params[:wage])
       # if params[:editor].present?
-        redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
+      remove_posts
+      create_posts
+      redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
       # else
       #   redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully updated.'
       # end
@@ -60,10 +62,112 @@ class WagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_wage
-      @wage = Wage.find(params[:id])
+  def remove_posts
+    @wage.posts.destroy_all
+  end
+  def create_posts
+    weeks = @wage.week_no - 1
+    @account_date = "#{@wage.FY}-04-06".to_date + (weeks * 7).days
+    # wages
+    wages_post
+    # # tax control
+    hmrc_post
+    # holiday control
+    holiday_post if @wage.employee.holiday
+    # employer costs
+    payroll_cost_post
+    # tips control
+    tips_post if @wage.tips > 0
+  end
+  def wages_post
+    credit = true
+    credit_amount = @wage.gross - ( @wage.PAYE + @wage.NI_employee )
+    debit_amount = 0.00
+    account = Account.find_by_name('Wages Payable')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+    @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                         postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+  end
+  def tips_post
+    credit = false
+    credit_amount = 0.00
+    debit_amount = @wage.tips
+    account = Account.find_by_name('Tips Control')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+    @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                        postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+
+    credit = true
+    credit_amount = @wage.tips
+    debit_amount = 0.00
+    account = Account.find_by_name('Allocated Tips')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+    @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                        postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+  end
+
+  def hmrc_post
+    if @wage.PAYE > 0.00
+      credit = true
+      credit_amount = @wage.PAYE
+      debit_amount = 0.00
+      account = Account.find_by_name('PAYE')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+      @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                          postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
     end
+    if @wage.NI_employee > 0.00
+      credit = true
+      credit_amount = @wage.NI_employee
+      debit_amount = 0.00
+      account = Account.find_by_name('NI Employee')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+      @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                          postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+    end
+    if @wage.NI_employer > 0.00
+      credit = true
+      credit_amount = @wage.NI_employer
+      debit_amount = 0.00
+      account = Account.find_by_name('NI Employer')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+      @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                          postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+    end
+  end
+
+  def holiday_post
+    credit = true
+    credit_amount = @wage.gross * CONFIG[:holiday_rate] / 100
+    debit_amount = 0.00
+    account = Account.find_by_name('Holiday Pay')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+    @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                        postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+  end
+
+  def payroll_cost_post
+    credit = false
+    credit_amount = 0.00
+    debit_amount = @wage.gross + ( @wage.gross * CONFIG[:holiday_rate] / 100 ) + @wage.NI_employer
+    account = Account.find_by_name('Payroll Costs')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
+    @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                        postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+  end
+
+    # Use callbacks to share common setup or constraints between actions.
+  def set_wage
+    @wage = Wage.find(params[:id])
+  end
 
     # Only allow a trusted parameter "white list" through.
   def current_resource
