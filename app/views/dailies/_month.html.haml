@@ -26,13 +26,19 @@
           %span
             = link_to daily.session[0].capitalize, edit_daily_path(daily), remote: true, class: 'no_ajaxify'
           %span
-            = link_to "#{pounds(daily.take)} #{pounds(daily.take - daily.credit_card)}", daily_path(daily), remote: true, class: 'no_ajaxify'
-          = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Session", :data => { :confirm => 'Are you sure?' }
+            = link_to "#{pounds(daily.take)}", daily_path(daily), remote: true, class: 'no_ajaxify'
+            = link_to 'x', daily_path( daily), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true, :confirm => 'Are you sure?'}, title: "Remove Session"
+          %span
+            = (daily.processed ? 'FFok' : '')
         %li
           %span
-            = "#{pluralize(daily.headcount, 'head')}"
+            = "#{daily.credit_card}cc + #{pounds(daily.take - daily.credit_card)}"
+        %li
           %span
-            = link_to "(#{pounds(daily.tips)})", daily_path(daily), remote: true, class: 'no_ajaxify'
+            = "#{daily.headcount} pax: "
+            =# "#{pluralize(daily.headcount, 'head')}"
+          %span
+            = link_to "#{pounds(daily.tips)}", daily_path(daily), remote: true, class: 'no_ajaxify'
     - if timesheets[date]
       - timesheets[date].each do |timesheet|
         %li
@@ -40,7 +46,7 @@
             = link_to "#{timesheet.session[0].upcase} #{timesheet.employee.first_name}", edit_timesheet_path(timesheet), remote: true, class: 'no_ajaxify'
           %span
             = "#{timesheet.hours}"
-          = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove Timesheet", :data => { :confirm => 'Are you sure?' }
+          = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true, :confirm => 'Are you sure?'}, title: "Remove Timesheet"
     - if bookings[date]
       %li
         = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'

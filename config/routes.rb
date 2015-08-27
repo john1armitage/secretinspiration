@@ -1,5 +1,6 @@
 Commerce::Application.routes.draw do
 
+  resources :posts
   resources :financials do
     collection do
       get 'batch'

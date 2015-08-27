@@ -2,6 +2,8 @@ class Financial < ActiveRecord::Base
 
   attr_accessor :amount
 
+  has_many  :posts, as: :postable, dependent: :destroy
+
   monetize :debit_amount_cents, :allow_nil => true
   monetize :credit_amount_cents, :allow_nil => true
   monetize :tax_home_cents, :allow_nil => true

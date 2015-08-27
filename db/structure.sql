@@ -208,8 +208,7 @@ CREATE TABLE dailies (
     petty_reason character varying(255),
     safe_cash_cents integer DEFAULT 0 NOT NULL,
     processed boolean,
-    financial_id integer,
-    "FY" integer,
+    fin_year integer,
     week_no integer
 );
 
@@ -703,6 +702,45 @@ CREATE SEQUENCE pay_rates_id_seq
 --
 
 ALTER SEQUENCE pay_rates_id_seq OWNED BY pay_rates.id;
+
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE posts (
+    id integer NOT NULL,
+    account_date date,
+    currency character varying DEFAULT 'GBP'::character varying,
+    exchange_rate numeric(10,6),
+    home_amount_cents integer,
+    debit_amount_cents integer,
+    credit_amount_cents integer,
+    postable_type character varying,
+    postable_id integer,
+    grouping integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 
 --
@@ -1226,6 +1264,13 @@ ALTER TABLE ONLY pay_rates ALTER COLUMN id SET DEFAULT nextval('pay_rates_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY receipts ALTER COLUMN id SET DEFAULT nextval('receipts_id_seq'::regclass);
 
 
@@ -1429,6 +1474,14 @@ ALTER TABLE ONLY pay_rates
 
 
 --
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: receipts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1544,13 +1597,6 @@ CREATE INDEX index_broadcasts_on_topic_id ON broadcasts USING btree (topic_id);
 
 
 --
--- Name: index_dailies_on_financial_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_dailies_on_financial_id ON dailies USING btree (financial_id);
-
-
---
 -- Name: index_financials_on_daily_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1583,6 +1629,20 @@ CREATE INDEX index_options_on_name ON options USING btree (name);
 --
 
 CREATE INDEX index_pay_rates_on_employee_id ON pay_rates USING btree (employee_id);
+
+
+--
+-- Name: index_posts_on_account_date; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_account_date ON posts USING btree (account_date);
+
+
+--
+-- Name: index_posts_on_postable_type_and_postable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_postable_type_and_postable_id ON posts USING btree (postable_type, postable_id);
 
 
 --
@@ -1924,4 +1984,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150802153722');
 INSERT INTO schema_migrations (version) VALUES ('20150802161025');
 
 INSERT INTO schema_migrations (version) VALUES ('20150826135718');
+
+INSERT INTO schema_migrations (version) VALUES ('20150827105711');
+
+INSERT INTO schema_migrations (version) VALUES ('20150827115527');
 

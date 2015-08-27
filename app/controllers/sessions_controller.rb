@@ -1,10 +1,15 @@
 class SessionsController < ApplicationController
 
   def new
-    p "DDDDDDDDDDDDDDDDDDDD"
-    p request.remote_addr
-    p request
-    unless request.remote_addr.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1' || (flash[:remote][0].present? && flash[:remote][0] == CONFIG[:remote])
+    # p "SESSION"
+    # p flash[:remote]
+    # p CONFIG[:remote]
+    # p request.remote_addr
+    # p request.remote_ip
+    # p request.env["HTTP_X_FORWARDED_FOR"]
+    #
+    # p request
+    unless request.remote_ip.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1' || (flash[:remote].present? && flash[:remote] == CONFIG[:remote])
       redirect_to root_url
     end
 

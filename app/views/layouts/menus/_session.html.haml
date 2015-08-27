@@ -20,7 +20,7 @@
   -#%li
   -#  != link_to "Register", signup_path, :class => "button radius"
   %li
-    - if request.remote_addr.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1'
+    - if (request.remote_ip.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1') # && 1 == 2
       != link_to "Manage", login_path() #, :class => "button radius"
     -else
       != link_to "Remote", remote_path()

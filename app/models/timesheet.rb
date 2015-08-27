@@ -33,7 +33,6 @@ class Timesheet < ActiveRecord::Base
   end
 
   def reduce_daily_headcount
-    p "HELLLLLO"
     headcount = Timesheet.where('work_date = ? AND session = ?', work_date_was, session).size
     Daily.where('account_date = ? AND session = ?', work_date_was, session).update_all(headcount: headcount)
   end

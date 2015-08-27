@@ -5,7 +5,7 @@ class Account < ActiveRecord::Base
   has_ancestry :cache_depth => true, :orphan_strategy => :adopt
 
   has_many :accounts
-  has_many :postings, dependent: :nullify
+  has_many :posts, dependent: :nullify
   has_many :payments, dependent: :nullify
   has_many :apportions
   belongs_to :accountable, class_name: 'Supplier'

@@ -15,11 +15,22 @@ class Daily < ActiveRecord::Base
   monetize :safe_cash_cents, :allow_nil => true
   monetize :surplus_cents, :allow_nil => true
 
-  has_many :financials, dependent: :destroy
+  # has_many :financials, dependent: :destroy
+
+  has_many  :posts, as: :postable, dependent: :destroy
 
   validates_presence_of :session, :account_date, :take, :credit_card, :tips
   validates_numericality_of :take, :credit_card, :tips
   before_validation :get_totals
+
+  before_save :get_HMRC_dates
+
+  def get_HMRC_dates
+    self.fin_year = account_date.year
+    self.fin_year -= 1 unless account_date >= "06-04-#{fin_year}".to_date
+    fin_year_start = "06-04-#{self.fin_year}".to_date
+    self.week_no = (((account_date - fin_year_start)/7).to_i + 1)
+  end
 
   def get_totals
     get_headcount

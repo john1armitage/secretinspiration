@@ -43,6 +43,7 @@ class DailiesController < ApplicationController
     set_net
     if @daily.save
       create_financials
+      daily_processed
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
     else
@@ -56,6 +57,7 @@ class DailiesController < ApplicationController
     if @daily.update(params[:daily])
       remove_financials
       create_financials
+      daily_processed
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
     else
@@ -73,6 +75,9 @@ class DailiesController < ApplicationController
   end
 
   private
+    def daily_processed
+      @daily.update(processed: true)
+    end
     def remove_financials
       @daily.financials.each do |financial|
         financial.destroy
