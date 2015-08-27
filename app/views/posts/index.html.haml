@@ -59,24 +59,25 @@
     %tr
       %td.has-tip.tip-right{'data-tooltip' => true, 'title' => posting.id}
         = posting.account_date.strftime("%d %b %y")
-      %td= posting.postable_type.classify.constantize.find(posting.postable_id).desc
+      %td= posting.desc
       %td= posting.account.name if posting.account
-      - case posting.postable_type
-        - when 'Order'
-          - type = posting.postable.contra ? 'Contra' : 'Order'
-          - title = "#{type} #{posting.postable_id}"
-        - when 'Payment'
-          - title = "Payment #{posting.postable_id}"
-        - when 'Receipt'
-          - title = "Receipt #{posting.postable_id}"
-        - else
-          - title = ''
-      %td.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
+      -#- case posting.postable_type
+      -#  - when 'Order'
+      -#    - type = posting.postable.contra ? 'Contra' : 'Order'
+      -#    - title = "#{type} #{posting.postable_id}"
+      -#  - when 'Payment'
+      -#    - title = "Payment #{posting.postable_id}"
+      -#  - when 'Receipt'
+      -#    - title = "Receipt #{posting.postable_id}"
+      -#  - else
+      -#    - title = ''
+      %td
+        -#.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
         = posting.accountable.name if posting.accountable
       %td.number= humanized_money_with_symbol( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= humanized_money_with_symbol( posting.credit_amount )  unless posting.credit_amount == 0
-      %td.number
-        = check_box_tag 'check'
+      -#%td.number
+      -#  = check_box_tag 'check'
       %td=# link_to 'Show', posting
       %td=# link_to 'Edit', edit_posting_path(posting)
       %td=# link_to 'Destroy', posting, :method => :delete, :data => { :confirm => 'Are you sure?' }

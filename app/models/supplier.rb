@@ -9,7 +9,7 @@ class Supplier < ActiveRecord::Base
   has_many :items, through: :supplies
   has_many :offerings
   has_many :categories, through: :offerings
-  has_many  :postings, as: :accountable, dependent: :nullify
+  has_many  :posts, as: :accountable, dependent: :nullify
 
   has_many  :payments, as: :payable, dependent: :destroy
 

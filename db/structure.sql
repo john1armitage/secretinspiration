@@ -711,13 +711,14 @@ ALTER SEQUENCE pay_rates_id_seq OWNED BY pay_rates.id;
 CREATE TABLE posts (
     id integer NOT NULL,
     account_date date,
-    currency character varying DEFAULT 'GBP'::character varying,
-    exchange_rate numeric(10,6),
-    home_amount_cents integer,
+    "desc" character varying,
     debit_amount_cents integer,
     credit_amount_cents integer,
     postable_type character varying,
     postable_id integer,
+    account_id integer,
+    accountable_type character varying,
+    accountable_id integer,
     grouping integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

@@ -449,7 +449,7 @@ class ApplicationController < ActionController::Base
           tips += tips_share
         else
           tips_share = 0.00
-          wages += daily_wage
+          # week_wages += daily_wage
         end
         if employee.id != timesheet.employee.id
           wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
@@ -482,6 +482,19 @@ class ApplicationController < ActionController::Base
         week_tips += tips_share
       end
     end
+    wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
+    unless wage
+      wage = Wage.new
+      wage.employee = employee
+      wage.FY = fy
+      wage.week_no = hmrc_pay_week
+      wage.rate_cents = rate_cents
+    end
+    wage.hours = week_hours
+    wage.gross_cents = week_wages
+    wage.tips_cents = week_tips * 100.00
+    wage.save!
+    wages << wage
     wages
   end
 end

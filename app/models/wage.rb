@@ -27,6 +27,8 @@ class Wage < ActiveRecord::Base
 
   belongs_to :employee
 
+  has_many  :posts, as: :postable, dependent: :destroy
+
   after_create
 
   validates_presence_of :employee_id, :message => 'is required'

@@ -17,7 +17,6 @@ class Daily < ActiveRecord::Base
 
   # has_many :financials, dependent: :destroy
 
-  has_many  :posts, as: :postable, dependent: :destroy
 
   validates_presence_of :session, :account_date, :take, :credit_card, :tips
   validates_numericality_of :take, :credit_card, :tips
