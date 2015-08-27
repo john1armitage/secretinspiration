@@ -53,9 +53,9 @@ class DailiesController < ApplicationController
   # PATCH/PUT /dailies/1
   def update
     set_net
-    remove_financials
-    create_financials
     if @daily.update(params[:daily])
+      remove_financials
+      create_financials
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
       # redirect_to daily_url(daily_date: @daily.account_date.strftime('%d-%m-%Y')), notice: 'Daily was successfully updated.'
     else
@@ -93,7 +93,7 @@ class DailiesController < ApplicationController
     def credit_card_financial
       ref_bank = 'MERCHANT'
       credit = false
-      credit_amount = 0
+      credit_amount = 0.00
       debit_amount = @daily.credit_card
       entity = 'Account'
       type = 'sales'
@@ -108,7 +108,7 @@ class DailiesController < ApplicationController
     def cash_financial
       ref_bank = 'CASH'
       credit = false
-      credit_amount = 0
+      credit_amount = 0.00
       debit_amount = @daily.take - @daily.credit_card
       entity = 'Account'
       type = 'sales'
@@ -124,7 +124,7 @@ class DailiesController < ApplicationController
       ref_bank = 'RECEIVABLE'
       credit = true
       credit_amount = @daily.turnover # - (@daily.tax + @daily.tips)
-      debit_amount = 0
+      debit_amount = 0.00
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('Sales')
@@ -139,7 +139,7 @@ class DailiesController < ApplicationController
       ref_bank = 'VAT'
       credit = true
       credit_amount = @daily.tax
-      debit_amount = 0
+      debit_amount = 0.00
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('VAT Control')

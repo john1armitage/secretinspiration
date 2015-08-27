@@ -3,7 +3,6 @@
 --
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -342,7 +341,9 @@ CREATE TABLE financials (
     summary character varying,
     entity_ref character varying,
     bank character varying,
-    daily_id integer
+    daily_id integer,
+    tax_home_cents integer,
+    account_id integer
 );
 
 
@@ -1921,4 +1922,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150802153321');
 INSERT INTO schema_migrations (version) VALUES ('20150802153722');
 
 INSERT INTO schema_migrations (version) VALUES ('20150802161025');
+
+INSERT INTO schema_migrations (version) VALUES ('20150826135718');
 

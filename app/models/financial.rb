@@ -4,7 +4,7 @@ class Financial < ActiveRecord::Base
 
   monetize :debit_amount_cents, :allow_nil => true
   monetize :credit_amount_cents, :allow_nil => true
-  monetize :VAT_cents, :allow_nil => true
+  monetize :tax_home_cents, :allow_nil => true
 
   validates :summary, presence: true
 

@@ -7,7 +7,9 @@ class Timesheet < ActiveRecord::Base
 
   before_validation :calculate_hours
 
-  after_validation :adjust_daily_headcount
+  after_save :adjust_daily_headcount
+
+  after_destroy :reduce_daily_headcount
 
   monetize :pay_cents
 
@@ -22,12 +24,18 @@ class Timesheet < ActiveRecord::Base
   end
 
   def adjust_daily_headcount
-    headcount = Timesheet.where('work_date = ? AND session = ?', work_date, session).size
-    if work_date != work_date_was
+    if work_date_changed?
+      headcount = Timesheet.where('work_date = ? AND session = ?', work_date_was, session).size
       Daily.where('account_date = ? AND session = ?', work_date_was, session).update_all(headcount: headcount)
     end
+    headcount = Timesheet.where('work_date = ? AND session = ?', work_date, session).size
     Daily.where('account_date = ? AND session = ?', work_date, session).update_all(headcount: headcount)
   end
 
+  def reduce_daily_headcount
+    p "HELLLLLO"
+    headcount = Timesheet.where('work_date = ? AND session = ?', work_date_was, session).size
+    Daily.where('account_date = ? AND session = ?', work_date_was, session).update_all(headcount: headcount)
+  end
 
 end
