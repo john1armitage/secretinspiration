@@ -422,6 +422,47 @@ class ApplicationController < ActionController::Base
   end
   helper_method :HMRC_week_number
 
+  def allocation_accounts
+    groupings = []
+    allocations = []
+    accounts = ['COGS','Overheads','Fixed Assets']
+    accounts.each do |a|
+      if account = Account.find_by_name(a) #.select(:id, :name)
+        groupings << account
+      end
+    end
+    groupings.each do |g|
+      allocations << g
+      g.children.order(:code).each do |c|
+        allocations << c
+      end
+    end
+    allocations
+  end
+  helper_method :allocation_accounts
+
+  def grouped_accounts
+    grouped = []
+    groupings = []
+    allocations = []
+    accounts = ['COGS','Overheads','Fixed Assets']
+    accounts.each do |a|
+      if account = Account.find_by_name(a) #.select(:id, :name)
+        groupings << account
+      end
+    end
+    groupings.each do |g|
+      grouping = g.name
+      children = []
+      g.children.order(:code).each do |c|
+        children << [c.name, c.id]
+      end
+      allocations << [grouping, children]
+    end
+    allocations
+  end
+  helper_method :grouped_accounts
+
   def process_timesheets(timesheets)
     hours = 0.00
     wages = 0.00

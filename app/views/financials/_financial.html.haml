@@ -1,0 +1,22 @@
+- grouped = grouped_accounts
+- amount = (financial.credit ?  financial.credit_amount : financial.debit_amount)
+= form_for financial  do |f|
+  %fieldset
+    .row
+      = hidden_field_tag :editor, true
+      .field.small-2.columns.headings
+        = link_to financial.event_date, edit_financial_path(financial), title: 'Edit Financial'
+      .field.small-3.columns.has-tip{"data-tooltip" => "", title: financial.desc}
+        = "#{financial.entity_ref}:"
+        %br
+        = "#{financial.credit ?  'Credit' : 'Debit'}: #{pounds(amount)}"
+      .field.small-2.columns.left
+        = f.text_field :tax_home
+      .field.small-1.columns.left
+        = hidden_field_tag :amount, amount
+        = label_tag :VAT, 'VAT'
+        = check_box_tag :VAT,'VAT', (financial.tax_home && financial.tax_home > 0.00), class: 'VAT'
+      .field.small-3.columns.left
+        = f.select :account_id, grouped_options_for_select(grouped, financial.account_id), {include_blank: 'Account'}
+      .field.small-1.columns
+        = f.submit 'Save'

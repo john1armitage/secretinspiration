@@ -50,50 +50,36 @@
       = f.collection_select :classification_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
       -#= f.select :classification_eq, options_for_select(@banks, @target_bank), include_blank: true
   .row
-    .field.small-2.columns.left
-      = f.label :processed_eq, 'Processed'
-      = f.check_box :processed_eq
     .actions
       = f.submit 'Search'
 
-= render @financials
 
-:javascript
-  vat_rate = "#{CONFIG[:vat_rate_standard]}";
-:coffeescript
-  $(".VAT").change ->
-    if $(this).is(":checked")
-      gross = $(this).siblings().val()
-      net = (gross / (1.00 + vat_rate))
-      net = (gross / (1.20))
-      vat = (gross - net).toFixed(2)
-    $(this).parent().siblings().find("#financial_tax_home").val vat
--#%table.money
--#  %thead
--#    %tr
--#      %th Date
--#      %th
--#      %th
--#      %th Credit
--#      %th Debit
--#      -#%th Res
--#      -#%th Proc
--#      %th
--#      %th
--#
--#  %tbody
--#    - @financials.each do |financial|
--#      %tr
--#        %td= financial.event_date
--#        -#%td= financial.classification
--#        %td.has-tip{"data-tooltip" => "", title: financial.desc}
--#          = financial.summary
--#        %td.has-tip{"data-tooltip" => "", title: financial.entity_id}
--#          = financial.entity_ref.truncate(15, omission: '...') unless financial.entity_ref.blank?
--#        %td= (financial.credit_amount && financial.credit_amount > 0 ? pounds(financial.credit_amount) : '')
--#        %td= (financial.debit_amount && financial.debit_amount > 0 ? pounds(financial.debit_amount) : '')
--#        -#%td= ( financial.resolved ? 'OK' : '' )
--#        -#%td= ( financial.processed ? 'OK' : '' )
--#        %td= link_to 'E', edit_financial_path(financial)
--#        %td= link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
--#
+%table.money
+  %thead
+    %tr
+      %th Date
+      %th
+      %th
+      %th Credit
+      %th Debit
+      -#%th Res
+      -#%th Proc
+      %th
+      %th
+
+  %tbody
+    - @financials.each do |financial|
+      %tr
+        %td= financial.event_date
+        -#%td= financial.classification
+        %td.has-tip{"data-tooltip" => "", title: financial.desc}
+          = financial.summary
+        %td.has-tip{"data-tooltip" => "", title: financial.entity_id}
+          = financial.entity_ref.truncate(15, omission: '...') unless financial.entity_ref.blank?
+        %td= (financial.credit_amount && financial.credit_amount > 0 ? pounds(financial.credit_amount) : '')
+        %td= (financial.debit_amount && financial.debit_amount > 0 ? pounds(financial.debit_amount) : '')
+        -#%td= ( financial.resolved ? 'OK' : '' )
+        -#%td= ( financial.processed ? 'OK' : '' )
+        %td= link_to 'E', edit_financial_path(financial)
+        %td= link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

@@ -264,3 +264,13 @@ body {
 a.small.radius.button:hover {
   color: white;
 }
+table {
+  &.money {
+    td, th {
+      text-align: right;
+      &.lefty {
+        text-align: left;
+      }
+    }
+  }
+}

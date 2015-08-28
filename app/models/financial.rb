@@ -4,6 +4,8 @@ class Financial < ActiveRecord::Base
 
   has_many  :posts, as: :postable, dependent: :destroy
 
+  belongs_to :account
+
   monetize :debit_amount_cents, :allow_nil => true
   monetize :credit_amount_cents, :allow_nil => true
   monetize :tax_home_cents, :allow_nil => true

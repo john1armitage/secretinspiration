@@ -1,36 +1,32 @@
 -#= link_to 'New Wage', new_wage_path
 
-%table
+%table.money
   %tr
-    %th Fy
-    %th Week no
-    %th Employee
-    %th Hours
-    %th Rate
+    %th Week
+    %th.lefty Employee
+    %th Hourly
     %th Gross
-    %th Ni employer
-    %th Ni employee
-    %th Paye
     %th Tips
-    %th Paid date
-    %th
+    %th Paye
+    %th NI ee/er
+    %th Take Home
+    -#%th
+    -#%th
     %th
     %th
 
   - @wages.order(:FY,:week_no).each do |wage|
     %tr
-      %td= wage.FY
-      %td= wage.week_no
-      %td= wage.employee.name if wage.employee
-      %td= wage.hours
-      %td= wage.rate
-      %td= wage.gross
-      %td= wage.NI_employer
-      %td= wage.NI_employee
-      %td= wage.PAYE
-      %td= wage.tips
-      %td= wage.paid_date
-      %td= link_to 'Show', wage
+      %td= "#{wage.FY}/#{wage.week_no}"
+      %td.lefty= wage.employee ? wage.employee.first_name : 'unresolved'
+      %td= "#{pounds(wage.rate)} x #{wage.hours}"
+      %td= pounds(wage.gross)
+      %td= pounds(wage.tips)
+      %td= (wage.PAYE > 0.00) ? pounds(wage.PAYE) : ''
+      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)},#{pounds(wage.NI_employer)}" : ''
+      %td= "#{pounds(wage.gross + wage.tips - (wage.PAYE + wage.NI_employee))}"
+      -#%td= wage.paid_date
+      -#%td= link_to 'Show', wage
       %td= link_to 'Edit', edit_wage_path(wage)
-      %td= link_to 'Destroy', wage, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'X', wage, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

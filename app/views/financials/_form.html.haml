@@ -1,3 +1,5 @@
+-# allocations = allocation_accounts
+- grouped = grouped_accounts
 = form_for @financial do |f|
   - if @financial.errors.any?
     #error_explanation
@@ -26,33 +28,29 @@
         = f.label :processed
         = f.check_box :processed
     .row
-      .field.small-8.columns.left
-        = f.label :entity_ref
-        = f.text_field :entity_ref
-      .field.small-8.columns.left
-        = f.label :summary, 'Accounts Summary'
-        = f.text_field :summary
-    .row
-      .field.small-12.columns.left
-        = f.label :desc, 'Bank Reference'
-        = f.text_field :desc
-    .row
-      .field.small-3.columns.left
-        = f.label :classification
-        = f.text_field :classification
       .field.small-3.columns.left
         = f.label :credit_amount
         = f.text_field :credit_amount
+      .field.small-2.columns.left
+        = f.label :tax_home,'VAT'
+        = f.text_field :tax_home
+      .field.small-1.columns.left
+        = label_tag :VAT, 'Calc'
+        = check_box_tag :VAT,'VAT', (@financial.tax_home && @financial.tax_home > 0.00)
       .field.small-3.columns.left
         = f.label :debit_amount
         = f.text_field :debit_amount
+      .field.small-3.columns.left
+        = f.label :classification,'Method'
+        = f.text_field :classification
     .row
+      .field.small-3.columns.left
+        = f.label :account_id
+        -#= f.collection_select :account_id, allocations,'id','name', {include_blank: 'Account'}
+        = f.select :account_id, grouped_options_for_select(grouped, @financial.account_id), {include_blank: 'Account'}
       .field.small-2.columns.left
         = f.label :entity
         = f.collection_select :entity, Element.where(kind: 'entity').order(:name).load,'name','name'
-      -#.field.small-1.columns.left
-      -#  = f.label :entity_id, 'id'
-      -#  = f.text_field :entity_id
       .field.small-3.columns.left
         = f.label :entity_id, 'ID'
         - case @financial.entity
@@ -66,5 +64,23 @@
         = f.label :mandate
         = f.text_field :mandate
     .row
+      .field.small-8.columns.left
+        = f.label :summary, 'Accounts Summary'
+        = f.text_field :summary
+      .field.small-4.columns.left
+        = f.label :entity_ref
+        = f.text_field :entity_ref
+    .row
+      .field.small-12.columns.left
+        = f.label :desc, 'Bank Reference'
+        = f.text_field :desc
+    .row
       .actions
         = f.submit 'Save'
+
+:coffeescript
+  $("#VAT").change ->
+    if $(this).is(":checked")
+      gross = $("#financial_credit_amount").val()
+      vat = gross * 0.20
+    $("#financial_tax_home").val vat

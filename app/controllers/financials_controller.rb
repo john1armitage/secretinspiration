@@ -4,7 +4,7 @@ class FinancialsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @financials = Financial.all
+    #@financials = Financial.all
 
     @refs = get_entity_refs
     @suppliers = get_entity_suppliers
@@ -32,7 +32,6 @@ class FinancialsController < ApplicationController
       params[:q].delete :summary_eq
       params[:q].delete :classification_eq
     end
-    # p params[:q]
 
     @q = Financial.search(params[:q])
 
@@ -40,6 +39,10 @@ class FinancialsController < ApplicationController
     list_order = 'DESC'
 
     @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at DESC")
+
+    if params[:no_process].present?
+      @financials = @financials.where(processed: false)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -68,6 +71,7 @@ class FinancialsController < ApplicationController
         @financials << tx
       end
       counter = 0
+      end_date = @financials.first[0]
       @financials.each do |tx|
         type = 'unresolved'
         summary = nil
@@ -278,8 +282,9 @@ class FinancialsController < ApplicationController
         Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
 
       end
-      time = Time.now.strftime("%Y%m%d")
-      done = "~/commerce/#{ref_bank.downcase}.#{time}"
+      # time = Time.now.strftime("%Y%m%d")
+      label = end_date.split('/').reverse.join('')
+      done = "~/commerce/#{ref_bank.downcase}.#{label}"
       system("mv #{data_file} #{done}")
     else
       done = "#{params[:bank]} Batch not found"
@@ -332,8 +337,14 @@ class FinancialsController < ApplicationController
     end
     respond_to do |format|
       if @financial.update(params[:financial])
-        format.html { redirect_to financials_url }
-        format.json { head :no_content }
+        remove_posts
+        create_posts
+        # if params[:editor].present?
+        #   redirect_to financials_url(no_process: true), notice: 'Financial was successfully updated.'
+        # else
+          format.html { redirect_to financials_url(no_process: true) }
+          format.json { head :no_content }
+        # end
       else
         format.html { render action: 'edit' }
         format.json { render json: financial.errors, status: :unprocessable_entity }
@@ -350,6 +361,85 @@ class FinancialsController < ApplicationController
   end
 
   private
+
+  def remove_posts
+    @financial.posts.destroy_all
+  end
+
+  def create_posts
+    case @financial.classification
+      when 'BACS', 'card', 'direct'
+        # all purchases, must be allocated to an account
+        if @financial.account_id.blank?
+          financial_unprocessed
+        else
+          purchase_posts
+        end
+      when 'charges'
+        # reference bank charges
+        charges_posts
+      when 'interest'
+        # reference bank interest
+        interest_posts
+      when 'transfer'
+        # between banks
+        transfer_posts
+      when 'merchant', 'cash'
+        # incoming funds
+        receipt_posts
+      when 'payroll'
+        # wage payment
+        wages_posts
+    end
+  end
+
+  def purchase_posts
+    account = @financial.account
+    supplier = Supplier.find(@financial.entity_id)
+    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    net = @financial.credit_amount
+    if @financial.tax_home
+      net -= @financial.tax_home
+      vat_post(supplier)
+    end
+    bank_credit_post(supplier)
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                    debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping: account.grouping)
+    financial_processed
+  end
+
+  def vat_post(supplier)
+    bank_name = 'VAT Control'
+    bank = Bank.find_by_name( bank_name )
+    account = Account.find_by_name(bank_name)
+    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: @financial.tax_home, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Bank', accountable_id: bank.id, grouping: account.grouping)
+  end
+
+  def bank_credit_post(supplier)
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: @financial.credit_amount, account_id: account.id,
+                                     accountable_type:'Bank', accountable_id: bank.id, grouping: account.grouping)
+  end
+
+  def bank_debit_post
+
+  end
+
+  def financial_processed
+    @financial.update!(processed: true)
+  end
+
+  def financial_unprocessed
+    @financial.update!(processed: false)
+  end
 
   def get_entity_ref
     ref = ''
