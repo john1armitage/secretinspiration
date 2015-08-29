@@ -52,6 +52,12 @@ $head-border: #009900;
     }
   }
   body {
+    fieldset.compact {
+      font-size: 0.85em;
+      margin: 0.5em;
+      padding: 0;
+      border: none;
+    }
     fieldset.no-pad {
       padding: 0;
     }

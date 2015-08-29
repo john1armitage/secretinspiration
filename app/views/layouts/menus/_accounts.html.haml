@@ -3,27 +3,15 @@
   - if allow? :financials, :index
     %li
       != link_to 'Financials', financials_path, :class => "small button radius"
-  - if allow? :suppliers, :index
-    %li
-      != link_to 'Suppliers', suppliers_path, :class => "small button radius"
-  - if allow? :orders, :index
-    %li
-      != link_to 'Orders', orders_path, :class => "small button radius"
-  - if allow? :payments, :index
-    %li
-      != link_to 'Payments', payments_path, :class => "small button radius"
-  - if allow? :receipts, :index
-    %li
-      != link_to 'Receipts', receipts_path, :class => "small button radius"
-  - if allow? :transfers, :index
-    %li
-      != link_to 'Transfers', transfers_path, :class => "small button radius"
-  - if allow? :postings, :index
+  - if allow? :posts, :index
     %li
       != link_to 'Posts', posts_path, :class => "small button radius"
   - if allow? :monthlies, :index
     %li
       != link_to 'Monthlies', monthlies_path, :class => "small button radius"
+  - if allow? :suppliers, :index
+    %li
+      != link_to 'Suppliers', suppliers_path, :class => "small button radius"
   - if allow? :banks, :index
     %li
       != link_to 'Banks', banks_path, :class => "small button radius"
@@ -45,4 +33,18 @@
   - if allow? :accounts, :index
     %li
       != link_to 'Account List', accounts_path, :class => "small button radius"
+
+  -# out of use
+  - if allow? :orders, :index
+    %li
+      != link_to 'Orders', orders_path, :class => "small button radius"
+  - if allow? :payments, :index
+    %li
+      != link_to 'Payments', payments_path, :class => "small button radius"
+  - if allow? :receipts, :index
+    %li
+      != link_to 'Receipts', receipts_path, :class => "small button radius"
+  - if allow? :transfers, :index
+    %li
+      != link_to 'Transfers', transfers_path, :class => "small button radius"
 

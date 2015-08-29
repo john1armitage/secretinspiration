@@ -59,7 +59,7 @@
     %tr
       %td.has-tip.tip-right{'data-tooltip' => true, 'title' => posting.id}
         = posting.account_date.strftime("%d %b %y")
-      %td= posting.desc
+      %td= posting.desc.sub(' debit','').sub(' credit','')
       %td= posting.account.name if posting.account
       -#- case posting.postable_type
       -#  - when 'Order'

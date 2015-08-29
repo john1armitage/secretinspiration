@@ -40,8 +40,9 @@ class FinancialsController < ApplicationController
 
     @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at DESC")
 
-    if params[:no_process].present?
-      @financials = @financials.where(processed: false)
+    if params[:processed].present?
+      @q.processed_eq = processed = params[:processed] == 'true' ? true : false
+      @financials = @financials.where(processed: processed)
     end
 
     respond_to do |format|
@@ -81,6 +82,7 @@ class FinancialsController < ApplicationController
         entity_id = nil
         entity_ref = nil
         event_date = tx[0]
+        p tx
         reference = tx[1].upcase.gsub(/[^0-9a-z &,]/i, '').sub('WWW', '').sub(' & ', 'AND')
         if tx[2].blank?
           credit = true
@@ -128,7 +130,7 @@ class FinancialsController < ApplicationController
             if (bank = Bank.find_by_reference(entity_ref))
               entity_id = bank.id
             end
-            summary = 'Bank Interest'
+            # summary = 'Bank Interest'
           end
           if (emp = reference.scan(/SHACKPAYROLL .+/)[0])
             type = 'payroll'
@@ -166,7 +168,6 @@ class FinancialsController < ApplicationController
           entity = nil
           if (payer = reference.scan(/^*BANK GIRO CREDIT REF [a-zA-Z0-9\s]+,/)[0])
             payer = payer.sub('BANK GIRO CREDIT REF ', '').sub(',', '').gsub(/[0-9]/, '')
-            type = 'merchant'
           elsif (location = reference.scan(/^*CASH DEPOSIT AT [a-zA-Z\s]+/)[0])
             location = location.sub('CASH DEPOSIT AT ', '')
             type = 'cash'
@@ -243,22 +244,26 @@ class FinancialsController < ApplicationController
         if entity_ref && entity_ref.scan(/AMAZON[[a-zA-Z0-9]]*/)[0]
           entity_ref = 'AMAZON'
         end
-        if reference.scan(/DIRECTORS AC/)[0]
+        if reference.scan(/DIRECTORS AC/)[0] || reference.scan(/JM_VM_ARMITAGE/)[0]
           entity = 'Bank'
           entity_ref = 'DIRECTORS'
           summary = 'DIRECTORS ACCOUNT'
+          type = 'transfer'
         end
         if reference.scan(/HMRC PAYE/)[0]
           entity = 'Bank'
           entity_ref = 'PAYE'
+          type = 'transfer'
         end
         if reference.scan(/HMRC CUSTOMS/)[0]
           entity = 'Bank'
           entity_ref = 'VAT'
+          type = 'transfer'
         end
         if payer && ['EMS', 'AX'].include?(payer.split(' ')[0])
           entity = 'Bank'
           entity_ref = payer.split(' ')[0]
+          type = 'merchant'
         end
         if entity == 'Bank'
           if (bank = Bank.find_by_reference(entity_ref))
@@ -342,7 +347,8 @@ class FinancialsController < ApplicationController
         # if params[:editor].present?
         #   redirect_to financials_url(no_process: true), notice: 'Financial was successfully updated.'
         # else
-          format.html { redirect_to financials_url(no_process: true) }
+          processed = params[:processed].present?  && params[:processed] == 'true'
+          format.html { redirect_to financials_url(processed: processed )}
           format.json { head :no_content }
         # end
       else
@@ -384,6 +390,12 @@ class FinancialsController < ApplicationController
       when 'transfer'
         # between banks
         transfer_posts
+      when 'reverse'
+        # between banks
+        reverse_posts
+      when 'refund'
+        # between banks
+        refund_posts
       when 'merchant', 'cash'
         # incoming funds
         receipt_posts
@@ -396,7 +408,7 @@ class FinancialsController < ApplicationController
   def purchase_posts
     account = @financial.account
     supplier = Supplier.find(@financial.entity_id)
-    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    desc = "#{account.name} debit: #{supplier.name}"
     net = @financial.credit_amount
     if @financial.tax_home
       net -= @financial.tax_home
@@ -404,8 +416,151 @@ class FinancialsController < ApplicationController
     end
     bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
-                                    debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     debit_amount: net, credit_amount: 0, account_id: account.id,
                                      accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping: account.grouping)
+    financial_processed
+  end
+
+  def charges_posts
+    account = Account.find_by_name('Bank Charges')
+    supplier = Supplier.where("'#{@financial.entity_ref}' = ANY (reference)").first
+    desc = "#{account.name} debit: #{supplier.name}"
+    net = @financial.credit_amount
+    # bank_credit_post(supplier)
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id:  supplier.id, grouping: account.grouping)
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} credit: #{supplier.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: net, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+    financial_processed
+  end
+
+  def interest_posts
+    account = Account.find_by_name('Bank Interest')
+    supplier = Supplier.where("'#{@financial.entity_ref}' = ANY (reference)").first
+    desc = "#{account.name} credit: #{supplier.name}"
+    net = @financial.debit_amount
+    # bank_credit_post(supplier)
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: net, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} debit: #{supplier.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+    financial_processed
+  end
+
+  def transfer_posts
+    bank_ref = @financial.bank
+    from_bank = Bank.find_by_reference( bank_ref )
+    from_account = Account.find_by_name(from_bank.name)
+    to_bank = Bank.find( @financial.entity_id )
+    to_account = Account.find_by_name(to_bank.name)
+    desc = "#{from_bank.name} to: #{to_bank.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: @financial.credit_amount, account_id: from_account.id,
+                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping: from_account.grouping)
+    desc = "#{to_bank.name} from: #{from_bank.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: @financial.credit_amount, credit_amount: 0, account_id: to_account.id,
+                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping: to_account.grouping)
+    financial_processed
+  end
+
+  def receipt_posts
+    bank_ref = @financial.bank
+    to_bank = Bank.find_by_reference( bank_ref )
+    to_account = Account.find_by_name(to_bank.name)
+    from_bank = Bank.find_by_reference( @financial.entity_ref)
+    from_account = Account.find_by_name(from_bank.name)
+    desc = "#{from_bank.name} to: #{to_bank.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: @financial.debit_amount, account_id: from_account.id,
+                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping: from_account.grouping)
+    desc = "#{to_bank.name} from: #{from_bank.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: @financial.debit_amount, credit_amount: 0, account_id: to_account.id,
+                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping: to_account.grouping)
+    financial_processed
+  end
+
+  def reverse_posts
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    case @financial.entity
+      when 'Employee'
+        ref_account = Account.find_by_name('Wages Payable')
+        entity = Employee.find(@financial.entity_id)
+      when 'Supplier'
+        ref_account = Account.find_by_name('Accounts Payable')
+        entity = Supplier.find(@financial.entity_id)
+    end
+    net = @financial.debit_amount
+
+    desc = "#{account.name} reverse: #{entity.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     accountable_type:@financial.entity, accountable_id: @financial.entity_id, grouping: account.grouping)
+    desc = "#{ref_account.name} reverse: #{entity.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: net, account_id: ref_account.id,
+                                     accountable_type: @financial.entity, accountable_id:@financial.entity_id, grouping: ref_account.grouping)
+
+    financial_processed
+
+  end
+
+  def refund_posts
+    account = Account.find(@financial.account_id)
+    supplier = Supplier.where("'#{@financial.entity_ref}' = ANY (reference)").first
+    desc = "#{account.name} refund: #{supplier.name}"
+    net = @financial.debit_amount
+    net -= @financial.tax_home if @financial.tax_home
+    # bank_credit_post(supplier)
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: 0, credit_amount: net, account_id: account.id,
+                                     accountable_type: 'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} refund: #{supplier.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: @financial.debit_amount, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+
+    if @financial.tax_home && @financial.tax_home > 0.00
+      bank_name = 'VAT Control'
+      bank = Bank.find_by_name( bank_name )
+      account = Account.find_by_name(bank_name)
+      desc = "#{account.name} refund: #{supplier.name}"
+      post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                       debit_amount: 0, credit_amount: @financial.tax_home, account_id: account.id,
+                                       accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+    end
+
+    financial_processed
+
+  end
+
+  def wages_posts
+    account = Account.find_by_name('Wages Payable')
+    employee = Employee.find(@financial.entity_id)
+    desc = "#{account.name} debit: #{employee.name}"
+    net = @financial.credit_amount
+    bank_credit_post(employee)
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: net, credit_amount: 0, account_id: account.id,
+                                     accountable_type:'Employee', accountable_id: @financial.entity_id, grouping: account.grouping)
     financial_processed
   end
 
@@ -413,24 +568,30 @@ class FinancialsController < ApplicationController
     bank_name = 'VAT Control'
     bank = Bank.find_by_name( bank_name )
     account = Account.find_by_name(bank_name)
-    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    desc = "#{account.name} debit: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.tax_home, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Bank', accountable_id: bank.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
   end
 
-  def bank_credit_post(supplier)
+  def bank_credit_post(entity)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
-    desc = "#{account.name} #{@financial.credit ? 'credit' :'debit'}: #{supplier.name}"
+    desc = "#{account.name} credit: #{entity.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: @financial.credit_amount, account_id: account.id,
-                                     accountable_type:'Bank', accountable_id: bank.id, grouping: account.grouping)
+                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping: account.grouping)
   end
 
   def bank_debit_post
-
+    bank_ref = @financial.bank
+    bank = Bank.find_by_reference( bank_ref )
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} debit: #{entity.name}"
+    post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
+                                     debit_amount: @financial.debit_amount, credit_amount: 0, account_id: account.id,
+                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping: account.grouping)
   end
 
   def financial_processed
