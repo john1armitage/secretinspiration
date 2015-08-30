@@ -422,6 +422,37 @@ class ApplicationController < ActionController::Base
   end
   helper_method :HMRC_week_number
 
+  def get_fy_start
+    fy_start = "01-11-#{Date.today.year}".to_date
+    fy_start = fy_start - 1.year if fy_start > Date.today
+    fy_start
+  end
+
+  def fy_to_date
+    period = []
+    period << get_fy_start #.strftime("%Y-%m-%d")
+    period << Date.today #.strftime("%Y-%m-%d")
+  end
+  def fq_to_date
+    period = []
+    month = Date.today.month
+    month_in_quarter = (month + (month < 11 ? 12 : 0) - 11) % 3
+    period << Date.today.beginning_of_month - month_in_quarter.month
+    period << Date.today
+  end
+  def last_fy
+    period = []
+    period << get_fy_start - 1.year
+    period << period[0] - 1.day + 1.year
+  end
+  def last_fq
+    period = []
+    month = Date.today.month
+    month_in_quarter = (month + (month < 11 ? 12 : 0) - 11) % 3
+    period << Date.today.beginning_of_month - month_in_quarter.month - 3.month
+    period << period[0] +3.month - 1.day
+  end
+
   def allocation_accounts
     groupings = []
     allocations = []

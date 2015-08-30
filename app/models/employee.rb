@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   has_many :timesheets, dependent: :destroy
   has_many :pay_rates, dependent: :destroy
   has_many :wages, dependent: :destroy
+  has_many  :posts, as: :accountable, dependent: :nullify
   before_update :make_reference
 
   def name

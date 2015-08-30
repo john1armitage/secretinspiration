@@ -5,6 +5,7 @@
     %th Name
     %th Code
     %th Ancestry
+    %th Grouping
     %th Opening balance
     %th
     %th
@@ -18,6 +19,7 @@
         = account.name
       %td= account.code
       %td= account.ancestry
+      %td= account.grouping_id
       %td= account.opening_balance
       %td= link_to 'Show', account
       %td= link_to 'Child', new_account_path(:parent_id => account)

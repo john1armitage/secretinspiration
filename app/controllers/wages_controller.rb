@@ -87,7 +87,7 @@ class WagesController < ApplicationController
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
     @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                          postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                         accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                         accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
   end
   def tips_post
     credit = false
@@ -97,7 +97,7 @@ class WagesController < ApplicationController
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
     @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                         postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
 
     credit = true
     credit_amount = @wage.tips
@@ -106,7 +106,7 @@ class WagesController < ApplicationController
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
     @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                         postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
   end
 
   def hmrc_post
@@ -118,7 +118,7 @@ class WagesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
       @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                           postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
     end
     if @wage.NI_employee > 0.00
       credit = true
@@ -128,7 +128,7 @@ class WagesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
       @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                           postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
     end
     if @wage.NI_employer > 0.00
       credit = true
@@ -138,7 +138,7 @@ class WagesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
       @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                           postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                          accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
     end
   end
 
@@ -150,7 +150,7 @@ class WagesController < ApplicationController
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
     @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                         postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
   end
 
   def payroll_cost_post
@@ -161,7 +161,7 @@ class WagesController < ApplicationController
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
     @wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                         postable_id: @wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping: account.grouping)
+                        accountable_type:'Employee', accountable_id: @wage.employee_id, grouping_id: account.grouping_id)
   end
 
     # Use callbacks to share common setup or constraints between actions.

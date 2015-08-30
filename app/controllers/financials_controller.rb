@@ -417,7 +417,7 @@ class FinancialsController < ApplicationController
     bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping: account.grouping_id)
     financial_processed
   end
 
@@ -429,14 +429,14 @@ class FinancialsController < ApplicationController
     # bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id:  supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id:  supplier.id, grouping: account.grouping_id)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
     desc = "#{account.name} credit: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping_id)
     financial_processed
   end
 
@@ -448,14 +448,14 @@ class FinancialsController < ApplicationController
     # bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping_id)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
     desc = "#{account.name} debit: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
     financial_processed
   end
 
@@ -468,11 +468,11 @@ class FinancialsController < ApplicationController
     desc = "#{from_bank.name} to: #{to_bank.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: @financial.credit_amount, account_id: from_account.id,
-                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping: from_account.grouping)
+                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping_id: from_account.grouping_id)
     desc = "#{to_bank.name} from: #{from_bank.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.credit_amount, credit_amount: 0, account_id: to_account.id,
-                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping: to_account.grouping)
+                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping_id: to_account.grouping_id)
     financial_processed
   end
 
@@ -485,11 +485,11 @@ class FinancialsController < ApplicationController
     desc = "#{from_bank.name} to: #{to_bank.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: @financial.debit_amount, account_id: from_account.id,
-                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping: from_account.grouping)
+                                     accountable_type:'Bank', accountable_id: to_bank.id, grouping_id: from_account.grouping_id)
     desc = "#{to_bank.name} from: #{from_bank.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.debit_amount, credit_amount: 0, account_id: to_account.id,
-                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping: to_account.grouping)
+                                     accountable_type:'Bank', accountable_id: from_bank.id, grouping_id: to_account.grouping_id)
     financial_processed
   end
 
@@ -510,11 +510,11 @@ class FinancialsController < ApplicationController
     desc = "#{account.name} reverse: #{entity.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:@financial.entity, accountable_id: @financial.entity_id, grouping: account.grouping)
+                                     accountable_type:@financial.entity, accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
     desc = "#{ref_account.name} reverse: #{entity.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: ref_account.id,
-                                     accountable_type: @financial.entity, accountable_id:@financial.entity_id, grouping: ref_account.grouping)
+                                     accountable_type: @financial.entity, accountable_id:@financial.entity_id, grouping_id: ref_account.grouping_id)
 
     financial_processed
 
@@ -529,14 +529,14 @@ class FinancialsController < ApplicationController
     # bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type: 'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type: 'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
     desc = "#{account.name} refund: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.debit_amount, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
 
     if @financial.tax_home && @financial.tax_home > 0.00
       bank_name = 'VAT Control'
@@ -545,7 +545,7 @@ class FinancialsController < ApplicationController
       desc = "#{account.name} refund: #{supplier.name}"
       post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                        debit_amount: 0, credit_amount: @financial.tax_home, account_id: account.id,
-                                       accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                       accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
     end
 
     financial_processed
@@ -560,7 +560,7 @@ class FinancialsController < ApplicationController
     bank_credit_post(employee)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Employee', accountable_id: @financial.entity_id, grouping: account.grouping)
+                                     accountable_type:'Employee', accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
     financial_processed
   end
 
@@ -571,7 +571,7 @@ class FinancialsController < ApplicationController
     desc = "#{account.name} debit: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.tax_home, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
   end
 
   def bank_credit_post(entity)
@@ -581,7 +581,7 @@ class FinancialsController < ApplicationController
     desc = "#{account.name} credit: #{entity.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: @financial.credit_amount, account_id: account.id,
-                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping: account.grouping)
+                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping_id: account.grouping_id)
   end
 
   def bank_debit_post
@@ -591,7 +591,7 @@ class FinancialsController < ApplicationController
     desc = "#{account.name} debit: #{entity.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: @financial.debit_amount, credit_amount: 0, account_id: account.id,
-                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping: account.grouping)
+                                     accountable_type: @financial.entity, accountable_id: entity.id, grouping_id: account.grouping_id)
   end
 
   def financial_processed

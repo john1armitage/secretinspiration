@@ -112,7 +112,7 @@ class DailiesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}" # 'Daily Credit Card Receipt'
       @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
                            postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
+                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 
@@ -132,7 +132,7 @@ class DailiesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
       @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
                            postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
+                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 
@@ -152,7 +152,7 @@ class DailiesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
       @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
                            postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
+                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 
@@ -172,7 +172,7 @@ class DailiesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
       @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
                            postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
+                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 
@@ -192,7 +192,7 @@ class DailiesController < ApplicationController
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
       @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
                            postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping: account.grouping)
+                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 

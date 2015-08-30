@@ -1,6 +1,5 @@
-=# search_form_for @q, url: search_postings_path, html: { method: :post } do |f|
 = search_form_for @q do |f|
-  .row
+  .row.search
     .field.small-3.columns
       = f.label :debit_amount_cents_gteq, 'Debits >='
       = f.text_field :debit_amount_cents_gteq
@@ -13,17 +12,20 @@
     .field.small-3.columns.left
       = f.label :credit_amount_cents_gteq, '<='
       = f.text_field :credit_amount_cents_lteq
-  .row
+  .row.search
+    .field.small-3.columns
+      = label_tag :financial, 'Period'
+      = select_tag :financial,  options_from_collection_for_select(@financials, "name", "name", @period), include_blank: true
     .field.small-3.columns
       = f.label :account_date_gteq, 'From'
       = f.date_field :account_date_gteq
     .field.small-3.columns.left
       = f.label :account_date_lteq, 'Until'
       = f.date_field :account_date_lteq
-  .row
+  .row.search
     .field.small-3.columns
-      = f.label :grouping_eq, 'Group'
-      = f.collection_select :grouping_eq, @account_groups, 'id', 'name', include_blank: true
+      = f.label :grouping_id_eq, 'Group'
+      = f.collection_select :grouping_id_eq, @groupings, 'id', 'name', include_blank: true
     .field.small-3.columns
       = f.label :account_id_eq, 'Account'
       = f.collection_select :account_id_eq, @accounts, 'id', 'name', include_blank: true

@@ -4,9 +4,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @account_groups = Account.joins(:posts).where(ancestry_depth: 1).order("name").select('name', 'accounts.id').uniq
+    @financials = Element.where(kind: 'financial').order(:rank)
+    @groupings = Post.joins("INNER JOIN accounts ON posts.grouping_id = accounts.id").select('accounts.name AS name', 'posts.grouping_id AS id, accounts.code').order('accounts.code').uniq
     @accounts = Account.joins(:posts).order("name").select('name', 'accounts.id').uniq
-    @accountables = Supplier.joins(:posts). where('suppliers.id = posts.accountable_id').order("name").select('name', 'suppliers.id', 'rank').uniq
+    @accountables = Supplier.joins(:posts). where("posts.accountable_type = 'Supplier' AND suppliers.id = posts.accountable_id").order("name").select('name', 'posts.accountable_id AS id','rank').uniq
+    @accountables += Employee.joins(:posts). where("posts.accountable_type = 'Employee' AND employees.id = posts.accountable_id").order("reference").select('reference AS name','first_name','last_name', 'posts.accountable_id AS id').uniq
+    @accountables += Bank.joins(:posts). where("posts.accountable_type = 'Bank' AND banks.id = posts.accountable_id").order("reference").select('reference','name', 'posts.accountable_id AS id', 'rank').uniq
     #if params[:q]
     #  params[:q][:debit_amount_cents_gteq] = 100 * params[:q][:debit_amount_cents_gteq].to_d
     #  params[:q][:debit_amount_cents_lteq] = 100 * params[:q][:debit_amount_cents_lteq].to_d
@@ -14,14 +17,54 @@ class PostsController < ApplicationController
     #  params[:q][:credit_amount_cents_lteq] = 100 * params[:q][:credit_amount_cents_lteq].to_d
     #end
     list_order = ''
+
+    unless params[:financial].present? && !params[:financial].blank?
+      #params[:financial] = 'FQ to date'
+    end
+
+    if params[:financial].present?
+      @period =  params[:financial]
+      case @period
+        when 'FY to date'
+          period = fy_to_date
+          params[:q][:account_date_gteq] = period[0]
+          params[:q][:account_date_lteq] = period[1]
+        when 'FQ to date'
+          period = fq_to_date
+          params[:q][:account_date_gteq] = period[0]
+          params[:q][:account_date_lteq] = period[1]
+        when 'Last FY'
+          period = last_fy
+          params[:q][:account_date_gteq] = period[0]
+          params[:q][:account_date_lteq] = period[1]
+        when 'Last FQ'
+          period = last_fq
+          params[:q][:account_date_gteq] = period[0]
+          params[:q][:account_date_lteq] = period[1]
+        else
+          params[:q][:account_date_gteq] = ''
+          params[:q][:account_date_lteq] = ''
+      end
+    end
+
     unless params[:q].present?
       limit = 100
       list_order = 'DESC'
     else
       limit = params[:limit] || 100
     end
-
+    if params[:q].present?
+      params[:q][:debit_amount_cents_gteq] = 1 unless params[:q][:debit_amount_cents_lteq].blank?
+      params[:q][:credit_amount_cents_gteq] = 1 unless params[:q][:credit_amount_cents_lteq].blank?
+      # params[:q][:credit_amount_cents_gteq] = 100 * params[:q][:credit_amount_cents_gteq].to_i unless params[:q][:credit_amount_cents_gteq].blank?
+      # unless params[:q][:debit_amount_cents_lteq].blank?
+      #   params[:q][:debit_amount_cents_lteq] = 100 * params[:q][:debit_amount_cents_lteq].to_i
+      #   params[:q][:debit_amount_cents_gt] = 0
+      # end
+      # params[:q][:credit_amount_cents_lteq] = 100 * params[:q][:credit_amount_cents_lteq].to_i unless params[:q][:credit_amount_cents_lteq].blank?
+    end
     @q = Post.search(params[:q])
+    # @q.debit_amount_cents_gteq = 0 unless params[:q][:debit_amount_cents_lteq].blank?
     @posts = @q.result(distinct: true).limit(limit).order("account_date #{list_order}, created_at")
     @debits = @posts.sum('debit_amount_cents').to_d / 100
     @credits = @posts.sum('credit_amount_cents').to_d / 100

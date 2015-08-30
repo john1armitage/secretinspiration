@@ -4,7 +4,7 @@ class Bank < ActiveRecord::Base
 
   validates :name, uniqueness: true, presence: true
 
-  has_many  :postings, as: :accountable, dependent: :nullify
+  has_many  :posts, as: :accountable, dependent: :nullify
 
   default_scope { order('rank ASC, name ASC') }
 
