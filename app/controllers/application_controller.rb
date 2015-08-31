@@ -535,6 +535,8 @@ class ApplicationController < ActionController::Base
           wage.hours = week_hours
           wage.gross_cents = week_wages
           wage.tips_cents = week_tips * 100.00
+          wage.bonus_cents = 0
+          wage.holiday_cents = 0
           wage.save!
           wages << wage
           pay_date = params[:week].to_date + 10.days
@@ -553,20 +555,22 @@ class ApplicationController < ActionController::Base
         week_wages += daily_wage
         week_tips += tips_share
       end
+      wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
+      unless wage
+        wage = Wage.new
+        wage.employee = employee
+        wage.FY = fy
+        wage.week_no = hmrc_pay_week
+        wage.rate_cents = rate_cents
+      end
+      wage.hours = week_hours
+      wage.gross_cents = week_wages
+      wage.tips_cents = week_tips * 100.00
+      wage.bonus_cents = 0
+      wage.holiday_cents = 0
+      wage.save!
+      wages << wage
+      wages
     end
-    wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
-    unless wage
-      wage = Wage.new
-      wage.employee = employee
-      wage.FY = fy
-      wage.week_no = hmrc_pay_week
-      wage.rate_cents = rate_cents
-    end
-    wage.hours = week_hours
-    wage.gross_cents = week_wages
-    wage.tips_cents = week_tips * 100.00
-    wage.save!
-    wages << wage
-    wages
   end
 end

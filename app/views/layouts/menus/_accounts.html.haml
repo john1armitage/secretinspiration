@@ -23,7 +23,7 @@
   -#    != link_to 'Timesheets', timesheets_path, :class => "small button radius"
   - if allow? :wages, :index
     %li
-      != link_to 'Wages', wages_path, :class => "small button radius"
+      != link_to 'Wages', wages_path(this_year: true), :class => "small button radius"
   - if allow? :employees, :index
     %li
       != link_to 'Employees', employees_path, :class => "small button radius"

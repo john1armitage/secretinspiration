@@ -4,7 +4,7 @@
       = hidden_field_tag :editor, true
       = hidden_field_tag :week, params[:week]
       .field.small-1.columns.headings
-        = @wage.employee.first_name
+        = link_to @wage.employee.first_name, edit_wage_path(@wage, timesheets: params[:week])
       .field.small-1.columns
         = "#{@wage.hours} hr"
         %br

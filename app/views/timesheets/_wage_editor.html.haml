@@ -1,4 +1,4 @@
-- if !@wages.empty?
+- if @wages && !@wages.empty?
   - wage = @wages.first
   .row
     %h4.small-6.columns.left
@@ -20,13 +20,15 @@
       NI E'ee
     .small-1.columns.left.lefty
       NI E'er
-    .small-3.columns.left.lefty
+    .small-2.columns.left.lefty
       Paid
   - @wages.each do |wage|
     - @wage = wage
     = render 'wage'
 -else
-  No timesheets for Period
+  %p
+    %b
+      No timesheets for Period
 
 :coffeescript
   Ajaxify.set_content_container('daily_editor')

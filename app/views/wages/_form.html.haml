@@ -1,6 +1,7 @@
 = form_for @wage, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
     .row
+      = hidden_field_tag :timesheets, params[:timesheets] if params[:timesheets].present?
       .field.small-3.columns
         = f.label :FY, 'FY'
         = f.number_field :FY

@@ -23,7 +23,7 @@
     %th Tips
     %th Bonus HolPay
     %th Paye
-    %th NI E'ee (E'er)
+    %th NI E'ee [E'er]
     %th Take Home
     -#%th
     -#%th
@@ -33,7 +33,11 @@
   - @wages.order(:FY,:week_no).each do |wage|
     %tr
       %td= "#{wage.FY}/#{wage.week_no}"
-      %td.lefty= wage.employee ? wage.employee.first_name : 'unresolved'
+      %td.lefty
+        - if wage.employee
+          =link_to(wage.employee.first_name, edit_wage_path(wage))
+        -else
+          unresolved
       %td
         = pounds(wage.gross)
         %br
@@ -41,11 +45,11 @@
           = "(#{pounds(wage.rate)} x #{wage.hours})"
       %td= pounds(wage.tips)
       %td
-        = pounds(wage.bonus)
-        = pounds(wage.holiday)
+        = (wage.bonus > 0.00) ? pounds(wage.bonus) : ''
+        = (wage.holiday > 0.00) ? pounds(wage.holiday) : ''
       %td= (wage.PAYE > 0.00) ? pounds(wage.PAYE) : ''
-      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)} (#{pounds(wage.NI_employer)})" : ''
-      -#%td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.PAYE + wage.NI_employee))}"
+      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)} [#{pounds(wage.NI_employer)}]" : ''
+      %td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.PAYE + wage.NI_employee))}"
       -#%td= wage.paid_date
       -#%td= link_to 'Show', wage
       %td= link_to 'Edit', edit_wage_path(wage)

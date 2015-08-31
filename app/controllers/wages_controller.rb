@@ -4,7 +4,12 @@ class WagesController < ApplicationController
   # GET /wages
   def index
     @wages = Wage.limit(50)
-    if params[:fy].present?
+    if params[:this_year].present?
+      fy_start = "06-04-#{Date.today.year}".to_date
+      fy_start = fy_start - 1.year if fy_start > Date.today
+      @fy = fy_start.year
+      @wages = @wages.where(FY: @fy)
+    elsif params[:fy].present?
       @fy = params[:fy]
       @wages = @wages.where(FY: params[:fy].to_i)
       if params[:week_no].present?
@@ -48,6 +53,8 @@ class WagesController < ApplicationController
   def create
     @wage = Wage.new(params[:wage])
 
+    check_nil_cents
+
     if @wage.save
       cookies[:last_wage_fy] = @wage.FY
       cookies[:last_wage_week_no] = @wage.week_no
@@ -60,12 +67,18 @@ class WagesController < ApplicationController
   # PATCH/PUT /wages/1
   def update
     if @wage.update(params[:wage])
+      check_nil_cents
+      @wage.save
       # if params[:editor].present?
       remove_posts
       create_posts
       cookies[:last_wage_fy] = @wage.FY
       cookies[:last_wage_week_no] = @wage.week_no
-      redirect_to wages_url(week_no: params[@wage.week_no], fy: @wage.FY), notice: 'Wage was successfully updated.'
+      if params[:timesheets].present?
+        redirect_to timesheets_url(week: params[:timesheets]), notice: 'Wage was successfully updated.'
+      else
+        redirect_to wages_url(week_no: @wage.week_no, fy: @wage.FY), notice: 'Wage was successfully updated.'
+      end
       # redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
       # else
       #   redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully updated.'
@@ -84,6 +97,16 @@ class WagesController < ApplicationController
   end
 
   private
+
+  def check_nil_cents
+    @wage.gross = 0.00 unless @wage.gross
+    @wage.holiday = 0.00 unless @wage.holiday
+    @wage.bonus = 0.00 unless @wage.bonus
+    @wage.PAYE = 0.00 unless @wage.PAYE
+    @wage.NI_employee = 0.00 unless @wage.NI_employee
+    @wage.NI_employer = 0.00 unless @wage.NI_employer
+  end
+
   def remove_posts
     @wage.posts.destroy_all
   end
