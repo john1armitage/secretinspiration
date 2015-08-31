@@ -1,14 +1,29 @@
--#= link_to 'New Wage', new_wage_path
+= form_tag({}, {:method => :get}) do
+  .fieldset
+    .row.search
+      .field.small-3.columns
+        = label_tag :fy, 'FY'
+        = text_field_tag :fy, @fy
+      .field.small-3.columns.left
+        = label_tag :week_no, 'Week'
+        = text_field_tag :week_no, @week_no
+    .row.search
+      -#.field.small-1.columns
+      -#  &nbsp;
+      .actions.small-2.columns
+        = submit_tag 'Search'
+      .actions.small-6.columns.left
+        = link_to 'New Wage', new_wage_path
 
 %table.money
   %tr
     %th Week
     %th.lefty Employee
     %th Hourly
-    %th Gross
     %th Tips
+    %th Bonus HolPay
     %th Paye
-    %th NI ee/er
+    %th NI E'ee (E'er)
     %th Take Home
     -#%th
     -#%th
@@ -19,12 +34,18 @@
     %tr
       %td= "#{wage.FY}/#{wage.week_no}"
       %td.lefty= wage.employee ? wage.employee.first_name : 'unresolved'
-      %td= "#{pounds(wage.rate)} x #{wage.hours}"
-      %td= pounds(wage.gross)
+      %td
+        = pounds(wage.gross)
+        %br
+        %i
+          = "(#{pounds(wage.rate)} x #{wage.hours})"
       %td= pounds(wage.tips)
+      %td
+        = pounds(wage.bonus)
+        = pounds(wage.holiday)
       %td= (wage.PAYE > 0.00) ? pounds(wage.PAYE) : ''
-      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)},#{pounds(wage.NI_employer)}" : ''
-      %td= "#{pounds(wage.gross + wage.tips - (wage.PAYE + wage.NI_employee))}"
+      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)} (#{pounds(wage.NI_employer)})" : ''
+      -#%td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.PAYE + wage.NI_employee))}"
       -#%td= wage.paid_date
       -#%td= link_to 'Show', wage
       %td= link_to 'Edit', edit_wage_path(wage)

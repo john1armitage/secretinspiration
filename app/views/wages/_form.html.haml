@@ -1,46 +1,48 @@
 = form_for @wage, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
     .row
-      .field.small-6.columns
+      .field.small-3.columns
         = f.label :FY, 'FY'
         = f.number_field :FY
-      .field.small-6.columns
+      .field.small-3.columns
         = f.label :week_no, 'Week'
         = f.number_field :week_no
-    .row
-      .field.small-12.columns
+      .field.small-3.columns.left
         = f.label :employee_id, 'Employee'
         = f.collection_select :employee_id, Employee.where(live: true).order(:first_name), 'id', 'first_name', include_blank: true
     .row
-      .field.small-6.columns
+      .field.small-3.columns
         = f.label :hours
         = f.text_field :hours
-      .field.small-6.columns
+      .field.small-3.columns
         = f.label :rate
         = f.text_field :rate
-    .row
-      .field.small-6.columns
-        = f.label :tips
-        = f.text_field :tips
-      .field.small-6.columns
+      .field.small-3.columns.left
         = f.label :gross
         = f.text_field :gross
     .row
-      .field.small-6.columns
-        = f.label :NI_employer, 'Employer'
-        = f.text_field :NI_employer
-      .field.small-6.columns
-        = f.label :NI_employee, 'Employee'
-        = f.text_field :NI_employee
+      .field.small-3.columns
+        = f.label :tips
+        = f.text_field :tips
+      .field.small-3.columns
+        = f.label :bonus
+        = f.text_field :bonus
+      .field.small-3.columns
+        = f.label :holiday
+        = f.text_field :holiday
     .row
-      .field.small-12.columns
+      .field.small-3.columns
         = f.label :PAYE
         = f.text_field :PAYE
-    .row
-      .field.small-12.columns
+      .field.small-3.columns
+        = f.label :NI_employer, 'Employer'
+        = f.text_field :NI_employer
+      .field.small-3.columns
+        = f.label :NI_employee, 'Employee'
+        = f.text_field :NI_employee
+      .field.small-3.columns
         = f.label :paid_date
         = f.date_field :paid_date
     .row
       .field.small-12.columns
         = f.submit 'Save'
-        = f.submit 'Cancel'

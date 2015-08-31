@@ -24,6 +24,14 @@ class Wage < ActiveRecord::Base
            :numericality => {
                :greater_than_or_equal_to => 0
            }
+  monetize :holiday_cents, :allow_nil => true,
+           :numericality => {
+               :greater_than_or_equal_to => 0
+           }
+  monetize :bonus_cents, :allow_nil => true,
+           :numericality => {
+               :greater_than_or_equal_to => 0
+           }
 
   belongs_to :employee
 

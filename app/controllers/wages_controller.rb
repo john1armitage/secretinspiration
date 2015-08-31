@@ -4,7 +4,18 @@ class WagesController < ApplicationController
   # GET /wages
   def index
     @wages = Wage.limit(50)
-    @wages = @wages.where(FY: params[:fy].to_i, week_no: params[:week_no].to_i) if params[:fy].present? && params[:week_no].present?
+    if params[:fy].present?
+      @fy = params[:fy]
+      @wages = @wages.where(FY: params[:fy].to_i)
+      if params[:week_no].present?
+        @week_no = params[:week_no]
+        @wages = @wages.where(week_no: params[:week_no].to_i)
+      end
+    elsif cookies[:last_wage_fy] && cookies[:last_wage_week_no]
+      @fy = cookies[:last_wage_fy]
+      @week_no = cookies[:last_wage_week_no]
+      @wages = Wage.where(FY: @fy, week_no: @week_no)
+    end
   end
 
   # GET /wages/1
@@ -13,14 +24,20 @@ class WagesController < ApplicationController
 
   # GET /wages/new
   def new
-    @wage = Wage.where(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]).first
-    @wage = Wage.new(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]) unless @wage
-    @wage.hours = params[:hours]
-    @wage.rate_cents = params[:rate]
-    @wage.gross_cents = @wage.hours.to_d * @wage.rate_cents.to_d
-    @wage.tips_cents = params[:tips]
-    @wage.paid_date = params[:pay_day] if @wage.paid_date.blank?
-    render 'edit'
+    if params[:dailies.present?]
+      @wage = Wage.where(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]).first
+      @wage = Wage.new(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]) unless @wage
+      @wage.hours = params[:hours]
+      @wage.rate_cents = params[:rate]
+      @wage.gross_cents = @wage.hours.to_d * @wage.rate_cents.to_d
+      @wage.tips_cents = params[:tips]
+      @wage.paid_date = params[:pay_day] if @wage.paid_date.blank?
+      render 'edit'
+    else
+      @wage = Wage.new
+      @wage.FY = cookies[:last_wage_fy]
+      @wage.week_no = cookies[:last_wage_week_no]
+    end
   end
 
   # GET /wages/1/edit
@@ -32,6 +49,8 @@ class WagesController < ApplicationController
     @wage = Wage.new(params[:wage])
 
     if @wage.save
+      cookies[:last_wage_fy] = @wage.FY
+      cookies[:last_wage_week_no] = @wage.week_no
       redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully created.'
     else
       render action: 'new'
@@ -44,7 +63,10 @@ class WagesController < ApplicationController
       # if params[:editor].present?
       remove_posts
       create_posts
-      redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
+      cookies[:last_wage_fy] = @wage.FY
+      cookies[:last_wage_week_no] = @wage.week_no
+      redirect_to wages_url(week_no: params[@wage.week_no], fy: @wage.FY), notice: 'Wage was successfully updated.'
+      # redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
       # else
       #   redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully updated.'
       # end
@@ -81,7 +103,7 @@ class WagesController < ApplicationController
   end
   def wages_post
     credit = true
-    credit_amount = @wage.gross - ( @wage.PAYE + @wage.NI_employee )
+    credit_amount = @wage.gross + @wage.holiday + @wage.bonus - ( @wage.PAYE + @wage.NI_employee )
     debit_amount = 0.00
     account = Account.find_by_name('Wages Payable')
     desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{@wage.FY}/#{@wage.week_no}"
