@@ -3,11 +3,11 @@
   <component name="dataSourceStorageLocal">
     <data-source name="Rails commerce: development" uuid="5453bb6c-2028-4ba2-b84f-e1efeeedc28e">
       <user-name>boss</user-name>
-      <user-password>dfc0dfcbdfc9df9cdf9cdfc1dfcbdfc6df9cdf9c</user-password>
+      <user-password>dfc0dfcbdfc9df92df92dfc1dfcbdfc6df92df92</user-password>
     </data-source>
     <data-source name="Rails commerce: production" uuid="bd661fb3-5f2e-4028-a303-ce4c39732732">
       <user-name>boss</user-name>
-      <user-password>dfc0dfcbdfc9df9cdf9cdfc1dfcbdfc6df9cdf9c</user-password>
+      <user-password>dfc0dfcbdfc9df92df92dfc1dfcbdfc6df92df92</user-password>
     </data-source>
   </component>
 </project>
