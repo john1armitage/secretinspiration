@@ -21,6 +21,7 @@ class WagesController < ApplicationController
       @week_no = cookies[:last_wage_week_no]
       @wages = Wage.where(FY: @fy, week_no: @week_no)
     end
+    @wages = @wages.joins(:employee).select( "wages.*, employees.first_name")
   end
 
   # GET /wages/1

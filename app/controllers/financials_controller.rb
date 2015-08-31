@@ -82,7 +82,6 @@ class FinancialsController < ApplicationController
         entity_id = nil
         entity_ref = nil
         event_date = tx[0]
-        p tx
         reference = tx[1].upcase.gsub(/[^0-9a-z &,]/i, '').sub('WWW', '').sub(' & ', 'AND')
         if tx[2].blank?
           credit = true

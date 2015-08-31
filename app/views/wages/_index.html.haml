@@ -30,12 +30,12 @@
     %th
     %th
 
-  - @wages.order(:FY,:week_no).each do |wage|
+  - @wages.order(:FY,:week_no, :employee_id).each do |wage|
     %tr
       %td= "#{wage.FY}/#{wage.week_no}"
       %td.lefty
-        - if wage.employee
-          =link_to(wage.employee.first_name, edit_wage_path(wage))
+        - if wage.first_name
+          =link_to(wage.first_name, edit_wage_path(wage))
         -else
           unresolved
       %td

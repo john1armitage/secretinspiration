@@ -41,6 +41,10 @@ class Wage < ActiveRecord::Base
 
   validates_presence_of :employee_id, :message => 'is required'
 
+  default_scope { order(:FY, :week_no) }
 
+  def name
+    employee.first_name
+  end
 
 end
