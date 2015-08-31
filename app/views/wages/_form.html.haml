@@ -2,43 +2,46 @@
   %fieldset
     .row
       = hidden_field_tag :timesheets, params[:timesheets] if params[:timesheets].present?
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :FY, 'FY'
         = f.number_field :FY
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :week_no, 'Week'
         = f.number_field :week_no
       .field.small-3.columns.left
         = f.label :employee_id, 'Employee'
         = f.collection_select :employee_id, Employee.where(live: true).order(:first_name), 'id', 'first_name', include_blank: true
+      .field.small-2.columns.left
+        = f.label :post
+        = f.check_box :post
     .row
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :hours
         = f.text_field :hours
-      .field.small-3.columns
+      .field.small-2.columns.left
         = f.label :rate
         = f.text_field :rate
-      .field.small-3.columns.left
+    .row
+      .field.small-2.columns.left
         = f.label :gross
         = f.text_field :gross
-    .row
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :tips
         = f.text_field :tips
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :bonus
         = f.text_field :bonus
-      .field.small-3.columns
+      .field.small-2.columns.left
         = f.label :holiday
         = f.text_field :holiday
     .row
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :PAYE
         = f.text_field :PAYE
-      .field.small-3.columns
+      .field.small-2.columns
         = f.label :NI_employer, 'Employer'
         = f.text_field :NI_employer
-      .field.small-3.columns
+      .field.small-23.columns
         = f.label :NI_employee, 'Employee'
         = f.text_field :NI_employee
       .field.small-3.columns

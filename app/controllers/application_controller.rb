@@ -514,63 +514,188 @@ class ApplicationController < ActionController::Base
       employee = timesheets.first.employee
       rate_cents = get_rate_cents(employee, timesheets.first.work_date)
       timesheets.each do |timesheet|
-        if (timesheet.session != 'bonus')
-          daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
-          daily_tips = (daily.tips_cents / 100.00 || 0.00)
-          tips_share = daily_tips / daily.headcount.to_d
-          tips += tips_share
-        else
-          tips_share = 0.00
-          # week_wages += daily_wage
-        end
-        if employee.id != timesheet.employee.id
-          wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
-          unless wage
-            wage = Wage.new
-            wage.employee = employee
-            wage.FY = fy
-            wage.week_no = hmrc_pay_week
-            wage.rate_cents = rate_cents
+        # unless employee.monthly
+          if (timesheet.session != 'bonus')
+            daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
+            daily_tips = (daily.tips_cents / 100.00 || 0.00)
+            tips_share = daily_tips / daily.headcount.to_d
+            tips += tips_share
+          else
+            tips_share = 0.00
+            # week_wages += daily_wage
           end
-          wage.hours = week_hours
-          wage.gross_cents = week_wages
-          wage.tips_cents = week_tips * 100.00
-          wage.bonus_cents = 0
-          wage.holiday_cents = 0
-          wage.save!
-          wages << wage
-          pay_date = params[:week].to_date + 10.days
-          week = week_number(pay_date) #.to_date.strftime('%U')
-          hmrc_pay_week = HMRC_week_number(pay_date)
-          fy = get_fy(pay_date)
-          week_hours = 0
-          week_wages = 0
-          week_tips = 0.00
-          employee = timesheet.employee
-          rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
+          if employee.id != timesheet.employee.id
+            wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
+            unless wage
+              wage = Wage.new
+              wage.employee = employee
+              wage.post = false if employee.monthly
+              wage.FY = fy
+              wage.week_no = hmrc_pay_week
+              wage.rate_cents = rate_cents
+            end
+            wage.hours = week_hours
+            wage.gross_cents = week_wages
+            wage.tips_cents = week_tips * 100.00
+            wage.bonus_cents = 0
+            wage.holiday_cents = 0
+            wage.save!
+            wages << wage
+            remove_posts(wage)
+            if wage.post
+              create_posts(wage)
+            end
+            pay_date = params[:week].to_date + 10.days
+            week = week_number(pay_date) #.to_date.strftime('%U')
+            hmrc_pay_week = HMRC_week_number(pay_date)
+            fy = get_fy(pay_date)
+            week_hours = 0
+            week_wages = 0
+            week_tips = 0.00
+            employee = timesheet.employee
+            rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
+          end
+          hours += timesheet.hours
+          daily_wage = timesheet.hours * rate_cents
+          week_hours += timesheet.hours
+          week_wages += daily_wage
+          week_tips += tips_share
         end
-        hours += timesheet.hours
-        daily_wage = timesheet.hours * rate_cents
-        week_hours += timesheet.hours
-        week_wages += daily_wage
-        week_tips += tips_share
+        wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
+        unless wage
+          wage = Wage.new
+          wage.employee = employee
+          wage.FY = fy
+          wage.week_no = hmrc_pay_week
+          wage.rate_cents = rate_cents
+        end
+        wage.hours = week_hours
+        wage.gross_cents = week_wages
+        wage.tips_cents = week_tips * 100.00
+        wage.bonus_cents = 0
+        wage.holiday_cents = 0
+        wage.save!
+        wages << wage
+        remove_posts(wage)
+        if wage.post
+          create_posts(wage)
+        end
+        wages
       end
-      wage = Wage.where(employee_id: employee.id, FY: fy, week_no: hmrc_pay_week).first
-      unless wage
-        wage = Wage.new
-        wage.employee = employee
-        wage.FY = fy
-        wage.week_no = hmrc_pay_week
-        wage.rate_cents = rate_cents
-      end
-      wage.hours = week_hours
-      wage.gross_cents = week_wages
-      wage.tips_cents = week_tips * 100.00
-      wage.bonus_cents = 0
-      wage.holiday_cents = 0
-      wage.save!
-      wages << wage
-      wages
+    # end
+  end
+
+  def check_nil_cents(wage)
+    wage.gross = 0.00 unless wage.gross
+    wage.holiday = 0.00 unless wage.holiday
+    wage.bonus = 0.00 unless wage.bonus
+    wage.PAYE = 0.00 unless wage.PAYE
+    wage.NI_employee = 0.00 unless wage.NI_employee
+    wage.NI_employer = 0.00 unless wage.NI_employer
+    wage
+  end
+
+  def remove_posts(wage)
+    wage.posts.destroy_all
+  end
+  def create_posts(wage)
+    weeks = wage.week_no - 1
+    @account_date = "#{wage.FY}-04-06".to_date + (weeks * 7).days
+    # wages
+    wages_post(wage)
+    # # tax control
+    hmrc_post(wage)
+    # holiday control
+    holiday_post(wage) if wage.employee.holiday
+    # employer costs
+    payroll_cost_post(wage)
+    # tips control
+    tips_post(wage) if wage.tips > 0
+  end
+  def wages_post(wage)
+    credit = true
+    credit_amount = wage.gross + wage.holiday + wage.bonus - ( wage.PAYE + wage.NI_employee )
+    debit_amount = 0.00
+    account = Account.find_by_name('Wages Payable')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                       postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                       accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+  end
+  def tips_post(wage)
+    credit = false
+    credit_amount = 0.00
+    debit_amount = wage.tips
+    account = Account.find_by_name('Tips Control')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                       postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                       accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+
+    credit = true
+    credit_amount = wage.tips
+    debit_amount = 0.00
+    account = Account.find_by_name('Allocated Tips')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                       postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                       accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+  end
+
+  def hmrc_post(wage)
+    if wage.PAYE > 0.00
+      credit = true
+      credit_amount = wage.PAYE
+      debit_amount = 0.00
+      account = Account.find_by_name('PAYE')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+      wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                         postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    end
+    if wage.NI_employee > 0.00
+      credit = true
+      credit_amount = wage.NI_employee
+      debit_amount = 0.00
+      account = Account.find_by_name('NI Employee')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+      wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                         postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    end
+    if wage.NI_employer > 0.00
+      credit = true
+      credit_amount = wage.NI_employer
+      debit_amount = 0.00
+      account = Account.find_by_name('NI Employer')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+      wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                         postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
     end
   end
+
+  def holiday_post(wage)
+    credit = true
+    credit_amount = wage.gross * CONFIG[:holiday_rate] / 100
+    debit_amount = 0.00
+    account = Account.find_by_name('Holiday Pay')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                       postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                       accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+  end
+
+  def payroll_cost_post(wage)
+    credit = false
+    credit_amount = 0.00
+    holiday_earned = wage.employee.holiday ? wage.gross * CONFIG[:holiday_rate] / 100 : 0
+    debit_amount = wage.gross + wage.holiday + wage.bonus + holiday_earned + wage.NI_employer
+    account = Account.find_by_name('Payroll Costs')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.FY}/#{wage.week_no}"
+    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                       postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                       accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+  end
+
 end

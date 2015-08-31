@@ -18,6 +18,7 @@
 %table.money
   %tr
     %th Week
+    %th
     %th.lefty Employee
     %th Hourly
     %th Tips
@@ -33,6 +34,7 @@
   - @wages.order(:FY,:week_no, :employee_id).each do |wage|
     %tr
       %td= "#{wage.FY}/#{wage.week_no}"
+      %td= (wage.posts.size > 0 ? 'OK' : '')
       %td.lefty
         - if wage.first_name
           =link_to(wage.first_name, edit_wage_path(wage))
