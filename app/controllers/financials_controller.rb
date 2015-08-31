@@ -416,7 +416,7 @@ class FinancialsController < ApplicationController
     bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping: account.grouping_id)
+                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
     financial_processed
   end
 
@@ -428,14 +428,14 @@ class FinancialsController < ApplicationController
     # bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id:  supplier.id, grouping: account.grouping_id)
+                                     accountable_type:'Supplier', accountable_id:  supplier.id, grouping_id: account.grouping_id)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
     desc = "#{account.name} credit: #{supplier.name}"
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping_id)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
     financial_processed
   end
 
@@ -447,7 +447,7 @@ class FinancialsController < ApplicationController
     # bank_credit_post(supplier)
     post = @financial.posts.create!( account_date:  @financial.event_date, desc: desc,
                                      debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping: account.grouping_id)
+                                     accountable_type:'Supplier', accountable_id: supplier.id, grouping_id: account.grouping_id)
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
     account = Account.find_by_name(bank.name)
