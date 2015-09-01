@@ -90,6 +90,7 @@ class OrdersController < ApplicationController
     end
     @order.net_total_currency = @currency
     @order.exchange_rate = @exchange_rate
+    @order.cheque = @order.goods = @order.cash = @order.voucher = 0.00
   end
 
   # GET /orders/1/edit
@@ -144,13 +145,24 @@ class OrdersController < ApplicationController
     if params[:status].present?
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
+
       @order.update(params[:order])
-      if @order.voucher > 0
-        @order.net_home = (@order.paid / 1.2)
-        @order.tax_home = (@order.paid - @order.net_home)
-        @order.save
-      end
-      @order.update(tip_cents: 0) if @order.tip_cents.blank?
+
+      net_home = @order.paid / (1 + CONFIG[:vat_rate_standard])
+      tax_home = @order.paid - net_home
+
+      @order.update(net_home: net_home, tax_home: tax_home)
+
+      # if @order.goods > 0
+      #   @order.paid = @order.paid - @order.goods
+      #   @order.save
+      # end
+      # if @order.voucher > 0
+      #   @order.net_home = (@order.paid / 1.2)
+      #   @order.tax_home = (@order.paid - @order.net_home)
+      #   @order.save
+      # end
+      # @order.update(tip_cents: 0) if @order.tip_cents.blank?
     end
     set_booking_dates
     render 'bookings/index'

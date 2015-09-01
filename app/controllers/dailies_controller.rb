@@ -16,19 +16,23 @@ class DailiesController < ApplicationController
 
   # GET /dailies/new
   def new
-    @daily = Daily.new
-    @daily.account_date = params[:date].present? ? params[:date] : Date.today
-    @daily.session = 'dinner'
+    if params[:date].present? && params[:session].present?
+      @daily = Daily.where(account_date: params[:date], session: params[:session]).first
+    end
+    unless @daily
+      @daily = Daily.new
+      @daily.account_date = params[:date].present? ? params[:date] : Date.today
+      @daily.session = params[:session].present? ? params[:session] : 'dinner'
+      @daily.cash = 0.00
+    end
+    get_orders_summary
     @daily.headcount = get_headcount
-    get_credit_card
-    get_daily_orders
     render 'form'
   end
 
   def edit
     @daily.headcount = get_headcount
-    get_credit_card
-    get_daily_orders
+    get_orders_summary
     render 'form'
   end
   # GET /dailies/1/edit
@@ -41,7 +45,7 @@ class DailiesController < ApplicationController
   def create
     @daily = Daily.new(params[:daily])
     set_net
-    if @daily.save
+    if @daily.save!
       create_posts
       daily_processed
       redirect_to dailies_url(daily_date: @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')), notice: 'Daily was successfully created.'
@@ -211,12 +215,37 @@ class DailiesController < ApplicationController
       @daily = Daily.find(params[:id])
     end
 
+  def get_orders_summary
+    @orders = get_daily_orders
+    @daily.credit_card_cents = get_credit_card
+    @daily.cheque_cents = get_cheque
+    @daily.cash_cents = get_cash
+    @daily.tips_cents = get_tips
+    @daily.goods_cents = get_goods
+  end
+
   def get_credit_card
-    @credit_card = Order.where('effective_date = ? AND session = ?', @daily.account_date, @daily.session).to_a.sum(&:credit_card_cents)
+    @orders.to_a.sum(&:credit_card_cents)
+  end
+
+  def get_cheque
+    @orders.to_a.sum(&:cheque_cents)
+  end
+
+  def get_cash
+    @orders.to_a.sum(&:cash_cents)
+  end
+
+  def get_goods
+     @orders.to_a.sum(&:goods_cents)
+  end
+
+  def get_tips
+    @orders.to_a.sum(&:tip_cents)
   end
 
   def get_daily_orders
-    @orders = Order.where(session: @daily.session, effective_date: @daily.account_date)
+    Order.where(session: @daily.session, effective_date: @daily.account_date)
   end
     # Only allow a trusted parameter "white list" through.
   def current_resource

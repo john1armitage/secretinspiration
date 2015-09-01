@@ -6,6 +6,7 @@ class Daily < ActiveRecord::Base
   monetize :tax_cents
   monetize :discount_cents
   monetize :credit_card_cents
+  monetize :cash_cents
   monetize :seated_cents
   monetize :takeaway_cents
   monetize :safe_cents, :allow_nil => true
@@ -14,6 +15,8 @@ class Daily < ActiveRecord::Base
   monetize :till_cents, :allow_nil => true
   monetize :safe_cash_cents, :allow_nil => true
   monetize :surplus_cents, :allow_nil => true
+  monetize :cheque_cents, :allow_nil => true
+  monetize :goods_cents, :allow_nil => true
 
   # has_many :financials, dependent: :destroy
 
@@ -56,6 +59,8 @@ class Daily < ActiveRecord::Base
       takeaways = orders.where('seating_id IS NULL')
       orders = orders.to_a
       self.takeaways = takeaways.size
+      self.goods_cents = orders.sum(&:goods_cents)
+      self.cheque_cents = orders.sum(&:cheque_cents)
       self.turnover_cents = orders.sum(&:net_home_cents)
       self.tips_cents = orders.sum(&:tip_cents)
       self.tax_cents = orders.sum(&:tax_home_cents)
@@ -73,6 +78,8 @@ class Daily < ActiveRecord::Base
       self.tax_cents = 0
       self.take_cents = 0
       self.discount_cents = 0
+      self.cheque_cents = 0
+      self.goods_cents = 0
       self.takeaway_cents = 0
       self.seated_cents = 0
     end

@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     end
 
     unless params[:q].present?
-      limit = 100
+      limit = 500
       list_order = 'DESC'
     else
       limit = params[:limit] || 100

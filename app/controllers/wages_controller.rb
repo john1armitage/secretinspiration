@@ -46,7 +46,7 @@ class WagesController < ApplicationController
       @wage.FY = cookies[:last_wage_fy]
       @wage.employee_id = cookies[:last_employee]
       @wage.rate = cookies[:last_rate]
-      @wage.week_no = cookies[:last_wage_week_no]
+      @wage.week_no = cookies[:last_wage_week_no].to_i + 1
     end
     @wage = check_nil_cents(@wage)
   end

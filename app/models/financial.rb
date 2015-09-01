@@ -11,11 +11,9 @@ class Financial < ActiveRecord::Base
   monetize :tax_home_cents, :allow_nil => true
 
   validates :summary, presence: true
+  validates :account_id, presence: true
 
   validate :amount_included?
-
-  # validates :debit_amount_cent, presence: true, unless: :check_credit_amount
-  # validates :credit_amount_cent, presence: true, unless: :check_debit_amount
 
   before_save :ensure_reference, :set_credit
 

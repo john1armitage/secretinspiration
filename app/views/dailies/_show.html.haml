@@ -2,7 +2,8 @@
 - last_session = ( @daily.session == 'lunch' ) ? dailies.where('account_date < ?', @daily.account_date).last : dailies.where("account_date < ? OR (account_date = ? AND session = 'lunch')", @daily.account_date, @daily.account_date).last
 - last_till = last_session ? last_session.till : 0.00
 - last_safe = last_session ? last_session.safe : 0.00
-- cash = @daily.take - @daily.credit_card
+- take = @daily.take - @daily.goods
+- cash = @daily.take - (@daily.credit_card + @daily.cheque)
 - surplus_amount = cash + last_till - (@daily.petty + @daily.till)
 -# safe_amount = last_safe + cash - @daily.petty + ( last_till - @daily.till ) - @daily.bank
 - safe_amount = last_safe + @daily.surplus - (@daily.bank + @daily.safe_cash)
@@ -34,7 +35,7 @@
     .large-6.columns.id
       Take
     .large-6.columns.number.id
-      = pounds(@daily.take)
+      = pounds(take)
   .row
     .large-6.columns
       Cards
@@ -45,6 +46,11 @@
       Cash
     .large-6.columns.number
       = pounds(cash)
+  .row
+    .large-6.columns
+      Cheque
+    .large-6.columns.number
+      = pounds(@daily.cheque)
   .row
     .large-6.columns
       Till
@@ -134,3 +140,8 @@
         Calculated
       .large-6.columns.number.off
         = pounds(safe_amount)
+  .row
+    .large-6.columns.id
+      Goods
+    .large-6.columns.number.id
+      = pounds(@daily.goods)

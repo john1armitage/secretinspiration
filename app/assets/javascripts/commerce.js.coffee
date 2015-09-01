@@ -29,36 +29,25 @@ jQuery ->
     event.preventDefault()
   $(document).on "click", 'a.no_content', (event) ->
     $('div#content').html('')
-  $(document).on "click", 'input#cash_payment', (event) ->
+  $(document).on "click", 'input#bill_check', (event) ->
     voucher = parseFloat($('input#order_voucher').val())
-    if $('input#order_tip').val() == ''
-      $('input#order_tip').val('0.00')
-    total_paid = parseFloat($('input#total').val()) + parseFloat($('input#cash').val()) + parseFloat($('input#order_tip').val())  + voucher
-    order_total = parseFloat($('input#order_total').val())
-    $('input#order_credit_card').val(0.00)
-    if parseFloat(total_paid) > 0.00
-      if total_paid > order_total
-        $('input#order_paid').val(order_total - voucher)
-        $('input#order_tip').val(total_paid - order_total)
-      else
-        $('input#order_paid').val(total_paid - voucher)
-        $('input#order_tip').val('0.00')
-  $(document).on "click", 'input#card_payment', (event) ->
-    credit_card = parseFloat($('input#total').val())
-    $('input#order_credit_card').val(credit_card)
-    cash = parseFloat($('input#cash').val())
-    order_total = parseFloat($('input#order_total').val())
-    voucher = parseFloat($('input#order_voucher').val())
-    if $('input#order_tip').val() == ''
-      $('input#order_tip').val('0.00')
-    total_paid = credit_card + cash + parseFloat($('input#order_tip').val())  + voucher
-    if parseFloat(total_paid) > 0.00
-      if total_paid > order_total
-        $('input#order_paid').val(order_total - voucher)
-        $('input#order_tip').val(total_paid - order_total)
-      else
-        $('input#order_paid').val(total_paid - voucher)
-        $('input#order_tip').val('0.00')
+    cheque = parseFloat($('input#order_cheque').val())
+    cash = parseFloat($('input#order_cash').val())
+    credit_card = parseFloat($('input#order_credit_card').val())
+    goods = parseFloat($('input#order_goods').val())
+    bill = parseFloat($('input#order_total').val())
+    total_paid = credit_card + cash + cheque
+    total_due = bill + goods - voucher
+    net_tips = total_paid - total_due
+    if net_tips < 0
+      net_tips = 0.00
+    $('span#paid').text('£' + parseFloat(total_paid, 10).toFixed(2))
+    $('span#due').text('£' + parseFloat(total_due, 10).toFixed(2))
+    $('span#tip').text('£' + parseFloat(net_tips, 10).toFixed(2))
+    $('input#order_tip').val(net_tips)
+    $('input#order_paid').val(total_paid)
+    event.preventDefault()
+
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')
     $('input#variant_id').val(variant)

@@ -2,14 +2,45 @@
 #display
 = form_for @daily, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
+    = f.hidden_field :credit_card
+    = f.hidden_field :cheque
+    = f.hidden_field :goods
+    = f.hidden_field :cash
+    = f.hidden_field :tips
     .row
       .field.small-12.columns
-        = f.label :account_date
+        = f.label :account_date, "#{@daily.session.capitalize} Summary"
         = f.date_field :account_date
     .row
       .field.small-12.columns
-        = f.label :credit_card, "Credit Card: #{pounds(@credit_card/100.00)}"
-        = f.text_field :credit_card
+        %b
+          Credit Card
+        %br
+        = pounds(@daily.credit_card)
+    .row
+      .field.small-12.columns
+        %b
+          Cheque
+        %br
+        = pounds(@daily.cheque)
+    .row
+      .field.small-12.columns
+        %b
+          Goods
+        %br
+        = pounds(@daily.goods)
+    .row
+      .field.small-12.columns
+        %b
+          Tips
+        %br
+        = pounds(@daily.tips)
+    .row
+      .field.small-12.columns
+        %b
+          Cash
+        %br
+        = pounds(@daily.cash)
     .row
       .field.small-12.columns
         = f.label :till, "Pounds in Till"
@@ -52,10 +83,6 @@
         .field.small-12.columns
           = f.label :tips
           = f.text_field :tips
-    .row
-      .field.small-12.columns.left
-        = f.label :session
-        = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @daily.session)
     .row
       .field.small-12.columns.left
         %label

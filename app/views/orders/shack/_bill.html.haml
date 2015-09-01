@@ -104,34 +104,38 @@
           = hidden_field_tag :bill, true
           = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
           = f.hidden_field :state
+          = f.hidden_field :tip
           = f.hidden_field :paid
-          = f.hidden_field :credit_card
           .row
-            .large-1.columns
+            .large-2.columns
+              = f.label :cheque
+              = f.text_field :cheque
+            .large-2.columns
+              = f.label :cash, 'Cash'
+              = f.text_field :cash
+            .large-2.columns
+              = f.label :credit_card, 'Card'
+              = f.text_field :credit_card
+            .large-2.columns
               = f.label :voucher
               = f.text_field :voucher
-            .large-2.columns
-              = f.label :tip, 'Cash Tip'
-              = f.text_field :tip
-            .large-2.columns
-              = label_tag :cash, 'Part Cash'
-              = text_field_tag :cash, 0.00
-            .large-2.columns
-              - total = (@order.paid > 0) ? @order.paid : (@order.net_home + @order.tax_home)
-              = label_tag :total #, "Total (cc #{@order.credit_card})"
-              = text_field_tag :total, total
-            .large-2.columns
-              %p.center
-                %span.small
-                  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
-              %p.center
-                = f.submit 'All Cash', id: 'cash_payment'
             .large-2.columns.left
+              = f.label :goods
+              = f.text_field :goods
+            .large-2.columns
               %p.center
-                %span.small
-                  = "[#{pounds(@order.credit_card )}]"
+                &nbsp;
+                -#%span.small
+                -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
               %p.center
-                = f.submit 'Card', id: 'card_payment'
+                = f.submit 'Check', id: 'bill_check'
+                = f.submit 'Save', id: 'bill_payment'
+            -#.large-2.columns.left
+            -#  %p.center
+            -#    %span.small
+            -#      = "[#{pounds(@order.credit_card )}]"
+            -#  %p.center
+            -#    = f.submit 'Card', id: 'card_payment'
           .row
             - if allow? :orders, :destroy
               .large-3.columns
@@ -140,3 +144,23 @@
               .large-3.columns.left
                 = f.label :session
                 = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
+            .large-2.columns
+              - due = @order.net_total + @order.tax_total + @order.goods - @order.voucher
+              - paid = @order.cash + @order.cheque + @order.credit_card
+              %span
+                Total Paid
+              %br
+              %span#paid
+                = pounds(paid)
+            .large-2.columns
+              %span
+                Total Due
+              %br
+              %span#due
+                = pounds(due)
+            .large-1.columns.left
+              %span
+                Tip
+              %br
+              %span#tip
+                = pounds(@order.tip)

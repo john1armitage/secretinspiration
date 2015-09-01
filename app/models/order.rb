@@ -18,6 +18,9 @@ class Order < ActiveRecord::Base
   monetize :adjustment_total_cents, :allow_nil => true
   monetize :discount_cents, :allow_nil => true
   monetize :credit_card_cents, :allow_nil => true
+  monetize :cash_cents, :allow_nil => true
+  monetize :cheque_cents, :allow_nil => true
+  monetize :goods_cents, :allow_nil => true
 
   has_many :line_items, as: :ownable #, dependent: :destroy
   has_many :allocations, dependent: :destroy
