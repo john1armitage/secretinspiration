@@ -44,6 +44,8 @@ class WagesController < ApplicationController
     else
       @wage = Wage.new
       @wage.FY = cookies[:last_wage_fy]
+      @wage.employee_id = cookies[:last_employee]
+      @wage.rate = cookies[:last_rate]
       @wage.week_no = cookies[:last_wage_week_no]
     end
     @wage = check_nil_cents(@wage)
@@ -62,6 +64,8 @@ class WagesController < ApplicationController
     if @wage.save!
       create_posts(@wage)
       cookies[:last_wage_fy] = @wage.FY
+      cookies[:last_employee] = @wage.employee_id
+      cookies[:last_rate] = @wage.rate
       cookies[:last_wage_week_no] = @wage.week_no
       redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully created.'
     else
