@@ -59,7 +59,7 @@ class WagesController < ApplicationController
 
     @wage = check_nil_cents(@wage)
 
-    if @wage.save
+    if @wage.save!
       create_posts(@wage)
       cookies[:last_wage_fy] = @wage.FY
       cookies[:last_wage_week_no] = @wage.week_no

@@ -44,7 +44,7 @@
         = pounds(wage.gross)
         %br
         %i
-          = "(#{pounds(wage.rate)} x #{wage.hours})"
+          = "#{pounds(wage.rate)}*#{wage.hours}"
       %td= pounds(wage.tips)
       %td
         = (wage.bonus > 0.00) ? pounds(wage.bonus) : ''

@@ -416,11 +416,18 @@ class ApplicationController < ActionController::Base
   helper_method :week_start
 
   def HMRC_week_number(date)
-    fy_start = "06-04-#{Date.today.year}".to_date
+    fy_start = "06-04-#{date.year}".to_date
     fy_start = fy_start - 1.year if fy_start > date
     (((date - fy_start)/7).to_i + 1)
   end
   helper_method :HMRC_week_number
+
+  # def HMRC_week_number(date)
+  #   fy_start = "06-04-#{Date.today.year}".to_date
+  #   fy_start = fy_start - 1.year if fy_start > date
+  #   (((date - fy_start)/7).to_i + 1)
+  # end
+  # helper_method :HMRC_week_number
 
   def get_fy_start
     fy_start = "01-11-#{Date.today.year}".to_date
