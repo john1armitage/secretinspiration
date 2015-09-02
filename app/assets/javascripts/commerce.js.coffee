@@ -47,6 +47,23 @@ jQuery ->
     $('input#order_tip').val(net_tips)
     $('input#order_paid').val(total_paid)
     event.preventDefault()
+  $(document).on "click", 'input#bill_payment', (event) ->
+    voucher = parseFloat($('input#order_voucher').val())
+    cheque = parseFloat($('input#order_cheque').val())
+    cash = parseFloat($('input#order_cash').val())
+    credit_card = parseFloat($('input#order_credit_card').val())
+    goods = parseFloat($('input#order_goods').val())
+    bill = parseFloat($('input#order_total').val())
+    total_paid = credit_card + cash + cheque
+    total_due = bill + goods - voucher
+    net_tips = total_paid - total_due
+    if net_tips < 0
+      net_tips = 0.00
+    $('span#paid').text('£' + parseFloat(total_paid, 10).toFixed(2))
+    $('span#due').text('£' + parseFloat(total_due, 10).toFixed(2))
+    $('span#tip').text('£' + parseFloat(net_tips, 10).toFixed(2))
+    $('input#order_tip').val(net_tips)
+    $('input#order_paid').val(total_paid)
 
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')

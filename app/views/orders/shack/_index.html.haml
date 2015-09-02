@@ -7,3 +7,27 @@
         Orders
     - @orders = @orders.order('id ASC')
     = render :partial => "orders/#{current_tenant.domain}/current_order", collection: @orders.where(state: 'complete')
+    %li#summary
+      %p
+        %span.title
+          = pluralize(@orders.size, 'Order')
+      %p
+        %span.title
+          = "Paid"
+        %span
+          = "#{pounds(@orders.to_a.sum(&:paid_cents)/100.00)}"
+      %p
+        %span.title
+          = "Card"
+        %span
+          = "#{pounds(@orders.to_a.sum(&:credit_card_cents)/100.00)}"
+      %p
+        %span.title
+          = "Cash"
+        %span
+          = "#{pounds(@orders.to_a.sum(&:cash_cents)/100.00)}"
+      %p
+        %span.title
+          = "Tips"
+        %span
+          = "#{pounds(@orders.to_a.sum(&:tip_cents)/100.00)}"

@@ -35,6 +35,14 @@ ul.inline-list a.button:hover {
   background-color: $special; //#008cba;
   color: white;
 }
+table#sidebar_summary {
+  margin-top: 0.5em;
+  //padding: 0.25em;
+  border: 1px solid grey;
+  td {
+    font-size: 0.85em;
+  }
+}
 
 .has-tip {
   cursor: pointer;

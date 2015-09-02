@@ -2,6 +2,7 @@
 #display
 = form_for @daily, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
+    = f.hidden_field :session
     = f.hidden_field :credit_card
     = f.hidden_field :cheque
     = f.hidden_field :goods
@@ -9,38 +10,9 @@
     = f.hidden_field :tips
     .row
       .field.small-12.columns
-        = f.label :account_date, "#{@daily.session.capitalize} Summary"
-        = f.date_field :account_date
-    .row
-      .field.small-12.columns
-        %b
-          Credit Card
-        %br
-        = pounds(@daily.credit_card)
-    .row
-      .field.small-12.columns
-        %b
-          Cheque
-        %br
-        = pounds(@daily.cheque)
-    .row
-      .field.small-12.columns
-        %b
-          Goods
-        %br
-        = pounds(@daily.goods)
-    .row
-      .field.small-12.columns
-        %b
-          Tips
-        %br
-        = pounds(@daily.tips)
-    .row
-      .field.small-12.columns
-        %b
-          Cash
-        %br
-        = pounds(@daily.cash)
+        = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
+        = f.hidden_field :account_date
+        = @daily.account_date.strftime("%a,%e %b %Y")
     .row
       .field.small-12.columns
         = f.label :till, "Pounds in Till"
@@ -86,7 +58,59 @@
     .row
       .field.small-12.columns.left
         %label
-          = "Headcount: #{@daily.headcount} ...  Correct?"
+          = "Headcount: #{@daily.headcount} Correct?"
     .row
       .field.small-12.columns.left
         = f.submit 'Save'
+
+-#%table#sidebar_summary
+-#  %tr
+-#    %td
+-#      %b
+-#        Take
+-#      %br
+-#      = pounds(@daily.take)
+-#  %tr
+-#    %td
+-#      %b
+-#        Sales
+-#      %br
+-#      = pounds(@daily.turnover + @daily.tax)
+-#    %td
+-#      %b
+-#        Tips
+-#      %br
+-#      = pounds(@daily.tips)
+-#  %tr
+-#    %td
+-#      %b
+-#        Net
+-#      %br
+-#      = pounds(@daily.turnover)
+-#    %td
+-#      %b
+-#        Tax
+-#      %br
+-#      = pounds(@daily.tax)
+-#  %tr
+-#    %td
+-#      %b
+-#        Card
+-#      %br
+-#      = pounds(@daily.credit_card)
+-#    %td
+-#      %b
+-#        Cash
+-#      %br
+-#      = pounds(@daily.cash)
+-#  %tr
+-#    %td
+-#      %b
+-#        Cheque
+-#      %br
+-#      = pounds(@daily.cheque)
+-#    %td
+-#      %b
+-#        Goods
+-#      %br
+-#      = pounds(@daily.goods)

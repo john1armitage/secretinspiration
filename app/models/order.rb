@@ -13,14 +13,14 @@ class Order < ActiveRecord::Base
   monetize :voucher_cents, :allow_nil => false
   monetize :tip_cents, :allow_nil => false
   monetize :tax_total_cents, :allow_nil => false
-  monetize :tax_home_cents, :allow_nil => true
+  monetize :tax_home_cents, :allow_nil => false
   monetize :paid_cents, :allow_nil => false
-  monetize :adjustment_total_cents, :allow_nil => true
-  monetize :discount_cents, :allow_nil => true
-  monetize :credit_card_cents, :allow_nil => true
-  monetize :cash_cents, :allow_nil => true
-  monetize :cheque_cents, :allow_nil => true
-  monetize :goods_cents, :allow_nil => true
+  monetize :adjustment_total_cents, :allow_nil => false
+  monetize :discount_cents, :allow_nil => false
+  monetize :credit_card_cents, :allow_nil => false
+  monetize :cash_cents, :allow_nil => false
+  monetize :cheque_cents, :allow_nil => false
+  monetize :goods_cents, :allow_nil => false
 
   has_many :line_items, as: :ownable #, dependent: :destroy
   has_many :allocations, dependent: :destroy

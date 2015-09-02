@@ -22,6 +22,9 @@
   - if (current_tenant.sitting && current_tenant.sitting == '1') && (allow? :tabels, :index )
     %li
       != link_to 'Tables', tabels_path, :class => "small button radius"
+  - if allow? :items, :index
+    %li
+      != link_to 'Items', items_path, :class => "small button radius"
   - if allow? :item_types, :index
     %li
       != link_to 'Item Types', item_types_path, :class => "small button radius"

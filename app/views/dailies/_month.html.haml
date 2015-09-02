@@ -16,12 +16,12 @@
   %ul
     %li
     = date.day
-    = link_to 'Hours', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
     - if date <= Date.today
-      = link_to 'Din', new_daily_path(date: date.to_s, session: 'dinner'), class: 'no_ajaxify', remote: true
-      = link_to 'Lun', new_daily_path(date: date.to_s, session: 'lunch'), class: 'no_ajaxify', remote: true
+      = link_to 'Lunch', new_daily_path(date: date.to_s, session: 'lunch'), class: 'no_ajaxify', remote: true
+      = link_to 'Eve', new_daily_path(date: date.to_s, session: 'dinner'), class: 'no_ajaxify', remote: true
       - if  allow? :dailes, :destroy
-        = link_to 'Bon', new_daily_path(date: date.to_s, session: 'bonus'), class: 'no_ajaxify', remote: true
+        = link_to 'B', new_daily_path(date: date.to_s, session: 'bonus'), class: 'no_ajaxify', remote: true
+    = link_to 'Hours', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
 
     - if dailies[date]
       - dailies[date].each do |daily|
@@ -57,7 +57,7 @@
           = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true, :confirm => 'Are you sure?'}, title: "Remove Timesheet"
     - if bookings[date]
       %li
-        = link_to (pluralize bookings[date].size, 'booking'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
-    - if orders[date]
-      %li
-        = link_to (pluralize orders[date].size, 'order'), orders_path(date: date.to_s, home: true), remote: true, class: 'no_ajaxify'
+        = link_to (pluralize bookings[date].size, 'book'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
+        - if orders[date]
+          = ':'
+          = link_to (pluralize orders[date].size, 'order'), orders_path(date: date.to_s, home: true), remote: true, class: 'no_ajaxify'

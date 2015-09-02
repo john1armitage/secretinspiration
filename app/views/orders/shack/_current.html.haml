@@ -23,7 +23,8 @@
       - net = paid_orders.to_a.map(&:net_home).reduce(:+)
       - tax = paid_orders.to_a.map(&:tax_home).reduce(:+)
       - card = paid_orders.to_a.map(&:credit_card).reduce(:+)
-      - take = paid + tips
+      - cash = paid_orders.to_a.map(&:cash).reduce(:+)
+      - take = paid
       %p
         %span.title
           = "Take: #{pounds(take)}"
@@ -32,4 +33,4 @@
           = " = #{pounds(net)} +  #{pounds(tax)} + #{pounds(tips)}T"
       %p
         %span
-          = " = #{pounds(card)}cc + #{pounds(paid + tips - card)}"
+          = " = #{pounds(card)}cc + #{pounds(cash)}"

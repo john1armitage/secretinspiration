@@ -4,21 +4,23 @@
       = current_order.created_at.strftime('%H:%M %e %b')
     %span.title
       = link_to "#{current_order.desc.sub(/.*:/,"")}", order_path(current_order, bill: true), remote: true, class: 'no_ajaxify', title: 'View Order'
+    %span
+      = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
     %span
-      = pounds(current_order.net_home + current_order.tax_home)
+      -#= pounds(current_order.net_home + current_order.tax_home)
+      = pounds(current_order.paid)
     - if current_order.tax_home > 0
       %span
         = "(#{pounds(current_order.net_home)} + #{pounds(current_order.tax_home)})"
     %span
-      = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
     %span.title
       Paid
     %span
       - current_order.paid ||= 0
       - current_order.tip ||= 0
-      = pounds(current_order.paid + current_order.tip)
+      = pounds(current_order.paid)
     - if allow? :orders, :delete
       %span.title
         != link_to 'X', order_path( current_order ), method: :delete, remote: true, class: 'no_ajaxify',
@@ -27,7 +29,8 @@
       %span.title
         != link_to '.', order_path( current_order, test: true ), method: :delete, remote: true, class: 'no_ajaxify',
           data: {  confirm: 'Remove Order?'}, title: "Remove Order"
+    = "Tips: #{pounds(current_order.tip)}"
   %p
     %span
-      - cash = current_order.paid + current_order.tip - current_order.credit_card
-      = "#{pounds(current_order.credit_card)}cc + #{pounds(cash)} #{pounds(current_order.tip)}T"
+      -#- cash = current_order.paid + current_order.tip - current_order.credit_card
+      = "#{pounds(current_order.credit_card)}cc + #{pounds(current_order.cash)} #{pounds(current_order.cheque)}chq"

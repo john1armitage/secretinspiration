@@ -58,14 +58,28 @@ class Daily < ActiveRecord::Base
     if orders.size > 0
       takeaways = orders.where('seating_id IS NULL')
       orders = orders.to_a
+      cheque = orders.sum(&:cheque_cents)
+      goods =  orders.sum(&:goods_cents)
+      tips = orders.sum(&:tip_cents)
+      take = orders.sum(&:paid_cents)
+      self.goods_cents = goods
+      self.cheque_cents = cheque
+      self.tips_cents = tips
+      self.take_cents = take
+      # cheque sales credited on cheque credit
+      received = take - (cheque + goods + tips)
+      turnover =  (received / (1 + CONFIG[:vat_rate_standard])).to_i
+      p "DDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+      p cheque
+      p goods
+      p tips
+      p take
+      p received
+      p turnover
+      self.turnover_cents = turnover
+      self.tax_cents = received - turnover
+      self.discount_cents = orders.sum(&:discount_cents) + orders.sum(&:voucher_cents)
       self.takeaways = takeaways.size
-      self.goods_cents = orders.sum(&:goods_cents)
-      self.cheque_cents = orders.sum(&:cheque_cents)
-      self.turnover_cents = orders.sum(&:net_home_cents)
-      self.tips_cents = orders.sum(&:tip_cents)
-      self.tax_cents = orders.sum(&:tax_home_cents)
-      self.take_cents = self.turnover_cents + self.tax_cents + self.tips_cents
-      self.discount_cents = orders.sum(&:discount_cents)
       self.takeaway_cents = takeaways.to_a.sum(&:net_home_cents)
       self.seated_cents = self.turnover_cents - self.takeaway_cents
     elsif take_cents.to_d > 0

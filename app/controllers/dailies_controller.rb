@@ -44,7 +44,7 @@ class DailiesController < ApplicationController
   # POST /dailies
   def create
     @daily = Daily.new(params[:daily])
-    set_net
+    # set_net
     if @daily.save!
       create_posts
       daily_processed
@@ -57,7 +57,7 @@ class DailiesController < ApplicationController
 
   # PATCH/PUT /dailies/1
   def update
-    set_net
+    # set_net
     if @daily.update(params[:daily])
       remove_posts
       create_posts
@@ -71,11 +71,11 @@ class DailiesController < ApplicationController
 
   # DELETE /dailies/1
   def destroy
+    remove_posts
     params[:daily_date] = @daily.account_date.beginning_of_month.strftime('%d-%m-%Y')
     @daily.destroy
     set_daily_dates
     render 'index'
-#    redirect_to dailies_url, notice: 'Daily was successfully destroyed.'
   end
 
   private
@@ -84,19 +84,20 @@ class DailiesController < ApplicationController
     end
     def remove_posts
       @daily.posts.destroy_all
-      # @daily.posts.each do |financial|
-      #   financial.destroy
-      # end
     end
     def create_posts
       # card control
       credit_card_post
       # cash control
       cash_post
+      # cheque control
+      cheque_post if @daily.cheque > 0
+      # goods control
+      goods_post
       # VAT control
-      tax_post
+      vat_post
       # sales control
-      sales_post
+      net_sales_post
       # tips control
       tips_post
     end
@@ -125,7 +126,7 @@ class DailiesController < ApplicationController
       bank = Bank.find_by_reference(ref_bank)
       credit = false
       credit_amount = 0.00
-      debit_amount = @daily.take - @daily.credit_card
+      debit_amount = @daily.cash
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('Cash in Hand')
@@ -140,52 +141,72 @@ class DailiesController < ApplicationController
       # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
     end
 
-    def sales_post
-      ref_bank = 'RECEIVABLE'
-      bank = Bank.find_by_reference(ref_bank)
-      credit = true
-      credit_amount = @daily.turnover # - (@daily.tax + @daily.tips)
-      debit_amount = 0.00
-      entity = 'Account'
-      type = 'sales'
-      account = Account.find_by_name('Sales')
-      if account
-        entity_id = account.id
-        entity_ref = account.code
-      end
-      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
-      @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
-                           postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
-      # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+  def cheque_post
+    ref_bank = 'RECEIVABLE'
+    bank = Bank.find_by_reference(ref_bank)
+    credit = true
+    credit_amount = 0
+    debit_amount = @daily.cheque
+    entity = 'Account'
+    type = 'sales'
+    account = Account.find_by_name('Sales')
+    if account
+      entity_id = account.id
+      entity_ref = account.code
     end
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
+    # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+  end
 
-    def tax_post
-      ref_bank = 'VAT'
-      bank = Bank.find_by_reference(ref_bank)
-      credit = true
-      credit_amount = @daily.tax
-      debit_amount = 0.00
-      entity = 'Account'
-      type = 'sales'
-      account = Account.find_by_name('VAT Control')
-      if account
-        entity_id = account.id
-        entity_ref = account.code
-      end
-      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
-      @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
-                           postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                           accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
-      # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+  def net_sales_post
+    credit = true
+    entity = 'Account'
+    type = 'sales'
+    account = Account.find_by_name('Sales')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: 0, credit_amount: @daily.turnover, account_id:account.id,
+                         accountable_type:'Account', accountable_id:account.id, grouping_id: account.grouping_id)
+  end
+
+  def vat_post
+    ref_bank = 'VAT'
+    bank = Bank.find_by_reference(ref_bank)
+    credit = true
+    entity = 'Account'
+    type = 'sales'
+    account = Account.find_by_name('VAT Control')
+    if account
+      entity_id = account.id
+      entity_ref = account.code
     end
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: 0, credit_amount: @daily.tax, account_id:account.id,
+                         accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
+    # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+  end
+
+  def goods_post
+    credit = true
+    entity = 'Account'
+    type = 'sales'
+    account = Account.find_by_name('Goods')
+    desc = "#{account.name} #{credit ? 'credit' :'debit'}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: 0, credit_amount: @daily.goods, account_id:account.id,
+                         accountable_type:'Account', accountable_id:account.id, grouping_id: account.grouping_id)
+  end
 
     def tips_post
       ref_bank = 'TIPS'
       bank = Bank.find_by_reference(ref_bank)
       credit = true
       credit_amount = @daily.tips
-      debit_amount = 0.00
+      debit_amount = 0
       entity = 'Account'
       type = 'sales'
       account = Account.find_by_name('Tips Control')

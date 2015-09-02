@@ -619,6 +619,7 @@ class ApplicationController < ActionController::Base
     # tips control
     tips_post(wage) if wage.tips > 0
   end
+
   def wages_post(wage)
     credit = true
     credit_amount = wage.gross + wage.holiday + wage.bonus - ( wage.PAYE + wage.NI_employee )
@@ -629,6 +630,7 @@ class ApplicationController < ActionController::Base
                        postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
                        accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
   end
+
   def tips_post(wage)
     credit = false
     credit_amount = 0.00
