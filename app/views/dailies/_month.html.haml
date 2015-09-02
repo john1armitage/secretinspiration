@@ -18,9 +18,9 @@
     = date.day
     - if date <= Date.today
       = link_to 'L', new_daily_path(date: date.to_s, session: 'lunch'), class: 'no_ajaxify', remote: true
-      = link_to 'Dinner', new_daily_path(date: date.to_s, session: 'dinner'), class: 'no_ajaxify', remote: true
       - if  allow? :dailes, :destroy
         = link_to 'B', new_daily_path(date: date.to_s, session: 'bonus'), class: 'no_ajaxify', remote: true
+      = link_to 'Dinner', new_daily_path(date: date.to_s, session: 'dinner'), class: 'no_ajaxify', remote: true
     = link_to 'Shifts', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
 
     - if dailies[date]
