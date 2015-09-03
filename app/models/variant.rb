@@ -1,6 +1,13 @@
 class Variant < ActiveRecord::Base
 
-  monetize :price_cents, :allow_nil => true
+  # monetize :price_cents, :allow_nil => true
+
+  def price
+    price_cents / 100.00 if  price_cent
+  end
+  def price=(val)
+    self.price_cents = val ? val.to_d * 100 : 0
+  end
 
   belongs_to :item
 

@@ -9,13 +9,13 @@
     = form_tag(meal_items_path, :method=>'post', :class => "no_ajaxify menu-item", :remote => true) do
       =#.has-tip{"data-tooltip" => "", title: item.notes}
       - if (allow? :orders, :create) && !item.notes.blank?
-        = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide item variant has-tip', data: { id: default.first.id, tooltip: true }, title: item.notes
+        = submit_tag "#{pounds( item.price )} #{item.name}", class: 'wide item variant has-tip', data: { id: default.first.id, tooltip: true }, title: item.notes
       - else
-        = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide item variant', data: {id: default.first.id}
+        = submit_tag "#{pounds( item.price )} #{item.name}", class: 'wide item variant', data: {id: default.first.id}
       -#- if (default.first.name == 'default')
-      -#  = submit_tag "#{humanized_money_with_symbol( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
+      -#  = submit_tag "#{pounds( item.price )} #{item.name}", class: 'wide', data: { id: default.first.id }
       -#- else
-      -#  = make_title( "#{humanized_money_with_symbol( item.price )} #{item.name}" )
+      -#  = make_title( "#{pounds( item.price )} #{item.name}" )
       -#  = submit_tag default.first.name, class: 'wide', data: { id: item.id }
       - variants = variants - default
       = render partial: "choices/#{current_tenant.domain}/variant", collection: variants
@@ -42,7 +42,7 @@
   %li
     %p.item-header
       %span.price
-        = humanized_money_with_symbol( item.price )
+        = pounds( item.price )
       %span.title
         = item.name
       %span

@@ -2,10 +2,17 @@ class Transfer < ActiveRecord::Base
 
   include AccountPosting
 
-  monetize :amount_cents,
-           :numericality => {
-               :greater_than => 0
-           }
+  # monetize :amount_cents,
+  #          :numericality => {
+  #              :greater_than => 0
+  #          }
+
+  def amount
+    amount_cents / 100.00 if amount_cents
+  end
+  def amount=(val)
+    self.amount_cents = val ? val.to_d * 100 : 0
+  end
 
   belongs_to :bank
   belongs_to :recipient, class_name: 'Bank'

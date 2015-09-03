@@ -9,6 +9,9 @@
   - if allow? :monthlies, :index
     %li
       != link_to 'Monthlies', monthlies_path, :class => "small button radius"
+  - if allow? :depreciations, :index
+    %li
+      != link_to 'Depreciations', depreciations_path, :class => "small button radius"
   - if allow? :suppliers, :index
     %li
       != link_to 'Suppliers', suppliers_path, :class => "small button radius"

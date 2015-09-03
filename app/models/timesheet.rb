@@ -1,5 +1,14 @@
 class Timesheet < ActiveRecord::Base
 
+  # monetize :pay_cents
+
+  def pay
+    pay_cents / 100.00 if pay_cents
+  end
+  def pay=(val)
+    self.pay_cents = val ? val.to_d * 100.00 : 0
+  end
+
   belongs_to :employee
 
   validates_presence_of :employee_id, :work_date, :start_time, :end_time, :session
@@ -10,8 +19,6 @@ class Timesheet < ActiveRecord::Base
   after_save :adjust_daily_headcount
 
   after_destroy :reduce_daily_headcount
-
-  monetize :pay_cents
 
   def calculate_hours
     if hours <= 0 #&& 1 == 2

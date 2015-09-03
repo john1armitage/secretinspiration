@@ -1,5 +1,7 @@
 Commerce::Application.routes.draw do
 
+  resources :depreciations, :only => [ :index ]
+
   resources :posts
   resources :financials do
     collection do

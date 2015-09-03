@@ -9,4 +9,4 @@
       %span= link_to 'Edit', edit_variant_path(variant)
     - if allow? :items, :destroy
       %span= link_to 'X', variant, :method => :delete, :data => { :confirm => 'Are you sure?' }
-  = "(#{humanized_money_with_symbol( variant.price )})" if variant.price.to_d > 0
+  = "(#{pounds( variant.price )})" if variant.price.to_d > 0

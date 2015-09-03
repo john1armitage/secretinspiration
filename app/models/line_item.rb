@@ -1,12 +1,63 @@
 class LineItem < ActiveRecord::Base
 
-  monetize :net_item_cents, :allow_nil => true
-  monetize :tax_item_cents, :allow_nil => true
-  monetize :net_home_cents, :allow_nil => true
-  monetize :tax_home_cents, :allow_nil => true
-  monetize :net_total_item_cents, :allow_nil => true
-  monetize :tax_total_item_cents, :allow_nil => true
-  monetize :discount_cents, :allow_nil => true
+  # monetize :net_item_cents, :allow_nil => true
+  # monetize :tax_item_cents, :allow_nil => true
+  # monetize :net_home_cents, :allow_nil => true
+  # monetize :tax_home_cents, :allow_nil => true
+  # monetize :net_total_item_cents, :allow_nil => true
+  # monetize :tax_total_item_cents, :allow_nil => true
+  # monetize :discount_cents, :allow_nil => true
+  #
+
+  def net_total_item
+    net_total_item_cents / 100.00 if net_total_item_cents
+  end
+  def net_total_item=(val)
+    self.net_total_item_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tax_total_item
+    tax_total_item_cents / 100.00 if tax_total_item_cents
+  end
+  def tax_total_item=(val)
+    self.tax_total_item_cents = val ? val.to_d * 100 : 0
+  end
+
+  def net_item
+    net_item_cents / 100.00 if net_item_cents
+  end
+  def net_item=(val)
+    self.net_item_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tax_item
+    tax_item_cents / 100.00 if tax_item_cents
+  end
+  def tax_item=(val)
+    self.tax_item_cents = val ? val.to_d * 100 : 0
+  end
+
+  def net_home_item
+    net_home_cents / 100.00 if net_home_cents
+  end
+  def net_home=(val)
+    self.net_home_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tax_home
+    tax_home_cents / 100.00 if tax_home_cents
+  end
+  def tax_home=(val)
+    self.tax_home_cents = val ? val.to_d * 100 : 0
+  end
+
+  def discount
+    discount_cents / 100.00 if discount_cents
+  end
+  def discount=(val)
+    self.discount_cents = val ? val.to_d * 100 : 0
+  end
+
 
   has_ancestry :cache_depth => true, :orphan_strategy => :destroy
 
@@ -38,8 +89,8 @@ class LineItem < ActiveRecord::Base
 
   def process_home
     unless exchange_rate.blank?
-      self.net_home = net_total_item / exchange_rate
-      self.tax_home = tax_total_item / exchange_rate
+      self.net_home_cents = net_total_item_cents / exchange_rate
+      self.tax_home_cents = tax_total_item_cents / exchange_rate
     end
   end
 

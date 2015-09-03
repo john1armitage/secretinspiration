@@ -2,8 +2,22 @@ class Payment < ActiveRecord::Base
 
   include AccountPosting
 
-  monetize :amount_cents
-  monetize :home_amount_cents
+  # monetize :amount_cents
+  # monetize :home_amount_cents
+
+  def amount
+    amount_cents / 100.00 if amount_cents
+  end
+  def amount=(val)
+    self.amount_cents = val ? val.to_d * 100 : 0
+  end
+
+  def home_amount
+    home_amount_cents / 100.00 if home_amount_cents
+  end
+  def home_amount=(val)
+    self.home_amount_cents = val ? val.to_d * 100 : 0
+  end
 
   has_many :allocations, dependent: :destroy
   has_many :orders, through: :allocations

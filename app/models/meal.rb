@@ -91,13 +91,13 @@ class Meal < ActiveRecord::Base
 
   def create_special(variant_id, item_price, params_line_item)
     variant = Variant.find(variant_id)
-    variant.price = item_price.to_d / params_line_item[:quantity].to_d
+    variant.price_cents = item_price.to_d * 100 / params_line_item[:quantity].to_d
     current_item = line_items.build(variant_id: variant_id)
-    price = variant.price
+    price = variant.price_cents
     current_item.vat_rate = get_vat_rate( variant.item.vat_rate )
     current_item.account_id = ItemType.find_by_name(variant.item.category.parent.name).account_id
-    current_item.net_item = price / ( 1 + current_item.vat_rate )
-    current_item.tax_item = price - current_item.net_item
+    current_item.net_item_cents = price / ( 1 + current_item.vat_rate )
+    current_item.tax_item_cents = price - current_item.net_item_cents
     current_item.quantity = params_line_item[:quantity]
     calculate_totals(current_item)
     current_item.ownable_id = params_line_item[:ownable_id]
@@ -113,11 +113,11 @@ class Meal < ActiveRecord::Base
     current_item.desc = variant.item.name
     current_item.desc += ": #{variant.name} " unless variant.name == 'default'
     current_item.quantity = 1
-    price = ( variant.price.to_d > 0 ? variant.price : variant.item.price )
+    price = ( variant.price_cents > 0 ? variant.price_cents : variant.item.price_cents )
     current_item.account_id = ItemType.find_by_name(variant.item.category.parent.name).account_id
     current_item.vat_rate = get_vat_rate( variant.item.vat_rate )
-    current_item.net_item = price / ( 1 + current_item.vat_rate )
-    current_item.tax_item = price - current_item.net_item
+    current_item.net_item_cents = price / ( 1 + current_item.vat_rate )
+    current_item.tax_item_cents = price - current_item.net_item_cents
     calculate_totals(current_item)
     current_item.options = inline_options
     choices.each do |k, v|
@@ -132,8 +132,8 @@ class Meal < ActiveRecord::Base
   end
 
   def calculate_totals(current_item)
-    current_item.net_total_item = current_item.net_item * current_item.quantity
-    current_item.tax_total_item = current_item.tax_item * current_item.quantity
+    current_item.net_total_item_cents = current_item.net_item_cents * current_item.quantity
+    current_item.tax_total_item_cents = current_item.tax_item_cents * current_item.quantity
   end
 
   def add_variant( current_item )

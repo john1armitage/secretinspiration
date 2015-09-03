@@ -140,9 +140,11 @@ module ApplicationHelper
   #   (((date - fy_start)/7).to_i + 1)
   # end
   def broadcast(channel, &block)
-    message = {:channel => channel, :data => capture(&block), :ext => {:auth_token =>  :FAYE_TOKEN}}
-#    uri = URI.parse("http://#{current_tenant.hostname}:9292/faye")
-    uri = URI.parse("https://#{current_tenant.hostname}/faye")
-    Net::HTTP.post_form(uri, :message => message.to_json)
+    unless Rails.env.development?
+      message = {:channel => channel, :data => capture(&block), :ext => {:auth_token =>  :FAYE_TOKEN}}
+  #    uri = URI.parse("http://#{current_tenant.hostname}:9292/faye")
+      uri = URI.parse("https://#{current_tenant.hostname}/faye")
+      Net::HTTP.post_form(uri, :message => message.to_json)
+    end
   end
 end

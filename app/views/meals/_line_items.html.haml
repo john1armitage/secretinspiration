@@ -13,7 +13,7 @@
             Total
         %td.right
           %span
-            != humanized_money_with_symbol(total)
+            != pounds(total)
         - if @meal.seating_id.blank? && total > CONFIG[:takeaway_threshold].to_d
           - discount = total * CONFIG[:takeaway_discount].to_d
           %tr
@@ -22,14 +22,14 @@
                 Discount
             %td.right
               %span
-                != humanized_money_with_symbol(discount)
+                != pounds(discount)
           %tr
             %td
               %span.title
                 To Pay
             %td.right
               %span.title
-                != humanized_money_with_symbol((total - discount))
+                != pounds((total - discount))
 
   - @course = ''
   = render partial: 'meals/line_item', collection: @meal.line_items.joins( {:variant => :item } ).order('items.grouping, items.rank, line_items.desc')

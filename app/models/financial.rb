@@ -6,9 +6,37 @@ class Financial < ActiveRecord::Base
 
   belongs_to :account
 
-  monetize :debit_amount_cents, :allow_nil => true
-  monetize :credit_amount_cents, :allow_nil => true
-  monetize :tax_home_cents, :allow_nil => true
+  # before_save :nil_to_zero
+  #
+  # monetize :debit_amount_cents, :allow_nil => true
+  # monetize :credit_amount_cents, :allow_nil => true
+  # monetize :tax_home_cents, :allow_nil => true
+
+  # def nil_to_zero
+  #   self.debit_amount_cents = 0 if debit_amount == nil
+  #   self.credit_amount_cents = 0 if credit_amount == nil
+  # end
+  #
+  def debit_amount
+    debit_amount_cents / 100.00 if debit_amount_cents
+  end
+  def debit_amount=(val)
+    self.debit_amount_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def credit_amount
+    credit_amount_cents / 100.00 if credit_amount_cents
+  end
+  def credit_amount=(val)
+    self.credit_amount_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def tax_home
+    tax_home_cents / 100.00
+  end
+  def tax_home=(val)
+    self.tax_home_cents = val ? val.to_d * 100.00 : 0
+  end
 
   validates :summary, presence: true
   validates :account_id, presence: true
@@ -18,6 +46,8 @@ class Financial < ActiveRecord::Base
   before_save :ensure_reference, :set_credit
 
   belongs_to :daily
+
+  has_many :depreciations
 
   default_scope { order('event_date DESC, created_at DESC') }
 

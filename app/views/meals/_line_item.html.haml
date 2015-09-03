@@ -22,8 +22,8 @@
       = link_to '+', meal_item_path( line_item.id, act: 'add'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"
       = link_to '-', meal_item_path( line_item.id, act: 'subtract'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Subtract one"
       = link_to 'x', meal_item_path( line_item), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Remove this item"
-    = humanized_money_with_symbol(line_item.net_total_item + line_item.tax_total_item)
-    = "(#{humanized_money_with_symbol(line_item.net_item + line_item.tax_item)})"
+    = pounds(line_item.net_total_item + line_item.tax_total_item)
+    = "(#{pounds(line_item.net_item + line_item.tax_item)})"
     - unless @meal.seating_id.blank?
       - if line_item.variant.item.grouping.match(/.*starter/)
         = link_to 'main', meal_item_path( line_item.id, act: 'main'), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Serve as Main"
@@ -41,5 +41,5 @@
       = link_to '-', meal_item_path( option.id, act: 'subtract', option: true), method: :patch, remote: true, class: 'no_ajaxify'
       = link_to 'x', meal_item_path( option, option: true), method: :delete, remote: true, class: 'no_ajaxify'
     = option.net_total_item + option.tax_total_item
-    = " ~ #{humanized_money_with_symbol(option.net_item + option.tax_item)}"
+    = " ~ #{pounds(option.net_item + option.tax_item)}"
     %br

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 #gem 'rails', '> 4.0.2'
-gem 'rails', '4.2.3'
+gem 'rails'
 
 gem 'responders', '~> 2.0'
 
@@ -66,8 +66,8 @@ gem 'cocoon'
 gem 'redcarpet'
 
 gem 'jquery-tokeninput-rails'
-gem 'money' #, '6.0.1.beta4'    HERE
-gem 'money-rails'
+# gem 'money' #, '6.0.1.beta4'    HERE
+# gem 'money-rails'
 #gem 'monetize' HERE
 
 gem 'eventmachine' #,'1.0.7'    HERE

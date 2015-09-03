@@ -8,10 +8,10 @@ class WagesController < ApplicationController
       fy_start = "06-04-#{Date.today.year}".to_date
       fy_start = fy_start - 1.year if fy_start > Date.today
       @fy = fy_start.year
-      @wages = @wages.where(FY: @fy)
+      @wages = @wages.where(fy: @fy)
     elsif params[:fy].present?
       @fy = params[:fy]
-      @wages = @wages.where(FY: params[:fy].to_i)
+      @wages = @wages.where(fy: params[:fy].to_i)
       if params[:week_no].present?
         @week_no = params[:week_no]
         @wages = @wages.where(week_no: params[:week_no].to_i)
@@ -19,7 +19,7 @@ class WagesController < ApplicationController
     elsif cookies[:last_wage_fy] && cookies[:last_wage_week_no]
       @fy = cookies[:last_wage_fy]
       @week_no = cookies[:last_wage_week_no]
-      @wages = Wage.where(FY: @fy, week_no: @week_no)
+      @wages = Wage.where(fy: @fy, week_no: @week_no)
     end
     @wages = @wages.joins(:employee).includes(:posts).select( "wages.*, employees.first_name")
   end
@@ -31,8 +31,8 @@ class WagesController < ApplicationController
   # GET /wages/new
   def new
     if params[:dailies.present?]
-      @wage = Wage.where(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]).first
-      @wage = Wage.new(employee_id: params[:employee_id], FY: params[:fy], week_no: params[:week_no]) unless @wage
+      @wage = Wage.where(employee_id: params[:employee_id], fy: params[:fy], week_no: params[:week_no]).first
+      @wage = Wage.new(employee_id: params[:employee_id], fy: params[:fy], week_no: params[:week_no]) unless @wage
       @wage.hours = params[:hours]
       @wage.rate_cents = params[:rate]
       @wage.gross_cents = @wage.hours.to_d * @wage.rate_cents.to_d
@@ -63,11 +63,11 @@ class WagesController < ApplicationController
 
     if @wage.save!
       create_posts(@wage)
-      cookies[:last_wage_fy] = @wage.FY
+      cookies[:last_wage_fy] = @wage.fy
       cookies[:last_employee] = @wage.employee_id
       cookies[:last_rate] = @wage.rate
       cookies[:last_wage_week_no] = @wage.week_no
-      redirect_to wages_url(fy: @wage.FY, week_no: @wage.week_no), notice: 'Wage was successfully created.'
+      redirect_to wages_url(fy: @wage.fy, week_no: @wage.week_no), notice: 'Wage was successfully created.'
     else
       render action: 'new'
     end
@@ -81,12 +81,12 @@ class WagesController < ApplicationController
       # if params[:editor].present?
       remove_posts(@wage)
       create_posts(@wage)
-      cookies[:last_wage_fy] = @wage.FY
+      cookies[:last_wage_fy] = @wage.fy
       cookies[:last_wage_week_no] = @wage.week_no
       if params[:timesheets].present?
         redirect_to timesheets_url(week: params[:timesheets]), notice: 'Wage was successfully updated.'
       else
-        redirect_to wages_url(week_no: @wage.week_no, fy: @wage.FY), notice: 'Wage was successfully updated.'
+        redirect_to wages_url(week_no: @wage.week_no, fy: @wage.fy), notice: 'Wage was successfully updated.'
       end
       # redirect_to timesheets_url(week: params[:week], no_process: true), notice: 'Wage was successfully updated.'
       # else
@@ -99,7 +99,7 @@ class WagesController < ApplicationController
 
   # DELETE /wages/1
   def destroy
-    fy = @wage.FY
+    fy = @wage.fy
     week_no = @wage.week_no
     @wage.destroy
     redirect_to wages_url(fy: fy, week_no: week_no), notice: 'Wage was successfully destroyed.'

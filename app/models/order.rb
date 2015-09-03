@@ -2,25 +2,123 @@ class Order < ActiveRecord::Base
 
   include AccountPosting
 
-  monetize :net_total_cents, :allow_nil => true,
-           :numericality => {
-               :greater_than => 0
-           }
-  monetize :net_home_cents, :allow_nil => true,
-           :numericality => {
-               :greater_than => 0
-           }
-  monetize :voucher_cents, :allow_nil => false
-  monetize :tip_cents, :allow_nil => false
-  monetize :tax_total_cents, :allow_nil => false
-  monetize :tax_home_cents, :allow_nil => false
-  monetize :paid_cents, :allow_nil => false
-  monetize :adjustment_total_cents, :allow_nil => false
-  monetize :discount_cents, :allow_nil => false
-  monetize :credit_card_cents, :allow_nil => false
-  monetize :cash_cents, :allow_nil => false
-  monetize :cheque_cents, :allow_nil => false
-  monetize :goods_cents, :allow_nil => false
+  # monetize :net_total_cents, :allow_nil => true,
+  #          :numericality => {
+  #              :greater_than => 0
+  #          }
+  # monetize :net_home_cents, :allow_nil => true,
+  #          :numericality => {
+  #              :greater_than => 0
+  #          }
+  # monetize :voucher_cents, :allow_nil => false
+  # monetize :tip_cents, :allow_nil => false
+  # monetize :tax_total_cents, :allow_nil => false
+  # monetize :tax_home_cents, :allow_nil => false
+  # monetize :paid_cents, :allow_nil => false
+  # monetize :adjustment_total_cents, :allow_nil => false
+  # monetize :discount_cents, :allow_nil => false
+  # monetize :credit_card_cents, :allow_nil => false
+  # monetize :cash_cents, :allow_nil => false
+  # monetize :cheque_cents, :allow_nil => false
+  # monetize :goods_cents, :allow_nil => false
+
+  def net_total
+    net_total_cents / 100.00 if net_total_cents
+  end
+  def net_total=(val)
+    self.net_total_cents = val ? val.to_d * 100 : 0
+  end
+
+  def net_home
+    net_home_cents / 100.00 if net_home_cents
+  end
+  def net_home=(val)
+    self.net_home_cents = val ? val.to_d * 100 : 0
+  end
+
+  def voucher
+    voucher_cents / 100.00 if voucher_cents
+  end
+  def voucher=(val)
+    self.voucher_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tip
+    tip_cents / 100.00 if tip_cents
+  end
+  def tip=(val)
+    self.tip_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tax_total
+    tax_total_cents / 100.00 if tax_total_cents
+  end
+  def tax_total=(val)
+    self.tax_total_cents = val ? val.to_d * 100 : 0
+  end
+
+  def tax_home
+    tax_home_cents / 100.00 if tax_home_cents
+  end
+  def tax_home=(val)
+    self.tax_home_cents = val ? val.to_d * 100 : 0
+  end
+
+  def paid
+    paid_cents / 100.00 if paid_cents
+  end
+  def paid=(val)
+    self.paid_cents = val ? val.to_d * 100 : 0
+  end
+
+  def adjustment_total
+    adjustment_total_cents / 100.00 if adjustment_total_cents
+  end
+  def adjustment_total=(val)
+    self.adjustment_total_cents = val ? val.to_d * 100 : 0
+  end
+
+  def discount
+    discount_cents / 100.00 if discount_cents
+  end
+  def discount=(val)
+    self.discount_cents = val ? val.to_d * 100 : 0
+  end
+
+  def credit_card
+    credit_card_cents / 100.00 if credit_card_cents
+  end
+  def credit_card=(val)
+    self.credit_card_cents = val ? val.to_d * 100 : 0
+  end
+
+  def cash
+    cash_cents / 100.00 if cash_cent
+  end
+  def cash=(val)
+    self.cash_cents = val ? val.to_d * 100 : 0
+  end
+
+  def cheque
+    cheque_cents / 100.00 if cheque_cent
+  end
+  def cheque=(val)
+    self.cheque_cents = val ? val.to_d * 100 : 0
+  end
+
+  def goods
+    goods_cents / 100.00 if goods_cents
+  end
+  def goods=(val)
+    self.goods_cents = val ? val.to_d * 100 : 0
+  end
+
+  def price
+    price_cents / 100.00 if  price_cents
+  end
+  def price=(val)
+    self.price_cents = val ? val.to_d * 100 : 0
+  end
 
   has_many :line_items, as: :ownable #, dependent: :destroy
   has_many :allocations, dependent: :destroy

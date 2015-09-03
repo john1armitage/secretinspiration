@@ -144,19 +144,25 @@ class DailiesController < ApplicationController
   def cheque_post
     ref_bank = 'RECEIVABLE'
     bank = Bank.find_by_reference(ref_bank)
-    credit = true
-    credit_amount = 0
-    debit_amount = @daily.cheque
     entity = 'Account'
     type = 'sales'
-    account = Account.find_by_name('Sales')
-    if account
-      entity_id = account.id
-      entity_ref = account.code
-    end
-    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{ref_bank}"
+    account = Account.find_by_name(bank.name)
+    desc = "#{account.name} debit: #{ref_bank}"
     @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
-                         postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                         postable_id: @daily.id, debit_amount: @daily.cheque, credit_amount: 0, account_id:account.id,
+                         accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
+
+    net =  (@daily.cheque / (1 + CONFIG[:vat_rate_standard])).to_i
+    account = Account.find_by_name('Sales Pending')
+    desc = "#{account.name} credit: #{ref_bank}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: 0, credit_amount: net, account_id:account.id,
+                         accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
+    tax =  @daily.cheque - net
+    account = Account.find_by_name('VAT Pending')
+    desc = "#{account.name} credit: #{ref_bank}"
+    @daily.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
+                         postable_id: @daily.id, debit_amount: 0, credit_amount: tax, account_id:account.id,
                          accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
     # @daily.financials.create!(event_date: @daily.account_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, summary: summary, desc: desc, debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
   end

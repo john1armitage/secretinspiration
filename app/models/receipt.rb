@@ -2,8 +2,22 @@ class Receipt < ActiveRecord::Base
 
   include AccountPosting
 
-  monetize :amount_cents
-  monetize :home_amount_cents
+  # monetize :amount_cents
+  # monetize :home_amount_cents
+
+  def amount
+    amount_cents / 100.00 if amount_cents
+  end
+  def debit_amount=(val)
+    self.debit_amount_cents = val ? val.to_d * 100 : 0
+  end
+
+  def home_amount
+    home_amount_cents / 100.00 if amount_cents
+  end
+  def home_amount=(val)
+    self.home_amount_cents = val ? val.to_d * 100 : 0
+  end
 
   belongs_to :bank
   belongs_to :order

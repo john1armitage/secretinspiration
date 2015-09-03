@@ -10,9 +10,21 @@
     = f.hidden_field :tips
     .row
       .field.small-12.columns
-        = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
         = f.hidden_field :account_date
         = @daily.account_date.strftime("%a,%e %b %Y")
+        = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
+    .row
+      .field.small-12.columns
+        = "Card: #{pounds(@daily.credit_card)}"
+    .row
+      .field.small-12.columns
+        = "Cash: #{pounds(@daily.cash)}"
+    .row
+      .field.small-12.columns
+        = "Cheque: #{pounds(@daily.cheque)}"
+    .row
+      .field.small-12.columns
+        = "Goods: #{pounds(@daily.goods)}"
     .row
       .field.small-12.columns
         = f.label :till, "Pounds in Till"

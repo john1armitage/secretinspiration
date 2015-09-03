@@ -1,24 +1,141 @@
 class Daily < ActiveRecord::Base
 
-  monetize :take_cents
-  monetize :tips_cents
-  monetize :turnover_cents
-  monetize :tax_cents
-  monetize :discount_cents
-  monetize :credit_card_cents
-  monetize :cash_cents
-  monetize :seated_cents
-  monetize :takeaway_cents
-  monetize :safe_cents, :allow_nil => true
-  monetize :petty_cents, :allow_nil => true
-  monetize :bank_cents, :allow_nil => true
-  monetize :till_cents, :allow_nil => true
-  monetize :safe_cash_cents, :allow_nil => true
-  monetize :surplus_cents, :allow_nil => true
-  monetize :cheque_cents, :allow_nil => true
-  monetize :goods_cents, :allow_nil => true
+  # monetize :take_cents
+  # monetize :tips_cents
+  # monetize :turnover_cents
+  # monetize :tax_cents
+  # monetize :discount_cents
+  # monetize :credit_card_cents
+  # monetize :cash_cents
+  # monetize :seated_cents
+  # monetize :takeaway_cents
+  # monetize :safe_cents, :allow_nil => true
+  # monetize :petty_cents, :allow_nil => true
+  # monetize :bank_cents, :allow_nil => true
+  # monetize :till_cents, :allow_nil => true
+  # monetize :safe_cash_cents, :allow_nil => true
+  # monetize :surplus_cents, :allow_nil => true
+  # monetize :cheque_cents, :allow_nil => true
+  # monetize :goods_cents, :allow_nil => true
 
-  # has_many :financials, dependent: :destroy
+  def take
+    take_cents / 100.00 if take_cents
+  end
+  def take=(val)
+    self.take_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def tips
+    tips_cents / 100.00 if tips_cents
+  end
+  def tips=(val)
+    self.tips_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def turnover
+    turnover_cents / 100.00 if turnover_cents
+  end
+  def turnover=(val)
+    self.turnover_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def tax
+    tax_cents / 100.00 if tax_cents
+  end
+  def tax=(val)
+    self.tax_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def discount
+    discount_cents / 100.00 if discount_cents
+  end
+  def discount=(val)
+    self.discount_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def credit_card
+    credit_card_cents / 100.00 if credit_card_cents
+  end
+  def credit_card=(val)
+    self.credit_card_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def cash
+    cash_cents / 100.00 if cash_cents
+  end
+  def cash=(val)
+    self.cash_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def seated
+    seated_cents / 100.00 if seated_cents
+  end
+  def seated=(val)
+    self.seated_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def takeaway
+    takeaway_cents / 100.00 if takeaway_cents
+  end
+  def takeaway=(val)
+    self.takeaway_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def safe
+    safe_cents / 100.00 if safe_cents
+  end
+  def safe=(val)
+    self.safe_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def petty
+    petty_cents / 100.00 if petty_cents
+  end
+  def petty=(val)
+    self.petty_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def bank
+    bank_cents / 100.00 if bank_cents
+  end
+  def bank=(val)
+    self.bank_cents = val ? val.to_d * 100 : 0
+  end
+
+  def till
+    till_cents / 100.00 if till_cents
+  end
+  def till=(val)
+    self.till_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def safe_cash
+    safe_cash_cents / 100.00 if safe_cash_cents
+  end
+  def safe_cash=(val)
+    self.safe_cash_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def surplus
+    surplus_cents / 100.00 if surplus_cents
+  end
+  def surplus=(val)
+    self.surplus_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def cheque
+    cheque_cents / 100.00 if cheque_cents
+  end
+  def cheque=(val)
+    self.cheque_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def goods
+    goods_cents / 100.00 if goods_cents
+  end
+  def goods=(val)
+    self.goods_cents = val ? val.to_d * 100.00 : 0
+  end
 
   has_many  :posts, as: :postable, dependent: :destroy
 
@@ -69,13 +186,6 @@ class Daily < ActiveRecord::Base
       # cheque sales credited on cheque credit
       received = take - (cheque + goods + tips)
       turnover =  (received / (1 + CONFIG[:vat_rate_standard])).to_i
-      p "DDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
-      p cheque
-      p goods
-      p tips
-      p take
-      p received
-      p turnover
       self.turnover_cents = turnover
       self.tax_cents = received - turnover
       self.discount_cents = orders.sum(&:discount_cents) + orders.sum(&:voucher_cents)

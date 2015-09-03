@@ -1,6 +1,14 @@
 class Employee < ActiveRecord::Base
 
-  monetize :hourly_rate_cents
+  # monetize :hourly_rate_cents
+
+  def hourly_rate
+    hourly_rate_cents / 100.00 if hourly_rate_cents
+  end
+  def hourly_rate=(val)
+    self.hourly_rate_cents = val ? val.to_d * 100.00 : 0
+  end
+
   has_many :timesheets, dependent: :destroy
   has_many :pay_rates, dependent: :destroy
   has_many :wages, dependent: :destroy

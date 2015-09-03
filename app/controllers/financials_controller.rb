@@ -346,6 +346,12 @@ class FinancialsController < ApplicationController
       if @financial.update(params[:financial])
         remove_posts
         create_posts
+        fixed_assets = ['Goodwill','Fixtures & Fittings','System Hardware','Furniture','Kitchen Equipment','Other Equipment']
+        @account_name = @financial.account ? @financial.account.name : 'no_account'
+        if fixed_assets.include? @account_name
+          remove_depreciations
+          create_depreciations
+        end
         # if params[:editor].present?
         #   redirect_to financials_url(no_process: true), notice: 'Financial was successfully updated.'
         # else
@@ -361,6 +367,8 @@ class FinancialsController < ApplicationController
   end
 
   def destroy
+    remove_posts
+    remove_depreciations
     @financial.destroy
     respond_to do |format|
       format.html { redirect_to financials_url }
@@ -369,12 +377,35 @@ class FinancialsController < ApplicationController
   end
 
   private
-    # def transfer_account
-    #   bank = Bank.find(params[:financial][:entity_id])
-    #   params[:financial][:account_id] = Account.find_by_name(bank.name)
-    # end
 
-    def remove_posts
+  def remove_depreciations
+    @financial.depreciations.destroy_all
+  end
+
+  def create_depreciations
+    case @account_name
+      when 'Goodwill'
+        months = CONFIG[:amortisation_period]
+      when 'Fixtures & Fittings'
+        months = CONFIG[:depreciation_period_fnf]
+      when 'System Hardware','Furniture','Kitchen Equipment','Other Equipment'
+        months = CONFIG[:depreciation_period_standard]
+    end
+    cost = @financial.credit_amount - @financial.tax_home
+    allocation = (cost / months).round(2)
+    allocated = 0
+    service_date = @account_date + 1.month
+    2.upto(months) do
+      @financial.depreciations.create(service_date: service_date, allowable_cost: allocation, life_years: months)
+      allocated += allocation
+      service_date += 1.month
+    end
+    allocated = allocated.round(2)
+    allocation = (cost - allocated).round(2)
+    @financial.depreciations.create(service_date:service_date, allowable_cost: allocation, life_years: months)
+  end
+
+  def remove_posts
     @financial.posts.destroy_all
   end
 
@@ -434,38 +465,41 @@ class FinancialsController < ApplicationController
   def cheque_posts
     bank_ref = @financial.bank
     bank = Bank.find_by_reference( bank_ref )
+    bank_account = Account.find_by_name(bank.name)
     entity = Bank.find(@financial.entity_id)
-    account = Account.find(@financial.account_id)
-    desc = "#{account.name} cheque: #{entity.name}"
-    net = @financial.debit_amount
-    tax = 0
-    if account.name = 'RECEIVABLE'
-      net = net / (1 + CONFIG[:vat_rate_standard])
+    entity_ref = entity.reference
+    entity_account = Account.find_by_name(entity.name)
+    desc = "#{bank_account.name} cheque: #{entity.name}"
+    # Received by
+    @financial.posts.create!( account_date:  @account_date, desc: desc,
+                              debit_amount: @financial.debit_amount, credit_amount: 0, account_id: bank_account.id,
+                              accountable_type:'Bank', accountable_id: bank.id, grouping_id: bank_account.grouping_id)
+    # Received from
+    @financial.posts.create!( account_date:  @account_date, desc: desc,
+                              debit_amount: 0, credit_amount: @financial.debit_amount, account_id: entity_account.id,
+                              accountable_type: 'Bank', accountable_id: entity.id, grouping_id: entity_account.grouping_id)
+    if bank_account.name = 'RECEIVABLE'
+      net = @financial.debit_amount / (1 + CONFIG[:vat_rate_standard])
       tax = @financial.debit_amount - net
       # Sales
       account = Account.find_by_name('Sales')
-      if tax > 0
-        @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                  debit_amount: 0, credit_amount: tax, account_id: account.id,
-                                  accountable_type:@financial.entity, accountable_id: entity.id, grouping_id: account.grouping_id)
-      end
-      @financial.posts.create( account_date:  @daily.account_date, desc: desc, postable_type: 'Daily',
-                               postable_id: @daily.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                               accountable_type:'Bank', accountable_id:bank.id, grouping_id: account.grouping_id)
+      @financial.posts.create( account_date:  @account_date, desc: desc,
+                               debit_amount: 0, credit_amount: net, account_id:account.id,
+                               accountable_type:'Account', accountable_id:account.id, grouping_id: account.grouping_id)
       # VAT
       account = Account.find_by_name('VAT Control')
       @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                debit_amount: @financial.debit_amount, credit_amount: 0, account_id: account.id,
-                                accountable_type: 'Bank', accountable_id: bank.id, grouping_id: account.grouping_id)
+                                debit_amount: 0, credit_amount: tax, account_id: account.id,
+                                accountable_type: 'Account', accountable_id: account.id, grouping_id: account.grouping_id)
+      account = Account.find_by_name('Sales Pending')
+      @financial.posts.create( account_date:  @account_date, desc: desc,
+                               debit_amount: net, credit_amount: 0, account_id: account.id,
+                               accountable_type:'Account', accountable_id: account.id, grouping_id: account.grouping_id)
+      account = Account.find_by_name('VAT Pending')
+      @financial.posts.create( account_date:  @account_date, desc: desc,
+                               debit_amount: tax, credit_amount: 0, account_id:account.id,
+                               accountable_type:'Account', accountable_id: account.id, grouping_id: account.grouping_id)
     end
-    # Current Account
-    @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: 0, credit_amount: net, account_id: account.id,
-                                     accountable_type:'Bank', accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
-    # Receivable
-    @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: 0, credit_amount: @financial.debit_amount, account_id: account.id,
-                                     accountable_type: 'Bank', accountable_id: bank.id, grouping_id: account.grouping_id)
     financial_processed
   end
 

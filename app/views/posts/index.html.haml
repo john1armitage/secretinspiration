@@ -48,11 +48,11 @@
     %th.number
       = sort_link(@q, :debit_amount_cents, "Debit")
       %br
-      = humanized_money_with_symbol( @debits )
+      = pounds( @debits )
     %th.number
       = sort_link(@q, :credit_amount_cents, "Credit")
       %br
-      = humanized_money_with_symbol( @credits )
+      = pounds( @credits )
     %th
     -#%th
     -#%th
@@ -76,8 +76,8 @@
       %td
         -#.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
         = posting.accountable.name if posting.accountable
-      %td.number= humanized_money_with_symbol( posting.debit_amount )  unless posting.debit_amount == 0
-      %td.number= humanized_money_with_symbol( posting.credit_amount )  unless posting.credit_amount == 0
+      %td.number= pounds( posting.debit_amount )  unless posting.debit_amount == 0
+      %td.number= pounds( posting.credit_amount )  unless posting.credit_amount == 0
       -#%td.number
       -#  = check_box_tag 'check'
       %td=# link_to 'Show', posting

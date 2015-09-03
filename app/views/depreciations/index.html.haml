@@ -1,0 +1,34 @@
+= search_form_for @q do |f|
+  .row.search
+    .field.small-3.columns
+      = label_tag :financial, 'Period'
+      = select_tag :financial,  options_from_collection_for_select(@periods, "name", "name", @period), include_blank: true
+    .field.small-3.columns
+      = f.label :service_date_gteq, 'From'
+      = f.date_field :service_date_gteq
+    .field.small-3.columns.left
+      = f.label :service_date_lteq, 'Until'
+      = f.date_field :service_date_lteq
+  .row.search
+    .actions
+      = f.submit 'Search'
+
+%table#financial
+  %tr
+    %th= sort_link(@q, :service_date, "Date")
+    %th
+    %th
+    %th
+    %th.number
+      = sort_link(@q, :allowable_cost_cents, "Allocation")
+      %br
+      = pounds( @total )
+
+  - @depreciations.each do |d|
+    %tr
+      %td.has-tip.tip-right{'data-tooltip' => true, 'title' => d.id}
+        = d.service_date.strftime("%d %b %y")
+      %td= d.summary
+      %td= d.financial.event_date.strftime("%d %b %y")
+      %td= pluralize(d.life_years / 12, 'year')
+      %td= pounds(d.allowable_cost)
