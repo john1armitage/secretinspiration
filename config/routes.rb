@@ -1,5 +1,7 @@
 Commerce::Application.routes.draw do
 
+  get 'accounting/index'
+
   resources :depreciations, :only => [ :index ]
 
   resources :posts

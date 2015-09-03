@@ -4,26 +4,21 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @financials = Element.where(kind: 'financial').order(:rank)
+    @periods = Element.where(kind: 'financial').order(:rank)
     @groupings = Post.joins("INNER JOIN accounts ON posts.grouping_id = accounts.id").select('accounts.name AS name', 'posts.grouping_id AS id, accounts.code').order('accounts.code').uniq
     @accounts = Account.joins(:posts).order("name").select('name', 'accounts.id').uniq
     @accountables = Supplier.joins(:posts). where("posts.accountable_type = 'Supplier' AND suppliers.id = posts.accountable_id").order("name").select('name', 'posts.accountable_id AS id','rank').uniq
     @accountables += Employee.joins(:posts). where("posts.accountable_type = 'Employee' AND employees.id = posts.accountable_id").order("reference").select('reference AS name','first_name','last_name', 'posts.accountable_id AS id').uniq
     @accountables += Bank.joins(:posts). where("posts.accountable_type = 'Bank' AND banks.id = posts.accountable_id").order("reference").select('reference','name', 'posts.accountable_id AS id', 'rank').uniq
-    #if params[:q]
-    #  params[:q][:debit_amount_cents_gteq] = 100 * params[:q][:debit_amount_cents_gteq].to_d
-    #  params[:q][:debit_amount_cents_lteq] = 100 * params[:q][:debit_amount_cents_lteq].to_d
-    #  params[:q][:credit_amount_cents_gteq] = 100 * params[:q][:credit_amount_cents_gteq].to_d
-    #  params[:q][:credit_amount_cents_lteq] = 100 * params[:q][:credit_amount_cents_lteq].to_d
-    #end
+
     list_order = ''
 
     unless params[:financial].present? && !params[:financial].blank?
       #params[:financial] = 'FQ to date'
     end
 
-    if params[:financial].present?
-      @period =  params[:financial]
+    if params[:period].present?
+      @period =  params[:period]
       case @period
         when 'FY to date'
           period = fy_to_date
@@ -44,8 +39,8 @@ class PostsController < ApplicationController
         else
           params[:q][:account_date_gteq] = ''
           params[:q][:account_date_lteq] = ''
-      end
     end
+  end
 
     unless params[:q].present?
       limit = 500

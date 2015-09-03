@@ -14,8 +14,8 @@
       = f.text_field :credit_amount_cents_lteq
   .row.search
     .field.small-3.columns
-      = label_tag :financial, 'Period'
-      = select_tag :financial,  options_from_collection_for_select(@financials, "name", "name", @period), include_blank: true
+      = label_tag :period, 'Period'
+      = select_tag :period,  options_from_collection_for_select(@periods, "name", "name", @period), include_blank: true
     .field.small-3.columns
       = f.label :account_date_gteq, 'From'
       = f.date_field :account_date_gteq
@@ -36,7 +36,7 @@
       = label_tag :limit
       = select_tag :limit, options_for_select(%w[50 100 500 1000], params[:limit] || 100)
   .row
-    .actions
+    .actions.small-3.columns.left
       = f.submit 'Search'
 
 %table#financial
@@ -60,7 +60,7 @@
   - @posts.each do |posting|
     %tr
       %td.has-tip.tip-right{'data-tooltip' => true, 'title' => posting.id}
-        = posting.account_date.strftime("%d %b %y")
+        = posting.account_date.strftime("%-d %b %y")
       %td= posting.desc.sub(' debit','').sub(' credit','')
       %td= posting.account.name if posting.account
       -#- case posting.postable_type

@@ -6,8 +6,8 @@ class DepreciationsController < ApplicationController
 
     limit = params[:limit] || 100
 
-    if params[:financial].present?
-      @period =  params[:financial]
+    if params[:period].present?
+      @period =  params[:period]
       case @period
         when 'FY to date'
           period = fy_to_date

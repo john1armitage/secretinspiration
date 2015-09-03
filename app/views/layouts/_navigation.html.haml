@@ -31,6 +31,9 @@
       - if (current_tenant.bookings && current_tenant.bookings == '1') && (allow? :bookings, :index )
         %li
           != link_to 'Book', bookings_path, remote: true, class: 'button radius no_ajaxify'
+      - if allow? :posts, :index
+        %li
+          != link_to 'Accounts', accounting_index_path, remote: true, class: 'button radius'
       - %w(food drinks accessory jewellery bag art stuff catalogue painting clearance).each do |component|                       #  accessory bag scented art
         - if eval("current_tenant.#{component} == '1'")
           %li

@@ -1,8 +1,8 @@
 = search_form_for @q do |f|
   .row.search
     .field.small-3.columns
-      = label_tag :financial, 'Period'
-      = select_tag :financial,  options_from_collection_for_select(@periods, "name", "name", @period), include_blank: true
+      = label_tag :period, 'Period'
+      = select_tag :period,  options_from_collection_for_select(@periods, "name", "name", @period), include_blank: true
     .field.small-3.columns
       = f.label :service_date_gteq, 'From'
       = f.date_field :service_date_gteq
@@ -10,7 +10,7 @@
       = f.label :service_date_lteq, 'Until'
       = f.date_field :service_date_lteq
   .row.search
-    .actions
+    .actions.small-3.columns.left
       = f.submit 'Search'
 
 %table#financial
@@ -18,7 +18,9 @@
     %th= sort_link(@q, :service_date, "Date")
     %th
     %th
+      Purchase
     %th
+      Period
     %th.number
       = sort_link(@q, :allowable_cost_cents, "Allocation")
       %br

@@ -1,0 +1,164 @@
+= form_tag accounting_index_path, method: :get do
+  .row.search.no-print
+    .field.small-3.columns
+      = label_tag :period, 'Period'
+      = select_tag :period, options_from_collection_for_select(@periods, "name", "name", @period), include_blank: true
+    .field.small-3.columns
+      = label_tag :account_date_gteq, 'From'
+      = date_field_tag :account_date_gteq, @start
+    .field.small-3.columns.left
+      = label :account_date_lteq, 'Until'
+      = date_field_tag :account_date_lteq, @stop
+  .row.search.no-print
+    .actions.small-3.columns.left
+      = submit_tag 'Search'
+
+.row
+  .large-12.columns
+    %h5
+      = "VAT Summary: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+.row
+  .large-3.columns.title
+    VAT due
+  .large-2.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-3.columns.title
+    &nbsp;
+  .large-2.columns.left
+    &nbsp;
+.row
+  .large-2.columns.title
+    VAT Received
+  .large-2.columns.left
+    £££
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Sales
+  .large-2.columns.left
+    £££
+.row
+  .large-2.columns.title
+    VAT Paid
+  .large-2.columns.left
+    £££
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Purchases
+  .large-2.columns.left
+    £££
+.row
+  .large-12.columns
+    %h5
+      = "Account Summary: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+.row
+  .large-3.columns.title
+    Revenue
+  .large-2.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-3.columns.title
+    Expenses
+  .large-2.columns.left
+    £££
+.row
+  .large-2.columns.title
+    Sales
+  .large-3.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    COGS
+  .large-3.columns.left
+    £££
+.row
+  .large-2.columns.title
+    Pending Sales
+  .large-3.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Payroll
+  .large-3.columns.left
+    £££
+.row
+  .large-2.columns.title
+    Interest
+  .large-3.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Depreciation
+  .large-3.columns.left
+    £££
+.row
+  .large-2.columns.title
+    &nbsp;
+  .large-3.columns.left
+    &nbsp;
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Amortisation
+  .large-3.columns.left
+    £££
+.row
+  .large-12.columns
+    %h5
+      = "Fixed Assets: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+.row
+  .large-3.columns.title
+    Start of Period
+  .large-2.columns.left
+    £££
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.left
+    &nbsp;
+.row
+  .large-2.columns.title
+    Additions
+  .large-3.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    &nbsp;
+  .large-3.columns.left
+    &nbsp;
+.row
+  .large-2.columns.title
+    Depreciation
+  .large-3.columns.left
+    £££
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    &nbsp;
+  .large-3.columns.left
+    &nbsp;
+.row
+  .large-3.columns.title
+    End of Period
+  .large-2.columns.left
+    £££
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.title
+    &nbsp;
+  .large-2.columns.left
+    &nbsp;
+.row
+  .large-12.columns
+    %h5
+      = "Overheads  Breakdown: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+
