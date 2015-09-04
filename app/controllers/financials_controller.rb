@@ -11,13 +11,14 @@ class FinancialsController < ApplicationController
     @employees = get_entity_employees
     @banks = get_banks
     @target_banks = get_target_banks
+    @classes = get_classes
 
     #Note: HACK TO ALLOW Employee & Supplier & Bank Search - misuses classification & summary
     if params[:q].present?
       @ref_bank = params[:q][:bank_eq]
-
-      if !params[:q][:classification_eq].blank?
-        @target_bank = params[:q][:entity_id_eq] = params[:q][:classification_eq]
+      @class = params[:q][:classification_eq]
+      if !params[:q][:mandate_eq].blank?
+        @target_bank = params[:q][:entity_id_eq] = params[:q][:mandate_eq]
         params[:q][:entity_eq] = 'Bank'
       elsif !params[:q][:summary_eq].blank?
         params[:q][:entity_ref_eq] = params[:q][:summary_eq]
@@ -30,7 +31,7 @@ class FinancialsController < ApplicationController
       end
       # remove hack params for search
       params[:q].delete :summary_eq
-      params[:q].delete :classification_eq
+      params[:q].delete :mandate_eq
     end
 
     @q = Financial.search(params[:q])
@@ -176,7 +177,7 @@ class FinancialsController < ApplicationController
             type = 'cash'
           elsif reference.scan(/^*FASTER PAYMENTS RECEIPT/)[0]
             payer = reference.scan(/^*FROM [a-zA-Z\s]+/)[0].sub('FROM ', '')
-            type = 'bacs'
+            type = 'BACS'
             entity = 'Debtor'
           elsif (location = reference.scan(/^*CHEQUE PAID IN AT [a-zA-Z\s]+/)[0])
             location = location.sub('CHEQUE PAID IN AT ', '')
@@ -705,6 +706,9 @@ class FinancialsController < ApplicationController
   def get_target_banks
     target_bank_ids = Financial.where(entity: 'Bank').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)
     @banks.where( id: target_bank_ids )
+  end
+  def get_classes
+    Financial.where('classification IS NOT NULL').select(:classification).map(&:classification).uniq.sort { |w1, w2| w1.casecmp(w2) }
   end
   def get_entity_suppliers
     supplier_ids = Financial.where('entity_id IS NOT NULL').where(entity: 'Supplier').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)

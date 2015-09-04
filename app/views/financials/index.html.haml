@@ -46,10 +46,12 @@
       = f.label :summary_eq, 'Employee'
       = f.select :summary_eq, options_for_select(@employees, @employee), include_blank: true
     .field.small-3.columns
-      = f.label :classification_eq, 'Target Bank'
-      = f.collection_select :classification_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
-      -#= f.select :classification_eq, options_for_select(@banks, @target_bank), include_blank: true
+      = f.label :mandate_eq, 'Target Bank'
+      = f.collection_select :mandate_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
   .row
+    .field.small-3.columns
+      = f.label :classification_eq, 'Type'
+      = f.select :classification_eq, options_for_select(@classes, @class), include_blank: true
     .field.small-2.columns.left
       = f.label :processed_eq, 'Processed'
       = f.check_box :processed_eq
