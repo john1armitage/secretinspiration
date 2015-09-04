@@ -11,17 +11,18 @@
       = date_field_tag :account_date_lteq, @stop
   .row.search.no-print
     .actions.small-3.columns.left
-      = submit_tag 'Search'
+      = submit_tag 'Fetch'
 
 .row
   .large-12.columns
     %h5
-      = "VAT Summary: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "VAT Summary: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     VAT due
   .large-2.columns.left
-    £££
+    = pounds(@vat_received - @vat_paid)
+
   .large-1.columns.title
     &nbsp;
   .large-3.columns.title
@@ -32,72 +33,94 @@
   .large-2.columns.title
     VAT Received
   .large-2.columns.left
-    £££
+    = pounds(@vat_received)
   .large-2.columns.title
     &nbsp;
   .large-2.columns.title
     Sales
   .large-2.columns.left
-    £££
+    = pounds(@sales)
 .row
   .large-2.columns.title
     VAT Paid
   .large-2.columns.left
-    £££
+    = pounds(@vat_paid)
   .large-2.columns.title
     &nbsp;
   .large-2.columns.title
     Purchases
   .large-2.columns.left
-    £££
+    = pounds(@cogs + @overheads + @fixed_assets)
 .row
   .large-12.columns
     %h5
-      = "Account Summary: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Account Summary: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     Revenue
   .large-2.columns.left
-    £££
+    = pounds(@sales + @interest)
   .large-1.columns.title
     &nbsp;
   .large-3.columns.title
     Expenses
   .large-2.columns.left
-    £££
+    = pounds(@direct_costs + @overheads + @depreciation + @amortisation)
 .row
   .large-2.columns.title
     Sales
   .large-3.columns.left
-    £££
+    = pounds(@sales)
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title
-    COGS
+    Direct Costs
   .large-3.columns.left
-    £££
-.row
-  .large-2.columns.title
-    Pending Sales
-  .large-3.columns.left
-    £££
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Payroll
-  .large-3.columns.left
-    £££
+    = pounds(@direct_costs)
 .row
   .large-2.columns.title
     Interest
   .large-3.columns.left
-    £££
+    = pounds(@interest)
+  .large-1.columns.title
+    &nbsp;
+  .large-1.columns.title
+    COGS
+  .large-3.columns.left
+    = pounds(@cogs)
+.row
+  .large-2.columns.title
+    &nbsp
+  .large-3.columns.left
+    &nbsp
+  .large-1.columns.title
+    &nbsp;
+  .large-1.columns.title
+    Payroll
+  .large-3.columns.left
+    = pounds(@payroll_costs)
+.row
+  .large-2.columns.title
+    Pending Sales
+  .large-3.columns.left
+    = pounds(@sales_pending)
+  .large-1.columns.title
+    &nbsp;
+  .large-2.columns.title
+    Overheads
+  .large-3.columns.left
+    = pounds(@overheads)
+.row
+  .large-2.columns.title
+    &nbsp;
+  .large-3.columns.left
+    &nbsp;
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title
     Depreciation
   .large-3.columns.left
-    £££
+    = pounds(@depreciation)
 .row
   .large-2.columns.title
     &nbsp;
@@ -108,16 +131,16 @@
   .large-2.columns.title
     Amortisation
   .large-3.columns.left
-    £££
+    = pounds(@amortisation)
 .row
   .large-12.columns
     %h5
-      = "Fixed Assets: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Fixed Assets: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     Start of Period
   .large-2.columns.left
-    £££
+    = pounds(@fixed_assets_previous - @depreciation_previous)
   .large-2.columns.title
     &nbsp;
   .large-2.columns.title
@@ -128,7 +151,7 @@
   .large-2.columns.title
     Additions
   .large-3.columns.left
-    £££
+    = pounds(@fixed_assets)
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title
@@ -139,7 +162,7 @@
   .large-2.columns.title
     Depreciation
   .large-3.columns.left
-    £££
+    = pounds(@depreciation)
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title
@@ -150,7 +173,7 @@
   .large-3.columns.title
     End of Period
   .large-2.columns.left
-    £££
+    = pounds(@fixed_assets_previous + @fixed_assets - (@depreciation_previous + @depreciation))
   .large-2.columns.title
     &nbsp;
   .large-2.columns.title
@@ -160,5 +183,23 @@
 .row
   .large-12.columns
     %h5
-      = "Overheads  Breakdown: #{@start ? @start.strftime('%-d %b %y') : ''} - #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Overheads Breakdown: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+.row
+  .large-3.columns.title
+    Overheads
+  .large-2.columns.left
+    = pounds(@overheads)
+  .large-1.columns.title
+    &nbsp;
+  .large-3.columns.title
+    &nbsp;
+  .large-2.columns.left
+    &nbsp;
+- @grouped_overheads.each do |overhead|
+  .row
+    .large-2.columns.title
+      = overhead.name
+    .large-3.columns.left
+      - cost = overhead.total_cost.to_i  / 100.00
+      = pounds( cost )
 

@@ -74,6 +74,7 @@ class FinancialsController < ApplicationController
       counter = 0
       end_date = @financials.first[0]
       @financials.each do |tx|
+        account = nil
         type = 'unresolved'
         summary = nil
         employee = nil
@@ -285,7 +286,7 @@ class FinancialsController < ApplicationController
         # f = Financial.create(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, mandate: mandate, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount)
         # if counter < 50
         #   counter += 1
-        Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank)
+        Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank, account: account)
 
       end
       # time = Time.now.strftime("%Y%m%d")
@@ -348,8 +349,8 @@ class FinancialsController < ApplicationController
         create_posts
         fixed_assets = ['Goodwill','Fixtures & Fittings','System Hardware','Furniture','Kitchen Equipment','Other Equipment']
         @account_name = @financial.account ? @financial.account.name : 'no_account'
+        remove_depreciations
         if fixed_assets.include? @account_name
-          remove_depreciations
           create_depreciations
         end
         # if params[:editor].present?
@@ -451,7 +452,7 @@ class FinancialsController < ApplicationController
     supplier = Supplier.find(@financial.entity_id)
     desc = "#{account.name} debit: #{supplier.name}"
     net = @financial.credit_amount
-    if @financial.tax_home
+    if @financial.tax_home && @financial.tax_home > 0
       net -= @financial.tax_home
       vat_post(supplier)
     end

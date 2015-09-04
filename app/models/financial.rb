@@ -39,7 +39,9 @@ class Financial < ActiveRecord::Base
   end
 
   validates :summary, presence: true
-  validates :account_id, presence: true
+  validates :desc, presence: true
+  validates :classification, presence: true
+#  validates :account_id, presence: true
 
   validate :amount_included?
 
