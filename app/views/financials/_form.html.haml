@@ -85,10 +85,12 @@
       .actions
         = f.submit 'Save'
 
+:javascript
+  vat_rate = "#{CONFIG[:vat_rate_standard]}";
 :coffeescript
   $("#VAT").change ->
     if $(this).is(":checked")
       gross = $("#financial_credit_amount").val()
-      net = gross / 1.20
-      vat = gross - net
+      net = gross / parseFloat(1.00 + parseFloat(vat_rate))
+      vat = (gross - net).toFixed(2)
     $("#financial_tax_home").val vat

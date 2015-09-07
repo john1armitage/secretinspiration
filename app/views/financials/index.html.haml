@@ -66,8 +66,7 @@
   $(".VAT").change ->
     if $(this).is(":checked")
       gross = $(this).siblings().val()
-      net = (gross / (1.00 + vat_rate))
-      net = (gross / (1.20))
+      net = gross / parseFloat(1.00 + parseFloat(vat_rate))
       vat = (gross - net).toFixed(2)
     $(this).parent().siblings().find("#financial_tax_home").val vat
 -#%table.money
