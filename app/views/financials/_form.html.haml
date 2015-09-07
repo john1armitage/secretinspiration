@@ -89,5 +89,6 @@
   $("#VAT").change ->
     if $(this).is(":checked")
       gross = $("#financial_credit_amount").val()
-      vat = gross * 0.20
+      net = gross / 1.20
+      vat = gross - net
     $("#financial_tax_home").val vat

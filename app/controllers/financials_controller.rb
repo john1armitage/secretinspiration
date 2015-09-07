@@ -414,7 +414,7 @@ class FinancialsController < ApplicationController
   def create_posts
     @account_date = @financial.effective_date.blank? ? @financial.event_date : @financial.effective_date
     case @financial.classification
-      when 'BACS', 'card', 'direct'
+      when 'BACS', 'card', 'direct','petty'
         # all purchases, must be allocated to an account
         if @financial.account_id.blank?
           financial_unprocessed
