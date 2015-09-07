@@ -16,7 +16,7 @@
 .row
   .large-12.columns
     %h5
-      = "VAT Summary: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "VAT Summary: #{@start ? @start.to_date.strftime('%-d %b %y') : ''} to #{@stop ? @stop.to_date.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     VAT due
@@ -54,7 +54,7 @@
 .row
   .large-12.columns
     %h5
-      = "Account Summary: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Account Summary: #{@start ? @start.to_date.strftime('%-d %b %y') : ''} to #{@stop ? @stop.to_date.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     Revenue
@@ -135,7 +135,7 @@
 .row
   .large-12.columns
     %h5
-      = "Fixed Assets: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Fixed Assets: #{@start ? @start.to_date.strftime('%-d %b %y') : ''} to #{@stop ? @stop.to_date.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     Start of Period
@@ -183,7 +183,7 @@
 .row
   .large-12.columns
     %h5
-      = "Overheads Breakdown: #{@start ? @start.strftime('%-d %b %y') : ''} to #{@stop ? @stop.strftime('%-d %b %y') : ''}"
+      = "Overheads Breakdown: #{@start ? @start.to_date.strftime('%-d %b %y') : ''} to #{@stop ? @stop.to_date.strftime('%-d %b %y') : ''}"
 .row
   .large-3.columns.title
     Overheads

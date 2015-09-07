@@ -3,33 +3,33 @@ class AccountingController < ApplicationController
     @periods = Element.where(kind: 'financial').order(:rank)
     if params[:period].present?
       @period =  params[:period]
-    else
-      @period = 'FY to date'
-    end
+    # elsif !params[:account_date_gteq] && !params[:account_date_lteq]
+    #   @period = 'FY to date'
 
-    case @period
-      when 'FY to date'
-        period = fy_to_date
-        params[:account_date_gteq] = period[0]
-        params[:account_date_lteq] = period[1]
-      when 'FQ to date'
-        period = fq_to_date
-        params[:account_date_gteq] = period[0]
-        params[:account_date_lteq] = period[1]
-      when 'Last FY'
-        period = last_fy
-        params[:account_date_gteq] = period[0]
-        params[:account_date_lteq] = period[1]
-      when 'Last FQ'
-        period = last_fq
-        params[:account_date_gteq] = period[0]
-        params[:account_date_lteq] = period[1]
-      else
-        params[:account_date_gteq] = ''
-        params[:account_date_lteq] = ''
+      case @period
+        when 'FY to date'
+          period = fy_to_date
+          params[:account_date_gteq] = period[0]
+          params[:account_date_lteq] = period[1]
+        when 'FQ to date'
+          period = fq_to_date
+          params[:account_date_gteq] = period[0]
+          params[:account_date_lteq] = period[1]
+        when 'Last FY'
+          period = last_fy
+          params[:account_date_gteq] = period[0]
+          params[:account_date_lteq] = period[1]
+        when 'Last FQ'
+          period = last_fq
+          params[:account_date_gteq] = period[0]
+          params[:account_date_lteq] = period[1]
+        else
+          params[:account_date_gteq] = ''
+          params[:account_date_lteq] = ''
+      end
     end
-    @start = params[:account_date_gteq]
-    @stop = params[:account_date_lteq]
+    @start = params[:account_date_gteq] ?  params[:account_date_gteq] : '2001-01-01'.to_date
+    @stop = params[:account_date_lteq] ? params[:account_date_lteq] : Date.today
     @stop = nil if @start && @stop && @start > @stop
 
     previous_posts = Post.includes(:account).joins('JOIN accounts AS groupings ON groupings.id = posts.grouping_id').where('account_date < ?',@start)
