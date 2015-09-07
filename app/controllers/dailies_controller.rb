@@ -244,11 +244,13 @@ class DailiesController < ApplicationController
 
   def get_orders_summary
     @orders = get_daily_orders
-    @daily.credit_card_cents = get_credit_card
-    @daily.cheque_cents = get_cheque
-    @daily.cash_cents = get_cash
-    @daily.tips_cents = get_tips
-    @daily.goods_cents = get_goods
+    if @orders.size > 0
+      @daily.credit_card_cents = get_credit_card
+      @daily.cheque_cents = get_cheque
+      @daily.cash_cents = get_cash
+      @daily.tips_cents = get_tips
+      @daily.goods_cents = get_goods
+    end
   end
 
   def get_credit_card

@@ -3,28 +3,54 @@
 = form_for @daily, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
     = f.hidden_field :session
-    = f.hidden_field :credit_card
-    = f.hidden_field :cheque
-    = f.hidden_field :goods
-    = f.hidden_field :cash
-    = f.hidden_field :tips
     .row
       .field.small-12.columns
+        = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
         = f.hidden_field :account_date
         = @daily.account_date.strftime("%a,%e %b %Y")
-        = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
-    .row
-      .field.small-12.columns
-        = "Card: #{pounds(@daily.credit_card)}"
-    .row
-      .field.small-12.columns
-        = "Cash: #{pounds(@daily.cash)}"
-    .row
-      .field.small-12.columns
-        = "Cheque: #{pounds(@daily.cheque)}"
-    .row
-      .field.small-12.columns
-        = "Goods: #{pounds(@daily.goods)}"
+    - if @orders.size > 0 || !(allow? :orders, :destroy)
+      = f.hidden_field :credit_card
+      = f.hidden_field :cheque
+      = f.hidden_field :goods
+      = f.hidden_field :cash
+      = f.hidden_field :tips
+      .row
+        .field.small-12.columns
+          = "Card: #{pounds(@daily.credit_card)}"
+      .row
+        .field.small-12.columns
+          = "Cash: #{pounds(@daily.cash)}"
+      .row
+        .field.small-12.columns
+          = "Cheque: #{pounds(@daily.cheque)}"
+      .row
+        .field.small-12.columns
+          = "Goods: #{pounds(@daily.goods)}"
+    - else
+      .row
+        .field.small-12.columns
+          = f.label :take
+          = f.text_field :take
+      .row
+        .field.small-12.columns
+          = f.label :credit_card, 'Card'
+          = f.text_field :credit_card
+      .row
+        .field.small-12.columns
+          = f.label :cash
+          = f.text_field :cash
+      .row
+        .field.small-12.columns
+          = f.label :cheque
+          = f.text_field :cheque
+      .row
+        .field.small-12.columns
+          = f.label :goods
+          = f.text_field :goods
+      .row
+        .field.small-12.columns
+          = f.label :tips
+          = f.text_field :tips
     .row
       .field.small-12.columns
         = f.label :till, "Pounds in Till"
@@ -58,15 +84,6 @@
         .field.small-12.columns
           = f.label :bank, "Banked"
           = f.text_field :bank
-    - unless @orders && @orders.size > 0
-      .row
-        .field.small-12.columns
-          = f.label :take
-          = f.text_field :take
-      .row
-        .field.small-12.columns
-          = f.label :tips
-          = f.text_field :tips
     .row
       .field.small-12.columns.left
         %label

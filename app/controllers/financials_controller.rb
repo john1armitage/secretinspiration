@@ -29,6 +29,9 @@ class FinancialsController < ApplicationController
         params[:q][:entity_eq] = 'Supplier'
         @ref = params[:q][:entity_ref_eq]
       end
+      if params[:vat_only]
+        params[:q][:tax_home_cents_gt] = 0
+      end
       # remove hack params for search
       params[:q].delete :summary_eq
       params[:q].delete :mandate_eq
@@ -36,12 +39,15 @@ class FinancialsController < ApplicationController
 
     @q = Financial.search(params[:q])
 
-    limit = params[:limit] || 100
-    list_order = 'DESC'
+    limit = params[:limit] || 500
+    list_order = params[:ascending] ? 'ASC' : 'DESC'
 
-    @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at DESC")
+    @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at #{list_order}")
 
-    if params[:processed].present?
+    if params[:exceptions].present?
+      has_posts = @financials.joins(:posts)
+      @financials = @financials.where(processed: true) - has_posts
+    elsif params[:processed].present?
       @q.processed_eq = processed = params[:processed] == 'true' ? true : false
       @financials = @financials.where(processed: processed)
     end
