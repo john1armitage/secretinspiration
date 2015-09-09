@@ -5,6 +5,8 @@ class Meal < ActiveRecord::Base
 
   has_many :line_items, as: :ownable, dependent: :destroy
 
+  has_many :timings, as: :timeable, dependent: :destroy
+
   validates_presence_of :contact, :phone, :start_time,  if: :remote_takeaway?
   validates  :contact,  length: { minimum: 2, too_short: 'too short' },   if: :remote_takeaway?
   validates  :phone,  length: { minimum: 6, too_short: 'number too short' },  if: :remote_takeaway?
@@ -40,12 +42,6 @@ class Meal < ActiveRecord::Base
     options.each do |k, option_set|
       option_set.each do |o|
         inline_options << o
-        #option = Element.find_by_name(o)
-        #if option.price.to_d > 0
-        #  line_item_options << option
-        #else
-        #  inline_options << option.name
-        #end
       end
     end
     inline_options = inline_options.join(', ')
@@ -79,15 +75,6 @@ class Meal < ActiveRecord::Base
     option_child.account = current_item.account
     option_child.save
   end
-
-  # line_item[ownable_id]:186
-  # line_item[ownable_type]:Meal
-  # line_item[special]:main
-  # line_item[desc]:hhhh
-  # each:6
-  #
-  # line_item[quantity]:1
-
 
   def create_special(variant_id, item_price, params_line_item)
     variant = Variant.find(variant_id)

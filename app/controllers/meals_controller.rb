@@ -28,7 +28,9 @@ class MealsController < ApplicationController
           @meal.line_items.destroy_all
           @meal.update(state: 'takeaway', notes: '', start_time: nil)
         when 'confirm'
-          @meal.update(state: 'confirmed') if @meal.line_items
+          state = 'confirmed'
+          @meal.timings.create(state: state)
+          @meal.update(state: state) if @meal.line_items
       end
       render  action: 'takeaway'
     end
@@ -57,6 +59,7 @@ class MealsController < ApplicationController
       if state
         #EventBus.announce( :order_update, meal: @meal.id)
         @meal.ordered_at = Time.now if @meal.ordered_at.blank? || params[:order] == 'dessert'
+        @meal.timings.create(state: state)
         @meal.update(state: state)
       end
     end
@@ -77,10 +80,12 @@ class MealsController < ApplicationController
       @meal.tabel_name = params[:tabel_name]
       existing = Meal.where("state <> 'billed' and seating_id = ?", params[:seating_id] ).size
       @meal.tabel_name += "-#{existing}" if existing > 0
-      @meal.state = 'active'
+      state = 'active'
+      @meal.state = state
     end
     @meal.start_time = Time.now
     @meal.save
+    @meal.timings.create(state: state)
     target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
     @message = Message.new(message: "#{target}: ordering", message_type: @meal.state, user_id: current_user.id, created_at: Time.now)
     if params[:takeaway].present?
@@ -113,18 +118,22 @@ class MealsController < ApplicationController
         state = params[:state]
       end
       #Publish events
+      @meal.timings.create(state: state)
       @meal.update(state: state)
     elsif params[:pholourie].present?
+      @meal.timings.create(state: 'pholourie')
       @meal.update(pholourie: true)
     elsif params[:takeaway].present?
       case params[:takeaway]
         when 'request'
           if @meal.update(state: 'requested')
+            @meal.timings.create(state: 'requested')
             TakeawayMailer.takeaway_notify(@meal).deliver
           else
             render 'takeaway'
           end
         when 'cancel'
+          @meal.timings.create(state: 'takeaway')
           @meal.update(notes: '', start_time: nil, state: 'takeaway')
       end
     else
@@ -151,6 +160,7 @@ class MealsController < ApplicationController
       @message = Message.new(message: "#{target}: re-ordering", message_type: @meal.state, user_id: current_user.id, created_at: Time.now)
       state = @meal.seating_id.blank? ? 'takeaway' : 'active'
       @meal.update(state: state)
+      @meal.timings.create(state: state)
       render 'meal_items/meal.js.erb'
     else
       render 'meal_items/meal.js.erb'
@@ -197,9 +207,11 @@ class MealsController < ApplicationController
     @order.save
     @order.state = 'complete'
     @meal.line_items.update_all(ownable_type: 'Order', ownable_id: @order.id)
+    @meal.timings.update_all(timeable_type: 'Order', timeable_id: @order.id)
     @meal.seating.booking.update_attribute(:state, 'billing')  if @meal.seating and @meal.seating.booking
     state = @meal.seating_id.blank? ? 'takeaway' : 'billed'
     @meal.update(state: state)
+    @order.timings.create(state: state)
 #    @meal.destroy
     set_booking_dates
     target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
@@ -213,7 +225,8 @@ class MealsController < ApplicationController
     @meal = Meal.find( @order.desc.split(':')[0])
     state = @meal.seating_id.blank? ? 'checkout' : 'ordered'
     @meal.update(state: state)
-    if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id)
+    if @order.line_items.update_all(ownable_type: 'Meal', ownable_id: @meal.id) && @order.timings.update_all(timeable_type: 'Meal', timeable_id: @meal.id)
+      @meal.timings.create(state: 'unbilled')
       @order.destroy
     end
     redirect_to bookings_url
@@ -227,7 +240,7 @@ class MealsController < ApplicationController
     end
     target = @meal.seating_id.blank? ? "Take #{@meal.id}" : "#{@meal.tabel_name}"
     message = "#{target}:cancel"
-    @meal.destroy
+    @meal.destroy!
     redirect_to bookings_url(message: message, target: target)
   end
 

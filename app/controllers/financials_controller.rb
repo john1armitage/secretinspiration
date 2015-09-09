@@ -161,7 +161,7 @@ class FinancialsController < ApplicationController
             end
           end
           if ['direct', 'card', 'BACS'].include?(type)
-            entity_ref = payee.gsub(/0-9/, '').sub(' &', '').sub(' ', '').split(' ')[0]
+            entity_ref = payee.gsub(/0-9/, '').sub(' &', '').sub(' ', '').split(' ')[0].upcase
             supplier = Supplier.where("'#{entity_ref}' = ANY (reference)")
             supplier = Supplier.where("'SUNDRY' = ANY (reference)") unless supplier.first
             entity_id = supplier.first.id if supplier.first
@@ -290,10 +290,11 @@ class FinancialsController < ApplicationController
         end
         entity_id = entity_id.to_i
         mandate = mandate.to_i
-        # f = Financial.create(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, mandate: mandate, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount)
-        # if counter < 50
-        #   counter += 1
-        Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank, account: account)
+
+        # tax?
+        tax = tx.size > 5 ? tx[5] : ''
+
+        Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank, account: account, tax_home: tax)
 
       end
       # time = Time.now.strftime("%Y%m%d")

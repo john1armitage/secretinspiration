@@ -34,7 +34,7 @@
       %td
         Total
       %td.right
-        = humanized_money_with_symbol(@order.net_total + @order.tax_total + @order.discount)
+        = pounds(@order.net_total + @order.tax_total + @order.discount)
 
     - if  @order.discount > 0
       - if params[:offer].present?
@@ -45,19 +45,19 @@
                 Less
                 = offer_name
               %td.right
-                = humanized_money_with_symbol(amount)
+                = pounds(amount)
       - elsif @order.seating_id.blank?
         %tr
           %td
             = "Less #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% Takeaway"
           %td.right
-            = humanized_money_with_symbol(@order.discount)
+            = pounds(@order.discount)
       - else
         %tr
           %td
             Less Offer discount
           %td.right
-            = humanized_money_with_symbol(@order.discount)
+            = pounds(@order.discount)
 
     - if @order.discount > 0
       %tr.total
@@ -65,7 +65,7 @@
           To Pay
         %td.right
           %span#order_total
-            = humanized_money_with_symbol(@order.net_total + @order.tax_total)
+            = pounds(@order.net_total + @order.tax_total)
 
   -#%table
   -#  %tr.print-only.message
@@ -82,7 +82,7 @@
         %br
         = "VAT #{current_tenant.vat}: "
         %b
-          = "#{humanized_money_with_symbol(@order.tax_home)}"
+          = "#{pounds(@order.tax_home)}"
       %td.right
         = @order.updated_at.strftime('%e-%m-%y')
         %br

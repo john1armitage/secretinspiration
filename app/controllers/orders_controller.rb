@@ -152,6 +152,7 @@ class OrdersController < ApplicationController
       tax_home = @order.paid - net_home
 
       @order.update(net_home: net_home, tax_home: tax_home)
+      @order.timings.create(state: @order.state)
 
       # if @order.goods > 0
       #   @order.paid = @order.paid - @order.goods

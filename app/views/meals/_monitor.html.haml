@@ -17,7 +17,10 @@
     - @sides = Hash.new { 0 }
     - @timed_orders = @meals.order('ordered_at ASC')
     %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
-      = render partial: 'meal_order', collection: @meals
+      - if current_user.role.name == 'operator'
+        = render partial: 'meal_order', collection: @meals
+      - else
+        = render partial: 'meal_order', collection: @manager_meals
   -#    - package = 'Current'
   -#    - if @starters.size > 0
   -#      %li.tabel
@@ -46,92 +49,92 @@
   -#              %li
   -#                = "#{v} x #{k}"
   -#
-  -#- if @afters.size > 0
-  -#  - @timed_orders = @afters.order(:ordered_at)
-  -#  - @desserts = Hash.new { 0 }
-  -#  %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
-  -#    = render partial: 'meal_order', collection: @afters
-  -#    - if @desserts.size > 0
-  -#      %li.tabel
-  -#        %span.head
-  -#          = "#{package} Desserts"
-  -#        %ul.tabel
-  -#          - @desserts.sort_by{|k,v| k}.each do |k, v|
-  -#            %li
-  -#              = "#{v} x #{k}"
-  -#
-  -#
-  -#- if @takeaways.size > 0
-  -#  - @alpha = 'a'
-  -#  - @starters = Hash.new { 0 }
-  -#  - @mains = Hash.new { 0 }
-  -#  - @sides = Hash.new { 0 }
-  -#  - @desserts = Hash.new { 0 }
-  -#  - @timed_orders = @takeaways.order(:start_time)
-  -#  %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
-  -#    = render partial: 'meal_order', collection: @takeaways
-  -#    - package = ''
-  -#    %li.tabel
-  -#      - if @starters.size > 0
-  -#        %span.head
-  -#          = "#{package} Starters"
-  -#        %ul.tabel
-  -#          - @starters.sort_by{|k,v| k}.each do |k, v|
-  -#            %li
-  -#              = "#{v} x #{k}"
-  -#
-  -#      - if @mains.size > 0
-  -#        %span.head
-  -#          = "#{package} Mains"
-  -#        %ul.tabel
-  -#          - @mains.sort_by{|k,v| k}.each do |k, v|
-  -#            %li
-  -#              = "#{v} x #{k}"
-  -#      - if @sides.size > 0
-  -#        %span.head
-  -#          = "#{package} Sides"
-  -#        %ul.tabel
-  -#          - @sides.sort_by{|k,v| k}.each do |k, v|
-  -#            %li
-  -#              = "#{v} x #{k}"
-  -#
-  -#      - if @desserts.size > 0
-  -#        %span.head
-  -#          = "#{package} Desserts"
-  -#        %ul.tabel
-  -#          - @desserts.sort_by{|k,v| k}.each do |k, v|
-  -#            %li
-  -#              = "#{v} x #{k}"
+  - if @afters.size > 0
+    - @timed_orders = @afters.order(:ordered_at)
+    - @desserts = Hash.new { 0 }
+    %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
+      = render partial: 'meal_order', collection: @afters
+      -#- if @desserts.size > 0
+      -#  %li.tabel
+      -#    %span.head
+      -#      = "#{package} Desserts"
+      -#    %ul.tabel
+      -#      - @desserts.sort_by{|k,v| k}.each do |k, v|
+      -#        %li
+      -#          = "#{v} x #{k}"
 
--#:coffeescript
--#  jQuery ->
--#    $(document).keypress (e) ->
--#      key = String.fromCharCode(e.charCode).toUpperCase()
--#      input = $('input#' + key)
--#      act = input.val()
--#      if act
--#        $.confirm
--#          title: "Order " + key + " is " + act
--#          message: 'Is that correct?'
--#          buttons:
--#            Yes:
--#              class: "blue"
--#              action: ->
--#                input.trigger("click")
--#                Utility.dismissConfirm
--#                return
--#            No:
--#              class: "gray"
--#              action: ->
--#                Utility.dismissConfirm
--#                return
--#        $(document).keypress (e) ->
--#          switch String.fromCharCode(e.charCode).toUpperCase()
--#            when "Y"
--#              input.trigger("click")
--#              Utility.dismissConfirm
--#              return
--#            when "N"
--#              Utility.dismissConfirm
--#              return
--#
+
+  - if @takeaways.size > 0
+    - @alpha = 'a'
+    - @starters = Hash.new { 0 }
+    - @mains = Hash.new { 0 }
+    - @sides = Hash.new { 0 }
+    - @desserts = Hash.new { 0 }
+    - @timed_orders = @takeaways.order(:start_time)
+    %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
+      = render partial: 'meal_order', collection: @takeaways
+      - package = ''
+      %li.tabel
+        - if @starters.size > 0
+          %span.head
+            = "#{package} Starters"
+          %ul.tabel
+            - @starters.sort_by{|k,v| k}.each do |k, v|
+              %li
+                = "#{v} x #{k}"
+
+        - if @mains.size > 0
+          %span.head
+            = "#{package} Mains"
+          %ul.tabel
+            - @mains.sort_by{|k,v| k}.each do |k, v|
+              %li
+                = "#{v} x #{k}"
+        - if @sides.size > 0
+          %span.head
+            = "#{package} Sides"
+          %ul.tabel
+            - @sides.sort_by{|k,v| k}.each do |k, v|
+              %li
+                = "#{v} x #{k}"
+
+        - if @desserts.size > 0
+          %span.head
+            = "#{package} Desserts"
+          %ul.tabel
+            - @desserts.sort_by{|k,v| k}.each do |k, v|
+              %li
+                = "#{v} x #{k}"
+
+:coffeescript
+  jQuery ->
+    $(document).keypress (e) ->
+      key = String.fromCharCode(e.charCode).toUpperCase()
+      input = $('input#' + key)
+      act = input.val()
+      if act
+        $.confirm
+          title: "Order " + key + " is " + act
+          message: 'Is that correct?'
+          buttons:
+            Yes:
+              class: "blue"
+              action: ->
+                input.trigger("click")
+                Utility.dismissConfirm
+                return
+            No:
+              class: "gray"
+              action: ->
+                Utility.dismissConfirm
+                return
+        $(document).keypress (e) ->
+          switch String.fromCharCode(e.charCode).toUpperCase()
+            when "Y"
+              input.trigger("click")
+              Utility.dismissConfirm
+              return
+            when "N"
+              Utility.dismissConfirm
+              return
+

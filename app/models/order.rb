@@ -93,14 +93,14 @@ class Order < ActiveRecord::Base
   end
 
   def cash
-    cash_cents / 100.00 if cash_cent
+    cash_cents / 100.00 if cash_cents
   end
   def cash=(val)
     self.cash_cents = val ? val.to_d * 100 : 0
   end
 
   def cheque
-    cheque_cents / 100.00 if cheque_cent
+    cheque_cents / 100.00 if cheque_cents
   end
   def cheque=(val)
     self.cheque_cents = val ? val.to_d * 100 : 0
@@ -121,6 +121,9 @@ class Order < ActiveRecord::Base
   end
 
   has_many :line_items, as: :ownable #, dependent: :destroy
+
+  has_many :timings, as: :timeable, dependent: :destroy
+
   has_many :allocations, dependent: :destroy
   has_many :payments, through: :allocations
   has_many :depreciations

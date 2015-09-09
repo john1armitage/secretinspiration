@@ -72,6 +72,8 @@ class LineItem < ActiveRecord::Base
   before_validation :process_variant unless :special?
   before_validation :process_home
   #
+  after_save :drink_timing
+
   validates_presence_of :desc, unless: :special?
   validates_presence_of :account, unless: :special? #, :unless => :cart_or_blank?
   validates_numericality_of :net_item, :greater_than => 0, :message => 'is required', unless: :special? #, :allow_nil => true
@@ -97,6 +99,13 @@ class LineItem < ActiveRecord::Base
   def process_variant
     self.account_id = variant.item.item_type.account_id if variant_id.present?
     self.quantity = 1 unless quantity.to_i > 0
+  end
+
+  def drink_timing
+    category = variant.item.grouping.split(':')[0].to_i
+    if category >= 20000 && category <= 30000
+      ownable.timings.create(state: 'drinks') if ownable.timings.where(state: 'drinks').empty?
+    end
   end
 
   # def linked_id?

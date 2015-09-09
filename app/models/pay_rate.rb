@@ -4,7 +4,7 @@ class PayRate < ActiveRecord::Base
   # monetize :rate_cents
 
   def rate
-    rate_cents / 100.00 if rate_cent
+    rate_cents / 100.00 if rate_cents
   end
   def rate=(val)
     self.rate_cents = val ? val.to_d * 100 : 0
