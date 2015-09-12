@@ -134,6 +134,9 @@ class FinancialsController < ApplicationController
             type = 'charges'
             summary = 'Bank Charges'
             entity_ref = ref_bank
+            supplier = Supplier.where("'#{entity_ref}' = ANY (reference)")
+            supplier = Supplier.where("'SUNDRY' = ANY (reference)") unless supplier.first
+            entity_id = supplier.first.id if supplier.first
             if (bank = Bank.find_by_reference(entity_ref))
               entity_id = bank.id
             end
@@ -173,8 +176,8 @@ class FinancialsController < ApplicationController
           credit = false
           amount = tx[2].sub(',', '').to_d
           entity = nil
-          if (payer = reference.scan(/^*BANK GIRO CREDIT REF [a-zA-Z0-9\s]+,/)[0])
-            payer = payer.sub('BANK GIRO CREDIT REF ', '').sub(',', '').gsub(/[0-9]/, '')
+          if (payer = reference.scan(/^*BANK GIRO CREDIT REF[a-zA-Z0-9\s]+,/)[0])
+            payer = payer.sub('BANK GIRO CREDIT REF', '').sub(',', '').gsub(/[0-9]/, '')
           elsif (location = reference.scan(/^*CASH DEPOSIT AT [a-zA-Z\s]+/)[0])
             location = location.sub('CASH DEPOSIT AT ', '')
             type = 'cash'

@@ -3,8 +3,8 @@
     .row
       = hidden_field_tag :timesheets, params[:timesheets] if params[:timesheets].present?
       .field.small-2.columns
-        = f.label :FY, 'FY'
-        = f.number_field :FY
+        = f.label :fy, 'FY'
+        = f.number_field :fy
       .field.small-2.columns
         = f.label :week_no, 'Week'
         = f.number_field :week_no
@@ -36,14 +36,14 @@
         = f.text_field :holiday
     .row
       .field.small-2.columns
-        = f.label :PAYE
-        = f.text_field :PAYE
+        = f.label :paye
+        = f.text_field :paye
       .field.small-2.columns
-        = f.label :NI_employee, 'Employee'
-        = f.text_field :NI_employee
+        = f.label :ni_employee, 'Employee'
+        = f.text_field :ni_employee
       .field.small-2.columns
-        = f.label :NI_employer, 'Employer'
-        = f.text_field :NI_employer
+        = f.label :ni_employer, 'Employer'
+        = f.text_field :ni_employer
       .field.small-3.columns
         = f.label :paid_date
         = f.date_field :paid_date

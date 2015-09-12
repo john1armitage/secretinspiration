@@ -43,7 +43,7 @@ class WagesController < ApplicationController
       render 'edit'
     else
       @wage = Wage.new
-      @wage.FY = cookies[:last_wage_fy]
+      @wage.fy = cookies[:last_wage_fy]
       @wage.employee_id = cookies[:last_employee]
       @wage.rate = cookies[:last_rate]
       @wage.week_no = cookies[:last_wage_week_no].to_i + 1

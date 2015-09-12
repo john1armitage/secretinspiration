@@ -31,11 +31,11 @@
     %th
     %th
 
-  - @wages.order(:FY,:week_no, :employee_id).each do |wage|
+  - @wages.order(:fy,:week_no, :employee_id).each do |wage|
     %tr
-      %td= "#{wage.FY}/#{wage.week_no}"
+      %td= "#{wage.fy}/#{wage.week_no}"
       %td= (wage.posts.size > 0 ? 'OK' : '')
-      %td.lefty
+      %td.left
         - if wage.first_name
           =link_to(wage.first_name, edit_wage_path(wage))
         -else
@@ -49,9 +49,9 @@
       %td
         = (wage.bonus > 0.00) ? pounds(wage.bonus) : ''
         = (wage.holiday > 0.00) ? pounds(wage.holiday) : ''
-      %td= (wage.PAYE > 0.00) ? pounds(wage.PAYE) : ''
-      %td= (wage.NI_employee + wage.NI_employer > 0.00) ? "#{pounds(wage.NI_employee)} [#{pounds(wage.NI_employer)}]" : ''
-      %td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.PAYE + wage.NI_employee))}"
+      %td= (wage.paye > 0.00) ? pounds(wage.paye) : ''
+      %td= (wage.ni_employee + wage.ni_employer > 0.00) ? "#{pounds(wage.ni_employee)} [#{pounds(wage.ni_employer)}]" : ''
+      %td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.paye + wage.ni_employee))}"
       -#%td= wage.paid_date
       -#%td= link_to 'Show', wage
       %td= link_to 'Edit', edit_wage_path(wage)
