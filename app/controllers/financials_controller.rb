@@ -39,7 +39,7 @@ class FinancialsController < ApplicationController
 
     @q = Financial.search(params[:q])
 
-    limit = params[:limit] || 500
+    limit = params[:limit].present? ? (params[:limit] || 500) : 25
     list_order = params[:ascending] ? 'ASC' : 'DESC'
 
     @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at #{list_order}")
