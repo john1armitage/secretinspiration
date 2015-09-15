@@ -7,12 +7,13 @@
       .field.small-1.columns.headings
         = hidden_field_tag :processed, @q.processed_eq
       .field.small-2.columns.headings
+        = link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
         = link_to financial.event_date, edit_financial_path(financial), title: 'Edit Financial'
       .field.small-3.columns.has-tip{"data-tooltip" => "", title: financial.desc}
         = "#{financial.entity_ref}"
         %br
         = "#{financial.credit ?  'Credit' : 'Debit'}: #{pounds(amount)}"
-      - if ['BACS', 'card', 'direct','refund'].include? financial.classification
+      - if ['BACS', 'card', 'direct','refund', 'reverse', 'petty'].include? financial.classification
         .field.small-2.columns.left
           = f.text_field :tax_home
         .field.small-1.columns.left
