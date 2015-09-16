@@ -10,19 +10,27 @@
           = (@wage.posts.size > 0 ? 'OK' : '')
 
       .field.small-1.columns
-        = "#{@wage.hours} hr"
+        = "#{@wage.hours}"
         %br
-        = "#{pounds(@wage.rate)}"
+        %span.minor
+          = "#{pounds(@wage.rate)}"
       .field.small-1.columns
         = pounds(@wage.gross)
         %br
-        = "[#{pounds(@wage.tips)}]"
+        %span.minor
+          = "#{pounds(@wage.tips)}"
       .field.small-1.columns
         = pounds(@wage.bonus) if @wage.bonus && @wage.bonus > 0
         %br
-        = "[#{pounds(@wage.holiday)}]" if @wage.holiday && @wage.holiday > 0
+        %span.minor
+          = "#{pounds(@wage.holiday)}" if @wage.holiday && @wage.holiday > 0
       .field.small-1.columns
-        = pounds(@wage.gross + @wage.tips + @wage.bonus + @wage.holiday )
+        - gross = @wage.gross + @wage.tips + @wage.bonus + @wage.holiday
+        - net = gross - (@wage.paye + @wage.ni_employee + @wage.ni_employer)
+        = pounds(net)
+        %br
+        %span.minor
+          = "#{pounds(gross)}" unless (net == gross)
       .field.small-1.columns
         = f.text_field :paye
       .field.small-1.columns

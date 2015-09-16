@@ -43,6 +43,21 @@ $head-border: #009900;
   a.button {
     background-color: $link;
   }
+  span.minor {
+    color: gray;
+    font-style: italic;
+  }
+  form.edit_wage {
+    font-size: 0.9rem;
+    fieldset {
+      margin: 0;
+      padding: 0.5rem;
+      padding-right: 1rem;
+    }
+  }
+  div#daily_editor {
+    margin-bottom: 1rem;
+  }
   span.box {
     border: 1px solid gray;
     margin: 0.2em;
