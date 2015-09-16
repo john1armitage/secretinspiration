@@ -9,7 +9,10 @@ class SessionsController < ApplicationController
     # p request.env["HTTP_X_FORWARDED_FOR"]
     #
     # p request
-    unless request.remote_ip.include?(CONFIG[:home_network]) || request.remote_addr == '127.0.0.1' || (flash[:remote].present? && flash[:remote] == CONFIG[:remote])
+    unless CONFIG[:allowed_hosts].include?(request.remote_ip) || request.remote_addr == '127.0.0.1' || (flash[:remote].present? && flash[:remote] == CONFIG[:remote])
+      # p CONFIG[:allowed_hosts]
+      # p request.remote_ip
+      # p request.remote_addr
       redirect_to root_url
     end
 
