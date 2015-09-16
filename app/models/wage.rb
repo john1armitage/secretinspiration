@@ -1,38 +1,5 @@
 class Wage < ActiveRecord::Base
 
-  # monetize :rate_cents, :allow_nil => false,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :gross_cents, :allow_nil => false,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :NI_employer_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :NI_employee_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :PAYE_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :tips_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :holiday_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-  # monetize :bonus_cents, :allow_nil => true,
-  #          :numericality => {
-  #              :greater_than_or_equal_to => 0
-  #          }
-
   def rate
     rate_cents / 100.00 if rate_cents
   end

@@ -14,15 +14,15 @@
         = f.select :end_time, grouped_options_for_select(get_times('blank', 'timesheet'), @timesheet.end_time.strftime('%H:%M'), divider: 'Shift')
     .row
       .field.small-12.columns
-        = f.label :hours
-        = f.text_field :hours
+        = f.label :pay, 'Amount'
+        = f.text_field :pay
+      .field.small-12.columns.left
+        = f.label :session, 'Type'
+        = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @timesheet.session)
     .row
       .field.small-12.columns
         = f.label :work_date
         = f.date_field :work_date
-      .field.small-12.columns.left
-        = f.label :session
-        = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @timesheet.session)
     .row
       .field.small-12.columns.left
         = f.submit 'Save'

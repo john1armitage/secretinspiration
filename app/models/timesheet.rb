@@ -12,17 +12,17 @@ class Timesheet < ActiveRecord::Base
   belongs_to :employee
 
   validates_presence_of :employee_id, :work_date, :start_time, :end_time, :session
-  validates_presence_of :hours, message: 'Check Times'
+#  validates_presence_of :hours, message: 'Check Times'
 
-  before_validation :calculate_hours
+  before_validation :calculate_pay
 
   after_save :adjust_daily_headcount
 
   after_destroy :reduce_daily_headcount
 
-  def calculate_hours
-    if hours <= 0 #&& 1 == 2
-      self.hours = self.pay = 0
+  def calculate_pay
+    if ['bonus','holiday'].include? session
+      self.hours = 0
     else
       self.hours = hours
       rate_cents = employee.pay_rates.where('effective_date <= ?', work_date).order('effective_date DESC').first.rate_cents

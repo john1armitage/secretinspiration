@@ -509,6 +509,8 @@ class ApplicationController < ActionController::Base
     week_hours = 0.00
     week_wages = 0.00
     week_tips = 0.00
+    week_bonus = 0.00
+    week_holiday = 0.00
     tips_share = 0.00
     total_tips_in = 0.00
     total_tips_out = 0.00
@@ -523,7 +525,7 @@ class ApplicationController < ActionController::Base
       rate_cents = get_rate_cents(employee, timesheets.first.work_date)
       timesheets.each do |timesheet|
         # unless employee.monthly
-          if (timesheet.session != 'bonus')
+          if !(['bonus','holiday'].include? timesheet.session)
             daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
             daily_tips = (daily.tips_cents / 100.00 || 0.00)
             tips_share = daily_tips / daily.headcount.to_d
@@ -545,8 +547,8 @@ class ApplicationController < ActionController::Base
             wage.hours = week_hours
             wage.gross_cents = week_wages
             wage.tips_cents = week_tips * 100.00
-            wage.bonus_cents = 0
-            wage.holiday_cents = 0
+            wage.bonus_cents = week_bonus
+            wage.holiday_cents = week_holiday
             wage.save!
             wages << wage
             remove_posts(wage)
@@ -560,14 +562,23 @@ class ApplicationController < ActionController::Base
             week_hours = 0
             week_wages = 0
             week_tips = 0.00
+            week_bonus = 0
+            week_holiday = 0
             employee = timesheet.employee
             rate_cents = get_rate_cents(timesheet.employee, timesheet.work_date)
           end
-          hours += timesheet.hours
-          daily_wage = timesheet.hours * rate_cents
-          week_hours += timesheet.hours
-          week_wages += daily_wage
-          week_tips += tips_share
+          case timesheet.session
+            when 'holiday'
+              week_holiday += timesheet.pay_cents
+            when 'bonus'
+              week_bonus += timesheet.pay_cents
+            else
+              hours += timesheet.hours if ['bonus','holiday'].include? session
+              daily_wage = timesheet.hours * rate_cents
+              week_hours += timesheet.hours
+              week_wages += daily_wage
+              week_tips += tips_share
+          end
         end
         wage = Wage.where(employee_id: employee.id, fy: fy, week_no: hmrc_pay_week).first
         unless wage
@@ -580,8 +591,8 @@ class ApplicationController < ActionController::Base
         wage.hours = week_hours
         wage.gross_cents = week_wages
         wage.tips_cents = week_tips * 100.00
-        wage.bonus_cents = 0
-        wage.holiday_cents = 0
+        wage.bonus_cents = week_bonus
+        wage.holiday_cents = week_holiday
         wage.save!
         wages << wage
         remove_posts(wage)
@@ -658,7 +669,7 @@ class ApplicationController < ActionController::Base
       credit = true
       credit_amount = wage.paye
       debit_amount = 0.00
-      account = Account.find_by_name('PAYE')
+      account = Account.find_by_name('PAYE Control')
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{wage.week_no}"
       wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
                          postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,

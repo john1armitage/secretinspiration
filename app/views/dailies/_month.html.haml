@@ -1,4 +1,4 @@
-- months = get_months((Date.today.beginning_of_month - 3.year), 37).reverse
+- months = get_months((Date.today.beginning_of_month - 4.year), 49).reverse
 - no_content= params[:no_content].present? ? 'no_content' : ''
 - weeks = get_weeks(month)
 .row.large-12
@@ -53,7 +53,7 @@
           %span
             = link_to "#{timesheet.session[0].upcase} #{timesheet.employee.first_name}", edit_timesheet_path(timesheet), remote: true, class: 'no_ajaxify'
           %span
-            = "#{timesheet.hours}"
+            = "#{timesheet.hours}" unless ['bonus','holiday'].include? timesheet.session
           = link_to 'x', timesheet_path( timesheet), method: :delete, remote: true, class: 'no_ajaxify', data: { tooltip:  true, :confirm => 'Are you sure?'}, title: "Remove Timesheet"
     - if bookings[date]
       %li

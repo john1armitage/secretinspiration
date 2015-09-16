@@ -22,7 +22,7 @@
     %th.lefty Employee
     %th Hourly
     %th Tips
-    %th Bonus HolPay
+    %th Bonus [HolPay]
     %th Paye
     %th NI E'ee [E'er]
     %th Take Home
@@ -44,11 +44,12 @@
         = pounds(wage.gross)
         %br
         %i
-          = "#{pounds(wage.rate)}*#{wage.hours}"
+          = "#{pounds(wage.rate)}*#{wage.hours}" if wage.hours && wage.hours > 0
       %td= pounds(wage.tips)
       %td
         = (wage.bonus > 0.00) ? pounds(wage.bonus) : ''
-        = (wage.holiday > 0.00) ? pounds(wage.holiday) : ''
+        %br
+        = (wage.holiday > 0.00) ? "[#{pounds(wage.holiday)}]" : ''
       %td= (wage.paye > 0.00) ? pounds(wage.paye) : ''
       %td= (wage.ni_employee + wage.ni_employer > 0.00) ? "#{pounds(wage.ni_employee)} [#{pounds(wage.ni_employer)}]" : ''
       %td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.paye + wage.ni_employee))}"

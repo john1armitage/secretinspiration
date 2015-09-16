@@ -29,7 +29,7 @@
     - @timesheets.each do |timesheet|
       - hours += timesheet.hours
       - wage = timesheet.hours * rate_cents
-      - if (timesheet.session != 'bonus')
+      - if !(['bonus','holiday'].include? timesheet.session)
         - daily = @dailies.where(account_date: timesheet.work_date, session: timesheet.session).first
         - daily_tips = (daily.tips_cents / 100.00 || 0.00 )
         - tips_share = daily_tips / daily.headcount.to_d

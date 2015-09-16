@@ -15,10 +15,14 @@
         = "#{pounds(@wage.rate)}"
       .field.small-1.columns
         = pounds(@wage.gross)
+        %br
+        = "[#{pounds(@wage.tips)}]"
       .field.small-1.columns
-        = pounds(@wage.tips)
+        = pounds(@wage.bonus) if @wage.bonus && @wage.bonus > 0
+        %br
+        = "[#{pounds(@wage.holiday)}]" if @wage.holiday && @wage.holiday > 0
       .field.small-1.columns
-        = pounds(@wage.gross + @wage.tips)
+        = pounds(@wage.gross + @wage.tips + @wage.bonus + @wage.holiday )
       .field.small-1.columns
         = f.text_field :paye
       .field.small-1.columns
