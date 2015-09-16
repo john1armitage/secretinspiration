@@ -47,6 +47,7 @@ class WagesController < ApplicationController
       @wage.employee_id = cookies[:last_employee]
       @wage.rate = cookies[:last_rate]
       @wage.week_no = cookies[:last_wage_week_no].to_i + 1
+      @wage.paid_date = cookies[:last_paid_date] if @wage.paid_date.blank?
     end
     @wage = check_nil_cents(@wage)
   end
@@ -67,6 +68,7 @@ class WagesController < ApplicationController
       cookies[:last_employee] = @wage.employee_id
       cookies[:last_rate] = @wage.rate
       cookies[:last_wage_week_no] = @wage.week_no
+      cookies[:last_paid_date] = @wage.paid_date
       redirect_to wages_url(fy: @wage.fy, week_no: @wage.week_no), notice: 'Wage was successfully created.'
     else
       render action: 'new'
@@ -84,6 +86,7 @@ class WagesController < ApplicationController
       create_posts(@wage)
       cookies[:last_wage_fy] = @wage.fy
       cookies[:last_wage_week_no] = @wage.week_no
+      cookies[:last_paid_date] = @wage.paid_date
       if params[:timesheets].present?
         redirect_to timesheets_url(week: params[:timesheets]), notice: 'Wage was successfully updated.'
       else

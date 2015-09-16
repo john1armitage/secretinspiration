@@ -1,3 +1,5 @@
+- dated = @wage.paid_date.blank? ? false : true
+- @wage.paid_date = cookies[:last_paid_date] unless dated
 = form_for @wage  do |f|
   %fieldset
     .row
@@ -40,4 +42,4 @@
       .field.small-3.columns
         = f.date_field :paid_date
       .field.small-1.columns
-        = f.submit 'Save'
+        = f.submit "Save #{dated ? '':'-'}"
