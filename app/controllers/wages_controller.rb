@@ -112,9 +112,9 @@ class WagesController < ApplicationController
     wage.gross = 0.00 unless wage.gross && wage.gross > 0
     wage.holiday = 0.00 unless wage.holiday && wage.holiday > 0
     wage.bonus = 0.00 unless wage.bonus && wage.bonus > 0
-    wage.paye = 0.00 unless wage.paye && wage.paye > 0
-    wage.ni_employee = 0.00 unless wage.ni_employee && wage.ni_employee > 0
-    wage.ni_employer = 0.00 unless wage.ni_employer && wage.ni_employer > 0
+    wage.paye = 0.00 unless wage.paye
+    wage.ni_employee = 0.00 unless wage.ni_employee
+    wage.ni_employer = 0.00 unless wage.ni_employer
     wage
   end
 
