@@ -33,4 +33,10 @@
   %p
     %span
       -#- cash = current_order.paid + current_order.tip - current_order.credit_card
-      = "#{pounds(current_order.credit_card)}cc + #{pounds(current_order.cash)} #{pounds(current_order.cheque)}chq"
+      = "#{pounds(current_order.credit_card)}cc + #{pounds(current_order.cash)} + #{pounds(current_order.cheque)}chq"
+  - if current_order.goods > 0
+    %p
+      %span.title
+        Goods:
+      %span
+        = pounds(current_order.goods)
