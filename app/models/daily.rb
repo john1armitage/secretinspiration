@@ -175,10 +175,14 @@ class Daily < ActiveRecord::Base
     if orders.size > 0
       takeaways = orders.where('seating_id IS NULL')
       orders = orders.to_a
+      card = orders.sum(&:credit_card_cents)
+      cash = orders.sum(&:cash_cents)
       cheque = orders.sum(&:cheque_cents)
       goods =  orders.sum(&:goods_cents)
       tips = orders.sum(&:tip_cents)
       take = orders.sum(&:paid_cents)
+      self.credit_card_cents = card
+      self.cash_cents = cash
       self.goods_cents = goods
       self.cheque_cents = cheque
       self.tips_cents = tips
