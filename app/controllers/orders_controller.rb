@@ -149,7 +149,7 @@ class OrdersController < ApplicationController
       @order.update(params[:order])
 
       net_home_cents = @order.paid * 100 / (1 + CONFIG[:vat_rate_standard])
-      tax_home_cents = @order.paid * 100 - net_home
+      tax_home_cents = @order.paid * 100 - net_home_cents
 
       @order.update(net_home_cents: net_home_cents, tax_home_cents: tax_home_cents)
       @order.timings.create(state: @order.state)
