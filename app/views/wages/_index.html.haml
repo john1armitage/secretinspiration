@@ -35,7 +35,7 @@
     %tr
       %td= "#{wage.fy}/#{wage.week_no}"
       %td= (wage.posts.size > 0 ? 'OK' : '')
-      %td.left
+      %td
         - if wage.first_name
           =link_to(wage.first_name, edit_wage_path(wage))
         -else
