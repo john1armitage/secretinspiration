@@ -1,7 +1,7 @@
 .row.large-12
   .calendar
     - month = @daily_date.beginning_of_month
-    = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings, bookings: @bookings, orders: @orders}
+    = render partial: 'dailies/month', locals: {month: month, dailies: @dailies_by_date, timesheets: @timesheets_by_date, openings: @openings, bookings: @bookings, orders: @book_orders}
 
 :coffeescript
   jQuery ->

@@ -148,9 +148,9 @@ class OrdersController < ApplicationController
     elsif params[:order].present?
 
       @order.update(params[:order])
-      bill_cents = (@order.paid - (@order.tip + @order.goods + @order.voucher)) * 100
+      bill_cents = @order.paid * 100 - (@order.tip * 100 + @order.goods * 100 + @order.voucher * 100)
 
-      net_home_cents = bill_cents / (1 + CONFIG[:vat_rate_standard])
+      net_home_cents = (bill_cents / (1 + CONFIG[:vat_rate_standard])).ceil
       tax_home_cents = bill_cents - net_home_cents
 
       @order.update(net_home_cents: net_home_cents, tax_home_cents: tax_home_cents)
@@ -169,7 +169,7 @@ class OrdersController < ApplicationController
     end
     if params[:origin].present? and params[:origin] == 'dailies'
       notice = 'Order was successfully updated.'
-      redirect_to dailies_url(daily_date: @order.effective_date.beginning_of_month.strftime('%d-%m-%Y')), notice: notice
+      redirect_to dailies_url(daily_date: @order.effective_date.beginning_of_month.strftime('%d-%m-%Y'), orders: @order.effective_date), notice: notice
     else
       set_booking_dates
       render 'bookings/index'

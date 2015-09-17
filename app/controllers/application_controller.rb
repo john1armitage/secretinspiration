@@ -300,7 +300,7 @@ class ApplicationController < ActionController::Base
     @timesheets_by_date = get_timesheets(start, stop)
     @timesheets = Timesheet.includes(:employee).joins('LEFT OUTER JOIN dailies ON dailies.account_date = timesheets.work_date AND dailies.session = timesheets.session').where( "timesheets.work_date >= ? AND timesheets.work_date <= ? and employee_id = ?", start, stop, params[:employee] ).order('work_date, session DESC').select("timesheets.*, dailies.tips_cents as tips, dailies.headcount as headcount").group_by(&:work_date)
     @bookings = get_bookings(@daily_date, 'past')
-    @orders = get_orders(@daily_date, 'complete')
+    @book_orders = get_orders(@daily_date, 'complete')
   end
   helper_method :set_daily_dates
 
