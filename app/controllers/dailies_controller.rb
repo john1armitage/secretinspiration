@@ -83,23 +83,25 @@ class DailiesController < ApplicationController
       @daily.update(processed: true)
     end
     def remove_posts
+      p @daily.posts
       @daily.posts.destroy_all
+      p @daily.posts
     end
     def create_posts
       # card control
-      credit_card_post
+      credit_card_post if @daily.credit_card > 0
       # cash control
-      cash_post
+      cash_post if @daily.cash > 0
       # cheque control
       cheque_post if @daily.cheque > 0
       # goods control
-      goods_post
+      goods_post if @daily.goods > 0
       # VAT control
-      vat_post
+      vat_post if @daily.tax > 0
       # sales control
-      net_sales_post
+      net_sales_post if @daily.turnover > 0
       # tips control
-      tips_post
+      tips_post if @daily.tips > 0
     end
     def credit_card_post
       ref_bank = 'MERCHANT'

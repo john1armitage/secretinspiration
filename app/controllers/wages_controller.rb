@@ -132,7 +132,7 @@ class WagesController < ApplicationController
     # # tax control
     hmrc_post(wage)
     # holiday control
-    holiday_post(wage) if wage.employee.holiday
+    holiday_post(wage) if wage.employee.holiday && wage.gross > 0
     # employer costs
     payroll_cost_post(wage)
     # tips control
@@ -141,12 +141,14 @@ class WagesController < ApplicationController
   def wages_post(wage)
     credit = true
     credit_amount = wage.gross + wage.holiday + wage.bonus - ( wage.paye + wage.ni_employee )
-    debit_amount = 0.00
-    account = Account.find_by_name('Wages Payable')
-    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{@wage.week_no}"
-    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
-                         postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                         accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    if credit_amount > 0
+      debit_amount = 0.00
+      account = Account.find_by_name('Wages Payable')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{@wage.week_no}"
+      wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                           postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                           accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    end
   end
   def tips_post(wage)
     credit = false
@@ -217,11 +219,13 @@ class WagesController < ApplicationController
     credit_amount = 0.00
     holiday_earned = wage.employee.holiday ? wage.gross * CONFIG[:holiday_rate] / 100 : 0
     debit_amount = wage.gross + wage.holiday + wage.bonus + holiday_earned + wage.ni_employer
-    account = Account.find_by_name('Payroll Costs')
-    desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{wage.week_no}"
-    wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
-                        postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
-                        accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    if debit_amount > 0
+      account = Account.find_by_name('Payroll Costs')
+      desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{wage.week_no}"
+      wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
+                          postable_id: wage.id, debit_amount: debit_amount, credit_amount: credit_amount, account_id:account.id,
+                          accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
+    end
   end
 
     # Use callbacks to share common setup or constraints between actions.

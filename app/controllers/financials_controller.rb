@@ -565,11 +565,11 @@ class FinancialsController < ApplicationController
     to_account = Account.find_by_name(to_bank.name)
     desc = "#{from_bank.name} to: #{to_bank.name}"
     @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: 0, credit_amount: @financial.credit_amount, account_id: from_account.id,
+                                     debit_amount: 0, credit_amount: @financial.debit_amount, account_id: from_account.id,
                                      accountable_type:'Bank', accountable_id: to_bank.id, grouping_id: from_account.grouping_id)
     desc = "#{to_bank.name} from: #{from_bank.name}"
     @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: @financial.credit_amount, credit_amount: 0, account_id: to_account.id,
+                                     debit_amount: @financial.debit_amount, credit_amount: 0, account_id: to_account.id,
                                      accountable_type:'Bank', accountable_id: from_bank.id, grouping_id: to_account.grouping_id)
     financial_processed
   end
