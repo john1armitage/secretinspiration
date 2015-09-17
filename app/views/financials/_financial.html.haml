@@ -8,7 +8,7 @@
         = hidden_field_tag :processed, @q.processed_eq
       .field.small-2.columns.headings
         = link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        = link_to financial.event_date, edit_financial_path(financial), title: 'Edit Financial'
+        = link_to financial.event_date, edit_financial_path(financial), title: "Edit Financial: #{financial.id}"
       .field.small-3.columns.has-tip{"data-tooltip" => "", title: financial.desc}
         = "#{financial.entity_ref}"
         %br
