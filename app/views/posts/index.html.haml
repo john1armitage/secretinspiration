@@ -59,7 +59,7 @@
 
   - @posts.each do |posting|
     %tr
-      %td.has-tip.tip-right{'data-tooltip' => true, 'title' => posting.id}
+      %td.has-tip.tip-right{'data-tooltip' => true, 'title' => "#{posting.postable_type} #{posting.postable_id}"
         = posting.account_date.strftime("%-d %b %y")
       %td= posting.desc.sub(' debit','').sub(' credit','')
       %td= posting.account.name if posting.account
