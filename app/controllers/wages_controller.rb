@@ -3,7 +3,7 @@ class WagesController < ApplicationController
 
   # GET /wages
   def index
-    @wages = Wage.limit(50)
+    @wages = Wage.limit(5000)
     if params[:this_year].present?
       fy_start = "06-04-#{Date.today.year}".to_date
       fy_start = fy_start - 1.year if fy_start > Date.today
