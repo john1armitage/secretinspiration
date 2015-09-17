@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
       @orders = @orders.where( supplier_id: params[:supplier_id] ) #@supplier.orders.search(params[:q]).result(distinct: true).order("effective_date #{list_order}, net_total_cents DESC").limit(limit)
     else
       if params[:home].present?
+        @origin = params[:home] == 'dailies' ? 'dailies' : ''
         @orders = @orders.where(supplier_id: current_tenant.supplier_id) #.    orders.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC" )
       else
         @orders = @orders.outgoings(Supplier.find_by_name( current_tenant.home_supplier )) #.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
@@ -166,8 +167,13 @@ class OrdersController < ApplicationController
       # end
       # @order.update(tip_cents: 0) if @order.tip_cents.blank?
     end
-    set_booking_dates
-    render 'bookings/index'
+    if params[:origin].present? and params[:origin] == 'dailies'
+      notice = 'Order was successfully updated.'
+      redirect_to dailies_url(daily_date: @order.effective_date.beginning_of_month.strftime('%d-%m-%Y')), notice: notice
+    else
+      set_booking_dates
+      render 'bookings/index'
+    end
   end
 
   # DELETE /orders/1

@@ -11,7 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" afterPath="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" afterPath="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dailies/_month.html.haml" afterPath="$PROJECT_DIR$/app/views/dailies/_month.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/commerce.iml" afterPath="$PROJECT_DIR$/.idea/commerce.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/dailies_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/dailies_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/orders_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -28,7 +36,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/commerce@Development__commerce.coverage" NAME="Development: commerce Coverage Results" MODIFIED="1442488180558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
+    <SUITE FILE_PATH="coverage/commerce@Development__commerce.coverage" NAME="Development: commerce Coverage Results" MODIFIED="1442515383112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
     <SUITE FILE_PATH="coverage/commerce@db_migrate__commerce.coverage" NAME="db:migrate: commerce Coverage Results" MODIFIED="1441800059854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
     <SUITE FILE_PATH="coverage/commerce@routes__commerce.coverage" NAME="routes: commerce Coverage Results" MODIFIED="1441314953620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
     <SUITE FILE_PATH="coverage/commerce@Production__commerce.coverage" NAME="Production: commerce Coverage Results" MODIFIED="1438434933667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="commerce" />
@@ -50,37 +58,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/dailies_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="daily.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/daily.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="204" column="39" selection-start-line="204" selection-start-column="25" selection-end-line="204" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="commerce.js.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/commerce.js.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="order.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/order.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="64" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,9 +67,96 @@
       <file leaf-file-name="_show.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/dailies/_show.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-35.583332">
+            <state vertical-scroll-proportion="0.0">
               <caret line="151" column="128" selection-start-line="151" selection-start-column="128" selection-end-line="151" selection-end-column="128" />
-              <folding />
+              <folding>
+                <marker date="1442514544143" expanded="true" signature="693:700" placeholder="#editor" />
+                <marker date="1442514544143" expanded="true" signature="701:709" placeholder="#display" />
+                <marker date="1442514544143" expanded="true" signature="710:3832" placeholder="#summary" />
+                <marker date="1442514544143" expanded="true" signature="721:812" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="730:812" placeholder=".field.large-12.columns.title" />
+                <marker date="1442514544143" expanded="true" signature="815:887" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="824:887" placeholder=".field.large-12.columns.title" />
+                <marker date="1442514544143" expanded="true" signature="890:983" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="899:928" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="933:983" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="986:1083" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="995:1024" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1029:1083" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1086:1184" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1095:1125" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1130:1184" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1187:1278" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1196:1226" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="1231:1278" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="1281:1381" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1290:1318" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1323:1381" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1384:1476" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1393:1420" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1425:1476" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1479:1575" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1488:1517" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1522:1575" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1578:1670" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1587:1614" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1619:1670" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1673:1771" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1682:1712" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="1717:1771" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="1774:1883" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1783:1820" placeholder=".large-6.columns.off" />
+                <marker date="1442514544143" expanded="true" signature="1825:1883" placeholder=".large-6.columns.number.off" />
+                <marker date="1442514544143" expanded="true" signature="1886:1994" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="1895:1930" placeholder=".large-6.columns.off" />
+                <marker date="1442514544143" expanded="true" signature="1935:1994" placeholder=".large-6.columns.number.off" />
+                <marker date="1442514544143" expanded="true" signature="1997:2103" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2006:2040" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="2045:2103" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="2106:2202" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2115:2144" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="2149:2202" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="2205:2305" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2214:2245" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="2250:2305" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="2308:2406" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2317:2347" placeholder=".large-6.columns.off" />
+                <marker date="1442514544143" expanded="true" signature="2352:2406" placeholder=".large-6.columns.number.off" />
+                <marker date="1442514544143" expanded="true" signature="2409:2507" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2418:2448" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="2453:2507" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="2595:2698" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2606:2636" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="2643:2698" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="2703:2798" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2714:2744" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="2751:2798" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="2835:2944" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2846:2883" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="2890:2944" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="2949:3007" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="2960:3007" placeholder=".large-12.columns" />
+                <marker date="1442514544143" expanded="true" signature="3012:3114" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3023:3054" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="3061:3114" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="3119:3229" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3130:3164" placeholder=".large-6.columns" />
+                <marker date="1442514544143" expanded="true" signature="3171:3229" placeholder=".large-6.columns.number" />
+                <marker date="1442514544143" expanded="true" signature="3234:3295" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3245:3295" placeholder=".large-12.columns.off" />
+                <marker date="1442514544143" expanded="true" signature="3300:3406" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3311:3343" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="3350:3406" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="3411:3525" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3422:3461" placeholder=".large-6.columns.off" />
+                <marker date="1442514544143" expanded="true" signature="3468:3525" placeholder=".large-6.columns.number.off" />
+                <marker date="1442514544143" expanded="true" signature="3528:3628" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3537:3568" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="3573:3628" placeholder=".large-6.columns.number.id" />
+                <marker date="1442514544143" expanded="true" signature="3631:3832" placeholder=".row" />
+                <marker date="1442514544143" expanded="true" signature="3640:3671" placeholder=".large-6.columns.id" />
+                <marker date="1442514544143" expanded="true" signature="3676:3832" placeholder=".large-6.columns.number.id" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +164,18 @@
       <file leaf-file-name="orders_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13474026">
-              <caret line="149" column="45" selection-start-line="149" selection-start-column="45" selection-end-line="149" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.46614873">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_month.html.haml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/dailies/_month.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-32.791668">
+              <caret line="62" column="140" selection-start-line="62" selection-start-column="140" selection-end-line="62" selection-end-column="140" />
               <folding />
             </state>
           </provider>
@@ -109,7 +184,7 @@
       <file leaf-file-name="index.js.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/index.js.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -119,9 +194,12 @@
       <file leaf-file-name="_index.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1442514544147" expanded="true" signature="0:7" placeholder="#editor" />
+                <marker date="1442514544147" expanded="true" signature="8:16" placeholder="#display" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,8 +207,8 @@
       <file leaf-file-name="_current_order.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.875">
-              <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+            <state vertical-scroll-proportion="-3.125">
+              <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -139,8 +217,8 @@
       <file leaf-file-name="_bill.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.333334">
-              <caret line="147" column="89" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="89" />
+            <state vertical-scroll-proportion="-35.291668">
+              <caret line="155" column="28" selection-start-line="155" selection-start-column="28" selection-end-line="155" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -189,7 +267,6 @@
         <option value="$PROJECT_DIR$/db/migrate/20150909105645_create_table_timings.rb" />
         <option value="$PROJECT_DIR$/app/models/order.rb" />
         <option value="$PROJECT_DIR$/app/models/pay_rate.rb" />
-        <option value="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_line_item.html.haml" />
         <option value="$PROJECT_DIR$/app/models/line_item.rb" />
         <option value="$PROJECT_DIR$/app/views/meals/_monitor.html.haml" />
@@ -201,7 +278,6 @@
         <option value="$PROJECT_DIR$/app/models/timesheet.rb" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/timesheets/_payroll.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/dailies/_month.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/commerce.css.scss" />
         <option value="$USER_HOME$/Dropbox/key/peppershack.co.uk/commerce.yml" />
         <option value="$PROJECT_DIR$/config/commerce.yml" />
@@ -209,7 +285,6 @@
         <option value="$PROJECT_DIR$/app/views/timesheets/_wage_editor.html.haml" />
         <option value="$PROJECT_DIR$/app/views/timesheets/_wage.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/financials_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/dailies_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/wages/_index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/wages/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/posts/index.html.haml" />
@@ -217,7 +292,10 @@
         <option value="$PROJECT_DIR$/app/controllers/wages_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/daily.rb" />
         <option value="$PROJECT_DIR$/app/views/dailies/_show.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/dailies_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" />
         <option value="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/dailies/_month.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
       </list>
     </option>
@@ -237,10 +315,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-4" />
-    <option name="width" value="1857" />
-    <option name="height" value="1085" />
+    <option name="x" value="65" />
+    <option name="y" value="5" />
+    <option name="width" value="1704" />
+    <option name="height" value="1024" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -268,7 +346,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -315,7 +392,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -333,7 +410,59 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orders" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orders" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shack" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commerce" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dailies" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -401,14 +530,15 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="RailsProjectView" />
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/key/peppershack.co.uk/commerce.yml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
     <property name="dynamic.classpath" value="false" />
@@ -682,17 +812,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="5" width="1704" height="1024" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27766797" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18684356" sideWeight="0.88842547" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18900967" sideWeight="0.88842547" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47653806" sideWeight="0.49958575" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36264822" sideWeight="0.8312546" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36206895" sideWeight="0.8312546" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28002214" sideWeight="0.11157456" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46851653" sideWeight="0.16874541" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30416223" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -724,9 +854,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23671497" sideWeight="0.88842547" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28304094" sideWeight="0.8312546" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24847476" sideWeight="0.55957943" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24847476" sideWeight="0.55957943" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28304094" sideWeight="0.8312546" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -832,6 +962,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="89" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/transfer.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -959,18 +1097,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dailies/_month.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.102622576">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/wage.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4787234">
           <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,7 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,13 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/commerce.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11653718">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1042,7 +1164,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.75">
           <caret line="22" column="19" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,7 +1171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.90979785">
           <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,7 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4535975">
           <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1066,17 +1185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder="if ... end" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".row" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".row.headings" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-1.columns" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-1.columns" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-1.columns.lefty" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-1.columns.lefty" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-1.columns.left.lefty" />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder=".small-2.columns.left.lefty" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1092,7 +1200,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8141593">
           <caret line="56" column="146" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1100,7 +1207,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7300885">
           <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1116,10 +1222,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.99115044">
           <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding>
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1442487178300" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,7 +1230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44247788">
           <caret line="62" column="72" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1135,7 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.877429">
           <caret line="112" column="24" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1143,30 +1244,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25641027">
           <caret line="12" column="66" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/dailies_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/daily.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="204" column="39" selection-start-line="204" selection-start-column="25" selection-end-line="204" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/commerce.js.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1183,46 +1260,168 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.333334">
-          <caret line="147" column="89" selection-start-line="147" selection-start-column="22" selection-end-line="147" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
+          <folding>
+            <marker date="1442514544147" expanded="true" signature="0:7" placeholder="#editor" />
+            <marker date="1442514544147" expanded="true" signature="8:16" placeholder="#display" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/order.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="64" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
+          <caret line="104" column="18" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/dailies/_show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-35.583332">
+        <state vertical-scroll-proportion="0.0">
           <caret line="151" column="128" selection-start-line="151" selection-start-column="128" selection-end-line="151" selection-end-column="128" />
+          <folding>
+            <marker date="1442514544143" expanded="true" signature="693:700" placeholder="#editor" />
+            <marker date="1442514544143" expanded="true" signature="701:709" placeholder="#display" />
+            <marker date="1442514544143" expanded="true" signature="710:3832" placeholder="#summary" />
+            <marker date="1442514544143" expanded="true" signature="721:812" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="730:812" placeholder=".field.large-12.columns.title" />
+            <marker date="1442514544143" expanded="true" signature="815:887" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="824:887" placeholder=".field.large-12.columns.title" />
+            <marker date="1442514544143" expanded="true" signature="890:983" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="899:928" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="933:983" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="986:1083" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="995:1024" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1029:1083" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1086:1184" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1095:1125" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1130:1184" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1187:1278" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1196:1226" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="1231:1278" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="1281:1381" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1290:1318" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1323:1381" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1384:1476" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1393:1420" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1425:1476" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1479:1575" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1488:1517" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1522:1575" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1578:1670" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1587:1614" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1619:1670" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1673:1771" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1682:1712" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="1717:1771" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="1774:1883" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1783:1820" placeholder=".large-6.columns.off" />
+            <marker date="1442514544143" expanded="true" signature="1825:1883" placeholder=".large-6.columns.number.off" />
+            <marker date="1442514544143" expanded="true" signature="1886:1994" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="1895:1930" placeholder=".large-6.columns.off" />
+            <marker date="1442514544143" expanded="true" signature="1935:1994" placeholder=".large-6.columns.number.off" />
+            <marker date="1442514544143" expanded="true" signature="1997:2103" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2006:2040" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="2045:2103" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="2106:2202" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2115:2144" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="2149:2202" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="2205:2305" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2214:2245" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="2250:2305" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="2308:2406" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2317:2347" placeholder=".large-6.columns.off" />
+            <marker date="1442514544143" expanded="true" signature="2352:2406" placeholder=".large-6.columns.number.off" />
+            <marker date="1442514544143" expanded="true" signature="2409:2507" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2418:2448" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="2453:2507" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="2595:2698" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2606:2636" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="2643:2698" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="2703:2798" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2714:2744" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="2751:2798" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="2835:2944" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2846:2883" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="2890:2944" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="2949:3007" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="2960:3007" placeholder=".large-12.columns" />
+            <marker date="1442514544143" expanded="true" signature="3012:3114" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3023:3054" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="3061:3114" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="3119:3229" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3130:3164" placeholder=".large-6.columns" />
+            <marker date="1442514544143" expanded="true" signature="3171:3229" placeholder=".large-6.columns.number" />
+            <marker date="1442514544143" expanded="true" signature="3234:3295" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3245:3295" placeholder=".large-12.columns.off" />
+            <marker date="1442514544143" expanded="true" signature="3300:3406" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3311:3343" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="3350:3406" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="3411:3525" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3422:3461" placeholder=".large-6.columns.off" />
+            <marker date="1442514544143" expanded="true" signature="3468:3525" placeholder=".large-6.columns.number.off" />
+            <marker date="1442514544143" expanded="true" signature="3528:3628" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3537:3568" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="3573:3628" placeholder=".large-6.columns.number.id" />
+            <marker date="1442514544143" expanded="true" signature="3631:3832" placeholder=".row" />
+            <marker date="1442514544143" expanded="true" signature="3640:3671" placeholder=".large-6.columns.id" />
+            <marker date="1442514544143" expanded="true" signature="3676:3832" placeholder=".large-6.columns.number.id" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/daily.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68368477">
+          <caret line="204" column="25" selection-start-line="204" selection-start-column="25" selection-end-line="204" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/commerce.js.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/dailies_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-35.291668">
+          <caret line="155" column="28" selection-start-line="155" selection-start-column="28" selection-end-line="155" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/dailies/_month.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-32.791668">
+          <caret line="62" column="140" selection-start-line="62" selection-start-column="140" selection-end-line="62" selection-end-column="140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.125">
+          <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13474026">
-          <caret line="149" column="45" selection-start-line="149" selection-start-column="45" selection-end-line="149" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.46614873">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>

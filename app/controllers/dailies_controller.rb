@@ -83,9 +83,7 @@ class DailiesController < ApplicationController
       @daily.update(processed: true)
     end
     def remove_posts
-      p @daily.posts
       @daily.posts.destroy_all
-      p @daily.posts
     end
     def create_posts
       # card control
