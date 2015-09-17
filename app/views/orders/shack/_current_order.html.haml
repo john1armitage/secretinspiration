@@ -8,8 +8,8 @@
       = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p
     %span
-      -#= pounds(current_order.net_home + current_order.tax_home)
-      = pounds(current_order.paid)
+      = pounds(current_order.net_home + current_order.tax_home)
+      =# pounds(current_order.paid)
     - if current_order.tax_home.to_i > 0
       %span
         = "(#{pounds(current_order.net_home)} + #{pounds(current_order.tax_home)})"

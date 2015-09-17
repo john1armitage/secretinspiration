@@ -147,9 +147,10 @@ class OrdersController < ApplicationController
     elsif params[:order].present?
 
       @order.update(params[:order])
+      bill_cents = (@order.paid - (@order.tip + @order.goods + @order.voucher)) * 100
 
-      net_home_cents = @order.paid * 100 / (1 + CONFIG[:vat_rate_standard])
-      tax_home_cents = @order.paid * 100 - net_home_cents
+      net_home_cents = bill_cents / (1 + CONFIG[:vat_rate_standard])
+      tax_home_cents = bill_cents - net_home_cents
 
       @order.update(net_home_cents: net_home_cents, tax_home_cents: tax_home_cents)
       @order.timings.create(state: @order.state)
