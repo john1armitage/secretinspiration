@@ -10,9 +10,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/views/dailies/_show.html.haml" line="124" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;" />
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -43,18 +41,7 @@
     <favorites_list name="commerce" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="_index.html.haml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/wages/_index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48230088">
-              <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -110,7 +97,6 @@
         <option value="$PROJECT_DIR$/app/views/wages/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/financials/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/financials/_financial.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/wages/_index.html.haml" />
         <option value="$PROJECT_DIR$/app/models/wage.rb" />
         <option value="$PROJECT_DIR$/app/views/timesheets/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/timesheets_controller.rb" />
@@ -127,6 +113,7 @@
         <option value="$PROJECT_DIR$/app/controllers/financials_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/dailies_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/wages_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/wages/_index.html.haml" />
       </list>
     </option>
   </component>
@@ -572,10 +559,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="-4" width="1857" height="1085" extended-state="7" />
+    <editor active="false" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27766797" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27766797" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1095,8 +1082,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/wages/_index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48230088">
-          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.8141593">
+          <caret line="56" column="146" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
           <folding />
         </state>
       </provider>

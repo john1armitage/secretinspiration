@@ -26,16 +26,6 @@
         = f.label :gross
         = f.text_field :gross
       .field.small-2.columns
-        = f.label :tips
-        = f.text_field :tips
-      .field.small-2.columns
-        = f.label :bonus
-        = f.text_field :bonus
-      .field.small-2.columns.left
-        = f.label :holiday
-        = f.text_field :holiday
-    .row
-      .field.small-2.columns
         = f.label :paye
         = f.text_field :paye
       .field.small-2.columns
@@ -44,9 +34,19 @@
       .field.small-2.columns
         = f.label :ni_employer, 'Employer'
         = f.text_field :ni_employer
+    .row
       .field.small-3.columns
         = f.label :paid_date
         = f.date_field :paid_date
+      .field.small-2.columns
+        = f.label :tips
+        = f.text_field :tips
+      .field.small-2.columns
+        = f.label :bonus
+        = f.text_field :bonus
+      .field.small-2.columns.left
+        = f.label :holiday
+        = f.text_field :holiday
     .row
       .field.small-12.columns
         = f.submit 'Save'
