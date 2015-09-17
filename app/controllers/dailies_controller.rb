@@ -10,6 +10,7 @@ class DailiesController < ApplicationController
     end
     if params[:orders].present?
       @orders = Order.where(supplier_id: current_tenant.supplier_id, effective_date: params[:orders])
+      @origin = 'dailies'
       render 'orders.js.erb'
     end
   end
