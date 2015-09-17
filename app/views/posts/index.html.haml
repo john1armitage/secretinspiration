@@ -34,7 +34,7 @@
       = f.collection_select :accountable_id_eq, @accountables, 'id', 'name', include_blank: true
     .field.small-3.columns.left
       = label_tag :limit
-      = select_tag :limit, options_for_select(%w[50 100 500 1000], params[:limit] || 100)
+      = select_tag :limit, options_for_select(%w[50 100 500 1000 2000 5000], params[:limit] || 100)
   .row
     .actions.small-3.columns.left
       = f.submit 'Search'
