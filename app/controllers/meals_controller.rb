@@ -178,26 +178,26 @@ class MealsController < ApplicationController
     @order.net_total_cents = @order.net_home_cents = @meal.line_items.map(&:net_total_item_cents).sum
     @order.tax_total_cents = @order.tax_home_cents = @meal.line_items.map(&:tax_total_item_cents).sum
     if params[:offer]
-      discount = 0.00
+      discount_cents = 0
       params[:offer].each do |k, v|
-        discount += v.to_d
+        discount_cents += v * 100
       end
-      @order.discount = discount
-      net_discount = current_tenant.vat ? @order.discount / (1 + CONFIG[:vat_rate_standard].to_d ) : 0
-      net_discount_tax = @order.discount - net_discount
-      @order.net_home -= net_discount
-      @order.tax_home -= net_discount_tax
-      @order.net_total = @order.net_home
-      @order.tax_total = @order.tax_home
+      @order.discount_cents = discount_cents
+      net_discount_cents = current_tenant.vat ? @order.discount_cents / (1 + CONFIG[:vat_rate_standard].to_d ) : 0
+      net_discount_tax_cents = @order.discount_cents - net_discount_cents
+      @order.net_home_cents -= net_discount_cents
+      @order.tax_home_cents -= net_discount_tax_cents
+      @order.net_total_cents = @order.net_home_cents
+      @order.tax_total_cents = @order.tax_home_cents
     end
-    if @meal.seating_id.blank? && (@order.net_home + @order.tax_home) > CONFIG[:takeaway_threshold].to_d
-      @order.discount = (@order.net_home + @order.tax_home) * CONFIG[:takeaway_discount]
-      net_discount = current_tenant.vat ? @order.discount / (1 + CONFIG[:vat_rate_standard].to_d ) : 0
-      net_discount_tax = @order.discount - net_discount
-      @order.net_home -= net_discount
-      @order.tax_home -= net_discount_tax
-      @order.net_total = @order.net_home
-      @order.tax_total = @order.tax_home
+    if @meal.seating_id.blank? && (@order.net_home_cents + @order.tax_home_cents) > CONFIG[:takeaway_threshold].to_d
+      @order.discount_cents = (@order.net_home_cents + @order.tax_home_cents) * CONFIG[:takeaway_discount]
+      net_discount_cents = current_tenant.vat ? (@order.discount_cents / (1 + CONFIG[:vat_rate_standard].to_d).ceil ) : 0
+      net_discount_tax_cents = @order.discount_cents - net_discount_cents
+      @order.net_home_cents -= net_discount_cents
+      @order.tax_home_cents -= net_discount_tax_cents
+      @order.net_total_cents = @order.net_home_cents
+      @order.tax_total_cents = @order.tax_home_cents
     end
     @order.seating = @meal.seating
     @order.effective_date = Time.now

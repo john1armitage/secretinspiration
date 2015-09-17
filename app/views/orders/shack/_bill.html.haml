@@ -34,7 +34,7 @@
       %td
         Total
       %td.right
-        = pounds(@order.net_total + @order.tax_total + @order.discount)
+        = pounds((@order.net_total_cents + @order.tax_total_cents + @order.discount_cents)/100.00)
 
     - if  @order.discount > 0
       - if params[:offer].present?
@@ -65,7 +65,7 @@
           To Pay
         %td.right
           %span#order_total
-            = pounds(@order.net_total + @order.tax_total)
+            = pounds((@order.net_total_cents + @order.tax_total_cents) / 100.00)
 
   -#%table
   -#  %tr.print-only.message
