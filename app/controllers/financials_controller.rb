@@ -429,7 +429,7 @@ class FinancialsController < ApplicationController
         if @financial.account_id.blank?
           financial_unprocessed
         else
-          purchase_posts
+          payment_posts
         end
       when 'charges'
         # reference bank charges
@@ -458,19 +458,23 @@ class FinancialsController < ApplicationController
     end
   end
 
-  def purchase_posts
+  def payment_posts
     account = @financial.account
-    supplier = Supplier.find(@financial.entity_id)
-    desc = "#{account.name} debit: #{supplier.name}"
-    net = @financial.credit_amount
-    if @financial.tax_home && @financial.tax_home > 0
-      net -= @financial.tax_home
-      vat_post(supplier)
+    if @financial.entity == 'Supplier'
+      entity = Supplier.find(@financial.entity_id)
+    else
+      entity = Employee.find(@financial.entity_id)
     end
-    bank_credit_post(supplier)
+    desc = "#{account.name} debit: #{entity.name}"
+    net = @financial.credit_amount
+    if @financial.entity == 'Supplier' && @financial.tax_home && @financial.tax_home > 0
+      net -= @financial.tax_home
+      vat_post(entity)
+    end
+    bank_credit_post(entity)
     @financial.posts.create!( account_date:  @account_date, desc: desc,
                                      debit_amount: net, credit_amount: 0, account_id: account.id,
-                                     accountable_type:'Supplier', accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
+                                     accountable_type:@financial.entity, accountable_id: @financial.entity_id, grouping_id: account.grouping_id)
     financial_processed
   end
 
