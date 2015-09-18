@@ -43,6 +43,14 @@
           = hidden_field_tag :origin, params[:origin]
           .row
             .large-2.columns
+              %p.center
+                &nbsp;
+              -#%span.small
+              -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
+              %p.center
+                = f.submit 'Check', id: 'bill_check'
+                = f.submit 'Save', id: 'bill_payment'
+            .large-2.columns
               = f.label :cheque
               = f.text_field :cheque
             .large-2.columns
@@ -57,14 +65,6 @@
             .large-2.columns.left
               = f.label :goods
               = f.text_field :goods
-            .large-2.columns
-              %p.center
-                &nbsp;
-              -#%span.small
-              -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
-              %p.center
-                = f.submit 'Check', id: 'bill_check'
-                = f.submit 'Save', id: 'bill_payment'
           -#.large-2.columns.left
           -#  %p.center
           -#    %span.small
