@@ -46,13 +46,13 @@
               = (daily.processed ? 'FFok' : '')
           %li
             %span
+              = "#{daily.credit_card}cc + #{pounds(daily.cash)}"
+          %li
+            %span
               = "#{daily.headcount} pax: "
               =# "#{pluralize(daily.headcount, 'head')}"
             %span
               = link_to "#{pounds(daily.tips)}", daily_path(daily), remote: true, class: 'no_ajaxify'
-          %li
-            %span
-              = "#{daily.credit_card}cc + #{pounds(daily.cash)}"
     - if timesheets[date]
       - timesheets[date].each do |timesheet|
         %li
