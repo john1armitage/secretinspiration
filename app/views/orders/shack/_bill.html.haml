@@ -48,8 +48,8 @@
               -#%span.small
               -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
               %p.center
-                = f.submit 'Check', id: 'bill_check'
                 = f.submit 'Save', id: 'bill_payment'
+                = f.submit 'Check', id: 'bill_check'
             .large-2.columns
               = f.label :cheque
               = f.text_field :cheque
