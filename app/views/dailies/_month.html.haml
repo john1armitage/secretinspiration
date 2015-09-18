@@ -24,10 +24,10 @@
     = link_to 'Shifts', new_timesheet_path(date: date.to_s), class: 'no_ajaxify', remote: true
     - if bookings[date]
       %li
-        = link_to (pluralize bookings[date].size, 'book'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
         - if orders[date]
-          = ':'
           = link_to (pluralize orders[date].size, 'order'), orders_path(date: date.to_s, home: 'dailies'), remote: true, class: 'no_ajaxify'
+          = ':'
+        = link_to (pluralize bookings[date].size, 'book'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
 
     - if dailies[date]
       - dailies[date].each do |daily|
