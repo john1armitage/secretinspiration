@@ -19,12 +19,90 @@
 
   %h3.no-print= "Bill #{@order.id}: #{@order.state}"
 
+  %p.no-print
+    %span
+      = link_to "Print",'#', id: 'print'
+      |
+    %span
+      = link_to 'Amend Bill', check_in_meal_path(@order.id), method: :post, data: {confirm: 'Re-Create Order?'}, remote: true, class: 'no_ajaxify'
+    -#- if @order.state == 'incomplete'
+    -#  |
+    -#  %span
+    -#    = link_to 'Complete', status_order_path(@order.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Complete Payment'}, remote: true, class: 'no_ajaxify'
+
+    - if allow? :orders, :edit
+      = form_for @order, url: {controller: 'orders', action: 'status', id: @order.id}, html: { class: 'no_ajaxify no-print'}, method: :post, remote: true, validate: true do |f|
+        %fieldset.no-pad
+          = hidden_field_tag :bill, true
+          = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
+          = f.hidden_field :state
+          = f.hidden_field :tip_cents
+          = f.hidden_field :paid_cents
+          = hidden_field_tag :origin, params[:origin]
+          .row
+            .large-2.columns
+              = f.label :cheque
+              = f.text_field :cheque
+            .large-2.columns
+              = f.label :cash, 'Cash'
+              = f.text_field :cash
+            .large-2.columns
+              = f.label :credit_card, 'Card'
+              = f.text_field :credit_card
+            .large-2.columns
+              = f.label :voucher
+              = f.text_field :voucher
+            .large-2.columns.left
+              = f.label :goods
+              = f.text_field :goods
+            .large-2.columns
+              %p.center
+                &nbsp;
+              -#%span.small
+              -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
+              %p.center
+                = f.submit 'Check', id: 'bill_check'
+                = f.submit 'Save', id: 'bill_payment'
+          -#.large-2.columns.left
+          -#  %p.center
+          -#    %span.small
+          -#      = "[#{pounds(@order.credit_card )}]"
+          -#  %p.center
+          -#    = f.submit 'Card', id: 'card_payment'
+          .row
+            - if allow? :orders, :destroy
+              .large-3.columns
+                = f.label :effective_date
+                = f.date_field :effective_date
+              .large-3.columns.left
+                = f.label :session
+                = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
+            .large-2.columns
+              - due = @order.net_total + @order.tax_total + @order.goods - @order.voucher
+              - paid = @order.cash + @order.cheque + @order.credit_card
+              %span
+                Total Paid
+              %br
+              %span#paid
+                = pounds(paid)
+            .large-2.columns
+              %span
+                Total Due
+              %br
+              %span#due
+                = pounds(due)
+            .large-1.columns.left
+              %span
+                Tip
+              %br
+              %span#tip
+                = pounds(@order.tip)
   %table#items
-    %tr.header.no-print
-      %td.title
-        = current_tenant.name
-      %td
-        &nbsp;
+    -#%tr.header.no-print
+    -#  %td.title
+    -#    = current_tenant.name
+    -#  %td
+    -#    &nbsp;
     - line_items = @order.line_items.joins( {:variant => :item } ) #.order('items.grouping, items.rank, line_items.desc')
     != render partial: "orders/#{current_tenant.domain}/line_item", collection: line_items.order('items.grouping, items.rank, line_items.desc')
     %tr
@@ -87,81 +165,3 @@
         = @order.updated_at.strftime('%e-%m-%y')
         %br
         = "Table #{@order.seating.tabel.name}" if @order.seating
-  %p.no-print
-    %span
-      = link_to "Print",'#', id: 'print'
-      |
-    %span
-      = link_to 'Amend Bill', check_in_meal_path(@order.id), method: :post, data: {confirm: 'Re-Create Order?'}, remote: true, class: 'no_ajaxify'
-    -#- if @order.state == 'incomplete'
-    -#  |
-    -#  %span
-    -#    = link_to 'Complete', status_order_path(@order.id, status: 'complete', bill: true), method: :post, data: {confirm: 'Complete Payment'}, remote: true, class: 'no_ajaxify'
-
-    - if allow? :orders, :edit
-      = form_for @order, url: {controller: 'orders', action: 'status', id: @order.id}, html: { class: 'no_ajaxify no-print'}, method: :post, remote: true, validate: true do |f|
-        %fieldset.no-pad
-          = hidden_field_tag :bill, true
-          = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
-          = f.hidden_field :state
-          = f.hidden_field :tip_cents
-          = f.hidden_field :paid_cents
-          = hidden_field_tag :origin, params[:origin]
-          .row
-            .large-2.columns
-              = f.label :cheque
-              = f.text_field :cheque
-            .large-2.columns
-              = f.label :cash, 'Cash'
-              = f.text_field :cash
-            .large-2.columns
-              = f.label :credit_card, 'Card'
-              = f.text_field :credit_card
-            .large-2.columns
-              = f.label :voucher
-              = f.text_field :voucher
-            .large-2.columns.left
-              = f.label :goods
-              = f.text_field :goods
-            .large-2.columns
-              %p.center
-                &nbsp;
-                -#%span.small
-                -#  = "[#{pounds( @order.paid + @order.tip - @order.credit_card )}]"
-              %p.center
-                = f.submit 'Check', id: 'bill_check'
-                = f.submit 'Save', id: 'bill_payment'
-            -#.large-2.columns.left
-            -#  %p.center
-            -#    %span.small
-            -#      = "[#{pounds(@order.credit_card )}]"
-            -#  %p.center
-            -#    = f.submit 'Card', id: 'card_payment'
-          .row
-            - if allow? :orders, :destroy
-              .large-3.columns
-                = f.label :effective_date
-                = f.date_field :effective_date
-              .large-3.columns.left
-                = f.label :session
-                = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
-            .large-2.columns
-              - due = @order.net_total + @order.tax_total + @order.goods - @order.voucher
-              - paid = @order.cash + @order.cheque + @order.credit_card
-              %span
-                Total Paid
-              %br
-              %span#paid
-                = pounds(paid)
-            .large-2.columns
-              %span
-                Total Due
-              %br
-              %span#due
-                = pounds(due)
-            .large-1.columns.left
-              %span
-                Tip
-              %br
-              %span#tip
-                = pounds(@order.tip)
