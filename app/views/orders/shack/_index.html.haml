@@ -31,7 +31,7 @@
           = "Tips"
         %span
           = "#{pounds(@orders.to_a.sum(&:tip_cents)/100.00)}"
-      - goods = @orders.to_a.sum(&:good_cents)/100.00
+      - goods = @orders.to_a.sum(&:goods_cents)/100.00
       - if goods > 0
         %p
           %span.title
