@@ -146,9 +146,6 @@ class OrdersController < ApplicationController
     if params[:status].present?
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
-      # p params[:order][:tip]
-      # p @order.tip
-      # p @order.tip_cents
       @order.update(params[:order])
       bill_cents = @order.paid * 100 - (@order.tip * 100 + @order.goods * 100 + @order.voucher * 100)
 
@@ -158,16 +155,6 @@ class OrdersController < ApplicationController
       @order.update(net_home_cents: net_home_cents, tax_home_cents: tax_home_cents)
       @order.timings.create(state: @order.state)
 
-      # if @order.goods > 0
-      #   @order.paid = @order.paid - @order.goods
-      #   @order.save
-      # end
-      # if @order.voucher > 0
-      #   @order.net_home = (@order.paid / 1.2)
-      #   @order.tax_home = (@order.paid - @order.net_home)
-      #   @order.save
-      # end
-      # @order.update(tip_cents: 0) if @order.tip_cents.blank?
     end
     if params[:origin].present? and params[:origin] == 'dailies'
       notice = 'Order was successfully updated.'
