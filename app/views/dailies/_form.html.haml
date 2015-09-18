@@ -8,6 +8,9 @@
         = f.label :account_date, "Cash-up #{@daily.session.capitalize}"
         = f.hidden_field :account_date
         = @daily.account_date.strftime("%a,%e %b %Y")
+    .row
+      .field.small-12.columns.left
+        = f.submit 'Save'
     - if @orders.size > 0 || !(allow? :orders, :destroy)
       = f.hidden_field :credit_card
       = f.hidden_field :cheque
@@ -88,6 +91,3 @@
       .field.small-12.columns.left
         %label
           = "Headcount: #{@daily.headcount} Correct?"
-    .row
-      .field.small-12.columns.left
-        = f.submit 'Save'
