@@ -72,13 +72,6 @@
           -#  %p.center
           -#    = f.submit 'Card', id: 'card_payment'
           .row
-            - if allow? :orders, :destroy
-              .large-3.columns
-                = f.label :effective_date
-                = f.date_field :effective_date
-              .large-3.columns.left
-                = f.label :session
-                = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
             .large-2.columns
               - due = @order.net_total + @order.tax_total + @order.goods - @order.voucher
               - paid = @order.cash + @order.cheque + @order.credit_card
@@ -99,6 +92,13 @@
               %br
               %span#tip
                 = pounds(@order.tip)
+            - if allow? :orders, :destroy
+              .large-3.columns
+                = f.label :effective_date
+                = f.date_field :effective_date
+              .large-3.columns.left
+                = f.label :session
+                = f.select :session, options_for_select(Element.where(kind: 'sessions').order(:rank).map(&:name), @order.session)
   %table#items
     -#%tr.header.no-print
     -#  %td.title
