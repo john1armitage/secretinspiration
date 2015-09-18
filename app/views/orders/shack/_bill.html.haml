@@ -51,14 +51,14 @@
                 = f.submit 'Save', id: 'bill_payment'
                 = f.submit 'Check', id: 'bill_check'
             .large-2.columns
-              = f.label :cheque
-              = f.text_field :cheque
-            .large-2.columns
               = f.label :cash, 'Cash'
               = f.text_field :cash
             .large-2.columns
               = f.label :credit_card, 'Card'
               = f.text_field :credit_card
+            .large-2.columns
+              = f.label :cheque
+              = f.text_field :cheque
             .large-2.columns
               = f.label :voucher
               = f.text_field :voucher
