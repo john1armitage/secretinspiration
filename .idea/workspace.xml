@@ -12,6 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" afterPath="$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" afterPath="$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="commerce.iws" />
@@ -48,8 +49,8 @@
       <file leaf-file-name="_current_order.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625">
-              <caret line="9" column="85" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+            <state vertical-scroll-proportion="-3.125">
+              <caret line="5" column="51" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -58,9 +59,26 @@
       <file leaf-file-name="_bill.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6544715">
-              <caret line="105" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.46747968">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+              <folding>
+                <marker date="1442571795825" expanded="true" signature="0:5637" placeholder="#invoice" />
+                <marker date="1442571795825" expanded="true" signature="11:417" placeholder="#print-header" />
+                <marker date="1442571795825" expanded="true" signature="1635:2474" placeholder=".row" />
+                <marker date="1442571795825" expanded="true" signature="1652:1737" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="1750:1839" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="1852:1955" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="1968:2055" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="2068:2156" placeholder=".large-2.columns.left" />
+                <marker date="1442571795825" expanded="true" signature="2169:2474" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="2704:3683" placeholder=".row" />
+                <marker date="1442571795825" expanded="true" signature="2765:2870" placeholder=".large-3.columns" />
+                <marker date="1442571795825" expanded="true" signature="2885:3071" placeholder=".large-3.columns.left" />
+                <marker date="1442571795825" expanded="true" signature="3084:3383" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="3396:3530" placeholder=".large-2.columns" />
+                <marker date="1442571795825" expanded="true" signature="3543:3683" placeholder=".large-1.columns.left" />
+                <marker date="1442571795825" expanded="true" signature="5143:5275" placeholder="#print-header" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1138,17 +1156,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_current_order.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="85" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        <state vertical-scroll-proportion="-3.125">
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/orders/shack/_bill.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6544715">
-          <caret line="105" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.46747968">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+          <folding>
+            <marker date="1442571795825" expanded="true" signature="0:5637" placeholder="#invoice" />
+            <marker date="1442571795825" expanded="true" signature="11:417" placeholder="#print-header" />
+            <marker date="1442571795825" expanded="true" signature="1635:2474" placeholder=".row" />
+            <marker date="1442571795825" expanded="true" signature="1652:1737" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="1750:1839" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="1852:1955" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="1968:2055" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="2068:2156" placeholder=".large-2.columns.left" />
+            <marker date="1442571795825" expanded="true" signature="2169:2474" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="2704:3683" placeholder=".row" />
+            <marker date="1442571795825" expanded="true" signature="2765:2870" placeholder=".large-3.columns" />
+            <marker date="1442571795825" expanded="true" signature="2885:3071" placeholder=".large-3.columns.left" />
+            <marker date="1442571795825" expanded="true" signature="3084:3383" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="3396:3530" placeholder=".large-2.columns" />
+            <marker date="1442571795825" expanded="true" signature="3543:3683" placeholder=".large-1.columns.left" />
+            <marker date="1442571795825" expanded="true" signature="5143:5275" placeholder="#print-header" />
+          </folding>
         </state>
       </provider>
     </entry>

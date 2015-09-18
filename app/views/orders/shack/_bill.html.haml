@@ -21,6 +21,8 @@
 
   %p.no-print
     %span
+      = @order.desc.sub(/.*:/,"")
+    %span
       = link_to "Print",'#', id: 'print'
       |
     %span
