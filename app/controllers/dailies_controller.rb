@@ -9,7 +9,7 @@ class DailiesController < ApplicationController
       set_daily_dates
     end
     if params[:orders].present?
-      @orders = Order.where(supplier_id: current_tenant.supplier_id, effective_date: params[:orders]).order(:effective_date)
+      @orders = Order.where(supplier_id: current_tenant.supplier_id, effective_date: params[:orders]).order('effective_date DESC')
       @origin = 'dailies'
       render 'orders.js.erb'
     end
