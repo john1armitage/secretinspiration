@@ -104,8 +104,8 @@
           = hidden_field_tag :bill, true
           = hidden_field_tag :order_total, (@order.net_total + @order.tax_total)
           = f.hidden_field :state
-          = f.hidden_field :tip
-          = f.hidden_field :paid
+          = f.hidden_field :tip_cents
+          = f.hidden_field :paid_cents
           = hidden_field_tag :origin, params[:origin]
           .row
             .large-2.columns

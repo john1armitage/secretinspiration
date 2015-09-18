@@ -62,8 +62,8 @@ jQuery ->
     $('span#paid').text('£' + parseFloat(total_paid, 10).toFixed(2))
     $('span#due').text('£' + parseFloat(total_due, 10).toFixed(2))
     $('span#tip').text('£' + parseFloat(net_tips, 10).toFixed(2))
-    $('input#order_tip').val(net_tips)
-    $('input#order_paid').val(total_paid)
+    $('input#order_tip_cents').val(Math.round(net_tips * 100))
+    $('input#order_paid_cents').val(Math.round(total_paid * 100))
 
   $(document).on "click", 'input.variant', (event) ->
     variant = $(event.target).data('id')

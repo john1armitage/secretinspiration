@@ -146,7 +146,9 @@ class OrdersController < ApplicationController
     if params[:status].present?
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
-
+      # p params[:order][:tip]
+      # p @order.tip
+      # p @order.tip_cents
       @order.update(params[:order])
       bill_cents = @order.paid * 100 - (@order.tip * 100 + @order.goods * 100 + @order.voucher * 100)
 
