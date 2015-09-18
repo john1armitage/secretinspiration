@@ -14,17 +14,17 @@ class OrdersController < ApplicationController
       limit = params[:limit] || 500
       list_order = 'ASC'
     end
-    @orders = @q.result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
+    @orders = @q.result(distinct: true).limit(limit).order("effective_date #{list_order}, id DESC")
 
     if params[:supplier_id].present?
       @supplier = Supplier.find(params[:supplier_id])
-      @orders = @orders.where( supplier_id: params[:supplier_id] ) #@supplier.orders.search(params[:q]).result(distinct: true).order("effective_date #{list_order}, net_total_cents DESC").limit(limit)
+      @orders = @orders.where( supplier_id: params[:supplier_id] )
     else
       if params[:home].present?
         @origin = params[:home] == 'dailies' ? 'dailies' : ''
-        @orders = @orders.where(supplier_id: current_tenant.supplier_id) #.    orders.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC" )
+        @orders = @orders.where(supplier_id: current_tenant.supplier_id)
       else
-        @orders = @orders.outgoings(Supplier.find_by_name( current_tenant.home_supplier )) #.search(params[:q]).result(distinct: true).limit(limit).order("effective_date #{list_order}, net_total_cents DESC")
+        @orders = @orders.outgoings(Supplier.find_by_name( current_tenant.home_supplier ))
       end
     end
     @orders = @orders.where(effective_date: params[:date]) if params[:date].present?
