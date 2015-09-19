@@ -6,7 +6,6 @@
       %span
         Orders
     - @orders = @orders.where(state: 'complete').order('id DESC')
-    - p @orders
     = render :partial => "orders/#{current_tenant.domain}/current_order", collection: @orders
     %li#summary
       %p
