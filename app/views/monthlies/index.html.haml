@@ -21,14 +21,14 @@
   - @monthlies.order(:year, :month).each do |monthly|
     %tr
       %td= "#{monthly.year}:#{monthly.month}"
-      %td= monthly.credit_card + monthly.cash + monthly.cash_used
+      %td= (monthly.credit_card + monthly.cash + monthly.cash_used).round(2)
       %td= monthly.credit_card
       %td= monthly.cash
       %td= monthly.cash_used
       %td= monthly.tips
       %td= monthly.takings
       %td= monthly.tax
-      %td= monthly.tips + monthly.takings + monthly.tax
+      %td= (monthly.tips + monthly.takings + monthly.tax).round(2)
       %td= link_to 'Ed', edit_monthly_path(monthly)
       %td= link_to 'X', monthly, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
