@@ -46,40 +46,35 @@
       = f.label :summary_eq, 'Employee'
       = f.select :summary_eq, options_for_select(@employees, @employee), include_blank: true
     .field.small-3.columns
-      = f.label :classification_eq, 'Target Bank'
-      = f.collection_select :classification_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
-      -#= f.select :classification_eq, options_for_select(@banks, @target_bank), include_blank: true
+      = f.label :mandate_eq, 'Target Bank'
+      = f.collection_select :mandate_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
   .row
+    .field.small-3.columns
+      = f.label :classification_eq, 'Type'
+      = f.select :classification_eq, options_for_select(@classes, @class), include_blank: true
+    .field.small-2.columns.left
+      = f.label :processed_eq, 'Processed'
+      = f.check_box :processed_eq
+    .field.small-2.columns.left
+      = label_tag :vat_only
+      = check_box_tag :vat_only, true, params[:vat_only]
+    .field.small-2.columns.left
+      = label_tag :ascending
+      = check_box_tag :ascending, true, params[:ascending]
+    .field.small-2.columns.left
+      = label_tag :exceptions
+      = check_box_tag :exceptions, true, params[:exceptions]
     .actions
       = f.submit 'Search'
 
+= render @financials
 
-%table.money
-  %thead
-    %tr
-      %th Date
-      %th
-      %th
-      %th Credit
-      %th Debit
-      -#%th Res
-      -#%th Proc
-      %th
-      %th
-
-  %tbody
-    - @financials.each do |financial|
-      %tr
-        %td= financial.event_date
-        -#%td= financial.classification
-        %td.has-tip{"data-tooltip" => "", title: financial.desc}
-          = financial.summary
-        %td.has-tip{"data-tooltip" => "", title: financial.entity_id}
-          = financial.entity_ref.truncate(15, omission: '...') unless financial.entity_ref.blank?
-        %td= (financial.credit_amount && financial.credit_amount > 0 ? pounds(financial.credit_amount) : '')
-        %td= (financial.debit_amount && financial.debit_amount > 0 ? pounds(financial.debit_amount) : '')
-        -#%td= ( financial.resolved ? 'OK' : '' )
-        -#%td= ( financial.processed ? 'OK' : '' )
-        %td= link_to 'E', edit_financial_path(financial)
-        %td= link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+:javascript
+  vat_rate = "#{CONFIG[:vat_rate_standard]}";
+:coffeescript
+  $(".VAT").change ->
+    if $(this).is(":checked")
+      gross = $(this).siblings().val()
+      net = gross / parseFloat(1.00 + parseFloat(vat_rate))
+      vat = (gross - net).toFixed(2)
+    $(this).parent().siblings().find("#financial_tax_home").val vat

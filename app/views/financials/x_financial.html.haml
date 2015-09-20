@@ -4,8 +4,6 @@
   %fieldset.compact
     .row
       = hidden_field_tag :editor, true
-      = hidden_field_tag :event_date_gteq, @q.event_date_gteq
-      = hidden_field_tag :event_date_lteq, @q.event_date_lteq
       .field.small-1.columns.headings
         = hidden_field_tag :processed, @q.processed_eq
       .field.small-2.columns.headings

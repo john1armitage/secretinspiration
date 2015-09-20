@@ -51,14 +51,6 @@ class FinancialsController < ApplicationController
       @q.processed_eq = processed = params[:processed] == 'true' ? true : false
       @financials = @financials.where(processed: processed)
     end
-    if params[:event_date_gteq].present?
-      @financials = @financials.where('event_date >= ?', params[:event_date_gteq] )
-      @q.event_date_gteq = params[:event_date_gteq]
-    end
-    if params[:event_date_lteq].present?
-      @financials = @financials.where('event_date <= ?', params[:event_date_lteq] )
-      @q.event_date_lteq = params[:event_date_lteq]
-    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -375,10 +367,8 @@ class FinancialsController < ApplicationController
         # if params[:editor].present?
         #   redirect_to financials_url(no_process: true), notice: 'Financial was successfully updated.'
         # else
-        processed = params[:processed].present?  && params[:processed] == 'true'
-        start = params[:event_date_gteq].present? ? params[:event_date_gteq] : ''
-        stop = params[:event_date_lteq].present? ? params[:event_date_lteq] : ''
-          format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop )}
+          processed = params[:processed].present?  && params[:processed] == 'true'
+          format.html { redirect_to financials_url(processed: processed )}
           format.json { head :no_content }
         # end
       else
