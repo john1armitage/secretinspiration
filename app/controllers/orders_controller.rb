@@ -147,7 +147,7 @@ class OrdersController < ApplicationController
       @order.update_attribute(:state, params[:status])
     elsif params[:order].present?
       @order.update(params[:order])
-      bill_cents = @order.paid * 100 - (@order.tip * 100 + @order.goods * 100 + @order.voucher * 100)
+      bill_cents = @order.paid * 100 - (@order.tip * 100 + @order.goods * 100)
 
       net_home_cents = (bill_cents / (1 + CONFIG[:vat_rate_standard])).ceil
       tax_home_cents = bill_cents - net_home_cents
