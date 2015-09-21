@@ -279,7 +279,7 @@ class DailiesController < ApplicationController
   end
 
   def get_daily_orders
-    Order.where(session: @daily.session, effective_date: @daily.account_date)
+    Order.where(session: @daily.session, effective_date: @daily.account_date, state: 'complete')
   end
     # Only allow a trusted parameter "white list" through.
   def current_resource

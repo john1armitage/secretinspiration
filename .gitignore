@@ -23,7 +23,7 @@
 capybara-*.html
 .rspec
 /.idea/*
-.idea/workspace.xml
+/.idea/workspace.xml
 /vendor/bundle
 /log/*
 /tmp/*
