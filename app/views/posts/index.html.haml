@@ -74,9 +74,9 @@
       -#    - title = "Receipt #{posting.postable_id}"
       -#  - else
       -#    - title = ''
-      %td
-        -#.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
-        = posting.accountable.name if posting.accountable
+      -#%td
+      -#  -#.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
+      -#  = posting.accountable.name if posting.accountable
       %td.number= pounds( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= pounds( posting.credit_amount )  unless posting.credit_amount == 0
       -#%td.number

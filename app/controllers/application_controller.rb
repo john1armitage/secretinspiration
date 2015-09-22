@@ -484,7 +484,7 @@ class ApplicationController < ActionController::Base
     grouped = []
     groupings = []
     allocations = []
-    accounts = ['Direct Costs','Overheads','Fixed Assets','Current Assets','Current Liabilities','Long Term Liabilities']
+    accounts = ['Direct Costs','Overheads','Disallowed','Fixed Assets','Current Assets','Current Liabilities','Long Term Liabilities']
     accounts.each do |a|
       if account = Account.find_by_name(a) #.select(:id, :name)
         groupings << account

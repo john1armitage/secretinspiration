@@ -53,6 +53,7 @@ class AccountingController < ApplicationController
     @direct_costs = posts.where('groupings.name = ? AND debit_amount_cents > 0','Direct Costs').sum('debit_amount_cents').to_d / 100
     overheads = posts.where('groupings.name = ? AND debit_amount_cents > 0','Overheads')
     @overheads = overheads.sum('debit_amount_cents').to_d / 100
+    @disallowed = posts.where('groupings.name = ? AND debit_amount_cents > 0','Disallowed').sum('debit_amount_cents').to_d / 100
     @fixed_assets = posts.where('groupings.name = ? AND debit_amount_cents > 0','Fixed Assets').sum('debit_amount_cents').to_d / 100
 
     posts = Post.includes(:account).where('account_date >= ?',@start)
