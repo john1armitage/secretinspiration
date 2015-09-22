@@ -47,11 +47,11 @@ class WagesController < ApplicationController
       render 'edit'
     else
       @wage = Wage.new
-      @wage.fy = cookies[:last_wage_fy]
-      @wage.employee_id = cookies[:last_employee]
-      @wage.rate = cookies[:last_rate]
-      @wage.week_no = cookies[:last_wage_week_no].to_i + 1
-      @wage.paid_date = cookies[:last_paid_date].to_date + 7.days
+      @wage.fy = cookies[:last_wage_fy] if cookies[:last_wage_fy]
+      @wage.employee_id = cookies[:last_employee] if cookies[:last_employee]
+      @wage.rate = cookies[:last_rate] if cookies[:last_rate]
+      @wage.week_no = cookies[:last_wage_week_no].to_i + 1 if cookies[:last_wage_week_no]
+      @wage.paid_date = cookies[:last_paid_date].to_date + 7.days if cookies[:last_paid_date]
     end
     @wage = check_nil_cents(@wage)
   end

@@ -8,9 +8,8 @@ class PostsController < ApplicationController
     @groupings = Post.joins("INNER JOIN accounts ON posts.grouping_id = accounts.id").select('accounts.name AS name', 'posts.grouping_id AS id, accounts.code').order('accounts.code').uniq
     @accounts = Account.joins(:posts).order("name").select('name', 'accounts.id').uniq
     @accountables = Supplier.joins(:posts). where("posts.accountable_type = 'Supplier' AND suppliers.id = posts.accountable_id").order("name").select('name', 'posts.accountable_id AS id','rank').uniq
-    @accountables += Employee.joins(:posts). where("posts.accountable_type = 'Employee' AND employees.id = posts.accountable_id").order("reference").select('reference AS name','first_name','last_name', 'posts.accountable_id AS id').uniq
+    @accountables += Employee.joins(:posts). where("posts.accountable_type = 'Employee' AND employees.id = posts.accountable_id").order("first_name").select('reference AS name','first_name','last_name', 'posts.accountable_id AS id').uniq
     @accountables += Bank.joins(:posts). where("posts.accountable_type = 'Bank' AND banks.id = posts.accountable_id").order("reference").select('reference','name', 'posts.accountable_id AS id', 'rank').uniq
-
     list_order = ''
 
     unless params[:financial].present? && !params[:financial].blank?
