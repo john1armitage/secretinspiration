@@ -63,7 +63,7 @@ class WagesController < ApplicationController
     @wage = check_nil_cents(@wage)
 
     if @wage.save!
-      create_posts(@wage)
+      create_posts(@wage) if @wage.post
       cookies[:last_wage_fy] = @wage.fy
       cookies[:last_employee] = @wage.employee_id
       cookies[:last_rate] = @wage.rate
@@ -83,7 +83,7 @@ class WagesController < ApplicationController
       @wage.save
       # if params[:editor].present?
       remove_posts(@wage)
-      create_posts(@wage)
+      create_posts(@wage) if @wage.post
       cookies[:last_wage_fy] = @wage.fy
       cookies[:last_wage_week_no] = @wage.week_no
       cookies[:last_paid_date] = @wage.paid_date
