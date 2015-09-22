@@ -7,6 +7,10 @@
       .field.small-3.columns.left
         = label_tag :week_no, 'Week'
         = text_field_tag :week_no, @week_no
+      .field.small-3.columns.left
+        - employees = Employee.where(live: true).order(:first_name)
+        = label_tag :employee_id, 'Employee'
+        = select_tag :employee_id,  options_from_collection_for_select(employees, "id", "first_name", params[:employee_id]), include_blank: true
     .row.search
       -#.field.small-1.columns
       -#  &nbsp;

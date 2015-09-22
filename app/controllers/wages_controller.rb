@@ -16,11 +16,15 @@ class WagesController < ApplicationController
         @week_no = params[:week_no]
         @wages = @wages.where(week_no: params[:week_no].to_i)
       end
-    elsif cookies[:last_wage_fy] && cookies[:last_wage_week_no]
+    elsif !params[:employee_id].present? && cookies[:last_wage_fy] && cookies[:last_wage_week_no]
       @fy = cookies[:last_wage_fy]
       @week_no = cookies[:last_wage_week_no]
       @wages = Wage.where(fy: @fy, week_no: @week_no)
     end
+    if params[:employee_id].present?
+      @wages = @wages.where(employee_id: params[:employee_id])
+    end
+
     @wages = @wages.joins(:employee).includes(:posts).select( "wages.*, employees.first_name")
   end
 
