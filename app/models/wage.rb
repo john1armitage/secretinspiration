@@ -64,7 +64,6 @@ class Wage < ActiveRecord::Base
   end
 
 
-
   belongs_to :employee
 
   has_many  :posts, as: :postable, dependent: :destroy
