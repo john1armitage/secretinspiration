@@ -40,9 +40,9 @@ class FinancialsController < ApplicationController
     @q = Financial.search(params[:q])
 
     limit = params[:limit].present? ? (params[:limit] || 500) : 25
-    list_order = params[:ascending] ? 'ASC' : 'DESC'
+    list_order = (params[:ascending].present? && params[:ascending]) == 'true' ? 'ASC' : 'DESC'
 
-    @financials = @q.result(distinct: true).limit(limit).order("event_date #{list_order}, created_at #{list_order}")
+    @financials = @q.result(distinct: true).limit(limit)
 
     if params[:exceptions].present?
       has_posts = @financials.joins(:posts)
@@ -60,8 +60,17 @@ class FinancialsController < ApplicationController
       @q.event_date_lteq = params[:event_date_lteq]
     end
 
+    if params[:credit].present?
+      @financials = @financials.where('credit_amount_cents > 0')
+    elsif params[:debit].present?
+      @financials = @financials.where('debit_amount_cents > 0')
+    end
+
+
     @debits = @financials.sum('debit_amount_cents').to_d / 100
     @credits = @financials.sum('credit_amount_cents').to_d / 100
+
+    @financials = @financials.order("event_date #{list_order}, created_at #{list_order}")
 
     respond_to do |format|
       format.html # index.html.erb

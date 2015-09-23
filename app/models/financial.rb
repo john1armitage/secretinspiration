@@ -51,7 +51,7 @@ class Financial < ActiveRecord::Base
 
   has_many :depreciations
 
-  default_scope { order('event_date DESC, created_at DESC') }
+  #default_scope { order('event_date DESC, created_at DESC') }
 
   def amount_included?
     unless ((debit_amount ? debit_amount.to_d : 0.00 ) + (credit_amount ? credit_amount.to_d : 0.00 ) > 0.00)
