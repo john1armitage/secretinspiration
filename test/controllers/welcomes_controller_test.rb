@@ -24,8 +24,8 @@ class WelcomesControllerTest < ActionController::TestCase
     assert_redirected_to welcome_path(assigns(:welcome))
   end
 
-  test "should show welcome" do
-    get :show, id: @welcome
+  test "should xshow welcome" do
+    get :xshow, id: @welcome
     assert_response :success
   end
 

@@ -15,7 +15,7 @@
 %body{ id: "#{params[:controller].parameterize}_controller", class: current_tenant.domain}
   = javascript_include_tag "application"
   -#.row#navigation.no-print
-  -#  .large-12.columns.show-for-medium-up.no-print
+  -#  .large-12.columns.xshow-for-medium-up.no-print
   -#    = render 'layouts/navigation'
   -#  .large-12.columns.hide-for-medium-up.no-print
   -#    = render 'layouts/navigation_small'
@@ -23,11 +23,11 @@
   -#  .large-12.columns#messages.no-print
   -#    = render 'layouts/messages'
   -#.row
-  -#  #aside.show-for-medium-down.no-print
+  -#  #aside.xshow-for-medium-down.no-print
   -#    %aside#sidebar.no-print
   -#      = render "welcome/offers"
   -#      -#= render "layouts/media/#{current_tenant.domain}/index"
-  -#  .large-2.columns#aside.show-for-large-up.no-print
+  -#  .large-2.columns#aside.xshow-for-large-up.no-print
   -#    %aside#sidebar.no-print
   -#      #editor.hide-for-medium-down
   -#      = render "welcome/offers"

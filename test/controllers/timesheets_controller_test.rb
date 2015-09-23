@@ -24,8 +24,8 @@ class TimesheetsControllerTest < ActionController::TestCase
     assert_redirected_to timesheet_path(assigns(:timesheet))
   end
 
-  test "should show timesheet" do
-    get :show, id: @timesheet
+  test "should xshow timesheet" do
+    get :xshow, id: @timesheet
     assert_response :success
   end
 

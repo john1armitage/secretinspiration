@@ -24,8 +24,8 @@ class CustomersControllerTest < ActionController::TestCase
     assert_redirected_to customer_path(assigns(:customer))
   end
 
-  test "should show customer" do
-    get :show, id: @customer
+  test "should xshow customer" do
+    get :xshow, id: @customer
     assert_response :success
   end
 

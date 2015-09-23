@@ -24,8 +24,8 @@ class WagesControllerTest < ActionController::TestCase
     assert_redirected_to wage_path(assigns(:wage))
   end
 
-  test "should show wage" do
-    get :show, id: @wage
+  test "should xshow wage" do
+    get :xshow, id: @wage
     assert_response :success
   end
 

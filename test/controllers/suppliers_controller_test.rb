@@ -24,8 +24,8 @@ class SuppliersControllerTest < ActionController::TestCase
     assert_redirected_to supplier_path(assigns(:supplier))
   end
 
-  test "should show supplier" do
-    get :show, id: @supplier
+  test "should xshow supplier" do
+    get :xshow, id: @supplier
     assert_response :success
   end
 

@@ -24,8 +24,8 @@ class MenusControllerTest < ActionController::TestCase
     assert_redirected_to menu_path(assigns(:menu))
   end
 
-  test "should show menu" do
-    get :show, id: @menu
+  test "should xshow menu" do
+    get :xshow, id: @menu
     assert_response :success
   end
 

@@ -23,4 +23,4 @@
           %span.notes
             != subcat.description unless subcat.description.blank?
 
-        = render :partial => "choices/#{current_tenant.domain}/show", locals: { subcat: subcat}
+        = render :partial => "choices/#{current_tenant.domain}/xshow", locals: { subcat: subcat}

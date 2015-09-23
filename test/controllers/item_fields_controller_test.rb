@@ -24,8 +24,8 @@ class ItemFieldsControllerTest < ActionController::TestCase
     assert_redirected_to item_field_path(assigns(:item_field))
   end
 
-  test "should show item_field" do
-    get :show, id: @item_field
+  test "should xshow item_field" do
+    get :xshow, id: @item_field
     assert_response :success
   end
 

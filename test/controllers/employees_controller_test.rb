@@ -24,8 +24,8 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_redirected_to employee_path(assigns(:employee))
   end
 
-  test "should show employee" do
-    get :show, id: @employee
+  test "should xshow employee" do
+    get :xshow, id: @employee
     assert_response :success
   end
 

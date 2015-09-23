@@ -24,8 +24,8 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to topic_path(assigns(:topic))
   end
 
-  test "should show topic" do
-    get :show, id: @topic
+  test "should xshow topic" do
+    get :xshow, id: @topic
     assert_response :success
   end
 

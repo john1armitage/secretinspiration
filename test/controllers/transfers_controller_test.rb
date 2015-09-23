@@ -24,8 +24,8 @@ class TransfersControllerTest < ActionController::TestCase
     assert_redirected_to transfer_path(assigns(:transfer))
   end
 
-  test "should show transfer" do
-    get :show, id: @transfer
+  test "should xshow transfer" do
+    get :xshow, id: @transfer
     assert_response :success
   end
 

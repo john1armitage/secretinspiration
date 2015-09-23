@@ -336,10 +336,7 @@ class FinancialsController < ApplicationController
 
   end
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: financial }
-    end
+
   end
 
   def new

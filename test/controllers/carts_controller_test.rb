@@ -24,8 +24,8 @@ class CartsControllerTest < ActionController::TestCase
     assert_redirected_to cart_path(assigns(:carts))
   end
 
-  test "should show carts" do
-    get :show, id: @cart
+  test "should xshow carts" do
+    get :xshow, id: @cart
     assert_response :success
   end
 

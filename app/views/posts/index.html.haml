@@ -55,6 +55,7 @@
     %th
     -#%th
     -#%th
+  #display
 
   - @posts.each do |posting|
     %tr
@@ -74,8 +75,12 @@
       -#  - else
       -#    - title = ''
       %td
-        -#.has-tip.tip-right{'data-tooltip' => true, 'title' => title}
-        = posting.accountable.name if posting.accountable
+        = posting.accountable.name
+        -#- case posting.postable_type
+        -#  - when 'Financial'
+        -#    = link_to posting.accountable.name, financial_path(posting.postable) if posting.accountable
+        -#  - when 'Wage'
+        -#  - when 'Daily'
       %td.number= pounds( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= pounds( posting.credit_amount )  unless posting.credit_amount == 0
       -#%td.number
@@ -83,3 +88,6 @@
       %td=# link_to 'Show', posting
       %td=# link_to 'Edit', edit_posting_path(posting)
       %td=# link_to 'Destroy', posting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+:coffeescript
+  Ajaxify.set_content_container('display')

@@ -24,8 +24,8 @@ class OrdersControllerTest < ActionController::TestCase
     assert_redirected_to order_path(assigns(:order))
   end
 
-  test "should show order" do
-    get :show, id: @order
+  test "should xshow order" do
+    get :xshow, id: @order
     assert_response :success
   end
 

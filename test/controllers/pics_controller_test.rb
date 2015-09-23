@@ -24,8 +24,8 @@ class PicsControllerTest < ActionController::TestCase
     assert_redirected_to pic_path(assigns(:pic))
   end
 
-  test "should show pic" do
-    get :show, id: @pic
+  test "should xshow pic" do
+    get :xshow, id: @pic
     assert_response :success
   end
 

@@ -1,18 +1,1 @@
-%p#notice= notice
-
-%p
-  %b Event date:
-  = financial.event_date
-%p
-  %b Reference:
-  = financial.desc
-%p
-  %b Credit amount:
-  = financial.credit_amount
-%p
-  %b Debit amount:
-  = financial.debit_amount
-
-= link_to 'Edit', edit_transaction_path(financial)
-\|
-= link_to 'Back', transactions_path
+= render 'financial', financial: @financial

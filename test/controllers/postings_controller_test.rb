@@ -18,14 +18,14 @@ class PostingsControllerTest < ActionController::TestCase
 
   test "should create posting" do
     assert_difference('Posting.count') do
-      post :create, posting: { index: @posting.index, show: @posting.show }
+      post :create, posting: { index: @posting.index, xshow: @posting.xshow }
     end
 
     assert_redirected_to posting_path(assigns(:posting))
   end
 
-  test "should show posting" do
-    get :show, id: @posting
+  test "should xshow posting" do
+    get :xshow, id: @posting
     assert_response :success
   end
 
@@ -35,7 +35,7 @@ class PostingsControllerTest < ActionController::TestCase
   end
 
   test "should update posting" do
-    patch :update, id: @posting, posting: { index: @posting.index, show: @posting.show }
+    patch :update, id: @posting, posting: { index: @posting.index, xshow: @posting.xshow }
     assert_redirected_to posting_path(assigns(:posting))
   end
 

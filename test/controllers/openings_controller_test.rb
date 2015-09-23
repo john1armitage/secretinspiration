@@ -24,8 +24,8 @@ class OpeningsControllerTest < ActionController::TestCase
     assert_redirected_to opening_path(assigns(:opening))
   end
 
-  test "should show opening" do
-    get :show, id: @opening
+  test "should xshow opening" do
+    get :xshow, id: @opening
     assert_response :success
   end
 

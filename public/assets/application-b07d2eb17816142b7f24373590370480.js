@@ -5306,7 +5306,7 @@ jQuery.event = {
 		beforeunload: {
 			postDispatch: function( event ) {
 
-				// Even when returnValue equals to undefined Firefox will still show alert
+				// Even when returnValue equals to undefined Firefox will still xshow alert
 				if ( event.result !== undefined ) {
 					event.originalEvent.returnValue = event.result;
 				}
@@ -7307,7 +7307,7 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 	jQuery.cssHooks[ name ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
-				// certain elements can have dimension info if we invisibly show them
+				// certain elements can have dimension info if we invisibly xshow them
 				// however, it must have a current display style that would benefit from this
 				return elem.offsetWidth === 0 && rdisplayswap.test( jQuery.css( elem, "display" ) ) ?
 					jQuery.swap( elem, cssShow, function() {
@@ -9132,7 +9132,7 @@ function defaultPrefilter( elem, props, opts ) {
 	}
 
 
-	// show/hide pass
+	// xshow/hide pass
 	for ( prop in props ) {
 		value = props[ prop ];
 		if ( rfxtypes.exec( value ) ) {
@@ -9292,7 +9292,7 @@ jQuery.each([ "toggle", "show", "hide" ], function( i, name ) {
 jQuery.fn.extend({
 	fadeTo: function( speed, to, easing, callback ) {
 
-		// show any hidden elements after setting opacity to 0
+		// xshow any hidden elements after setting opacity to 0
 		return this.filter( isHidden ).css( "opacity", 0 ).show()
 
 			// animate to the value specified
@@ -11963,7 +11963,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
           self.create({$li : $this, index : index});
         });
 
-        // show first tip
+        // xshow first tip
         if (!this.settings.start_timer_on_click && this.settings.timer > 0) {
           this.show('init');
           this.startTimer();

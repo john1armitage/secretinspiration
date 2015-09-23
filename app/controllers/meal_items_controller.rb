@@ -23,7 +23,7 @@ class MealItemsController < ApplicationController
       elsif (current_user.id.blank? && !['takeaway','requested'].include?(@meal.state)) || @line_item.save!
         format.js { render 'meal.js.erb',
                notice: 'Line item was successfully created.' }
-        format.json { render action: 'show',
+        format.json { render action: 'xshow',
                status: :created, location: @line_item }
       else
         format.js { render 'failed.js.erb' }
@@ -53,7 +53,7 @@ class MealItemsController < ApplicationController
     respond_to do |format|
       format.js { render 'meal.js.erb',
                          notice: 'Line item was successfully created.' }
-      format.json { render action: 'show',
+      format.json { render action: 'xshow',
                            status: :created, location: @line_item }
     end
   end
@@ -72,7 +72,7 @@ class MealItemsController < ApplicationController
     respond_to do |format|
       format.js { render 'meal.js.erb',
                          notice: 'Line item was successfully created.' }
-      format.json { render action: 'show',
+      format.json { render action: 'xshow',
                            status: :created, location: @line_item }
     end
   end

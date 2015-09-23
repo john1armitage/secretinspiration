@@ -24,8 +24,8 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_redirected_to category_path(assigns(:category))
   end
 
-  test "should show category" do
-    get :show, id: @category
+  test "should xshow category" do
+    get :xshow, id: @category
     assert_response :success
   end
 

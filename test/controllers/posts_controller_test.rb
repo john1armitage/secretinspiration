@@ -24,8 +24,8 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to post_path(assigns(:post))
   end
 
-  test "should show post" do
-    get :show, id: @post
+  test "should xshow post" do
+    get :xshow, id: @post
     assert_response :success
   end
 

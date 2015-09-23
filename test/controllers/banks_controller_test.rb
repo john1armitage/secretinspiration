@@ -24,8 +24,8 @@ class BanksControllerTest < ActionController::TestCase
     assert_redirected_to bank_path(assigns(:bank))
   end
 
-  test "should show bank" do
-    get :show, id: @bank
+  test "should xshow bank" do
+    get :xshow, id: @bank
     assert_response :success
   end
 

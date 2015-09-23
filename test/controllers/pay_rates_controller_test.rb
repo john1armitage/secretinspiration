@@ -24,8 +24,8 @@ class PayRatesControllerTest < ActionController::TestCase
     assert_redirected_to pay_rate_path(assigns(:pay_rate))
   end
 
-  test "should show pay_rate" do
-    get :show, id: @pay_rate
+  test "should xshow pay_rate" do
+    get :xshow, id: @pay_rate
     assert_response :success
   end
 

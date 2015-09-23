@@ -24,8 +24,8 @@ class BookingsControllerTest < ActionController::TestCase
     assert_redirected_to booking_path(assigns(:booking))
   end
 
-  test "should show booking" do
-    get :show, id: @booking
+  test "should xshow booking" do
+    get :xshow, id: @booking
     assert_response :success
   end
 

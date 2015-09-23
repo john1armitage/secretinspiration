@@ -24,8 +24,8 @@ class OffersControllerTest < ActionController::TestCase
     assert_redirected_to offer_path(assigns(:offer))
   end
 
-  test "should show offer" do
-    get :show, id: @offer
+  test "should xshow offer" do
+    get :xshow, id: @offer
     assert_response :success
   end
 

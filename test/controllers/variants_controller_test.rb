@@ -24,8 +24,8 @@ class VariantsControllerTest < ActionController::TestCase
     assert_redirected_to variant_path(assigns(:variant))
   end
 
-  test "should show variant" do
-    get :show, id: @variant
+  test "should xshow variant" do
+    get :xshow, id: @variant
     assert_response :success
   end
 

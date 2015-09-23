@@ -1,5 +1,5 @@
 class FinancialsController < ApplicationController
-  before_action :set_financial, only: [:show, :edit, :update, :destroy]
+  before_action :set_financial, only: [:xshow, :edit, :update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
@@ -317,7 +317,7 @@ class FinancialsController < ApplicationController
   end
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # xshow.html.erb
       format.json { render json: financial }
     end
   end

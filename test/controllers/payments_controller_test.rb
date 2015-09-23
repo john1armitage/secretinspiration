@@ -24,8 +24,8 @@ class PaymentsControllerTest < ActionController::TestCase
     assert_redirected_to payment_path(assigns(:payment))
   end
 
-  test "should show payment" do
-    get :show, id: @payment
+  test "should xshow payment" do
+    get :xshow, id: @payment
     assert_response :success
   end
 

@@ -24,8 +24,8 @@ class MonthliesControllerTest < ActionController::TestCase
     assert_redirected_to monthly_path(assigns(:monthly))
   end
 
-  test "should show monthly" do
-    get :show, id: @monthly
+  test "should xshow monthly" do
+    get :xshow, id: @monthly
     assert_response :success
   end
 

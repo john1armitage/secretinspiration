@@ -24,8 +24,8 @@ class CreateOptionsControllerTest < ActionController::TestCase
     assert_redirected_to create_option_path(assigns(:create_option))
   end
 
-  test "should show create_option" do
-    get :show, id: @create_option
+  test "should xshow create_option" do
+    get :xshow, id: @create_option
     assert_response :success
   end
 

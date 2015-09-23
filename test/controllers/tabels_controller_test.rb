@@ -24,8 +24,8 @@ class TabelsControllerTest < ActionController::TestCase
     assert_redirected_to tabel_path(assigns(:tabel))
   end
 
-  test "should show tabel" do
-    get :show, id: @tabel
+  test "should xshow tabel" do
+    get :xshow, id: @tabel
     assert_response :success
   end
 

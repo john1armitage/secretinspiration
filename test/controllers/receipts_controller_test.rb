@@ -24,8 +24,8 @@ class ReceiptsControllerTest < ActionController::TestCase
     assert_redirected_to receipt_path(assigns(:receipt))
   end
 
-  test "should show receipt" do
-    get :show, id: @receipt
+  test "should xshow receipt" do
+    get :xshow, id: @receipt
     assert_response :success
   end
 

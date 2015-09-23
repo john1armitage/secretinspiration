@@ -24,8 +24,8 @@ class LineItemsControllerTest < ActionController::TestCase
     assert_redirected_to line_item_path(assigns(:line_item))
   end
 
-  test "should show line_item" do
-    get :show, id: @line_item
+  test "should xshow line_item" do
+    get :xshow, id: @line_item
     assert_response :success
   end
 

@@ -24,8 +24,8 @@ class PagesControllerTest < ActionController::TestCase
     assert_redirected_to page_path(assigns(:page))
   end
 
-  test "should show page" do
-    get :show, id: @page
+  test "should xshow page" do
+    get :xshow, id: @page
     assert_response :success
   end
 

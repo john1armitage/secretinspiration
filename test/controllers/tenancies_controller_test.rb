@@ -24,8 +24,8 @@ class TenanciesControllerTest < ActionController::TestCase
     assert_redirected_to tenancies_controller_path(assigns(:tenancies_controller))
   end
 
-  test "should show tenancies_controller" do
-    get :show, id: @tenancies_controller
+  test "should xshow tenancies_controller" do
+    get :xshow, id: @tenancies_controller
     assert_response :success
   end
 

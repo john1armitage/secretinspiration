@@ -24,8 +24,8 @@ class DailiesControllerTest < ActionController::TestCase
     assert_redirected_to daily_path(assigns(:daily))
   end
 
-  test "should show daily" do
-    get :show, id: @daily
+  test "should xshow daily" do
+    get :xshow, id: @daily
     assert_response :success
   end
 

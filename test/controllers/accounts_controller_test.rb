@@ -24,8 +24,8 @@ class AccountsControllerTest < ActionController::TestCase
     assert_redirected_to account_path(assigns(:account))
   end
 
-  test "should show account" do
-    get :show, id: @account
+  test "should xshow account" do
+    get :xshow, id: @account
     assert_response :success
   end
 

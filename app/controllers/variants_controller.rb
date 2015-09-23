@@ -1,6 +1,6 @@
 class VariantsController < ApplicationController
   before_action :set_variant, only: [:show, :edit, :update, :destroy]
-  #before_action :set_item, only: [:show, :edit, :update, :destroy]
+  #before_action :set_item, only: [:xshow, :edit, :update, :destroy]
   before_action :set_item_param, only: [:new]
 #  before_action :set_state, only: [:carts, :update]
 
