@@ -11,7 +11,7 @@
     %span
       = pounds((current_order.net_home_cents + current_order.tax_home_cents) / 100.00)
       =# pounds(current_order.paid_cents / 100.00)
-    - if current_order.tax_home.to_i > 0
+    - if current_order.tax_home_cents.to_i > 0
       %span
         = "(#{pounds(current_order.net_home)} + #{pounds(current_order.tax_home)})"
     %span
