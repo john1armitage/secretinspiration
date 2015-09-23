@@ -10,7 +10,7 @@
 
   %fieldset
     %legend= 'Transaction'
-
+    = hidden_field_tag :processed, @financial.processed
     .row
       .field.small-3.columns
         = f.label :event_date

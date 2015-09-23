@@ -60,7 +60,11 @@ class AccountingController < ApplicationController
     posts = posts.where('account_date <= ?',@stop) if @stop
 
     @cogs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Victual Costs').sum('debit_amount_cents').to_d / 100
-    @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Payroll Costs').sum('debit_amount_cents').to_d / 100
+    # @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Payroll Costs').sum('debit_amount_cents').to_d / 100
+    @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Hourly Wages').sum('debit_amount_cents').to_d / 100
+    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Bonus').sum('debit_amount_cents').to_d / 100
+    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Employer NI').sum('debit_amount_cents').to_d / 100
+    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Accrued Holiday').sum('debit_amount_cents').to_d / 100
 
     @sales = posts.where('accounts.name = ? AND credit_amount_cents > 0','Sales').sum('credit_amount_cents').to_d / 100
     @sales_pending = posts.where('accounts.name = ? AND credit_amount_cents > 0','Sales Pending').sum('credit_amount_cents').to_d / 100
