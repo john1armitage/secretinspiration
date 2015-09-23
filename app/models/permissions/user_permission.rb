@@ -3,7 +3,7 @@ module Permissions
     def initialize(user)
       allow :choices, :index
       allow :sessions, [:new, :carts, :destroy]
-      allow :items_exists, [:index, :xshow]
+      allow :items_exists, [:index, :show]
       allow :users, [:xshow, :form, :update] do |u|
         u.id == user.id
       end

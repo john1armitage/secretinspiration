@@ -7,7 +7,7 @@
     .store-variant
       - if pic = variant.pics.first
         - title = variant.item.notes.blank? ? desc : "#{desc} [#{variant.item.notes}]"
-        -#%a.gallery.no_ajaxify.xshow-for-small-only{ href: pic.image_url(:detail), rel: @choice.name, title: name }
+        -#%a.gallery.no_ajaxify.show-for-small-only{ href: pic.image_url(:detail), rel: @choice.name, title: name }
         %span.show-for-small-only
           != render :partial => "choices/#{current_tenant.domain}/image_small", locals: {variant: variant, pic: pic, name: name, desc: desc}
         %a.gallery.no_ajaxify.hide-for-small-only{ href: pic.image_url(:detail), rel: @choice.name, title: title }

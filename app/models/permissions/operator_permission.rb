@@ -3,12 +3,13 @@ module Permissions
     def initialize(user)
       allow :welcome, :index
       allow :bookings, [:index,:new, :create]
-      allow :choices, [:index,:xshow]
-      allow :pages, [:index, :blog,:xshow]
-      allow :broadcasts, [:index, :blog,:xshow]
-      allow :menus, [:sub,:xshow]
+      allow :choices, [:index,:show]
+      allow :pages, [:index, :blog,:show]
+      allow :broadcasts, [:index, :blog,:show]
+      allow :menus, [:sub,:show]
+      allow :orders, [:analysis]
       allow :carts, [:index, :update, :clear]
-      allow :meals, [:index, :takeaway, :xshow, :clear, :patcher]
+      allow :meals, [:index, :takeaway, :show, :clear, :patcher]
       allow :messages, [:index, :create]
       allow :meal_items, [:create, :update, :destroy]
       allow :line_items, [:create, :update, :destroy]

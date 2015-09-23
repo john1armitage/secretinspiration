@@ -13,7 +13,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.js { render 'cart.js.erb',
                notice: 'Line item was successfully created.' }
-        format.json { render action: 'xshow',
+        format.json { render action: 'show',
                status: :created, location: @line_item }
       else
         format.js { render 'failed.js.erb' }
@@ -41,7 +41,7 @@ class LineItemsController < ApplicationController
         format.js { render 'cart.js.erb',
                            notice: 'Line item was successfully created.' }
       end
-      format.json { render action: 'xshow',
+      format.json { render action: 'show',
                            status: :created, location: @line_item }
     end
   end
@@ -52,7 +52,7 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.js { render 'cart.js.erb',
                          notice: 'Line item was successfully created.' }
-      format.json { render action: 'xshow',
+      format.json { render action: 'show',
                            status: :created, location: @line_item }
     end
   end

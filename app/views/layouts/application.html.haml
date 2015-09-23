@@ -35,7 +35,7 @@
         = render "welcome/intro"
       #utility
     .large-10.small-12.medium-12.columns
-      -#.row.xshow-for-medium-up.no-print
+      -#.row.show-for-medium-up.no-print
       .row.show-for-small-up.no-print
         .large-12.columns#menu
           - if current_tenant.menu.blank?
@@ -43,7 +43,7 @@
           - elsif current_tenant.menu != 'off'
             = render "layouts/menus/#{current_tenant.menu}"
       .row
-        -#.large-12.columns.double.xshow-for-medium-up#content{role: "content"}
+        -#.large-12.columns.double.show-for-medium-up#content{role: "content"}
         -#  = yield
         -#.large-12.columns.hide-for-medium-up.no-print#content{role: "content"}
         -#  = yield

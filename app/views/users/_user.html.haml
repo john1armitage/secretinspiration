@@ -1,4 +1,4 @@
-- if allow? :users, :xshow, user
+- if allow? :users, :show, user
   %tr
     %td= user.email
     %td= user.username
@@ -10,5 +10,5 @@
       - if allow?(:users, :destroy, user)
         = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
     %td
-      - if allow?(:roles, :xshow) && user.role
+      - if allow?(:roles, :show) && user.role
         = user.role.name

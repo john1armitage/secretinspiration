@@ -33,10 +33,10 @@
         = select_tag 'sub', options_for_select(@subs, params['sub']), {prompt: 'Options'} if @subs
       .field.large-3.columns
         = select_tag 'item', options_for_select(@items, params['item']), {prompt: 'Items'} if @items
-    -#.large-3.columns.xshow-for-medium-up
+    -#.large-3.columns.show-for-medium-up
     -#  = date_field_tag :start, @start
     -#  = date_field_tag :stop, @stop
-    -#.large-2.columns.xshow-for-medium-up.left
+    -#.large-2.columns.show-for-medium-up.left
     -#  = select_tag 'months', options_for_select(months, month.strftime('%Y-%m-%d'))
     -#  = select_tag 'weeks', options_for_select(weeks), {prompt: 'Week'}
 
