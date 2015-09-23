@@ -48,7 +48,7 @@ class FinancialsController < ApplicationController
       has_posts = @financials.joins(:posts)
       @financials = @financials.where(processed: true) - has_posts
     elsif params[:processed].present?
-      @q.processed_eq = processed = params[:processed] == 'true' ? true : false
+      @q.processed_eq = processed = (params[:processed] == 'true' ? true : false)
       @financials = @financials.where(processed: processed)
     end
     if params[:event_date_gteq].present?
@@ -59,6 +59,9 @@ class FinancialsController < ApplicationController
       @financials = @financials.where('event_date <= ?', params[:event_date_lteq] )
       @q.event_date_lteq = params[:event_date_lteq]
     end
+
+    @debits = @financials.sum('debit_amount_cents').to_d / 100
+    @credits = @financials.sum('credit_amount_cents').to_d / 100
 
     respond_to do |format|
       format.html # index.html.erb

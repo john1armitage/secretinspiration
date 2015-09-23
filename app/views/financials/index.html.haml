@@ -67,6 +67,9 @@
     .actions
       = f.submit 'Search'
 
+%p
+  = "--> Search Totals .... Credits: #{pounds(@credits)} .... Debits: #{pounds(@debits)}  .... #{@financials.size} entries shown"
+
 = render @financials
 
 :javascript
