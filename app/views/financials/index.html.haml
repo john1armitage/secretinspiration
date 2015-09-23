@@ -73,17 +73,16 @@
     .actions
       = f.submit 'Search'
 
+#posts
+
 %p
   = "--> Search Totals .... Credits: #{pounds(@credits)} .... Debits: #{pounds(@debits)}  .... #{@financials.size} entries shown"
-
-#display
 
 = render @financials
 
 :javascript
   vat_rate = "#{CONFIG[:vat_rate_standard]}";
 :coffeescript
-  Ajaxify.set_content_container('display')
   $(".VAT").change ->
     if $(this).is(":checked")
       gross = $(this).siblings().val()

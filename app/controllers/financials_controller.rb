@@ -336,7 +336,8 @@ class FinancialsController < ApplicationController
 
   end
   def show
-
+    @posts = @financial.posts
+    render 'show.js.erb'
   end
 
   def new

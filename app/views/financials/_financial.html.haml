@@ -13,7 +13,7 @@
         = link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
         = link_to financial.event_date, edit_financial_path(financial), title: "Edit Financial: #{financial.id}"
       .field.small-3.columns.has-tip{"data-tooltip" => "", title: financial.desc}
-        = link_to financial.entity_ref, post_path(financial) #, class: 'no_ajaxify'
+        = link_to financial.entity_ref, post_path(financial), remote: true, class: 'no_ajaxify'
         %br
         = "#{financial.credit ?  'Credit' : 'Debit'}: #{pounds(amount)}"
       - if ['BACS', 'card', 'direct','refund', 'reverse', 'petty'].include? financial.classification

@@ -39,6 +39,8 @@
     .actions.small-3.columns.left
       = f.submit 'Search'
 
+#financial
+
 %table#financial
   %tr
     %th= sort_link(@q, :account_date, "Date")
@@ -53,9 +55,6 @@
       %br
       = pounds( @credits )
     %th
-    -#%th
-    -#%th
-  #display
 
   - @posts.each do |posting|
     %tr
@@ -88,6 +87,3 @@
       %td=# link_to 'Show', posting
       %td=# link_to 'Edit', edit_posting_path(posting)
       %td=# link_to 'Destroy', posting, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-:coffeescript
-  Ajaxify.set_content_container('display')
