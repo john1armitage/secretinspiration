@@ -33,17 +33,19 @@
     -#%th
     -#%th
     %th
-    %th
 
   - @wages.order(:fy,:week_no, :employee_id).each do |wage|
     %tr
-      %td= "#{wage.fy}/#{wage.week_no}"
-      %td= (wage.posts.size > 0 ? 'OK' : '')
+      %td
+        = "#{wage.fy}/#{wage.week_no}"
+      %td= (wage.posts.size > 0 ? 'ok' : '')
       %td
         - if wage.first_name
           =link_to(wage.first_name, edit_wage_path(wage))
         -else
           unresolved
+        %br
+        = wage.paid_date.strftime('%d-%m-%y') if wage.paid_date
       %td
         = pounds(wage.gross)
         %br
@@ -59,6 +61,5 @@
       %td= "#{pounds(wage.gross + wage.tips + wage.bonus + wage.holiday - (wage.paye + wage.ni_employee))}"
       -#%td= wage.paid_date
       -#%td= link_to 'Show', wage
-      %td= link_to 'Edit', edit_wage_path(wage)
       %td= link_to 'X', wage, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

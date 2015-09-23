@@ -569,17 +569,30 @@ class FinancialsController < ApplicationController
 
   def transfer_posts
     bank_ref = @financial.bank
-    from_bank = Bank.find_by_reference( bank_ref )
-    from_account = Account.find_by_name(from_bank.name)
-    to_bank = Bank.find( @financial.entity_id )
-    to_account = Account.find_by_name(to_bank.name)
+    ref_bank = Bank.find_by_reference( bank_ref )
+    ref_account = Account.find_by_name(ref_bank.name)
+    tx_bank = Bank.find( @financial.entity_id )
+    tx_account = Account.find_by_name(tx_bank.name)
+    if @financial.credit_amount > 0
+      to_bank = tx_bank
+      to_account = tx_account
+      from_bank = ref_bank
+      from_account = ref_account
+      amount = @financial.credit_amount
+    else
+      to_bank = ref_bank
+      to_account = ref_account
+      from_bank = tx_bank
+      from_account = tx_account
+      amount = @financial.debit_amount
+    end
     desc = "#{from_bank.name} to: #{to_bank.name}"
     @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: 0, credit_amount: @financial.debit_amount, account_id: from_account.id,
+                                     debit_amount: 0, credit_amount: amount, account_id: from_account.id,
                                      accountable_type:'Bank', accountable_id: to_bank.id, grouping_id: from_account.grouping_id)
     desc = "#{to_bank.name} from: #{from_bank.name}"
     @financial.posts.create!( account_date:  @account_date, desc: desc,
-                                     debit_amount: @financial.debit_amount, credit_amount: 0, account_id: to_account.id,
+                                     debit_amount: amount, credit_amount: 0, account_id: to_account.id,
                                      accountable_type:'Bank', accountable_id: from_bank.id, grouping_id: to_account.grouping_id)
     financial_processed
   end
