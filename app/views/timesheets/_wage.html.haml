@@ -28,7 +28,7 @@
           = "#{pounds(@wage.holiday)}" if @wage.holiday && @wage.holiday > 0
       .field.small-1.columns
         - gross = @wage.gross + @wage.tips + @wage.bonus + @wage.holiday
-        - net = gross - (@wage.paye + @wage.ni_employee + @wage.ni_employer)
+        - net = gross - (@wage.paye + @wage.ni_employee)
         = pounds(net)
         %br
         %span.minor
