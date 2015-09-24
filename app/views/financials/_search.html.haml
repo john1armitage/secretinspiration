@@ -1,0 +1,74 @@
+.row
+  .large-12.columns
+    %ul#contact.inline-list
+      - if allow? :financials, :index
+        - @banks.where(statement: true).each do |bank|
+          %li#admin
+            != link_to "#{bank.reference}", batch_financials_path(bank: bank.reference), title: 'Batch Input', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+
+        %li#admin
+          != link_to 'Refs', entity_financials_path, title: 'Supplier References', class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+.row
+  .large-12.columns
+    %ul#contact.inline-list
+      - if allow? :financials, :index
+        - Element.where(kind: 'entity').map(&:name).each do |name|
+          %li#admin
+            != link_to "<New #{name}>", new_financial_path(entity: name), title: 'Create Transaction' #, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+
+= search_form_for @q do |f|
+
+  .row
+    .field.small-3.columns
+      = f.label :event_date_gteq, 'From'
+      = f.date_field :event_date_gteq
+    .field.small-3.columns.left
+      = f.label :event_date_lteq, 'Until'
+      = f.date_field :event_date_lteq
+    - if params[:result].present? && !params[:result].blank?
+      .field.small-6.columns.left
+        %p
+          = params[:result]
+    .field.small-3.columns.left
+      = label_tag :limit
+      = select_tag :limit, options_for_select(%w[50 100 500 1000 1500 2000], params[:limit] || 100)
+    .field.small-3.columns
+      = f.label :bank_eq, 'Ref Bank'
+      = f.collection_select :bank_eq, @banks, 'reference', 'name', selected: @ref_bank, include_blank: true
+  .row
+    .field.small-3.columns
+      = f.label :entity_id_eq, 'Supplier'
+      = f.collection_select :entity_id_eq, @suppliers, 'id', 'name', selected: @supplier_id, include_blank: true
+    .field.small-3.columns
+      = f.label :entity_ref_eq, 'Ref'
+      = f.select :entity_ref_eq, options_for_select(@refs, @ref), include_blank: true
+    .field.small-3.columns
+      = f.label :summary_eq, 'Employee'
+      = f.select :summary_eq, options_for_select(@employees, @employee), include_blank: true
+    .field.small-3.columns
+      = f.label :mandate_eq, 'Target Bank'
+      = f.collection_select :mandate_eq, @target_banks, 'id', 'name', selected: @target_bank, include_blank: true
+  .row
+    .field.small-3.columns
+      = f.label :classification_eq, 'Type'
+      = f.select :classification_eq, options_for_select(@classes, @class), include_blank: true
+    .field.small-2.columns.left
+      = f.label :processed_eq, 'Processed'
+      = f.check_box :processed_eq
+    .field.small-1.columns.left
+      = label_tag :vat_only, 'VAT'
+      = check_box_tag :vat_only, true, params[:vat_only]
+    .field.small-1.columns.left
+      = label_tag :ascending, 'ASC'
+      = check_box_tag :ascending, true, params[:ascending]
+    .field.small-1.columns.left
+      = label_tag :credit
+      = check_box_tag :credit, true, params[:credit]
+    .field.small-2.columns.left
+      = label_tag :debit
+      = check_box_tag :debit, true, params[:debit]
+    -#.field.small-2.columns.left
+    -#  = label_tag :exceptions
+    -#  = check_box_tag :exceptions, true, params[:exceptions]
+    .actions
+      = f.submit 'Search'

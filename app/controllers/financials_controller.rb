@@ -59,6 +59,14 @@ class FinancialsController < ApplicationController
       @financials = @financials.where('event_date <= ?', params[:event_date_lteq] )
       @q.event_date_lteq = params[:event_date_lteq]
     end
+    if params[:processed].present?
+      @financials = @financials.where(processed: params[:processed] )
+      @q.processed_eq = params[:processed]
+    end
+    if params[:classification].present?
+      @financials = @financials.where(classification: params[:classification] )
+      @q.classification_eq = params[:classification]
+    end
 
     if params[:credit].present?
       @financials = @financials.where('credit_amount_cents > 0')
@@ -388,8 +396,10 @@ class FinancialsController < ApplicationController
         processed = params[:processed].present?  && params[:processed] == 'true'
         start = params[:event_date_gteq].present? ? params[:event_date_gteq] : ''
         stop = params[:event_date_lteq].present? ? params[:event_date_lteq] : ''
-          format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop )}
-          format.json { head :no_content }
+        hidden = params[:hidden].present? ? params[:hidden] : ''
+        classification = params[:classification].present? ? params[:classification] : ''
+        format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop, hidden: hidden, processed: processed, classification: classification )}
+        format.json { head :no_content }
         # end
       else
         format.html { render action: 'edit' }

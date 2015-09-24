@@ -4,11 +4,12 @@
   %fieldset.compact
     .row
       = hidden_field_tag :editor, true
+      = hidden_field_tag :hidden, true
       - if @q
         = hidden_field_tag :event_date_gteq, @q.event_date_gteq
         = hidden_field_tag :event_date_lteq, @q.event_date_lteq
-        .field.small-1.columns.headings
-          = hidden_field_tag :processed, @q.processed_eq
+        = hidden_field_tag :processed, @q.processed_eq
+        = hidden_field_tag :classification, @q.classification_eq
       .field.small-2.columns.headings
         = link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
         = link_to financial.event_date, edit_financial_path(financial), title: "Edit Financial: #{financial.id}"
