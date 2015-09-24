@@ -151,13 +151,6 @@ class OrdersController < ApplicationController
 
       net_home_cents = (bill_cents / (1 + CONFIG[:vat_rate_standard])).ceil
       tax_home_cents = bill_cents - net_home_cents
-
-      p bill_cents
-      p net_home_cents
-      p (bill_cents / (1 + CONFIG[:vat_rate_standard]))
-      p (bill_cents / (1 + CONFIG[:vat_rate_standard])).ceil
-      p tax_home_cents
-
       @order.update(net_home_cents: net_home_cents, tax_home_cents: tax_home_cents)
       @order.timings.create(state: @order.state)
 

@@ -33,11 +33,10 @@
   - if allow? :accounts, :index
     %li
       != link_to 'Account List', accounts_path, :class => "small button radius"
-
-  -# out of use
-  -#- if allow? :monthlies, :index
-  -#  %li
-  -#    != link_to 'Monthlies', monthlies_path, :class => "small button radius"
+  - if allow? :monthlies, :index
+    %li
+      != link_to 'Monthlies', monthlies_path, :class => "small button radius"
+        -# out of use
   -#- if allow? :orders, :index
   -#  %li
   -#    != link_to 'Orders', orders_path, :class => "small button radius"

@@ -70,7 +70,8 @@ class AccountingController < ApplicationController
     @sales_pending = posts.where('accounts.name = ? AND credit_amount_cents > 0','Sales Pending').sum('credit_amount_cents').to_d / 100
     @interest = posts.where('accounts.name = ? AND credit_amount_cents > 0','Bank Interest').sum('credit_amount_cents').to_d / 100
     @vat_paid = posts.where('accounts.name = ? AND debit_amount_cents > 0','VAT Control').sum('debit_amount_cents').to_d / 100
-    @vat_received = posts.where('accounts.name = ? AND credit_amount_cents > 0','VAT Control').sum('credit_amount_cents').to_d / 100
+    # @vat_received = posts.where('accounts.name = ? AND credit_amount_cents > 0','VAT Control').sum('credit_amount_cents').to_d / 100
+    @vat_received = @sales * CONFIG[:vat_rate_standard]
 
     @grouped_overheads = overheads.joins(:account).order('accounts.code').select('accounts.code, accounts.name, sum(debit_amount_cents) as total_cost').group('accounts.code, accounts.name') #.having("sum(price) > ?", 100)
 
