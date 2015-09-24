@@ -1,0 +1,28 @@
+%p
+  = "#{@wage.fy}/#{@wage.week_no}"
+  %b
+    = @wage.employee.name
+  Hourly
+  = "#{pounds(@wage.gross)} = #{@wage.hours} x #{pounds(@wage.rate)}"
+  - unless @wage.paid_date.blank?
+    Paid
+    = @wage.paid_date
+%p
+  Tips
+  = pounds(@wage.tips)
+  - if @wage.bonus > 0
+    Bonus
+    = pounds(@wage.bonus)
+  - if @wage.holiday > 0
+    Holiday
+    = pounds(@wage.holiday)
+%p
+  - if @wage.paye > 0
+    Paye
+    = pounds(@wage.paye)
+  - if @wage.ni_employee > 0
+    NI ee
+    = pounds(@wage.ni_employee)
+  - if @wage.ni_employer > 0
+    NI er:
+    = pounds(@wage.ni_employer)

@@ -39,7 +39,7 @@
     .actions.small-3.columns.left
       = f.submit 'Search'
 
-#financial
+#postable
 
 %table#financial
   %tr
@@ -74,12 +74,14 @@
       -#  - else
       -#    - title = ''
       %td
-        = posting.accountable.name
-        -#- case posting.postable_type
-        -#  - when 'Financial'
-        -#    = link_to posting.accountable.name, financial_path(posting.postable) if posting.accountable
-        -#  - when 'Wage'
-        -#  - when 'Daily'
+        - case posting.postable_type
+          - when 'Financial'
+            = link_to posting.accountable.name, financial_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
+          - when 'Wage'
+            - p posting.id
+            = link_to posting.accountable.name, wage_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
+          - when 'Daily'
+            = link_to posting.accountable.name, daily_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
       %td.number= pounds( posting.debit_amount )  unless posting.debit_amount == 0
       %td.number= pounds( posting.credit_amount )  unless posting.credit_amount == 0
       -#%td.number

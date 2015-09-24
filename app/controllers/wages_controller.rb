@@ -109,6 +109,7 @@ class WagesController < ApplicationController
   def destroy
     fy = @wage.fy
     week_no = @wage.week_no
+    remove_posts(@wage)
     @wage.destroy
     redirect_to wages_url(fy: fy, week_no: week_no), notice: 'Wage was successfully destroyed.'
   end

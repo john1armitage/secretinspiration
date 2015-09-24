@@ -4,6 +4,8 @@
   = render 'search'
 '
 #posts
+  - if @posts
+    = render 'posts/show'
 
 %p
   = "--> Search Totals .... Credits: #{pounds(@credits)} .... Debits: #{pounds(@debits)}  .... #{@financials.size} entries shown"

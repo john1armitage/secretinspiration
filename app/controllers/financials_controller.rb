@@ -80,6 +80,10 @@ class FinancialsController < ApplicationController
 
     @financials = @financials.order("event_date #{list_order}, created_at #{list_order}")
 
+    if params[:financial].present?
+      @posts = Financial.find(params[:financial]).posts
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @financials }
@@ -409,7 +413,7 @@ class FinancialsController < ApplicationController
         stop = params[:event_date_lteq].present? ? params[:event_date_lteq] : ''
         hidden = params[:hidden].present? ? params[:hidden] : ''
         classification = params[:classification].present? ? params[:classification] : ''
-        format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop, hidden: hidden, processed: processed, classification: classification )}
+        format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop, hidden: hidden, processed: processed, classification: classification, financial: @financial.id )}
         format.json { head :no_content }
         # end
       else
