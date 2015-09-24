@@ -1,5 +1,8 @@
 %ul.inline-list
-  - ['find_us', 'opening_hours'].each do |category|
+  - if allow? :financials, :create
+    %li
+      != link_to "New Petty", new_financial_path(petty: true), title: 'Create Petty Cash' #, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+  - ['opening_hours','find_us'].each do |category|
     %li
       = link_to title(category), page_path(category, code:true)
   - if admin_ok?

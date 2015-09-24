@@ -350,10 +350,21 @@ class FinancialsController < ApplicationController
 
   def new
     @financial = Financial.new
-    @financial.entity = params[:entity] if params[:entity].present?
-    @financial.event_date = cookies[:last_fx_date]
-    @financial.bank = cookies[:last_fx_bank]
-    # @financial.debit_amount = @financial.credit_amount = 0.00
+    if params[:petty].present?
+      @financial.event_date = Date.today
+      @financial.bank = 'PETTY'
+      @financial.classification = 'petty'
+      @financial.entity = 'Supplier'
+      @financial.entity_ref = 'SUNDRY'
+      @financial.entity_id = Supplier.find_by_name('Sundry GBP Suppliers').id
+      @financial.credit = true
+      @financial.account_id = Account.find_by_name('Victual Costs').id
+      @financial.summary = @financial.desc = 'Petty Cash Purchase'
+    else
+      @financial.entity = params[:entity] if params[:entity].present?
+      @financial.event_date = cookies[:last_fx_date]
+      @financial.bank = cookies[:last_fx_bank]
+    end
   end
 
   def edit

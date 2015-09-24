@@ -14,9 +14,9 @@
   - if allow? :items, :index
     %li
       != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'
-  - if allow? :postings, :index
+  - if allow? :users, :new
     %li
-      != link_to "Accounting", menu_path('accounts'), remote: true, class: 'no_ajaxify'
+      != link_to "Register", signup_path
   - if allow? :elements, :index
     %li
       != link_to "System", menu_path('system'), remote: true, class: 'no_ajaxify'

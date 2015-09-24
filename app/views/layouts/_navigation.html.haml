@@ -3,13 +3,13 @@
     != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', class: 'no_ajaxify image'
   .large-4.columns
     %ul#contact.inline-list
+      - if allow? :postings, :index
+        %li
+          != link_to "Accounting", menu_path('accounts'), remote: true, class: 'no_ajaxify'
       - if allow? :items, :index
         %li#admin
           != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
-      - if allow? :users, :new
-        %li
-          != link_to "Register", signup_path
-      - else
+      - unless allow? :users, :new
         #contact
           != render 'layouts/contact/index'
       - if allow? :dailies, :index and current_tenant.dailies == '1'
@@ -21,8 +21,6 @@
         %li#admin
           - cat = Category.find_by_name('main')
           != link_to 'Analysis', analysis_orders_path(choices: 'food', cat: cat) #, remote: 'true'
-        -#%li
-        -#  != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
   .large-5.columns
     %ul#main-nav.inline-list.right
       - if (current_tenant.takeaway && current_tenant.takeaway == '1') && allow?(:meals, :takeaway) && current_user.id.blank?

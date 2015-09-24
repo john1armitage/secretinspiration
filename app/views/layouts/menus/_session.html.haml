@@ -5,14 +5,9 @@
   - if @home_flag
     %li#admin
       != link_to 'Home', welcome_path, class: 'no_ajaxify' #, remote: 'true'
-  - if allow? :meals, :index
-    %li#admin
-      != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
-    %li#admin
-      - cat = Category.find_by_name('main')
-      != link_to 'Analysis', analysis_orders_path(choices: 'food', cat: cat) #, remote: 'true'
-    -#%li
-    -#  != link_to "Orders", meals_path(table_view: true), :class => "no_ajaxify" #, :class => "button radius"
+  -#- if allow? :meals, :index
+  -#  %li#admin
+  -#    != link_to 'Monitor', meals_path(monitor: true), class: 'no_ajaxify' #, remote: 'true'
   %li
     - monitor = params[:monitor].present? ?  true : false
     != link_to "Log Out", logout_path(monitor: monitor), :method => :delete, :class => "no_ajaxify"
