@@ -705,7 +705,6 @@ class FinancialsController < ApplicationController
     end
 
     financial_processed
-
   end
 
   def wages_posts
