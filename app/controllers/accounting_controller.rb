@@ -59,14 +59,21 @@ class AccountingController < ApplicationController
     posts = Post.includes(:account).where('account_date >= ?',@start)
     posts = posts.where('account_date <= ?',@stop) if @stop
 
-    @cogs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Victual Costs').sum('debit_amount_cents').to_d / 100
-    @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Hourly Wages').sum('debit_amount_cents').to_d / 100
-    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Bonus').sum('debit_amount_cents').to_d / 100
-    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Employer NI').sum('debit_amount_cents').to_d / 100
-    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Accrued Holiday').sum('debit_amount_cents').to_d / 100
+    cogs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Victual Costs')
+    @cogs = cogs.sum('debit_amount_cents').to_d / 100
 
-    #TEMP historical
-    @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Payroll Costs').sum('debit_amount_cents').to_d / 100
+    # @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Hourly Wages').sum('debit_amount_cents').to_d / 100
+    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Bonus').sum('debit_amount_cents').to_d / 100
+    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Employer NI').sum('debit_amount_cents').to_d / 100
+    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Accrued Holiday').sum('debit_amount_cents').to_d / 100
+    # #TEMP historical
+    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Payroll Costs').sum('debit_amount_cents').to_d / 100
+
+    payroll = posts.where("accounts.name = ANY('{Payroll Costs,Hourly Wages,Bonus,Employer NI,Accrued Holiday}'::text[]) AND debit_amount_cents > 0")
+    @payroll_costs = payroll.sum('debit_amount_cents').to_d / 100
+
+    # @grouped_payroll_costs = payroll.joins('INNER JOIN wages ON posts.postable_id = wages.id') #.select('wages.employee_id, sum(debit_amount_cents) as total_cost').group('employee_id')
+    # p @grouped_payroll_costs
 
     @sales = posts.where('accounts.name = ? AND credit_amount_cents > 0','Sales').sum('credit_amount_cents').to_d / 100
     @sales_pending = posts.where('accounts.name = ? AND credit_amount_cents > 0','Sales Pending').sum('credit_amount_cents').to_d / 100
@@ -76,7 +83,8 @@ class AccountingController < ApplicationController
     @vat_received = @sales * CONFIG[:vat_rate_standard]
 
     @grouped_overheads = overheads.joins(:account).order('accounts.code').select('accounts.code, accounts.name, sum(debit_amount_cents) as total_cost').group('accounts.code, accounts.name') #.having("sum(price) > ?", 100)
-
+    # @grouped_cogs = cogs.joins(:account).order('accounts.code').select('accounts.code, accounts.name, sum(debit_amount_cents) as total_cost').group('accounts.code, accounts.name') #.having("sum(price) > ?", 100)
+#p @grouped_cogs
   end
 end
 

@@ -204,23 +204,34 @@
     %h5
       = "Overheads Breakdown: #{@start ? @start.to_date.strftime('%-d %b %y') : ''} to #{@stop ? @stop.to_date.strftime('%-d %b %y') : ''}"
 .row
-  .large-2.columns.title
-    Overheads
-  .large-2.columns.left
-    = pounds(@overheads)
-  .large-1.columns.title
-    &nbsp;
-  .large-3.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-- @grouped_overheads.each do |overhead|
-  .row
-    .large-1.columns.title
-      &nbsp;
-    .large-2.columns.title
-      = overhead.name
-    .large-3.columns.left
-      - cost = overhead.total_cost.to_i  / 100.00
-      = pounds( cost )
+  .large-6.columns
+    .row
+      .large-4.columns.title
+        Overheads
+      .large-6.columns.left
+        = pounds(@overheads)
+    - @grouped_overheads.each do |overhead|
+      .row
+        .large-1.columns.title
+          &nbsp;
+        .large-7.columns.title
+          = overhead.name
+        .large-4.columns.left
+          - cost = overhead.total_cost.to_i  / 100.00
+          = pounds( cost )
+  .large-6.columns
+    .row
+      .large-4.columns.title
+        COGS
+      .large-6.columns.left
+        = pounds(@cogs)
+    -#- @grouped_cogs.each do |cog|
+      -#.row
+      -#  .large-1.columns.title
+      -#    &nbsp;
+      -#  .large-7.columns.title
+      -#    = cog.name
+      -#  .large-4.columns.left
+      -#    - cost = cog.total_cost.to_i  / 100.00
+      -#    = pounds( cost )
 

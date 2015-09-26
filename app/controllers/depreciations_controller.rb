@@ -11,8 +11,6 @@ class DepreciationsController < ApplicationController
       case @period
         when 'FY to date'
           period = fy_to_date
-          p period[0]
-          p period[1]
           params[:q][:service_date_gteq] = period[0]
           params[:q][:service_date_lteq] = period[1]
         when 'FQ to date'

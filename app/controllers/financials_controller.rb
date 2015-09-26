@@ -22,6 +22,7 @@ class FinancialsController < ApplicationController
         params[:q][:entity_eq] = 'Bank'
       elsif !params[:q][:summary_eq].blank?
         params[:q][:entity_ref_eq] = params[:q][:summary_eq]
+        params[:q][:entity_eq] = 'Employee'
         @employee = params[:q][:summary_eq]
         params[:q].delete :entity_id_eq
       elsif !params[:q][:entity_id_eq].blank?
