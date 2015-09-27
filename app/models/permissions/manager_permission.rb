@@ -23,7 +23,7 @@ module Permissions
       allow_param :message, [:message, :message_type, :user_id, :create_time]
       allow_param :order, [:state, :net_total, :net_home, :tax_home, :paid, :credit_card, :tip, :voucher, :goods, :cheque, :cash, :net_total_cents, :net_home_cents, :tax_home_cents, :paid_cents, :credit_card_cents, :tip_cents, :voucher_cents, :goods_cents, :cheque_cents, :cash_cents ]
       allow_param :daily, [:headcount, :account_date, :credit_card, :session, :pax, :till, :surplus, :walkin_pax, :updated_at]
-      allow_param :timesheet, [:employee_id, :start_time, :end_time, :hours, :work_date, :session, :rate_cents, :headcount]
+      allow_param :timesheet, [:employee_id, :start_time, :end_time, :hours, :work_date, :session, :pay, :pay_cents, :headcount]
       #allow :choices, :index
       #allow :users, [:new, :carts, :form, :update]
       #allow :sessions, [:new, :carts, :destroy]
