@@ -78,7 +78,6 @@
           - when 'Financial'
             = link_to posting.accountable.name, financial_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
           - when 'Wage'
-            - p posting.id
             = link_to posting.accountable.name, wage_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
           - when 'Daily'
             = link_to posting.accountable.name, daily_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
