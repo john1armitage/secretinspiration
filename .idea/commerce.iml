@@ -197,8 +197,6 @@
     <orderEntry type="library" scope="PROVIDED" name="mini_magick (v4.3.3, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile (v0.6.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.8.0, ruby-2.2.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="money (v6.6.1, ruby-2.2.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="money-historical-bank (v0.0.3, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.11.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multipart-post (v2.0.0, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nenv (v0.2.0, ruby-2.2.0-p0) [gem]" level="application" />
@@ -216,9 +214,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.0.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails_layout (v1.0.26, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v4.2.4, ruby-2.2.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rake (v10.4.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ransack (v1.2.4@bcce3a, ruby-2.2.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rdoc (v4.2.0, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redcarpet (v3.3.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis (v3.2.1, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.5.2, ruby-2.2.0-p0) [gem]" level="application" />
@@ -242,7 +238,6 @@
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v2.7.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.6.2, ruby-2.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.2, ruby-2.2.0-p0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="yajl-ruby (v1.2.1, ruby-2.2.0-p0) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />

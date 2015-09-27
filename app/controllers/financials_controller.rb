@@ -129,6 +129,14 @@ class FinancialsController < ApplicationController
 
   end
 
+  def batch_secret
+
+  end
+
+  def batch_gigiri
+
+  end
+
   def batch_shack(ref_bank)
     counter = 0
     @financials.each do |tx|

@@ -75,7 +75,7 @@ gem 'eventmachine' #,'1.0.7'    HERE
 gem 'faraday'
 gem 'faraday_middleware'
 
-gem 'money-historical-bank'
+# gem 'money-historical-bank'
 
 #gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 
