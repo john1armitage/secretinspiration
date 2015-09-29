@@ -256,7 +256,7 @@ class WagesController < ApplicationController
     if wage.holiday > 0
       desc = "#{account.name} #{credit ? 'credit' :'debit'}: #{wage.fy}/#{wage.week_no}"
       wage.posts.create( account_date:  @account_date, desc: desc, postable_type: 'Wage',
-                         postable_id: wage.id, debit_amount: 0, credit_amount: wage.holiday, account_id:account.id,
+                         postable_id: wage.id, debit_amount: wage.holiday, credit_amount: 0, account_id:account.id,
                          accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
     end
     # if debit_amount > 0
