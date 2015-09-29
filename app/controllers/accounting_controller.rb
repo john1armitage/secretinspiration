@@ -32,12 +32,17 @@ class AccountingController < ApplicationController
     @stop = params[:account_date_lteq] ? params[:account_date_lteq] : Date.today
     @stop = nil if @start && @stop && @start > @stop
 
+    goodwill = Account.find_by_name('Goodwill')
+
     previous_posts = Post.includes(:account).joins('JOIN accounts AS groupings ON groupings.id = posts.grouping_id').where('account_date < ?',@start)
     previous_posts = previous_posts.where('groupings.name = ? AND debit_amount_cents > 0','Fixed Assets')
     previous_depreciations = Depreciation.includes(financial: :account).where('service_date < ?',@start)
     @fixed_assets_previous = previous_posts.sum('debit_amount_cents').to_d / 100
-    @depreciation_previous = previous_depreciations.sum('allowable_cost_cents').to_d / 100
-
+    @intangibles_previous = previous_posts.where('posts.account_id = ?',goodwill).sum('debit_amount_cents').to_d / 100
+    @tangibles_previous = @fixed_assets_previous - @intangibles_previous
+    @depreciation_previous = previous_depreciations.where('financials.account_id = ?',goodwill).sum('allowable_cost_cents').to_d / 100
+    @intangible_depreciation_previous = previous_depreciations.sum('allowable_cost_cents').to_d / 100
+    @tangible_depreciation_previous = @depreciation_previous - @intangible_depreciation_previous
     depreciations = Depreciation.where('service_date >= ? AND service_date <= ? ',@start, (@stop || Time.now))
     depreciations = depreciations.includes(financial: :account)
 
@@ -55,6 +60,9 @@ class AccountingController < ApplicationController
     @overheads = overheads.sum('debit_amount_cents').to_d / 100
     @disallowed = posts.where('groupings.name = ? AND debit_amount_cents > 0','Disallowed').sum('debit_amount_cents').to_d / 100
     @fixed_assets = posts.where('groupings.name = ? AND debit_amount_cents > 0','Fixed Assets').sum('debit_amount_cents').to_d / 100
+
+    @intangibles = posts.where('posts.account_id = ?',goodwill).sum('debit_amount_cents').to_d / 100
+    @tangibles = @fixed_assets - @intangibles
 
     posts = Post.includes(:account).where('account_date >= ?',@start)
     posts = posts.where('account_date <= ?',@stop) if @stop

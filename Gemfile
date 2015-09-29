@@ -92,3 +92,6 @@ gem 'sidekiq'
 # gem 'debugger', group: [:development, :test]
 
 #gem 'awesome_nested_set', github: 'huoxito/awesome_nested_set', branch: 'rails4'
+
+gem 'backup'
+gem 'whenever'

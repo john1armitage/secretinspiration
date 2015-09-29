@@ -95,10 +95,12 @@
   .large-1.columns.left
     = pounds(@cogs)
 .row
+  .large-1.columns.title
+    &nbsp
+  .large-2.columns.left
+    Pending Sales
   .large-2.columns.title
-    &nbsp
-  .large-3.columns.left
-    &nbsp
+    = pounds(@sales_pending);
   .large-3.columns.title
     &nbsp;
   .large-2.columns.title
@@ -106,12 +108,12 @@
   .large-1.columns.left
     = pounds(@payroll_costs)
 .row
+  .large-2.columns.title
+    Consumables
+  .large-3.columns.left
+    = pounds(@cogs + @overheads)
   .large-1.columns.title
     &nbsp;
-  .large-2.columns.title
-    Pending Sales
-  .large-3.columns.left
-    = pounds(@sales_pending)
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title
@@ -183,7 +185,7 @@
   .large-2.columns.title
     Depreciation
   .large-3.columns.left
-    = pounds(@depreciation)
+    = pounds(@depreciation + @amortisation)
   .large-2.columns.title
     &nbsp;
   .large-3.columns.left
