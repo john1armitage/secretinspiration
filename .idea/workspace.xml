@@ -11,8 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/posts/index.html.haml" afterPath="$PROJECT_DIR$/app/views/posts/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/accounting/index.html.haml" afterPath="$PROJECT_DIR$/app/views/accounting/index.html.haml" />
     </list>
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,32 +44,181 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/accounting/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.75">
-              <caret line="263" column="24" selection-start-line="263" selection-start-column="24" selection-end-line="263" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/posts/index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.216">
-              <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="accounting_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/accounting_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="37" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="37" />
-              <folding />
+            <state vertical-scroll-proportion="0.40711462">
+              <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+              <folding>
+                <marker date="1443542772373" expanded="true" signature="52:499" placeholder=".row.search.no-print" />
+                <marker date="1443542772373" expanded="true" signature="77:254" placeholder=".field.small-3.columns" />
+                <marker date="1443542772373" expanded="true" signature="259:376" placeholder=".field.small-3.columns" />
+                <marker date="1443542772373" expanded="true" signature="381:499" placeholder=".field.small-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="502:583" placeholder=".row.search.no-print" />
+                <marker date="1443542772373" expanded="true" signature="527:583" placeholder=".actions.small-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="585:749" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="592:749" placeholder=".large-12.columns" />
+                <marker date="1443542772373" expanded="true" signature="750:962" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="757:791" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="794:855" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="858:891" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="894:927" placeholder=".large-3.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="930:962" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="963:1177" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="970:1009" placeholder=".large-3.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1012:1061" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1064:1097" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1100:1132" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1135:1177" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1178:1416" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="1185:1220" placeholder=".large-3.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1223:1268" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1271:1304" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1307:1343" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1346:1416" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1417:1738" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="1424:1575" placeholder=".large-5.columns" />
+                <marker date="1443542772373" expanded="true" signature="1578:1738" placeholder=".large-6.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1739:2022" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="1746:1780" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1783:1837" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="1840:1873" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1876:1911" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="1914:2022" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2023:2273" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="2030:2063" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2066:2098" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2101:2143" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2146:2179" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2182:2221" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2224:2273" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2274:2514" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="2281:2314" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2317:2352" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2355:2400" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2403:2436" placeholder=".large-3.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2439:2470" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2473:2514" placeholder=".large-1.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2515:2777" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="2522:2554" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2557:2596" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2599:2651" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2654:2687" placeholder=".large-3.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2690:2724" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2727:2777" placeholder=".large-1.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2778:3040" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="2785:2823" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2826:2880" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="2883:2916" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2919:2952" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2955:2991" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="2994:3040" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3041:3240" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="3048:3080" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3083:3114" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3117:3150" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3153:3190" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3193:3240" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3241:3446" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="3248:3281" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3284:3316" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3319:3352" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3355:3394" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3397:3446" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3447:3652" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="3454:3487" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3490:3522" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3525:3558" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3561:3600" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3603:3652" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3653:3818" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="3660:3818" placeholder=".large-12.columns" />
+                <marker date="1443542772373" expanded="true" signature="3819:4061" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="3826:3868" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3871:3954" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="3957:3990" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="3993:4026" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4029:4061" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4062:4303" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="4069:4102" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4105:4140" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4143:4232" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4235:4268" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4271:4303" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4304:4551" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="4311:4344" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4347:4384" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4387:4480" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4483:4516" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4519:4551" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4552:4773" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="4559:4598" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4601:4666" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4669:4702" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4705:4738" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4741:4773" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4774:4975" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="4781:4814" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4817:4852" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4855:4904" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4907:4940" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="4943:4975" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="4976:5179" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="4983:5016" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5019:5056" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5059:5108" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5111:5144" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5147:5179" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5180:5382" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="5187:5223" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5226:5275" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5278:5311" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5314:5347" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5350:5382" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5383:5581" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="5390:5423" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5426:5461" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5464:5510" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5513:5546" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5549:5581" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5582:5784" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="5589:5622" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5625:5662" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5665:5713" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5716:5749" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5752:5784" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5785:6059" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="5792:5832" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5835:5952" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="5955:5988" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="5991:6024" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6027:6059" placeholder=".large-2.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6060:6332" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="6067:6100" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6103:6138" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6141:6261" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6264:6297" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6300:6332" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6333:6616" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="6340:6373" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6376:6413" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6416:6545" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6548:6581" placeholder=".large-2.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6584:6616" placeholder=".large-3.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6617:6789" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="6624:6789" placeholder=".large-12.columns" />
+                <marker date="1443542772373" expanded="true" signature="6818:6926" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="6829:6869" placeholder=".large-4.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="6876:6926" placeholder=".large-6.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="6977:7252" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="6990:7029" placeholder=".large-1.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="7038:7086" placeholder=".large-7.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="7095:7197" placeholder=".large-4.columns.left" />
+                <marker date="1443542772373" expanded="true" signature="7845:8235" placeholder=".large-6.columns" />
+                <marker date="1443542772373" expanded="true" signature="7866:8235" placeholder=".row" />
+                <marker date="1443542772373" expanded="true" signature="7877:7912" placeholder=".large-4.columns.title" />
+                <marker date="1443542772373" expanded="true" signature="7919:8235" placeholder=".large-6.columns.left" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,8 +294,8 @@
         <option value="$PROJECT_DIR$/config/schedule.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/controllers/accounting_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/accounting/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/posts/index.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/accounting/index.html.haml" />
       </list>
     </option>
   </component>
@@ -166,8 +314,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="205" />
-    <option name="y" value="18" />
+    <option name="x" value="652" />
+    <option name="y" value="31" />
     <option name="width" value="1532" />
     <option name="height" value="1024" />
   </component>
@@ -628,11 +776,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="205" y="18" width="1532" height="1024" extended-state="0" />
+    <frame x="652" y="31" width="1532" height="1024" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21767241" sideWeight="0.49956933" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2731183" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40107527" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1132,19 +1280,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/accounting/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/posts/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.75">
-          <caret line="263" column="24" selection-start-line="263" selection-start-column="24" selection-end-line="263" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.47674417">
+          <caret line="69" column="24" selection-start-line="69" selection-start-column="24" selection-end-line="69" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/posts/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/accounting/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.216">
-          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding />
+        <state vertical-scroll-proportion="0.40711462">
+          <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+          <folding>
+            <marker date="1443542772373" expanded="true" signature="52:499" placeholder=".row.search.no-print" />
+            <marker date="1443542772373" expanded="true" signature="77:254" placeholder=".field.small-3.columns" />
+            <marker date="1443542772373" expanded="true" signature="259:376" placeholder=".field.small-3.columns" />
+            <marker date="1443542772373" expanded="true" signature="381:499" placeholder=".field.small-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="502:583" placeholder=".row.search.no-print" />
+            <marker date="1443542772373" expanded="true" signature="527:583" placeholder=".actions.small-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="585:749" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="592:749" placeholder=".large-12.columns" />
+            <marker date="1443542772373" expanded="true" signature="750:962" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="757:791" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="794:855" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="858:891" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="894:927" placeholder=".large-3.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="930:962" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="963:1177" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="970:1009" placeholder=".large-3.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1012:1061" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1064:1097" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1100:1132" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1135:1177" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1178:1416" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="1185:1220" placeholder=".large-3.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1223:1268" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1271:1304" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1307:1343" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1346:1416" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1417:1738" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="1424:1575" placeholder=".large-5.columns" />
+            <marker date="1443542772373" expanded="true" signature="1578:1738" placeholder=".large-6.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1739:2022" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="1746:1780" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1783:1837" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="1840:1873" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1876:1911" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="1914:2022" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2023:2273" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="2030:2063" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2066:2098" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2101:2143" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2146:2179" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2182:2221" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2224:2273" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2274:2514" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="2281:2314" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2317:2352" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2355:2400" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2403:2436" placeholder=".large-3.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2439:2470" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2473:2514" placeholder=".large-1.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2515:2777" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="2522:2554" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2557:2596" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2599:2651" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2654:2687" placeholder=".large-3.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2690:2724" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2727:2777" placeholder=".large-1.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2778:3040" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="2785:2823" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2826:2880" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="2883:2916" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2919:2952" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2955:2991" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="2994:3040" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3041:3240" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="3048:3080" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3083:3114" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3117:3150" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3153:3190" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3193:3240" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3241:3446" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="3248:3281" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3284:3316" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3319:3352" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3355:3394" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3397:3446" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3447:3652" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="3454:3487" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3490:3522" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3525:3558" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3561:3600" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3603:3652" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3653:3818" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="3660:3818" placeholder=".large-12.columns" />
+            <marker date="1443542772373" expanded="true" signature="3819:4061" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="3826:3868" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3871:3954" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="3957:3990" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="3993:4026" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4029:4061" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4062:4303" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="4069:4102" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4105:4140" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4143:4232" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4235:4268" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4271:4303" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4304:4551" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="4311:4344" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4347:4384" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4387:4480" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4483:4516" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4519:4551" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4552:4773" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="4559:4598" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4601:4666" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4669:4702" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4705:4738" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4741:4773" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4774:4975" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="4781:4814" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4817:4852" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4855:4904" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4907:4940" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="4943:4975" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="4976:5179" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="4983:5016" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5019:5056" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5059:5108" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5111:5144" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5147:5179" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5180:5382" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="5187:5223" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5226:5275" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5278:5311" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5314:5347" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5350:5382" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5383:5581" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="5390:5423" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5426:5461" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5464:5510" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5513:5546" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5549:5581" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5582:5784" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="5589:5622" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5625:5662" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5665:5713" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5716:5749" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5752:5784" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5785:6059" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="5792:5832" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5835:5952" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="5955:5988" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="5991:6024" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6027:6059" placeholder=".large-2.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6060:6332" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="6067:6100" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6103:6138" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6141:6261" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6264:6297" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6300:6332" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6333:6616" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="6340:6373" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6376:6413" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6416:6545" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6548:6581" placeholder=".large-2.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6584:6616" placeholder=".large-3.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6617:6789" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="6624:6789" placeholder=".large-12.columns" />
+            <marker date="1443542772373" expanded="true" signature="6818:6926" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="6829:6869" placeholder=".large-4.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="6876:6926" placeholder=".large-6.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="6977:7252" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="6990:7029" placeholder=".large-1.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="7038:7086" placeholder=".large-7.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="7095:7197" placeholder=".large-4.columns.left" />
+            <marker date="1443542772373" expanded="true" signature="7845:8235" placeholder=".large-6.columns" />
+            <marker date="1443542772373" expanded="true" signature="7866:8235" placeholder=".row" />
+            <marker date="1443542772373" expanded="true" signature="7877:7912" placeholder=".large-4.columns.title" />
+            <marker date="1443542772373" expanded="true" signature="7919:8235" placeholder=".large-6.columns.left" />
+          </folding>
         </state>
       </provider>
     </entry>
