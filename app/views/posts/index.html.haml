@@ -45,7 +45,10 @@
   %tr
     %th= sort_link(@q, :account_date, "Date")
     %th= sort_link(@q, :account_id, "Account")
-    %th Reference
+    %th.number
+      Net
+      %br
+      = pounds( @debits - @credits )
     %th.number
       = sort_link(@q, :debit_amount_cents, "Debit")
       %br
@@ -73,7 +76,7 @@
       -#    - title = "Receipt #{posting.postable_id}"
       -#  - else
       -#    - title = ''
-      %td
+      %td.number
         - case posting.postable_type
           - when 'Financial'
             = link_to posting.accountable.name, financial_path(posting.postable),remote: true, class: 'no_ajaxify' if posting.accountable
