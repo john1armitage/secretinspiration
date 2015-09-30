@@ -295,6 +295,11 @@
       = "CT600: #{pounds(@overheads + @payroll_costs)}"
     .row
       .large-7.columns.title
+        Consumables
+      .large-4.columns.left
+        = pounds( @direct_costs + @overheads )
+    .row
+      .large-7.columns.title
         Payroll
       .large-4.columns.left
         = pounds( directors + @payroll_costs )
