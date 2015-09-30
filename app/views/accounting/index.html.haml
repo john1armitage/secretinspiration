@@ -118,179 +118,115 @@
     Amortisation
   .large-3.columns.left
     = pounds(@amortisation)
-.row
-  .large-12.columns
+.large-6.columns
+  .row
     %h5
       = "VAT Summary:"
-.row
-  .large-2.columns.title
-    VAT due
-  .large-2.columns.left
-    = pounds(@vat_received - @vat_paid)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-.row
-  .large-3.columns.title
-    VAT Received
-  .large-2.columns.left
-    = pounds(@vat_received)
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Sales
-  .large-2.columns.left
-    = pounds(@sales)
-.row
-  .large-3.columns.title
-    VAT Paid
-  .large-2.columns.left
-    = pounds(@vat_paid)
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Purchases
-  .large-2.columns.left
-    = pounds(@cogs + @overheads + @fixed_assets)
-.row
-  .large-12.columns
+  .row
+    .large-4.columns.title
+      VAT due
+    .large-4.columns.left
+      = pounds(@vat_received - @vat_paid)
+  .row
+    .large-4.columns.title
+      VAT Received
+    .large-4.columns.left
+      = pounds(@vat_received)
+  .row
+    .large-4.columns.title
+      VAT Paid
+    .large-4.columns.left
+      = pounds(@vat_paid)
+  .row
+    .large-4.columns.title
+      Sales
+    .large-4.columns.left
+      = pounds(@sales)
+  .row
+    .large-4.columns.title
+      Purchases
+    .large-4.columns.left
+      = pounds(@cogs + @overheads + @fixed_assets)
+.large-6.columns
+  .row
     %h5
       = "Fixed Assets:"
-.row
-  .large-2.columns.title
-    Start of Period
-  .large-2.columns.left
-    = pounds(@fixed_assets_previous - @depreciation_previous)
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Tangible
-  .large-3.columns.left
-    = pounds(@tangibles_previous - @tangible_depreciation_previous)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Intangible
-  .large-3.columns.left
-    = pounds(@intangibles_previous - @intangible_depreciation_previous)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-2.columns.title
-    Depreciation
-  .large-2.columns.left
-    = pounds(@depreciation + @amortisation)
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Tangible
-  .large-3.columns.left
-    = pounds(@depreciation)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Intangible
-  .large-3.columns.left
-    = pounds(@amortisation)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-2.columns.title
-    Additions
-  .large-2.columns.left
-    = pounds(@fixed_assets)
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Tangible
-  .large-3.columns.left
-    = pounds(@tangibles)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Intangible
-  .large-3.columns.left
-    = pounds(@intangibles)
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-2.columns.title
-    End of Period
-  .large-2.columns.left
-    = pounds(@fixed_assets_previous + @fixed_assets - (@depreciation_previous + @depreciation))
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.title
-    &nbsp;
-  .large-2.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Tangible
-  .large-3.columns.left
-    = pounds(@tangibles_previous + @tangibles - (@tangible_depreciation_previous + @depreciation))
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
-.row
-  .large-1.columns.title
-    &nbsp;
-  .large-2.columns.title
-    Intangible
-  .large-3.columns.left
-    = pounds(@intangibles_previous + @intangibles - (@intangible_depreciation_previous +  + @amortisation))
-  .large-2.columns.title
-    &nbsp;
-  .large-3.columns.left
-    &nbsp;
+  .row
+    .large-4.columns.title
+      Start of Period
+    .large-4.columns.left
+      = pounds(@fixed_assets_previous - @depreciation_previous)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Tangible
+    .large-4.columns.left
+      = pounds(@tangibles_previous - @tangible_depreciation_previous)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Intangible
+    .large-4.columns.left
+      = pounds(@intangibles_previous - @intangible_depreciation_previous)
+  .row
+    .large-4.columns.title
+      Depreciation
+    .large-4.columns.left
+      = pounds(@depreciation + @amortisation)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Tangible
+    .large-4.columns.left
+      = pounds(@depreciation)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Intangible
+    .large-4.columns.left
+      = pounds(@amortisation)
+  .row
+    .large-2.columns.title
+      Additions
+    .large-2.columns.left
+      = pounds(@fixed_assets)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Tangible
+    .large-4.columns.left
+      = pounds(@tangibles)
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Intangible
+    .large-4.columns.left
+      = pounds(@intangibles)
+  .row
+    .large-4.columns.title
+      End of Period
+    .large-4.columns.left
+      = pounds(@fixed_assets_previous + @fixed_assets - (@depreciation_previous + @depreciation))
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Tangible
+    .large-4.columns.left
+      = pounds(@tangibles_previous + @tangibles - (@tangible_depreciation_previous + @depreciation))
+  .row
+    .large-1.columns.title
+      &nbsp;
+    .large-4.columns.title
+      Intangible
+    .large-4.columns.left
+      = pounds(@intangibles_previous + @intangibles - (@intangible_depreciation_previous +  + @amortisation))
 
 - directors = 0
 - payroll = 0
