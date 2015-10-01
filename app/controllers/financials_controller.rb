@@ -129,14 +129,6 @@ class FinancialsController < ApplicationController
 
   end
 
-  def batch_secret
-
-  end
-
-  def batch_gigiri
-
-  end
-
   def batch_shack(ref_bank)
     counter = 0
     @financials.each do |tx|
@@ -370,6 +362,7 @@ class FinancialsController < ApplicationController
 
   def new
     @financial = Financial.new
+    @financial.credit = true
     if params[:petty].present?
       @financial.event_date = Date.today
       @financial.bank = 'PETTY'
@@ -377,13 +370,19 @@ class FinancialsController < ApplicationController
       @financial.entity = 'Supplier'
       @financial.entity_ref = 'SUNDRY'
       @financial.entity_id = Supplier.find_by_name('Sundry GBP Suppliers').id
-      @financial.credit = true
       @financial.account_id = Account.find_by_name('Victual Costs').id
       @financial.summary = @financial.desc = 'Petty Cash Purchase'
     else
       @financial.entity = params[:entity] if params[:entity].present?
       @financial.event_date = cookies[:last_fx_date]
-      @financial.bank = cookies[:last_fx_bank]
+      @financial.classification = @financial.entity == 'Bank' ? 'transfer' : 'BACS'
+      if params[:invoice].present?
+        @financial.bank = 'PAYABLE'
+        @financial.invoice = true
+        @financial.summary = @financial.desc = 'Invoice Received '
+      else
+        @financial.bank = cookies[:last_fx_bank]
+      end
     end
   end
 
@@ -391,10 +390,14 @@ class FinancialsController < ApplicationController
   end
 
   def create
+
+    params[:financial][:entity_ref] = get_entity_reference
+
     @financial = Financial.new(params[:financial])
     cookies[:last_fx_date] = @financial.event_date
     cookies[:last_fx_bank] = @financial.bank
     # transfer_account if params[:financial][:account_id].blank?
+
     respond_to do |format|
       if @financial.save
         format.html { redirect_to financials_url }
@@ -408,9 +411,12 @@ class FinancialsController < ApplicationController
 
   def update
     # transfer_account if params[:financial][:account_id].blank?
-    if @financial.entity_ref.blank? && params[:financial][:entity_ref].blank?
-      params[:financial][:entity_ref] = get_entity_ref
-    end
+    # if @financial.entity_ref.blank? && params[:financial][:entity_ref].blank?
+    #   params[:financial][:entity_ref] = get_entity_ref
+    # end
+
+    params[:financial][:entity_ref] = get_entity_reference
+
     respond_to do |format|
       if @financial.update(params[:financial])
         remove_posts
@@ -429,7 +435,7 @@ class FinancialsController < ApplicationController
         stop = params[:event_date_lteq].present? ? params[:event_date_lteq] : ''
         hidden = params[:hidden].present? ? params[:hidden] : ''
         classification = params[:classification].present? ? params[:classification] : ''
-        format.html { redirect_to financials_url(processed: processed, event_date_gteq: start, event_date_lteq: stop, hidden: hidden, processed: processed, classification: classification, financial: @financial.id )}
+        format.html { redirect_to financials_url(event_date_gteq: start, event_date_lteq: stop, hidden: hidden, processed: processed, classification: classification, financial: @financial.id )}
         format.json { head :no_content }
         # end
       else
@@ -773,20 +779,20 @@ class FinancialsController < ApplicationController
     @financial.update!(processed: false)
   end
 
-  def get_entity_ref
-    ref = ''
-    case @financial.entity
-      when 'Supplier'
-        supplier_ref = Supplier.find(@financial.entity_id).reference
-        ref = supplier_ref.first if supplier_ref
-      when 'Bank'
-        ref = Bank.find(@financial.entity_id).reference
-      when 'Employee'
-        ref = Employee.find(@financial.entity_id).reference
-    end
-    ref
-  end
-
+  # def get_entity_ref
+  #   ref = ''
+  #   case @financial.entity
+  #     when 'Supplier'
+  #       supplier_ref = Supplier.find(@financial.entity_id).reference
+  #       ref = supplier_ref.first if supplier_ref
+  #     when 'Bank'
+  #       ref = Bank.find(@financial.entity_id).reference
+  #     when 'Employee'
+  #       ref = Employee.find(@financial.entity_id).reference
+  #   end
+  #   ref
+  # end
+  #
   def get_banks
     Bank.where( 'reference IS NOT NULL' ).order(:rank)
   end
@@ -800,8 +806,19 @@ class FinancialsController < ApplicationController
   def get_entity_suppliers
     supplier_ids = Financial.where('entity_id IS NOT NULL').where(entity: 'Supplier').select(:entity_id).map(&:entity_id).uniq.sort_by(&:to_i)
     Supplier.where( id: supplier_ids ) #.order(:id)
-
   end
+
+  def get_entity_reference
+    case params[:financial][:entity]
+      when 'Supplier'
+        Supplier.find(params[:financial][:entity_id]).reference.first
+      when 'Employee'
+        Employee.find(params[:financial][:entity_id]).reference
+      when 'Bank'
+        Bank.find(params[:financial][:entity_id]).reference
+    end
+  end
+
 
   def get_entity_refs
     Financial.where('entity_ref IS NOT NULL').where(entity: 'Supplier').select(:entity_ref).map(&:entity_ref).uniq.sort { |w1, w2| w1.casecmp(w2) }

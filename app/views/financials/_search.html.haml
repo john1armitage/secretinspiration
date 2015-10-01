@@ -15,6 +15,8 @@
         - Element.where(kind: 'entity').map(&:name).each do |name|
           %li#admin
             != link_to "<New #{name}>", new_financial_path(entity: name), title: 'Create Transaction' #, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
+        &nbsp;
+        != link_to "<New Invoice>", new_financial_path(entity: 'Supplier', invoice: true), title: 'Create Invoice' #, class: 'small button radius' #, class: 'no_ajaxify', remote: 'true'
 
 = search_form_for @q do |f|
 
@@ -64,9 +66,12 @@
     .field.small-1.columns.left
       = label_tag :credit
       = check_box_tag :credit, true, params[:credit]
-    .field.small-2.columns.left
+    .field.small-1.columns.left
       = label_tag :debit
       = check_box_tag :debit, true, params[:debit]
+    .field.small-1.columns.left
+      = label_tag :invoice, 'Inv'
+      = check_box_tag :invoice, true, params[:invoice]
     -#.field.small-2.columns.left
     -#  = label_tag :exceptions
     -#  = check_box_tag :exceptions, true, params[:exceptions]
