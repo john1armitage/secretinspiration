@@ -14,6 +14,9 @@
       .field.small-2.columns.headings
         = link_to 'X', financial, :method => :delete, :data => { :confirm => 'Are you sure?' }
         = link_to financial.event_date, edit_financial_path(financial), title: "Edit Financial: #{financial.id}"
+        %br
+        = (financial.annual ? 'Annual' : '')
+        = (financial.invoice ? 'Invoice' : '')
       .field.small-3.columns.has-tip{"data-tooltip" => "", title: financial.desc}
         = link_to financial.entity_ref, post_path(financial), remote: true, class: 'no_ajaxify'
         %br
