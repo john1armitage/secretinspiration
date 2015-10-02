@@ -91,8 +91,20 @@ class AccountingController < ApplicationController
     @vat_received = @sales * CONFIG[:vat_rate_standard]
 
     @grouped_overheads = overheads.joins(:account).order('accounts.code').select('accounts.code, accounts.name, sum(debit_amount_cents) as total_cost').group('accounts.code, accounts.name') #.having("sum(price) > ?", 100)
-    # @grouped_cogs = cogs.joins(:account).order('accounts.code').select('accounts.code, accounts.name, sum(debit_amount_cents) as total_cost').group('accounts.code, accounts.name') #.having("sum(price) > ?", 100)
-#p @grouped_cogs
+
+    prepayments = Financial.where(annual: true)
+    @prepayments = 0
+
+    prepayments.each do |prepayment|
+      date = prepayment.effective_date || prepayment.event_date
+      elapsed = (@stop.to_date - date).to_i
+      if elapsed > 0 && elapsed < 365
+        remaining = (365 - elapsed)
+        amount = ( prepayment.credit_amount_cents * remaining / 365 )
+        @prepayments += amount
+      end
+    end
+    @prepayments = (@prepayments / 100).to_i
   end
 end
 
