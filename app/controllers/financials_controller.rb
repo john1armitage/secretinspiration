@@ -131,6 +131,9 @@ class FinancialsController < ApplicationController
 
   def batch_shack(ref_bank)
     counter = 0
+
+    invoices = Financial.where(invoice: true, entity: 'Supplier')
+
     @financials.each do |tx|
       account = nil
       type = 'unresolved'
@@ -345,16 +348,17 @@ class FinancialsController < ApplicationController
 
       # tax?
       tax = tx.size > 5 ? tx[5] : ''
-
-      Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank, account: account, tax_home: tax)
-
+      matches = invoices.where(entity_id: entity_id, credit_amount_cents: (credit_amount * 100))
+      if !matches.empty?
+        invoice = matches.first
+        invoice.update(invoice: false, effective_date: invoice.event_date, event_date: event_date, bank: ref_bank, classification: type, desc: tx[1], processed: false)
+      else
+        Financial.create!(event_date: event_date, credit: credit, classification: type, entity: entity, entity_id: entity_id, entity_ref: entity_ref, mandate: mandate, summary: summary, desc: tx[1], debit_amount: debit_amount, credit_amount: credit_amount, bank: ref_bank, account: account, tax_home: tax)
+      end
     end
 
   end
 
-  def processor
-
-  end
   def show
     @posts = @financial.posts
     render 'show.js.erb'
@@ -374,7 +378,7 @@ class FinancialsController < ApplicationController
       @financial.summary = @financial.desc = 'Petty Cash Purchase'
     else
       @financial.entity = params[:entity] if params[:entity].present?
-      @financial.event_date = cookies[:last_fx_date]
+      @financial.event_date = cookies[:last_fx_date] || Date.today
       @financial.classification = @financial.entity == 'Bank' ? 'transfer' : 'BACS'
       if params[:invoice].present?
         @financial.bank = 'PAYABLE'
