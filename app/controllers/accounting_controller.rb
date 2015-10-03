@@ -70,13 +70,6 @@ class AccountingController < ApplicationController
     cogs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Victual Costs')
     @cogs = cogs.sum('debit_amount_cents').to_d / 100
 
-    # @payroll_costs = posts.where('accounts.name = ? AND debit_amount_cents > 0','Hourly Wages').sum('debit_amount_cents').to_d / 100
-    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Bonus').sum('debit_amount_cents').to_d / 100
-    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Employer NI').sum('debit_amount_cents').to_d / 100
-    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Accrued Holiday').sum('debit_amount_cents').to_d / 100
-    # #TEMP historical
-    # @payroll_costs += posts.where('accounts.name = ? AND debit_amount_cents > 0','Payroll Costs').sum('debit_amount_cents').to_d / 100
-
     payroll = posts.where("accounts.name = ANY('{Payroll Costs,Hourly Wages,Bonus,Employer NI,Accrued Holiday}'::text[]) AND debit_amount_cents > 0")
     @payroll_costs = payroll.sum('debit_amount_cents').to_d / 100
 
