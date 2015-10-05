@@ -17,10 +17,7 @@
     - @sides = Hash.new { 0 }
     - @timed_orders = @meals.order('ordered_at ASC')
     %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
-      - if current_user.role.name == 'operator'
-        = render partial: 'meal_order', collection: @meals
-      - else
-        = render partial: 'meal_order', collection: @manager_meals
+      = render partial: 'meal_order', collection: @meals
   -#    - package = 'Current'
   -#    - if @starters.size > 0
   -#      %li.tabel
