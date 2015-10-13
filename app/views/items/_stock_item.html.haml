@@ -9,12 +9,13 @@
     - item.stock_level = stocks.first.stock_level
   %fieldset.compact
     .row
-      .field.small-2.columns
-        = link_to item.name, stocks_path(item_id: item.id), remote: true, class: 'no_ajaxify'
+      .field.small-3.columns.righty
+        %b
+          = link_to item.name, stocks_path(item_id: item.id), remote: true, class: 'no_ajaxify'
         - if @option
           %br
           = hidden_field_tag :item_option, @option
-          = @option.capitalize
+          = @option.titleize.gsub(/_/,' ').gsub(/ And /,' and ')
       .field.small-2.columns
         = f.number_field :stock_level, class: 'level'
       .field.small-3.columns
