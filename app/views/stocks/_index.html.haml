@@ -8,7 +8,7 @@
     - sold = sold_items.sum(:quantity)
     - total_sold = 0
     - sold_items.each do |item|
-      - parts = item.options.split(',').size
+      - parts = item.options.empty? ? 1 : item.options.split(',').size
       - total_sold += (item.quantity / parts)
   %p
     %span= "#{stock.stock_date.strftime('%e %b %Y')}: #{stock.stock_level} in stock"
