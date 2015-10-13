@@ -16,6 +16,8 @@
           %br
           = hidden_field_tag :option, @option
           = @option.titleize.gsub(/_/,' ').gsub(/ And /,' and ')
+        = hidden_field_tag :grouping, @q.grouping_eq
+        = hidden_field_tag :name, @q.name_cont
       .field.small-2.columns
         = f.number_field :stock_level, class: 'level'
       .field.small-3.columns

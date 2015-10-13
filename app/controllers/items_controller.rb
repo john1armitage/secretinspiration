@@ -6,12 +6,18 @@ class ItemsController < ApplicationController
 
     get_root_categories
 
+    @groupings = Item.where(stock_item: true).select("grouping, initcap(regexp_replace(grouping, '^.*:', '')) as title" ).order(:grouping).uniq
+
     @q = Item.search(params[:q])
 
-    @groupings = Item.where(stock_item: true).select("grouping, initcap(regexp_replace(grouping, '^.*:', '')) as title" ).order(:grouping).uniq
+    @q.grouping_eq = params[:grouping] if  params[:grouping].present?
+    @q.name_cont = params[:name] if  params[:name].present?
 
     # @items = Item.order(:item_type_id, :category_id, :rank, :name)
     @items = @q.result(distinct: true).joins(:variants).order(:item_type_id, :category_id, :rank, :name)
+
+    # @items = @items.where(grouping: params[:grouping]) if params[:grouping].present?
+
 
     if params[:stock].present?
       @items = @items.includes(:stocks).where(stock_item: true)
@@ -20,9 +26,9 @@ class ItemsController < ApplicationController
         # @option = params[:item_option]
         # @stocks = @item.stocks.order('stock_date DESC')
       end
-      if params[:item_option].present?
-        @item_option = params[:item_option]
-      end
+
+      @item_option = params[:option] if params[:option].present?
+
       render 'stock'
     end
   end
@@ -84,7 +90,7 @@ class ItemsController < ApplicationController
       end
     else
       do_stocks unless params[:item][:stock_level].blank?
-      redirect_to items_url( stock: true, item_id: @item.id, item_option: params[:item_option] ), notice: 'Stocks updated.'
+      redirect_to items_url( stock: true, item_id: @item.id, option: params[:item_option], grouping: params[:grouping], name: params[:name] ), notice: 'Stocks updated.'
     end
   end
 
