@@ -20,7 +20,6 @@ module Permissions
       allow_param :booking, [:walkin, :arrival, :pax, :customer_name, :contact, :notes, :booking_date, :state, :email]
       allow_param :meal, [:contact, :phone, :state, :start_time, :notes]
       allow_param :message, [:message, :message_type, :user_id, :create_time]
-      allow_param :item, [:stock_date, :stock_level, :updated_at]
       allow_param :stock, [:item_id, :stock_date, :stock_level, :updated_at, :created_at]
     end
   end

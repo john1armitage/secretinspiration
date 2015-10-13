@@ -12,9 +12,10 @@ class StocksController < ApplicationController
     end
     @stocks = @stocks.order('stock_date DESC')
     if params[:option].present?
+      # @option = params[:option]
       @stocks = @stocks.where(item_option: params[:option] )
     end
-    # @option =  ? params[:option] : nil
+    @option = params[:option].present? ? params[:option] : nil
     render 'index.js.erb'
     # respond_to do |format|
     #   format.html # index.html.erb

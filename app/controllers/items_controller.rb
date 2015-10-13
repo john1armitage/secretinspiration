@@ -3,12 +3,21 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
+
     get_root_categories
-    @items = Item.order(:item_type_id, :category_id, :rank, :name)
+
+    @q = Item.search(params[:q])
+
+    @groupings = Item.where(stock_item: true).select("grouping, initcap(regexp_replace(grouping, '^.*:', '')) as title" ).order(:grouping).uniq
+
+    # @items = Item.order(:item_type_id, :category_id, :rank, :name)
+    @items = @q.result(distinct: true).joins(:variants).order(:item_type_id, :category_id, :rank, :name)
+
     if params[:stock].present?
       @items = @items.includes(:stocks).where(stock_item: true)
       if params[:item_id].present?
         @item = Item.find(params[:item_id])
+        # @option = params[:item_option]
         # @stocks = @item.stocks.order('stock_date DESC')
       end
       if params[:item_option].present?
