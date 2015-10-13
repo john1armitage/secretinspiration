@@ -9,14 +9,27 @@
     - sold = sold_items.sum(:quantity)
     - total_sold = 0
     - sold_items.each do |item|
-      %p
-        - p item.variant.name if item.variant.name != 'default'
-      - parts = item.options.empty? ? 1 : item.options.split(',').size
-      - total_sold += (item.quantity / parts)
+      - parts = 1
+      - if item.variant.name != 'default'
+        -# WINES
+        - whole = 750
+        - case item.variant.name
+          - when 'Large'
+            - parts = whole / 250
+          - when 'Medium'
+            - parts = whole / 175
+      - else
+        - parts = item.options.split(',').size unless item.options.empty?
+      - total_sold += (item.quantity.to_d / parts.to_d)
+      -#- p item.desc
+      -#- p item.variant.name
+      -#- p parts
+      -#- p item.quantity.to_d / parts.to_d
+      -#- p total_sold
   %p
     %span= "#{stock.stock_date.strftime('%e %b %Y')}: #{stock.stock_level} in stock"
     - if first
-      %span= ", #{total_sold} portions sold"
+      %span= ", #{total_sold.to_i} portions sold (#{sold})"
       - first = false
     %span= link_to '[x]', stock, :method => :delete, :data => { :confirm => 'Remove stock reading?' }, remote: true, class: 'no_ajaxify'
 
