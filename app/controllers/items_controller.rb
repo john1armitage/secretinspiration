@@ -11,6 +11,9 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:item_id])
         # @stocks = @item.stocks.order('stock_date DESC')
       end
+      if params[:item_option].present?
+        @item_option = params[:item_option]
+      end
       render 'stock'
     end
   end
@@ -72,7 +75,7 @@ class ItemsController < ApplicationController
       end
     else
       do_stocks unless params[:item][:stock_level].blank?
-      redirect_to items_url( stock: true, item_id: @item.id ), notice: 'Stocks updated.'
+      redirect_to items_url( stock: true, item_id: @item.id, item_option: params[:item_option] ), notice: 'Stocks updated.'
     end
   end
 

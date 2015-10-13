@@ -12,16 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/20151013082238_create_stocks.rb" afterPath="$PROJECT_DIR$/db/migrate/20151013082238_create_stocks.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stocks/_index.html.haml" afterPath="$PROJECT_DIR$/app/views/stocks/_index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" afterPath="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/_stock_item.html.haml" afterPath="$PROJECT_DIR$/app/views/items/_stock_item.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stocks/index.js.erb" afterPath="$PROJECT_DIR$/app/views/stocks/index.js.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/items_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/items_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/stock.html.haml" afterPath="$PROJECT_DIR$/app/views/items/stock.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stocks_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/stocks_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/structure.sql" afterPath="$PROJECT_DIR$/db/structure.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,11 +46,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_index.html.haml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_index.html.haml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/stocks/_index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2348643">
-              <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+            <state vertical-scroll-proportion="-1.25">
+              <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_stock_item.html.haml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/items/_stock_item.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31637716">
+              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stock.html.haml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/items/stock.html.haml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.375">
+              <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+              <folding>
+                <marker date="1444748056185" expanded="true" signature="456:636" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="items_controller.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/items_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,11 +156,11 @@
         <option value="$PROJECT_DIR$/app/views/choices/shack/_item.html.haml" />
         <option value="$PROJECT_DIR$/db/migrate/20151013082238_create_stocks.rb" />
         <option value="$PROJECT_DIR$/app/views/stocks/index.js.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/items_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/items/_stock_item.html.haml" />
         <option value="$PROJECT_DIR$/app/views/items/stock.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/stocks_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/stocks/_index.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/items_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/items/_stock_item.html.haml" />
       </list>
     </option>
   </component>
@@ -300,51 +324,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="stocks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commerce" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="accounting" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -739,7 +719,7 @@
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15019763" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15019763" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22035573" sideWeight="0.49094203" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1231,24 +1211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/items_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/items/stock.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <marker date="1444748056185" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/stocks/index.js.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1267,14 +1229,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/items/_stock_item.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.125">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/accounting_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43482688">
@@ -1285,8 +1239,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/stocks/_index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2348643">
-          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+        <state vertical-scroll-proportion="-1.25">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/items_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/items/stock.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+          <folding>
+            <marker date="1444748056185" expanded="true" signature="456:636" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/items/_stock_item.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31637716">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
           <folding />
         </state>
       </provider>

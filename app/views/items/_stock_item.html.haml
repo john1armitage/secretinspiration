@@ -22,6 +22,6 @@
       .field.small-1.columns.left
         = f.submit 'Save'
 %div{id: "stocks_#{item.id}_#{@option}"}
-  - if !stocks.empty? and @item.present? and (@item.id == item.id)
+  - if !stocks.empty? and @item.present? and (@item.id == item.id) and stocks.first.item_option == @item_option
     - @stocks = stocks
     = render 'stocks/index'
