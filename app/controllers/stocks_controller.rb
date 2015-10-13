@@ -11,7 +11,10 @@ class StocksController < ApplicationController
       @stocks = Stock.all
     end
     @stocks = @stocks.order('stock_date DESC')
-
+    if params[:option].present?
+      @stocks = @stocks.where(item_option: params[:option] )
+    end
+    # @option =  ? params[:option] : nil
     render 'index.js.erb'
     # respond_to do |format|
     #   format.html # index.html.erb
@@ -70,9 +73,10 @@ class StocksController < ApplicationController
   # DELETE /stocks/1
   # DELETE /stocks/1.json
   def destroy
-    @stocks = Item.find(@stock.item_id).stocks.order('stock_date DESC')
     @item_id = @stock.item_id
+    @option = @stock.item_option
     @stock.destroy
+    @stocks = Item.find(@item_id).stocks.where(item_option: @option).order('stock_date DESC')
     render 'index.js.erb'
     # respond_to do |format|
     #   format.html { redirect_to stocks_url }

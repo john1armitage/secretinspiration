@@ -47,7 +47,7 @@
         = item.name
       %span
         = 'Sorry, available soon' unless default.first.item.available
-      - if allow? :items, :update
+      - if allow? :items, :create
         %span= link_to 'Edit', edit_item_path(item)
       - if allow? :items, :destroy
         %span= link_to 'X', item, :method => :delete, :data => { :confirm => 'Are you sure?' }

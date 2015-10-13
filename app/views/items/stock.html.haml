@@ -1,6 +1,14 @@
 - @items.each do |stock_item |
-  = render 'stock_item', item: stock_item
-
+  - @option = nil
+  - if stock_item.options.size > 1
+    - stock_item.options.each do |option|
+      - unless option.blank?
+        - options = Element.where(kind: option)
+        - options.each do |o|
+          - @option = o.name
+          = render 'stock_item', item: stock_item
+  - else
+    = render 'stock_item', item: stock_item
 :coffeescript
   pad = (n) ->
     if n < 10 then '0' + n else n

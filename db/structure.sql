@@ -697,7 +697,9 @@ CREATE TABLE schema_migrations (
 CREATE TABLE stocks (
     id integer NOT NULL,
     stock_date date,
+    item_option character varying,
     stock_level integer,
+    stock_unit character varying,
     item_id integer,
     timestamps character varying
 );

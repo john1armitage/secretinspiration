@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
       @items = @items.includes(:stocks).where(stock_item: true)
       if params[:item_id].present?
         @item = Item.find(params[:item_id])
-        @stocks = @item.stocks.order('stock_date DESC')
+        # @stocks = @item.stocks.order('stock_date DESC')
       end
       render 'stock'
     end
@@ -64,18 +64,15 @@ class ItemsController < ApplicationController
       sups = params[:item][:sups]
       params[:item].delete :sups
       set_sups(sups)
-    end
-    params[:item][:stock_date] = Date.today if !params[:item][:stock_level].blank? && params[:item][:stock_date].blank?
-    if @item.update(params[:item].merge(:domain => current_tenant.domain))
-      if params[:item][:sups].present?
+      if @item.update(params[:item].merge(:domain => current_tenant.domain))
         redirect_to choice_url( @item.item_type.name ), notice: 'Item was successfully updated.'
       else
-        do_stocks
-        redirect_to items_url( stock: true, item_id: @item.id ), notice: 'Item was successfully updated.'
+        get_categories(@item.category.root.name)
+        render action: 'edit'
       end
     else
-      get_categories(@item.category.root.name)
-      render action: 'edit'
+      do_stocks unless params[:item][:stock_level].blank?
+      redirect_to items_url( stock: true, item_id: @item.id ), notice: 'Stocks updated.'
     end
   end
 
@@ -90,11 +87,18 @@ class ItemsController < ApplicationController
   private
 
     def do_stocks
-      stock = @item.stocks.where(stock_date: @item.stock_date)
-      if !stock.empty?
-        stock.first.update( stock_level: @item.stock_level)
+      stock_date = params[:item][:stock_date].blank? ? Date.today : params[:item][:stock_date]
+      stock = @item.stocks.where(stock_date: stock_date)
+      if params[:item_option].present?
+        stock = stock.where(item_option: params[:item_option])
+        option = params[:item_option]
       else
-        @item.stocks.create(stock_date: @item.stock_date, stock_level: @item.stock_level)
+        option = nil
+      end
+      if !stock.empty?
+        stock.first.update( stock_level: params[:item][:stock_level])
+      else
+        @item.stocks.create(stock_date: stock_date, stock_level: params[:item][:stock_level], item_option: option)
       end
     end
 
