@@ -9,6 +9,6 @@
         = f.date_field :stock_date
       .field.small-1.columns.left
         = f.submit 'Save'
-%p{id: "stocks_#{item.id}"}
+%div{id: "stocks_#{item.id}"}
   - if @item.present? and (@item.id == item.id)
     = render 'stocks/index'

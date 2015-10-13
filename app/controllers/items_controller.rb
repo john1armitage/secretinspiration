@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
       @items = @items.includes(:stocks).where(stock_item: true)
       if params[:item_id].present?
         @item = Item.find(params[:item_id])
-        @stocks = @item.stocks
+        @stocks = @item.stocks.order('stock_date DESC')
       end
       render 'stock'
     end

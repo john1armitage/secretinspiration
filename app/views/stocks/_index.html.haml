@@ -1,12 +1,12 @@
-.stocks
-  - first = true
-  - @stocks.each do |stock|
+-#.stocks
+- first = true
+- @stocks.each do |stock|
+  - if first
+    - sold = LineItem.joins(:variant).where('line_items.created_at >= ? and line_items.domain = ? and item_id = ?', stock.stock_date, current_tenant.domain, stock.item_id).sum(:quantity)
+  %p
+    %span= "#{stock.stock_date.strftime('%e %b %Y')}: #{stock.stock_level} in stock"
     - if first
-      - sold = LineItem.joins(:variant).where('line_items.created_at >= ? and line_items.domain = ? and item_id = ?', stock.stock_date, current_tenant.domain, stock.item_id).sum(:quantity)
-    %p
-      %span= "#{stock.stock_date.strftime('%e %b %Y')}: #{stock.stock_level} in stock"
-      - if first
-        %span= ", #{sold} sold"
-        - first = false
-      %span= link_to '[x]', stock, :method => :delete, :data => { :confirm => 'Remove stock reading?' }, remote: true, class: 'no_ajaxify'
+      %span= ", #{sold} sold"
+      - first = false
+    %span= link_to '[x]', stock, :method => :delete, :data => { :confirm => 'Remove stock reading?' }, remote: true, class: 'no_ajaxify'
 
