@@ -1,0 +1,14 @@
+= form_for item  do |f|
+  %fieldset.compact
+    .row
+      .field.small-2.columns
+        = link_to item.name, stocks_path(item_id: item.id), remote: true, class: 'no_ajaxify'
+      .field.small-2.columns
+        = f.number_field :stock_level, class: 'level'
+      .field.small-3.columns
+        = f.date_field :stock_date
+      .field.small-1.columns.left
+        = f.submit 'Save'
+%p{id: "stocks_#{item.id}"}
+  - if @item.present? and (@item.id == item.id)
+    = render 'stocks/index'

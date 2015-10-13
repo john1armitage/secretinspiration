@@ -10,6 +10,7 @@ class Item < ActiveRecord::Base
   end
 
   has_many :variants #, :dependent => :destroy
+  has_many :stocks, :dependent => :destroy
 
   belongs_to :item_type
   belongs_to :category

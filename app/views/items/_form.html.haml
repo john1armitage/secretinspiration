@@ -20,8 +20,11 @@
         = f.label :withdrawn
         = f.check_box :withdrawn #, :class => 'block'
       .field.small-2.columns.left
-        = f.label :available, 'in stock'
+        = f.label :available
         = f.check_box :available
+      .field.small-2.columns.left
+        = f.label :stock_item
+        = f.check_box :stock_item
       .field.small-2.columns.left
         = f.label :unique
         = f.check_box :unique

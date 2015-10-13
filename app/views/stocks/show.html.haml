@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Index:
+  = @stock.index
+%p
+  %b Delete:
+  = @stock.delete
+
+= link_to 'Edit', edit_stock_path(@stock)
+\|
+= link_to 'Back', stocks_path

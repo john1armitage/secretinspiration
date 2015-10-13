@@ -4,6 +4,8 @@ Commerce::Application.routes.draw do
 
   resources :depreciations, :only => [ :index ]
 
+  resources :stocks, only: [ :index, :destroy ]
+
   resources :posts
   resources :financials do
     collection do

@@ -5,6 +5,14 @@ class ItemsController < ApplicationController
   def index
     get_root_categories
     @items = Item.order(:item_type_id, :category_id, :rank, :name)
+    if params[:stock].present?
+      @items = @items.includes(:stocks).where(stock_item: true)
+      if params[:item_id].present?
+        @item = Item.find(params[:item_id])
+        @stocks = @item.stocks
+      end
+      render 'stock'
+    end
   end
 
   # GET /items/1
@@ -52,11 +60,19 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1
   def update
-    sups = params[:item][:sups]
-    params[:item].delete :sups
-    set_sups(sups)
+    if params[:item][:sups].present?
+      sups = params[:item][:sups]
+      params[:item].delete :sups
+      set_sups(sups)
+    end
+    params[:item][:stock_date] = Date.today if !params[:item][:stock_level].blank? && params[:item][:stock_date].blank?
     if @item.update(params[:item].merge(:domain => current_tenant.domain))
-      redirect_to choice_url( @item.item_type.name ), notice: 'Item was successfully updated.'
+      if params[:item][:sups].present?
+        redirect_to choice_url( @item.item_type.name ), notice: 'Item was successfully updated.'
+      else
+        do_stocks
+        redirect_to items_url( stock: true, item_id: @item.id ), notice: 'Item was successfully updated.'
+      end
     else
       get_categories(@item.category.root.name)
       render action: 'edit'
@@ -72,6 +88,16 @@ class ItemsController < ApplicationController
   end
 
   private
+
+    def do_stocks
+      stock = @item.stocks.where(stock_date: @item.stock_date)
+      if !stock.empty?
+        stock.first.update( stock_level: @item.stock_level)
+      else
+        @item.stocks.create(stock_date: @item.stock_date, stock_level: @item.stock_level)
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find_by_slug( params[:id] )

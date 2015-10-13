@@ -1,0 +1,10 @@
+- @items.each do |stock_item |
+  = render 'stock_item', item: stock_item
+
+:coffeescript
+  pad = (n) ->
+    if n < 10 then '0' + n else n
+  $(".level").change ->
+    date = new Date()
+    fdate = date.getFullYear() + '-' + pad(date.getUTCMonth()+1) + '-' + pad(date.getUTCDate())
+    $(this).parent().siblings().find("#item_stock_date").val fdate
