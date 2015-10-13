@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     @q.name_cont = params[:name] if  params[:name].present?
 
     # @items = Item.order(:item_type_id, :category_id, :rank, :name)
-    @items = @q.result(distinct: true).joins(:variants).order(:item_type_id, :category_id, :rank, :name)
+    @items = @q.result(distinct: true).order(:item_type_id, :category_id, :rank, :name)
 
     # @items = @items.where(grouping: params[:grouping]) if params[:grouping].present?
 
@@ -90,7 +90,7 @@ class ItemsController < ApplicationController
       end
     else
       do_stocks unless params[:item][:stock_level].blank?
-      redirect_to items_url( stock: true, item_id: @item.id, option: params[:item_option], grouping: params[:grouping], name: params[:name] ), notice: 'Stocks updated.'
+      redirect_to items_url( stock: true, item_id: @item.id, option: params[:option], grouping: params[:grouping], name: params[:name] ), notice: 'Stocks updated.'
     end
   end
 
@@ -107,9 +107,9 @@ class ItemsController < ApplicationController
     def do_stocks
       stock_date = params[:item][:stock_date].blank? ? Date.today : params[:item][:stock_date]
       stock = @item.stocks.where(stock_date: stock_date)
-      if params[:item_option].present?
-        stock = stock.where(item_option: params[:item_option])
-        option = params[:item_option]
+      if params[:option].present?
+        stock = stock.where(item_option: params[:option])
+        option = params[:option]
       else
         option = nil
       end

@@ -2,12 +2,15 @@
 - first = true
 - @stocks.each do |stock|
   - if first
-    - sold_items = LineItem.joins(:variant).where('line_items.created_at >= ? and line_items.domain = ? and item_id = ?', stock.stock_date, current_tenant.domain, stock.item_id)
+    - sold_items = LineItem.joins("LEFT OUTER JOIN variants ON variants.id = line_items.variant_id").where('line_items.created_at >= ? and line_items.domain = ? and item_id = ?',
+          stock.stock_date, current_tenant.domain, stock.item_id) #.select('line_items.created_at, line_items.domain, item_id, line_items.options, line_items.quantity, variants.name')
     - unless stock.item_option.blank?
       - sold_items = sold_items.where("line_items.options LIKE '%#{stock.item_option}%'")
     - sold = sold_items.sum(:quantity)
     - total_sold = 0
     - sold_items.each do |item|
+      %p
+        - p item.variant.name if item.variant.name != 'default'
       - parts = item.options.empty? ? 1 : item.options.split(',').size
       - total_sold += (item.quantity / parts)
   %p
