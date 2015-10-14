@@ -1,5 +1,5 @@
 = search_form_for @q do |f|
-  = hidden_field :stock, true
+  = hidden_field_tag :stock, true
   .field.small-3.columns
     = f.collection_select :grouping_eq, @groupings, "grouping", "title", prompt: 'Category'
     -#= f.select :grouping_eq,  options_from_collection_for_select(@groupings, "grouping", "grouping", params[:q][:grouping_eq]), include_blank: true
@@ -11,6 +11,7 @@
 
 - @items.each do |stock_item |
   - @option = nil
+  - stock_item.options = "" if stock_item.collapse
   - if stock_item.options.size > 1
     - stock_item.options.each do |option|
       - unless option.blank?

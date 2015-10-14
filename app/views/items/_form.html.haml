@@ -15,6 +15,9 @@
         = f.label :product_flow
         = collection_select(:item, :product_flow,
           Element.where("kind = 'product_flow'").order(:rank), :name, :name, include_blank: true)
+      .field.small-2.columns.left
+        = f.label :unique
+        = f.check_box :unique
     .row
       .field.small-2.columns.left
         = f.label :withdrawn
@@ -25,9 +28,15 @@
       .field.small-2.columns.left
         = f.label :stock_item
         = f.check_box :stock_item
-      .field.small-2.columns.left
-        = f.label :unique
-        = f.check_box :unique
+      .field.small-1.columns.left
+        = f.label :collapse
+        = f.check_box :collapse
+      .field.small-3.columns.left
+        = f.label :stock_base_id
+        = collection_select(:item, :stock_base_id, @stock_bases, :id, :name,  include_blank: true )   # { multiple: true, size: 5, include_blank: true})
+      .field.small-1.columns.left
+        = f.label :stock_base_part, 'Parts'
+        = f.text_field :stock_base_part
     .row
       .field.small-3.columns
         = f.label :category, 'Category'

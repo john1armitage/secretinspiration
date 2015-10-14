@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
+    get_stock_bases
     @item = Item.new
     if params[:category_id].present?
       category = Category.find(params[:category_id])
@@ -58,7 +59,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    #@categories = get_categories( @item.category.root.name )
+    get_stock_bases
   end
 
   # POST /items
@@ -103,6 +104,9 @@ class ItemsController < ApplicationController
   end
 
   private
+    def get_stock_bases
+      @stock_bases = Item.where('id <> ? AND stock_item = ?', @item.id, true).order(:name)
+    end
 
     def do_stocks
       stock_date = params[:item][:stock_date].blank? ? Date.today : params[:item][:stock_date]
