@@ -1,5 +1,7 @@
 - @cost = 0
 %h5= @item.name if @item
+%p
+  = @item.notes
 %hr
 .large.columns-12
   - if @item
@@ -10,4 +12,6 @@
 = render @recipes
 %hr
 .large.columns-12
-  = "Item cost: #{pounds(@cost)} "
+  = "Item cost: #{pounds(@cost)}, price #{pounds(@item.price)}, target #{pounds(@cost * 3.5)}, margin #{pounds((@item.price / 1.2) - @cost)}"
+  -# VERY NAUGHTY
+  - @item.update(cost: @cost)

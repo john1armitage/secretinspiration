@@ -12,21 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce30f9df-f017-4bbd-b10b-be3c22a06a48" name="Default" comment="Merge branch 'master' of https://github.com/john1armitage/secretinspiration&#10;&#10;Conflicts:&#10;&#9;.gitignore&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/recipes/_recipe.html.haml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/20151015104804_create_recipes.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20151015104804_create_recipes.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/20151015110351_create_ingredients.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20151015110351_create_ingredients.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/20151015112211_add_orderingto_supplier.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20151015112211_add_orderingto_supplier.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/db/migrate/20151015143647_rename_quantity_to_quantity_id.rb" afterPath="$PROJECT_DIR$/db/migrate_multi/20151015143647_rename_quantity_to_quantity_id.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ingredients/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/ingredients/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recipes/_form.html.haml" afterPath="$PROJECT_DIR$/app/views/recipes/_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ingredients/index.html.haml" afterPath="$PROJECT_DIR$/app/views/ingredients/index.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/recipes/index.html.haml" afterPath="$PROJECT_DIR$/app/views/recipes/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ingredient.rb" afterPath="$PROJECT_DIR$/app/models/ingredient.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ingredients_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/ingredients_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/item.rb" afterPath="$PROJECT_DIR$/app/models/item.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/recipes_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/recipes_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/structure.sql" afterPath="$PROJECT_DIR$/db/structure.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="commerce.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,118 +45,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_form.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/ingredients/_form.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.375">
-              <caret line="15" column="122" selection-start-line="15" selection-start-column="122" selection-end-line="15" selection-end-column="122" />
-              <folding>
-                <marker date="1444945929142" expanded="true" signature="1441:1603" placeholder="..." />
-                <marker date="1444945929142" expanded="true" signature="1481:1603" placeholder="type: 'GET'..." />
-                <marker date="1444945929142" expanded="true" signature="1530:1603" placeholder="unit_id: $(&quot;#ingredient_unit_id option:selected&quot;).val()..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/ingredients/index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.0">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_wage.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/timesheets/_wage.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-27.5">
-              <caret line="44" column="43" selection-start-line="42" selection-start-column="0" selection-end-line="44" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/recipes/_form.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-              <folding>
-                <marker date="1444946397431" expanded="true" signature="718:884" placeholder="..." />
-                <marker date="1444946397431" expanded="true" signature="754:884" placeholder="type: 'GET'..." />
-                <marker date="1444946397431" expanded="true" signature="803:884" placeholder="ingredient_id: $(&quot;#recipe_ingredient_id option:selected&quot;).val()..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_recipe.html.haml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/recipes/_recipe.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18773466">
-              <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/recipes/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0795053">
+              <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_entity_ref.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/financials/_entity_ref.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="26" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ingredients_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/ingredients_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipes_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/recipes_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_form.html.haml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/receipts/_form.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1444297402436" expanded="true" signature="1238:2086" placeholder="..." />
-                <marker date="1444297402436" expanded="true" signature="1253:1427" placeholder="calculateHomeTotal: ( amount ) -&gt;&#10;        exchange_rate = $('input#receipt_exchange_rate').val()&#10;        $('input#receipt_home_amount').val((amount/exchange_rate).toFixed(2))..." />
-                <marker date="1444297402436" expanded="true" signature="1295:1427" placeholder="..." />
-                <marker date="1444297402436" expanded="true" signature="1497:1578" placeholder="..." />
-                <marker date="1444297402436" expanded="true" signature="1643:1932" placeholder="..." />
-                <marker date="1444297402436" expanded="true" signature="1697:1836" placeholder="..." />
-                <marker date="1444297402436" expanded="true" signature="1993:2086" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -246,8 +126,8 @@
         <option value="$PROJECT_DIR$/app/views/ingredients/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/recipes/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/controllers/recipes_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/recipes/index.html.haml" />
         <option value="$PROJECT_DIR$/app/views/recipes/_recipe.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/recipes/index.html.haml" />
       </list>
     </option>
   </component>
@@ -818,7 +698,7 @@
     <frame x="152" y="66" width="1649" height="925" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27355278" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27315357" sideWeight="0.40942028" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32740587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1256,26 +1136,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/ingredients/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.0">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/timesheets/_wage_editor.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/timesheets/_wage.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-27.5">
-          <caret line="44" column="43" selection-start-line="42" selection-start-column="0" selection-end-line="44" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1296,42 +1160,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/ingredients/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.375">
-          <caret line="15" column="122" selection-start-line="15" selection-start-column="122" selection-end-line="15" selection-end-column="122" />
-          <folding>
-            <marker date="1444945929142" expanded="true" signature="1441:1603" placeholder="..." />
-            <marker date="1444945929142" expanded="true" signature="1481:1603" placeholder="type: 'GET'..." />
-            <marker date="1444945929142" expanded="true" signature="1530:1603" placeholder="unit_id: $(&quot;#ingredient_unit_id option:selected&quot;).val()..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/receipts/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1444297402436" expanded="true" signature="1238:2086" placeholder="..." />
-            <marker date="1444297402436" expanded="true" signature="1253:1427" placeholder="calculateHomeTotal: ( amount ) -&gt;&#10;        exchange_rate = $('input#receipt_exchange_rate').val()&#10;        $('input#receipt_home_amount').val((amount/exchange_rate).toFixed(2))..." />
-            <marker date="1444297402436" expanded="true" signature="1295:1427" placeholder="..." />
-            <marker date="1444297402436" expanded="true" signature="1497:1578" placeholder="..." />
-            <marker date="1444297402436" expanded="true" signature="1643:1932" placeholder="..." />
-            <marker date="1444297402436" expanded="true" signature="1697:1836" placeholder="..." />
-            <marker date="1444297402436" expanded="true" signature="1993:2086" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/recipes/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding>
-            <marker date="1444946397431" expanded="true" signature="718:884" placeholder="..." />
-            <marker date="1444946397431" expanded="true" signature="754:884" placeholder="type: 'GET'..." />
-            <marker date="1444946397431" expanded="true" signature="803:884" placeholder="ingredient_id: $(&quot;#recipe_ingredient_id option:selected&quot;).val()..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="calculateHomeTotal: ( amount ) -&gt;&#10;        exchange_rate = $('input#receipt_exchange_rate').val()&#10;        $('input#receipt_home_amount').val((amount/exchange_rate).toFixed(2))..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444297402436" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1352,18 +1192,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/recipes/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/recipes/_recipe.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.26501766">
+          <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/recipes/_recipe.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/recipes/_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18773466">
-          <caret line="10" column="66" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.26501766">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <marker date="1444946397431" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444946397431" expanded="true" signature="-1:-1" placeholder="type: 'GET'..." />
+            <marker date="1444946397431" expanded="true" signature="-1:-1" placeholder="ingredient_id: $(&quot;#recipe_ingredient_id option:selected&quot;).val()..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/timesheets/_wage.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1660777">
+          <caret line="44" column="43" selection-start-line="42" selection-start-column="0" selection-end-line="44" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/ingredients/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84805655">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/ingredients/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3975265">
+          <caret line="15" column="122" selection-start-line="15" selection-start-column="122" selection-end-line="15" selection-end-column="122" />
+          <folding>
+            <marker date="1444945929142" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444945929142" expanded="true" signature="-1:-1" placeholder="type: 'GET'..." />
+            <marker date="1444945929142" expanded="true" signature="-1:-1" placeholder="unit_id: $(&quot;#ingredient_unit_id option:selected&quot;).val()..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/recipes/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0795053">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
           <folding />
         </state>
       </provider>
