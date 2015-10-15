@@ -1,7 +1,7 @@
 = search_form_for @q do |f|
   = hidden_field_tag :stock, true
   .field.small-3.columns
-    = f.collection_select :grouping_eq, @groupings, "grouping", "title", prompt: 'Category'
+    = f.collection_select :grouping_eq, @groupings, "grouping", "title" #, prompt: 'Category'
     -#= f.select :grouping_eq,  options_from_collection_for_select(@groupings, "grouping", "grouping", params[:q][:grouping_eq]), include_blank: true
   .field.small-3.columns.left
     = f.text_field :name_cont

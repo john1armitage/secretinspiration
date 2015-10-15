@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
     get_root_categories
 
-    @groupings = Item.where(stock_item: true).select("grouping, initcap(regexp_replace(grouping, '^.*:', '')) as title" ).order(:grouping).uniq
+    @groupings = Item.where(stock_item: true).select("grouping, initcap(regexp_replace(regexp_replace(grouping, '^.*:', ''), '_', ' ', 'g')) as title" ).order(:grouping).uniq
 
     @q = Item.search(params[:q])
 
