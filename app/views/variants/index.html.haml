@@ -20,7 +20,7 @@
         = variant.id
         = variant.item.name
         = ": #{variant.name}" unless variant.name == 'default'
-      %td= humanized_money_with_symbol variant.price
+      %td= pounds variant.price
       %td= variant.withdrawn
       %td= variant.remote_order
       %td= variant.item_default

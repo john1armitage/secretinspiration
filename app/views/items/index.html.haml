@@ -27,6 +27,9 @@
       %td= link_to 'Destroy', item, :method => :delete, :data => { :confirm => 'Are you sure?' }
       %td
         = link_to 'Variants', variants_path(:item_id => item.id)
-        = item.variants.where( :domain => current_tenant.domain, item_default: true).size
+        - variants = item.variants.where( :domain => current_tenant.domain)
+        - if variants.size > 0
+          = variants.size
+          = 'ok' if variants.where( item_default: true).size > 0
 
 
