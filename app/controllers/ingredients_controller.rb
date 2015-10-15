@@ -9,6 +9,8 @@ class IngredientsController < ApplicationController
 
     @ingredients =  @q.result(distinct: true).order(:name)
 
+    @suppliers = Supplier.where(ordering: true).order(:name)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @ingredients }

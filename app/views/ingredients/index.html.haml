@@ -1,16 +1,16 @@
+%p
+  = link_to 'New Ingredient', new_ingredient_path, :class => "small button radius"
+
 = search_form_for @q do |f|
   = hidden_field_tag :stock, true
   .field.small-3.columns
-    = f.collection_select :supplier_eq, @suppliers, "id", "name" #, prompt: 'Category'
+    = f.collection_select :supplier_id_eq, @suppliers, "id", "name", include_blank: 'Supplier'
   -#= f.select :grouping_eq,  options_from_collection_for_select(@groupings, "grouping", "grouping", params[:q][:grouping_eq]), include_blank: true
   .field.small-3.columns.left
     = f.text_field :name_cont
   .row
     .actions.small-3.columns.left
       = f.submit 'Search'
-
-
-= link_to 'New Ingredient', new_ingredient_path
 
 %table
   %thead
@@ -28,10 +28,10 @@
       %th
 
   %tbody
-    - @ingrediients.each do |ingredient|
+    - @ingredients.each do |ingredient|
       %tr
         %td= ingredient.name
-        %td= ingredient.supplier_id
+        %td= ingredient.supplier.name
         %td= ingredient.reference
         %td= ingredient.quantity
         %td= ingredient.unit_id

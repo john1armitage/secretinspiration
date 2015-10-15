@@ -1,6 +1,6 @@
 Commerce::Application.routes.draw do
 
-  resources :ingrediients
+  resources :ingredients
   resources :recipes
   get 'accounting/index'
 

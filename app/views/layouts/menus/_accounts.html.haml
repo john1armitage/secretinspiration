@@ -15,12 +15,7 @@
   - if allow? :banks, :index
     %li
       != link_to 'Banks', banks_path, :class => "small button radius"
-  -#- if allow? :dailes, :index
-  -#  %li
-  -#    != link_to 'Dailies', dailies_path, :class => "small button radius", remote: true, class: 'no_ajaxify'
-  -#- if allow? :timesheets, :index
-  -#  %li
-  -#    != link_to 'Timesheets', timesheets_path, :class => "small button radius"
+  %hr
   - if allow? :wages, :index
     %li
       != link_to 'Wages', wages_path(this_year: true), :class => "small button radius"
@@ -30,6 +25,7 @@
   - if allow? :pay_rates, :index
     %li
       != link_to 'Pay Rates', pay_rates_path, :class => "small button radius"
+  %hr
   - if allow? :accounts, :index
     %li
       != link_to 'Account List', accounts_path, :class => "small button radius"

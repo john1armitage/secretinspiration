@@ -21,11 +21,11 @@ class ItemsController < ApplicationController
 
     if params[:stock].present?
       @items = @items.includes(:stocks).where(stock_item: true)
-      unless params[:grouping].present?
+      unless params[:q].present? && params[:q][:grouping_eq].present?
         category = Category.find_by_name('main')
         grouping = "#{category.rank}:#{category.name}"
         @q.grouping_eq = grouping
-        @items = @items.where('grouping LIKE ?', grouping)
+        @items = @items.where('grouping = ?', grouping)
       end
       if params[:item_id].present?
         @item = Item.find(params[:item_id])
