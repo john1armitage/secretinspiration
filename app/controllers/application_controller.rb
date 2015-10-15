@@ -723,4 +723,9 @@ class ApplicationController < ActionController::Base
                        accountable_type:'Employee', accountable_id: wage.employee_id, grouping_id: account.grouping_id)
   end
 
+  def get_quantities(unit_id)
+    Element.where(kind: Element.find(unit_id).name).order(:rank)
+  end
+  helper_method :get_quantities
+
 end

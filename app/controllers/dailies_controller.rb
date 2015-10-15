@@ -1,4 +1,5 @@
 class DailiesController < ApplicationController
+
   before_action :set_daily, only: [:show, :edit, :form, :update, :destroy]
 
   # GET /dailies

@@ -1,5 +1,6 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: [:show, :edit, :update, :destroy]
+  before_action :get_suppliers, only: [:index, :new, :edit, :create, :update]
 
   # GET /ingredients
   # GET /ingredients.json
@@ -8,8 +9,6 @@ class IngredientsController < ApplicationController
     @q = Ingredient.search(params[:q])
 
     @ingredients =  @q.result(distinct: true).order(:name)
-
-    @suppliers = Supplier.where(ordering: true).order(:name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,21 +27,23 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/new
   def new
-    @ingredient = ingredient.new
+    @ingredient = Ingredient.new
+    @ingredient.unit_id = Element.find_by_name('ml').id
   end
 
   # GET /ingredients/1/edit
   def edit
+    @ingredient = Ingredient.find(params[:id])
   end
 
   # POST /ingredients
   # POST /ingredients.json
   def create
-    @ingredient = ingredient.new(ingredient_params)
+    @ingredient = Ingredient.new(params[:ingredient])
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @ingredient, notice: 'ingredient was successfully created.' }
+        format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
         format.json { render json: @ingredient, status: :created }
       else
         format.html { render action: 'new' }
@@ -54,9 +55,10 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
+    @ingredient = Ingredient.find(params[:id])
     respond_to do |format|
-      if @ingredient.update(ingredient_params)
-        format.html { redirect_to @ingredient, notice: 'ingredient was successfully updated.' }
+      if @ingredient.update(params[:ingredient])
+        format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -68,21 +70,27 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   # DELETE /ingredients/1.json
   def destroy
+    @supplier_id = @ingredient.supplier_id
     @ingredient.destroy
     respond_to do |format|
-      format.html { redirect_to ingredients_url }
+      format.html { redirect_to ingredients_url(supplier_id: @supplier_id) }
       format.json { head :no_content }
     end
   end
 
+  def quantities
+    @quantities = get_quantities(params[:unit_id])
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ingredient
-      @ingredient = ingredient.find(params[:id])
+
+    def get_suppliers
+      @suppliers = Supplier.where(ordering: true).order(:name)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ingredient_params
-      params.require(:ingredient).permit(:name, :supplier_id, :reference, :quantity, :unit_id, :live, :notes, :text)
+    # Use callbacks to share common setup or constraints between actions.
+    def set_ingredient
+      @current_resource ||= @ingredient
     end
+
 end

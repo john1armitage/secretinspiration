@@ -1,34 +1,43 @@
 = form_for @ingredient do |f|
-  - if @ingredient.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@ingrediient.errors.count, "error")} prohibited this ingredient from being saved:"
-      %ul
-        - @ingredient.errors.full_messages.each do |msg|
-          %li= msg
+  -#- if @ingredient.errors.any?
+  -#  #error_explanation
+  -#    %h2= "#{pluralize(@ingrediient.errors.count, "error")} prohibited this ingredient from being saved:"
+  -#    %ul
+  -#      - @ingredient.errors.full_messages.each do |msg|
+  -#        %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :supplier_id
-    = f.number_field :supplier_id
-  .field
-    = f.label :reference
-    = f.text_field :reference
-  .field
-    = f.label :quantity
-    = f.number_field :quantity
-  .field
-    = f.label :unit_id
-    = f.number_field :unit_id
-  .field
-    = f.label :live
-    = f.check_box :live
-  .field
-    = f.label :notes
-    = f.text_field :notes
-  .field
-    = f.label :text
-    = f.text_field :text
+  .row
+    .field.small-4.columns.left
+      = f.label :name
+      = f.text_field :name
+    .field.small-2.columns.left
+      = f.label :unit_id
+      = collection_select(:ingredient, :unit_id, Element.where(kind: 'unit').order(:name), :id, :name )
+    .field.small-2.columns.left
+      = f.label :quantity
+      = collection_select(:ingredient, :quantity_id, get_quantities(@ingredient.unit_id), :id, :name )
+    .field.small-2.columns.left
+      = f.label :live
+      = f.check_box :live
+  .row
+    .field.small-3.columns.left
+      = f.label :supplier_id
+      = collection_select(:ingredient, :supplier_id, Supplier.where(ordering: true).order(:name), :id, :name,  include_blank: 'Supplier' )
+    .field.small-3.columns.left
+      = f.label :reference
+      = f.text_field :reference
+  .row
+    .field.small-6.columns.left
+      = f.label :notes
+      = f.text_field :notes
   .actions
     = f.submit 'Save'
+
+:coffeescript
+  $("#ingredient_unit_id").change ->
+    $.ajax '/ingredients/quantities',
+      type: 'GET'
+      dataType: 'script'
+      data: {
+        unit_id: $("#ingredient_unit_id option:selected").val()
+      }
