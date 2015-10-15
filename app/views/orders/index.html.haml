@@ -44,7 +44,7 @@
       %td.number.has-tip.tip-right{'data-tooltip' => true, 'title' => order.id}
         = order.effective_date.strftime("%-d %b %y")
       %td.number.has-tip.tip-right{'data-tooltip' => true, 'title' => "Net: #{order.net_total}, Tax: #{order.tax_total}"}
-        = humanized_money_with_symbol(order.net_total + order.tax_total)
+        = pounds(order.net_total + order.tax_total)
       -#%td= humanized_money_with_symbol(order.net_total)
       -#%td= humanized_money_with_symbol(order.tax_total)
       %td.number

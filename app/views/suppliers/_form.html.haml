@@ -9,6 +9,9 @@
       .field.small-2.columns
         = f.label :rank
         = f.number_field :rank
+      .field.small-1.columns.left
+        = f.label :ordering
+        = f.check_box :ordering
       .field.small-3.columns.left
         = f.label :cats, 'Offerings'
         = f.collection_select :cats, get_categories( nil, 'incoming'), 'id', 'name', {}, {:multiple => true}

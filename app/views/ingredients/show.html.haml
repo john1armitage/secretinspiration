@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ingrediient.name
+%p
+  %b Supplier:
+  = @ingrediient.supplier_id
+%p
+  %b Reference:
+  = @ingrediient.reference
+%p
+  %b Quantity:
+  = @ingrediient.quantity
+%p
+  %b Unit:
+  = @ingrediient.unit_id
+%p
+  %b Live:
+  = @ingrediient.live
+%p
+  %b Notes:
+  = @ingrediient.notes
+%p
+  %b Text:
+  = @ingrediient.text
+
+= link_to 'Edit', edit_ingrediient_path(@ingrediient)
+\|
+= link_to 'Back', ingrediients_path

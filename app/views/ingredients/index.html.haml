@@ -1,0 +1,44 @@
+= search_form_for @q do |f|
+  = hidden_field_tag :stock, true
+  .field.small-3.columns
+    = f.collection_select :supplier_eq, @suppliers, "id", "name" #, prompt: 'Category'
+  -#= f.select :grouping_eq,  options_from_collection_for_select(@groupings, "grouping", "grouping", params[:q][:grouping_eq]), include_blank: true
+  .field.small-3.columns.left
+    = f.text_field :name_cont
+  .row
+    .actions.small-3.columns.left
+      = f.submit 'Search'
+
+
+= link_to 'New Ingredient', new_ingredient_path
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Supplier
+      %th Reference
+      %th Quantity
+      %th Unit
+      %th Live
+      %th Notes
+      %th Text
+      %th
+      %th
+      %th
+
+  %tbody
+    - @ingrediients.each do |ingredient|
+      %tr
+        %td= ingredient.name
+        %td= ingredient.supplier_id
+        %td= ingredient.reference
+        %td= ingredient.quantity
+        %td= ingredient.unit_id
+        %td= ingredient.live
+        %td= ingredient.notes
+        %td= ingredient.text
+        %td= link_to 'Show', ingredient
+        %td= link_to 'Edit', edit_ingredient_path(ingredient)
+        %td= link_to 'Destroy', ingredient, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

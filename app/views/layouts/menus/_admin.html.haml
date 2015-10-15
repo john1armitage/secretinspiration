@@ -13,7 +13,7 @@
       != link_to 'Openings', openings_path
   - if allow? :items, :index
     %li
-      != link_to "Trade", menu_path('base'), remote: true, class: 'no_ajaxify'
+      != link_to "Trade", menu_path('trade'), remote: true, class: 'no_ajaxify'
   - if allow? :users, :new
     %li
       != link_to "Register", signup_path
