@@ -3,7 +3,14 @@ class ElementsController < ApplicationController
 
   # GET /elements
   def index
-    @elements = Element.all.order(:kind, :rank, :name)
+    @q = Element.search(params[:q])
+
+    @kinds = Element.where(kind: 'kind').select("id, name, initcap(regexp_replace(name, '_', ' ', 'g')) as title" ).order(:name).uniq
+
+    @q.kind_eq = 'kind' unless params[:q].present?
+
+    # @elements = Element.all.order(:kind, :rank, :name)
+    @elements = @q.result(distinct: true).order(:kind, :rank, :name)
     @elements = @elements.where( :kind => params[:kind] )  if params[:kind].present?
   end
 

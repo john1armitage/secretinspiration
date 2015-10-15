@@ -1,3 +1,12 @@
+= search_form_for @q do |f|
+  .field.small-3.columns
+    = f.collection_select :kind_eq, @kinds, "name", "title" #, prompt: 'Category'
+  -#= f.select :grouping_eq,  options_from_collection_for_select(@groupings, "grouping", "grouping", params[:q][:grouping_eq]), include_blank: true
+  .field.small-3.columns.left
+    = f.text_field :name_cont
+  .row
+    .actions.small-3.columns.left
+      = f.submit 'Search'
 %p
   = link_to 'New element', new_element_path
 
