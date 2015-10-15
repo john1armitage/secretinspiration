@@ -33,7 +33,7 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/1/edit
   def edit
-    @ingredient = Ingredient.find(params[:id])
+    # @ingredient = Ingredient.find(params[:id])
   end
 
   # POST /ingredients
@@ -55,7 +55,7 @@ class IngredientsController < ApplicationController
   # PATCH/PUT /ingredients/1
   # PATCH/PUT /ingredients/1.json
   def update
-    @ingredient = Ingredient.find(params[:id])
+    # @ingredient = Ingredient.find(params[:id])
     respond_to do |format|
       if @ingredient.update(params[:ingredient])
         format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
@@ -90,6 +90,11 @@ class IngredientsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_ingredient
+      @ingredient = Ingredient.find(params[:id])
+    end
+
+      # Only allow a trusted parameter "white list" through.
+    def current_resource
       @current_resource ||= @ingredient
     end
 

@@ -45,8 +45,8 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    get_stock_bases
     @item = Item.new
+    get_stock_bases
     if params[:category_id].present?
       category = Category.find(params[:category_id])
       params[:category_root] = category.root
@@ -111,7 +111,8 @@ class ItemsController < ApplicationController
 
   private
     def get_stock_bases
-      @stock_bases = Item.where('id <> ? AND stock_item = ?', @item.id, true).order(:name)
+      @stock_bases = Item.where(stock_item: true).order(:name)
+      @stock_bases = @stock_bases.where('id <> ?', @item.id) unless @item.id.blank?
     end
 
     def do_stocks

@@ -1,19 +1,26 @@
-= form_for @recipe do |f|
-  - if @recipe.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
-      %ul
-        - @recipe.errors.full_messages.each do |msg|
-          %li= msg
+%h5= @item.name if @item
 
-  .field
-    = f.label :item_id
-    = f.text_field :item_id
-  .field
-    = f.label :ingredient_id
-    = f.number_field :ingredient_id
-  .field
-    = f.label :amount_id
-    = f.number_field :amount_id
+= form_for @recipe do |f|
+  = f.hidden_field :item_id
+  .row
+    .field.small-3.columns.left
+      = f.label :ingredient_id
+      = collection_select(:recipe, :ingredient_id, Ingredient.where(live: true).order(:name), :id, :name, include_blank: true )
+    .field.small-3.columns.left
+      = f.label :amount_id
+      - if @recipe.new_record?
+        = f.select :amount_id, "<option value=''>Select Ingredient</option>".html_safe
+      - else
+        = collection_select(:recipe, :amount_id, get_quantities(Ingredient.find(@recipe.ingredient_id).unit_id), :id, :name )
+
   .actions
     = f.submit 'Save'
+
+:coffeescript
+  $("#recipe_ingredient_id").change ->
+    $.ajax '/recipes/quantities',
+      type: 'GET'
+      dataType: 'script'
+      data: {
+        ingredient_id: $("#recipe_ingredient_id option:selected").val()
+      }

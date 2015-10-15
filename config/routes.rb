@@ -6,7 +6,12 @@ Commerce::Application.routes.draw do
     end
   end
 
-  resources :recipes
+  resources :recipes do
+    collection do
+      get 'quantities'
+    end
+  end
+
   get 'accounting/index'
 
   resources :depreciations, :only => [ :index ]

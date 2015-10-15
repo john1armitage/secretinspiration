@@ -1,1 +1,1 @@
-$("#ingredient_quantity_id").empty().append("<%= escape_javascript(render(:partial => 'quantities')) %>")
+$("#ingredient_quantity_id").empty().append("<%= escape_javascript(render(:partial => 'quantities/quantities')) %>")

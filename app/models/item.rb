@@ -16,6 +16,7 @@ class Item < ActiveRecord::Base
   belongs_to :category
   has_many :supplies
   has_many :suppliers, through: :supplies
+  has_many :recipes, :dependent => :destroy
 
   acts_as_taggable
 
