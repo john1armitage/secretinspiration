@@ -1,0 +1,30 @@
+- divide = (recipe.amount.name.include?('/') ? true : false)
+- unit_cost = recipe.ingredient.cost
+- unit_amount = recipe.ingredient.quantity.name.gsub(/[^0-9]/,'').to_d
+- amount = recipe.amount ? recipe.amount.name.gsub(/[^0-9]/,'').to_d : ( divide ? 1.00 : 0.00)
+- cost = divide ? (unit_cost / amount) : (unit_cost * amount / unit_amount)
+- @cost += cost
+.row
+  .field.small-3.columns
+    = link_to  recipe.ingredient.name, edit_recipe_path(recipe)
+  .field.small-3.columns
+    = "#{recipe.amount.name} of #{recipe.ingredient.quantity.name}" if recipe.amount
+  -#.field.small-1.columns
+  -#  = recipe.amount.name.gsub(/[^0-9]/,'').to_d if recipe.amount
+  -#.field.small-1.columns
+  -#  = divide
+  -#.field.small-1.columns
+  -#  = pounds(recipe.ingredient.cost)
+  -#.field.small-1.columns
+  -#  = recipe.ingredient.quantity.name.gsub(/[^0-9]/,'').to_d
+  .field.small-1.columns
+    = pounds(cost)
+  = form_for recipe.ingredient  do |f|
+    = hidden_field_tag :item_id, @item.id
+    = hidden_field_tag :recipe, true
+    .field.small-2.columns
+      = f.text_field :cost
+    .field.small-2.columns
+      = f.submit "Update Cost"
+    .field.small-1.columns.left
+      = link_to 'x', recipe, :method => :delete, :data => { :confirm => 'Are you sure?' }

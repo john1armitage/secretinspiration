@@ -19,7 +19,7 @@
       %th Supplier
       %th Reference
       %th Quantity
-      %th Unit
+      %th Cost
       %th Live
       %th
 
@@ -30,7 +30,7 @@
         %td= ingredient.supplier.name if ingredient.supplier
         %td= ingredient.reference
         %td= ingredient.quantity.name
-        %td= ingredient.unit.name
+        %td= pounds(ingredient.cost)
         %td= ingredient.live
         %td= link_to 'X', ingredient, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

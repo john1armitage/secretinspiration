@@ -43,8 +43,12 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
-        format.json { render json: @ingredient, status: :created }
+        if !params[:item_id].present?
+          format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
+          format.json { render json: @ingredient, status: :created }
+        else
+          format.html { redirect_to new_recipe_url(item_id: params[:item_id], ingredient_id: @ingredient.id) }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }
@@ -58,8 +62,12 @@ class IngredientsController < ApplicationController
     # @ingredient = Ingredient.find(params[:id])
     respond_to do |format|
       if @ingredient.update(params[:ingredient])
-        format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
-        format.json { head :no_content }
+        if !params[:item_id].present?
+          format.html { redirect_to ingredients_url(supplier_id: @ingredient.supplier_id) }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to recipes_url(item_id: params[:item_id]) }
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }

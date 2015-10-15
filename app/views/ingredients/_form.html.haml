@@ -5,14 +5,15 @@
   -#    %ul
   -#      - @ingredient.errors.full_messages.each do |msg|
   -#        %li= msg
-
+  - if params[:item_id].present?
+    = hidden_field_tag :item_id, params[:item_id]
   .row
     .field.small-4.columns.left
       = f.label :name
       = f.text_field :name
     .field.small-2.columns.left
       = f.label :unit_id
-      = collection_select(:ingredient, :unit_id, Element.where(kind: 'unit').order(:name), :id, :name )
+      = collection_select(:ingredient, :unit_id, Element.where(kind: 'unit').order(:name), :id, :name, include_blank: true )
     .field.small-2.columns.left
       = f.label :quantity
       = collection_select(:ingredient, :quantity_id, get_quantities(@ingredient.unit_id), :id, :name )
@@ -23,6 +24,9 @@
     .field.small-3.columns.left
       = f.label :supplier_id
       = collection_select(:ingredient, :supplier_id, Supplier.where(ordering: true).order(:name), :id, :name,  include_blank: 'Supplier' )
+    .field.small-3.columns.left
+      = f.label :cost
+      = f.text_field :cost
     .field.small-3.columns.left
       = f.label :reference
       = f.text_field :reference

@@ -1,20 +1,13 @@
+- @cost = 0
 %h5= @item.name if @item
-.row
-  .large.columns-12.left
-    %table
-      %thead
-        %tr
-          %th
-            Ingredient
-            - if @item
-              = link_to 'new', new_recipe_path(item_id: @item.id)
-          %th Amount
-          %th
-          %th
-
-      %tbody
-        - @recipes.each do |recipe|
-          %tr
-            %td= link_to  recipe.ingredient.name, edit_recipe_path(recipe)
-            %td= recipe.amount.name if recipe.amount
-            %td= link_to 'x', recipe, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%hr
+.large.columns-12
+  - if @item
+    = link_to 'Add', new_recipe_path(item_id: @item.id)
+  Ingredient
+  = link_to 'Create', new_ingredient_path(item_id: @item.id)
+%hr
+= render @recipes
+%hr
+.large.columns-12
+  = "Item cost: #{pounds(@cost)} "

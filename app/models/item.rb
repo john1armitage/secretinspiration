@@ -5,8 +5,16 @@ class Item < ActiveRecord::Base
   def price
     price_cents / 100.00 if price_cents
   end
+
   def price=(val)
     self.price_cents = val ? val.to_d * 100.00 : 0
+  end
+
+  def cost
+    cost_cents / 100.00 if cost_cents
+  end
+  def cost=(val)
+    self.cost_cents = val ? val.to_d * 100.00 : 0
   end
 
   has_many :variants #, :dependent => :destroy

@@ -8,7 +8,7 @@
       = collection_select(:recipe, :ingredient_id, Ingredient.where(live: true).order(:name), :id, :name, include_blank: true )
     .field.small-3.columns.left
       = f.label :amount_id
-      - if @recipe.new_record?
+      - if @recipe.new_record? && @recipe.ingredient_id.blank?
         = f.select :amount_id, "<option value=''>Select Ingredient</option>".html_safe
       - else
         = collection_select(:recipe, :amount_id, get_quantities(Ingredient.find(@recipe.ingredient_id).unit_id), :id, :name )

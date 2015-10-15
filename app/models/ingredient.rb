@@ -1,5 +1,12 @@
 class Ingredient < ActiveRecord::Base
 
+  def cost
+    cost_cents / 100.00 if cost_cents
+  end
+  def cost=(val)
+    self.cost_cents = val ? val.to_d * 100.00 : 0
+  end
+
   belongs_to :supplier
   belongs_to :unit, class_name: 'Element'
   belongs_to :quantity, class_name: 'Element'

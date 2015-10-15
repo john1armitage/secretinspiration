@@ -35,8 +35,11 @@ class RecipesController < ApplicationController
     else
       @recipe = Recipe.new(params[:recipe])
     end
-  end
+    if params[:ingredient_id].present?
+      @recipe.ingredient_id = Ingredient.find(params[:ingredient_id]).id
 
+    end
+  end
   # GET /recipes/1/edit
   def edit
   end
