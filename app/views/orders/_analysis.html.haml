@@ -39,115 +39,76 @@
     -#  = select_tag 'months', options_for_select(months, month.strftime('%Y-%m-%d'))
     -#  = select_tag 'weeks', options_for_select(weeks), {prompt: 'Week'}
   .row.duo
-    .columns-12.small
-      .columns-6.small
-        -#- if @orders
-        -#  %p
-        -#    = @orders.count
-        -#    Orders
-        - if @line_items
-          - category = Hash.new
-          - subcat = Hash.new
-          - menu_items = Hash.new
-          - rices = Hash.new
-          - sides = Hash.new
-          - dips = Hash.new
-          - desserts = Hash.new
-          - sauces = Hash.new
-          - @line_items.each do |i|
-            %p
-              - amount = i.quantity.to_d
-              -# DISPLAY ITEMS
-              -#= amount
-              -#= i.variant.item.name
-              - desc = terse(i.variant.item.name)
-              - unless i.choices.blank?
-                - i.choices.each do |k,v|
-                  - v = title(v)
-                  - case k
-                    - when "rices"
-                      - rices[v] = ((rices.key? v) ? rices[v] + amount : amount)
-                    - when "sides"
-                      - sides[v] = ((sides.key? v) ? sides[v] + amount : amount)
-                    - when "dips"
-                      - dips[v] = ((dips.key? v) ? dips[v] + amount : amount)
-                    - when "desserts"
-                      - desserts[v] = ((desserts.key? v) ? desserts[v] + amount : amount)
-                    - when "tarts","ribs"
-                      - desc = "#{desc}: #{title(v)}"
-                    -#- else
-                    -#  %b
-                    -#    = k
-                    -#  = v
-              %p
-              - if ['medium','large'].include?(i.variant.name.downcase) and (ungrouping(i.variant.item.grouping) == 'wines')
-                - case i.variant.name.downcase
-                  - when ' medium'
-                    - amount = amount * 175.0 / 750.0
-                  - when 'large'
-                    - amount = amount * 250.0 / 750.0
-              - if i.options.blank?
-                - menu_items[desc] = ((menu_items.key? desc) ? menu_items[desc] + amount : amount)
+    - if @line_items
+      - category = Hash.new
+      - subcat = Hash.new
+      - menu_items = Hash.new
+      - rices = Hash.new
+      - sides = Hash.new
+      - dips = Hash.new
+      - desserts = Hash.new
+      - sauces = Hash.new
+      - @line_items.each do |i|
+        - amount = i.quantity.to_d
+        -# DISPLAY ITEMS
+        -#= amount
+        -#= i.variant.item.name
+        - desc = terse(i.variant.item.name)
+        - unless i.choices.blank?
+          - i.choices.each do |k,v|
+            - v = title(v)
+            - case k
+              - when "rices"
+                - rices[v] = ((rices.key? v) ? rices[v] + amount : amount)
+              - when "sides"
+                - sides[v] = ((sides.key? v) ? sides[v] + amount : amount)
+              - when "dips"
+                - dips[v] = ((dips.key? v) ? dips[v] + amount : amount)
+              - when "desserts"
+                - desserts[v] = ((desserts.key? v) ? desserts[v] + amount : amount)
+              - when "tarts","ribs"
+                - desc = "#{desc}: #{title(v)}"
+              -#- else
+              -#  %b
+              -#    = k
+              -#  = v
+          - if ['medium','large'].include?(i.variant.name.downcase) and (ungrouping(i.variant.item.grouping) == 'wines')
+            - case i.variant.name.downcase
+              - when ' medium'
+                - amount = amount * 175.0 / 750.0
+              - when 'large'
+                - amount = amount * 250.0 / 750.0
+          - if i.options.blank?
+            - menu_items[desc] = ((menu_items.key? desc) ? menu_items[desc] + amount : amount)
+          - else
+            - options = i.options.split(", ")
+            -#= "Options: #{options.size} #{options.join("++")} #{i.options}"
+            - amount = (1.00 / options.size)
+            - options.each do |opt|
+              -#= desc
+              - opt = title(opt)
+              - if (desc == "Steak Burger")
+                - sauces[opt] = ((sauces.key? opt) ? sauces[opt] + amount : amount)
+                - odesc = desc
               - else
-                - options = i.options.split(", ")
-                -#= "Options: #{options.size} #{options.join("++")} #{i.options}"
-                - amount = (1.00 / options.size)
-                - options.each do |opt|
-                  -#= desc
-                  - opt = title(opt)
-                  - if (desc == "Steak Burger")
-                    - sauces[opt] = ((sauces.key? opt) ? sauces[opt] + amount : amount)
-                    - odesc = desc
-                  - else
-                    - odesc = "#{desc}: #{title(opt)}"
-                  - menu_items[odesc] = ((menu_items.key? odesc) ? (menu_items[odesc] + amount) : amount)
-              - cat_name = title(i.variant.item.item_type.name)
-              - category[cat_name] = ((category.key? cat_name) ? (category[cat_name] + amount) : amount)
-              - sub_name = title(i.variant.item.category.name)
-              - subcat[sub_name] = ((subcat.key? sub_name) ? (subcat[sub_name] + amount) : amount)
+                - odesc = "#{desc}: #{title(opt)}"
+              - menu_items[odesc] = ((menu_items.key? odesc) ? (menu_items[odesc] + amount) : amount)
+          - cat_name = title(i.variant.item.item_type.name)
+          - category[cat_name] = ((category.key? cat_name) ? (category[cat_name] + amount) : amount)
+          - sub_name = title(i.variant.item.category.name)
+          - subcat[sub_name] = ((subcat.key? sub_name) ? (subcat[sub_name] + amount) : amount)
 
 
-              =# "Choices: #{i.choices}" # .blank?
-              -#- i.options.each do |k, v|
-              -#  = "Option #{k}: #{v}"
-              -#- i.choices.each do |k, v|
-              -#  = "Choices #{k}: #{v}"
+          =# "Choices: #{i.choices}" # .blank?
+          -#- i.options.each do |k, v|
+          -#  = "Option #{k}: #{v}"
+          -#- i.choices.each do |k, v|
+          -#  = "Choices #{k}: #{v}"
 
-          %p
-            %b
-              Items
-            - if !menu_items.empty?
-              - menu_items.each do |k, v|
-                %p
-                  = v.ceil
-                  = k
-            - else
-              %p
-                None
-          - unless rices.empty?
-            %p
-              %b
-                Rices
-            - rices.each do |k, v|
-              %p
-                = v.ceil
-                = k
-          - unless sauces.empty?
-            %p
-              %b
-                Burgers
-            - sauces.each do |k, v|
-              %p
-                = v.ceil
-                = k
-          - unless desserts.empty?
-            %p
-              %b
-                Desserts
-            - desserts.each do |k, v|
-              %p
-                = v.ceil
-                = k
+          -#- if @orders
+          -#  %p
+          -#    = @orders.count
+          -#    Orders
       .columns-6.small
         %p
           %b
@@ -164,5 +125,41 @@
           %p
             = v.ceil
             = k
+      .columns-6.small
+        %p
+          %b
+            Items
+          - if !menu_items.empty?
+            - menu_items.each do |k, v|
+              %p
+                = v.ceil
+                = k
+          - else
+            %p
+              None
+        - unless rices.empty?
+          %p
+            %b
+              Rices
+          - rices.each do |k, v|
+            %p
+              = v.ceil
+              = k
+        - unless sauces.empty?
+          %p
+            %b
+              Burgers
+          - sauces.each do |k, v|
+            %p
+              = v.ceil
+              = k
+        - unless desserts.empty?
+          %p
+            %b
+              Desserts
+          - desserts.each do |k, v|
+            %p
+              = v.ceil
+              = k
 
 
