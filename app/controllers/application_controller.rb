@@ -41,12 +41,6 @@ class ApplicationController < ActionController::Base
       results = results.where('product_flow <> ?', 'incoming' )
     end
     results.order(:rank)
-    #if category
-    #  root_id = category.id
-    #  results = Category.at_depth( 1 ).where('root_id = ? and product_flow <> ?', root_id, product_block ).order(:rank)
-    #else
-    #  results = Category.at_depth( 1 ).where('product_flow <> ?', product_block ).order(:rank)
-    #end
 
   end
   helper_method :get_categories

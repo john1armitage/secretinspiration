@@ -151,11 +151,11 @@ Commerce::Application.routes.draw do
     end
   end
   resources :payments
-  resources :postings, :only => [:index, :show] do
-    collection do
-      match 'search' => 'collections#search', via: [:get, :post], as: :search
-    end
-  end
+  # resources :postings, :only => [:index, :show] do
+  #   collection do
+  #     match 'search' => 'collections#search', via: [:get, :post], as: :search
+  #   end
+  # end
   get 'choices', to: 'choices#index'
   get 'welcome', to: 'welcome#index'
   get 'remote', to: 'welcome#edit'
