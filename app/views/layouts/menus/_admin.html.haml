@@ -1,25 +1,25 @@
 %ul.inline-list
+  - if allow? :items, :index
+    %li
+      != link_to "Trade", menu_path('trade'), remote: true, class: 'no_ajaxify'
+  - if allow? :elements, :index
+    %li
+      != link_to "System", menu_path('system'), remote: true, class: 'no_ajaxify'
   - if allow? :pages, :index
     %li
       != link_to 'Pages', pages_path
+  - if (allow? :openings, :index and current_tenant.openings == '1')
+    %li
+      != link_to 'Openings', openings_path
   - if allow? :broadcasts, :index
     %li
       != link_to 'Broadcasts', broadcasts_path
   - if (allow? :offers, :index and current_tenant.offers == '1')
     %li
       != link_to 'Offers', offers_path
-  - if (allow? :openings, :index and current_tenant.openings == '1')
-    %li
-      != link_to 'Openings', openings_path
-  - if allow? :items, :index
-    %li
-      != link_to "Trade", menu_path('trade'), remote: true, class: 'no_ajaxify'
   - if allow? :users, :new
     %li
       != link_to "Register", signup_path
-  - if allow? :elements, :index
-    %li
-      != link_to "System", menu_path('system'), remote: true, class: 'no_ajaxify'
 :coffeescript
   jQuery ->
     $('div#menu li').on 'click', (event) ->

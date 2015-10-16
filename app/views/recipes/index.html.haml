@@ -12,6 +12,8 @@
 = render @recipes
 %hr
 .large.columns-12
-  = "Item cost: #{pounds(@cost)}, price #{pounds(@item.price)}, target #{pounds(@cost * 3.5)}, margin #{pounds((@item.price / 1.2) - @cost)}"
+  - margin = (@item.price / 1.2) - @cost
+  - percent = (100 * margin / @item.price).to_i
+  = "Item Cost: #{pounds(@cost)}, Price #{pounds(@item.price)}, Target #{pounds(@cost * 3.5)}, Margin #{pounds(margin)} = #{percent}%"
   -# VERY NAUGHTY
   - @item.update(cost: @cost)

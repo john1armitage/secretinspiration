@@ -3,12 +3,12 @@
     != link_to image_tag("#{current_tenant.domain}_logo_small.gif"), '/', class: 'no_ajaxify image'
   .large-4.columns
     %ul#contact.inline-list
-      - if allow? :postings, :index
-        %li
-          != link_to "AC", menu_path('accounts'), remote: true, class: 'no_ajaxify'
       - if allow? :items, :index
         %li#admin
           != link_to 'Admin', sub_menu_path('admin', code: true), class: 'no_ajaxify', remote: 'true'
+      - if allow? :postings, :index
+        %li
+          != link_to "AC", menu_path('accounts'), remote: true, class: 'no_ajaxify'
       - unless allow? :users, :new
         #contact
           != render 'layouts/contact/index'
