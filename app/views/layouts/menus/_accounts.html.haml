@@ -26,9 +26,10 @@
     %li
       != link_to 'Pay Rates', pay_rates_path, :class => "small button radius"
   %hr
-  - if allow? :accounts, :index
+  - if allow? :orders, :index
     %li
-      != link_to 'Account List', accounts_path, :class => "small button radius"
+      != link_to 'Orders Taken', orders_path(home: true), :class => "small button radius"
+  %hr
   - if allow? :monthlies, :index
     %li
       != link_to 'Monthlies', monthlies_path, :class => "small button radius"

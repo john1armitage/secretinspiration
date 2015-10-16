@@ -9,9 +9,6 @@
     %li
       != link_to 'Suppliers', suppliers_path, :class => "small button radius"
   %hr
-  - if allow? :orders, :index
-    %li
-      != link_to 'Orders Taken', orders_path(home: true), :class => "small button radius"
   - if allow? :items, :index
     %li
       != link_to 'Items', items_path, :class => "small button radius"
@@ -21,6 +18,10 @@
   - if allow? :customers, :index
     %li
       != link_to 'Customers', customers_path, :class => "small button radius"
+  %hr
+  - if (current_tenant.sitting && current_tenant.sitting == '1') && (allow? :tabels, :index )
+    %li
+      != link_to 'Tables', tabels_path, :class => "small button radius"
   %hr
   - if allow? :options, :index
     %li
