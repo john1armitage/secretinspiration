@@ -103,8 +103,14 @@ class FinancialsController < ApplicationController
     ref_bank = params[:bank].present? ? params[:bank] : CONFIG[:default_bank]
 
     require "csv"
-    data_file = "~/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.csv"
+    data_file = "~john/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.csv"
     input_file = File.expand_path(data_file)
+
+    unless File.exist?(input_file)
+      data_file = "~john/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.csv"
+      input_file = File.expand_path(data_file)
+    end
+
     if File.exist?(input_file)
 
       @financials = []
@@ -119,7 +125,7 @@ class FinancialsController < ApplicationController
 
       # time = Time.now.strftime("%Y%m%d")
       label = end_date.split('/').reverse.join('')
-      done = "~/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.#{label}"
+      done = "~john/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.#{label}"
       system("mv #{data_file} #{done}")
     else
       done = "Batch not found: #{input_file}"
