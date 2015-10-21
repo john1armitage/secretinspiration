@@ -40,8 +40,8 @@ class AccountingController < ApplicationController
     @fixed_assets_previous = previous_posts.sum('debit_amount_cents').to_d / 100
     @intangibles_previous = previous_posts.where('posts.account_id = ?',goodwill).sum('debit_amount_cents').to_d / 100
     @tangibles_previous = @fixed_assets_previous - @intangibles_previous
-    @depreciation_previous = previous_depreciations.where('financials.account_id = ?',goodwill).sum('allowable_cost_cents').to_d / 100
-    @intangible_depreciation_previous = previous_depreciations.sum('allowable_cost_cents').to_d / 100
+    @intangible_depreciation_previous = previous_depreciations.where('financials.account_id = ?',goodwill).sum('allowable_cost_cents').to_d / 100
+    @depreciation_previous = previous_depreciations.sum('allowable_cost_cents').to_d / 100
     @tangible_depreciation_previous = @depreciation_previous - @intangible_depreciation_previous
     depreciations = Depreciation.where('service_date >= ? AND service_date <= ? ',@start, (@stop || Time.now))
     depreciations = depreciations.includes(financial: :account)

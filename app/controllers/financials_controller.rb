@@ -122,7 +122,7 @@ class FinancialsController < ApplicationController
       done = "~/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.#{label}"
       system("mv #{data_file} #{done}")
     else
-      done = "#{params[:bank]} Batch not found"
+      done = "Batch not found: #{input_file}"
     end
 
     redirect_to financials_url(result: done)
