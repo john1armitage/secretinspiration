@@ -1,9 +1,11 @@
+- employees = Employee.order(:first_name)
+- employees = employees.where(live: true) if allow? :employees, :destroy
 = form_for @timesheet, html: { class: 'no_ajaxify'}, remote: true, :validate => true  do |f|
   %fieldset
     .row
       .field.small-12.columns
         = f.label :employee_id
-        = f.collection_select :employee_id, Employee.where(live: true).order(:first_name), 'id', 'first_name', include_blank: true
+        = f.collection_select :employee_id, employees, 'id', 'first_name', include_blank: true
     .row
       .field.small-12.columns
         = f.label :start_time, 'Start'
