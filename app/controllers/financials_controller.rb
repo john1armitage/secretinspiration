@@ -823,7 +823,7 @@ class FinancialsController < ApplicationController
       when 'Supplier'
         Supplier.find(params[:financial][:entity_id]).reference.first
       when 'Employee'
-        Employee.find(params[:financial][:entity_id]).reference.upcase
+        Employee.find(params[:financial][:entity_id]).reference
       when 'Bank'
         Bank.find(params[:financial][:entity_id]).reference
     end
