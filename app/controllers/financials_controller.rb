@@ -823,7 +823,12 @@ class FinancialsController < ApplicationController
       when 'Supplier'
         Supplier.find(params[:financial][:entity_id]).reference.first
       when 'Employee'
-        Employee.find(params[:financial][:entity_id]).reference
+        e = Employee.find(params[:financial][:entity_id])
+        e.reference.blank? ? e.first_name.upcase : e.reference.upcase
+        # p "PPPPPPPPPPPPPPPPPPPPPPPPPP"
+        # p params[:financial][:entity_id]
+        # p Employee.find(params[:financial][:entity_id])
+        # p Employee.find(params[:financial][:entity_id]).reference
       when 'Bank'
         Bank.find(params[:financial][:entity_id]).reference
     end
