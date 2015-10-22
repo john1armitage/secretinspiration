@@ -4,6 +4,7 @@
   %tr
     %th
     %th Name
+    %th Ref
     %th Date of birth
     %th Ni number
     %th Hol
@@ -12,13 +13,13 @@
     %th End date
     %th
     %th
-    %th
 
   - @employees.each do |employee|
     %tr
       %td= employee.id
       %td.has-tip{"data-tooltip" => "", title: employee.reference}
         = employee.first_name
+      %td= employee.reference
       %td= employee.date_of_birth
       %td= employee.ni_number
       %td= employee.holiday
@@ -26,6 +27,6 @@
       %td= employee.start_date
       %td= employee.end_date
       %td= link_to 'Pay', new_payment_path(type: 'payroll', employee_id: employee.id)
-      %td= link_to 'Show', employee
+      -#%td= link_to 'Show', employee
       %td= link_to 'Edit', edit_employee_path(employee)
-      %td= link_to 'Destroy', employee, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'X', employee, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -425,7 +425,7 @@ class FinancialsController < ApplicationController
     #   params[:financial][:entity_ref] = get_entity_ref
     # end
 
-    params[:financial][:entity_ref] = get_entity_reference
+    params[:financial][:entity_ref] = get_entity_reference if params[:financial][:entity_id].present?
 
     respond_to do |format|
       if @financial.update(params[:financial])
@@ -823,7 +823,7 @@ class FinancialsController < ApplicationController
       when 'Supplier'
         Supplier.find(params[:financial][:entity_id]).reference.first
       when 'Employee'
-        Employee.find(params[:financial][:entity_id]).reference
+        Employee.find(params[:financial][:entity_id]).reference.upcase
       when 'Bank'
         Bank.find(params[:financial][:entity_id]).reference
     end
