@@ -1,12 +1,12 @@
 - stocks = item.stocks.order('stock_date DESC')
 - stocks = stocks.where(item_option: @option) if @option
 = form_for item  do |f|
-  - if stocks.empty?
-    - item.stock_date = nil
-    - item.stock_level = nil
-  - else
-    - item.stock_date = stocks.first.stock_date
-    - item.stock_level = stocks.first.stock_level
+  -#- if stocks.empty?
+  -#  - item.stock_date = nil
+  -#  - item.stock_level = nil
+  -#- else
+  -#  - item.stock_date = stocks.first.stock_date
+  -#  - item.stock_level = stocks.first.stock_level
   %fieldset.compact
     .row
       .field.small-3.columns.righty
@@ -25,6 +25,7 @@
       .field.small-1.columns.left
         = f.submit 'Save'
 %div{id: "stocks_#{item.id}_#{@option}"}
-  - if !stocks.empty? and @item.present? and (@item.id == item.id) and stocks.first.item_option == @item_option
+  -# if !stocks.empty? and @item.present? and (@item.id == item.id) and stocks.first.item_option == @item_option
+  - if !stocks.empty? # and @item.present? and (@item.id == item.id) and stocks.first.item_option == @item_option
     - @stocks = stocks
     = render 'stocks/index'

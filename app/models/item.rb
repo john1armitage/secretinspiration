@@ -44,7 +44,7 @@ class Item < ActiveRecord::Base
   end
 
   def set_grouping_plus
-    if category.name == 'vegetarian_starter'
+    if ['vegetarian_starter','child_main'].include? category.name
       starter = Category.find_by_name('starter')
       self.grouping = "#{starter.rank}:#{starter.name}"
     elsif category.name == 'vegetarian_mains'
