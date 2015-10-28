@@ -72,6 +72,15 @@ $head-border: #009900;
       margin: 0.5em;
       padding: 0;
       border: none;
+      div.flat {
+        input {
+          margin: 0;
+        }
+      }
+      &.gap {
+        margin-bottom: 1em;
+        margin-top: -1em;
+      }
     }
     fieldset.no-pad {
       padding: 0;

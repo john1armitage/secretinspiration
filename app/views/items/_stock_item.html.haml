@@ -8,7 +8,7 @@
   -#  - item.stock_date = stocks.first.stock_date
   -#  - item.stock_level = stocks.first.stock_level
   %fieldset.compact
-    .row
+    .row.flat
       .field.small-3.columns.righty
         %b
           = link_to item.name, stocks_path(item_id: item.id, option: @option), remote: true, class: 'no_ajaxify'
