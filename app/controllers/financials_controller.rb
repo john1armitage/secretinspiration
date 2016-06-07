@@ -202,7 +202,7 @@ class FinancialsController < ApplicationController
           end
           # summary = 'Bank Interest'
         end
-        if (emp = reference.scan(/SHACKPAYROLL .+/)[0])
+        if (emp = reference.scan(/SHACKPAY .+/)[0])
           type = 'payroll'
           entity = 'Employee'
           entity_ref = emp.sub('SHACKPAY ', '').downcase.capitalize
