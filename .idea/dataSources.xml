@@ -4,13 +4,13 @@
     <data-source source="LOCAL" name="Rails commerce: development" uuid="5453bb6c-2028-4ba2-b84f-e1efeeedc28e">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/comback</jdbc-url>
+      <jdbc-url>jdbc:postgresql://128.1.1.70/comback</jdbc-url>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails commerce: production" uuid="bd661fb3-5f2e-4028-a303-ce4c39732732">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/commerce</jdbc-url>
+      <jdbc-url>jdbc:postgresql://128.1.1.70/commerce</jdbc-url>
       <libraries />
     </data-source>
   </component>

@@ -285,7 +285,7 @@ class FinancialsController < ApplicationController
             entity_id = bank.id
           end
           summary = "Transfer from #{payer}"
-        elsif reference.scan(/INTEREST PAID/)[0]
+        elsif reference.scan(/INTEREST /)[0]
           payer = 'bank'
           type = 'interest'
           entity = 'Bank'
@@ -331,7 +331,7 @@ class FinancialsController < ApplicationController
         entity_ref = 'VAT'
         type = 'transfer'
       end
-      if payer && ['EMS', 'AX'].include?(payer.split(' ')[0])
+      if payer && ['EMS', 'AX', 'ELAVON'].include?(payer.split(' ')[0])
         entity = 'Bank'
         entity_ref = payer.split(' ')[0]
         type = 'merchant'
