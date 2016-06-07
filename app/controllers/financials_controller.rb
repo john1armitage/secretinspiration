@@ -668,6 +668,7 @@ class FinancialsController < ApplicationController
     bank_ref = @financial.bank
     to_bank = Bank.find_by_reference( bank_ref )
     to_account = Account.find_by_name(to_bank.name)
+    @financial.entity_ref = 'EMS' if @financial.entity_ref == 'ELAVON' #TEMP FIX
     from_bank = Bank.find_by_reference( @financial.entity_ref)
     from_account = Account.find_by_name(from_bank.name)
     desc = "#{from_bank.name} to: #{to_bank.name}"
