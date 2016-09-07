@@ -125,7 +125,7 @@ class FinancialsController < ApplicationController
 
       # time = Time.now.strftime("%Y%m%d")
       label = end_date.split('/').reverse.join('')
-      done = "~john/Dropbox/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.#{label}"
+      done = "~john/commerce/#{current_tenant.domain}_#{ref_bank.downcase}.#{label}"
       system("mv #{data_file} #{done}")
     else
       done = "Batch not found: #{input_file}"
@@ -180,8 +180,9 @@ class FinancialsController < ApplicationController
         elsif (payee = reference.scan(/^*BILL PAYMENT TO [a-zA-Z0-9\s]+/)[0])
           payee = payee.sub('BILL PAYMENT TO ', '')
           type = 'BACS'
-        elsif (payee = reference.scan(/^*TRANSFER TO [a-zA-Z\s]+/)[0])
-          payee = payee.sub('TRANSFER TO ', '')
+        elsif (payee = reference.scan(/^*TRANSFER [a-zA-Z\s]+/)[0])
+          payee = payee.sub(' TO', '')
+          payee = payee.sub('TRANSFER ', '')
           type = 'transfer'
           entity = 'Bank'
           if (bank = Bank.find_by_reference(payee))
@@ -202,10 +203,11 @@ class FinancialsController < ApplicationController
           end
           # summary = 'Bank Interest'
         end
-        if (emp = reference.scan(/SHACKPAY .+/)[0])
+        if (emp = reference.scan(/SHACKPAY +\S[\s,]/)[0])
           type = 'payroll'
           entity = 'Employee'
           entity_ref = emp.sub('SHACKPAY ', '').downcase.capitalize
+          p entity_ref
           entity_id = Employee.find_by_first_name(entity_ref).id
           summary = "PAYROLL #{entity_id}: #{entity_ref}"
         else
@@ -355,6 +357,8 @@ class FinancialsController < ApplicationController
       # tax?
       tax = tx.size > 5 ? tx[5] : ''
       matches = invoices.where(entity_id: entity_id, credit_amount_cents: (credit_amount * 100))
+      p event_date
+      p tx[1]
       if !matches.empty?
         invoice = matches.first
         invoice.update(invoice: false, effective_date: invoice.event_date, event_date: event_date, bank: ref_bank, classification: type, desc: tx[1], processed: false)
