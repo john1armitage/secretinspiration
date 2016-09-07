@@ -159,7 +159,15 @@ class FinancialsController < ApplicationController
           mandate = mandate.sub('MANDATE NO ', '').to_i
         end
         entity = 'Supplier'
-        if (payee = reference.scan(/^*DIRECT DEBIT PAYMENT TO .+ REF/)[0])
+        if (emp = reference.scan(/SHACKPAY \S+\s/)[0])
+          type = 'payroll'
+          entity = 'Employee'
+          entity_ref = emp.sub('SHACKPAY ', '').sub(',', '').sub(' ', '').downcase.capitalize
+          p 'SHACKPAY'
+          p entity_ref
+          entity_id = Employee.find_by_first_name(entity_ref).id
+          summary = "PAYROLL #{entity_id}: #{entity_ref}"
+        elsif (payee = reference.scan(/^*DIRECT DEBIT PAYMENT TO .+ REF/)[0])
           payee = payee.sub('DIRECT DEBIT PAYMENT TO ', '').sub(' REF', '')
           type = 'direct'
         elsif (payee = reference.scan(/^*CARD PAYMENT TO [^,]+/)[0])
@@ -203,28 +211,28 @@ class FinancialsController < ApplicationController
           end
           # summary = 'Bank Interest'
         end
-        if (emp = reference.scan(/SHACKPAY +\S[\s,]/)[0])
-          type = 'payroll'
-          entity = 'Employee'
-          entity_ref = emp.sub('SHACKPAY ', '').downcase.capitalize
-          p entity_ref
-          entity_id = Employee.find_by_first_name(entity_ref).id
-          summary = "PAYROLL #{entity_id}: #{entity_ref}"
-        else
-          staff =[['JUANITA ARMITAGE', 'Juanita'], ['TYLER HOWELL', 'Tyler'], ['PAISLEY JARRA', 'Paisley'], ['VERNA ARMITAGE', 'Verna'], ['LEAH CAMPBELL', 'Leah'], ['TOM AKERY', 'Tom'], ['VICTORIA CAMPBEL', 'Victoria'], ['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
-          staff.each do |s|
-            if reference[s[0]]
-              type = 'payroll'
-              entity_ref = s[1]
-              emp = Employee.find_by_first_name(entity_ref)
-              entity_id = !emp.blank? ? emp.id : nil
-              entity = 'Employee'
-            end
-          end
-          unless emp.blank?
-            summary = "PAYROLL #{entity_id}: #{entity_ref}"
-          end
-        end
+        # if (emp = reference.scan(/SHACKPAY +\S[\s,]/)[0])
+        #   type = 'payroll'
+        #   entity = 'Employee'
+        #   entity_ref = emp.sub('SHACKPAY ', '').downcase.capitalize
+        #   p entity_ref
+        #   entity_id = Employee.find_by_first_name(entity_ref).id
+        #   summary = "PAYROLL #{entity_id}: #{entity_ref}"
+        # else
+        #   staff =[['JUANITA ARMITAGE', 'Juanita'], ['TYLER HOWELL', 'Tyler'], ['PAISLEY JARRA', 'Paisley'], ['VERNA ARMITAGE', 'Verna'], ['LEAH CAMPBELL', 'Leah'], ['TOM AKERY', 'Tom'], ['VICTORIA CAMPBEL', 'Victoria'], ['SOPHIE BENJAFIELD', 'Sophie'], ['MOLLY DRISCOLL', 'Molly'], ['HARRY WELCH', 'Harry'], ['JJ ARMITAGE', 'Joel'], ['DEMI HELYER', 'Demi'], ['DANIELLE PARSONS', 'Danielle'], ['YAWEN LAI', 'Emmy'], ['ABBIE MONTGOMERY', 'Abigail'], ['MELIA CAMPBELL', 'Melia'], ['ROB STOREY', 'Rob'], ['HOLLY ELLARD', 'Holly'], ['TIFFANY RICHARDS', 'Tiffany'], ['TYLER HOWELL', 'Tyler']]
+        #   staff.each do |s|
+        #     if reference[s[0]]
+        #       type = 'payroll'
+        #       entity_ref = s[1]
+        #       emp = Employee.find_by_first_name(entity_ref)
+        #       entity_id = !emp.blank? ? emp.id : nil
+        #       entity = 'Employee'
+        #     end
+        #   end
+        #   unless emp.blank?
+        #     summary = "PAYROLL #{entity_id}: #{entity_ref}"
+        #   end
+        # end
         if ['direct', 'card', 'BACS'].include?(type)
           entity_ref = payee.gsub(/0-9/, '').sub(' &', '').sub(' ', '').split(' ')[0].upcase
           supplier = Supplier.where("'#{entity_ref}' = ANY (reference)")
