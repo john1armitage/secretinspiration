@@ -163,8 +163,8 @@ class FinancialsController < ApplicationController
           type = 'payroll'
           entity = 'Employee'
           entity_ref = emp.sub('SHACKPAY ', '').sub(',', '').sub(' ', '').downcase.capitalize
-          p 'SHACKPAY'
-          p entity_ref
+          # p 'SHACKPAY'
+          # p entity_ref
           entity_id = Employee.find_by_first_name(entity_ref).id
           summary = "PAYROLL #{entity_id}: #{entity_ref}"
         elsif (payee = reference.scan(/^*DIRECT DEBIT PAYMENT TO .+ REF/)[0])
@@ -246,8 +246,10 @@ class FinancialsController < ApplicationController
         credit = false
         amount = tx[2].sub(',', '').to_d
         entity = nil
-        if (payer = reference.scan(/^*BANK GIRO CREDIT REF[a-zA-Z0-9\s]+,/)[0])
-          payer = payer.sub('BANK GIRO CREDIT REF', '').sub(',', '').gsub(/[0-9]/, '')
+        if (payer = reference.match(/ELAVON/))
+          payer = 'EMS'
+        elsif (payer = reference.scan(/^*BANK GIRO CREDIT REF [a-zA-Z0-9\s]+,/)[0])
+            payer = payer.sub('BANK GIRO CREDIT REF ', '').sub(',', '').gsub(/[0-9]A/, '')
         elsif (location = reference.scan(/^*CASH DEPOSIT AT [a-zA-Z\s]+/)[0])
           location = location.sub('CASH DEPOSIT AT ', '')
           type = 'cash'
@@ -341,9 +343,9 @@ class FinancialsController < ApplicationController
         entity_ref = 'VAT'
         type = 'transfer'
       end
-      if payer && ['EMS', 'AX', 'ELAVON'].include?(payer.split(' ')[0])
+      if payer && ['EMS', 'AX', 'ELAVON'].include?(payer)
         entity = 'Bank'
-        entity_ref = payer.split(' ')[0]
+        entity_ref = payer
         type = 'merchant'
       end
       if entity == 'Bank'
@@ -362,11 +364,12 @@ class FinancialsController < ApplicationController
       entity_id = entity_id.to_i
       mandate = mandate.to_i
 
+      summary = "Unrecognised type" if summary.blank?
       # tax?
       tax = tx.size > 5 ? tx[5] : ''
       matches = invoices.where(entity_id: entity_id, credit_amount_cents: (credit_amount * 100))
-      p event_date
-      p tx[1]
+      # p event_date
+      # p tx[1]
       if !matches.empty?
         invoice = matches.first
         invoice.update(invoice: false, effective_date: invoice.event_date, event_date: event_date, bank: ref_bank, classification: type, desc: tx[1], processed: false)
