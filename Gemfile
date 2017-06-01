@@ -2,7 +2,11 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 #gem 'rails', '> 4.0.2'
-gem 'rails'
+#gem 'rails'
+gem 'rails', github: 'rails/rails', branch: '4-2-stable'
+
+gem 'json', github: 'flori/json', branch: 'v1.8'
+gem 'arel', github: 'rails/arel', branch: '6-0-stable'
 
 gem 'responders', '~> 2.0'
 
@@ -11,7 +15,7 @@ gem 'pg'
 #gem 'apartment'
 gem 'pg_array_parser'
 #gem 'activerecord-postgres-hstore'
-gem 'node'
+#gem 'node'
 
 gem 'thin'
 gem 'faye'
