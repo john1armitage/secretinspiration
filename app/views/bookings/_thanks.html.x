@@ -8,10 +8,10 @@
           We've got your booking request. 
       %p
         %span.title
-          PLEASE check any Junk folder if you do not see our Email 
+          PLEASE check any Junk folder if you do not see our Email. 
       %p 
         %span
-          In case of ANY DOUBT, please just give us a call
+          In case of ANY DOUBT, please just give us a call.
   .row
     .large-12.columns
       %p
