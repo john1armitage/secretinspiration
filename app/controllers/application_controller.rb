@@ -178,7 +178,7 @@ class ApplicationController < ActionController::Base
   def set_booking_dates
     @booking_date = @booking.booking_date if @booking
     @booking_date ||= params['booking_date'].present? ? params['booking_date'].to_date : Date.today
-    @bookings = Booking.where( booking_date: @booking_date ).order(:arrival, :customer_name)
+    @bookings = Booking.where( booking_date: @booking_date ).where('state <> ?', 'cancelled').order(:arrival, :customer_name)
     @requests = Booking.where( 'confirmed = ?', false ).order(:booking_date, :customer_name)
     @bookings_by_date = get_bookings(@booking_date)
     @bookings_next_month = get_bookings(@booking_date + 1.month)
