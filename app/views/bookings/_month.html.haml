@@ -41,7 +41,7 @@
           - else
             Phone, 9pm Only
         - else
-          Sorry, we're Full
+          Pretty much Full
         - if allow? :seatings, :create
           = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
         -#- else
