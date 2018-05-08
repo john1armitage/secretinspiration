@@ -68,7 +68,8 @@ module ApplicationHelper
     if ['dinner', 'open'].include?(opening)
       times = []
       time = dinner_open.to_time
-      0.upto(18) do |i|
+      segments =  CONFIG[:dinner_segments].to_i
+      0.upto(segments) do |i|
         times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
       end
