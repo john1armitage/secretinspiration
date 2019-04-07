@@ -27,7 +27,7 @@
         - if orders[date]
           = link_to (pluralize orders[date].size, 'order'), orders_path(date: date.to_s, home: 'dailies'), remote: true, class: 'no_ajaxify'
           = ':'
-        - if bookings[date]
+        - if bookings[date] && 1 == 0
           = link_to (pluralize bookings[date].size, 'book'), dated_bookings_path(booking_date: date.to_s, all: true), remote: true, class: 'no_ajaxify'
 
     - if dailies[date]

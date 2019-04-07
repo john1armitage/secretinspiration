@@ -10,7 +10,7 @@
         Pepper Shack
     %p.print-only
       %span
-        Hopefully, we got it right and you had a good time ... but do tell us if we can make things better. Otherwise, please help us spread the word ... nice reviews on <b>TripAdvisor</b> are most welcome, too.
+        Hopefully, we got it right ... but do tell us if we can make things better. Nice reviews on <b>TripAdvisor</b> are most welcome, too.
   -#%p.print-only
     -#  %span
     -#    book@peppershack.co.uk
@@ -153,16 +153,13 @@
   #print-header
     %p.print-only
       %span
-        All <b>tips</b>, cash and card, are shared equally &amp; in full - Thanks again!
+        All <b>tips</b> shared equally &amp; in full - Total with 10% service = 
+        = pounds(((@order.net_total_cents + @order.tax_total_cents) * 1.1) / 100.00)
   %table
     %tr.print-onlyx
       %td
         = current_tenant.company
         = "Co. No. #{current_tenant.coho}"
-        %br
-        = "VAT #{current_tenant.vat}: "
-        %b
-          = "#{pounds(@order.tax_home)}"
       %td.right
         = @order.updated_at.strftime('%e-%m-%y')
         %br

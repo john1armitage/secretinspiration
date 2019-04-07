@@ -22,11 +22,13 @@
   .large-6.columns.left
     %h5
       = "Gross Profit: #{pounds(@sales + @interest - (@direct_costs + @overheads + @disallowed + @depreciation + @amortisation))}"
+      =  "#{pounds(@sales + @interest + @vat_received - (@direct_costs + @overheads + @disallowed + @depreciation + @amortisation + @vat_paid))}"
 .row
   .large-2.columns.title
     Revenue
   .large-3.columns.left
     = pounds(@sales + @interest)
+    = pounds(@sales + @interest + @vat_received - @vat_paid)
   .large-1.columns.title
     &nbsp;
   .large-2.columns.title

@@ -5,6 +5,3 @@
     != "Registered in UK"
   %p
     != "Company No #{current_tenant.coho}"
-  -unless current_tenant.vat.blank?
-    %p
-      !="VAT #{current_tenant.vat}"
