@@ -112,8 +112,9 @@
         &nbsp;
     %tr.total
       %td
-        Total
+        &nbsp;
       %td.right
+        Total
         = pounds((@order.net_total_cents + @order.tax_total_cents + @order.discount_cents)/100.00)
 
     - if  @order.discount > 0
@@ -147,14 +148,14 @@
           %span#order_total
             = pounds((@order.net_total_cents + @order.tax_total_cents) / 100.00)
 
-  -#%table
-  -#  %tr.print-only.message
-  -#    %td.center
-  #print-header
-    %p.print-only
-      %span
-        All <b>tips</b> shared equally &amp; in full - Total with 10% service = 
-        = pounds(((@order.net_total_cents + @order.tax_total_cents) * 1.1) / 100.00)
+    #print-header
+      %tr
+        %td &nbsp;
+        %td.right
+          <b><i>Total with 10% staff tip at your discretion, shared in full = 
+          = pounds(((@order.net_total_cents + @order.tax_total_cents) * 1.1) / 100.00)
+          </i></b>
+
   %table
     %tr.print-onlyx
       %td
