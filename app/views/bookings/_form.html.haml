@@ -47,6 +47,8 @@
         .large-12.columns
           = f.label :email, 'Email'
           = f.text_field :email, placeholder: 'email'
+          %p 
+            = f.label :dummy, 'Confirmation will be sent to this address ... please check any Junk Folder if you see nothing'
     - else
       = f.hidden_field :customer_name
       = f.hidden_field :contact
@@ -77,6 +79,8 @@
     .row
       .large-6.columns
         = f.submit 'Send'
+        %p
+          = f.label :dummy, 'Be patient!' 
       .large-6.columns
         = f.submit 'Cancel'
 
