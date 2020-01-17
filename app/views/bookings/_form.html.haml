@@ -37,8 +37,8 @@
     - unless @booking.walkin
       .row
         .large-12.columns
-          = f.label :customer_name, 'Contact'
-          = f.text_field :customer_name, placeholder: 'name'
+          = f.label :customer_name, 'First Name & Last Initial'
+          = f.text_field :customer_name, placeholder: 'eg John A'
       .row
         .large-12.columns
           = f.label :contact, 'Phone', placeholder: 'phone'
