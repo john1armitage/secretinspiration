@@ -154,10 +154,11 @@ class FinancialsController < ApplicationController
       if tx[2].blank?
         credit = true
         amount = tx[3].sub(',', '').to_d
-        mandate = reference.scan(/^*MANDATE NO [\d]+/)[0]
-        unless mandate.blank?
-          mandate = mandate.sub('MANDATE NO ', '').to_i
-        end
+        mandate = "999"
+        #mandate = reference.scan(/^*MANDATE NO [\d]+/)[0]
+        #unless mandate.blank?
+        #  mandate = mandate.sub('MANDATE NO ', '').to_i
+        #end
         entity = 'Supplier'
         if (emp = reference.scan(/SHACKPAY \S+\s/)[0])
           type = 'payroll'
