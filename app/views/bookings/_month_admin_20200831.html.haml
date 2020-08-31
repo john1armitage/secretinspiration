@@ -1,13 +1,10 @@
-%li.request
-  = link_to 'New Takeaway', meals_path(takeaway: true), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
-
+-#%li.request
 -#  = link_to 'Make Booking', new_booking_path(date: date.to_s, opening: opening), class: 'no_ajaxify', remote: true
 - if date == Time.now.to_date
-  -# Uncomment for RESUMPTION and remove duplicate Takeaway above
-  -#%li.request
-    =# link_to 'New Walk-In', new_booking_path(:walk_in => true, opening: opening), class: 'no_ajaxify', remote: true
-  -#%li.request
-    -#= link_to 'New Takeaway', meals_path(takeaway: true), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
+  %li.request
+    = link_to 'New Walk-In', new_booking_path(:walk_in => true, opening: opening), class: 'no_ajaxify', remote: true
+  %li.request
+    = link_to 'New Takeaway', meals_path(takeaway: true), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
 - if bookings[date]
   %li
     - lunches = bookings[date].map{|a| a.session == "lunch"}

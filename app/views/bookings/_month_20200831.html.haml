@@ -15,21 +15,11 @@
             - message = ''
           -else
             - message = "#{opening.message}"
-      - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
-        - opening = 'dinner'
-      - else
-        - if status.include? 'open'
-          - opening = 'open'
-        - else
-          - opening = 'lunch'
-
-      - if allow? :seatings, :create
-        = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
-      
       - if status.size > 0 and ((status & ['lunch','dinner','open'] ).size == 0)
         %span.closed
-          = "Restaurant Closed"
+          = "We're Closed"
           = " ... #{message}" unless message.blank?
+          = " ... sorry"
       - else
         - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
           - opening = 'dinner'
@@ -38,6 +28,11 @@
             - opening = 'open'
           - else
             - opening = 'lunch'
+        -#- if allow? :seating, :create
+        -#  = opening
+        -#-else
+        -#- if bookings[date].where(contact: 'early_ok').size > 0
+        -#  Early Only Please Call
         - if bookings[date].blank? || (bookings[date] && bookings[date].sum(&:pax) < 30) ||  allow?(:seating, :create)
           = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
         - elsif bookings[date] && bookings[date].any?{|a| ["early_ok","late_ok"].include? a.customer_name }
@@ -47,10 +42,31 @@
             Phone, 9pm Only
         - else
           Pretty much Full
-        -# if allow? :seatings, :create
-          =# render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
+        - if allow? :seatings, :create
+          = render partial: 'bookings/month_admin', locals: {date: date, bookings: bookings, openings: openings, opening: opening}
+        -#- else
+        -#  = render partial: 'month_public', locals: {date: date, bookings: bookings, events: events, opening: opening }
       - if events[date]
         - events[date].each do |event|
           %li.event{class: event.category}
             != link_to event.title, broadcast_path( event, aside: true ), class: "no_ajaxify  #{no_content}", remote: true
 
+
+
+
+
+
+  -#- if date >= Time.now.to_date
+  -#  = link_to 'new', new_booking_path(date: date.to_s)
+  -#  - if date == Time.now.to_date && (allow? :bookings, :create)
+  -#    = link_to 'New Walk-In', new_booking_path(:walk_in => true)
+  -#  - else
+  -#    REQUEST
+  -#- if bookings[date]
+  -#  = link_to "#{bookings[date].size} booked", dated_bookings_path(booking_date: date.to_s), remote: true, class: 'no_ajaxify'
+  -#  = bookings[date].map(&:pax).sum
+  -#  %ul
+  -#    - bookings[date].each do |booking|
+  -#      %li
+  -#        - title =  "#{booking.arrival.to_s(:time)} #{booking.pax} #{booking.customer_name}"
+  -#        = link_to title, booking

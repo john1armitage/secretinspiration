@@ -64,11 +64,12 @@
   - else
     - times = get_times( opening || 'dinner', 'takeaway')
     -#- times = []  # Testing line
-    - if opening == 'closed'
+    -# 1 == 2 allows admin orders
+    - if opening == 'closed' && 1 == 2
       %li.centre
         %span.title
           Sorry, Closed today
-    - elsif times.empty?
+    - elsif times.empty?  && 1 == 2
       %li.center
         %span.title
           Sorry, Too Late today
