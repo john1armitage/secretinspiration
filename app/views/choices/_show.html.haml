@@ -6,9 +6,9 @@
 - else
   - @page = Page.find_by_code( @choice.name )
 %ul#catalogue
-  - if @page
-    - markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-    != markdown(@page.body)
+  -# if @page
+    -# markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+    !=# markdown(@page.body)
   - subcats = params[:filter].present? ? @choice.children.where( name: params[:filter]) : @choice.children
   - subcats.each do |subcat|
     - if (allow? :items, :create) || subcat.items.where(withdrawn: false).size > 0
