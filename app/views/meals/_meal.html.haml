@@ -1,4 +1,8 @@
+- meal.takeaway_date = Date.today if meal.takeaway_date.blank?
+- future = ( meal.takeaway_date != Date.today ) ? meal.takeaway_date.strftime("%-d/%-m") : ""
+
 %li.inline
-  - title = meal.seating_id.blank? ? "TA#{meal.id}" : meal.tabel_name
+  -# title = meal.seating_id.blank? ? "#{meal.contact}" || 'name @time [day]'  : meal.tabel_name
+  - title = meal.seating_id.blank? ? "#{meal.contact}: #{meal.start_time.strftime('%l:%M')} #{future}" || 'name @time [day]'  : meal.tabel_name
   = button_to title, edit_meal_path(meal, choices: 'food'), method: :get, remote: true,
-    form_class: 'no_ajaxify', class: 'semi'
+    form_class: 'no_ajaxify', class: 'full'

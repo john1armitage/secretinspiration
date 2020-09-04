@@ -1,5 +1,5 @@
 %li.request
-  = link_to 'New Takeaway', meals_path(takeaway: true), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
+  = link_to 'New Takeaway', meals_path(takeaway: true, date: date.to_s), method: 'POST', remote: true, class: 'no_ajaxify has-tip', data: { tooltip:  true}, title: 'Create Takeaway Order'
 
 -#  = link_to 'Make Booking', new_booking_path(date: date.to_s, opening: opening), class: 'no_ajaxify', remote: true
 - if date == Time.now.to_date
@@ -12,10 +12,13 @@
   %li
     - lunches = bookings[date].map{|a| a.session == "lunch"}
     - dinners = bookings[date].map{|a| a.session == "dinner"}
+    -# takeaways = takeaways[date].map{|a| a.tabel_name == "takeaway"}
     - if lunches[0]
       = link_to (pluralize lunches.size, 'lunch'), dated_bookings_path(booking_date: date.to_s, session: 'lunch'), remote: true, class: 'no_ajaxify'
     - if dinners[0]
       = link_to (pluralize dinners.size, 'dinner'), dated_bookings_path(booking_date: date.to_s, session: 'dinner'), remote: true, class: 'no_ajaxify'
+    -# if takeaways[0]
+      =# link_to (pluralize takeaways.size, 'takeaway'), dated_takeaways_path(takeaway_date: date.to_s, tabel_name: 'takeaway'), remote: true, class: 'no_ajaxify'
   %li
     = pluralize bookings[date].map(&:pax).sum, 'person'
     -#- bookings[date].each do |booking|

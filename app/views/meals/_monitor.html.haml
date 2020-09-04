@@ -15,7 +15,7 @@
     - @starters = Hash.new { 0 }
     - @mains = Hash.new { 0 }
     - @sides = Hash.new { 0 }
-    - @timed_orders = @meals.order('ordered_at ASC')
+    - @timed_orders = @meals.order('start_time ASC')
     %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
       = render partial: 'meal_order', collection: @meals
   -#    - package = 'Current'
@@ -70,8 +70,8 @@
     - @timed_orders = @takeaways.order(:start_time)
     %ul.menu-item.small-block-grid-1.medium-block-grid-3.large-block-grid-5
       = render partial: 'meal_order', collection: @takeaways
-      - package = ''
-      %li.tabel
+      -# package = ''
+      -#%li.tabel
         - if @starters.size > 0
           %span.head
             = "#{package} Starters"
@@ -88,9 +88,9 @@
               %li
                 = "#{v} x #{k}"
         - if @sides.size > 0
-          %span.head
-            = "#{package} Sides"
-          %ul.tabel
+          -%span.head
+            =# "#{package} Sides"
+          -%ul.tabel
             - @sides.sort_by{|k,v| k}.each do |k, v|
               %li
                 = "#{v} x #{k}"
@@ -100,7 +100,7 @@
             = "#{package} Desserts"
           %ul.tabel
             - @desserts.sort_by{|k,v| k}.each do |k, v|
-              %li
+              -%li
                 = "#{v} x #{k}"
 
 :coffeescript

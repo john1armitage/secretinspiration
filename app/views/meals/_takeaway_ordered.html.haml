@@ -1,4 +1,4 @@
-- @meals = Meal.where("seating_id IS NULL AND state IN ('ordered')").order('updated_at')
+- @meals = Meal.where("seating_id IS NULL AND state IN ('ordered')").order('start_time')
 - unless @meals.empty?
   %ul.aside.no-print
     %li.title

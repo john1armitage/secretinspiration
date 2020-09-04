@@ -19,6 +19,12 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   def show
   end
+  
+  def takeaway_dated
+    @takeaway_date = params['takeaway_date'].present? ? params['takeaway_date'].to_date : Date.today
+    @takeaways = Meal.where( takeaway_date: @takeaway_date, tabel_name: 'takeaway' )
+    # @takeaways = @takeaways.where('state <> ?', params[:state]) if params[:not].present?
+  end
 
   # GET /bookings/new
   def new

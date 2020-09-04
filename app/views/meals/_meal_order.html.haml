@@ -5,9 +5,9 @@
       %span.head
         = "Takeaway "
       %span
-        = "for #{meal_order.contact} (#{meal_order.id})"
+        = "for #{meal_order.contact}:"
       %span.head
-        = "at #{meal_order.start_time.strftime('%H:%M')}"
+        = "#{meal_order.start_time.strftime('%H:%M')}"
     - else
       %span.head
         Table

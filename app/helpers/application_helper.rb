@@ -65,12 +65,12 @@ module ApplicationHelper
       end
       grouped_times << times
     end
-    if ['dinner', 'open'].include?(opening)
+    if ['dinner', 'open'].include?(opening) || purpose == 'takeaway'
       times = []
       time = dinner_open.to_time
       segments =  CONFIG[:dinner_segments].to_i
       0.upto(segments) do |i|
-        times << time.strftime('%H:%M')  unless purpose == 'takeaway' && now > time
+        times << time.strftime('%H:%M')  # unless purpose == 'takeaway' && now > time
         time = time + 15.minutes
       end
       grouped_times << times

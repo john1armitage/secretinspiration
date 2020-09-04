@@ -75,6 +75,7 @@ class MealsController < ApplicationController
     if params[:takeaway].present?
       @meal.tabel_name = 'takeaway'
       @meal.state = 'confirmed'
+      @meal.takeaway_date = params[:date]
     else
       @meal.seating_id = params[:seating_id] if  params[:seating_id].present?
       @meal.tabel_name = params[:tabel_name]
@@ -209,7 +210,7 @@ class MealsController < ApplicationController
     @meal.line_items.update_all(ownable_type: 'Order', ownable_id: @order.id)
     @meal.timings.update_all(timeable_type: 'Order', timeable_id: @order.id)
     @meal.seating.booking.update_attribute(:state, 'billing')  if @meal.seating and @meal.seating.booking
-    state = @meal.seating_id.blank? ? 'takeaway' : 'billed'
+    state = @meal.seating_id.blank? ? 'billed' : 'billed' # previously 'takeaway'
     @meal.update(state: state)
     @order.timings.create(state: state)
 #    @meal.destroy

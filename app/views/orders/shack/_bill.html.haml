@@ -130,7 +130,7 @@
       - elsif @order.seating_id.blank?
         %tr
           %td
-            = "Less #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% Takeaway"
+            = "Pre-order #{(CONFIG[:takeaway_discount].to_d * 100).to_i}% discount, if applicable"
           %td.right
             = pounds(@order.discount)
       - else
@@ -148,7 +148,7 @@
           %span#order_total
             = pounds((@order.net_total_cents + @order.tax_total_cents) / 100.00)
 
-    #print-header
+    -##print-header
       %tr
         %td &nbsp;
         %td.right

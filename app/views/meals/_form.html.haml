@@ -82,6 +82,11 @@
                 = f.hidden_field :id
                 .row
                   .large-12.columns
+                    = f.label :takeaway_date, 'Date'
+                    = f.date_field :takeaway_date
+
+                .row
+                  .large-12.columns
                     = f.label :contact, 'Contact Name'
                     = f.text_field :contact, placeholder: 'your name'
                 .row

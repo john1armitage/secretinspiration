@@ -226,205 +226,214 @@
   }
 
   /* line 70, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
-  body fieldset.compact {
+  body fieldset.compact, body p.compact {
     font-size: 0.85em;
     margin: 0.5em;
     padding: 0;
     border: none;
   }
   /* line 76, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body fieldset.compact div.flat input, body p.compact div.flat input {
+    margin: 0;
+  }
+  /* line 80, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  body fieldset.compact.gap, body p.compact.gap {
+    margin-bottom: 1em;
+    margin-top: -1em;
+  }
+  /* line 85, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body fieldset.no-pad {
     padding: 0;
   }
-  /* line 80, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 89, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret a.button {
     background-color: #845cd6;
   }
-  /* line 83, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 92, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret h1 {
     background-color: #6533cb;
   }
-  /* line 88, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 97, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri a.button {
     background-color: #2b58de;
   }
-  /* line 91, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 100, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri h1 {
     background-color: #1d44b8;
   }
-  /* line 95, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 104, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#daily_editor {
     font-size: 0.8rem;
   }
-  /* line 97, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 106, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#daily_editor fieldset {
     padding: 0;
     border: none;
   }
-  /* line 100, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 109, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#daily_editor fieldset input {
     margin: 0;
   }
-  /* line 103, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 112, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#daily_editor fieldset .headings {
     padding-right: 0;
   }
-  /* line 110, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 119, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor .row {
     max-width: inherit;
   }
-  /* line 113, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 122, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div.columns.no_padding {
     padding: 0;
   }
-  /* line 116, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 125, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages {
     border: 1px solid gray;
     margin: 0.2em;
     padding: 0.2em;
   }
-  /* line 121, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 130, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages form .row {
     margin-left: 0;
   }
-  /* line 125, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 134, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages input {
     margin: 0;
     margin-bottom: 0.2em;
     padding: 0.2em;
     height: 1.8em;
   }
-  /* line 131, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 140, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat {
     margin-left: 1em;
     margin-bottom: 0;
     padding-left: 0;
   }
-  /* line 135, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 144, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li {
     font-size: 0.9em;
   }
-  /* line 138, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 147, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.starter, body#monitor div#messages ul#chat li span.main, body#monitor div#messages ul#chat li span.dessert {
     font-weight: bold;
   }
-  /* line 142, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 151, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.starter {
     color: green;
   }
-  /* line 145, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 154, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.main {
     color: green;
   }
-  /* line 148, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 157, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.dessert {
     color: purple;
   }
-  /* line 151, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 160, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.ready {
     font-weight: bold;
     color: red;
   }
-  /* line 158, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 167, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor div#messages ul#chat li span.cancel {
     font-weight: bold;
     color: purple;
   }
-  /* line 165, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 174, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor form.inline {
     display: inline;
   }
-  /* line 167, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 176, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor form.inline div {
     display: inline;
   }
-  /* line 171, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 180, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel {
     margin: 0;
     background-color: #e0eeee;
     border: 1px solid darkslategray;
   }
-  /* line 176, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 185, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel.first {
     border: 2px solid green;
   }
-  /* line 179, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 188, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li {
     list-style-type: none;
     padding: .2em 0 .2em .2em;
     font-size: 0.8em;
   }
-  /* line 184, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 193, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li span.title {
     clear: both;
   }
-  /* line 188, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 197, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li:nth-child(even) {
     background: lightgrey;
   }
-  /* line 191, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 200, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.category {
     line-height: 1.9em;
     font-weight: bold;
   }
-  /* line 195, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 204, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.info {
     background-color: lightyellow;
     font-style: italic;
   }
-  /* line 200, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 209, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.ready.category {
     color: white;
     background-color: red;
   }
-  /* line 203, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 212, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.ready.category span {
     font-weight: bold;
   }
-  /* line 208, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 217, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.served {
     background-color: #d3d3d3;
     font-style: italic;
   }
-  /* line 214, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 223, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active span.title {
     font-weight: bold;
   }
-  /* line 218, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 227, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active:nth-child(even) {
     background: #d3d3d3;
   }
-  /* line 221, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 230, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active.category {
     color: white;
     background-color: green;
   }
-  /* line 224, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 233, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel li.active.category span {
     font-weight: bold;
   }
-  /* line 230, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 239, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel h1 {
     font-size: 2em;
   }
-  /* line 233, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 242, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel h6 {
     font-size: 0.9rem;
   }
-  /* line 236, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 245, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel form, body#monitor ul.tabel div, body#monitor ul.tabel li.inline {
     display: inline;
   }
-  /* line 239, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 248, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor ul.tabel p {
     font-size: 0.8em;
   }
-  /* line 244, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 253, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body#monitor span.head {
     font-weight: bold;
   }
 
-  /* line 252, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 261, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   table#financial td {
     font-size: 0.8em;
     line-height: 1em;
@@ -433,12 +442,12 @@
     padding-right: 0.5em;
   }
 
-  /* line 260, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 269, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   td.larger {
     font-size: 0.95em;
   }
 
-  /* line 263, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 272, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash {
     margin: 0.5em;
     margin-bottom: 1em;
@@ -447,81 +456,81 @@
     color: orangered;
     border: 1px dotted orangered;
   }
-  /* line 270, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 279, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash a {
     font-size: 1.1rem;
     font-weight: bold;
   }
-  /* line 274, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 283, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#flash p {
     margin-left: 1em;
     margin-bottom: 0;
     text-align: center;
   }
 
-  /* line 282, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 291, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#catalogue span.title {
     font-weight: bold;
   }
-  /* line 285, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 294, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#catalogue span.body {
     font-size: 0.9em;
   }
 
-  /* line 290, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 299, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary {
     border: 1px solid gray;
     padding: 0.2em;
   }
-  /* line 294, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 303, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row {
     font-size: 0.8em;
     padding: 0.2em 0 0.2em 0;
   }
-  /* line 297, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 306, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .number {
     text-align: right;
   }
-  /* line 300, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 309, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .title {
     font-weight: bold;
     text-align: center;
   }
-  /* line 304, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 313, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .id {
     font-weight: bold;
     text-align: center;
     color: darkslategray;
   }
-  /* line 309, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 318, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .sub {
     color: purple;
   }
-  /* line 312, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 321, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .head {
     text-align: center;
     font-weight: bold;
   }
-  /* line 316, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 325, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#summary div.row .off {
     color: gray;
   }
 
-  /* line 324, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 333, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   li .sub {
     color: purple;
   }
-  /* line 327, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 336, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   li .head {
     text-align: center;
     font-weight: bold;
   }
 
-  /* line 332, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 341, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog {
     margin-left: 0;
   }
-  /* line 334, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 343, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 {
     background-color: #3d5c2c;
     color: white;
@@ -529,30 +538,30 @@
     padding-left: 0.5em;
     margin-bottom: 0.2em;
   }
-  /* line 340, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 349, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 a {
     color: yellow;
   }
-  /* line 342, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 351, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog h1 a:hover {
     color: orange;
   }
-  /* line 347, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 356, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog p {
     font-size: 0.85em;
     line-height: 1.5em;
     text-align: justify;
     margin-bottom: 0.2em;
   }
-  /* line 354, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 363, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog p.center {
     text-align: center;
   }
-  /* line 358, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 367, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog td {
     border-top: 1px solid gray;
   }
-  /* line 361, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 370, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.blog li {
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
@@ -561,57 +570,57 @@
     break-inside: avoid-column;
   }
 
-  /* line 369, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 378, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.date {
     font-size: 0.9em;
     color: darkslategray;
   }
-  /* line 372, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 381, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.date.event {
     font-weight: bold;
   }
 
-  /* line 376, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 385, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   h1 span.date {
     color: yellow;
   }
 
-  /* line 379, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 388, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p.right {
     text-align: right;
   }
 
-  /* line 383, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 392, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.time {
     font-size: 0.8em;
     color: darkslategray;
   }
-  /* line 386, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 395, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.time.event {
     font-weight: bold;
   }
 
-  /* line 391, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 400, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   #test2.red, #test3.red {
     background-color: #ff6666;
   }
-  /* line 394, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 403, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   #test2.blue, #test3.blue {
     background-color: blue;
   }
 
-  /* line 398, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 407, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar {
     padding-left: 0.1em;
     padding-right: 0.1em;
   }
-  /* line 401, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 410, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar h1 {
     font-size: 1.1em;
     font-weight: bold;
     padding: 0.2em;
   }
-  /* line 411, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 420, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   aside#sidebar fieldset {
     margin: 0;
     padding: 0.2em;
@@ -619,14 +628,14 @@
     border: 1px solid darkgray;
   }
 
-  /* line 419, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 428, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus, div#current, div#offers, div#sidecast {
     border: 1px solid darkgray;
     background-color: palegreen;
     padding: 0.15em 0.25em 0 0.25em;
     margin-bottom: 0.5em;
   }
-  /* line 424, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 433, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus h1, div#current h1, div#offers h1, div#sidecast h1 {
     font-weight: bold;
     font-size: 1.0em;
@@ -634,11 +643,11 @@
     margin-bottom: 0;
     margin-top: 0;
   }
-  /* line 431, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 440, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus h3, div#current h3, div#offers h3, div#sidecast h3 {
     font-size: 0.8em;
   }
-  /* line 434, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 443, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus p, div#current p, div#offers p, div#sidecast p {
     font-size: 0.75em;
     line-height: 1.1rem;
@@ -646,86 +655,86 @@
     text-align: justify;
     margin-bottom: 0;
   }
-  /* line 440, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 449, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus p em, div#current p em, div#offers p em, div#sidecast p em {
     color: #3d5c2c;
   }
-  /* line 444, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 453, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus img, div#current img, div#offers img, div#sidecast img {
     margin-bottom: 0.5em;
     border: solid 1px #333;
   }
-  /* line 448, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 457, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.red, div#current.red, div#offers.red, div#sidecast.red {
     background-color: palegoldenrod;
     border-color: #ff4d4d;
   }
-  /* line 451, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 460, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.red h1, div#solus.red span.highlight, div#current.red h1, div#current.red span.highlight, div#offers.red h1, div#offers.red span.highlight, div#sidecast.red h1, div#sidecast.red span.highlight {
     color: #ff1a1a;
   }
-  /* line 455, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 464, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.red em, div#current.red em, div#offers.red em, div#sidecast.red em {
     color: #ff1a1a;
   }
-  /* line 459, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 468, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.purple, div#current.purple, div#offers.purple, div#sidecast.purple {
     background-color: #CCCCFF;
     border-color: mediumpurple;
   }
-  /* line 462, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 471, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.purple h1, div#solus.purple span.highlight, div#current.purple h1, div#current.purple span.highlight, div#offers.purple h1, div#offers.purple span.highlight, div#sidecast.purple h1, div#sidecast.purple span.highlight {
     color: #6533cb;
   }
-  /* line 465, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 474, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.purple em, div#current.purple em, div#offers.purple em, div#sidecast.purple em {
     color: #6533cb;
   }
-  /* line 469, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 478, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.green, div#current.green, div#offers.green, div#sidecast.green {
     background-color: palegreen;
     border-color: darkgreen;
   }
-  /* line 472, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 481, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.green h1, div#solus.green span.highlight, div#current.green h1, div#current.green span.highlight, div#offers.green h1, div#offers.green span.highlight, div#sidecast.green h1, div#sidecast.green span.highlight {
     color: darkgreen;
   }
-  /* line 476, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 485, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.green em, div#current.green em, div#offers.green em, div#sidecast.green em {
     color: #004b00;
   }
-  /* line 480, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 489, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.darkslategray, div#current.darkslategray, div#offers.darkslategray, div#sidecast.darkslategray {
     background-color: #d0d0d0;
   }
-  /* line 483, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 492, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.darkslategray h1, div#solus.darkslategray span.highlight, div#current.darkslategray h1, div#current.darkslategray span.highlight, div#offers.darkslategray h1, div#offers.darkslategray span.highlight, div#sidecast.darkslategray h1, div#sidecast.darkslategray span.highlight {
     color: darkslategray;
   }
-  /* line 490, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 499, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#solus.theme h1, div#solus.theme span.highlight, div#current.theme h1, div#current.theme span.highlight, div#offers.theme h1, div#offers.theme span.highlight, div#sidecast.theme h1, div#sidecast.theme span.highlight {
     color: #3d5c2c;
   }
 
-  /* line 498, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 507, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#offers h1, div#offers span.highlight {
     background-color: white;
     color: #3d5c2c;
   }
 
-  /* line 504, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 513, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#sidecast {
     background-color: palegoldenrod;
   }
 
-  /* line 509, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 518, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article p, body article li {
     font-size: 0.85em;
     text-align: justify;
     line-height: 1.3rem;
     margin-bottom: 0.8em;
   }
-  /* line 517, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 526, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article h1 {
     font-size: 1.5rem;
     padding: 0.3em 0em 0.1em 0em;
@@ -736,45 +745,45 @@
     margin-top: 0.3em;
     margin-bottom: 0;
   }
-  /* line 527, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 536, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article h2 {
     border-top: solid 1px darkgray;
   }
-  /* line 530, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 539, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article h6, body article h2 {
     font-size: 1.1em;
     color: #3d5c2c;
     margin-bottom: 0.2em;
   }
-  /* line 535, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 544, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body article img {
     margin-bottom: 0.5em;
     border: 1px solid darkgray;
   }
-  /* line 541, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 550, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body table {
     border: none;
     width: 100%;
   }
-  /* line 544, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 553, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body table.border {
     border: solid 1px #3d5c2c;
     background-color: #FFFCB2;
   }
-  /* line 547, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 556, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body table.border tr {
     border: none;
   }
-  /* line 549, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 558, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body table.border tr td {
     border: none;
   }
-  /* line 553, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 562, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body table.border.highlight {
     border-color: red;
   }
 
-  /* line 560, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 569, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   .double div.two-column {
     column-count: 2;
     column-gap: 20px;
@@ -783,13 +792,13 @@
     -webkit-column-count: 2;
     -webkit-column-gap: 20px;
   }
-  /* line 567, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 576, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   .double div.two-column li {
     orphans: 3;
     widows: 3;
   }
 
-  /* line 572, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 581, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   footer {
     border: 1px solid darkgray;
     background-color: #e0eeee;
@@ -797,23 +806,23 @@
     margin-bottom: 0.5em;
     text-align: center;
   }
-  /* line 578, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 587, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   footer p {
     font-size: 0.7em;
     color: darkslategrey;
   }
 
-  /* line 583, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 592, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#content {
     margin-bottom: 0.5em;
     margin-top: 0.2em;
   }
 
-  /* line 588, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 597, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu ul.inline-list {
     margin-bottom: 0;
   }
-  /* line 592, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 601, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li a {
     padding-left: 0.25em;
     padding-right: 0.25em;
@@ -823,161 +832,166 @@
     font-size: 0.9rem;
     font-weight: bold;
   }
-  /* line 605, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 614, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li:hover a {
     background-color: #e0eeee;
   }
-  /* line 610, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 619, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#menu li.active a {
     background-color: #009900;
     color: white;
   }
 
-  /* line 620, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 629, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret ul.blog h1 {
     background-color: #6533cb;
   }
-  /* line 624, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 633, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret ul#catalogue li p.header {
     background-color: #e0d6f5;
   }
-  /* line 628, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 637, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li {
     background-color: #e0eeee;
     color: #845cd6;
   }
-  /* line 631, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 640, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li a {
     color: #845cd6;
   }
-  /* line 636, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 645, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li:hover a {
     background-color: #e0d6f5;
   }
-  /* line 641, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 650, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.secret div#menu li.active a {
     color: white;
     background-color: #845cd6;
   }
-  /* line 650, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 659, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri ul#catalogue li p.header {
     background-color: #afc0f2;
   }
-  /* line 654, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 663, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri ul.blog h1 {
     background-color: #1d44b8;
   }
-  /* line 659, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 668, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li {
     background-color: #e0eeee;
     color: #2b58de;
   }
-  /* line 662, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 671, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li a {
     color: #2b58de;
   }
-  /* line 667, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 676, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li:hover a {
     background-color: #afc0f2;
   }
-  /* line 672, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 681, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   body.gigiri div#menu li.active a {
     color: white;
     background-color: #2b58de;
   }
 
-  /* line 682, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 691, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   label.available {
     color: green;
   }
-  /* line 685, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 694, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   label.booked {
     color: red;
   }
 
-  /* line 691, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 700, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form .columns, ul#order-pad form .columns {
     padding: 0;
   }
-  /* line 694, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 703, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form .row, ul#order-pad form .row {
     margin: 0;
   }
-  /* line 697, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 706, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form label, ul#order-pad form label {
     margin: 0;
   }
-  /* line 699, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 708, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form label.third, ul#order-pad form label.third {
     display: inline;
   }
-  /* line 704, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 713, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input, ul#order-pad form input {
     margin: 0;
     margin-bottom: 0.3rem;
     width: 100%;
     height: 2rem;
   }
-  /* line 708, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 717, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input.semi, ul#order-pad form input.semi {
     width: 47%;
     margin-left: 0.1em;
   }
-  /* line 712, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 721, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  ul#order form input.full, ul#order-pad form input.full {
+    width: 97%;
+    margin-left: 0.1em;
+  }
+  /* line 725, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order form input.third, ul#order-pad form input.third {
     width: 35%;
     display: inline;
     text-align: right;
   }
-  /* line 721, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 734, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order table, ul#order-pad table {
     margin-bottom: 0.2em;
     font-size: 0.9em;
     width: 95%;
   }
-  /* line 725, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 738, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#order table td, ul#order-pad table td {
     padding: 0;
   }
 
-  /* line 730, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 743, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   input {
     font-weight: bold;
   }
-  /* line 731, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 744, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   input.wide {
     width: 98%;
     text-align: center;
   }
-  /* line 735, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 748, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   input.semi {
     width: 47%;
   }
 
-  /* line 742, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 755, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-variant input.wide {
     text-align: center;
   }
 
-  /* line 747, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 760, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   span.bold {
     font-weight: bold;
   }
 
-  /* line 751, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 764, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li {
     margin-left: -0.5em;
   }
-  /* line 753, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 766, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li span.title {
     font-weight: bold;
   }
-  /* line 756, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 769, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li span.notes {
     color: darkslategray;
     font-size: 0.9em;
   }
-  /* line 761, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 774, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant {
     margin-top: 0em;
     margin-left: 0em;
@@ -986,119 +1000,119 @@
     border: 1px solid white;
     width: 100%;
   }
-  /* line 766, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 779, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant form, ul#catalogue li div.store-variant div {
     display: inline;
   }
-  /* line 771, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 784, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant img {
     margin: 0 auto;
     display: block;
     border: 1px solid #666;
     max-height: 19.5em;
   }
-  /* line 777, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 790, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li div.store-variant input.wide {
     text-align: center;
     width: 100%;
   }
-  /* line 782, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 795, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p {
     padding: 0.2em;
   }
-  /* line 784, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 797, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.header {
     background-color: palegreen;
   }
-  /* line 787, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 800, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.item-header {
     background-color: paleturquoise;
   }
-  /* line 791, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 804, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue li p.center {
     margin: 0;
     padding-bottom: 0;
   }
-  /* line 797, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 810, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue ul.menu-item {
     margin-left: 0;
   }
-  /* line 799, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 812, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#catalogue ul.menu-item li.choice {
     white-space: nowrap;
   }
 
-  /* line 806, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 819, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.menu-item input {
     background-color: paleturquoise;
   }
-  /* line 808, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 821, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.menu-item input.store {
     background-color: lightgray;
   }
 
-  /* line 813, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 826, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.menu-item, ul.aside, ul.takeaway {
     font-size: 0.8em;
     clear: both;
   }
-  /* line 817, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 830, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.title span, ul#meal li.title span, ul#order li.title span, ul#order-pad li.title span, ul.menu-item li.title span, ul.aside li.title span, ul.takeaway li.title span {
     font-weight: bold;
     font-size: 1.1em;
     color: darkslategray;
     padding-left: 0.2em;
   }
-  /* line 825, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 838, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart h1, ul#meal h1, ul#order h1, ul#order-pad h1, ul.menu-item h1, ul.aside h1, ul.takeaway h1 {
     font-size: 2em;
   }
-  /* line 828, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 841, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart h6, ul#meal h6, ul#order h6, ul#order-pad h6, ul.menu-item h6, ul.aside h6, ul.takeaway h6 {
     font-size: 0.9rem;
   }
-  /* line 831, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 844, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart form, ul#cart div, ul#cart li.inline, ul#meal form, ul#meal div, ul#meal li.inline, ul#order form, ul#order div, ul#order li.inline, ul#order-pad form, ul#order-pad div, ul#order-pad li.inline, ul.menu-item form, ul.menu-item div, ul.menu-item li.inline, ul.aside form, ul.aside div, ul.aside li.inline, ul.takeaway form, ul.takeaway div, ul.takeaway li.inline {
     display: inline;
   }
-  /* line 834, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 847, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart p, ul#meal p, ul#order p, ul#order-pad p, ul.menu-item p, ul.aside p, ul.takeaway p {
     font-size: 0.8em;
   }
 
-  /* line 840, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 853, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.side-nav li a {
     width: 100%;
   }
 
-  /* line 845, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 858, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart, ul#meal, ul#order, ul#order-pad, ul.aside {
     background-color: #e0eeee;
     border: 1px solid darkslategray;
   }
-  /* line 848, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 861, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li, ul#meal li, ul#order li, ul#order-pad li, ul.aside li {
     padding: .2em 0 .2em .2em;
     width: 100%;
   }
-  /* line 851, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 864, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li span.title, ul#meal li span.title, ul#order li span.title, ul#order-pad li span.title, ul.aside li span.title {
     font-weight: bold;
   }
-  /* line 856, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 869, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li:nth-child(even), ul#meal li:nth-child(even), ul#order li:nth-child(even), ul#order-pad li:nth-child(even), ul.aside li:nth-child(even) {
     background: #d3d3d3;
   }
-  /* line 859, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 872, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.category, ul#meal li.category, ul#order li.category, ul#order-pad li.category, ul.aside li.category {
     background-color: lightgreen;
   }
-  /* line 861, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 874, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#cart li.category span, ul#meal li.category span, ul#order li.category span, ul#order-pad li.category span, ul.aside li.category span {
     font-weight: bold;
   }
 
-  /* line 867, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 880, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete {
     position: absolute;
     list-style: none;
@@ -1107,107 +1121,107 @@
     border: solid 1px #999;
     cursor: default;
   }
-  /* line 874, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 887, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li {
     background-color: #FFF;
     border-top: solid 1px #DDD;
     margin: 0;
     padding: 0;
   }
-  /* line 879, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 892, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li a {
     color: #000;
     display: block;
     padding: 3px;
   }
-  /* line 884, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 897, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul.ui-autocomplete li a.ui-state-hover, ul.ui-autocomplete li a.ui-state-active {
     background-color: #FFFCB2;
   }
 
-  /* line 889, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 902, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   .hidden {
     display: none;
   }
 
-  /* line 898, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 911, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-category.ui-tabs-panel {
     padding: 0.3em;
   }
-  /* line 900, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 913, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.store-category.ui-tabs-panel .test {
     clear: both;
   }
 
-  /* line 906, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 919, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#side_menu h1 {
     font-size: 1.2em;
     margin-bottom: 0em;
   }
 
-  /* line 946, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 959, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.catalogue_variant {
     margin-left: 100px;
     margin-top: 0.5em;
     margin-bottom: 0.8em;
   }
-  /* line 950, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 963, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.catalogue_variant form, div.catalogue_variant div {
     display: inline;
   }
 
-  /* line 954, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 967, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   form[method=get], form.inline {
     display: inline;
   }
-  /* line 956, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 969, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   form[method=get] div, form.inline div {
     display: inline;
   }
 
-  /* line 961, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 974, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   button.image, .button.image {
     padding: 0;
     border: none;
     margin: 0;
   }
 
-  /* line 966, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 979, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   section#main {
     padding-top: 0.5em;
   }
 
-  /* line 969, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 982, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#navigation img {
     margin-top: 0.2em;
   }
 
-  /* line 972, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 985, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#status li {
     font-size: 0.8em;
   }
 
-  /* line 975, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 988, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact {
     margin-left: 0;
   }
-  /* line 977, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 990, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li {
     text-align: left;
     margin-bottom: 0;
   }
-  /* line 980, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 993, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li.phone {
     font-weight: bold;
     font-size: 1.1em;
     color: darkred;
   }
-  /* line 985, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 998, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#contact li.location {
     font-size: 0.9em;
   }
 
-  /* line 996, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1009, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#contact {
     border: 1px solid darkgray;
     background-color: #e0eeee;
@@ -1215,66 +1229,66 @@
     margin-bottom: 0.2em;
   }
 
-  /* line 1005, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1018, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact {
     text-align: center;
     margin-bottom: 0;
   }
-  /* line 1008, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1021, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact .columns {
     padding-left: 0;
   }
-  /* line 1011, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1024, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span {
     text-align: left;
     margin-bottom: 0;
   }
-  /* line 1014, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1027, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span.phone {
     font-weight: bold;
     font-size: 1em;
     color: darkred;
   }
-  /* line 1020, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1033, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   p#contact span.location {
     font-size: 0.8em;
     padding-top: 0.2em;
   }
 
-  /* line 1030, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1043, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   ul#main-nav {
     margin-top: 0.3em;
   }
 
-  /* line 1033, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1046, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar {
     margin-left: 1em;
     margin-right: 1.25em;
   }
-  /* line 1036, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1049, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar select {
     width: 10em;
     direction: rtl;
   }
-  /* line 1044, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1057, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar li.request {
     border-top: 1px solid darkgray;
     border-bottom: 1px solid darkgray;
     background-color: #e0eeee;
   }
-  /* line 1049, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1062, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div.calendar li.event {
     border-top: 1px solid darkgray;
     border-bottom: 1px solid darkgray;
     background-color: palegoldenrod;
   }
 
-  /* line 1056, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1069, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#editor {
     margin-bottom: 0.5em;
   }
 
-  /* line 1059, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1072, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks {
     font-size: 0.9em;
     margin: 0.1em;
@@ -1282,94 +1296,101 @@
     background-color: palegoldenrod;
     border: 1px solid darkgray;
   }
-  /* line 1065, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1078, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks p {
     font-size: 0.9rem;
   }
-  /* line 1068, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1081, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#thanks span.title {
     font-weight: bold;
   }
 
-  /* line 1073, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1086, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice #print-header {
     text-align: center;
   }
-  /* line 1075, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1088, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice #print-header p {
     font-size: 0.85em;
   }
-  /* line 1078, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1091, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice #print-header h1 {
     font-size: 2em;
   }
-  /* line 1082, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1095, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr {
     text-align: left;
   }
-  /* line 1083, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1096, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr td {
     font-size: 0.95em;
   }
-  /* line 1087, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1100, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.category {
     font-weight: bold;
   }
-  /* line 1090, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1103, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.total {
     font-weight: bold;
   }
-  /* line 1091, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1104, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.total td {
     font-size: 1.1em;
   }
-  /* line 1097, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+  /* line 1110, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
   div#invoice tr.message td {
     font-size: 1em;
   }
 }
-/* line 1107, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1120, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 body.artwork article.painting p, body.artwork article.welcome div.two-column p {
   text-align: center;
 }
 
-/* line 1114, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1127, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 article.welcome ul.inline-list li.title {
   text-align: center;
   font-weight: bold;
 }
 
-/* line 1119, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1132, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor {
   font-size: 0.8rem;
 }
-/* line 1121, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1134, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor fieldset {
   padding: 0;
   border: none;
 }
-/* line 1124, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1137, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor fieldset input {
   margin: 0;
 }
-/* line 1128, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1141, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor .headings {
   padding-right: 0;
   font-weight: bold;
   text-align: right;
 }
-/* line 1132, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1145, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor .headings div {
   padding-right: 0;
 }
-/* line 1134, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1147, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor .headings div.lefty {
   text-align: left;
 }
-/* line 1139, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+/* line 1152, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
 #daily_editor .field {
   padding-right: 0;
   text-align: right;
+}
+
+/* line 1157, /home/john/projects/commerce/app/assets/stylesheets/commerce.css.scss */
+.inline-div {
+  width: 45%;
+  display: inline;
+  border: 0;
 }
 /* line 364, /home/john/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
 meta.foundation-version {
@@ -11355,6 +11376,16 @@ table.money td.lefty, table.money th.lefty {
 
 /* line 286, /home/john/projects/commerce/app/assets/stylesheets/framework_and_overrides.css.scss */
 .row.search input, section.search input {
+  margin: 0;
+}
+
+/* line 290, /home/john/projects/commerce/app/assets/stylesheets/framework_and_overrides.css.scss */
+.row.duo, section.duo {
+  margin-left: .5em;
+}
+/* line 292, /home/john/projects/commerce/app/assets/stylesheets/framework_and_overrides.css.scss */
+.row.duo p, section.duo p {
+  width: 50%;
   margin: 0;
 }
 

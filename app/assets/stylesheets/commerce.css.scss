@@ -718,6 +718,10 @@ $head-border: #009900;
           width: 47%;
           margin-left: 0.1em;
         }
+        &.full {
+          width: 97%;
+          margin-left: 0.1em;
+        }
         &.third {
           width: 35%;
           display: inline;
