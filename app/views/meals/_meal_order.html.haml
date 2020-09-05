@@ -3,11 +3,11 @@
   %li.tabel
     -if meal_order.seating_id.to_i == 0
       %span.head
-        = "Takeaway "
-      %span
-        = "for #{meal_order.contact}:"
-      %span.head
         = "#{meal_order.start_time.strftime('%H:%M')}"
+      %span
+        = " takeaway for "
+      %span.head
+        = "#{meal_order.contact}"
     - else
       %span.head
         Table

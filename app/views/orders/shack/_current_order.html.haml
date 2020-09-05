@@ -4,7 +4,7 @@
       =# current_order.created_at.strftime('%H:%M %e %b')
       = current_order.effective_date.strftime('%e %b')
     %span.title
-      = link_to "#{current_order.desc.sub(/.*:/,"")}", order_path(current_order, bill: true, origin: @origin), remote: true, class: 'no_ajaxify', title: 'View Order'
+      = link_to "#{current_order.desc.sub(/.*:TA\d*\s/,"")}", order_path(current_order, bill: true, origin: @origin), remote: true, class: 'no_ajaxify', title: 'View Order'
     %span
       = "#{pluralize(current_order.line_items.sum('quantity')  , 'item')}"
   %p

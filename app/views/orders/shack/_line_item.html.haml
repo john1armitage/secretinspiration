@@ -11,7 +11,7 @@
   %td
     = line_item.quantity
     x
-    = line_item.desc
+    = line_item.desc.gsub(/[\^\*]/,"")
     = "(each #{pounds(line_item.net_item + line_item.tax_item)})"
   -#%br
   -#= link_to '+', line_item_path( line_item.id, act: 'add', bill: true), method: :patch, remote: true, class: 'no_ajaxify', data: { tooltip:  true}, title: "Add one"

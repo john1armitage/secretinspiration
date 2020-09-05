@@ -21,7 +21,7 @@
 
   %p.no-print
     %span
-      = @order.desc.sub(/.*:/,"")
+      = @order.desc.sub(/.*:TA\d*\s/,"")
     %span
       = link_to "Print",'#', id: 'print'
       |
@@ -143,7 +143,7 @@
     - if @order.discount > 0
       %tr.total
         %td
-          To Pay
+          Less Possible Discount
         %td.right
           %span#order_total
             = pounds((@order.net_total_cents + @order.tax_total_cents) / 100.00)
