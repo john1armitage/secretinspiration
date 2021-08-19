@@ -30,7 +30,7 @@
         %span.closed
           = "Restaurant Closed"
           = " ... #{message}" unless message.blank?
-      - else
+      -# else
         - unless (status.size > 0 and ( status & ['lunch','open']).size > 0)
           - opening = 'dinner'
         - else
