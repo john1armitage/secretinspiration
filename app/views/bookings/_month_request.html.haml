@@ -5,7 +5,7 @@
 - else
   - open = opening.capitalize
 - if allow? :orders, :create
-  - if allow? :seating, :create
+  - if allow? :dailies, :create
     = link_to "Book #{opening.capitalize}", new_booking_path(date: date.to_s, opening: opening), class: 'no_ajaxify', remote: true
   - else
     = link_to "Book #{open}", new_booking_path(date: date.to_s, opening: opening), class: "no_ajaxify #{opening} #{no_content}", remote: true
