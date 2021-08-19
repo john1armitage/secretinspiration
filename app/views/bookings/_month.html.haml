@@ -38,7 +38,7 @@
             - opening = 'open'
           - else
             - opening = 'lunch'
-        - if bookings[date].blank? || (bookings[date] && bookings[date].sum(&:pax) < 30) ||  allow?(:seating, :create)
+        - if bookings[date].blank? || (bookings[date] && bookings[date].sum(&:pax) < 300) ||  allow?(:seating, :create) #full increased to 300 to avoid limit logic
           = render partial: 'bookings/month_request', locals: {date: date, bookings: bookings, events: events, opening: opening, no_content: no_content }
         - elsif bookings[date] && bookings[date].any?{|a| ["early_ok","late_ok"].include? a.customer_name }
           - if bookings[date].any?{|a| ["early_ok"].include? a.customer_name }
